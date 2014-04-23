@@ -96,4 +96,4 @@ include "admin/functions.php";
  add_action('wp_head','cwppos_dynamic_stylesheet');
  add_action( 'admin_init', 'cwppos_pac_admin_init' );
  add_action( 'init', 'cwppos_pac_init' ); 
-?>
+ 
