@@ -7,7 +7,7 @@
 			<div class="logo ">
 				<h2>
 
-			    <img class="theme_options_logo" src="<?php echo plugins_url( 'img/logo.png' , __FILE__ ) . ''; ?>" alt="<?php echo cwp_config('admin_page_header'); ?>"> 
+			    <img class="theme_options_logo" src="<?php echo plugins_url( 'img/logo.png' , __FILE__ ) . ''; ?>" alt="<?php echo cwppos_config('admin_page_header'); ?>"> 
 				
 				<a href="http://www.readythemes.com/wp-product-review/?r=wporg" class="read_docs button" target="_blank" style="text-decoration: none;"><?php _e("Visit Plugin Page", "cwp"); ?></a>
 				
