@@ -106,7 +106,7 @@ include "inc/cwp_comment.php";
 		?>
 
 		<style type="text/css">
-
+			#review-statistics .review-wrap-up .review-top { border-top: <?php echo $options['cwppos_reviewboxbd_width']; ?>px solid <?php echo $options['cwppos_reviewboxbd_color']; ?>;  }
 			.user-comments-grades .comment-meta-grade-bar,
 
 			#review-statistics  .review-wu-bars ul li{
