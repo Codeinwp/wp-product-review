@@ -264,8 +264,8 @@
 
 								 "default"=>"Cons"
 
-							   ) 
-							   ,
+							   ),
+
 								array(
 									"type"=>"color",
 									"name"=>"Review box border",
