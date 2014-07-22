@@ -264,23 +264,7 @@
 
 								 "default"=>"Cons"
 
-							   ),
-
-								array(
-									"type"=>"color",
-									"name"=>"Review box border",
-									"description"=>"Select the border color to be used on the review box",
-									"id"=>"cwppos_reviewboxbd_color",
-									"default"=>"#3BAEDA"
-								),
-
-								array(
-									"type"=>"input_text",
-									"name"=>"Review box border width",
-									"description"=>"Select the width in pixels of the top border of the review box",
-									"id"=>"cwppos_reviewboxbd_width",
-									"default"=>"5"
-								)
+							   ) 
 
 							
 

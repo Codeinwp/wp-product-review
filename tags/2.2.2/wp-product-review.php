@@ -6,7 +6,7 @@ Plugin Name: WP Product Review
 
 Description: The highest rated and most complete review plugin, now with rich snippets support. Easily turn your basic posts into in-depth reviews with ratings, pros and cons and affiliate links .
 
-Version: 2.2.4
+Version: 2.2.2
 
 Author: CodeInWP
 
@@ -107,8 +107,6 @@ include "inc/cwp_comment.php";
 
 		<style type="text/css">
 
-			#review-statistics .review-wrap-up .review-top { border-top: <?php echo $options['cwppos_reviewboxbd_width']; ?>px solid <?php echo $options['cwppos_reviewboxbd_color']; ?>;  }
-		
 			.user-comments-grades .comment-meta-grade-bar,
 
 			#review-statistics  .review-wu-bars ul li{
