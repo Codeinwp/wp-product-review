@@ -519,7 +519,7 @@
 
 									"name"=>"Buy the PRO version ",
 
-									"description"=>"Buy the PRO version now for only $14.99",
+									"description"=>"Buy the PRO version now for only $9.95",
 
 									"id"=>"cwppos_show_buypro",
 
