@@ -21,7 +21,8 @@ For updates follow https://twitter.com/ready_themes.
 
 **Fortcoming**
 
-- direct amazon integration
+- easily import settings from other posts
+- A pro version
 
 **WP Product Review provides following features**
 
