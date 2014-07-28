@@ -65,6 +65,11 @@
 										$this->add_image($tabid,esc_html($field['name']),esc_html($field["description"]),esc_attr($field['id']));
 			
 									break;
+									case 'button': 
+										 
+										$this->add_button($tabid,esc_html($field['name']),esc_html($field["description"]),esc_attr($field['id']));
+			
+									break;
 									case 'typography': 
 										   
 										
@@ -484,6 +489,19 @@
 															"html"=>$html 
 										);
 		}
+
+		public function add_button($tabid,$name,$description,$id,$class = ''){
+		$html = '
+				<div class="controls '.$class.' ">
+				<div class="explain">'.$name.'</div><p class="field_description">'.$description.'</p> 
+				<a href="http://www.readythemes.com/wp-product-review-pro/" class="button" target="_blank" style="color:red; text-decoration: none; ">'.$name.'</a>
+				</div></div>';
+				$this->tabs[$tabid]["elements"][] = array(
+						"type"=>"button",
+						"html"=>$html
+				);
+		}
+
 		public function add_color($tabid,$name,$description,$id,$class =  ''){
 		 
 

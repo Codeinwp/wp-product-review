@@ -1,0 +1,12 @@
+/* Sidebar Popular Reviews Widget */
+
+.cwp-popular-review { position: relative; border-bottom: 1px solid #ddd; margin: 0; padding: 15px 0px!important;}
+
+.cwp-popular-review .cwp-review-chart canvas, .cwp-popular-review .cwp-review-chart span  { width: 40px!important; height: 40px!important; line-height: 2.3; }
+.cwp-popular-review .cwp-review-chart .cwp-review-percentage { top: -1px; left: -1px; }
+.cwp-popular-review .cwp-review-chart { border: 0px solid #fff; width: 40px; height: 40px; top: 56%; margin-top: -22px; }
+/* Review Pie Chart Styles */
+.cwp-review-chart { float: left; margin: 10px;margin-right:0px; position: absolute;top: 0;right: 0; border: 3px solid #fff; border-radius: 50%;}
+.cwp-review-percentage span { font-family: "Lato"; font-size: 17px; font-weight: 900; background: #fff; display: block;border-radius: 50%; }
+.easyPieChart { position: relative; text-align: center; }
+.easyPieChart canvas { position: absolute; top: 0; left: 0; }

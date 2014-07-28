@@ -7,7 +7,7 @@ add_action( 'admin_menu', 'cwppos_options_add_page' );
 function cwppos_options_add_page() { 
 	
 	$render = new cwpposRenderView();
-	add_options_page( __( cwppos_config("admin_page_title"), 'cwppos' ), __( cwppos_config("admin_page_menu_name"), 'cwppos' ), 'manage_options', cwppos_config("menu_slug"), array($render,'show'), "" ,61 );
+	add_menu_page( __( cwppos_config("admin_page_title"), 'cwppos' ), __( cwppos_config("admin_page_menu_name"), 'cwppos' ), 'manage_options', cwppos_config("menu_slug"), array($render,'show'), "dashicons-star-half" ,'99.87414' );
 }
  
 function cwppos_config($config_name, $echo = 0){

@@ -56,9 +56,9 @@ function cwp_review_meta_box_callback( $post )
 
 	<div class="review-settings-notice">
 
-		<h4><?php _e("Product Details", "cwp"); ?></h4>
+		<h4><?php _e("Product Details", "cwppos"); ?></h4>
 
-		<p style="margin:0;"><?php _e("Specify the general details for the reviewed product.", "cwp"); ?></p>
+		<p style="margin:0;"><?php _e("Specify the general details for the reviewed product.", "cwppos"); ?></p>
 
 
 
@@ -72,7 +72,7 @@ function cwp_review_meta_box_callback( $post )
 
 				<li>
 
-					<label for="cwp_rev_product_name"><?php _e("Product Name", "cwp"); ?></label>  
+					<label for="cwp_rev_product_name"><?php _e("Product Name", "cwppos"); ?></label>  
 
 		    		<input type="text" name="cwp_rev_product_name" id="cwp_rev_product_name" value="<?php if(isset($cwp_review_stored_meta['cwp_rev_product_name'][0])) { echo $cwp_review_stored_meta['cwp_rev_product_name'][0]; }?>"/>
 
@@ -95,7 +95,7 @@ function cwp_review_meta_box_callback( $post )
 
 				<li>
 
-					<label for="cwp_product_affiliate_text"><?php _e("Affiliate Button Text", "cwp"); ?></label>  
+					<label for="cwp_product_affiliate_text"><?php _e("Affiliate Button Text", "cwppos"); ?></label>  
 
 		    		<input type="text" name="cwp_product_affiliate_text" id="cwp_product_affiliate_text" value="<?php if(isset($cwp_review_stored_meta['cwp_product_affiliate_text'][0])) { echo $cwp_review_stored_meta['cwp_product_affiliate_text'][0]; } ?>"/>
 
@@ -105,7 +105,7 @@ function cwp_review_meta_box_callback( $post )
 
 				<li>
 
-					<label for="cwp_product_affiliate_link"><?php _e("Affiliate Link", "cwp"); ?></label>  
+					<label for="cwp_product_affiliate_link"><?php _e("Affiliate Link", "cwppos"); ?></label>  
 
 		    		<input type="text" name="cwp_product_affiliate_link" id="cwp_product_affiliate_link" value="<?php if(isset($cwp_review_stored_meta['cwp_product_affiliate_link'][0])) { echo $cwp_review_stored_meta['cwp_product_affiliate_link'][0]; } ?>"/>
 
@@ -122,14 +122,17 @@ function cwp_review_meta_box_callback( $post )
 
 
 	<div class="review-settings-notice">
-
-		<h4><?php _e("Product Options Setting", "cwp"); ?></h4>
-
-		<div class="preloadInfo"><?php _e("Insert your options and their grades. Grading must be done <b><i>from 0 to 100</i></b>. For more information about this, please consult <a href='http://www.readythemes.com/reviewgine-lite-tutorial/'>Reviewgine Theme Documentation</a>.", "cwp"); ?></div>
-
- 
-
-	</div><!-- end .review-settings-notice -->
+        <h4><?php _e("Product Options Setting", "cwppos"); ?></h4>
+        <div class="preloadInfo"><?php _e("Insert your options and their grades. Grading must be done <b><i>from 0 to 100</i></b>. In order to be able to automatically preload your settings from another posts, you need to <a href='http://www.readythemes.com/wp-product-review-pro/' target='_blank'>Upgrade to PRO</a>.", "cwppos"); ?></div>
+        <?php if(cwppos("cwppos_show_poweredby") === 'yes' || class_exists('CWP_PR_PRO_Core')) { ?>
+        <a href="#" class="preload_info"><?php _e("Preload Info","cwppos");?></a>
+        <?php } else { 
+            $pageURL = admin_url('admin.php?page=cwppos_options#tab-upgrade_to_pro');
+            $pageURL = str_replace(":80","",$pageURL);
+  ?>
+            <a href="<?php echo $pageURL;?>" target="_blank" class="preload_info"><?php _e("Preload Info","cwppos");?></a>
+        <?php } ?>
+    </div><!-- end .review-settings-notice -->
 
 	<div class="review-settings-group">
 
@@ -199,9 +202,9 @@ function cwp_review_meta_box_callback( $post )
 
 	<div class="review-settings-notice">
 
-		<h4><?php _e("Pro Features", "cwp"); ?></h4>
+		<h4><?php _e("Pro Features", "cwppos"); ?></h4>
 
-		<p style="margin:0;"><?php _e("Insert product's pro features below.", "cwp"); ?></p>
+		<p style="margin:0;"><?php _e("Insert product's pro features below.", "cwppos"); ?></p>
 
 	</div><!-- end .review-settings-notice -->
 
@@ -273,9 +276,9 @@ function cwp_review_meta_box_callback( $post )
 
 	<div class="review-settings-notice">
 
-		<h4><?php _e("Cons Features", "cwp"); ?></h4>
+		<h4><?php _e("Cons Features", "cwppos"); ?></h4>
 
-		<p style="margin:0;"><?php _e("Insert product's cons features below.", "cwp"); ?></p>
+		<p style="margin:0;"><?php _e("Insert product's cons features below.", "cwppos"); ?></p>
 
 	</div><!-- end .review-settings-notice -->
 

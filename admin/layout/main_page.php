@@ -9,11 +9,11 @@
 
 			    <img class="theme_options_logo" src="<?php echo plugins_url( 'img/logo.png' , __FILE__ ) . ''; ?>" alt="<?php echo cwppos_config('admin_page_header'); ?>"> 
 				
-				<a href="http://www.readythemes.com/wp-product-review/?r=wporg" class="read_docs button" target="_blank" style="text-decoration: none;"><?php _e("Visit Plugin Page", "cwp"); ?></a>
+				<?php if (!class_exists('CWP_PR_PRO_Core')) { ?><a href="http://www.readythemes.com/wp-product-review-pro/?r=wporg" class="read_docs button" target="_blank" style="color:red;text-decoration: none;"><?php _e("Buy the PRO version", "cwppos"); ?></a><?php } ?>
 				
-				<a href="http://www.readythemes.com/category/themes/?r=wporg"  class="read_docs button" target="_blank" style="color:red; text-decoration: none; "><?php _e("Recommended Review Themes", "cwp"); ?></a>
+				<a href="http://www.readythemes.com/category/themes/?r=wporg"  class="read_docs button" target="_blank" style=" text-decoration: none; "><?php _e("Recommended Review Themes", "cwppos"); ?></a>
 				
-				<a href="http://www.readythemes.com/contact/" target="_blank" class="read_docs button" style="text-decoration: none;"><?php _e("Contact us", "cwp"); ?></a>
+				<a href="http://www.readythemes.com/contact/" target="_blank" class="read_docs button" style="text-decoration: none;"><?php _e("Contact us", "cwppos"); ?></a>
 
 				</h2>
 			</div>
