@@ -4,9 +4,9 @@ jQuery("document").ready(function() {
 
 	jQuery("#cwp_container").fadeIn(200);
 	
-    var _custom_media = true,
+    var _custom_media = true;
 
-      _orig_send_attachment = wp.media.editor.send.attachment;
+      //_orig_send_attachment = wp.media.editor.send.attachment;
 
 
 
@@ -19,52 +19,11 @@ jQuery("document").ready(function() {
 	return false;
   });
 
-  jQuery('.selector-image').click(function(e) {
-
-    var send_attachment_bkp = wp.media.editor.send.attachment;
-
-    var button =   jQuery(this);
-
-    var id = button.attr('id').replace('_button', '');
-
-    _custom_media = true;
-
-	 wp.media.frames.file_frame = wp.media({
-            title: "Select Image",
-            button: {
-                text: 'Select Image'
-            },
-            multiple: false
-        }); 
-    wp.media.editor.send.attachment = function(props, attachment){
-
-      if ( _custom_media ) {
-
-          jQuery("#"+id).val(attachment.url); 
-		  jQuery("#"+id+"_image").attr("src",attachment.url).show();
-
-		jQuery("#"+id+"-gradientcolor").hide();
-		jQuery("#"+id+"-gradientselector").hide();
-      } else {
-
-        return _orig_send_attachment.apply( this, [props, attachment] );
-
-      };
-
-    }
-	
-    wp.media.editor.open(button);
-	setInterval(function(){
-		if(jQuery('a.media-button-insert').text() != 'Use this Image' )
-			jQuery('a.media-button-insert').text('Use this Image');
-	},100)
-    return false;
-
-  });
+  
 	
    jQuery(".subo-color-picker").wpColorPicker({  change: function(event, ui){
 		var color = ui.color.toCSS();
-		console.log(color);
+		
 		var id = jQuery(this).attr('id').replace('_color_selector', '');
 	 
 		 

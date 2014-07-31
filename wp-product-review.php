@@ -6,7 +6,7 @@ Plugin Name: WP Product Review
 
 Description: The highest rated and most complete review plugin, now with rich snippets support. Easily turn your basic posts into in-depth reviews with ratings, pros and cons and affiliate links .
 
-Version: 2.2.5
+Version: 2.2.7
 
 Author: ReadyThemes
 

@@ -85,7 +85,7 @@ function cwp_review_meta_box_callback( $post )
                     <label for="cwp_rev_product_image" class="cwp_rev_product_image-title"><?php _e( 'Product Image', 'cwp' )?></label>
                     <input type="text" name="cwp_rev_product_image" id="cwp_rev_product_image" value="<?php if ( isset ( $cwp_review_stored_meta['cwp_rev_product_image'][0] ) ) echo $cwp_review_stored_meta['cwp_rev_product_image'][0]; ?>" />
                     <input type="button" id="cwp_rev_product_image-button" class="button" value="<?php _e( 'Choose or Upload an Image', 'cwp' )?>" />
-
+                    <p><?php  if (cwppos("cwppos_show_poweredby") == 'no' && !class_exists('CWP_PR_PRO_Core')) { ?> <del> <?php _e("*If no image is provided, featured image is used","cwppos");?> </del> <span style="color:red;"><?php _e("This is only available in the PRO version.","cwppos");?></span> <?php } else _e("*If no image is provided, featured image is used");?>
 
 
 					
@@ -492,10 +492,25 @@ function cwp_review_meta_boxes_save($post_id)
 
 
 
-    if( isset( $_POST[ 'cwp_rev_product_image' ] ) ) {
+    if( isset( $_POST[ 'cwp_rev_product_image' ] )&&$_POST[ 'cwp_rev_product_image' ] !="" ) {
 
         update_post_meta( $post_id, 'cwp_rev_product_image', sanitize_text_field( $_POST[ 'cwp_rev_product_image' ] ) );
 
+    } elseif (cwppos("cwppos_show_poweredby") == 'yes' || class_exists('CWP_PR_PRO_Core')) {
+        $image="";
+        if ( strlen( $img = get_the_post_thumbnail( $post_id, array( 150, 150 ) ) ) ) :
+            $image_array = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'optional-size' );
+            $image = $image_array[0];
+        else :
+            $post = get_post($post_id);
+            $image = '';
+            ob_start();
+            ob_end_clean();
+            $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
+
+            $image = $matches [1] [0];
+        endif;           
+        update_post_meta( $post_id, 'cwp_rev_product_image', $image );
     }
 
 
@@ -577,6 +592,34 @@ function cwp_review_meta_boxes_save($post_id)
         update_post_meta( $post_id, 'cwp_option_5_cons', sanitize_text_field( $_POST[ 'cwp_option_5_cons' ] ) );
 
     }
+
+    for($i=1; $i<6; $i++) {
+
+        ${"option".$i."_grade"} = get_post_meta($post_id, "option_".$i."_grade", true); 
+
+    }
+
+    $overall_score = "";
+
+    $iter = 0;
+
+    if(!empty($option1_grade) || $option1_grade === '0') { $overall_score += $option1_grade; $iter++; } 
+
+    if(!empty($option2_grade) || $option2_grade === '0' ) { $overall_score += $option2_grade; $iter++; }
+
+    if(!empty($option3_grade) || $option3_grade === '0' ) { $overall_score += $option3_grade; $iter++; }
+
+    if(!empty($option4_grade) || $option4_grade === '0' ) { $overall_score += $option4_grade; $iter++; }
+
+    if(!empty($option5_grade) || $option5_grade === '0' ) { $overall_score += $option5_grade; $iter++; }
+    if($iter == 0){
+        $overall_score = 0;
+    }else{ 
+        $overall_score = $overall_score / $iter;
+    }
+    update_post_meta($post_id, 'option_overall_score', $overall_score/10);
+    
+
 
 }
 

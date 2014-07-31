@@ -14,7 +14,7 @@
 			$this->add_js("main_page_js",$js_path."admin.js");
 			$this->add_js("typsy",$js_path."tipsy.js");
 			$this->add_js("jquery" );
-			$this->add_js("media" );
+			//$this->add_js("media" );
 			 
 			$this->options =  get_option(cwppos_config("menu_slug"));
  
