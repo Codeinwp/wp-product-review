@@ -11,7 +11,7 @@
 			$css_path = cwppos_config("admin_template_directory_uri")."/css/";
 			$js_path = cwppos_config("admin_template_directory_uri")."/js/"; 
 			$this->add_css("main_page_css",$css_path."main_page.css"); 
-			$this->add_js("main_page_js",$js_path."admin.js");
+			$this->add_js("wp_product_review_main_page_js",$js_path."admin.js");
 			$this->add_js("typsy",$js_path."tipsy.js");
 			$this->add_js("jquery" );
 			//$this->add_js("media" );
