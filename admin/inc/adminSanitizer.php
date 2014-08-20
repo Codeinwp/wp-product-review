@@ -99,6 +99,11 @@
 				} 
 				
 		}
+
+		public function sanitize_change_icon($input, $name, $default= array()) {
+			return wp_kses_data($input);
+		}
+
 		public function sanitize_array($input,$name, $default = array()){
 		 
 				$options = $this->get_config_option($name);

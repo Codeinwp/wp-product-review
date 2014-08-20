@@ -1,9 +1,6 @@
 <?php 
-
 /**
-
  * CWP - Top Producs Widget 
-
  */
 
 
@@ -18,7 +15,7 @@ parent::__construct(
 
 'cwp_top_products_widget', 
 
-__('WP Product Review Top Products Widget', 'cwppos'), 
+__('CWP Top Products Widget', 'cwppos'), 
 
 
 

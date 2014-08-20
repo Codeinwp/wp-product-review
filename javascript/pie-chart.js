@@ -34,7 +34,7 @@ Thanks to Philip Thrasher for the jquery plugin boilerplate for coffee script
 
 (function($) {
 
-  $.easyPieChart = function(el, options) {
+  $.cwp_easyPieChart = function(el, options) {
 
     var addScaleLine, animateLine, drawLine, easeInOutQuad, rAF, renderBackground, renderScale, renderTrack,
 
@@ -44,13 +44,13 @@ Thanks to Philip Thrasher for the jquery plugin boilerplate for coffee script
 
     this.$el = $(el);
 
-    this.$el.data("easyPieChart", this);
+    this.$el.data("cwp_easyPieChart", this);
 
     this.init = function() {
 
       var percent, scaleBy;
 
-      _this.options = $.extend({}, $.easyPieChart.defaultOptions, options);
+      _this.options = $.extend({}, $.cwp_easyPieChart.defaultOptions, options);
 
       percent = parseInt(_this.$el.data('percent'), 10);
 
@@ -94,7 +94,7 @@ Thanks to Philip Thrasher for the jquery plugin boilerplate for coffee script
 
       _this.ctx.rotate(_this.options.rotate * Math.PI / 180);
 
-      _this.$el.addClass('easyPieChart');
+      _this.$el.addClass('cwp_easyPieChart');
 
       _this.$el.css({
 
@@ -350,7 +350,7 @@ Thanks to Philip Thrasher for the jquery plugin boilerplate for coffee script
 
   };
 
-  $.easyPieChart.defaultOptions = {
+  $.cwp_easyPieChart.defaultOptions = {
 
     barColor: '#ef1e25',
 
@@ -378,7 +378,7 @@ Thanks to Philip Thrasher for the jquery plugin boilerplate for coffee script
 
   };
 
-  $.fn.easyPieChart = function(options) {
+  $.fn.cwp_easyPieChart = function(options) {
 
     return $.each(this, function(i, el) {
 
@@ -386,11 +386,11 @@ Thanks to Philip Thrasher for the jquery plugin boilerplate for coffee script
 
       $el = $(el);
 
-      if (!$el.data('easyPieChart')) {
+      if (!$el.data('cwp_easyPieChart')) {
 
         instanceOptions = $.extend({}, options, $el.data());
 
-        return $el.data('easyPieChart', new $.easyPieChart(el, instanceOptions));
+        return $el.data('cwp_easyPieChart', new $.cwp_easyPieChart(el, instanceOptions));
 
       }
 

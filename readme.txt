@@ -11,9 +11,15 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-Easily turn your basic posts into in-depth reviews with ratings, pros and cons and affiliate links .
+Easily turn your basic posts into in-depth reviews with ratings, pros and cons and affiliate links. Enhance the relationship between search engines and your site by telling more. Help search engines -like Google- to understand your content better!
 
-This plugin helps you to interact with your users with improved comments, you can expose your reviews in a easier to read way and will help you generate money by adding a buy now button in your post.
+If you want to see a live demo of the plugin you can check this url : <a href="http://demo.readythemes.com/reviewgine-free/?p=11">http://demo.readythemes.com/reviewgine-free/?p=11</a>
+
+This plugin helps you to interact with your users with improved comments, you can expose your reviews in a easier to read way and will help you generate money by adding a buy now button in your post. Rich snippets are also supported.
+
+After you install the plugin, go on a post admin page and you should be able to see a checkbox called : "Is this post a review ?", once this is checked you can add review details and those will appear on the post page.
+
+If you want to to edit the colors, enable/disable the affiliate button, change icons go on the plugin options page.
 
 All the plugin settings/colors are fully customizable, and you can read more about it <a href="http://www.readythemes.com/wp-product-review/?r=wporg">here</a>
 
@@ -31,6 +37,18 @@ For updates follow https://twitter.com/ready_themes.
 - Add an awesome wrap-up widget at the end of your articles
 - Add specific review options to wordpress comments
 
+= Translations =
+
+* sk_SK translation by Patrik Žec (PATWIST) of http://patwist.com
+
+== Changelog ==
+
+**New in v2.28**
+
+- Fixed translation issues
+- Added custom icons
+- Added price attribute
+
 == Installation ==
 
 Following are the steps to install the WP Product Review
@@ -39,7 +57,7 @@ Following are the steps to install the WP Product Review
 2. With an FTP program, access your site?s server.
 3. Upload (copy) the Plugin file(s) or folder to the /wp-content/plugins folder.
 4. In your WordPress Administration Panels, click on Plugins from the menu.
-5. You should see Tweet Old Posts Plugin listed. If not, with your FTP program, check the folder to see if it is installed. If it isn?t, upload the file(s) again. If it is, delete the files and upload them again.
+5. You should see WP Product Review Plugin listed. If not, with your FTP program, check the folder to see if it is installed. If it isn?t, upload the file(s) again. If it is, delete the files and upload them again.
 6. To turn the WP Product Review on, click Activate.
 7. Check your Administration Panels or WordPress blog to see if the Plugin is working.
 8. You can change the plugin options from Tweet Old Posts under settings menu.
@@ -63,6 +81,7 @@ http://www.readythemes.com/contact/?r=wporg
 1. Screenshot 1 Wrap-up widget that is added at the end of the posts
 2. Screenshot 2 Options added to wp comments
 3. Screenshot 3 Fully configurable theme options
+4. Screenshot 4 Rich Snippets displayed in Google
 
 for more you can check out 
 

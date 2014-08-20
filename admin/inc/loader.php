@@ -357,10 +357,10 @@ function cwppos_admin_notice() {
 }
 
 function cwppos_check_options(){
-
 		$option = get_option(cwppos_config("menu_slug"));
 		if($option === false) cwppos_add_options();
 }
+
 
 function cwppos_add_options(){
 /*		 	$errors = cwppos_check_config();
@@ -371,7 +371,9 @@ function cwppos_add_options(){
 		$defaults = cwppos_get_config_defaults($structure);
 		$defaults = $validator->validate_defaults();
 		$options = array_merge($defaults,is_array($option) ? $option : array() );
-		if(!is_array($option))
+
+
+		if(!is_array($option)) 
 			add_option(cwppos_config("menu_slug"),$options,"","no");
 		else
 			update_option(cwppos_config("menu_slug"),$options);
@@ -380,6 +382,7 @@ function cwppos_add_options(){
 		}
 }
 
+
 function cwppos_load_defaults_callback() {
 		$errors = cwppos_check_config();
 		if(!empty($errors)) return false; 
@@ -387,7 +390,7 @@ function cwppos_load_defaults_callback() {
 		$validator = new cwpposOptionsValidator();
 		$structure = cwpposConfig::$structure;
 		$defaults = cwppos_get_config_defaults($structure);
-		$defaults = $validator->validate_defaults();	print_r($defaults);
+		$defaults = $validator->validate_defaults(); print_r($defaults);
 		add_option(cwppos_config("menu_slug"),$defaults,"","no");
 		
 		die();

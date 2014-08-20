@@ -444,7 +444,16 @@
 
 									"default"=>"yes"
 
-								), 
+								),
+
+								array(
+									"type"        => "change_icon",
+									"name"        => "Change Default Rating Icon",
+									"description" => "Choose which icon would you like to use for the rating bar.",
+									"id"          => "cwppos_change_bar_icon",
+									"default"	  => "#xf005"
+								),
+
 
 								array(
 
@@ -504,7 +513,7 @@
 
 									"name"=>"Display the Powered by link ?",
 
-									"description"=>"If you wanna use our Preloader functionality without paying for the plugin, just activate this box and a nofollow link will be added to your review posts",
+									"description"=>"If you wanna use our Preloader functionality and custom icons without paying for the plugin, just activate this box and a nofollow link will be added to your review posts",
 
 									"id"=>"cwppos_show_poweredby",
 
@@ -519,7 +528,7 @@
 
 									"name"=>"Buy the PRO version ",
 
-									"description"=>"Buy the PRO version now for only $9.95",
+									"description"=>"Buy the PRO version now for only $19.95",
 
 									"id"=>"cwppos_show_buypro",
 
