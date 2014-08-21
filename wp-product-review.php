@@ -74,8 +74,11 @@ Loading the stylesheet for admin page.
         }
 
         $uni_font = cwppos("cwppos_change_bar_icon");
+        
+        //if ($uni_font!=="&#")
 
-        if(isset($uni_font[0])) {$uni_font = $uni_font[0]; } else { $uni_font = ""; }
+        if(isset($uni_font[0])) {  if ($uni_font[0]=="#") $uni_font = $uni_font; else $uni_font = $uni_font[0]; } else { $uni_font = ""; }
+      
         echo    "<script type='text/javascript'>
                     var cwpCustomBarIcon = '" . $uni_font . "';
                     var isSetToPro = '".$isSetToPro."';

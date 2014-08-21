@@ -451,7 +451,7 @@
 									"name"        => "Change Default Rating Icon",
 									"description" => "Choose which icon would you like to use for the rating bar.",
 									"id"          => "cwppos_change_bar_icon",
-									"default"	  => "#xf005"
+									"default"	  => ""
 								),
 
 

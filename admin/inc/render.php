@@ -225,10 +225,18 @@
 				
 					$html .= "<button id='cwp_select_bar_icon'>Select Bar Icon</button>";
 					$html .= "<input type='hidden' id='cwp_bar_icon_field' name='".cwppos_config("menu_slug")."[".$id."][]' value='";
-					 if(isset($this->options[$id])) { $html .= $this->options[$id][0]; } 
+					 if(isset($this->options[$id])) { if ($this->options[$id][0]=="#") { $html.=$this->options[$id]; } else $html .= $this->options[$id][0]; } 
 					$html .= "'/> <span class='current_bar_icon'>"; 
 				 		if(!empty($this->options[$id][0])) {
-                        	$html .= "<i class='fa fa-fw'>&". $this->options[$id][0] . "</i> <a href='#' class='useDefault'>Use Default Styling</a>";
+				 			//var_dump($this->options[$id][0]);
+				 			if ($this->options[$id][0]==="#") {
+				 				
+				 				$code = $this->options[$id];
+				 			}
+				 			else
+				 				$code = $this->options[$id][0];
+				 			
+                        	$html .= "<i class='fa fa-fw'>&". $code . "</i> <a href='#' class='useDefault'>Use Default Styling</a>";
                         } else {
                         	$html .= "* Currently set to the default styling</span>";
                         } } else {

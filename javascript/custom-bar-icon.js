@@ -31,6 +31,11 @@
 			r();
 		});
 
+		function d() {
+		    jQuery("#bar-icon-elements").removeClass("active").hide();
+		    return;
+		}
+
 		jQuery("#cwp_form").on("click", "#bar-icon-elements i.icon", function(a) {
 		    a.preventDefault();
 		    var b = jQuery(this).attr("id");
@@ -39,5 +44,5 @@
 		    jQuery(this).addClass("active");
 		    jQuery(".current_bar_icon").text("").append("<i class='fa icon fa-fw'>&" + b + "</i>" + uD);
 		    jQuery("input[type='hidden']#cwp_bar_icon_field").val(b);
-		    a();
+		    d();
 		});
