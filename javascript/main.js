@@ -44,7 +44,8 @@ jQuery(document).ready(function($) {
 
     	//alert(cwpCustomBarIcon);
 		//(!(typeof(cwpCustomBarIcon) === "undefined") || !(cwpCustomBarIcon === null) || !(cwpCustomBarIcon === ""))
-    	if( cwpCustomBarIcon && isSetToPro) {
+       
+    	if( !(typeof(cwpCustomBarIcon) === "undefined") && !(cwpCustomBarIcon === "") && isSetToPro) {
     		$(".rev-option").each(function() {
 	            var grade = $(this).attr("data-value");
 	            $(this).addClass("customBarIcon");

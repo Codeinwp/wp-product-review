@@ -2,7 +2,7 @@
 /*
 Plugin Name: WP Product Review 
 Description: The highest rated and most complete review plugin, now with rich snippets support. Easily turn your basic posts into in-depth reviews.
-Version: 2.2.9
+Version: 2.3
 Author: ReadyThemes
 Author URI:  http://www.readythemes.com/
 Plugin URI: http://www.readythemes.com/wp-product-review/

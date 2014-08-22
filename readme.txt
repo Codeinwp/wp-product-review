@@ -3,7 +3,7 @@ Contributors: codeinwp
 Tags:  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews
 Author URI: http://codeinwp.com 
 Requires at least: 3.5
-Tested up to: 3.9
+Tested up to: 4.0
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -42,6 +42,14 @@ For updates follow https://twitter.com/ready_themes.
 * sk_SK translation by Patrik Žec (PATWIST) of http://patwist.com
 
 == Changelog ==
+
+**New in v2.3**
+
+- Fixed js errors
+
+**New in v2.29**
+
+- Fixed upgrade to pro issue
 
 **New in v2.28**
 
