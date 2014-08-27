@@ -8,5 +8,8 @@
 /* Review Pie Chart Styles */
 .cwp-review-chart { float: left; margin: 10px;margin-right:0px; position: absolute;top: 0;right: 0; border: 3px solid #fff; border-radius: 50%;}
 .cwp-review-percentage span { font-family: "Lato"; font-size: 17px; font-weight: 900; background: #fff; display: block;border-radius: 50%; }
-.easyPieChart { position: relative; text-align: center; }
-.easyPieChart canvas { position: absolute; top: 0; left: 0; }
+.cwp_easyPieChart { position: relative; text-align: center; }
+.cwp_easyPieChart canvas { position: absolute; top: 0; left: 0; }
+.cwp-popular-review:before {
+	content:""!important;
+} 

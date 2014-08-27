@@ -1,9 +1,6 @@
 <?php 
-
 /**
-
  * CWP - Top Producs Widget 
-
  */
 
 
@@ -18,7 +15,7 @@ parent::__construct(
 
 'cwp_top_products_widget', 
 
-__('WP Product Review Top Products Widget', 'cwppos'), 
+__('CWP Top Products Widget', 'cwppos'), 
 
 
 
@@ -59,16 +56,15 @@ array( 'description' => __( 'This widget displays the top products based on thei
 		echo $args['before_title'] . $title . $args['after_title'];
 
 
-
+		if ( $cwp_tp_category=="All") $cwp_tp_category="";
 	// Loop to get the most popular posts, ordered by the author's final grade.
 
 		$query_args = array(
 
 			'posts_per_page'=> $no_items, // limit it to the specified no of posts
-
-			'post_type'		=> array('post'),
-
-			'review_category' => $cwp_tp_category, // limit it to the specified category
+			'post_type'	=>	"any",
+			'category_name' => $cwp_tp_category, // limit it to the specified category
+			'meta_key' => 'option_overall_score',
 
 				'meta_query'             => array(
 
@@ -78,9 +74,12 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 			'value'     => 'Yes',
 
+
 		),
 
-	),	
+		),	
+		'orderby'	=> 'meta_value_num',
+		'order'		=> 'DESC'
 
 		);
 
@@ -224,6 +223,7 @@ array( 'description' => __( 'This widget displays the top products based on thei
 	<label for="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>"><?php _e( 'Category:', "cwppos" ); ?></label> 
 
 	<select id="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_category' ); ?>">
+	<?php echo "<option>All</option>"; ?>
 
 	<?php foreach ($cwp_tp_all_categories as $categ_slug => $categ_name): ?>
 

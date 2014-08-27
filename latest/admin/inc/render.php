@@ -11,10 +11,10 @@
 			$css_path = cwppos_config("admin_template_directory_uri")."/css/";
 			$js_path = cwppos_config("admin_template_directory_uri")."/js/"; 
 			$this->add_css("main_page_css",$css_path."main_page.css"); 
-			$this->add_js("main_page_js",$js_path."admin.js");
+			$this->add_js("wp_product_review_main_page_js",$js_path."admin.js");
 			$this->add_js("typsy",$js_path."tipsy.js");
 			$this->add_js("jquery" );
-			$this->add_js("media" );
+			//$this->add_js("media" );
 			 
 			$this->options =  get_option(cwppos_config("menu_slug"));
  
@@ -116,6 +116,10 @@
 									break;
 									case 'title':
 										$this->add_title($tabid,esc_html($field['name']));
+									break;
+
+									case 'change_icon':
+										$this->change_review_icon($tabid,esc_html($field['name']),esc_html($field["description"]),esc_attr($field['id']));
 									break; 
 									
 									
@@ -207,6 +211,47 @@
 			);
 			
 		}
+
+
+		public function change_review_icon($tabid, $name, $description, $id, $class='') {
+
+			$html = "<div class='controls'>
+						<div class='explain'>$name</div>
+						<p class='field_description'>$description</p>";
+
+            $html .= "<li>";
+
+            	if (cwppos('cwppos_show_poweredby') == 'yes' || class_exists('CWP_PR_PRO_Core')) {
+				
+					$html .= "<button id='cwp_select_bar_icon'>Select Bar Icon</button>";
+					$html .= "<input type='hidden' id='cwp_bar_icon_field' name='".cwppos_config("menu_slug")."[".$id."][]' value='";
+					 if(isset($this->options[$id])) { if ($this->options[$id][0]=="#") { $html.=$this->options[$id]; } else $html .= $this->options[$id][0]; } 
+					$html .= "'/> <span class='current_bar_icon'>"; 
+				 		if(!empty($this->options[$id][0])) {
+				 			//var_dump($this->options[$id][0]);
+				 			if ($this->options[$id][0]==="#") {
+				 				
+				 				$code = $this->options[$id];
+				 			}
+				 			else
+				 				$code = $this->options[$id][0];
+				 			
+                        	$html .= "<i class='fa fa-fw'>&". $code . "</i> <a href='#' class='useDefault'>Use Default Styling</a>";
+                        } else {
+                        	$html .= "* Currently set to the default styling</span>";
+                        } } else {
+                        	$html .= '<span style="color:red;">'. __("Custom Icon feature is only available in the PRO version.","cwppos") . "</span>"; 
+                    	} 
+                    $html .= "</li>";
+
+			$html .= "</div>";
+
+			$this->tabs[$tabid]["elements"][] = array("type" => "change_icon", "html" => $html);
+		}
+
+
+
+
 		public function get_fonts(){
 			return array(
 						'arial'     => 'Arial',
@@ -455,6 +500,9 @@
 															"html"=>$html 
 										);
 		}
+
+
+
 		public function add_radio($tabid,$name,$description,$id,$options,$class=""){
 	 
 				$html = '

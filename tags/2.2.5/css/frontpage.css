@@ -1,0 +1,324 @@
+
+
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Lato:100,200,300,400,700,900|Open+Sans:400italic,600italic,700italic,400,300,600,700,800);
+
+
+
+#review-statistics{
+
+	font-family:FontAwesome;
+
+	width:100%;
+
+	margin:auto;
+
+}
+
+#review-statistics h1,
+
+#review-statistics h2,
+
+#review-statistics h3,
+
+#review-statistics h4,
+
+#review-statistics h5,
+
+#review-statistics h6 { 
+
+font-family: "Lato", Helvetica, sans-serif;
+
+font-weight: normal; 
+border:none;
+padding:0;
+margin:0;
+}
+
+#review-statistics .photo-wrapup{
+
+
+
+	width:100%;
+
+}
+
+#review-statistics{
+
+	font-family:FontAwesome;
+
+}
+
+#review-statistics  .sec-top { border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; margin: 40px 0px 20px 0px; }
+
+#review-statistics   .sec-top h2 { line-height: 0; margin: 0; padding: 0; font-family: "Open Sans", Helvetica, Arial, sans-serif; font-weight: normal; text-transform: uppercase; font-style: italic; font-size: 1.643em; padding: 20px 0px; letter-spacing: -1px; border-left: 4px solid #D8D8D8;border-right: 4px solid #d8d8d8;padding-left: 20px;}
+
+#review-statistics   .sec-top h2 i { color: #d9d9d9; margin-right: 10px;}
+
+#review-statistics .container .edit-article { padding-right: 35px; text-align: right; }
+
+#review-statistics .container .edit-article a { text-decoration: none; text-transform: uppercase; padding: 5px 10px; font-size: 12px; background:#f3f3f3; border-radius: 4px; color:#7d7d7d; }
+
+#review-statistics .container .edit-article a:hover { background:#ddd;}
+
+#review-statistics .article-meta { margin: 20px 0px 20px 0px;}
+
+#review-statistics .icon-bar-chart:before {
+
+	content: "\f080";
+
+}
+
+#review-statistics   .sec-top h2 i {
+
+	color: #D9D9D9;
+
+	margin-right: 10px;
+
+} 
+
+   #review-statistics .clearfix:after {
+
+      content: '\0020';
+
+      display: block;
+
+      overflow: hidden;
+
+      visibility: hidden;
+
+      width: 0;
+
+      height: 0; } 
+
+   #review-statistics .clearfix:after {
+
+      clear: both; } 
+
+   #review-statistics .clearfix {
+
+      zoom: 1; }
+
+#review-statistics .cwp-review-chart { float: left;  position: relative !important;top: 0;right: 0;  border-radius: 50%;}
+
+#review-statistics .cwp-review-percentage span { font-family: "Lato"; font-size: 17px; font-weight: 900; background: #fff; display: block;border-radius: 50%; }
+
+#review-statistics .easyPieChart { position: relative; text-align: center; }
+
+#review-statistics .easyPieChart canvas { position: absolute; top: 0; left: 0; }
+
+#review-statistics  .review-wrap-up { margin-top: 20px; border:1px solid #e6e6e6; border-top: none;}
+
+#review-statistics  .review-wu-bars h3, .review-wu-bars span { font-family: "Open Sans"; font-size: 13px !important;  text-transform: uppercase;  font-style: italic; line-height: 18px; margin: 0; padding: 0;  }
+
+#review-statistics  .review-wu-bars span { text-align: right; float: right; line-height: 2;}
+
+#review-statistics  .review-wu-bars { width: 90%; padding: 0 5% 10px 5%; border-right:1px solid #e6e6e6; border-top:1px solid #e6e6e6;border-left: none; border-bottom: none;float:left; }
+
+#review-statistics  .review-wu-bars ul { margin: 0; margin-left: 0px !important; width: 100% !important; padding-left:0px !important; }
+
+#review-statistics  .review-wu-bars ul li {display: inline-block;  height: 6px;  margin-right: 2%; width: 8.2%; float:left; }
+
+#review-statistics  .review-wu-bars ul li:nth-child(10) { margin: 0 !important;}
+
+#review-statistics  .review-wu-bars .rev-option div > * { display: inline-block; }
+
+#review-statistics .review-wrap-up .review-top { padding: 20px; border-top: 5px solid #3baeda;border-bottom:1px solid #e6e6e6;  }
+
+#review-statistics .review-wrap-up .review-top .item { font-weight: 400; line-height: 1; margin: 0; padding: 0;}
+
+#review-statistics .review-wrap-up .review-top .item-category a { font-weight: 500; font-style: italic; letter-spacing: 1px; text-decoration: none;}
+
+#review-statistics .review-wrap-up .review-top .item-category a:hover { text-decoration: underline;}
+
+#review-statistics .review-wrap-up .review-top .item-category i { color:#e3e3e3; margin-right: 5px;}
+
+#review-statistics .review-wrap-up .review-wu-left {width: 318px; float: left;margin-top:10px;  }
+
+#review-statistics .review-wrap-up .review-wu-left .rev-wu-image { float: left; width: 134px;height:150px;  overflow: hidden; border-top: none;padding:0;margin-left: 5%;margin-right: 5%;}
+
+#review-statistics .review-wrap-up .review-wu-left .rev-wu-image img { width: 100%; box-shadow:none;}
+
+#review-statistics .review-wrap-up .review-wu-left .review-wu-grade {width: 150px;
+height: 149px; display:block; float: left; border:1px solid #e6e6e6; border-top:none;position: relative; border-bottom:none;}
+
+#review-statistics  .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart { position: relative; margin-top: 10%;
+margin-left: 20px;
+margin-bottom: 9%;}
+
+#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart span { font-size: 30px; }
+
+#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart .cwp-review-percentage { width: 150px;  }
+
+#review-statistics .review-wrap-up .review-wu-right { float: left;  max-width: 36%; padding: 20px; border-top: none;  }
+
+
+
+#review-statistics .review-wrap-up .review-wu-right h2 { font-family: "Lato"; font-size: 15px; text-transform: uppercase; font-weight: 800; margin-bottom: 0;}
+
+#review-statistics .review-wrap-up .review-wu-right ul li { margin: 0; font-size: 14px;padding-left: 0px;	 margin-bottom: 2%; font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Lato, Arial, sans-serif; }
+
+#review-statistics .review-wrap-up .review-wu-right ul li {
+
+	line-height:1;
+
+} 
+
+.review-wu-right ul li {
+
+	background:none !important; 
+
+}
+
+.comment-form-meta-option  input{
+
+	background:none !important;
+
+}
+
+.rev-wu-image img{
+
+	background:none!important;
+
+	padding:0px!important;
+
+	margin:0px !important;
+
+}
+
+.rev-option ul li{
+
+	margin-left:0px !important;
+
+	margin-top:0px !important;
+
+	margin-bottom:0px !important;
+
+	padding-left:0px !important;
+
+}
+
+.review-wu-bars,.review-wu-right{
+
+	box-sizing:content-box !important;
+
+}
+
+#review-statistics .rev-option{
+
+	margin-top:10px;
+
+}
+
+
+
+.affiliate-button {  width:100%; margin-bottom:20px; clear:both;}
+
+.affiliate-button a {    display: table; margin: 0 auto; border: none; border-radius: none;   padding: 10px 35px; margin-top: 20px; border-radius: 5px;  text-decoration: none !important; } 
+
+.affiliate-button a:hover span {  ; text-decoration: none; }
+
+.affiliate-button a span {   text-transform: uppercase; font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Lato, Arial, sans-serif; font-style: italic; font-weight: normal; font-size: 14px; padding-left: 20px; margin-left: -10px; text-decoration:none;}
+
+
+
+#review-statistics .review-wrap-up .review-wu-right ul{
+
+	margin-top:10px!important;;
+
+	padding-left:0px!important;
+	margin-left: 0px;
+	list-style:none;
+
+} 
+
+
+
+#cwp-slider-comment .comment-form-default label { }
+
+#cwp-slider-comment .comment-form-meta-option {  width: 100%; float: right; margin-bottom: 7px; }
+
+#cwp-slider-comment .comment-form-meta-option label { float: left; width: 90%; }
+
+#cwp-slider-comment .comment-form-meta-option .meta_option_input { float: right; width: 10%; text-align: center; border: none; padding: 0; font-weight: bold; }
+
+#cwp-slider-comment .comment-form-meta-option .comment_meta_slider { margin-top: 25px; background:#f3f3f3; border: none; height: 7px; box-shadow: inset 0px 0px 2px rgba(0,0,0,0.3);}
+
+#cwp-slider-comment .comment-form-meta-option .comment_meta_slider .ui-slider-handle { background: #3baeda; border:none; border-radius: 50%; width: 13px; height: 13px; top: -4px; left: 5px;  }
+
+#cwp-slider-comment .comment-form-meta-option .comment_meta_slider .ui-slider-handle:hover { cursor: pointer; box-shadow: inset 0px 0px 4px rgba(255,255,255,0.3);}
+
+#cwp-slider-comment cite.review-info { font-style: italic !important; color:#ddd; }
+
+
+
+/* User Comment Grades Styles */
+
+ .user-comments-grades { width: 200px; float: right; margin-top: 25px; border: 1px solid #ddd; padding: 10px; border-radius: 5px; margin-left: 15px;}
+
+ .user-comments-grades * { margin: 0 !important; padding: 0 !important; }
+
+ .user-comments-grades .comment-meta-option-name { float: left; text-transform: uppercase; font-size: 10px; color: #7d7d7d; margin-bottom: 3px !important;}
+
+.user-comments-grades .comment-meta-option-grade { float: right; text-transform: uppercase; font-size: 10px; font-weight: bold;}
+
+ .user-comments-grades .comment-meta-option { margin-bottom: 10px !important; }
+
+ .user-comments-grades .comment-meta-option:last-of-type { margin-bottom: 0 !important; }
+
+
+
+/* User Comment Grades Styles */
+
+ .user-comments-grades { width: 200px; float: right; margin-top: 25px; border: 1px solid #ddd; padding: 10px; border-radius: 5px; margin-left: 15px;}
+
+.user-comments-grades * { margin: 0 !important; padding: 0 !important; }
+
+ .user-comments-grades .comment-meta-option-name { float: left; text-transform: uppercase; font-size: 10px; color: #7d7d7d; margin-bottom: 3px !important;}
+
+.user-comments-grades .comment-meta-option-grade { float: right; text-transform: uppercase; font-size: 10px; font-weight: bold;}
+
+.user-comments-grades .comment-meta-option { margin-bottom: 10px !important; }
+
+.user-comments-grades .comment-meta-option:last-of-type { margin-bottom: 0 !important; }
+
+
+
+/* Comment Form Meta Options - GRADE BAR */
+
+.comment-meta-option .comment-meta-grade-bar { width: 100%; background: #ebedef;border-radius: 32px;height: 5px;-webkit-box-shadow: none;box-shadow: none; overflow: hidden;}
+
+ .comment-meta-grade {  height: 100%; }
+
+
+
+#cwp-slider-comment {
+
+	width:230px;
+
+	margin-left:10px;
+
+	display:block;
+
+}
+
+.comment-form-meta-option {
+
+	width:100% !important;
+
+}
+
+.clearfix{
+
+	clear:both !important;
+
+}
+
+/* Comment Form Meta Options - GRADE BAR */
+
+#cwp-slider-comment .comment-meta-option .comment-meta-grade-bar { width: 100%; background: #ebedef;border-radius: 32px;height: 5px;-webkit-box-shadow: none;box-shadow: none; overflow: hidden;}
+
+.leftcontent {
+width:600px!important;
+	}
+
+.review-wu-right ul li { list-style: none!important; }

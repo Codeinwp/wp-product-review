@@ -12,7 +12,8 @@
 			add_filter( 'cwppos_sanitize_url', array($sanitizer,'sanitize_imageurl'),10,2);
 			add_filter( 'cwppos_sanitize_number', array($sanitizer,'sanitize_number'),10,2);
 			add_filter( 'cwppos_sanitize_background', array($sanitizer,'sanitize_background'),10,2);		
-			add_filter( 'cwppos_sanitize_textarea_html', array($sanitizer,'sanitize_html'),10,2);		
+			add_filter( 'cwppos_sanitize_textarea_html', array($sanitizer,'sanitize_html'),10,2);
+			add_filter( 'cwppos_sanitize_change_icon', array($sanitizer, 'sanitize_change_icon'), 10, 2);	
 		}
 		public function validate_defaults(){
 			$ninput = array();
@@ -21,6 +22,7 @@
 				switch($i['type']){
 					case "textarea":
 					case "editor":
+					
 					case "input_text":
 							$ninput[$k] = apply_filters("cwppos_sanitize_textarea",$i['default']);
 					break;
@@ -54,9 +56,13 @@
 							$ninput[$k] = apply_filters("cwppos_sanitize_number",$i['default']);
 					break;	
 					case "checkbox":
-					case "multiselect":  
+					case "multiselect":
 							$ninput[$k] = apply_filters("cwppos_sanitize_array",$i['default'],$k);
 					break;	
+
+					case "change_icon":
+							$ninput[$k] = apply_filters("cwppos_sanitize_change_icon",$i['default'],$k);
+					break;
 				
 				}
 			}   
@@ -73,6 +79,7 @@
 				switch($options[$k]['type']){
 					case "textarea":
 					case "editor":
+
 					case "input_text": 
 							$ninput[$k] = apply_filters("cwppos_sanitize_textarea",$i,$options[$k]['default']);
 				 
@@ -105,9 +112,13 @@
 							$ninput[$k] = apply_filters("cwppos_sanitize_number",$i,$options[$k]['default']);
 					break;	
 					case "checkbox":
-					case "multiselect": 
+					case "multiselect":
 							$ninput[$k] = apply_filters("cwppos_sanitize_array",$i,$k,$options[$k]['default']);
 					break;	
+
+					case "change_icon":
+							$ninput[$k] = apply_filters("cwppos_sanitize_change_icon",$i,$k,$options[$k]['default']);
+					break;
 				
 				}
 			}      
