@@ -351,3 +351,7 @@ margin-bottom: 9%;}
 
 .review-wu-right ul li { list-style: none!important; }
 
+.cwp-chart-embed {
+	position:relative!important;
+	margin:10px!important;
+}

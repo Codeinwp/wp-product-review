@@ -2,12 +2,12 @@
 /*
 Plugin Name: WP Product Review 
 Description: The highest rated and most complete review plugin, now with rich snippets support. Easily turn your basic posts into in-depth reviews.
-Version: 2.3
+Version: 2.4
 Author: ReadyThemes
 Author URI:  http://www.readythemes.com/
 Plugin URI: http://www.readythemes.com/wp-product-review/
 Requires at least: 3.5
-Tested up to: 3.9
+Tested up to: 4.0
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -26,6 +26,59 @@ if (wp_get_theme() !== "Reviewgine Affiliate PRO") {
 Loading the stylesheet for admin page.
 */
 
+    function cwppos_calc_overall_rating($id){
+        $options = cwppos();
+        
+        for($i=1; $i<6; $i++) {
+
+            ${"option".$i."_grade"} = get_post_meta($id, "option_".$i."_grade", true);
+           // echo ${"option".$i."_grade"};
+
+            ${"comment_meta_option_".$i} = 0;
+
+        }
+
+        if( $options['cwppos_show_userreview'] == "yes" ) {
+            $args = array(
+                'status' => 'approve',
+                'post_id' => $id, // use post_id, not post_ID
+            );
+            $comments = get_comments($args);
+            $nr_of_comments = get_comments_number($id);
+            
+            foreach($comments as $comment) :
+                for($i=1; $i<6; $i++) {
+                    
+                    ${"comment_meta_option_".$i} += get_comment_meta( $comment->comment_ID, "meta_option_{$i}", true)*10/$nr_of_comments;
+                    //var_dump(${"comment_meta_option_".$i});
+                }
+            endforeach;
+
+        }
+        else {
+            $options['cwppos_infl_userreview'] = 0;
+        }
+        if ( $nr_of_comments==0 )
+            $options['cwppos_infl_userreview'] = 0;
+            
+        $overall_score = "";
+        $iter = 0;
+        $rating = array();
+        if(!empty($option1_grade)|| $option1_grade === '0') { $option1_grade = round(($option1_grade*(100-$options['cwppos_infl_userreview']) + $comment_meta_option_1*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option1'] = round($option1_grade);  }
+        if(!empty($option2_grade)|| $option2_grade === '0') { $option2_grade = round(($option2_grade*(100-$options['cwppos_infl_userreview']) + $comment_meta_option_2*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option2'] = round($option2_grade);}
+        if(!empty($option3_grade)|| $option3_grade === '0') { $option3_grade = round(($option3_grade*(100-$options['cwppos_infl_userreview']) + $comment_meta_option_3*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option3'] = round($option3_grade);}
+        if(!empty($option4_grade)|| $option4_grade === '0') { $option4_grade = round(($option4_grade*(100-$options['cwppos_infl_userreview']) + $comment_meta_option_4*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option4'] = round($option4_grade);}
+        if(!empty($option5_grade)|| $option5_grade === '0') { $option5_grade = round(($option5_grade*(100-$options['cwppos_infl_userreview']) + $comment_meta_option_5*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option5'] = round($option5_grade);}
+        $overall_score = ($option1_grade + $option2_grade + $option3_grade + $option4_grade + $option5_grade) / $iter;
+        $rating['overall'] = $overall_score;
+        update_post_meta($id, 'option_overall_score', $overall_score);
+        return $rating;
+
+        
+    }
+
+
+
     function cwppos_pac_admin_init() {
         wp_enqueue_style( 'cwp-pac-admin-stylesheet', plugins_url('css/dashboard_styles.css', __FILE__) );
         wp_enqueue_script( 'cwp-pac-script', plugins_url('javascript/admin-review.js', __FILE__),array("jquery"),"20140101",true );
@@ -38,6 +91,7 @@ Loading the stylesheet for admin page.
         if (class_exists('CWP_PR_PRO_Core') || $options['cwppos_show_poweredby']=="yes") {
             wp_register_script("cwp-review-preload", plugins_url( 'inc/cwp-review-preload.php', __FILE__ ), false, "1.0", "all");
             wp_enqueue_script("cwp-review-preload");
+
         }
 
     }
@@ -62,6 +116,9 @@ Loading the stylesheet for admin page.
         wp_register_style( 'cwp-pac-widget-stylesheet', plugins_url('css/cwppos-widget.css', __FILE__) );
         wp_register_style( 'jqueryui', plugins_url('css/jquery-ui.css', __FILE__) );
         wp_register_style( 'cwp-pac-fontawesome-stylesheet', plugins_url('css/font-awesome.min.css', __FILE__) );
+        wp_enqueue_script("img-lightbox", plugins_url( 'javascript/lightbox.min.js', __FILE__ ), false, "1.0", "all");
+        wp_enqueue_style("img-lightbox-css", plugins_url( 'css/lightbox.css', __FILE__ ), false, "1.0", "all");
+              
     }
 
     function cwp_def_settings() {
@@ -100,6 +157,9 @@ Loading the stylesheet for admin page.
             wp_print_scripts('jquery-ui-slider');
             wp_print_scripts('pie-chart');
             wp_print_scripts('cwp-pac-main-script');
+            wp_print_scripts('img-lightbox');
+            wp_print_styles('img-lightbox-css');
+            wp_print_scripts('jquery-ui-core');
             cwp_def_settings();
         } else {
             wp_print_styles('cwp-pac-widget-stylesheet');
@@ -188,4 +248,7 @@ Loading the stylesheet for admin page.
     if (class_exists('CWP_PR_PRO_Core')) $cwp_pr_pro = new CWP_PR_PRO_Core();
 
     load_plugin_textdomain('cwppos', false, dirname(plugin_basename(__FILE__)).'/languages/');
+
+    // [bartag foo="foo-value"]
+
 }

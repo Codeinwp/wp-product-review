@@ -13,3 +13,14 @@
 .cwp-popular-review:before {
 	content:""!important;
 } 
+
+.cwp-popular-review .cwp_rev_image {
+	margin-right:10px;
+	border-radius: 3px;
+	width: 50px;
+	vertical-align: middle;
+}
+
+.widget_cwp_top_products_widget ul, .widget_cwp_latest_products_widget ul  {
+	margin-left:0px!important;
+}

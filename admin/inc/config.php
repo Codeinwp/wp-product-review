@@ -447,6 +447,22 @@
 								),
 
 								array(
+
+									"type"=>"select",
+
+									"name"=>"Visitor Review Influence",
+
+									"description"=>"Select how much visitors rating will affect the main one.",
+
+									"id"=>"cwppos_infl_userreview",
+
+									"options"=>array("0"=>"No influence","10"=>"10%","20"=>"20%","30"=>"30%","40"=>"40%","50"=>"50%","60"=>"60%","70"=>"70%","80"=>"80%","90"=>"90%"),
+
+									"default"=>"0"
+
+								),
+
+								array(
 									"type"        => "change_icon",
 									"name"        => "Change Default Rating Icon",
 									"description" => "Choose which icon would you like to use for the rating bar.",

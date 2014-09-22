@@ -43,6 +43,10 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 		$cwp_tp_category = apply_filters( 'widget_content', $instance['cwp_tp_category'] );
 
+		$post_type = apply_filters( 'widget_content', $instance['title_type'] );
+
+		$show_image = apply_filters( 'widget_content', $instance['show_image'] );
+
 
 
 		// before and after widget arguments are defined by themes
@@ -94,34 +98,32 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 
 		<li class="cwp-popular-review cwp_top_posts_widget_<?php the_ID(); ?>">
+		<?php 
+		$product_image = get_post_meta($cwp_top_products_loop->post->ID, "cwp_rev_product_image", true);
+		if ($show_image==true&&!empty($product_image)) {
+		?>
+		
+		<img class="cwp_rev_image" src="<?php echo $product_image;?>"\>
+		<?php } ?>
+		<a href="<?php the_permalink(); ?>">
 
-		<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+		<?php if ($post_type==true) { $titlep = get_post_meta($cwp_top_products_loop->post->ID, "cwp_rev_product_name", true);echo $titlep; } else the_title(); ?>
+
+		</a>
 
 
 
 
 
 			<?php
-            for($i=1; $i<6; $i++) {
-                ${"option".$i."_grade"} = get_post_meta($cwp_top_products_loop->post->ID, "option_".$i."_grade", true);
-                //if(empty(${"option".$i."_grade"})) { ${"option".$i."_grade"} = "10"; }
-            }
-            
+           
             for($i=1; $i<6; $i++) {
                 ${"option".$i."_content"} = get_post_meta($cwp_top_products_loop->post->ID, "option_".$i."_content", true);
                 //if(empty(${"option".$i."_content"})) { ${"option".$i."_content"} = __("Default Feature ".$i, "cwppos"); }
             }
-            $overall_score = "";
-            $iter = "";
-            if(!empty($option1_grade)) { $overall_score += $option1_grade; $iter++; }
-            if(!empty($option2_grade)) { $overall_score += $option2_grade; $iter++; }
-            if(!empty($option3_grade)) { $overall_score += $option3_grade; $iter++; }
-            if(!empty($option4_grade)) { $overall_score += $option4_grade; $iter++; }
-            if(!empty($option5_grade)) { $overall_score += $option5_grade; $iter++; }
-            $overall_score = $overall_score / $iter;
-        	
+            $review_score = cwppos_calc_overall_rating($cwp_top_products_loop->post->ID);
+			$review_score = $review_score['overall'];
 
-			$review_score = $overall_score;
 			if(!empty($review_score)) { ?>
 
 			<div class="review-grade-widget">
@@ -163,22 +165,37 @@ array( 'description' => __( 'This widget displays the top products based on thei
 		if ( isset( $instance[ 'title' ] ) ) {
 
 			$title = $instance[ 'title' ];
-
-			$no_items = $instance[ 'no_items' ];
-
-			$cwp_tp_category = $instance[ 'cwp_tp_category' ];
-
 		}
-
 		else {
-
 			$title = __( 'Top Products', 'cwppos' );
-
+		}
+		if ( isset( $instance[ 'no_items' ]) ) {
+			$no_items = $instance[ 'no_items' ];
+		}
+		else {
 			$no_items = __( '10', 'cwppos');
-
+		}
+		if ( isset( $instance[ 'cwp_tp_category' ]) ) {
+			$cwp_tp_category = $instance[ 'cwp_tp_category' ];}
+		else {
 			$cwp_tp_category = "Select Category";
+		}
+		if ( isset( $instance[ 'title_type' ]) ) {
+			$title_type = $instance[ 'title_type' ];
 
 		}
+		else {
+			$title_type = false;
+		}
+
+		if ( isset( $instance[ 'show_image' ]) ) {
+			$show_image = $instance[ 'show_image' ];
+
+		}
+		else {
+			$show_image = false;
+		}
+		
 
 
 
@@ -246,7 +263,19 @@ array( 'description' => __( 'This widget displays the top products based on thei
 	</select>
 
 	</p>
+	<p>
 
+	<label for="<?php echo $this->get_field_id( 'title_type' ); ?>"><?php _e( 'Display Product Titles :', "cwppos" ); ?></label> 
+
+	<input  id="<?php echo $this->get_field_id( 'title_type' ); ?>" name="<?php echo $this->get_field_name( 'title_type' ); ?>"  type="checkbox" <?php checked( $title_type ); ?>  />
+	</p>
+
+	<p>
+
+	<label for="<?php echo $this->get_field_id( 'show_image' ); ?>"><?php _e( 'Display Product Image :', "cwppos" ); ?></label> 
+
+	<input  id="<?php echo $this->get_field_id( 'show_image' ); ?>" name="<?php echo $this->get_field_name( 'show_image' ); ?>"  type="checkbox" <?php checked( $show_image ); ?>  />
+	</p>
 
 
 	<?php }
@@ -257,7 +286,7 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 	public function update( $new_instance, $old_instance ) {
 
-		$instance = array();
+		$instance = $old_instance;
 
 		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
 
@@ -265,8 +294,9 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 		$instance['cwp_tp_category'] = ( ! empty( $new_instance['cwp_tp_category'] ) ) ? strip_tags( $new_instance['cwp_tp_category'] ) : '';
 
-
-
+		$instance['title_type'] = (bool) $new_instance['title_type'] ;
+		$instance['show_image'] = (bool) $new_instance['show_image'] ;
+		
 		return $instance;
 
 	}
