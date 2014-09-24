@@ -40,7 +40,6 @@ For updates follow https://twitter.com/ready_themes.
 = Translations =
 
 * sk_SK translation by Patrik Žec (PATWIST) of http://patwist.com
-* fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
 
