@@ -2,7 +2,7 @@
 /*
 Plugin Name: WP Product Review 
 Description: The highest rated and most complete review plugin, now with rich snippets support. Easily turn your basic posts into in-depth reviews.
-Version: 2.4
+Version: 2.4.2
 Author: ReadyThemes
 Author URI:  http://www.readythemes.com/
 Plugin URI: http://www.readythemes.com/wp-product-review/
@@ -64,13 +64,13 @@ Loading the stylesheet for admin page.
         $overall_score = "";
         $iter = 0;
         $rating = array();
-        if(!empty($option1_grade)|| $option1_grade === '0') { $option1_grade = round(($option1_grade*(100-$options['cwppos_infl_userreview']) + $comment_meta_option_1*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option1'] = round($option1_grade);  }
-        if(!empty($option2_grade)|| $option2_grade === '0') { $option2_grade = round(($option2_grade*(100-$options['cwppos_infl_userreview']) + $comment_meta_option_2*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option2'] = round($option2_grade);}
-        if(!empty($option3_grade)|| $option3_grade === '0') { $option3_grade = round(($option3_grade*(100-$options['cwppos_infl_userreview']) + $comment_meta_option_3*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option3'] = round($option3_grade);}
-        if(!empty($option4_grade)|| $option4_grade === '0') { $option4_grade = round(($option4_grade*(100-$options['cwppos_infl_userreview']) + $comment_meta_option_4*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option4'] = round($option4_grade);}
-        if(!empty($option5_grade)|| $option5_grade === '0') { $option5_grade = round(($option5_grade*(100-$options['cwppos_infl_userreview']) + $comment_meta_option_5*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option5'] = round($option5_grade);}
-        $overall_score = ($option1_grade + $option2_grade + $option3_grade + $option4_grade + $option5_grade) / $iter;
-        $rating['overall'] = $overall_score;
+        if(!empty($option1_grade)|| $option1_grade === '0') { $option1_grade = round(($option1_grade*(100-$options['cwppos_infl_userreview']) + $comment_meta_option_1*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option1'] = round($option1_grade);  $overall_score+=$option1_grade; }
+        if(!empty($option2_grade)|| $option2_grade === '0') { $option2_grade = round(($option2_grade*(100-$options['cwppos_infl_userreview']) + $comment_meta_option_2*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option2'] = round($option2_grade);$overall_score+=$option2_grade;}
+        if(!empty($option3_grade)|| $option3_grade === '0') { $option3_grade = round(($option3_grade*(100-$options['cwppos_infl_userreview']) + $comment_meta_option_3*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option3'] = round($option3_grade);$overall_score+=$option3_grade;}
+        if(!empty($option4_grade)|| $option4_grade === '0') { $option4_grade = round(($option4_grade*(100-$options['cwppos_infl_userreview']) + $comment_meta_option_4*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option4'] = round($option4_grade);$overall_score+=$option4_grade;}
+        if(!empty($option5_grade)|| $option5_grade === '0') { $option5_grade = round(($option5_grade*(100-$options['cwppos_infl_userreview']) + $comment_meta_option_5*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option5'] = round($option5_grade);$overall_score+=$option5_grade;}
+        //$overall_score = ($option1_grade + $option2_grade + $option3_grade + $option4_grade + $option5_grade) / $iter;
+        $rating['overall'] = $overall_score/$iter;
         update_post_meta($id, 'option_overall_score', $overall_score);
         return $rating;
 

@@ -245,6 +245,8 @@ margin-bottom: 9%;}
 
 .affiliate-button {  width:100%; margin-bottom:20px; clear:both;}
 
+.affiliate-button2 {  width:50%!important; margin-bottom:20px; float:left;clear:none!important;}
+
 .affiliate-button a {    display: table; margin: 0 auto; border: none; border-radius: none;   padding: 10px 35px; margin-top: 20px; border-radius: 5px;  text-decoration: none !important; } 
 
 .affiliate-button a:hover span {  ; text-decoration: none; }

@@ -44,6 +44,17 @@ For updates follow https://twitter.com/ready_themes.
 
 == Changelog ==
 
+**New in v2.4.2**
+
+- Fixed latest widget issue
+- Added possibility of having 2 affiliate buttons
+
+- Fixed js errors
+
+**New in v2.4.1**
+
+- Fixed division by zero
+
 **New in v2.4**
 
 - Added image and product title options in widget

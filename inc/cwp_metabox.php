@@ -62,6 +62,27 @@ function cwp_review_meta_boxes(){
                     ?>"/>
                 </li>
 
+                                <li>
+                    <label for="cwp_product_affiliate_text2"><?php  _e("Affiliate Button Text 2", "cwppos"); ?></label>
+                    <input type="text" name="cwp_product_affiliate_text2" id="cwp_product_affiliate_text2" value="<?php
+
+                    if(isset($cwp_review_stored_meta['cwp_product_affiliate_text2'][0])) {
+                        echo $cwp_review_stored_meta['cwp_product_affiliate_text2'][0];
+                    }
+
+                    ?>"/>
+                </li>
+                <li>
+                    <label for="cwp_product_affiliate_link2"><?php  _e("Affiliate Link 2", "cwppos"); ?></label>
+                    <input type="text" name="cwp_product_affiliate_link2" id="cwp_product_affiliate_link2" value="<?php
+
+                    if(isset($cwp_review_stored_meta['cwp_product_affiliate_link2'][0])) {
+                        echo $cwp_review_stored_meta['cwp_product_affiliate_link2'][0];
+                    }
+
+                    ?>"/>
+                </li>
+
                 <li>
                     <label for="cwp_cwp_rev_price"><?php  _e("Product Price", "cwppos"); ?></label>
                     <input type="text" name="cwp_rev_price" id="cwp_rev_price" value="<?php
@@ -330,6 +351,15 @@ function cwp_review_meta_boxes_save($post_id){
 
     if( isset( $_POST[ 'cwp_product_affiliate_link' ] ) ) {
         update_post_meta( $post_id, 'cwp_product_affiliate_link', esc_url( $_POST[ 'cwp_product_affiliate_link' ] ) );
+    }
+
+        if( isset( $_POST[ 'cwp_product_affiliate_text2' ] ) ) {
+        update_post_meta( $post_id, 'cwp_product_affiliate_text2', sanitize_text_field( $_POST[ 'cwp_product_affiliate_text2' ] ) );
+    }
+
+
+    if( isset( $_POST[ 'cwp_product_affiliate_link2' ] ) ) {
+        update_post_meta( $post_id, 'cwp_product_affiliate_link2', esc_url( $_POST[ 'cwp_product_affiliate_link2' ] ) );
     }
 
     if(  !empty($_POST[ 'cwp_bar_icon' ] )) {
