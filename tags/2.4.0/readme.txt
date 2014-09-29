@@ -44,24 +44,6 @@ For updates follow https://twitter.com/ready_themes.
 
 == Changelog ==
 
-**New in v2.4.2**
-
-- Fixed latest widget issue
-- Added possibility of having 2 affiliate buttons
-
-- Fixed js errors
-
-**New in v2.4.1**
-
-- Fixed division by zero
-
-**New in v2.4**
-
-- Added image and product title options in widget
-- Added lightbox on product review image, that preload image from the featured image
-- User is now able to select in admin how much user reviews will influence the main rating
-- Added [P_REVIEW post_id=3067 visual="yes"] shortcode in the PRO version, without visual attribute only the rating is displayed
-
 **New in v2.3**
 
 - Fixed js errors

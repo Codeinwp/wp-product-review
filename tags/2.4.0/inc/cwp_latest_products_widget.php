@@ -82,7 +82,7 @@ array( 'description' => __( 'This widget displays the latest products based on t
 		),
 
 		),	
-		'orderby'	=> 'date',
+		'orderby'	=> 'meta_value_num',
 		'order'		=> 'DESC'
 
 		);
