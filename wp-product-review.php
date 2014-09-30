@@ -61,7 +61,7 @@ Loading the stylesheet for admin page.
         if ( $nr_of_comments==0 )
             $options['cwppos_infl_userreview'] = 0;
             
-        $overall_score = "";
+        $overall_score = 0;
         $iter = 0;
         $rating = array();
         if(!empty($option1_grade)|| $option1_grade === '0') { $option1_grade = round(($option1_grade*(100-$options['cwppos_infl_userreview']) + $comment_meta_option_1*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option1'] = round($option1_grade);  $overall_score+=$option1_grade; }
