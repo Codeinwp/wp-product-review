@@ -5,7 +5,7 @@ header("Content-type: text/javascript", true);
 
 jQuery(document).ready(function(){
 		function cwpPreloadOptions(item) {
-			for (var i = 1; i <= 5; i++) {
+			for (var i = 1; i <= <?php echo cwppos("cwppos_option_nr");?>; i++) {
 				var preloadListItem = jQuery(item).parent().parent().children(".cwp_pitem_info").children(".cwp_pitem_options_content").children("li:eq("+(i-1)+")").text();
 				if(preloadListItem != "-") { jQuery("input#option_" + i + "_content").val(preloadListItem); }
 			};
@@ -13,7 +13,7 @@ jQuery(document).ready(function(){
 
 		function cwpPreloadCons(item)
 		{
-			for (var i = 1; i <= 5; i++) {
+			for (var i = 1; i <= <?php echo cwppos("cwppos_option_nr");?>; i++) {
 				var preloadListItem = jQuery(item).parent().parent().children(".cwp_pitem_info").children(".cwp_pitem_options_pros").children("li:eq("+(i-1)+")").text();
 				if(preloadListItem != "-") { jQuery("input#cwp_option_" + i + "_pro").val(preloadListItem); }
 			};
@@ -21,7 +21,7 @@ jQuery(document).ready(function(){
 
 		function cwpPreloadPros(item)
 		{
-			for (var i = 1; i <= 5; i++) {
+			for (var i = 1; i <= <?php echo cwppos("cwppos_option_nr");?>; i++) {
 				var preloadListItem = jQuery(item).parent().parent().children(".cwp_pitem_info").children(".cwp_pitem_options_cons").children("li:eq("+(i-1)+")").text();
 				if(preloadListItem != "-") { jQuery("input#cwp_option_" + i + "_cons").val(preloadListItem); }
 			};

@@ -37,15 +37,25 @@ array( 'description' => __( 'This widget displays the latest products based on t
 
 	public function widget( $args, $instance ) {
 
-		$title = apply_filters( 'widget_title', $instance['title'] );
+		if ( isset( $instance[ 'title' ]) ) 
 
-		$no_items = apply_filters( 'widget_content', $instance['no_items'] );
+			$title = apply_filters( 'widget_title', $instance['title'] );
 
-		$cwp_tp_category = apply_filters( 'widget_content', $instance['cwp_tp_category'] );
+		if ( isset( $instance[ 'no_items' ]) ) 
 
-		$post_type = apply_filters( 'widget_content', $instance['title_type'] );
+			$no_items = apply_filters( 'widget_content', $instance['no_items'] );
 
-		$show_image = apply_filters( 'widget_content', $instance['show_image'] );
+		if ( isset( $instance[ 'cwp_tp_category' ]) ) 
+
+			$cwp_tp_category = apply_filters( 'widget_content', $instance['cwp_tp_category'] );
+
+		if ( isset( $instance[ 'title_type' ]) ) 
+
+			$post_type = apply_filters( 'widget_content', $instance['title_type'] );
+
+		if ( isset( $instance[ 'show_image' ]) ) 
+
+			$show_image = apply_filters( 'widget_content', $instance['show_image'] );
 
 
 
@@ -67,6 +77,7 @@ array( 'description' => __( 'This widget displays the latest products based on t
 
 			'posts_per_page'=> $no_items, // limit it to the specified no of posts
 			'post_type'	=>	"any",
+			'post__not_in' => get_option('sticky_posts'),
 			'category_name' => $cwp_tp_category, // limit it to the specified category
 			'meta_key' => 'option_overall_score',
 

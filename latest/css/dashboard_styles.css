@@ -54,7 +54,7 @@
 }
 
 .preloadInfo {
-    width:90%
+    width:89%
 }
 
 .review-settings-notice h4 {
@@ -124,6 +124,15 @@
 
 .review-settings-group ul li input {
     width:200px
+}
+
+.cwp_image_link label {
+    display: inline!important;
+    float: none!important;
+}
+
+.review-settings-group ul li input[type=radio] {
+    width:10px
 }
 
 img.theme_options_logo {

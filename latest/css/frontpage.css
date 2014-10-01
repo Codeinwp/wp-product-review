@@ -1,6 +1,6 @@
 
 
-@import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700|Lato:100,200,300,400,700,900|Open+Sans:400italic,600italic,700italic,400,300,600,700,800);
+@import url(//fonts.googleapis.com/css?family=Droid+Sans:400,700|Lato:100,200,300,400,700,900|Open+Sans:400italic,600italic,700italic,400,300,600,700,800);
 
 
 
@@ -37,6 +37,11 @@ font-weight: normal;
 border:none;
 padding:0;
 margin:0;
+
+}
+
+.rev-option h3{
+	width:auto!important;
 }
 
 #review-statistics .photo-wrapup{
@@ -155,14 +160,14 @@ margin:0;
 
 #review-statistics .review-wrap-up .review-top { padding: 20px; border-top: 5px solid #3baeda;border-bottom:1px solid #e6e6e6;  }
 
-#review-statistics .review-wrap-up .review-top .item { font-weight: 400; line-height: 1; margin: 0; padding: 0;}
-#review-statistics .review-wrap-up .review-top h2.item {float:left;}
+#review-statistics .review-wrap-up .review-top .cwp-item { font-weight: 400; line-height: 1; margin: 0; padding: 0;}
+#review-statistics .review-wrap-up .review-top h2.cwp-item {float:left;width:auto!important;}
 
-#review-statistics .review-wrap-up .review-top .item-category a { font-weight: 500; font-style: italic; letter-spacing: 1px; text-decoration: none;}
+#review-statistics .review-wrap-up .review-top .cwp-item-category a { font-weight: 500; font-style: italic; letter-spacing: 1px; text-decoration: none;}
 
-#review-statistics .review-wrap-up .review-top .item-category a:hover { text-decoration: underline;}
+#review-statistics .review-wrap-up .review-top .cwp-item-category a:hover { text-decoration: underline;}
 
-#review-statistics .review-wrap-up .review-top .item-category i { color:#e3e3e3; margin-right: 5px;}
+#review-statistics .review-wrap-up .review-top .cwp-item-category i { color:#e3e3e3; margin-right: 5px;}
 
 #review-statistics .review-wrap-up .review-wu-left {width: 318px; float: left;margin-top:10px;  }
 
@@ -271,9 +276,9 @@ margin-bottom: 9%;}
 
 #cwp-slider-comment .comment-form-meta-option {  width: 100%; float: right; margin-bottom: 7px; }
 
-#cwp-slider-comment .comment-form-meta-option label { float: left; width: 90%; }
+#cwp-slider-comment .comment-form-meta-option label { float: left; width: 80%; }
 
-#cwp-slider-comment .comment-form-meta-option .meta_option_input { float: right; width: 10%; text-align: center; border: none; padding: 0; font-weight: bold; }
+#cwp-slider-comment .comment-form-meta-option .meta_option_input { float: right; width: 12%; text-align: center; border: none; padding: 0; font-weight: bold; }
 
 #cwp-slider-comment .comment-form-meta-option .comment_meta_slider { margin-top: 25px; background:#f3f3f3; border: none; height: 7px; box-shadow: inset 0px 0px 2px rgba(0,0,0,0.3);}
 

@@ -44,6 +44,16 @@ For updates follow https://twitter.com/ready_themes.
 
 == Changelog ==
 
+**New in v2.4.3**
+
+- Added multiple options/ pros/ cons
+- Fixed rich snippet issue
+- Improved image linking
+- Removed sticky posts
+- Fixed Aff button2 link/text
+
+- Fixed js errors
+
 **New in v2.4.2**
 
 - Fixed latest widget issue

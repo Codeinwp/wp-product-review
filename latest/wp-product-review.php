@@ -2,7 +2,7 @@
 /*
 Plugin Name: WP Product Review 
 Description: The highest rated and most complete review plugin, now with rich snippets support. Easily turn your basic posts into in-depth reviews.
-Version: 2.4.2
+Version: 2.4.3
 Author: ReadyThemes
 Author URI:  http://www.readythemes.com/
 Plugin URI: http://www.readythemes.com/wp-product-review/
@@ -29,7 +29,7 @@ Loading the stylesheet for admin page.
     function cwppos_calc_overall_rating($id){
         $options = cwppos();
         
-        for($i=1; $i<6; $i++) {
+        for($i=1; $i<=cwppos("cwppos_option_nr"); $i++) {
 
             ${"option".$i."_grade"} = get_post_meta($id, "option_".$i."_grade", true);
            // echo ${"option".$i."_grade"};
@@ -47,7 +47,7 @@ Loading the stylesheet for admin page.
             $nr_of_comments = get_comments_number($id);
             
             foreach($comments as $comment) :
-                for($i=1; $i<6; $i++) {
+                for($i=1; $i<=cwppos("cwppos_option_nr"); $i++) {
                     
                     ${"comment_meta_option_".$i} += get_comment_meta( $comment->comment_ID, "meta_option_{$i}", true)*10/$nr_of_comments;
                     //var_dump(${"comment_meta_option_".$i});
@@ -61,14 +61,11 @@ Loading the stylesheet for admin page.
         if ( $nr_of_comments==0 )
             $options['cwppos_infl_userreview'] = 0;
             
-        $overall_score = "";
+        $overall_score = 0;
         $iter = 0;
         $rating = array();
-        if(!empty($option1_grade)|| $option1_grade === '0') { $option1_grade = round(($option1_grade*(100-$options['cwppos_infl_userreview']) + $comment_meta_option_1*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option1'] = round($option1_grade);  $overall_score+=$option1_grade; }
-        if(!empty($option2_grade)|| $option2_grade === '0') { $option2_grade = round(($option2_grade*(100-$options['cwppos_infl_userreview']) + $comment_meta_option_2*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option2'] = round($option2_grade);$overall_score+=$option2_grade;}
-        if(!empty($option3_grade)|| $option3_grade === '0') { $option3_grade = round(($option3_grade*(100-$options['cwppos_infl_userreview']) + $comment_meta_option_3*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option3'] = round($option3_grade);$overall_score+=$option3_grade;}
-        if(!empty($option4_grade)|| $option4_grade === '0') { $option4_grade = round(($option4_grade*(100-$options['cwppos_infl_userreview']) + $comment_meta_option_4*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option4'] = round($option4_grade);$overall_score+=$option4_grade;}
-        if(!empty($option5_grade)|| $option5_grade === '0') { $option5_grade = round(($option5_grade*(100-$options['cwppos_infl_userreview']) + $comment_meta_option_5*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option5'] = round($option5_grade);$overall_score+=$option5_grade;}
+        for ($i=1;$i<=cwppos("cwppos_option_nr");$i++)
+        if(!empty(${'option'.$i.'_grade'})|| ${'option'.$i.'_grade'} === '0') { ${'option'.$i.'_grade'} = round((${'option'.$i.'_grade'}*(100-$options['cwppos_infl_userreview']) + ${'comment_meta_option_'.$i}*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option'.$i] = round(${'option'.$i.'_grade'});  $overall_score+=${'option'.$i.'_grade'}; }
         //$overall_score = ($option1_grade + $option2_grade + $option3_grade + $option4_grade + $option5_grade) / $iter;
         $rating['overall'] = $overall_score/$iter;
         update_post_meta($id, 'option_overall_score', $overall_score);
@@ -189,7 +186,7 @@ Loading the stylesheet for admin page.
                 width:<?php  echo $options['cwppos_widget_size']; ?>px!important;
             }
             <?php  } ?>
-            #review-statistics .review-wrap-up .review-wu-right ul li,#review-statistics  .review-wu-bars h3, .review-wu-bars span,#review-statistics .review-wrap-up .review-top .item-category a{
+            #review-statistics .review-wrap-up .review-wu-right ul li,#review-statistics  .review-wu-bars h3, .review-wu-bars span,#review-statistics .review-wrap-up .review-top .cwp-item-category a{
                 color:  <?php  echo $options['cwppos_font_color']; ?>;
             }
             #review-statistics .review-wrap-up .review-wu-right .pros h2 {

@@ -3,7 +3,8 @@ require_once( '../../../../wp-load.php' );
 
 				$args = array(
 					'offset'           => 0,
-					'post_type'        => array('post'),
+					'post_type'        => array('any'),
+					'post__not_in' => get_option('sticky_posts'),
 					'meta_query'             => array(
 											array(
 												'key'       => 'cwp_meta_box_check',
@@ -27,7 +28,7 @@ require_once( '../../../../wp-load.php' );
 					</header>
 					<?php 
 
-						for ($i=1; $i < 6; $i++) { 
+						for ($i=1; $i <=cwppos("cwppos_option_nr"); $i++) { 
 							$preloaded_info[$post_id]["option".$i] = array(
 								"content" => get_post_meta($post->ID, "option_" . $i ."_content", true),
 								"grade" => get_post_meta($post->ID, "option_" . $i ."_grade", true),
@@ -41,7 +42,7 @@ require_once( '../../../../wp-load.php' );
 					<ul class="cwp_pitem_options_content">
 						<h4><?php _e("Options", "cwppos"); ?></h4>
 						<?php
-							for ($i=1; $i < 6; $i++) { 
+							for ($i=1; $i <= cwppos("cwppos_option_nr"); $i++) { 
 								$pinfo_temp = $preloaded_info[$post_id]["option". $i]['content'];
 								if (!empty($pinfo_temp)) {
 									echo "<li>" . $pinfo_temp. "</li>";
@@ -55,7 +56,7 @@ require_once( '../../../../wp-load.php' );
 					<ul class="cwp_pitem_options_pros">
 						<h4><?php _e("Pros", "cwppos"); ?></h4>
 						<?php
-							for ($i=1; $i < 6; $i++) { 
+							for ($i=1; $i <=cwppos("cwppos_option_nr"); $i++) { 
 								$pinfo_temp = $preloaded_info[$post_id]["option". $i]['pro'];
 								if (!empty($pinfo_temp)) {
 									echo "<li>" . $pinfo_temp. "</li>";
@@ -69,7 +70,7 @@ require_once( '../../../../wp-load.php' );
 					<ul class="cwp_pitem_options_cons">
 						<h4><?php _e("Cons", "cwppos"); ?></h4>
 						<?php
-							for ($i=1; $i < 6; $i++) { 
+							for ($i=1; $i <=cwppos("cwppos_option_nr"); $i++) { 
 								$pinfo_temp = $preloaded_info[$post_id]["option". $i]['cons'];
 								if (!empty($pinfo_temp)) {
 									echo "<li>" . $pinfo_temp. "</li>";
