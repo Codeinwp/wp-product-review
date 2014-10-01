@@ -109,7 +109,7 @@ function cwp_review_meta_boxes(){
     <div class="review-settings-notice">
         <h4><?php  _e("Product Options Setting", "cwppos"); ?></h4>
         <div class="preloadInfo"><?php  _e("Insert your options and their grades. Grading must be done <b><i>from 0 to 100</i></b>.");
-         if(!cwppos("cwppos_show_poweredby") === 'yes' && !class_exists('CWP_PR_PRO_Core'))  
+         if(cwppos("cwppos_show_poweredby") !== 'yes' && !class_exists('CWP_PR_PRO_Core'))  
         _e(" In order to be able to automatically preload your settings from another posts, you need to <a href='http://www.readythemes.com/wp-product-review-pro/' target='_blank'>Upgrade to PRO</a>.", "cwppos"); ?>
         </div><?php  if(cwppos("cwppos_show_poweredby") === 'yes' || class_exists('CWP_PR_PRO_Core')) { ?>
             <a href="#" class="preload_info"><?php  _e("Preload Info","cwppos"); ?></a>
@@ -122,98 +122,34 @@ function cwp_review_meta_boxes(){
         <?php  } ?>
     </div><!-- end .review-settings-notice -->
     <div class="review-settings-group">
+    <?php 
+        for($i=1;$i<=cwppos("cwppos_option_nr");$i++) {?>
         <div class="review-settings-group-option">
-            <label for="option_1_content" class="option_label">1</label>
-            <input type="text" name="option_1_content" id="option_1_content" class="option_content" placeholder="Option 1" value="<?php
+            <label for="option_<?php echo $i;?>_content" class="option_label"><?php echo $i;?></label>
+            <input type="text" name="option_<?php echo $i;?>_content" id="option_<?php echo $i;?>_content" class="option_content" placeholder="Option <?php echo $i;?>" value="<?php
 
-            if(isset($cwp_review_stored_meta['option_1_content'][0])) {
-                echo $cwp_review_stored_meta['option_1_content'][0];
+            if(isset($cwp_review_stored_meta['option_'.$i.'_content'][0])) {
+                echo $cwp_review_stored_meta['option_'.$i.'_content'][0];
             }
 
             ?>"/>
-            <input type="text" name="option_1_grade" class="option_grade" placeholder="Grade" value="<?php
+            <input type="text" name="option_<?php echo $i;?>_grade" class="option_grade" placeholder="Grade" value="<?php
 
-            if(isset($cwp_review_stored_meta['option_1_grade'][0])) {
-                echo $cwp_review_stored_meta['option_1_grade'][0];
+            if(isset($cwp_review_stored_meta['option_'.$i.'_grade'][0])) {
+                echo $cwp_review_stored_meta['option_'.$i.'_grade'][0];
             }
 
             ?>"/>
         </div><!-- end .review-settings-group option -->
-        <div class="review-settings-group-option">
-            <label for="option_2_content" class="option_label">2</label>
-            <input type="text" name="option_2_content" id="option_2_content" class="option_content" placeholder="Option 2" value="<?php
-
-            if(isset($cwp_review_stored_meta['option_2_content'][0])) {
-                echo $cwp_review_stored_meta['option_2_content'][0];
-            }
-
-            ?>"/>
-            <input type="text" name="option_2_grade" class="option_grade" placeholder="Grade" value="<?php
-
-            if(isset($cwp_review_stored_meta['option_2_grade'][0])) {
-                echo $cwp_review_stored_meta['option_2_grade'][0];
-            }
-
-            ?>"/>
-        </div><!-- end .review-settings-group option -->
-        <div class="review-settings-group-option">
-            <label for="option_3_content" class="option_label">3</label>
-            <input type="text" name="option_3_content" id="option_3_content" class="option_content" placeholder="Option 3" value="<?php
-
-            if(isset($cwp_review_stored_meta['option_3_content'][0])) {
-                echo $cwp_review_stored_meta['option_3_content'][0];
-            }
-
-            ?>"/>
-            <input type="text" name="option_3_grade" class="option_grade" placeholder="Grade" value="<?php
-
-            if(isset($cwp_review_stored_meta['option_3_grade'][0])) {
-                echo $cwp_review_stored_meta['option_3_grade'][0];
-            }
-
-            ?>"/>
-        </div><!-- end .review-settings-group option -->
-        <div class="review-settings-group-option">
-            <label for="option_4_content" class="option_label">4</label>
-            <input type="text" name="option_4_content" id="option_4_content" class="option_content" placeholder="Option 4" value="<?php
-
-            if(isset($cwp_review_stored_meta['option_4_content'][0])) {
-                echo $cwp_review_stored_meta['option_4_content'][0];
-            }
-
-            ?>"/>
-            <input type="text" name="option_4_grade" class="option_grade" placeholder="Grade" value="<?php
-
-            if(isset($cwp_review_stored_meta['option_4_grade'][0])) {
-                echo $cwp_review_stored_meta['option_4_grade'][0];
-            }
-
-            ?>"/>
-        </div><!-- end .review-settings-group option -->
-        <div class="review-settings-group-option">
-            <label for="option_5_content" class="option_label">5</label>
-            <input type="text" name="option_5_content" id="option_5_content" class="option_content" placeholder="Option 5" value="<?php
-
-            if(isset($cwp_review_stored_meta['option_5_content'][0])) {
-                echo $cwp_review_stored_meta['option_5_content'][0];
-            }
-
-            ?>"/>
-            <input type="text" name="option_5_grade" class="option_grade" placeholder="Grade" value="<?php
-
-            if(isset($cwp_review_stored_meta['option_5_grade'][0])) {
-                echo $cwp_review_stored_meta['option_5_grade'][0];
-            }
-
-            ?>"/>
-        </div><!-- end .review-settings-group option -->
+        <?php } ?>
+       
     </div><!-- end .review-settings group -->
     <div class="review-settings-notice">
         <h4><?php  _e("Pro Features", "cwppos"); ?></h4>
         <p style="margin:0;"><?php  _e("Insert product's pro features below.", "cwppos"); ?></p>
     </div><!-- end .review-settings-notice -->
     <div class="review-settings-group">
-    <?php for ($i=1;$i<11;$i++) { ?>
+    <?php for ($i=1;$i<=cwppos("cwppos_option_nr");$i++) { ?>
     
         <div class="review-settings-group-option">
             <label for="cwp_option_<?php echo $i;?>_pro" class="option_label"><?php echo $i;?></label>
@@ -232,7 +168,7 @@ function cwp_review_meta_boxes(){
         <p style="margin:0;"><?php  _e("Insert product's cons features below.", "cwppos"); ?></p>
     </div><!-- end .review-settings-notice -->
     <div class="review-settings-group">
-    <?php for ($i=1;$i<11;$i++) { ?>
+    <?php for ($i=1;$i<=cwppos("cwppos_option_nr");$i++) { ?>
     
         <div class="review-settings-group-option">
             <label for="cwp_option_<?php echo $i;?>_cons" class="option_label"><?php echo $i;?></label>
@@ -309,57 +245,20 @@ function cwp_review_meta_boxes_save($post_id){
         update_post_meta( $post_id, 'cwp_bar_icon', "");
     }
 
+    for ($i=1;$i<=cwppos("cwppos_option_nr");$i++) {
 
-    if( isset( $_POST[ 'option_1_content' ] ) ) {
-        update_post_meta( $post_id, 'option_1_content', sanitize_text_field( $_POST[ 'option_1_content' ] ) );
+        if( isset( $_POST[ 'option_'.$i.'_content' ] ) ) {
+            update_post_meta( $post_id, 'option_'.$i.'_content', sanitize_text_field( $_POST[ 'option_'.$i.'_content' ] ) );
+        }
+
+
+        if( isset( $_POST[ 'option_'.$i.'_grade' ] ) ) {
+            update_post_meta( $post_id, 'option_'.$i.'_grade', sanitize_text_field( $_POST[ 'option_'.$i.'_grade' ] ) );
+        }
     }
 
 
-    if( isset( $_POST[ 'option_1_grade' ] ) ) {
-        update_post_meta( $post_id, 'option_1_grade', sanitize_text_field( $_POST[ 'option_1_grade' ] ) );
-    }
-
-
-    if( isset( $_POST[ 'option_2_content' ] ) ) {
-        update_post_meta( $post_id, 'option_2_content', sanitize_text_field( $_POST[ 'option_2_content' ] ) );
-    }
-
-
-    if( isset( $_POST[ 'option_2_grade' ] ) ) {
-        update_post_meta( $post_id, 'option_2_grade', sanitize_text_field( $_POST[ 'option_2_grade' ] ) );
-    }
-
-
-    if( isset( $_POST[ 'option_3_content' ] ) ) {
-        update_post_meta( $post_id, 'option_3_content', sanitize_text_field( $_POST[ 'option_3_content' ] ) );
-    }
-
-
-    if( isset( $_POST[ 'option_3_grade' ] ) ) {
-        update_post_meta( $post_id, 'option_3_grade', sanitize_text_field( $_POST[ 'option_3_grade' ] ) );
-    }
-
-
-    if( isset( $_POST[ 'option_4_content' ] ) ) {
-        update_post_meta( $post_id, 'option_4_content', sanitize_text_field( $_POST[ 'option_4_content' ] ) );
-    }
-
-
-    if( isset( $_POST[ 'option_4_grade' ] ) ) {
-        update_post_meta( $post_id, 'option_4_grade', sanitize_text_field( $_POST[ 'option_4_grade' ] ) );
-    }
-
-
-    if( isset( $_POST[ 'option_5_content' ] ) ) {
-        update_post_meta( $post_id, 'option_5_content', sanitize_text_field( $_POST[ 'option_5_content' ] ) );
-    }
-
-
-    if( isset( $_POST[ 'option_5_grade' ] ) ) {
-        update_post_meta( $post_id, 'option_5_grade', sanitize_text_field( $_POST[ 'option_5_grade' ] ) );
-    }
-
-
+  
     if( isset( $_POST[ 'cwp_rev_product_image' ] )) {
         update_post_meta( $post_id, 'cwp_rev_product_image', sanitize_text_field( $_POST[ 'cwp_rev_product_image' ] ) );
     }
@@ -381,7 +280,7 @@ function cwp_review_meta_boxes_save($post_id){
         update_post_meta( $post_id, 'cwp_rev_product_image', $image );
     }
 
-    for ($i=1; $i<11; $i++) {
+    for ($i=1; $i<=cwppos("cwppos_option_nr"); $i++) {
         if( isset( $_POST[ 'cwp_option_'.$i.'_pro' ] ) ) {
             update_post_meta( $post_id, 'cwp_option_'.$i.'_pro', sanitize_text_field( $_POST[ 'cwp_option_'.$i.'_pro' ] ) );
         }
@@ -392,42 +291,17 @@ function cwp_review_meta_boxes_save($post_id){
     
     }
 
-
-    for($i=1; $i<6; $i++) {
-        ${"option".$i."_grade"}= get_post_meta($post_id, "option_".$i."_grade", true);
-    }
-
     $overall_score = "";
     $iter = 0;
 
-    if(!empty($option1_grade) || $option1_grade === '0') {
-        $overall_score += $option1_grade;
-        $iter++;
+    for($i=1; $i<=cwppos("cwppos_option_nr"); $i++) {
+        ${"option".$i."_grade"}= get_post_meta($post_id, "option_".$i."_grade", true);
+        if(!empty(${"option".$i."_grade"}) || ${"option".$i."_grade"} === '0') {
+            $overall_score += ${"option".$i."_grade"};
+            $iter++;
+        }
     }
 
-
-    if(!empty($option2_grade) || $option2_grade === '0' ) {
-        $overall_score += $option2_grade;
-        $iter++;
-    }
-
-
-    if(!empty($option3_grade) || $option3_grade === '0' ) {
-        $overall_score += $option3_grade;
-        $iter++;
-    }
-
-
-    if(!empty($option4_grade) || $option4_grade === '0' ) {
-        $overall_score += $option4_grade;
-        $iter++;
-    }
-
-
-    if(!empty($option5_grade) || $option5_grade === '0' ) {
-        $overall_score += $option5_grade;
-        $iter++;
-    }
 
 
     if($iter == 0){
@@ -444,6 +318,7 @@ function cwp_review_plugin_activation() {
         if( "yes" != get_option( 'cwp_review_activate' ) ) {
 
             add_option( 'cwp_review_activate', "yes" );
+            update_option( 'cwp_review_activate', "yes" );
 
             $html = '<div class="updated">';
                 $html .= '<p>';
@@ -458,7 +333,8 @@ function cwp_review_plugin_activation() {
     } // end plugin_activation
 /**
  * Hooks.
- */add_action( 'add_meta_boxes', 'cwp_review_meta_boxes' );
+ */
+add_action( 'add_meta_boxes', 'cwp_review_meta_boxes' );
 add_action( 'save_post', 'cwp_review_meta_boxes_save' );
 add_action("admin_notices", "cwp_review_plugin_activation");
 ?>

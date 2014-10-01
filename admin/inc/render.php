@@ -459,13 +459,22 @@
 	 
 				$html = '
 				<div class="controls '.$class.'">
-				<div class="explain">'.$name.'</div><p class="field_description">'.$description.'</p>   <select class=" cwp_select" name="'.cwppos_config("menu_slug").'['.$id.']" > ';
+				<div class="explain">'.$name.'</div><p class="field_description">'.$description.'</p>';
+				if ($id=="cwppos_option_nr"&& cwppos('cwppos_show_poweredby') !== 'yes' && !class_exists('CWP_PR_PRO_Core'))
+					$html .= '<span style="color:red;">'. __("Custom number of options/pros/cons are available just in the PRO version.","cwppos") . "</span></div>"; 
+				else {
+					
+					$html .='<select class=" cwp_select" name="'.cwppos_config("menu_slug").'['.$id.']" > ';
+					
 					foreach($options as $k=>$v){
 						
 						$html.="<option value='".$k."' ".($this->options[$id] == $k ? 'selected' : '').">".$v."</option>";
 					}
+					
+                    	
 				
 				$html .='</select></div>';
+				}
 				$this->tabs[$tabid]["elements"][] = array("type"=>"select",
 															"html"=>$html 
 										);

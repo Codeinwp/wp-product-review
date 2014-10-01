@@ -23,4 +23,15 @@
 
 .widget_cwp_top_products_widget ul, .widget_cwp_latest_products_widget ul  {
 	margin-left:0px!important;
+	padding-left:0px!important;
+}
+
+.widget_cwp_top_products_widget li, .widget_cwp_latest_products_widget li  {
+	margin-left:0px!important;
+	list-style:none!important;
+}
+
+.widget_cwp_top_products_widget li a, .widget_cwp_latest_products_widget li a{
+	border:none!important;
+	padding:0px!important;
 }

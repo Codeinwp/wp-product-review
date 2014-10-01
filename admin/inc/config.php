@@ -63,6 +63,116 @@
  
 
 			self::$structure	= array(
+										array(
+
+							 "type"=>"tab",
+
+							 "name"=>"General settings",
+
+							 "options"=>array(
+
+								
+
+								array(
+
+									"type"=>"title",
+
+									"name"=>"General settings"
+
+								) , 
+
+								array(
+
+									"type"=>"select",
+
+									"name"=>"Show review comment",
+
+									"description"=>"Activate comment review user",
+
+									"id"=>"cwppos_show_userreview",
+
+									"options"=>array("yes"=>"Yes","no"=>"No"),
+
+									"default"=>"yes"
+
+								),
+
+								array(
+
+									"type"=>"select",
+
+									"name"=>"Visitor Review Influence",
+
+									"description"=>"Select how much visitors rating will affect the main one.",
+
+									"id"=>"cwppos_infl_userreview",
+
+									"options"=>array("0"=>"No influence","10"=>"10%","20"=>"20%","30"=>"30%","40"=>"40%","50"=>"50%","60"=>"60%","70"=>"70%","80"=>"80%","90"=>"90%"),
+
+									"default"=>"0"
+
+								),
+
+								array(
+									"type"        => "change_icon",
+									"name"        => "Change Default Rating Icon",
+									"description" => "Choose which icon would you like to use for the rating bar.",
+									"id"          => "cwppos_change_bar_icon",
+									"default"	  => ""
+								),
+
+								array(
+
+									"type"=>"select",
+
+									"name"=>"Number of options/pros/cons",
+
+									"description"=>"You can select the default number of options / pros/ cons (3-10)",
+
+									"id"=>"cwppos_option_nr",
+
+									"options"=>array(3=>"3",4=>"4",5=>"5",6=>"6",7=>"7",8=>"8",9=>"9",10=>"10"),
+
+									"default"=>5
+
+								),
+
+
+								array(
+
+									"type"=>"input_text",
+
+									"name"=>"Content width",
+
+									"description"=>"Write your content width in pixels in this format : 600 if you want to limit the review widget width.",
+
+									"id"=>"cwppos_widget_size",
+
+									"default"=>""
+
+								), 
+
+								array(
+
+									"type"=>"select",
+
+									"name"=>"Review position",
+
+									"description"=>"Position of the review box",
+
+									"id"=>"cwppos_show_reviewbox",
+
+									"options"=>array("yes"=>"After content","no"=>"Before content"),
+
+									"default"=>"yes"
+
+								)
+
+							
+
+							 )
+
+						),
 
 						array(
 
@@ -412,100 +522,7 @@
 
 						) ,
 
-						array(
 
-							 "type"=>"tab",
-
-							 "name"=>"General settings",
-
-							 "options"=>array(
-
-								
-
-								array(
-
-									"type"=>"title",
-
-									"name"=>"General settings"
-
-								) , 
-
-								array(
-
-									"type"=>"select",
-
-									"name"=>"Show review comment",
-
-									"description"=>"Activate comment review user",
-
-									"id"=>"cwppos_show_userreview",
-
-									"options"=>array("yes"=>"Yes","no"=>"No"),
-
-									"default"=>"yes"
-
-								),
-
-								array(
-
-									"type"=>"select",
-
-									"name"=>"Visitor Review Influence",
-
-									"description"=>"Select how much visitors rating will affect the main one.",
-
-									"id"=>"cwppos_infl_userreview",
-
-									"options"=>array("0"=>"No influence","10"=>"10%","20"=>"20%","30"=>"30%","40"=>"40%","50"=>"50%","60"=>"60%","70"=>"70%","80"=>"80%","90"=>"90%"),
-
-									"default"=>"0"
-
-								),
-
-								array(
-									"type"        => "change_icon",
-									"name"        => "Change Default Rating Icon",
-									"description" => "Choose which icon would you like to use for the rating bar.",
-									"id"          => "cwppos_change_bar_icon",
-									"default"	  => ""
-								),
-
-
-								array(
-
-									"type"=>"input_text",
-
-									"name"=>"Content width",
-
-									"description"=>"Write your content width in pixels in this format : 600 if you want to limit the review widget width.",
-
-									"id"=>"cwppos_widget_size",
-
-									"default"=>""
-
-								), 
-
-								array(
-
-									"type"=>"select",
-
-									"name"=>"Review position",
-
-									"description"=>"Position of the review box",
-
-									"id"=>"cwppos_show_reviewbox",
-
-									"options"=>array("yes"=>"After content","no"=>"Before content"),
-
-									"default"=>"yes"
-
-								)
-
-							
-
-							 )
-
-						),
 						array(
 
 							 "type"=>"tab",
@@ -544,7 +561,7 @@
 
 									"name"=>"Buy the PRO version ",
 
-									"description"=>"Buy the PRO version now for only $19.95",
+									"description"=>"Buy the PRO version now starting from $26.95",
 
 									"id"=>"cwppos_show_buypro",
 
