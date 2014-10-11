@@ -110,7 +110,7 @@ function cwp_review_meta_boxes(){
         <h4><?php  _e("Product Options Setting", "cwppos"); ?></h4>
         <div class="preloadInfo"><?php  _e("Insert your options and their grades. Grading must be done <b><i>from 0 to 100</i></b>.");
          if(cwppos("cwppos_show_poweredby") !== 'yes' && !class_exists('CWP_PR_PRO_Core'))  
-        _e(" In order to be able to automatically preload your settings from another posts, you need to <a href='http://www.readythemes.com/wp-product-review-pro/' target='_blank'>Upgrade to PRO</a>.", "cwppos"); ?>
+        _e(" In order to be able to automatically preload your settings from another posts, you need to <a href='https://themeisle.com/plugins/wp-product-review-pro-add-on/' target='_blank'>Upgrade to PRO</a>.", "cwppos"); ?>
         </div><?php  if(cwppos("cwppos_show_poweredby") === 'yes' || class_exists('CWP_PR_PRO_Core')) { ?>
             <a href="#" class="preload_info"><?php  _e("Preload Info","cwppos"); ?></a>
         <?php

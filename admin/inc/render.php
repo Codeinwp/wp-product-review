@@ -551,7 +551,7 @@
 		$html = '
 				<div class="controls '.$class.' ">
 				<div class="explain">'.$name.'</div><p class="field_description">'.$description.'</p> 
-				<a href="http://www.readythemes.com/wp-product-review-pro/" class="button" target="_blank" style="color:red; text-decoration: none; ">'.$name.'</a>
+				<a href="https://themeisle.com/plugins/wp-product-review-pro-add-on/" class="button" target="_blank" style="color:red; text-decoration: none; ">'.$name.'</a>
 				</div></div>';
 				$this->tabs[$tabid]["elements"][] = array(
 						"type"=>"button",
