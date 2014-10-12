@@ -13,7 +13,20 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Easily turn your basic posts into in-depth reviews with ratings, pros and cons and affiliate links. Enhance the relationship between search engines and your site by telling more. Help search engines -like Google- to understand your content better!
 
-If you want to see a live demo of the plugin you can check this url : <a href="http://demo.themeisle.com/reviewgine/?p=11">http://demo.themeisle.com/reviewgine/?p=11</a>
+**Plugin demo**
+
+If you want to see a live demo of the plugin you can check those urls : 
+
+<a href="http://demo.themeisle.com/reviewgine/?p=11">http://demo.themeisle.com/reviewgine/?p=11</a>
+<a href="http://www.werkzeugkoffer-tests.de/werkzeugkoffer/famex-729-89-werkzeugkoffer-set/">http://www.werkzeugkoffer-tests.de/werkzeugkoffer/famex-729-89-werkzeugkoffer-set/</a>
+
+**Why to upgrade to PRO ?**
+
+Using the PRO version of the plugin you will unleash the most important functionality : SHORTCODE . Using something like : [P_REVIEW post_id=3067 visual='full'] you are able to display the review box anywhere in the post, or you can even display 5 boxes in the same page (different products).
+
+Other notable features : Custom Icons, Preloader functionality, Unlimited Options, PROs/ Cons
+
+**User Review Enabled**
 
 This plugin helps you to interact with your users with improved comments, you can expose your reviews in a easier to read way and will help you generate money by adding a buy now button in your post. Rich snippets are also supported.
 
