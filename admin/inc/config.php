@@ -71,16 +71,21 @@
 
 							 "options"=>array(
 
-								
-
 								array(
 
-									"type"=>"title",
+									"type"=>"select",
 
-									"name"=>"General settings"
+									"name"=>"Position of the review box",
 
-								) , 
+									"description"=>"You can choose manually and use : <?php echo cwppos_show_review('postid'); ?> or for PRO members use shortcode :[P_REVIEW post_id=3067 visual='full']",
 
+									"id"=>"cwppos_show_reviewbox",
+
+									"options"=>array("yes"=>"After content","no"=>"Before content","manual"=>"Manually"),
+
+									"default"=>"yes"
+
+								),
 								array(
 
 									"type"=>"select",
@@ -93,7 +98,7 @@
 
 									"options"=>array("yes"=>"Yes","no"=>"No"),
 
-									"default"=>"yes"
+									"default"=>"no"
 
 								),
 
@@ -152,21 +157,7 @@
 
 								), 
 
-								array(
 
-									"type"=>"select",
-
-									"name"=>"Review position",
-
-									"description"=>"Position of the review box",
-
-									"id"=>"cwppos_show_reviewbox",
-
-									"options"=>array("yes"=>"After content","no"=>"Before content"),
-
-									"default"=>"yes"
-
-								)
 
 							
 
@@ -537,7 +528,7 @@
 
 									"type"=>"title",
 
-									"name"=>"In order to use the PRO features, you have 2 options :"
+									"name"=>"In order to use the PRO features, you have 2 options ( Shortcode can't be used with the powered_by link) :"
 
 								),
 								array(

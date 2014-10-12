@@ -362,3 +362,85 @@ margin-bottom: 9%;}
 	position:relative!important;
 	margin:10px!important;
 }
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 321px) {
+
+#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart {
+	margin-left:10px;
+}
+#review-statistics .review-wu-bars {
+	padding : 0 5% 10px 3%;
+}
+
+#review-statistics .review-wrap-up .review-wu-left {
+	width:300px;
+
+}
+
+#review-statistics .review-wrap-up .review-wu-left .review-wu-grade {
+	width:134px;
+}
+
+#review-statistics .review-wu-bars {
+	width:274px;
+}
+
+#review-statistics .review-wrap-up .review-wu-right {
+	max-width: 95%;
+}
+
+}
+
+@media only screen 
+and (min-device-width : 360px) 
+and (max-device-width : 391px) {
+
+#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart {
+	margin-left:25px;
+}
+#review-statistics .review-wu-bars {
+	padding : 0 5% 10px 3%;
+}
+
+#review-statistics .review-wrap-up .review-wu-left {
+	width:340px;
+
+}
+
+#review-statistics .review-wrap-up .review-wu-left .review-wu-grade {
+	width:166px;
+}
+
+#review-statistics .review-wu-bars {
+	width:309px;
+}
+
+}
+
+@media only screen 
+and (min-device-width : 374px) 
+and (max-device-width : 385px) {
+
+#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart {
+	margin-left:35px;
+}
+#review-statistics .review-wu-bars {
+	padding : 0 5% 10px 3%;
+}
+
+#review-statistics .review-wrap-up .review-wu-left {
+	width:350px;
+
+}
+
+#review-statistics .review-wrap-up .review-wu-left .review-wu-grade {
+	width:176px;
+}
+
+#review-statistics .review-wu-bars {
+	width:319px;
+}
+
+}

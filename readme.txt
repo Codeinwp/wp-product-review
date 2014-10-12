@@ -44,6 +44,12 @@ For updates follow https://twitter.com/themeisle.
 
 == Changelog ==
 
+**New in v2.4.5**
+
+- Fixed the image affiliate link issue
+- Improved responsive for the review box
+- Now you can place the review box manually using php or shortcode
+
 **New in v2.4.3**
 
 - Added multiple options/ pros/ cons
@@ -51,7 +57,6 @@ For updates follow https://twitter.com/themeisle.
 - Improved image linking
 - Removed sticky posts
 - Fixed Aff button2 link/text
-
 - Fixed js errors
 
 **New in v2.4.2**
@@ -109,6 +114,10 @@ Alternatively you can also follow the following steps to install the WP Product 
 6. You can change the plugin options from Tweet Old Posts under settings menu.
 
 == Frequently Asked Questions ==
+
+1. How to activate user reviews ?
+
+By default user reviews are disabled since not all the themes are compatible with this option due to different designs for the comment box. You can easily activate them from General Settings
 
 If you have any questions please get in touch with us at,
 https://themeisle.com/contact
