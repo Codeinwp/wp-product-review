@@ -13,7 +13,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Easily turn your basic posts into in-depth reviews with ratings, pros and cons and affiliate links. Enhance the relationship between search engines and your site by telling more. Help search engines -like Google- to understand your content better!
 
-If you want to see a live demo of the plugin you can check this url : <a href="http://demo.themeisle.com/reviewgine/?p=11">http://demo.themeisle.com/reviewgine/?p=11</a>
+If you want to see a live demo of the plugin you can check this url : <a href="http://demo.readythemes.com/reviewgine-free/?p=11">http://demo.readythemes.com/reviewgine-free/?p=11</a>
 
 This plugin helps you to interact with your users with improved comments, you can expose your reviews in a easier to read way and will help you generate money by adding a buy now button in your post. Rich snippets are also supported.
 
@@ -21,9 +21,9 @@ After you install the plugin, go on a post admin page and you should be able to 
 
 If you want to to edit the colors, enable/disable the affiliate button, change icons go on the plugin options page.
 
-All the plugin settings/colors are fully customizable, and you can read more about it <a href="https://themeisle.com/plugins/wp-product-review-lite/?utm_source=wpreadme&utm_medium=readme&utm_campaign=wporg">here</a>
+All the plugin settings/colors are fully customizable, and you can read more about it <a href="http://www.readythemes.com/wp-product-review/?r=wporg">here</a>
 
-For updates follow https://twitter.com/themeisle.
+For updates follow https://twitter.com/ready_themes.
 
 **Fortcoming**
 
@@ -44,12 +44,6 @@ For updates follow https://twitter.com/themeisle.
 
 == Changelog ==
 
-**New in v2.4.5**
-
-- Fixed the image affiliate link issue
-- Improved responsive for the review box
-- Now you can place the review box manually using php or shortcode
-
 **New in v2.4.3**
 
 - Added multiple options/ pros/ cons
@@ -57,6 +51,7 @@ For updates follow https://twitter.com/themeisle.
 - Improved image linking
 - Removed sticky posts
 - Fixed Aff button2 link/text
+
 - Fixed js errors
 
 **New in v2.4.2**
@@ -115,12 +110,8 @@ Alternatively you can also follow the following steps to install the WP Product 
 
 == Frequently Asked Questions ==
 
-1. How to activate user reviews ?
-
-By default user reviews are disabled since not all the themes are compatible with this option due to different designs for the comment box. You can easily activate them from General Settings
-
 If you have any questions please get in touch with us at,
-https://themeisle.com/contact
+http://www.readythemes.com/contact/?r=wporg
 
 == Screenshots ==
 
@@ -131,4 +122,4 @@ https://themeisle.com/contact
 
 for more you can check out 
 
-https://themeisle.com/plugins/wp-product-review-lite/
+http://www.readythemes.com/wp-product-review/?r=wporg
