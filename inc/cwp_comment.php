@@ -78,7 +78,7 @@ function cwp_pac_comment_single($text){
 
 							<p class='comment-meta-option-grade'>$comment_meta_value</p>
 
-							<div class='clearfix'></div>
+							<div class='cwpr_clearfix'></div>
 
 							<div class='comment-meta-grade-bar'>
 
@@ -112,7 +112,7 @@ function cwp_pac_comment_single($text){
 
 		
 
-			return  $return.$text."<div class='clearfix'></div>";
+			return  $return.$text."<div class='cwpr_clearfix'></div>";
 
 }
 
@@ -156,13 +156,13 @@ function cwp_additional_fields () {
 
 			<div class='comment_meta_slider'></div>
 
-			<div class='clearfix'></div>
+			<div class='cwpr_clearfix'></div>
 
 		</div>"; 
 
 	}  
 
-	echo "<div id='cwp-slider-comment'>".implode("",$sliders)."<div class='clearfix'></div></div>";
+	echo "<div id='cwp-slider-comment'>".implode("",$sliders)."<div class='cwpr_clearfix'></div></div>";
 
 }
 

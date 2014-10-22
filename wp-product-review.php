@@ -2,7 +2,7 @@
 /*
 Plugin Name: WP Product Review 
 Description: The highest rated and most complete review plugin, now with rich snippets support. Easily turn your basic posts into in-depth reviews.
-Version: 2.4.5
+Version: 2.4.6
 Author: Themeisle
 Author URI:  https://themeisle.com/
 Plugin URI: https://themeisle.com/plugins/wp-product-review-lite/
@@ -67,7 +67,8 @@ Loading the stylesheet for admin page.
         for ($i=1;$i<=cwppos("cwppos_option_nr");$i++)
         if(!empty(${'option'.$i.'_grade'})|| ${'option'.$i.'_grade'} === '0') { ${'option'.$i.'_grade'} = round((${'option'.$i.'_grade'}*(100-$options['cwppos_infl_userreview']) + ${'comment_meta_option_'.$i}*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option'.$i] = round(${'option'.$i.'_grade'});  $overall_score+=${'option'.$i.'_grade'}; }
         //$overall_score = ($option1_grade + $option2_grade + $option3_grade + $option4_grade + $option5_grade) / $iter;
-        $rating['overall'] = $overall_score/$iter;
+        if ($iter !==0) $rating['overall'] = $overall_score/$iter;
+        else $rating['overall'] = 0;
         update_post_meta($id, 'option_overall_score', $overall_score);
         return $rating;
 
@@ -88,8 +89,8 @@ Loading the stylesheet for admin page.
 
 
         $return_string  = '<section id="review-statistics" class="article-section" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
-                            <div class="review-wrap-up hreview clearfix">
-                                <div class="review-top clearfix">
+                            <div class="review-wrap-up hreview cwpr_clearfix">
+                                <div class="review-top cwpr_clearfix">
                                     <h2 class="cwp-item" itemprop="itemreviewed">'.get_post_meta($id, "cwp_rev_product_name", true).'</h2>
                                     <span class="cwp-item-price cwp-item"  itemprop="price">'.get_post_meta($id, "cwp_rev_price", true).'</span>
                                 </div><!-- end .review-top -->
@@ -98,7 +99,7 @@ Loading the stylesheet for admin page.
 
         $product_image = get_post_meta($id, "cwp_rev_product_image", true);
         $imgurl = get_post_meta($id, "cwp_image_link", true);
-
+        $feat_image = "";
         if(!empty($product_image)) {
             
             if ($imgurl =="image") 
@@ -144,11 +145,11 @@ Loading the stylesheet for admin page.
 
         if (!empty(${'option'.$i.'_content'}) && isset($rating['option'.$i]) && (!empty($rating['option'.$i]) || $rating['option'.$i] === '0' ) &&  strtoupper(${'option'.$i.'_content'}) != 'DEFAULT FEATURE '.$i) {
             $return_string .= '<div class="rev-option" data-value='.$rating['option'.$i].'>
-                                            <div class="clearfix">
+                                            <div class="cwpr_clearfix">
                                                 <h3>'. ${'option'.$i.'_content'}.'</h3>
                                                 <span>'.$rating['option'.$i].'/10</span>
                                             </div>
-                                            <ul class="clearfix"></ul>
+                                            <ul class="cwpr_clearfix"></ul>
                                         </div>';
         }
 
@@ -241,7 +242,9 @@ Loading the stylesheet for admin page.
 
     function cwppos_pac_admin_init() {
         wp_enqueue_style( 'cwp-pac-admin-stylesheet', plugins_url('css/dashboard_styles.css', __FILE__) );
-        wp_enqueue_script( 'cwp-pac-script', plugins_url('javascript/admin-review.js', __FILE__),array("jquery"),"20140101",true );
+        wp_register_script( 'cwp-pac-script', plugins_url('javascript/admin-review.js', __FILE__),array("jquery"),"20140101",true );
+        wp_localize_script( 'cwp-pac-script', 'ispro', array( 'value' => class_exists('CWP_PR_PRO_Core') ) );
+        wp_enqueue_script('cwp-pac-script' );
     }
 
 

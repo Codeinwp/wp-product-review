@@ -11,7 +11,7 @@
 }
 
 /* <div class="rowf1f1f1*/
-.clearfix:before,.clearfix:after,.row:before,.row:after {
+.cwpr_clearfix:before,.cwpr_clearfix:after,.row:before,.row:after {
     content:'\0020';
     display:block;
     overflow:hidden;
@@ -20,11 +20,11 @@
     height:0
 }
 
-.row:after,.clearfix:after {
+.row:after,.cwpr_clearfix:after {
     clear:both
 }
 
-.row,.clearfix {
+.row,.cwpr_clearfix {
     zoom:1
 }
 
@@ -432,3 +432,4 @@ box-shadow: 0 0 3px rgba(0,0,0,0.3);
     margin-left: 0;
     padding: 0;
 }
+

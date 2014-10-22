@@ -17,7 +17,7 @@
 .cwp-popular-review .cwp_rev_image {
 	margin-right:10px;
 	border-radius: 3px;
-	width: 50px;
+	width: 50px!important;
 	vertical-align: middle;
 }
 

@@ -90,7 +90,7 @@ margin:0;
 
 } 
 
-   #review-statistics .clearfix:after {
+   #review-statistics .cwpr_clearfix:after {
 
       content: '\0020';
 
@@ -104,11 +104,11 @@ margin:0;
 
       height: 0; } 
 
-   #review-statistics .clearfix:after {
+   #review-statistics .cwpr_clearfix:after {
 
       clear: both; } 
 
-   #review-statistics .clearfix {
+   #review-statistics .cwpr_clearfix {
 
       zoom: 1; }
 
@@ -346,7 +346,7 @@ margin-bottom: 9%;}
 
 }
 
-.clearfix{
+.cwpr_clearfix{
 
 	clear:both !important;
 

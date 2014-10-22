@@ -1,5 +1,6 @@
 jQuery(document).ready(function(){
 
+    if (ispro.value ==true) jQuery("#cwp_nav li:last").hide();
      // Instantiates the variable that holds the media library frame.
     var meta_image_frame;
  

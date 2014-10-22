@@ -13,7 +13,7 @@
 				
 				<a href="https://themeisle.com/allthemes"  class="read_docs button" target="_blank" style=" text-decoration: none; "><?php _e("Recommended Review Themes", "cwppos"); ?></a>
 				
-				<a href="https://themeisle.com/contact/" target="_blank" class="read_docs button" style="text-decoration: none;"><?php _e("Contact us", "cwppos"); ?></a>
+				<a href="https://themeisle.com/forums/" target="_blank" class="read_docs button" style="text-decoration: none;"><?php _e("Contact us", "cwppos"); ?></a>
 
 				</h2>
 			</div>
