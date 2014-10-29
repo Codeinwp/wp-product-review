@@ -90,10 +90,10 @@ Loading the stylesheet for admin page.
 
         $return_string  = '<section id="review-statistics" class="article-section" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
                             <div class="review-wrap-up hreview cwpr_clearfix">
-                                <div class="review-top cwpr_clearfix">
+                                <div class="cwpr-review-top cwpr_clearfix">
                                     <h2 class="cwp-item" itemprop="itemreviewed">'.get_post_meta($id, "cwp_rev_product_name", true).'</h2>
                                     <span class="cwp-item-price cwp-item"  itemprop="price">'.get_post_meta($id, "cwp_rev_price", true).'</span>
-                                </div><!-- end .review-top -->
+                                </div><!-- end .cwpr-review-top -->
                                 <div class="review-wu-left">
                                     <div class="rev-wu-image">';
 
@@ -333,7 +333,7 @@ Loading the stylesheet for admin page.
         $options = cwppos();
         ?>
         <style type="text/css">
-            #review-statistics .review-wrap-up .review-top { border-top: <?php  echo $options['cwppos_reviewboxbd_width']; ?>px solid <?php  echo $options['cwppos_reviewboxbd_color']; ?>;  }
+            #review-statistics .review-wrap-up .cwpr-review-top { border-top: <?php  echo $options['cwppos_reviewboxbd_width']; ?>px solid <?php  echo $options['cwppos_reviewboxbd_color']; ?>;  }
             .user-comments-grades .comment-meta-grade-bar,
             #review-statistics  .review-wu-bars ul li{
                 background: <?php  echo $options['cwppos_rating_default']; ?>;
@@ -348,7 +348,7 @@ Loading the stylesheet for admin page.
                 width:<?php  echo $options['cwppos_widget_size']; ?>px!important;
             }
             <?php  } ?>
-            #review-statistics .review-wrap-up .review-wu-right ul li,#review-statistics  .review-wu-bars h3, .review-wu-bars span,#review-statistics .review-wrap-up .review-top .cwp-item-category a{
+            #review-statistics .review-wrap-up .review-wu-right ul li,#review-statistics  .review-wu-bars h3, .review-wu-bars span,#review-statistics .review-wrap-up .cwpr-review-top .cwp-item-category a{
                 color:  <?php  echo $options['cwppos_font_color']; ?>;
             }
             #review-statistics .review-wrap-up .review-wu-right .pros h2 {
