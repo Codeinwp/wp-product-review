@@ -128,7 +128,7 @@ class TAV_Remote_Notification_Client {
 
 					}
 
-					set_transient( "rn_last_notification_$uniqid", $content, $this->cache*60*60 );
+					set_transient( "rn_last_notification_$uniqid", $content, $this->cache*60*60*5 );
 
 				}			
 
