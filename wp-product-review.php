@@ -2,7 +2,7 @@
 /*
 Plugin Name: WP Product Review 
 Description: The highest rated and most complete review plugin, now with rich snippets support. Easily turn your basic posts into in-depth reviews.
-Version: 2.4.6
+Version: 2.4.7
 Author: Themeisle
 Author URI:  https://themeisle.com/
 Plugin URI: https://themeisle.com/plugins/wp-product-review-lite/
@@ -34,6 +34,7 @@ Loading the stylesheet for admin page.
             ${"option".$i."_grade"} = get_post_meta($id, "option_".$i."_grade", true);
            // echo ${"option".$i."_grade"};
 
+            ${"comment_meta_option_nr_".$i} = 0;
             ${"comment_meta_option_".$i} = 0;
 
         }
@@ -49,9 +50,19 @@ Loading the stylesheet for admin page.
             foreach($comments as $comment) :
                 for($i=1; $i<=cwppos("cwppos_option_nr"); $i++) {
                     
-                    ${"comment_meta_option_".$i} += get_comment_meta( $comment->comment_ID, "meta_option_{$i}", true)*10/$nr_of_comments;
+                    if (get_comment_meta( $comment->comment_ID, "meta_option_{$i}", true)!=='') {
+                        ${"comment_meta_option_nr_".$i}++;
+                        ${"comment_meta_option_".$i} += get_comment_meta( $comment->comment_ID, "meta_option_{$i}", true)*10;
+                    }
+
+
                     //var_dump(${"comment_meta_option_".$i});
                 }
+                for($i=1; $i<=cwppos("cwppos_option_nr"); $i++) {
+                    if (get_comment_meta( $comment->comment_ID, "meta_option_{$i}", true)!="")
+                        ${"comment_meta_option_".$i} = ${"comment_meta_option_".$i}/${"comment_meta_option_nr_".$i};
+                }
+
             endforeach;
 
         }
@@ -64,8 +75,22 @@ Loading the stylesheet for admin page.
         $overall_score = 0;
         $iter = 0;
         $rating = array();
-        for ($i=1;$i<=cwppos("cwppos_option_nr");$i++)
-        if(!empty(${'option'.$i.'_grade'})|| ${'option'.$i.'_grade'} === '0') { ${'option'.$i.'_grade'} = round((${'option'.$i.'_grade'}*(100-$options['cwppos_infl_userreview']) + ${'comment_meta_option_'.$i}*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option'.$i] = round(${'option'.$i.'_grade'});  $overall_score+=${'option'.$i.'_grade'}; }
+        
+        for ($i=1;$i<=cwppos("cwppos_option_nr");$i++) {
+
+            if (${"comment_meta_option_nr_".$i}!==0)
+                $infl = $options['cwppos_infl_userreview'];
+            else {
+                $infl = 0;
+            
+            }
+            if(!empty(${'option'.$i.'_grade'})|| ${'option'.$i.'_grade'} === '0') { 
+                ${'option'.$i.'_grade'} = round((${'option'.$i.'_grade'}*(100-$infl) + ${'comment_meta_option_'.$i}*$infl)/100); 
+                $iter++; 
+                $rating['option'.$i] = round(${'option'.$i.'_grade'});  
+                $overall_score+=${'option'.$i.'_grade'}; 
+            }
+        }
         //$overall_score = ($option1_grade + $option2_grade + $option3_grade + $option4_grade + $option5_grade) / $iter;
         if ($iter !==0) $rating['overall'] = $overall_score/$iter;
         else $rating['overall'] = 0;
@@ -271,10 +296,10 @@ Loading the stylesheet for admin page.
     }
 
     function cwppos_pac_register() {
-        //wp_register_script( 'jquery-ui-core' );
-        //wp_register_script( 'jquery-ui-slider' );
+        
         wp_register_script( 'pie-chart', plugins_url('javascript/pie-chart.js', __FILE__),array("jquery"),"20140101",true );
         wp_register_script( 'cwp-pac-main-script', plugins_url('javascript/main.js', __FILE__),array("jquery",'pie-chart'),"20140101",true );
+        //wp_localize_script( 'cwp-pac-main-script', 'trackcolor', array( 'value' => $options['cwppos_rating_chart_default'] ) );       
         wp_register_style( 'cwp-pac-frontpage-stylesheet', plugins_url('css/frontpage.css', __FILE__) );
         wp_register_style( 'cwp-pac-widget-stylesheet', plugins_url('css/cwppos-widget.css', __FILE__) );
         wp_register_style( 'jqueryui', plugins_url('css/jquery-ui.css', __FILE__) );
@@ -294,6 +319,7 @@ Loading the stylesheet for admin page.
         }
 
         $uni_font = cwppos("cwppos_change_bar_icon");
+        $track = $options['cwppos_rating_chart_default'];
         
         //if ($uni_font!=="&#")
 
@@ -302,6 +328,7 @@ Loading the stylesheet for admin page.
         echo    "<script type='text/javascript'>
                     var cwpCustomBarIcon = '" . $uni_font . "';
                     var isSetToPro = '".$isSetToPro."';
+                    var trackcolor = '".$track."';
                 </script>";
     }
 

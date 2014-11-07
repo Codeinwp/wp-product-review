@@ -60,6 +60,11 @@ Other notable features :
 
 == Changelog ==
 
+**New in v2.4.7**
+
+- Fixed issue with more than 5 options
+- Added ability to modify the chart color
+
 **New in v2.4.5**
 
 - Fixed the image affiliate link issue

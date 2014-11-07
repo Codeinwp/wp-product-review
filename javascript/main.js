@@ -16,12 +16,19 @@ jQuery(document).ready(function($) {
                 return c4;
             }
         }
+        if (typeof trackcolor != 'undefined') {
+            trackColorRight = trackcolor.toUpperCase();
+        }
+        else {
+            trackColorRight = '#ebebeb';
+        }
+            
 
         $('.cwp-review-percentage').cwp_easyPieChart({
             barColor: function(percent) {
                 return returnColor(percent);
             },
-            trackColor: '#ebebeb',
+            trackColor: trackColorRight,
             scaleColor: false,
             lineCap: 'butt',
             rotate: 0,

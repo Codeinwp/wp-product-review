@@ -189,13 +189,27 @@
 
 									"type"=>"color",
 
-									"name"=>"Rating default color",
+									"name"=>"Rating options default color",
 
 									"description"=>"Select the color to be used by default on rating.",
 
 									"id"=>"cwppos_rating_default",
 
 									"default"=>"#E1E2E0"
+
+								),
+
+								array(	
+
+									"type"=>"color",
+
+									"name"=>"Rating chart default color",
+
+									"description"=>"Select the color to be used by default on rating chart.",
+
+									"id"=>"cwppos_rating_chart_default",
+
+									"default"=>"#ebebeb"
 
 								),
 

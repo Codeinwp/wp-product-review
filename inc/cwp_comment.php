@@ -134,7 +134,7 @@ function cwp_additional_fields () {
 
 	foreach ($meta_options as $k => $value) {
 
-		if(empty($meta_options[$k])) { 
+		if($meta_options[$k]=='') { 
 
 			unset($meta_options[$k]);
 
@@ -152,7 +152,7 @@ function cwp_additional_fields () {
 
 			<label for='$k'>$meta_options[$k]</label>
 
-			<input type='text' id='$k' class='meta_option_input' value='0' name='$k' readonly='readonly'>
+			<input type='text' id='$k' class='meta_option_input' value='' name='$k' readonly='readonly'>
 
 			<div class='comment_meta_slider'></div>
 
@@ -171,54 +171,18 @@ function cwp_additional_fields () {
 function cwp_add_comment_meta_values($comment_id)
 
 	{
+	for ($i=1;$i<=cwppos("cwppos_option_nr");$i++) {
 
-		if(isset($_POST['meta_option_1'])) {
+		if(isset($_POST['meta_option_'.$i])) {
 
-	        $meta_option_1 = wp_filter_nohtml_kses($_POST['meta_option_1']);
+	        ${'meta_option_'.$i} = wp_filter_nohtml_kses($_POST['meta_option_'.$i]);
 
-	        add_comment_meta($comment_id, 'meta_option_1', $meta_option_1, false);
-
-	    }
-
-
-
-		if(isset($_POST['meta_option_2'])) {
-
-	        $meta_option_2 = wp_filter_nohtml_kses($_POST['meta_option_2']);
-
-	        add_comment_meta($comment_id, 'meta_option_2', $meta_option_2, false);
+	        add_comment_meta($comment_id, 'meta_option_'.$i, ${'meta_option_'.$i}, false);
 
 	    }
 
+	}
 
-
-		if(isset($_POST['meta_option_3'])) {
-
-	        $meta_option_3 = wp_filter_nohtml_kses($_POST['meta_option_3']);
-
-	        add_comment_meta($comment_id, 'meta_option_3', $meta_option_3, false);
-
-	    }
-
-
-
-		if(isset($_POST['meta_option_4'])) {
-
-	        $meta_option_4 = wp_filter_nohtml_kses($_POST['meta_option_4']);
-
-	        add_comment_meta($comment_id, 'meta_option_4', $meta_option_4, false);
-
-	    }
-
-
-
-		if(isset($_POST['meta_option_5'])) {
-
-	        $meta_option_5 = wp_filter_nohtml_kses($_POST['meta_option_5']);
-
-	        add_comment_meta($comment_id, 'meta_option_5', $meta_option_5, false);
-
-	    }
 
 	}
 
