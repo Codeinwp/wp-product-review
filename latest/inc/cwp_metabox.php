@@ -142,7 +142,7 @@ function cwp_review_meta_boxes(){
             ?>"/>
         </div><!-- end .review-settings-group option -->
         <?php } ?>
-       <p> <?php _e("You can add as many options as possible in the PRO version.","cwppos");?></p>
+       <p><?php if (!class_exists('CWP_PR_PRO_Core')) { ?> <?php _e("You can add as many options as possible in the PRO version.","cwppos");?> <?php } ?></p>
     </div><!-- end .review-settings group -->
     <div class="review-settings-notice">
         <h4><?php  _e("Pro Features", "cwppos"); ?></h4>
@@ -162,7 +162,7 @@ function cwp_review_meta_boxes(){
             ?>"/>
         </div><!-- end .review-settings-group option -->
     <?php } ?>
-     <p> <?php _e("You can add as many options as possible in the PRO version.","cwppos");?></p>
+     <p> <?php if (!class_exists('CWP_PR_PRO_Core')) { ?> <?php _e("You can add as many options as possible in the PRO version.","cwppos");?> <?php } ?></p>
     </div><!-- end .review-settings group -->
     <div class="review-settings-notice">
         <h4><?php  _e("Cons Features", "cwppos"); ?></h4>
@@ -182,7 +182,7 @@ function cwp_review_meta_boxes(){
             ?>"/>
         </div><!-- end .review-settings-group option -->
     <?php } ?>
-     <p> <?php _e("You can add as many options as possible in the PRO version.","cwppos");?></p>
+     <p> <?php if (!class_exists('CWP_PR_PRO_Core')) { ?> <?php _e("You can add as many options as possible in the PRO version.","cwppos");?> <?php } ?></p>
     </div><!-- end .review-settings group -->
     </div>
 <?php

@@ -20,7 +20,7 @@ require_once( '../../../../wp-load.php' );
 				$preloaded_info[$post_id] = array();
 
 				?>
-				<li class="cwp_preloaded_item clearfix">
+				<li class="cwp_preloaded_item cwpr_clearfix">
 					<header>
 
 						<h3 class="cwp_p_title"><?php the_title(); ?></h3>

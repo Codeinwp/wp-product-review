@@ -2,7 +2,7 @@
 /*
 Plugin Name: WP Product Review 
 Description: The highest rated and most complete review plugin, now with rich snippets support. Easily turn your basic posts into in-depth reviews.
-Version: 2.4.5
+Version: 2.4.7
 Author: Themeisle
 Author URI:  https://themeisle.com/
 Plugin URI: https://themeisle.com/plugins/wp-product-review-lite/
@@ -34,6 +34,7 @@ Loading the stylesheet for admin page.
             ${"option".$i."_grade"} = get_post_meta($id, "option_".$i."_grade", true);
            // echo ${"option".$i."_grade"};
 
+            ${"comment_meta_option_nr_".$i} = 0;
             ${"comment_meta_option_".$i} = 0;
 
         }
@@ -49,9 +50,19 @@ Loading the stylesheet for admin page.
             foreach($comments as $comment) :
                 for($i=1; $i<=cwppos("cwppos_option_nr"); $i++) {
                     
-                    ${"comment_meta_option_".$i} += get_comment_meta( $comment->comment_ID, "meta_option_{$i}", true)*10/$nr_of_comments;
+                    if (get_comment_meta( $comment->comment_ID, "meta_option_{$i}", true)!=='') {
+                        ${"comment_meta_option_nr_".$i}++;
+                        ${"comment_meta_option_".$i} += get_comment_meta( $comment->comment_ID, "meta_option_{$i}", true)*10;
+                    }
+
+
                     //var_dump(${"comment_meta_option_".$i});
                 }
+                for($i=1; $i<=cwppos("cwppos_option_nr"); $i++) {
+                    if (get_comment_meta( $comment->comment_ID, "meta_option_{$i}", true)!="")
+                        ${"comment_meta_option_".$i} = ${"comment_meta_option_".$i}/${"comment_meta_option_nr_".$i};
+                }
+
             endforeach;
 
         }
@@ -64,10 +75,25 @@ Loading the stylesheet for admin page.
         $overall_score = 0;
         $iter = 0;
         $rating = array();
-        for ($i=1;$i<=cwppos("cwppos_option_nr");$i++)
-        if(!empty(${'option'.$i.'_grade'})|| ${'option'.$i.'_grade'} === '0') { ${'option'.$i.'_grade'} = round((${'option'.$i.'_grade'}*(100-$options['cwppos_infl_userreview']) + ${'comment_meta_option_'.$i}*$options['cwppos_infl_userreview'])/100); $iter++; $rating['option'.$i] = round(${'option'.$i.'_grade'});  $overall_score+=${'option'.$i.'_grade'}; }
+        
+        for ($i=1;$i<=cwppos("cwppos_option_nr");$i++) {
+
+            if (${"comment_meta_option_nr_".$i}!==0)
+                $infl = $options['cwppos_infl_userreview'];
+            else {
+                $infl = 0;
+            
+            }
+            if(!empty(${'option'.$i.'_grade'})|| ${'option'.$i.'_grade'} === '0') { 
+                ${'option'.$i.'_grade'} = round((${'option'.$i.'_grade'}*(100-$infl) + ${'comment_meta_option_'.$i}*$infl)/100); 
+                $iter++; 
+                $rating['option'.$i] = round(${'option'.$i.'_grade'});  
+                $overall_score+=${'option'.$i.'_grade'}; 
+            }
+        }
         //$overall_score = ($option1_grade + $option2_grade + $option3_grade + $option4_grade + $option5_grade) / $iter;
-        $rating['overall'] = $overall_score/$iter;
+        if ($iter !==0) $rating['overall'] = $overall_score/$iter;
+        else $rating['overall'] = 0;
         update_post_meta($id, 'option_overall_score', $overall_score);
         return $rating;
 
@@ -88,17 +114,17 @@ Loading the stylesheet for admin page.
 
 
         $return_string  = '<section id="review-statistics" class="article-section" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
-                            <div class="review-wrap-up hreview clearfix">
-                                <div class="review-top clearfix">
+                            <div class="review-wrap-up hreview cwpr_clearfix">
+                                <div class="cwpr-review-top cwpr_clearfix">
                                     <h2 class="cwp-item" itemprop="itemreviewed">'.get_post_meta($id, "cwp_rev_product_name", true).'</h2>
                                     <span class="cwp-item-price cwp-item"  itemprop="price">'.get_post_meta($id, "cwp_rev_price", true).'</span>
-                                </div><!-- end .review-top -->
+                                </div><!-- end .cwpr-review-top -->
                                 <div class="review-wu-left">
                                     <div class="rev-wu-image">';
 
         $product_image = get_post_meta($id, "cwp_rev_product_image", true);
         $imgurl = get_post_meta($id, "cwp_image_link", true);
-
+        $feat_image = "";
         if(!empty($product_image)) {
             
             if ($imgurl =="image") 
@@ -144,11 +170,11 @@ Loading the stylesheet for admin page.
 
         if (!empty(${'option'.$i.'_content'}) && isset($rating['option'.$i]) && (!empty($rating['option'.$i]) || $rating['option'.$i] === '0' ) &&  strtoupper(${'option'.$i.'_content'}) != 'DEFAULT FEATURE '.$i) {
             $return_string .= '<div class="rev-option" data-value='.$rating['option'.$i].'>
-                                            <div class="clearfix">
+                                            <div class="cwpr_clearfix">
                                                 <h3>'. ${'option'.$i.'_content'}.'</h3>
                                                 <span>'.$rating['option'.$i].'/10</span>
                                             </div>
-                                            <ul class="clearfix"></ul>
+                                            <ul class="cwpr_clearfix"></ul>
                                         </div>';
         }
 
@@ -241,7 +267,9 @@ Loading the stylesheet for admin page.
 
     function cwppos_pac_admin_init() {
         wp_enqueue_style( 'cwp-pac-admin-stylesheet', plugins_url('css/dashboard_styles.css', __FILE__) );
-        wp_enqueue_script( 'cwp-pac-script', plugins_url('javascript/admin-review.js', __FILE__),array("jquery"),"20140101",true );
+        wp_register_script( 'cwp-pac-script', plugins_url('javascript/admin-review.js', __FILE__),array("jquery"),"20140101",true );
+        wp_localize_script( 'cwp-pac-script', 'ispro', array( 'value' => class_exists('CWP_PR_PRO_Core') ) );
+        wp_enqueue_script('cwp-pac-script' );
     }
 
 
@@ -268,10 +296,10 @@ Loading the stylesheet for admin page.
     }
 
     function cwppos_pac_register() {
-        //wp_register_script( 'jquery-ui-core' );
-        //wp_register_script( 'jquery-ui-slider' );
+        
         wp_register_script( 'pie-chart', plugins_url('javascript/pie-chart.js', __FILE__),array("jquery"),"20140101",true );
         wp_register_script( 'cwp-pac-main-script', plugins_url('javascript/main.js', __FILE__),array("jquery",'pie-chart'),"20140101",true );
+        //wp_localize_script( 'cwp-pac-main-script', 'trackcolor', array( 'value' => $options['cwppos_rating_chart_default'] ) );       
         wp_register_style( 'cwp-pac-frontpage-stylesheet', plugins_url('css/frontpage.css', __FILE__) );
         wp_register_style( 'cwp-pac-widget-stylesheet', plugins_url('css/cwppos-widget.css', __FILE__) );
         wp_register_style( 'jqueryui', plugins_url('css/jquery-ui.css', __FILE__) );
@@ -291,6 +319,7 @@ Loading the stylesheet for admin page.
         }
 
         $uni_font = cwppos("cwppos_change_bar_icon");
+        $track = $options['cwppos_rating_chart_default'];
         
         //if ($uni_font!=="&#")
 
@@ -299,6 +328,7 @@ Loading the stylesheet for admin page.
         echo    "<script type='text/javascript'>
                     var cwpCustomBarIcon = '" . $uni_font . "';
                     var isSetToPro = '".$isSetToPro."';
+                    var trackcolor = '".$track."';
                 </script>";
     }
 
@@ -330,7 +360,7 @@ Loading the stylesheet for admin page.
         $options = cwppos();
         ?>
         <style type="text/css">
-            #review-statistics .review-wrap-up .review-top { border-top: <?php  echo $options['cwppos_reviewboxbd_width']; ?>px solid <?php  echo $options['cwppos_reviewboxbd_color']; ?>;  }
+            #review-statistics .review-wrap-up .cwpr-review-top { border-top: <?php  echo $options['cwppos_reviewboxbd_width']; ?>px solid <?php  echo $options['cwppos_reviewboxbd_color']; ?>;  }
             .user-comments-grades .comment-meta-grade-bar,
             #review-statistics  .review-wu-bars ul li{
                 background: <?php  echo $options['cwppos_rating_default']; ?>;
@@ -345,7 +375,7 @@ Loading the stylesheet for admin page.
                 width:<?php  echo $options['cwppos_widget_size']; ?>px!important;
             }
             <?php  } ?>
-            #review-statistics .review-wrap-up .review-wu-right ul li,#review-statistics  .review-wu-bars h3, .review-wu-bars span,#review-statistics .review-wrap-up .review-top .cwp-item-category a{
+            #review-statistics .review-wrap-up .review-wu-right ul li,#review-statistics  .review-wu-bars h3, .review-wu-bars span,#review-statistics .review-wrap-up .cwpr-review-top .cwp-item-category a{
                 color:  <?php  echo $options['cwppos_font_color']; ?>;
             }
             #review-statistics .review-wrap-up .review-wu-right .pros h2 {

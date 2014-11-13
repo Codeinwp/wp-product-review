@@ -1,33 +1,49 @@
 === Plugin Name ===
 Contributors: codeinwp
-Tags:  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews
-Author URI: http://codeinwp.com 
+Tags:  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin
+Author URI: https://themeisle.com 
 Requires at least: 3.5
 Tested up to: 4.0
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
- 
 
+
+Easily turn your basic posts into in-depth reviews with ratings, pros and cons, affiliate links, rich snippets and user reviews.
 == Description ==
 
-Easily turn your basic posts into in-depth reviews with ratings, pros and cons and affiliate links. Enhance the relationship between search engines and your site by telling more. Help search engines -like Google- to understand your content better!
 
-If you want to see a live demo of the plugin you can check this url : <a href="http://demo.themeisle.com/reviewgine/?p=11">http://demo.themeisle.com/reviewgine/?p=11</a>
+> If you want to see a live demo of the plugin you can check <a href="http://dev2.themeisle.com/reviewgine/?p=11">http://dev2.themeisle.com/reviewgine/?p=11</a>.
 
-This plugin helps you to interact with your users with improved comments, you can expose your reviews in a easier to read way and will help you generate money by adding a buy now button in your post. Rich snippets are also supported.
 
-After you install the plugin, go on a post admin page and you should be able to see a checkbox called : "Is this post a review ?", once this is checked you can add review details and those will appear on the post page.
+### Why to upgrade to PRO ?
 
-If you want to to edit the colors, enable/disable the affiliate button, change icons go on the plugin options page.
+Using the PRO version of the plugin you will unleash the most important functionality : SHORTCODE . Using something like : [P_REVIEW post_id=3067 visual='full'] you are able to display the review box anywhere in the post, or you can even display 5 boxes in the same page (different products).
 
-All the plugin settings/colors are fully customizable, and you can read more about it <a href="https://themeisle.com/plugins/wp-product-review-lite/?utm_source=wpreadme&utm_medium=readme&utm_campaign=wporg">here</a>
+Other notable features : 
 
-For updates follow https://twitter.com/themeisle.
+* Custom Icons
+* Preloader functionality
+* Unlimited Options
+* PROs/ Cons
+
+### User Review Enabled
+
+1. This plugin helps you to interact with your users with improved comments, you can expose your reviews in a easier to read way and will help you generate money by adding a buy now button in your post. Rich snippets are also supported.
+
+1. After you install the plugin, go on a post admin page and you should be able to see a checkbox called : "Is this post a review ?", once this is checked you can add review details and those will appear on the post page.
+
+1. If you want to to edit the colors, enable/disable the affiliate button, change icons go on the plugin options page.
+
+1. All the plugin settings/colors are fully customizable, and you can read more about it <a href="https://themeisle.com/plugins/wp-product-review-lite/?utm_source=wpreadme&utm_medium=readme&utm_campaign=wporg">here</a>
+
+1. For updates follow https://twitter.com/themeisle.
 
 **Fortcoming**
 
-- direct amazon integration
+- Direct amazon integration
+- Automatic landing page generation from the reviewed products
+- Easily embed multiple products in posts/pages
 
 **WP Product Review provides following features**
 
@@ -43,6 +59,11 @@ For updates follow https://twitter.com/themeisle.
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+
+**New in v2.4.7**
+
+- Fixed issue with more than 5 options
+- Added ability to modify the chart color
 
 **New in v2.4.5**
 
