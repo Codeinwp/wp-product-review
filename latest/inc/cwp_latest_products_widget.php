@@ -178,7 +178,7 @@ array( 'description' => __( 'This widget displays the latest products based on t
 			$title = $instance[ 'title' ];
 		}
 		else {
-			$title = __( 'Top Products', 'cwppos' );
+			$title = __( 'Latest Products', 'cwppos' );
 		}
 		if ( isset( $instance[ 'no_items' ]) ) {
 			$no_items = $instance[ 'no_items' ];
