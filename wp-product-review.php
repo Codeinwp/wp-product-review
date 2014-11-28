@@ -2,7 +2,7 @@
 /*
 Plugin Name: WP Product Review 
 Description: The highest rated and most complete review plugin, now with rich snippets support. Easily turn your basic posts into in-depth reviews.
-Version: 2.4.7
+Version: 2.4.8
 Author: Themeisle
 Author URI:  https://themeisle.com/
 Plugin URI: https://themeisle.com/plugins/wp-product-review-lite/
@@ -58,12 +58,14 @@ Loading the stylesheet for admin page.
 
                     //var_dump(${"comment_meta_option_".$i});
                 }
-                for($i=1; $i<=cwppos("cwppos_option_nr"); $i++) {
-                    if (get_comment_meta( $comment->comment_ID, "meta_option_{$i}", true)!="")
-                        ${"comment_meta_option_".$i} = ${"comment_meta_option_".$i}/${"comment_meta_option_nr_".$i};
-                }
+             
 
             endforeach;
+
+            for($i=1; $i<=cwppos("cwppos_option_nr"); $i++) {
+                if (${"comment_meta_option_nr_".$i}!==0)
+                    ${"comment_meta_option_".$i} = ${"comment_meta_option_".$i}/${"comment_meta_option_nr_".$i};
+            }        
 
         }
         else {
@@ -151,7 +153,7 @@ Loading the stylesheet for admin page.
             }
         }
 
-        $commentNr = get_comments_number($id) + 2;
+        $commentNr = get_comments_number($id)+1;
         $divrating = $rating['overall']/10;
         $return_string .= '</div><!-- end .rev-wu-image -->
                                 <div class="review-wu-grade">
