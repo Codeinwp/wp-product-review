@@ -16,9 +16,9 @@ Easily turn your basic posts into in-depth reviews with ratings, pros and cons, 
 > If you want to see a live demo of the plugin you can check <a href="http://dev2.themeisle.com/reviewgine/?p=11">http://dev2.themeisle.com/reviewgine/?p=11</a>.
 
 
-### Why to upgrade to PRO ?
+### Why to get the PRO add-ons ?
 
-Using the PRO version of the plugin you will unleash the most important functionality : SHORTCODE . Using something like : [P_REVIEW post_id=3067 visual='full'] you are able to display the review box anywhere in the post, or you can even display 5 boxes in the same page (different products).
+Using the add-ons you will unleash the most important functionality : SHORTCODE . Using something like : [P_REVIEW post_id=3067 visual='full'] you are able to display the review box anywhere in the post, or you can even display 5 boxes in the same page (different products).
 
 Other notable features : 
 

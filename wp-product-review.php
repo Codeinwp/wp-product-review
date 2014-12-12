@@ -22,6 +22,8 @@ if (wp_get_theme() !== "Reviewgine Affiliate PRO") {
     include "inc/cwp_top_products_widget.php";
     include "inc/cwp_latest_products_widget.php";
     include "inc/cwp_comment.php";
+    include "inc/cwp_js_preloader.php";
+    include "inc/cwp-addons.php";
     /*
 Loading the stylesheet for admin page.
 */
@@ -273,27 +275,17 @@ Loading the stylesheet for admin page.
         wp_localize_script( 'cwp-pac-script', 'ispro', array( 'value' => class_exists('CWP_PR_PRO_Core') ) );
         wp_enqueue_script('cwp-pac-script' );
     }
+    
 
-
-    function preloader_js(){
-        $options = cwppos();
-
-        if (class_exists('CWP_PR_PRO_Core') || $options['cwppos_show_poweredby']=="yes") {
-            wp_register_script("cwp-review-preload", plugins_url( 'inc/cwp-review-preload.php', __FILE__ ), false, "1.0", "all");
-            wp_enqueue_script("cwp-review-preload");
-
-        }
-
-    }
 
     function custom_bar_icon() {
         $options = cwppos();
 
-        if (class_exists('CWP_PR_PRO_Core') || $options['cwppos_show_poweredby']=="yes") {
+        if ($options['cwppos_show_poweredby']=="yes" || function_exists("wppr_ci_custom_bar_icon") || class_exists('CWP_PR_PRO_Core')) {
             wp_register_script("cwp-custom-bar-icon", plugins_url('javascript/custom-bar-icon.js', __FILE__), false, "1.0", "all");
             wp_enqueue_script("cwp-custom-bar-icon");
-            wp_register_style("font-awesome-cdn", "//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
-            wp_enqueue_style("font-awesome-cdn");
+            //wp_register_style("font-awesome-cdn", "//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+            //wp_enqueue_style("font-awesome-cdn");
         }
     }
 
@@ -351,10 +343,17 @@ Loading the stylesheet for admin page.
         wp_print_scripts('cwp-pac-main-script');
         wp_print_scripts('img-lightbox');
         wp_print_styles('img-lightbox-css');
-        wp_print_scripts('jquery-ui-core');
+        
         cwp_def_settings();
         
 
+    }
+
+    /**
+     * Addons menu item
+     */
+    function cwp_addons_menu() {
+        add_submenu_page( 'cwppos_options', __( 'WP Product Review Add-ons/Extensions', 'cwppos_options' ),  __( 'Add-ons', 'cwppos' ) , 'manage_options', 'wp-addons', 'cwp_addons');
     }
 
 
@@ -424,10 +423,9 @@ Loading the stylesheet for admin page.
 
     add_action('init', 'cwppos_pac_register');
     add_action('wp_head', 'cwppos_pac_print');
-    add_action('wp_head','cwppos_dynamic_stylesheet');
+    add_action('wp_footer','cwppos_dynamic_stylesheet');
     add_action( 'admin_init', 'cwppos_pac_admin_init' );
-    add_action('admin_enqueue_scripts','preloader_js');
-
+    add_action('admin_menu', 'cwp_addons_menu');
     add_action('admin_enqueue_scripts', 'custom_bar_icon');
 
     if (!class_exists('TAV_Remote_Notification_Client')) require( 'inc/class-remote-notification-client.php' );

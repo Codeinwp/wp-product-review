@@ -221,7 +221,7 @@
 
             $html .= "<li>";
 
-            	if (cwppos('cwppos_show_poweredby') == 'yes' || class_exists('CWP_PR_PRO_Core')) {
+            	if (cwppos('cwppos_show_poweredby') == 'yes' || function_exists('wppr_ci_custom_bar_icon')) {
 				
 					$html .= "<button id='cwp_select_bar_icon'>Select Bar Icon</button>";
 					$html .= "<input type='hidden' id='cwp_bar_icon_field' name='".cwppos_config("menu_slug")."[".$id."][]' value='";
@@ -240,7 +240,7 @@
                         } else {
                         	$html .= "* Currently set to the default styling</span>";
                         } } else {
-                        	$html .= '<span style="color:red;">'. __("Custom Icon feature is only available in the PRO version.","cwppos") . "</span>"; 
+                        	$html .= '<span style="color:red;">'. __("You need the custom icon add-on in order to change this.","cwppos") . "</span>"; 
                     	} 
                     $html .= "</li>";
 
@@ -460,9 +460,6 @@
 				$html = '
 				<div class="controls '.$class.'">
 				<div class="explain">'.$name.'</div><p class="field_description">'.$description.'</p>';
-				if ($id=="cwppos_option_nr"&& cwppos('cwppos_show_poweredby') !== 'yes' && !class_exists('CWP_PR_PRO_Core'))
-					$html .= '<span style="color:red;">'. __("Custom number of options/pros/cons are available just in the PRO version.","cwppos") . "</span></div>"; 
-				else {
 					
 					$html .='<select class=" cwp_select" name="'.cwppos_config("menu_slug").'['.$id.']" > ';
 					
@@ -474,7 +471,7 @@
                     	
 				
 				$html .='</select></div>';
-				}
+				
 				$this->tabs[$tabid]["elements"][] = array("type"=>"select",
 															"html"=>$html 
 										);
@@ -551,7 +548,7 @@
 		$html = '
 				<div class="controls '.$class.' ">
 				<div class="explain">'.$name.'</div><p class="field_description">'.$description.'</p> 
-				<a href="https://themeisle.com/plugins/wp-product-review-pro-add-on/" class="button" target="_blank" style="color:red; text-decoration: none; ">'.$name.'</a>
+				<a href="'.get_bloginfo('wpurl') . '/wp-admin/admin.php?page=wp-addons'.'" class="button" style="color:red; text-decoration: none; ">'.$name.'</a>
 				</div></div>';
 				$this->tabs[$tabid]["elements"][] = array(
 						"type"=>"button",

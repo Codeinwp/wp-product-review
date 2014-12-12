@@ -44,13 +44,13 @@
 
 			self::$shortname 			     = "cwppos";
 
-			self::$admin_template_directory_uri  =  plugins_url (  'wp-product-review/admin/layout' );
+			self::$admin_template_directory_uri  =  plugins_url (  '../layout', __FILE__  );
 
-			self::$admin_template_directory  =  plugins_url ('wp-product-review/admin/layout' );
+			self::$admin_template_directory  =  plugins_url ('../layout', __FILE__  );
 
-			self::$admin_uri  		= 	 plugins_url (   'wp-product-review/admin/' ); 
+			self::$admin_uri  		= 	 plugins_url (   '../' , __FILE__ ); 
 
-			self::$admin_path 	 	= 	 plugins_url ( 'wp-product-review/admin/');
+			self::$admin_path 	 	= 	 plugins_url ( '../', __FILE__ );
 
 			self::$menu_slug  		= 	"cwppos_options";
 
@@ -77,7 +77,7 @@
 
 									"name"=>"Position of the review box",
 
-									"description"=>"You can choose manually and use : <?php echo cwppos_show_review('postid'); ?> or for PRO members use shortcode :[P_REVIEW post_id=3067 visual='full']",
+									"description"=>"You can choose manually and use : <?php echo cwppos_show_review('postid'); ?> or you can get the Product in post add-on and use :[P_REVIEW post_id=3067 visual='full']",
 
 									"id"=>"cwppos_show_reviewbox",
 
@@ -532,7 +532,7 @@
 
 							 "type"=>"tab",
 
-							 "name"=>"Upgrade to Pro",
+							 "name"=>"Get Pro features",
 
 							 "options"=>array(
 
@@ -564,9 +564,9 @@
 
 									"type"=>"button",
 
-									"name"=>"Buy the PRO version ",
+									"name"=>"Buy the add-ons or the PRO bundle ",
 
-									"description"=>"Buy the PRO version now starting from $26.95",
+									"description"=>"See the extensions",
 
 									"id"=>"cwppos_show_buypro",
 

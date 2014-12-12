@@ -40,7 +40,7 @@ function cwp_review_meta_boxes(){
                     <label for="cwp_rev_product_image" class="cwp_rev_product_image-title"><?php  _e( 'Product Image', 'cwp' ) ?></label>
                     <input type="text" name="cwp_rev_product_image" id="cwp_rev_product_image" value="<?php  if ( isset ( $cwp_review_stored_meta['cwp_rev_product_image'][0] ) ) echo $cwp_review_stored_meta['cwp_rev_product_image'][0]; ?>" />
                     <input type="button" id="cwp_rev_product_image-button" class="button" value="<?php  _e( 'Choose or Upload an Image', 'cwp' ) ?>" />
-                    <p><?php  if (cwppos("cwppos_show_poweredby") == 'no' && !class_exists('CWP_PR_PRO_Core')) { ?> <del> <?php  _e("*If no image is provided, featured image is used","cwppos"); ?> </del> <span style="color:red;"><?php  _e("This is only available in the PRO version.","cwppos"); ?></span> <?php  } else _e("*If no image is provided, featured image is used"); ?>
+                    <p><?php _e("*If no image is provided, featured image is used"); ?>
                 </li>
                 <li class="cwp_image_link">
                     <label for="cwp_image_link_aff">Product Image link : </label>
@@ -109,16 +109,16 @@ function cwp_review_meta_boxes(){
     <div class="review-settings-notice">
         <h4><?php  _e("Product Options Setting", "cwppos"); ?></h4>
         <div class="preloadInfo"><?php  _e("Insert your options and their grades. Grading must be done <b><i>from 0 to 100</i></b>.");
-         if(cwppos("cwppos_show_poweredby") !== 'yes' && !class_exists('CWP_PR_PRO_Core'))  
-        _e(" In order to be able to automatically preload your settings from another posts, you need to <a href='https://themeisle.com/plugins/wp-product-review-pro-add-on/' target='_blank'>Upgrade to PRO</a>.", "cwppos"); ?>
-        </div><?php  if(cwppos("cwppos_show_poweredby") === 'yes' || class_exists('CWP_PR_PRO_Core')) { ?>
+         if(cwppos("cwppos_show_poweredby") !== 'yes' && !class_exists('CWP_PR_PRO_Core') && !function_exists('wppr_ep_js_preloader'))  
+        _e(" In order to be able to automatically preload your settings from another posts, you need to get the preloader add-on or the PRO bundle add-on", "cwppos"); ?>
+        </div><?php  if(cwppos("cwppos_show_poweredby") === 'yes' || class_exists('CWP_PR_PRO_Core')|| function_exists('wppr_ep_js_preloader')) { ?>
             <a href="#" class="preload_info"><?php  _e("Preload Info","cwppos"); ?></a>
         <?php
         } else {
             $pageURL = admin_url('admin.php?page=cwppos_options#tab-upgrade_to_pro');
             $pageURL = str_replace(":80","",$pageURL);
             ?>
-            <a href="<?php  echo $pageURL; ?>" target="_blank" class="preload_info"><?php  _e("Preload Info","cwppos"); ?></a>
+            <a href="<?php  echo $pageURL; ?>" target="_blank" class="preload_info_upsell"><?php  _e("Preload Info","cwppos"); ?></a>
         <?php  } ?>
     </div><!-- end .review-settings-notice -->
     <div class="review-settings-group">
@@ -142,7 +142,7 @@ function cwp_review_meta_boxes(){
             ?>"/>
         </div><!-- end .review-settings-group option -->
         <?php } ?>
-       <p><?php if (!class_exists('CWP_PR_PRO_Core')) { ?> <?php _e("You can add as many options as possible in the PRO version.","cwppos");?> <?php } ?></p>
+   
     </div><!-- end .review-settings group -->
     <div class="review-settings-notice">
         <h4><?php  _e("Pro Features", "cwppos"); ?></h4>
@@ -162,7 +162,7 @@ function cwp_review_meta_boxes(){
             ?>"/>
         </div><!-- end .review-settings-group option -->
     <?php } ?>
-     <p> <?php if (!class_exists('CWP_PR_PRO_Core')) { ?> <?php _e("You can add as many options as possible in the PRO version.","cwppos");?> <?php } ?></p>
+     
     </div><!-- end .review-settings group -->
     <div class="review-settings-notice">
         <h4><?php  _e("Cons Features", "cwppos"); ?></h4>
@@ -182,7 +182,7 @@ function cwp_review_meta_boxes(){
             ?>"/>
         </div><!-- end .review-settings-group option -->
     <?php } ?>
-     <p> <?php if (!class_exists('CWP_PR_PRO_Core')) { ?> <?php _e("You can add as many options as possible in the PRO version.","cwppos");?> <?php } ?></p>
+     
     </div><!-- end .review-settings group -->
     </div>
 <?php
