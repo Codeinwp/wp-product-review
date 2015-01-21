@@ -10,6 +10,7 @@
 .cwp-review-percentage span { font-family: "Lato"; font-size: 17px; font-weight: 900; background: #fff; display: block;border-radius: 50%; }
 .cwp_easyPieChart { position: relative; text-align: center; }
 .cwp_easyPieChart canvas { position: absolute; top: 0; left: 0; }
+.cwp-popular-review .cwp_easyPieChart span { text-align:center; }
 .cwp-popular-review:before {
 	content:""!important;
 } 
