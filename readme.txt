@@ -1,9 +1,9 @@
 === Plugin Name ===
-Contributors: codeinwp,themeisle,hardeepasrani,marius_codeinwp
+Contributors: codeinwp,marius2012,marius_codeinwp,hardeepasrani,themeisle
 Tags:  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin
 Author URI: https://themeisle.com 
 Requires at least: 3.5
-Tested up to: 4.0
+Tested up to: 4.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
