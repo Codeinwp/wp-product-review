@@ -1,6 +1,6 @@
 === Plugin Name ===
 Contributors: codeinwp,marius2012,marius_codeinwp,hardeepasrani,themeisle
-Tags:  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin
+Tags:  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin,  google rating, product review, rating, review, star rating, user rating, wp rating, wp review,  google, hreview,rich snippets,seo,snippet
 Author URI: https://themeisle.com 
 Requires at least: 3.5
 Tested up to: 4.1
@@ -13,7 +13,7 @@ Easily turn your basic posts into in-depth reviews with ratings, pros and cons, 
 == Description ==
 
 
-> If you want to see a live demo of the plugin you can check <a href="http://dev2.themeisle.com/reviewgine/?p=11">http://dev2.themeisle.com/reviewgine/?p=11</a>.
+> If you want to see a live demo of the review plugin + rich snippets you can check <a href="http://dev2.themeisle.com/reviewgine/?p=11">http://dev2.themeisle.com/reviewgine/?p=11</a>.
 
 
 ### Why to get the PRO add-ons ?
@@ -22,14 +22,14 @@ Using the add-ons you will unleash the most important functionality : SHORTCODE 
 
 Other notable features : 
 
-* Custom Icons
+* Custom Review Icons
 * Preloader functionality
 * Unlimited Options
 * PROs/ Cons
 
 ### User Review Enabled
 
-1. This plugin helps you to interact with your users with improved comments, you can expose your reviews in a easier to read way and will help you generate money by adding a buy now button in your post. Rich snippets are also supported.
+1. This review plugin helps you to interact with your users with improved comments, you can expose your reviews in a easier to read way and will help you generate money by adding a buy now button in your post. Rich snippets are also supported.
 
 1. After you install the plugin, go on a post admin page and you should be able to see a checkbox called : "Is this post a review ?", once this is checked you can add review details and those will appear on the post page.
 
@@ -47,11 +47,12 @@ Other notable features :
 
 **WP Product Review provides following features**
 
-- Create a top products widget
+- Create a top products review widget
 - Easily update all the colors of the widget from theme options
 - Add a download button in the posts
 - Add an awesome wrap-up widget at the end of your articles
-- Add specific review options to wordpress comments
+- Add specific user review options to wordpress comments
+- Add rich snippet ( schema ) to your posts
 
 = Translations =
 
@@ -145,8 +146,8 @@ https://themeisle.com/contact
 
 == Screenshots ==
 
-1. Screenshot 1 Wrap-up widget that is added at the end of the posts
-2. Screenshot 2 Options added to wp comments
+1. Screenshot 1 Wrap-up review widget that is added at the end of the posts
+2. Screenshot 2 User Review Options added to wp comments
 3. Screenshot 3 Fully configurable theme options
 4. Screenshot 4 Rich Snippets displayed in Google
 
