@@ -4,10 +4,11 @@ add_action( 'wp_ajax_cwp_load_preloader', 'cwp_load_preloader' );
 
 function cwp_load_preloader() {
     global $post;
+
     $args = array(
         'offset'           => 0,
         'post_type'        => array('any'),
-        'post__not_in' => array($post->ID),
+        //'post__not_in' => array($post->ID),
         'meta_query'             => array(
                                 array(
                                     'key'       => 'cwp_meta_box_check',

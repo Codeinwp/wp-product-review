@@ -476,6 +476,7 @@ box-shadow: 0 0 3px rgba(0,0,0,0.3);
 .cwp_addons_wrap .products li a p {
     padding: 20px!important;
     margin: 0!important;
+    height:70px;
     border-top: 1px solid #f1f1f1;
 }
 .cwp_addons_wrap .products li a:focus, .cwp_addons_wrap .products li a:hover {
@@ -483,7 +484,7 @@ box-shadow: 0 0 3px rgba(0,0,0,0.3);
 }
 
 .cwp_addons_wrap .cwp-cta {
-    margin-left: 17%;
+    margin-left: 25%;
     color: #555;
     border-color: #ccc;
     background: #f7f7f7;

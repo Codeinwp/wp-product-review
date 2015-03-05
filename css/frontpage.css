@@ -124,6 +124,8 @@ margin:0;
 
 #review-statistics  .review-wu-bars h3, .review-wu-bars span { font-family: "Open Sans"; font-size: 13px !important;  text-transform: uppercase;  font-style: italic; line-height: 18px; margin: 0; padding: 0;  }
 
+#review-statistics  .review-wu-bars h3 {float:left;}
+
 #review-statistics  .review-wu-bars span { text-align: right; float: right; line-height: 2;}
 
 #review-statistics  .review-wu-bars { width: 89%; padding: 0 5% 10px 5%; border-right:1px solid #e6e6e6; border-top:1px solid #e6e6e6;border-left: none; border-bottom: none;float:left; }
@@ -161,7 +163,7 @@ margin:0;
 #review-statistics .review-wrap-up .cwpr-review-top { padding: 20px; border-top: 5px solid #3baeda;border-bottom:1px solid #e6e6e6;  }
 
 #review-statistics .review-wrap-up .cwpr-review-top .cwp-item { font-weight: 400; line-height: 1; margin: 0; padding: 0;}
-#review-statistics .review-wrap-up .cwpr-review-top h2.cwp-item {float:left;width:auto!important;}
+#review-statistics .review-wrap-up .cwpr-review-top h2.cwp-item {float:left;width:auto!important;letter-spacing: 1px;}
 
 #review-statistics .review-wrap-up .cwpr-review-top .cwp-item-category a { font-weight: 500; font-style: italic; letter-spacing: 1px; text-decoration: none;}
 
@@ -237,6 +239,7 @@ margin-bottom: 9%;}
 .review-wu-bars,.review-wu-right{
 
 	box-sizing:content-box !important;
+	text-align:left;
 
 }
 
