@@ -57,7 +57,7 @@ function cwp_addons() {
 				
 				echo '<li class="product">';
 				
-				echo '<a href="' . $addon->link . '">';
+				echo '<a target="_blank" href="' . $addon->link . '">';
 				if ( ! empty( $addon->image ) ) {
 					echo '<img src="' . $addon->image . '"/>';
 				} else {
