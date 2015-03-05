@@ -8,14 +8,30 @@ function cwp_addons() {
 ?>
 
 <div class="cwp_addons_wrap">
+<div class="announcement clearfix" style="
+    width: 99%;  
+    background: no-repeat left -10px top -45px, #f16848;  
+    margin-top: 20px;
+    float: left;
+    clear: both;
+    margin-bottom: 10px;
+">
+		<h2 style="
+    width: 75%;  
+    float: left;  font-family: &quot;Helvetica Neue&quot;, HelveticaNeue, sans-serif;  color: #fff;  font-weight: 100;  font-size: 17px;  line-height: 1;  
+    padding-left: 20px;
+">Get the PRO addons bundle (including all existing add-on and future ones ) starting from $59!</h2>
+		<a class="show-me" href="https://themeisle.com/plugins/wp-product-review-pro-add-on/?utm_source=addonsadmin&amp;utm_medium=announce&amp;utm_campaign=top" style="
+    float: right;  background: #fff;  border-radius: 5px;  font-family: &quot;Helvetica Neue&quot;, HelveticaNeue, sans-serif;  color: #5c5c5c;  text-decoration: none;  text-transform: uppercase;  padding: 7px 15px;  margin-top: 9px;  margin-right: 20px;  -webkit-transition: all 0.3s ease-in-out;  -moz-transition: all 0.3s ease-in-out;  -o-transition: all 0.3s ease-in-out;  transition: all 0.3s ease-in-out;  line-height: 1;
+">Show Me</a>
+	</div>
 	<div class="icon32 icon32-posts-product" id="icon-woocommerce"><br /></div>
 	<h2>
 		<?php _e( 'WP Product Review Add-ons/Extensions', 'cwppos' ); ?>
-		<a href="https://themeisle.com/plugins/" class="add-new-h2"><?php _e( 'Browse all plugins', 'cwppos' ); ?></a>
-		<a href="https://themeisle.com/allthemes/" class="add-new-h2"><?php _e( 'Browse themes', 'cwppos' ); ?></a>
+		<a href="https://themeisle.com/plugins/" class="add-new-h2"><?php _e( 'See all extensions', 'cwppos' ); ?></a>
 	</h2>
 	<?php 
-	if ( false === ( $addons = get_transient( 'wpprx_addons_data' ) ) ) {
+	if ( false === ( $addons = get_transient( 'wppr_addons_data' ) ) ) {
 			$addons_json = wp_remote_get( 'https://themeisle-vertigostudio.netdna-ssl.com/wp-content/uploads/wppr-addons.json', array( 'user-agent' => 'WPPR Addons Page' ) );
 			if ( ! is_wp_error( $addons_json ) ) {
 				$addons = json_decode( wp_remote_retrieve_body( $addons_json ) );
@@ -38,8 +54,9 @@ function cwp_addons() {
 		<?php
 
 			foreach ( $addons as $addon ) {
-
+				
 				echo '<li class="product">';
+				
 				echo '<a href="' . $addon->link . '">';
 				if ( ! empty( $addon->image ) ) {
 					echo '<img src="' . $addon->image . '"/>';

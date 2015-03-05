@@ -9,7 +9,7 @@
 
 			    <img class="theme_options_logo" src="<?php echo plugins_url( 'img/logo.png' , __FILE__ ) . ''; ?>" alt="<?php echo cwppos_config('admin_page_header'); ?>"> 
 				
-				<?php if (!class_exists('CWP_PR_PRO_Core')) { ?><a href="https://themeisle.com/plugins/wp-product-review-pro-add-on/" class="read_docs button" target="_blank" style="color:red;text-decoration: none;"><?php _e("Buy the PRO version", "cwppos"); ?></a><?php } ?>
+				<?php if (!class_exists('CWP_PR_PRO_Core')) { ?><a href="https://themeisle.com/plugins/wp-product-review-pro-add-on/" class="read_docs button" target="_blank" style="color:red;text-decoration: none;"><?php _e("Buy the PRO Add-ons Bundle", "cwppos"); ?></a><?php } ?>
 				
 				<a href="https://themeisle.com/allthemes"  class="read_docs button" target="_blank" style=" text-decoration: none; "><?php _e("Recommended Review Themes", "cwppos"); ?></a>
 				
