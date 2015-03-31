@@ -2,7 +2,7 @@
 /*
 Plugin Name: WP Product Review 
 Description: The highest rated and most complete review plugin, now with rich snippets support. Easily turn your basic posts into in-depth reviews.
-Version: 2.5.2
+Version: 2.5.3
 Author: Themeisle
 Author URI:  https://themeisle.com/
 Plugin URI: https://themeisle.com/plugins/wp-product-review-lite/
@@ -129,7 +129,7 @@ Loading the stylesheet for admin page.
         $product_image = get_post_meta($id, "cwp_rev_product_image", true);
         $imgurl = get_post_meta($id, "cwp_image_link", true);
         $feat_image = "";
-        if(!empty($product_image)) {
+        if($product_image =="") {
             
             if ($imgurl =="image") 
                 $feat_image = wp_get_attachment_url( get_post_thumbnail_id($id) );
@@ -138,13 +138,11 @@ Loading the stylesheet for admin page.
                 $feat_image = get_post_meta($id, "cwp_product_affiliate_link", true);
                 $lightbox = "";
             }
-            
-
-                    
-        } else {
-            $product_image = $feat_image;
+            $product_image = $product_image = wp_get_attachment_image_src( get_post_thumbnail_id($id), 'thumbnail' )['0'];
+                             
         }
-        $return_string .= '<a href="'.$feat_image.'" '.$lightbox.'><img  src="'.$product_image.'" alt="'. get_post_meta($id, "cwp_rev_product_name", true).'" class="photo photo-wrapup"/></a>';
+
+        $return_string .= '<a rel="nofollow" href="'.$feat_image.'" '.$lightbox.'><img  src="'.$product_image.'" alt="'. get_post_meta($id, "cwp_rev_product_name", true).'" class="photo photo-wrapup"/></a>';
 
         $rating = cwppos_calc_overall_rating($id);
        
