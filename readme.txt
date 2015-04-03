@@ -15,7 +15,6 @@ Easily turn your basic posts into in-depth reviews with ratings, pros and cons, 
 
 > If you want to see a live demo of the review plugin + rich snippets you can check <a href="http://dev2.themeisle.com/reviewgine/?p=11">http://dev2.themeisle.com/reviewgine/?p=11</a>.
 
-If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-wordpress-hosting/" rel="friend">fastest WordPress hosting</a> or which <a href="http://www.codeinwp.com/blog/15-best-wordpress-review-themes/" rel="friend">review themes</a> are playing nice with WP Product review, checkout our blog.
 
 ### Why to get the PRO add-ons ?
 
@@ -39,6 +38,9 @@ Other notable features :
 1. All the plugin settings/colors are fully customizable, and you can read more about it <a rel="friend" href="https://themeisle.com/plugins/wp-product-review-lite/?utm_source=wpreadme&utm_medium=readme&utm_campaign=wporg">here</a>
 
 1. For updates follow https://twitter.com/themeisle.
+
+If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-wordpress-hosting/" rel="friend">fastest WordPress hosting</a> or which <a href="http://www.codeinwp.com/blog/15-best-wordpress-review-themes/" rel="friend">review themes</a> are playing nice with WP Product review, checkout our blog.
+
 
 **Fortcoming**
 
