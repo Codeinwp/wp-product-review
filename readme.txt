@@ -1,5 +1,5 @@
 === Plugin Name ===
-Contributors: codeinwp,marius2012,marius_codeinwp,hardeepasrani,themeisle
+Contributors: codeinwp,marius2012,marius_codeinwp,hardeepasrani,themeisle,Madalin_ThemeIsle
 Tags:  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin,  google rating, product review, rating, review, star rating, user rating, wp rating, wp review,  google, hreview,rich snippets,seo,snippet
 Author URI: https://themeisle.com 
 Requires at least: 3.5
