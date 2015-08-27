@@ -124,11 +124,11 @@ Loading the stylesheet for admin page.
         if(@$cwp_review_stored_meta['cwp_meta_box_check'][0]  == 'Yes' ) {
 
 
-        $return_string  = '<section id="review-statistics" class="article-section" itemscope itemtype="http://schema.org/Review">
-                            <div class="review-wrap-up  cwpr_clearfix">
+        $return_string  = '<section id="review-statistics"  class="article-section" itemscope itemtype="http://schema.org/Review">
+                            <div class="review-wrap-up  cwpr_clearfix" >
                                 <div class="cwpr-review-top cwpr_clearfix" itemprop="itemReviewed">
                                     <h2 class="cwp-item"  itemprop="name"  >'.get_post_meta($id, "cwp_rev_product_name", true).'</h2>
-                                    <span class="cwp-item-price cwp-item"  itemprop="price">'.get_post_meta($id, "cwp_rev_price", true).'</span>
+                                    <span class="cwp-item-price cwp-item"   >'.get_post_meta($id, "cwp_rev_price", true).'</span>
                                 </div><!-- end .cwpr-review-top -->
                                 <div class="review-wu-left">
                                     <div class="rev-wu-image">';
@@ -175,12 +175,12 @@ Loading the stylesheet for admin page.
                                 <div class="review-wu-grade">
                                     <div class="cwp-review-chart">
                                     <meta itemprop="datePublished" datetime="'.get_the_time("Y-m-d", $id).'">
-                                    <meta itemprop="reviewCount" content="'. $commentNr.'">
-                                    <meta itemprop="author" itemscope itemtype="http://schema.org/Person" itemprop="name" content="'.get_the_author().'">
-
-                                        <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="cwp-review-percentage" data-percent="';
-
-        $return_string .= $rating['overall'].'"><span itemprop="ratingValue" class="cwp-review-rating">'.$divrating.'</span><meta itemprop="bestRating" content = "10"/></div>
+                                    <span itemprop="author" itemscope itemtype="http://schema.org/Person" display="none" >
+                                         <meta itemprop="name"  content="'.get_the_author().'">
+                                    </span>
+                                        <div    itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" class="cwp-review-percentage" data-percent="';
+        $return_string .= $rating['overall'].'"><span itemprop="ratingValue" class="cwp-review-rating">'.$divrating.'</span><meta itemprop="bestRating" content = "10"/>
+                     <meta itemprop="reviewCount" content="'. $commentNr.'"> </div>
                                     </div><!-- end .chart -->
                                 </div><!-- end .review-wu-grade -->
                                 <div class="review-wu-bars">';
