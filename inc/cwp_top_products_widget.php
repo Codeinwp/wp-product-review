@@ -1,6 +1,6 @@
-<?php 
+<?php
 /**
- * CWP - Top Producs Widget 
+ * CWP - Top Producs Widget
  */
 
 
@@ -13,15 +13,15 @@ function __construct() {
 
 parent::__construct(
 
-'cwp_top_products_widget', 
+'cwp_top_products_widget',
 
-__('CWP Top Products Widget', 'cwppos'), 
+__('CWP Top Products Widget', 'cwppos'),
 
 
 
 // Widget description
 
-array( 'description' => __( 'This widget displays the top products based on their rating.', 'cwppos' ), ) 
+array( 'description' => __( 'This widget displays the top products based on their rating.', 'cwppos' ), )
 
 );
 
@@ -36,24 +36,28 @@ array( 'description' => __( 'This widget displays the top products based on thei
 	// This is where the action happens
 
 	public function widget( $args, $instance ) {
+		wp_enqueue_script( 'pie-chart', WPPR_URL.'/javascript/pie-chart.js',array("jquery"),WPPR_LITE_VERSION,true );
+		wp_enqueue_script( 'cwp-pac-main-script', WPPR_URL.'/javascript/main.js',array("jquery",'pie-chart'),WPPR_LITE_VERSION,true );
 
-		if ( isset( $instance[ 'title' ]) ) 
+		wp_enqueue_style( 'cwp-pac-widget-stylesheet',  WPPR_URL.'/css/cwppos-widget.css' );
+		wp_enqueue_style( 'cwp-pac-fontawesome-stylesheet',  WPPR_URL.'/css/font-awesome.min.css' );
+		if ( isset( $instance[ 'title' ]) )
 
 			$title = apply_filters( 'widget_title', $instance['title'] );
 
-		if ( isset( $instance[ 'no_items' ]) ) 
+		if ( isset( $instance[ 'no_items' ]) )
 
 			$no_items = apply_filters( 'widget_content', $instance['no_items'] );
 
-		if ( isset( $instance[ 'cwp_tp_category' ]) ) 
+		if ( isset( $instance[ 'cwp_tp_category' ]) )
 
 			$cwp_tp_category = apply_filters( 'widget_content', $instance['cwp_tp_category'] );
 
-		if ( isset( $instance[ 'title_type' ]) ) 
+		if ( isset( $instance[ 'title_type' ]) )
 
 			$post_type = apply_filters( 'widget_content', $instance['title_type'] );
 
-		if ( isset( $instance[ 'show_image' ]) ) 
+		if ( isset( $instance[ 'show_image' ]) )
 
 			$show_image = apply_filters( 'widget_content', $instance['show_image'] );
 
@@ -92,7 +96,7 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 		),
 
-		),	
+		),
 		'orderby'	=> 'meta_value_num',
 		'order'		=> 'DESC'
 
@@ -100,7 +104,7 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 
 
-		$cwp_top_products_loop = new WP_Query( $query_args );  
+		$cwp_top_products_loop = new WP_Query( $query_args );
 
 		echo "<ul>";
 
@@ -109,11 +113,11 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 
 		<li class="cwp-popular-review cwp_top_posts_widget_<?php the_ID(); ?>">
-		<?php 
+		<?php
 		$product_image = get_post_meta($cwp_top_products_loop->post->ID, "cwp_rev_product_image", true);
 		if ($show_image==true&&!empty($product_image)) {
 		?>
-		
+
 		<img class="cwp_rev_image" src="<?php echo $product_image;?>"\>
 		<?php } ?>
 		<a href="<?php the_permalink(); ?>">
@@ -127,7 +131,7 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 
 			<?php
-           
+
             for($i=1; $i<6; $i++) {
                 ${"option".$i."_content"} = get_post_meta($cwp_top_products_loop->post->ID, "option_".$i."_content", true);
                 //if(empty(${"option".$i."_content"})) { ${"option".$i."_content"} = __("Default Feature ".$i, "cwppos"); }
@@ -155,7 +159,7 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 		<?php endwhile; ?>
 
-		<?php wp_reset_postdata(); // reset the query 
+		<?php wp_reset_postdata(); // reset the query
 
 
 
@@ -169,7 +173,7 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 
 
-	// Widget Backend 
+	// Widget Backend
 
 	public function form( $instance ) {
 
@@ -206,7 +210,7 @@ array( 'description' => __( 'This widget displays the top products based on thei
 		else {
 			$show_image = false;
 		}
-		
+
 
 
 
@@ -226,7 +230,7 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 	<p>
 
-	<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', "cwppos" ); ?></label> 
+	<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', "cwppos" ); ?></label>
 
 	<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 
@@ -236,7 +240,7 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 	<p>
 
-	<label for="<?php echo $this->get_field_id( 'no_items' ); ?>"><?php _e( 'Number of posts to show:', "cwppos" ); ?></label> 
+	<label for="<?php echo $this->get_field_id( 'no_items' ); ?>"><?php _e( 'Number of posts to show:', "cwppos" ); ?></label>
 
 	<input id="<?php echo $this->get_field_id( 'no_items' ); ?>" name="<?php echo $this->get_field_name( 'no_items' ); ?>" size="3" type="text" value="<?php echo esc_attr( $no_items ); ?>" />
 
@@ -248,7 +252,7 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 	<?php $cwp_tp_selected_categ = esc_attr( $cwp_tp_category ); ?>
 
-	<label for="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>"><?php _e( 'Category:', "cwppos" ); ?></label> 
+	<label for="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>"><?php _e( 'Category:', "cwppos" ); ?></label>
 
 	<select id="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_category' ); ?>">
 	<?php echo "<option>All</option>"; ?>
@@ -263,7 +267,7 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 				echo "<option>There are no categs</select>";
 
-			} else { 
+			} else {
 
 				echo "<option>".$categ_slug."</option>";
 
@@ -276,14 +280,14 @@ array( 'description' => __( 'This widget displays the top products based on thei
 	</p>
 	<p>
 
-	<label for="<?php echo $this->get_field_id( 'title_type' ); ?>"><?php _e( 'Display Product Titles :', "cwppos" ); ?></label> 
+	<label for="<?php echo $this->get_field_id( 'title_type' ); ?>"><?php _e( 'Display Product Titles :', "cwppos" ); ?></label>
 
 	<input  id="<?php echo $this->get_field_id( 'title_type' ); ?>" name="<?php echo $this->get_field_name( 'title_type' ); ?>"  type="checkbox" <?php checked( $title_type ); ?>  />
 	</p>
 
 	<p>
 
-	<label for="<?php echo $this->get_field_id( 'show_image' ); ?>"><?php _e( 'Display Product Image :', "cwppos" ); ?></label> 
+	<label for="<?php echo $this->get_field_id( 'show_image' ); ?>"><?php _e( 'Display Product Image :', "cwppos" ); ?></label>
 
 	<input  id="<?php echo $this->get_field_id( 'show_image' ); ?>" name="<?php echo $this->get_field_name( 'show_image' ); ?>"  type="checkbox" <?php checked( $show_image ); ?>  />
 	</p>
@@ -291,7 +295,7 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 	<?php }
 
-	
+
 
 	// Updating widget replacing old instances with new
 
@@ -307,7 +311,7 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 		$instance['title_type'] = (bool) $new_instance['title_type'] ;
 		$instance['show_image'] = (bool) $new_instance['show_image'] ;
-		
+
 		return $instance;
 
 	}
