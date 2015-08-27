@@ -36,11 +36,8 @@ array( 'description' => __( 'This widget displays the top products based on thei
 	// This is where the action happens
 
 	public function widget( $args, $instance ) {
-		wp_enqueue_script( 'pie-chart', WPPR_URL.'/javascript/pie-chart.js',array("jquery"),WPPR_LITE_VERSION,true );
-		wp_enqueue_script( 'cwp-pac-main-script', WPPR_URL.'/javascript/main.js',array("jquery",'pie-chart'),WPPR_LITE_VERSION,true );
 
 		wp_enqueue_style( 'cwp-pac-widget-stylesheet',  WPPR_URL.'/css/cwppos-widget.css' );
-		wp_enqueue_style( 'cwp-pac-fontawesome-stylesheet',  WPPR_URL.'/css/font-awesome.min.css' );
 		if ( isset( $instance[ 'title' ]) )
 
 			$title = apply_filters( 'widget_title', $instance['title'] );

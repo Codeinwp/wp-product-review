@@ -22,7 +22,7 @@ jQuery(document).ready(function($) {
         else {
             trackColorRight = '#ebebeb';
         }
-            
+
 
         $('.cwp-review-percentage').cwp_easyPieChart({
             barColor: function(percent) {
@@ -51,14 +51,14 @@ jQuery(document).ready(function($) {
 
     	//alert(cwpCustomBarIcon);
 		//(!(typeof(cwpCustomBarIcon) === "undefined") || !(cwpCustomBarIcon === null) || !(cwpCustomBarIcon === ""))
-       
+
     	if( !(typeof(cwpCustomBarIcon) === "undefined") && !(cwpCustomBarIcon === "") && isSetToPro) {
     		$(".rev-option").each(function() {
 	            var grade = $(this).attr("data-value");
 	            $(this).addClass("customBarIcon");
 	            var x = 10;
 	            if ($(this).children("ul").find("li").length == 0)
-	                for (var i = 0; i < x; i++) {	
+	                for (var i = 0; i < x; i++) {
 	                $(this).children("ul").append("<li><i class='fa fa-fw'>&"+cwpCustomBarIcon+"</i></li>");
 	            }
 	            $(this).children("ul").children("li:nth-child(-n+" + Math.ceil(grade / 10) + ")").css("color", returnColor(grade));
@@ -76,7 +76,7 @@ jQuery(document).ready(function($) {
 	            $(this).children("div").children("span").text(grade / 10 + "/10");
 	        });
     	}
-        
+
     }
 
     $(".comment-meta-option .comment-meta-grade").each(function() {
@@ -98,4 +98,6 @@ jQuery(document).ready(function($) {
             }
         });
     });
+    $(".wppr-product-image").css({"visibility":"visible"});
+
 });

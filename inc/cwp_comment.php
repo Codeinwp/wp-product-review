@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 if( cwppos('cwppos_show_userreview') == "yes" ) :
 
@@ -10,7 +10,7 @@ if( cwppos('cwppos_show_userreview') == "yes" ) :
 
 	add_action ('comment_post', 'cwp_add_comment_meta_values', 1);
 
-else: 
+else:
 
 
 
@@ -38,13 +38,13 @@ function cwp_pac_comment_single($text){
 
 
 
-			for ($i=1; $i <=cwppos("cwppos_option_nr") ; $i++) { 
+			for ($i=1; $i <=cwppos("cwppos_option_nr") ; $i++) {
 
 				$post_options[$i] = get_post_meta($post->ID, "option_{$i}_content", true);
 
 				$comment_meta_options["comment-meta-option-{$i}"] = get_comment_meta( $comment->comment_ID, "meta_option_{$i}", true);
 
-			} 
+			}
 
 			$filtered_post_options = array_filter($comment_meta_options);
 
@@ -110,7 +110,7 @@ function cwp_pac_comment_single($text){
 
 		}
 
-		
+
 
 			return  $return.$text."<div class='cwpr_clearfix'></div>";
 
@@ -118,8 +118,9 @@ function cwp_pac_comment_single($text){
 
 function cwp_additional_fields () {
 
-	
 
+	wp_enqueue_style( 'jqueryui', WPPR_URL.'/css/jquery-ui.css',array(),WPPR_LITE_VERSION );
+	wp_enqueue_script("jquery-ui-slider");
 	global $post;
 
 	$meta_options = array();
@@ -130,11 +131,11 @@ function cwp_additional_fields () {
 
 	}
 
- 
+
 
 	foreach ($meta_options as $k => $value) {
 
-		if($meta_options[$k]=='') { 
+		if($meta_options[$k]=='') {
 
 			unset($meta_options[$k]);
 
@@ -158,9 +159,9 @@ function cwp_additional_fields () {
 
 			<div class='cwpr_clearfix'></div>
 
-		</div>"; 
+		</div>";
 
-	}  
+	}
 
 	echo "<div id='cwp-slider-comment'>".implode("",$sliders)."<div class='cwpr_clearfix'></div></div>";
 

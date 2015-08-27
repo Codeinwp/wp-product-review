@@ -109,7 +109,11 @@ Loading the stylesheet for admin page.
 
     function cwppos_show_review($id = "") {
         global $post;
-        wp_enqueue_style( 'cwp-pac-frontpage-stylesheet', WPPR_URL.'/css/frontpage.css' );
+        wp_enqueue_style( 'cwp-pac-frontpage-stylesheet', WPPR_URL.'/css/frontpage.css',array(),WPPR_LITE_VERSION );
+
+        wp_enqueue_script( 'pie-chart', WPPR_URL.'/javascript/pie-chart.js',array("jquery"),WPPR_LITE_VERSION,true );
+        wp_enqueue_script( 'cwp-pac-main-script', WPPR_URL.'/javascript/main.js',array("jquery",'pie-chart'),WPPR_LITE_VERSION,true );
+
         if ($id=="")
             $id = $post->ID;
 
@@ -132,14 +136,20 @@ Loading the stylesheet for admin page.
         $product_image = get_post_meta($id, "cwp_rev_product_image", true);
         $imgurl = get_post_meta($id, "cwp_image_link", true);
         $feat_image = "";
+
         if(!empty($product_image)) {
 
             if ($imgurl =="image")
                 $feat_image = wp_get_attachment_url( get_post_thumbnail_id($id) );
+
             $lightbox = 'data-lightbox="'.$feat_image.'"';
             if (!isset($feat_image) || $feat_image=="") {
                 $feat_image = get_post_meta($id, "cwp_product_affiliate_link", true);
                 $lightbox = "";
+            }else{
+                wp_enqueue_script("img-lightbox",WPPR_URL.'/javascript/lightbox.min.js',array(), WPPR_LITE_VERSION, array());
+                wp_enqueue_style("img-lightbox-css", WPPR_URL.'/css/lightbox.css' , array(), WPPR_LITE_VERSION  );
+
             }
 
 
@@ -147,7 +157,7 @@ Loading the stylesheet for admin page.
         } else {
             $product_image = $feat_image;
         }
-        $return_string .= '<a href="'.$feat_image.'" '.$lightbox.'><img  src="'.$product_image.'" alt="'. get_post_meta($id, "cwp_rev_product_name", true).'" class="photo photo-wrapup"/></a>';
+        $return_string .= '<a href="'.$feat_image.'" '.$lightbox.'><img  src="'.$product_image.'" alt="'. get_post_meta($id, "cwp_rev_product_name", true).'" class="photo photo-wrapup wppr-product-image" style="visibility:hidden"/></a>';
 
         $rating = cwppos_calc_overall_rating($id);
 
@@ -165,6 +175,7 @@ Loading the stylesheet for admin page.
                                 <div class="review-wu-grade">
                                     <div class="cwp-review-chart">
                                     <meta itemprop="datePublished" datetime="'.get_the_time("Y-m-d", $id).'">
+                                    <meta itemprop="reviewCount" content="'. $commentNr.'">
                                     <meta itemprop="author" itemscope itemtype="http://schema.org/Person" itemprop="name" content="'.get_the_author().'">
 
                                         <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="cwp-review-percentage" data-percent="';
@@ -311,7 +322,7 @@ Loading the stylesheet for admin page.
     function cwp_def_settings() {
         global $post;
         $options = cwppos();
-        if (class_exists('CWP_PR_PRO_Core') || $options['cwppos_show_poweredby']=="yes") {
+        if (function_exists('wppr_ci_custom_bar_icon') || $options['cwppos_show_poweredby']=="yes") {
             $isSetToPro = true;
         } else {
             $isSetToPro = false;
@@ -324,6 +335,11 @@ Loading the stylesheet for admin page.
 
         if(isset($uni_font[0])) {  if ($uni_font[0]=="#") $uni_font = $uni_font; else $uni_font = $uni_font[0]; } else { $uni_font = ""; }
 
+        if(!empty($uni_font)){
+            if(function_exists("wppr_ci_custom_bar_icon")){
+                wp_enqueue_style( 'cwp-pac-fontawesome-stylesheet',  WPPR_URL.'/css/font-awesome.min.css' );
+            }
+        }
         echo    "<script type='text/javascript'>
                     var cwpCustomBarIcon = '" . $uni_font . "';
                     var isSetToPro = '".$isSetToPro."';
