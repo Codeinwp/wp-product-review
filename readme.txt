@@ -1,9 +1,9 @@
 === Plugin Name ===
 Contributors: codeinwp,marius2012,marius_codeinwp,hardeepasrani,themeisle,Madalin_ThemeIsle
 Tags:  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin,  google rating, product review, rating, review, star rating, user rating, wp rating, wp review,  google, hreview,rich snippets,seo,snippet
-Author URI: https://themeisle.com 
+Author URI: https://themeisle.com
 Requires at least: 3.5
-Tested up to: 4.1
+Tested up to: 4.3
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -20,7 +20,7 @@ Easily turn your basic posts into in-depth reviews with ratings, pros and cons, 
 
 Using the add-ons you will unleash the most important functionality : SHORTCODE . Using something like : [P_REVIEW post_id=3067 visual='full'] you are able to display the review box anywhere in the post, or you can even display 5 boxes in the same page (different products).
 
-Other notable features : 
+Other notable features :
 
 * Custom Review Icons
 * Preloader functionality
@@ -163,6 +163,6 @@ https://themeisle.com/contact
 3. Screenshot 3 Fully configurable theme options
 4. Screenshot 4 Rich Snippets displayed in Google
 
-for more you can check out 
+for more you can check out
 
 https://themeisle.com/plugins/wp-product-review-lite/
