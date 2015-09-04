@@ -1,5 +1,5 @@
 <?php
-/*
+/**
 Plugin Name: WP Product Review
 Description: The highest rated and most complete review plugin, now with rich snippets support. Easily turn your basic posts into in-depth reviews.
 Version: 2.6.1
@@ -14,7 +14,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: cwppos
 Domain Path: /languages
 */
-define("WPPR_LITE_VERSION","2.6");
+define("WPPR_LITE_VERSION","2.6.1");
 define("WPPR_PATH",dirname(__FILE__));
 define("WPPR_URL",plugins_url("wp-product-review"));
 
@@ -111,7 +111,7 @@ Loading the stylesheet for admin page.
         global $post;
         wp_enqueue_style( 'cwp-pac-frontpage-stylesheet', WPPR_URL.'/css/frontpage.css',array(),WPPR_LITE_VERSION );
 
-        wp_enqueue_script( 'pie-chart', WPPR_URL.'/javascript/pie-chart.js',array("jquery"),WPPR_LITE_VERSION,true );
+        wp_enqueue_script( 'pie-chart', WPPR_URL.'/javascript/pie-chart.js',array("jquery"), WPPR_LITE_VERSION,true );
         wp_enqueue_script( 'cwp-pac-main-script', WPPR_URL.'/javascript/main.js',array("jquery",'pie-chart'),WPPR_LITE_VERSION,true );
 
         if ($id=="")
@@ -406,29 +406,29 @@ Loading the stylesheet for admin page.
             #review-statistics .review-wrap-up .review-wu-right .cons h2{
                 color:  <?php  echo $options['cwppos_cons_color']; ?>;
             }
-            .affiliate-button a{
+            div.affiliate-button a{
                 border:  2px solid  <?php  echo $options['cwppos_buttonbd_color']; ?>;
             }
-            .affiliate-button a:hover{
+            div.affiliate-button a:hover{
                 border:  2px solid  <?php  echo $options['cwppos_buttonbh_color']; ?>;
             }
-            .affiliate-button a{
+            div.affiliate-button a{
                 background:  <?php  echo $options['cwppos_buttonbkd_color']; ?>;
             }
-            .affiliate-button a:hover{
+            div.affiliate-button a:hover{
                 background:  <?php  echo $options['cwppos_buttonbkh_color']; ?>;
             }
-            .affiliate-button a span{
+           div.affiliate-button a span{
                 color:  <?php  echo $options['cwppos_buttontxtd_color']; ?>;
             }
-            .affiliate-button a:hover span{
+            div.affiliate-button a:hover span{
                 color:  <?php  echo $options['cwppos_buttontxth_color']; ?>;
             }
             <?php  if($options['cwppos_show_icon'] == 'yes') { ?>
-            .affiliate-button a span {
+            div.affiliate-button a span {
                 background:url("<?php  echo plugins_url('', __FILE__); ?>/images/cart-icon.png") no-repeat left center;
             }
-            .affiliate-button a:hover span{
+            div.affiliate-button a:hover span{
                 background:url("<?php  echo plugins_url('', __FILE__); ?>/images/cart-icon-hover.png") no-repeat left center;
             }
             <?php  } ?>

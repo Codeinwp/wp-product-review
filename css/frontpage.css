@@ -117,9 +117,7 @@ margin:0;
 #review-statistics .cwp-review-percentage span { font-family: "Lato"; font-size: 17px; font-weight: 900; background: #fff; display: block;border-radius: 50%; }
 
 .cwp-review-rating{
-	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
+
 }
 #review-statistics .cwp_easyPieChart { position: relative; text-align: center; }
 

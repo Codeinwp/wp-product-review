@@ -64,6 +64,12 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 
 == Changelog ==
 
+**New in v.2.6.1**
+
+ - Fixed rich snippet bug
+ - Fixed loading of the assets files where the plugin is not used
+
+
 **New in v2.5.2**
 
 - Added multiple addons including ranking chart
