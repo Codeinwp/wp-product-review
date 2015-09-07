@@ -64,6 +64,15 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 
 == Changelog ==
 
+**New in v.2.6.2**
+
+ - Added thumbnails for reviews
+ - Fixed bug when no image is set for reviews
+ - Fixed reset button for product options
+ - Added option to disable lightbox for review image
+
+
+
 **New in v.2.6.1**
 
  - Fixed rich snippet bug
