@@ -27,18 +27,17 @@ function cwp_addons() {
 	</div>
 	<div class="icon32 icon32-posts-product" id="icon-woocommerce"><br /></div>
 	<h2>
-		<?php _e( 'WP Product Review Add-ons/Extensions', 'cwppos' ); ?>
-		<a href="https://themeisle.com/plugins/" class="add-new-h2"><?php _e( 'See all extensions', 'cwppos' ); ?></a>
-	</h2>
-	<?php 
+		<?php esc_html_e( 'WP Product Review Add-ons/Extensions', 'cwppos' ); ?>
+		<a href="https://themeisle.com/plugins/" class="add-new-h2"><?php esc_html_e( 'See all extensions', 'cwppos' ); ?></a>
+	</h2><?php
 	if ( false === ( $addons = get_transient( 'wppr_addons_data' ) ) ) {
 			$addons_json = wp_remote_get( 'https://themeisle-vertigostudio.netdna-ssl.com/wp-content/uploads/wppr-addons.json', array( 'user-agent' => 'WPPR Addons Page' ) );
-			if ( ! is_wp_error( $addons_json ) ) {
-				$addons = json_decode( wp_remote_retrieve_body( $addons_json ) );
-				if ( $addons ) {
-					set_transient( 'wppr_addons_data', $addons, 604800 );
-				}
+		if ( ! is_wp_error( $addons_json ) ) {
+			$addons = json_decode( wp_remote_retrieve_body( $addons_json ) );
+			if ( $addons ) {
+				set_transient( 'wppr_addons_data', $addons, 604800 );
 			}
+		}
 	}
 	//print_r($addons);
 	/* $addons[0] = array(
@@ -50,27 +49,25 @@ function cwp_addons() {
 
 	if ( $addons ) :  ?>
 
-		<ul class="products">
-		<?php
+		<ul class="products"><?php
 
-			foreach ( $addons as $addon ) {
-				
-				echo '<li class="product">';
-				
-				echo '<a target="_blank" href="' . $addon->link . '">';
-				if ( ! empty( $addon->image ) ) {
-					echo '<img src="' . $addon->image . '"/>';
-				} else {
-					echo '<h3>' . $addon->title . '</h3>';
-				}
-				echo '<span class="price">' . $addon->price . '</span>';
-				echo '<p>' . $addon->excerpt . '</p>';
-				echo '<button class="cwp-cta">Get it now for '.$addon->price.'</button>';
-				echo '</a>';
-				echo '</li>';
+		foreach ( $addons as $addon ) {
+
+			echo '<li class="product">';
+
+			echo '<a target="_blank" href="' . esc_url( $addon->link ) . '">';
+			if ( ! empty( $addon->image ) ) {
+				echo '<img src="' . esc_url($addon->image) . '"/>';
+			} else {
+				echo '<h3>' . $addon->title . '</h3>';
 			}
-		?>
-		</ul>
+			echo '<span class="price">' . $addon->price . '</span>';
+			echo '<p>' . $addon->excerpt . '</p>';
+			echo '<button class="cwp-cta">Get it now for '.$addon->price.'</button>';
+			echo '</a>';
+			echo '</li>';
+		}
+		?></ul>
 	<?php else : ?>
 		<p><?php printf( __( 'Our catalog of WP Product Review Extensions can be found on ThemeIsle.com here: <a href="%s">WP Product Review Extensions</a>', 'cwppos' ), 'https://themeisle.com/plugins/' ); ?></p>
 	<?php endif; ?>

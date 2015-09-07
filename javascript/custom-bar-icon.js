@@ -16,7 +16,7 @@
 		    jQuery("#bar-icon-elements").append("<span class='closeModal'><i class='fa fa-times'></i></span>");
 		    jQuery("#bar-icon-elements .closeModal").click(function(x) {
 			    jQuery("#bar-icon-elements").removeClass("active").hide();
-			    return;
+
 		    });
 		}
 
@@ -33,7 +33,7 @@
 
 		function d() {
 		    jQuery("#bar-icon-elements").removeClass("active").hide();
-		    return;
+
 		}
 
 		jQuery("#cwp_form").on("click", "#bar-icon-elements i.icon", function(a) {

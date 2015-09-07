@@ -56,8 +56,8 @@
 	background: #f3f3f3;
 	border:solid #d8d8d8;
 	border-bottom:1px solid #D8D8D8;
-	border-width:0px 1px 1px 1px;
-	padding: 6px 20px 0px 6px;
+	border-width:0 1px 1px 1px;
+	padding: 6px 20px 0 6px;
 	height: 31px;
 	text-align: right;
 	-moz-box-shadow: inset 0 1px 0 #fcfcfc;
@@ -71,7 +71,7 @@ display: block;
 height: 22px;
 width: 21px;
 float: left;
-font-size:0px;
+font-size:0;
 text-indent: -9999px;
 margin: 0 0 0 10px;
 border: 1px solid #bbb;
@@ -122,8 +122,7 @@ border-radius: 2px;
 #cwp_container #cwp_nav li a, #cwp_container #cwp_nav ul li a:link, #cwp_nav ul li a:visited {
 	display: block;
 	padding: 10px 10px 10px 40px;
-	background-repeat: no-repeat;
-	background-position: 16px 10px;
+	background: no-repeat 16px 10px;
 	font-weight:bold;
 	font-size: 12px;
 	text-decoration: none;
@@ -181,7 +180,7 @@ border-radius: 2px;
 #cwp_container #content .section h3.heading {
 	font-family:;
 	margin: 9px 0 9px 0;
-	padding: 7px 0px;
+	padding: 7px 0;
 	border-bottom: 1px solid #e7e7e7;
 	color:#EC5923
 }
@@ -293,14 +292,12 @@ border-radius: 2px;
 
 #cwp_container #content .section-sorter li.placeholder {
 	background:#f9f9f9;
-	border-width:1px;
-	border-style:dashed;
+	border: 1px dashed;
 	height:40px;}
 	
 #cwp_container #content .section-slider li.placeholder {
 	background:#f9f9f9;
-	border-width:1px;
-	border-style:dashed;
+	border: 1px dashed;
 	height:33px;}
 
 
@@ -308,8 +305,7 @@ border-radius: 2px;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	border-style:solid;
-	border-width:1px;
+	border: 1px solid;
 }
 #cwp_container .controls .cwp_input, #cwp_container .controls .cwp_select, #cwp_container .controls .cwp_textarea {
 	 
@@ -445,7 +441,7 @@ label.radio, label.multicheck {
 #cwp_container .accept {
 	background: #DBF6BE no-repeat 10px center;
 	border: solid #9BBF65;
-	border-width: 0px 1px 1px 1px;
+	border-width: 0 1px 1px 1px;
 	color: #060;
 	font-weight: bold;
 	padding: 10px;
@@ -455,7 +451,7 @@ label.radio, label.multicheck {
 	background: #ffeeee no-repeat 10px center;
 	;
 	border: solid #dfbfbf;
-	border-width: 0px 1px 1px 1px;
+	border-width: 0 1px 1px 1px;
 	color: #333;
 	font-weight: bold;
 	padding: 10px;
@@ -464,7 +460,7 @@ label.radio, label.multicheck {
 #cwp_container .update_available {
 	background: #FFFEEB no-repeat 10px center;
 	border: solid #CCCCCC;
-	border-width: 0px 1px 1px 1px;
+	border-width: 0 1px 1px 1px;
 	color: #333;
 	font-weight: bold;
 	padding: 10px;
@@ -483,8 +479,7 @@ label.radio, label.multicheck {
 }
 
 #cwp_container .cwp_save-popup div{
-	background-repeat: no-repeat;
-	background-position: 20px 50%;
+	background: no-repeat 20px 50%;
 	padding:30px 30px 30px 60px;
 }
 #cwp_container .cwp_save-save {
@@ -510,14 +505,12 @@ label.radio, label.multicheck {
 }
 
 #cwp_container .button {
-border-width: 1px;
-border-style: solid;
--moz-border-radius: 3px;
+	-moz-border-radius: 3px;
 -khtml-border-radius: 3px;
 -webkit-border-radius: 3px;
 border-radius: 3px;
-border-color: #dfdfdf;
-background-color: #fff;
+	border: 1px solid #dfdfdf;
+	background-color: #fff;
 margin:4px 0 4px;
 }
 
@@ -576,8 +569,8 @@ color: #464646;
 #cwp_container .save_bar {
 	background: #f3f3f3;
 	border:solid #ccc;
-	border-width:0px 1px 1px 1px;
-	padding: 10px 20px 0px 20px;
+	border-width:0 1px 1px 1px;
+	padding: 10px 20px 0 20px;
 	height: 35px;
 	text-align: right;
 	-webkit-border-radius: 0 0 3px 3px;
@@ -838,7 +831,7 @@ html body * span.clear, html body * div.clear, html body * li.clear, html body *
   .tipsy-arrow-e { border-left-color: #000; }
   .tipsy-arrow-w { border-right-color: #000; }
   
-	.tipsy-n .tipsy-arrow { top: 0px; left: 50%; margin-left: -5px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent; }
+	.tipsy-n .tipsy-arrow { top: 0; left: 50%; margin-left: -5px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent; }
     .tipsy-nw .tipsy-arrow { top: 0; left: 10px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent;}
     .tipsy-ne .tipsy-arrow { top: 0; right: 10px; border-bottom-style: solid; border-top: none;  border-left-color: transparent; border-right-color: transparent;}
   .tipsy-s .tipsy-arrow { bottom: 0; left: 50%; margin-left: -5px; border-top-style: solid; border-bottom: none;  border-left-color: transparent; border-right-color: transparent; }
@@ -898,7 +891,7 @@ border-radius: 3px;
 		display:block;
 		width:100%;
 		margin-top:10px; 
-		padding: 7px 0px;
+		padding: 7px 0;
 		border-bottom: 1px solid #E7E7E7;
 		color: #EC5923;
    }
@@ -909,27 +902,20 @@ border-radius: 3px;
  .tab-title-area{
 
 		margin-top:10px; 
-		padding: 7px 0px; 
+		padding: 7px 0;
 		color: #21759B;
 		font-size:24px; 
  }
    .wp-color-picker{
 	
-		margin-bottom:0px !important;
+		margin-bottom:0 !important;
 		width:70px !important;
    }
     .wp-picker-clear{
-		margin-right:0px !important;
-		margin-left:6px !important;
-		margin-top:0px !important;
-		margin-bottom:0px !important;
+		margin: 0px 0px 0px 6px !important;
 		width:inherit!important;
-		padding-left:5px!important;
-		padding-right:5px!important;
-		padding-top:0px!important;
-		padding-bottom:0px!important;
-		
-		
+		padding: 0px 5px !important;
+
 	}
 	
 	.group-in-tab .group-name:hover{
@@ -960,8 +946,7 @@ border-radius: 3px;
 		float:left;
 	}
 #cwp_container .field_description{
-	margin:0px;
-	margin-bottom:5px;
+	margin: 0px 0px 5px;
 	font-size:12px;
 }
 #cwp_container .cwp_textarea{ 
@@ -1025,4 +1010,15 @@ color:red;
 }
 #wpfooter {
 display:none;
+}
+@media screen and (max-width: 782px) {
+#cwp_form #header .button {
+
+	padding: 0 4px 1px !important;
+	font-size: 11px !important;
+}
+}
+#cwp_form #header .logo h2{
+	padding:0 !important;
+	margin:0 !important;
 }

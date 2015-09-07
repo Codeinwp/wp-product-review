@@ -2,7 +2,7 @@
 /**
 Plugin Name: WP Product Review
 Description: The highest rated and most complete review plugin, now with rich snippets support. Easily turn your basic posts into in-depth reviews.
-Version: 2.6.1
+Version: 2.6.2
 Author: Themeisle
 Author URI:  https://themeisle.com/
 Plugin URI: https://themeisle.com/plugins/wp-product-review-lite/
@@ -14,7 +14,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: cwppos
 Domain Path: /languages
 */
-define("WPPR_LITE_VERSION","2.6.1");
+define("WPPR_LITE_VERSION","2.6.2");
 define("WPPR_PATH",dirname(__FILE__));
 define("WPPR_URL",plugins_url("wp-product-review"));
 
@@ -135,13 +135,14 @@ Loading the stylesheet for admin page.
 
         $product_image = get_post_meta($id, "cwp_rev_product_image", true);
         $imgurl = get_post_meta($id, "cwp_image_link", true);
-        $feat_image = "";
         $lightbox = "";
         if ($imgurl =="image") {
 	        $feat_image = wp_get_attachment_url( get_post_thumbnail_id( $id ) );
-	        $lightbox   = 'data-lightbox="' . $feat_image . '"';
-	        wp_enqueue_script("img-lightbox",WPPR_URL.'/javascript/lightbox.min.js',array(), WPPR_LITE_VERSION, array());
-	        wp_enqueue_style("img-lightbox-css", WPPR_URL.'/css/lightbox.css' , array(), WPPR_LITE_VERSION  );
+	        if(cwppos("cwppos_lighbox") == "no"){
+		        $lightbox   = 'data-lightbox="' . $feat_image . '"';
+		        wp_enqueue_script("img-lightbox",WPPR_URL.'/javascript/lightbox.min.js',array(), WPPR_LITE_VERSION, array());
+	            wp_enqueue_style("img-lightbox-css", WPPR_URL.'/css/lightbox.css' , array(), WPPR_LITE_VERSION  );
+	        }
         }else{
 	        $feat_image = get_post_meta($id, "cwp_product_affiliate_link", true);
         }
@@ -288,7 +289,8 @@ Loading the stylesheet for admin page.
 	function wppr_get_image_id($post_id,$image_url = "") {
 
 		global $wpdb;
-		if(!empty($image_url)) {
+		if(!empty($image_url) && $image_url !== false ) {
+
 			$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url ));
 			$image_id  = $attachment[0];
 		}else{
@@ -309,8 +311,6 @@ Loading the stylesheet for admin page.
         if ($options['cwppos_show_poweredby']=="yes" || function_exists("wppr_ci_custom_bar_icon") || class_exists('CWP_PR_PRO_Core')) {
             wp_register_script("cwp-custom-bar-icon", plugins_url('javascript/custom-bar-icon.js', __FILE__), false, "1.0", "all");
             wp_enqueue_script("cwp-custom-bar-icon");
-            //wp_register_style("font-awesome-cdn", "//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
-            //wp_enqueue_style("font-awesome-cdn");
         }
     }
 

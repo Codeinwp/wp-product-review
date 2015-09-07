@@ -188,5 +188,3 @@ function cwp_add_comment_meta_values($comment_id)
 	}
 
 
-
-?>

@@ -155,7 +155,21 @@
 
 									"default"=>""
 
-								), 
+								),
+								array(
+
+									"type"=>"select",
+
+									"name"=>"Lighbox images",
+
+									"description"=>"Disable lightbox effect on product images",
+
+									"id"=>"cwppos_lighbox",
+									"options"=>array("yes"=>"Yes","no"=>"No"),
+
+									"default"=>"no"
+
+								),
 
 
 

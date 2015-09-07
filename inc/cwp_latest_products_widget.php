@@ -108,7 +108,8 @@ array( 'description' => __( 'This widget displays the latest products based on t
 
 		<li class="cwp-popular-review cwp_top_posts_widget_<?php the_ID(); ?>">
 		<?php
-		$product_image = get_post_meta($cwp_latest_products_loop->post->ID, "cwp_rev_product_image", true);
+		$product_image = wppr_get_image_id(get_the_ID(),get_post_meta(get_the_ID(), "cwp_rev_product_image", true));
+
 		if ($show_image==true&&!empty($product_image)) {
 		?>
 

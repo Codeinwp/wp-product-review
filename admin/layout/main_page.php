@@ -58,9 +58,10 @@
 						</div> 
   
 					
-					<?php } ?></div>         
-      
-			<div class="clear"></div>
+					<?php } ?>
+
+				<div class="clear"></div></div>
+
 			
 		</div>
 		

@@ -140,7 +140,7 @@ add_action('admin_footer','cwppos_js_preloader');
         jQuery.get(ajaxurl,{'action':'cwp_load_preloader'},
         function(response){
             jQuery(".preload_list").html(response);
-        })
+        });
 
         //jQuery(".preload_list").html(ajaxLoad).load(loadUrl);
 

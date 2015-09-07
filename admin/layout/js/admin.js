@@ -117,13 +117,12 @@ jQuery("document").ready(function() {
 		    jQuery("#bar-icon-elements .closeModal").click(function(a) {
 		        a.preventDefault();
 		        d();
-		        return;
 		    });
 		}
 
 		function d() {
 		    jQuery("#bar-icon-elements").removeClass("active").hide();
-		    return;
+
 		}
 
 		function r() {

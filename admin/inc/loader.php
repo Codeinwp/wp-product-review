@@ -339,7 +339,7 @@ function cwppos_get_config_defaults($structure){
 						
 						}
 						 
-	} 
+	}
 	return $defaults;
 }
 
@@ -390,7 +390,8 @@ function cwppos_load_defaults_callback() {
 		$validator = new cwpposOptionsValidator();
 		$structure = cwpposConfig::$structure;
 		$defaults = cwppos_get_config_defaults($structure);
-		$defaults = $validator->validate_defaults(); print_r($defaults);
+		$defaults = $validator->validate_defaults();
+
 		add_option(cwppos_config("menu_slug"),$defaults,"","no");
 		
 		die();
@@ -412,7 +413,7 @@ function cwppos($name = ''){
 		add_action("admin_init","cwppos_add_options",999999);
 		add_action("init","cwppos_check_options");
 		add_action("admin_notices", "cwppos_admin_notice");
-		add_action("wp_ajax_cwppos_load_defaults", "cwppos_load_defaults_callback");
+		add_action("wp_ajax_cwp_load_defaults", "cwppos_load_defaults_callback");
  
 
 

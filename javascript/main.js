@@ -15,7 +15,7 @@ jQuery(document).ready(function($) {
             } else if (percent > 75) {
                 return c4;
             }
-        }
+        };
         if (typeof trackcolor != 'undefined') {
             trackColorRight = trackcolor.toUpperCase();
         }

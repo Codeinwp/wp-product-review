@@ -60,4 +60,4 @@ jQuery(document).ready(function(){
 
 
 
-})
+});
