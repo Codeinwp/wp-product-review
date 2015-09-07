@@ -136,26 +136,19 @@ Loading the stylesheet for admin page.
         $product_image = get_post_meta($id, "cwp_rev_product_image", true);
         $imgurl = get_post_meta($id, "cwp_image_link", true);
         $feat_image = "";
-
+        $lightbox = "";
+        if ($imgurl =="image") {
+	        $feat_image = wp_get_attachment_url( get_post_thumbnail_id( $id ) );
+	        $lightbox   = 'data-lightbox="' . $feat_image . '"';
+	        wp_enqueue_script("img-lightbox",WPPR_URL.'/javascript/lightbox.min.js',array(), WPPR_LITE_VERSION, array());
+	        wp_enqueue_style("img-lightbox-css", WPPR_URL.'/css/lightbox.css' , array(), WPPR_LITE_VERSION  );
+        }else{
+	        $feat_image = get_post_meta($id, "cwp_product_affiliate_link", true);
+        }
         if(!empty($product_image)) {
-
-            if ($imgurl =="image")
-                $feat_image = wp_get_attachment_url( get_post_thumbnail_id($id) );
-
-            $lightbox = 'data-lightbox="'.$feat_image.'"';
-            if (!isset($feat_image) || $feat_image=="") {
-                $feat_image = get_post_meta($id, "cwp_product_affiliate_link", true);
-                $lightbox = "";
-            }else{
-                wp_enqueue_script("img-lightbox",WPPR_URL.'/javascript/lightbox.min.js',array(), WPPR_LITE_VERSION, array());
-                wp_enqueue_style("img-lightbox-css", WPPR_URL.'/css/lightbox.css' , array(), WPPR_LITE_VERSION  );
-
-            }
-
-
-
+	        $product_image  = wppr_get_image_id($id,$product_image);
         } else {
-            $product_image = $feat_image;
+	        $product_image = wppr_get_image_id($id);
         }
         $return_string .= '<a href="'.$feat_image.'" '.$lightbox.'><img  src="'.$product_image.'" alt="'. get_post_meta($id, "cwp_rev_product_name", true).'" class="photo photo-wrapup wppr-product-image" style="visibility:hidden"/></a>';
 
@@ -292,6 +285,22 @@ Loading the stylesheet for admin page.
         wp_enqueue_script('cwp-pac-script' );
     }
 
+	function wppr_get_image_id($post_id,$image_url = "") {
+
+		global $wpdb;
+		if(!empty($image_url)) {
+			$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url ));
+			$image_id  = $attachment[0];
+		}else{
+			$image_id = get_post_thumbnail_id($post_id );
+
+		}
+		$image_thumb = "";
+		if(!empty($image_id)){
+			$image_thumb = wp_get_attachment_image_src($image_id, 'thumbnail');
+		}
+		return isset($image_thumb[0]) ? $image_thumb[0] : $image_url;
+	}
 
 
     function custom_bar_icon() {
