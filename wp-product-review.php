@@ -345,7 +345,7 @@ Loading the stylesheet for admin page.
         if(isset($uni_font[0])) {  if ($uni_font[0]=="#") $uni_font = $uni_font; else $uni_font = $uni_font[0]; } else { $uni_font = ""; }
 
         if(!empty($uni_font)){
-            if(function_exists("wppr_ci_custom_bar_icon")){
+            if(function_exists("wppr_ci_custom_bar_icon") || cwppos('cwppos_show_poweredby') == 'yes'){
                 wp_enqueue_style( 'cwp-pac-fontawesome-stylesheet',  WPPR_URL.'/css/font-awesome.min.css' );
             }
         }
