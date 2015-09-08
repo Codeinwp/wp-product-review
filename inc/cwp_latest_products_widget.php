@@ -102,20 +102,22 @@ array( 'description' => __( 'This widget displays the latest products based on t
 
 		echo "<ul>";
 
-		while($cwp_latest_products_loop->have_posts()) : $cwp_latest_products_loop->the_post(); ?>
+		while($cwp_latest_products_loop->have_posts()) : $cwp_latest_products_loop->the_post();
+
+			$product_image = wppr_get_image_id(get_the_ID(),get_post_meta(get_the_ID(), "cwp_rev_product_image", true));
+			?>
 
 
 
-		<li class="cwp-popular-review cwp_top_posts_widget_<?php the_ID(); ?>">
+		<li class="cwp-popular-review cwp_top_posts_widget_<?php the_ID(); if ($show_image==true&&!empty($product_image)) echo ' wppr-cols-3'; else echo ' wppr-cols-2' ?>">
 		<?php
-		$product_image = wppr_get_image_id(get_the_ID(),get_post_meta(get_the_ID(), "cwp_rev_product_image", true));
 
 		if ($show_image==true&&!empty($product_image)) {
 		?>
 
-		<img class="cwp_rev_image" src="<?php echo $product_image;?>"\>
+		<img class="cwp_rev_image wppr-col" src="<?php echo $product_image;?>"\>
 		<?php } ?>
-		<a href="<?php the_permalink(); ?>">
+		<a class="wppr-col" href="<?php the_permalink(); ?>">
 
 		<?php if ($post_type==true) { $titlep = get_post_meta($cwp_latest_products_loop->post->ID, "cwp_rev_product_name", true);echo $titlep; } else the_title(); ?>
 
@@ -136,7 +138,7 @@ array( 'description' => __( 'This widget displays the latest products based on t
 
 			if(!empty($review_score)) { ?>
 
-			<div class="review-grade-widget">
+			<div class="review-grade-widget wppr-col">
 
 				<div class="cwp-review-chart">
 

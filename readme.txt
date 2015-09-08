@@ -64,6 +64,16 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 
 == Changelog ==
 
+**New in v.2.6.3**
+ - Fixed custom icons bug
+ - Fixed sorting order to top products widget
+ - Added 100% influence on visitators rating
+ - Added  rel="nofollow" for img link
+ - Fixed bug for password protected reviews.
+ - Fixed long text for product titles in widgets
+ - Removed unecessary css
+
+
 **New in v.2.6.2**
 
  - Added thumbnails for reviews

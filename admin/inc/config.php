@@ -48,7 +48,7 @@
 
 			self::$admin_template_directory  =  plugins_url ('../layout', __FILE__  );
 
-			self::$admin_uri  		= 	 plugins_url (   '../' , __FILE__ ); 
+			self::$admin_uri  		= 	 plugins_url (   '../' , __FILE__ );
 
 			self::$admin_path 	 	= 	 plugins_url ( '../', __FILE__ );
 
@@ -58,9 +58,9 @@
 
 			self::$all_review_categories_array = array();
 
-			self::$categories_array = array(); 
+			self::$categories_array = array();
 
- 
+
 
 			self::$structure	= array(
 										array(
@@ -112,7 +112,7 @@
 
 									"id"=>"cwppos_infl_userreview",
 
-									"options"=>array("0"=>"No influence","10"=>"10%","20"=>"20%","30"=>"30%","40"=>"40%","50"=>"50%","60"=>"60%","70"=>"70%","80"=>"80%","90"=>"90%"),
+									"options"=>array("0"=>"No influence","10"=>"10%","20"=>"20%","30"=>"30%","40"=>"40%","50"=>"50%","60"=>"60%","70"=>"70%","80"=>"80%","90"=>"90%","100"=>"100%"),
 
 									"default"=>"0"
 
@@ -173,7 +173,7 @@
 
 
 
-							
+
 
 							 )
 
@@ -187,7 +187,7 @@
 
 							 "options"=>array(
 
-								
+
 
 								array(
 
@@ -197,9 +197,9 @@
 
 								) ,
 
- 
 
-								array(	
+
+								array(
 
 									"type"=>"color",
 
@@ -213,7 +213,7 @@
 
 								),
 
-								array(	
+								array(
 
 									"type"=>"color",
 
@@ -227,7 +227,7 @@
 
 								),
 
-								array(	
+								array(
 
 									"type"=>"color",
 
@@ -241,9 +241,9 @@
 
 								),
 
- 
 
-								array(	
+
+								array(
 
 									"type"=>"color",
 
@@ -257,9 +257,9 @@
 
 								),
 
- 
 
-								array(	
+
+								array(
 
 									"type"=>"color",
 
@@ -273,9 +273,9 @@
 
 								),
 
- 
 
-								array(	
+
+								array(
 
 									"type"=>"color",
 
@@ -289,7 +289,7 @@
 
 								)
 
-							
+
 
 							 )
 
@@ -303,7 +303,7 @@
 
 							 "options"=>array(
 
-								
+
 
 								array(
 
@@ -313,9 +313,9 @@
 
 								) ,
 
- 
 
-								array(	
+
+								array(
 
 									"type"=>"color",
 
@@ -329,7 +329,7 @@
 
 								),
 
-								array(	
+								array(
 
 									"type"=>"color",
 
@@ -343,7 +343,7 @@
 
 								),
 
-								array(	
+								array(
 
 									"type"=>"color",
 
@@ -357,17 +357,17 @@
 
 								),
 
-  
 
- 
 
-								
+
+
+
 
 								array(
 
 								 "type"=>"input_text",
 
-								 "name"=>"Pros text",							 
+								 "name"=>"Pros text",
 
 								 "description"=>"Specify text for pros heading",
 
@@ -377,15 +377,15 @@
 
 							   ),
 
- 
 
-								
+
+
 
 								array(
 
 								 "type"=>"input_text",
 
-								 "name"=>"Cons text",							 
+								 "name"=>"Cons text",
 
 								 "description"=>"Specify text for cons heading",
 
@@ -411,7 +411,7 @@
 									"default"=>"5"
 								)
 
-							
+
 
 							 )
 
@@ -425,7 +425,7 @@
 
 							 "options"=>array(
 
-								
+
 
 								array(
 
@@ -451,7 +451,7 @@
 
 								),
 
-								array(	
+								array(
 
 									"type"=>"color",
 
@@ -465,7 +465,7 @@
 
 								),
 
-								array(	
+								array(
 
 									"type"=>"color",
 
@@ -479,7 +479,7 @@
 
 								),
 
-								array(	
+								array(
 
 									"type"=>"color",
 
@@ -493,7 +493,7 @@
 
 								),
 
-								array(	
+								array(
 
 									"type"=>"color",
 
@@ -507,7 +507,7 @@
 
 								),
 
-								array(	
+								array(
 
 									"type"=>"color",
 
@@ -521,7 +521,7 @@
 
 								),
 
-								array(	
+								array(
 
 									"type"=>"color",
 
@@ -533,9 +533,9 @@
 
 									"default"=>"#FFFFFF"
 
-								) 
+								)
 
-							
+
 
 							 )
 
@@ -550,7 +550,7 @@
 
 							 "options"=>array(
 
-								
+
 
 								array(
 
@@ -584,7 +584,7 @@
 
 									"id"=>"cwppos_show_buypro",
 
-									
+
 									"default"=>"no"
 
 								)
@@ -593,7 +593,7 @@
 
 
 
-		
+
 
 					);
 
@@ -601,11 +601,11 @@
 
 
 
-			 
 
-		}	 
 
-	
+		}
 
-	} 
+
+
+	}
 

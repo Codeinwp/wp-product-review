@@ -2,7 +2,7 @@
 /**
 Plugin Name: WP Product Review
 Description: The highest rated and most complete review plugin, now with rich snippets support. Easily turn your basic posts into in-depth reviews.
-Version: 2.6.2
+Version: 2.6.3
 Author: Themeisle
 Author URI:  https://themeisle.com/
 Plugin URI: https://themeisle.com/plugins/wp-product-review-lite/
@@ -14,7 +14,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: cwppos
 Domain Path: /languages
 */
-define("WPPR_LITE_VERSION","2.6.2");
+define("WPPR_LITE_VERSION","2.6.3");
 define("WPPR_PATH",dirname(__FILE__));
 define("WPPR_URL",plugins_url("wp-product-review"));
 
@@ -101,7 +101,7 @@ Loading the stylesheet for admin page.
         //$overall_score = ($option1_grade + $option2_grade + $option3_grade + $option4_grade + $option5_grade) / $iter;
         if ($iter !==0) $rating['overall'] = $overall_score/$iter;
         else $rating['overall'] = 0;
-        update_post_meta($id, 'option_overall_score', $overall_score);
+        update_post_meta($id, 'option_overall_score', $rating['overall']);
         return $rating;
 
 
@@ -109,6 +109,7 @@ Loading the stylesheet for admin page.
 
     function cwppos_show_review($id = "") {
         global $post;
+        if ( post_password_required($post) ) return false;
         wp_enqueue_style( 'cwp-pac-frontpage-stylesheet', WPPR_URL.'/css/frontpage.css',array(),WPPR_LITE_VERSION );
 
         wp_enqueue_script( 'pie-chart', WPPR_URL.'/javascript/pie-chart.js',array("jquery"), WPPR_LITE_VERSION,true );
@@ -151,7 +152,7 @@ Loading the stylesheet for admin page.
         } else {
 	        $product_image = wppr_get_image_id($id);
         }
-        $return_string .= '<a href="'.$feat_image.'" '.$lightbox.'><img  src="'.$product_image.'" alt="'. get_post_meta($id, "cwp_rev_product_name", true).'" class="photo photo-wrapup wppr-product-image" style="visibility:hidden"/></a>';
+        $return_string .= '<a href="'.$feat_image.'" '.$lightbox.'  rel="nofollow"><img  src="'.$product_image.'" alt="'. get_post_meta($id, "cwp_rev_product_name", true).'" class="photo photo-wrapup wppr-product-image" style="visibility:hidden"/></a>';
 
         $rating = cwppos_calc_overall_rating($id);
 

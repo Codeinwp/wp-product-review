@@ -1,9 +1,4 @@
 
-
-@import url(//fonts.googleapis.com/css?family=Droid+Sans:400,700|Lato:100,200,300,400,700,900|Open+Sans:400italic,600italic,700italic,400,300,600,700,800);
-
-
-
 #review-statistics{
 
 	font-family:FontAwesome;
@@ -117,7 +112,7 @@ margin:0;
 #review-statistics .cwp-review-percentage span { font-family: "Lato"; font-size: 17px; font-weight: 900; background: #fff; display: block;border-radius: 50%; }
 
 .cwp-review-rating{
-
+	line-height: inherit !important;
 }
 #review-statistics .cwp_easyPieChart { position: relative; text-align: center; }
 

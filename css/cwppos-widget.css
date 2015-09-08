@@ -15,7 +15,7 @@
 .cwp-popular-review .cwp_easyPieChart span { text-align:center; }
 .cwp-popular-review:before {
 	content:""!important;
-} 
+}
 
 .cwp-popular-review .cwp_rev_image {
 	margin-right:10px;
@@ -38,4 +38,32 @@
 .widget_cwp_top_products_widget li a, .widget_cwp_latest_products_widget li a{
 	border:none!important;
 	padding:0 !important;
+}
+.wppr-cols-2 >  div.wppr-col,
+.wppr-cols-3 >  div.wppr-col{
+	width:15%;
+}
+.wppr-cols-2 > a.wppr-col,
+.wppr-cols-3 > a.wppr-col{
+	width:85%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;;
+}
+.wppr-cols-3 a.wppr-col{
+	width: 70%;
+}
+.wppr-cols-3 > img.wppr-col{
+	width:15%;
+}
+.wppr-cols-2 .wppr-col,
+.wppr-cols-3 .wppr-col{
+	float:left;
+
+}
+.wppr-cols-3:after,
+.wppr-cols-2:after {
+	content: "";
+	display: table;
+	clear: both;
 }

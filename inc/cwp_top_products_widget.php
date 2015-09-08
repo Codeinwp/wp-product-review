@@ -34,7 +34,10 @@ array( 'description' => __( 'This widget displays the top products based on thei
 	// Creating widget front-end
 
 	// This is where the action happens
+	public function custom_order_by($orderby){
 
+		return 'mt1.meta_value DESC, mt2.meta_value+0 DESC';
+	}
 	public function widget( $args, $instance ) {
 
 		wp_enqueue_style( 'cwp-pac-widget-stylesheet',  WPPR_URL.'/css/cwppos-widget.css' );
@@ -76,49 +79,45 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 		$query_args = array(
 
-			'posts_per_page'=> $no_items, // limit it to the specified no of posts
-			'post_type'	=>	"any",
-			'post__not_in' => get_option('sticky_posts'),
-			'category_name' => $cwp_tp_category, // limit it to the specified category
-			'meta_key' => 'option_overall_score',
+						'posts_per_page'=> $no_items, // limit it to the specified no of posts
+						'post_type'	=>	"any",
+						'post__not_in' => get_option('sticky_posts'),
+						'category_name' => $cwp_tp_category,
+						'meta_key'=> 'cwp_meta_box_check',
+						'meta_query' => array(
+											array(
+													'key' => 'cwp_meta_box_check',
+													'value'=> 'Yes',
+												),
+											array(
+													'key'       => 'option_overall_score'
+			                                    ),
 
-				'meta_query'             => array(
-
-		array(
-
-			'key'       => 'cwp_meta_box_check',
-
-			'value'     => 'Yes',
-
-
-		),
-
-		),
-		'orderby'	=> 'meta_value_num',
-		'order'		=> 'DESC'
-
-		);
-
-
-
+											)
+						);
+		add_filter('posts_orderby',array($this,'custom_order_by'));
 		$cwp_top_products_loop = new WP_Query( $query_args );
+		remove_filter('posts_orderby',array($this,'custom_order_by'));
+		//echo $cwp_top_products_loop->request;
 
 		echo "<ul>";
 
-		while($cwp_top_products_loop->have_posts()) : $cwp_top_products_loop->the_post(); ?>
+		while($cwp_top_products_loop->have_posts()) : $cwp_top_products_loop->the_post();
+
+			$product_image = wppr_get_image_id(get_the_ID(),get_post_meta(get_the_ID(), "cwp_rev_product_image", true));
+			?>
 
 
 
-		<li class="cwp-popular-review cwp_top_posts_widget_<?php the_ID(); ?>">
+		<li class="cwp-popular-review cwp_top_posts_widget_<?php the_ID(); if ($show_image==true&&!empty($product_image)) echo ' wppr-cols-3'; else echo ' wppr-cols-2' ?>">
 		<?php
 
-		$product_image = wppr_get_image_id(get_the_ID(),get_post_meta(get_the_ID(), "cwp_rev_product_image", true));
 		if ($show_image==true&&!empty($product_image)) {
 		?>
 
-		<img class="cwp_rev_image" src="<?php echo $product_image;?>"\>
+		<img class="cwp_rev_image wppr-col" src="<?php echo $product_image;?>"\>
 		<?php } ?>
-		<a href="<?php the_permalink(); ?>">
+		<a href="<?php the_permalink(); ?>" class="wppr-col">
 
 		<?php if ($post_type==true) { $titlep = get_post_meta($cwp_top_products_loop->post->ID, "cwp_rev_product_name", true);echo $titlep; } else the_title(); ?>
 
@@ -139,7 +138,7 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 			if(!empty($review_score)) { ?>
 
-			<div class="review-grade-widget">
+			<div class="review-grade-widget wppr-col">
 
 				<div class="cwp-review-chart">
 
