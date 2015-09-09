@@ -45,16 +45,17 @@
 }
 .wppr-cols-2 > a.wppr-col,
 .wppr-cols-3 > a.wppr-col{
-	width:85%;
+	width:70%;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;;
 }
 .wppr-cols-3 a.wppr-col{
-	width: 70%;
-}
-.wppr-cols-3 > img.wppr-col{
-	width:15%;
+	position: relative;
+	top: 40%;
+	transform: translateY(40%);
+
+	margin-right:-60px;
 }
 .wppr-cols-2 .wppr-col,
 .wppr-cols-3 .wppr-col{
@@ -66,4 +67,15 @@
 	content: "";
 	display: table;
 	clear: both;
+	position: relative !important;
+
+
+
+
+
+
+}
+.widget_cwp_top_products_widget{
+	overflow:hidden;
+
 }

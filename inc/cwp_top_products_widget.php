@@ -30,17 +30,18 @@ array( 'description' => __( 'This widget displays the top products based on thei
 }
 
 
+	public function assets(){
 
-	// Creating widget front-end
-
-	// This is where the action happens
+		wp_enqueue_style( 'cwp-pac-widget-stylesheet',  WPPR_URL.'/css/cwppos-widget.css' );
+		wp_enqueue_script( 'cwp-pac-main-script', WPPR_URL.'/javascript/main.js',array("jquery",'pie-chart'),WPPR_LITE_VERSION,true );
+		wp_enqueue_script( 'pie-chart', WPPR_URL.'/javascript/pie-chart.js',array("jquery"), WPPR_LITE_VERSION,true );
+	}
 	public function custom_order_by($orderby){
 
 		return 'mt1.meta_value DESC, mt2.meta_value+0 DESC';
 	}
 	public function widget( $args, $instance ) {
-
-		wp_enqueue_style( 'cwp-pac-widget-stylesheet',  WPPR_URL.'/css/cwppos-widget.css' );
+		$this->assets();
 		if ( isset( $instance[ 'title' ]) )
 
 			$title = apply_filters( 'widget_title', $instance['title'] );
