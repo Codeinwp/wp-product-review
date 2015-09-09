@@ -1,35 +1,40 @@
 <?php
 /**
-Plugin Name: WP Product Review
-Description: The highest rated and most complete review plugin, now with rich snippets support. Easily turn your basic posts into in-depth reviews.
-Version: 2.6.3
-Author: Themeisle
-Author URI:  https://themeisle.com/
-Plugin URI: https://themeisle.com/plugins/wp-product-review-lite/
-Requires at least: 3.5
-Tested up to: 4.3
-Stable tag: trunk
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: cwppos
-Domain Path: /languages
-*/
-define("WPPR_LITE_VERSION","2.6.3");
-define("WPPR_PATH",dirname(__FILE__));
-define("WPPR_URL",plugins_url("wp-product-review"));
+ * Main plugin file
+ *
+ * @package WPPR
+ * @author ThemeIsle
+ * @since 1.0.0
+ *
+ *
+ * Plugin Name: WP Product Review
+ * Description: The highest rated and most complete review plugin, now with rich snippets support. Easily turn your basic posts into in-depth reviews.
+ * Version: 2.6.3
+ * Author: Themeisle
+ * Author URI:  https://themeisle.com/
+ * Plugin URI: https://themeisle.com/plugins/wp-product-review-lite/
+ * Requires at least: 3.5
+ * Tested up to: 4.3
+ * Stable tag: trunk
+ * License: GPLv2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: cwppos
+ * Domain Path: /languages
+ */
 
-if (wp_get_theme() !== "Reviewgine Affiliate PRO") {
-    include "admin/functions.php";
-    include "inc/cwp_metabox.php";
-    include "inc/cwp_frontpage.php";
-    include "inc/cwp_top_products_widget.php";
-    include "inc/cwp_latest_products_widget.php";
-    include "inc/cwp_comment.php";
-    include "inc/cwp_js_preloader.php";
-    include "inc/cwp-addons.php";
-    /*
-Loading the stylesheet for admin page.
-*/
+define( 'WPPR_LITE_VERSION','2.6.3' );
+define( 'WPPR_PATH',dirname( __FILE__ ) );
+define( 'WPPR_URL',plugins_url( 'wp-product-review' ) );
+
+if ( wp_get_theme() !== 'Reviewgine Affiliate PRO' ) {
+	include 'admin/functions.php';
+	include 'inc/cwp_metabox.php';
+	include 'inc/cwp_frontpage.php';
+	include 'inc/cwp_top_products_widget.php';
+	include 'inc/cwp_latest_products_widget.php';
+	include 'inc/cwp_comment.php';
+	include 'inc/cwp_js_preloader.php';
+	include 'inc/cwp-addons.php';
 
     function cwppos_calc_overall_rating($id){
         $options = cwppos();
@@ -287,7 +292,7 @@ Loading the stylesheet for admin page.
         wp_enqueue_script('cwp-pac-script' );
     }
 
-	function wppr_get_image_id($post_id,$image_url = "") {
+	function wppr_get_image_id($post_id, $image_url = "", $size = "thumbnail" ) {
 
 		global $wpdb;
 		if(!empty($image_url) && $image_url !== false ) {
@@ -300,7 +305,12 @@ Loading the stylesheet for admin page.
 		}
 		$image_thumb = "";
 		if(!empty($image_id)){
-			$image_thumb = wp_get_attachment_image_src($image_id, 'thumbnail');
+			$image_thumb = wp_get_attachment_image_src($image_id, $size);
+			if( $size !== 'thumbnail' ) {
+				if($image_thumb[0] === $image_url){
+					$image_thumb = wp_get_attachment_image_src($image_id, "thumbnail");
+				}
+			}
 		}
 		return isset($image_thumb[0]) ? $image_thumb[0] : $image_url;
 	}
@@ -316,17 +326,7 @@ Loading the stylesheet for admin page.
     }
 
     function cwppos_pac_register() {
-
-        /*wp_register_script( 'pie-chart', plugins_url('javascript/pie-chart.js', __FILE__),array("jquery"),"20140101",true );
-        wp_register_script( 'cwp-pac-main-script', plugins_url('javascript/main.js', __FILE__),array("jquery",'pie-chart'),"20140101",true );
-        //wp_localize_script( 'cwp-pac-main-script', 'trackcolor', array( 'value' => $options['cwppos_rating_chart_default'] ) );
-        wp_register_style( 'cwp-pac-frontpage-stylesheet', plugins_url('css/frontpage.css', __FILE__) );
-        wp_register_style( 'cwp-pac-widget-stylesheet', plugins_url('css/cwppos-widget.css', __FILE__) );
-        wp_register_style( 'jqueryui', plugins_url('css/jquery-ui.css', __FILE__) );
-        wp_register_style( 'cwp-pac-fontawesome-stylesheet', plugins_url('css/font-awesome.min.css', __FILE__) );
-        wp_enqueue_script("img-lightbox", plugins_url( 'javascript/lightbox.min.js', __FILE__ ), false, "1.0", "all");
-        wp_enqueue_style("img-lightbox-css", plugins_url( 'css/lightbox.css', __FILE__ ), false, "1.0", "all");*/
-
+        add_image_size("wppr_widget_image",50,50);
     }
 
     function cwp_def_settings() {

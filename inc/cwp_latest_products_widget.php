@@ -108,7 +108,7 @@ array( 'description' => __( 'This widget displays the latest products based on t
 
 		while($cwp_latest_products_loop->have_posts()) : $cwp_latest_products_loop->the_post();
 
-			$product_image = wppr_get_image_id(get_the_ID(),get_post_meta(get_the_ID(), "cwp_rev_product_image", true));
+			$product_image = wppr_get_image_id(get_the_ID(),get_post_meta(get_the_ID(), "cwp_rev_product_image", true),'wppr_widget_image');
 			?>
 
 
