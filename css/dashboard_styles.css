@@ -34,10 +34,9 @@
 .product-review-meta-Yes .review-settings-group {
     display: block !important
 }
-
-.review-settings-notice, .review-settings-group {
-    display: none
-}
+ .product-review-meta-No{
+     display:none;
+ }
 
 .preloadInfo {
     width: 89%

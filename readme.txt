@@ -66,7 +66,7 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 
 **New in v.2.6.4**
 
- - Fixed layout problem with widgets
+ - Fixed layout problem with widgets on some themes
  - Added new image size for widgets 'wppr_widget_image' for 50x50. ( Requires thumbnail regeneration to use it )
 
 **New in v.2.6.3**
