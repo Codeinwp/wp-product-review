@@ -1,5 +1,13 @@
 
 
+### 2.6.5 - 10/09/2015
+
+ Changes: 
+
+
+ * Fix for require that crash the website
+
+
 ### 2.6.4 - 10/09/2015
 
  Changes: 
