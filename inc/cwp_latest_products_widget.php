@@ -29,12 +29,16 @@ array( 'description' => __( 'This widget displays the latest products based on t
 
 }
 
+	public function assets(){
 
-	public function widget( $args, $instance ) {
 
 		wp_enqueue_style( 'cwp-pac-widget-stylesheet',  WPPR_URL.'/css/cwppos-widget.css' );
+		wp_enqueue_script( 'cwp-pac-main-script', WPPR_URL.'/javascript/main.js',array("jquery",'pie-chart'),WPPR_LITE_VERSION,true );
+		wp_enqueue_script( 'pie-chart', WPPR_URL.'/javascript/pie-chart.js',array("jquery"), WPPR_LITE_VERSION,true );
+	}
 
-
+	public function widget( $args, $instance ) {
+		$this->assets();
 		if ( isset( $instance[ 'title' ]) )
 
 			$title = apply_filters( 'widget_title', $instance['title'] );
@@ -104,7 +108,7 @@ array( 'description' => __( 'This widget displays the latest products based on t
 
 		while($cwp_latest_products_loop->have_posts()) : $cwp_latest_products_loop->the_post();
 
-			$product_image = wppr_get_image_id(get_the_ID(),get_post_meta(get_the_ID(), "cwp_rev_product_image", true));
+			$product_image = wppr_get_image_id(get_the_ID(),get_post_meta(get_the_ID(), "cwp_rev_product_image", true),'wppr_widget_image');
 			?>
 
 
@@ -323,6 +327,9 @@ array( 'description' => __( 'This widget displays the latest products based on t
 
 // Register and load the widget
 
+/**
+ *
+ */
 function cwp_load_latest_products_widget() {
 
 	register_widget( 'cwp_latest_products_widget' );

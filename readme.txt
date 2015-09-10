@@ -64,7 +64,13 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 
 == Changelog ==
 
+**New in v.2.6.4**
+
+ - Fixed layout problem with widgets on some themes
+ - Added new image size for widgets 'wppr_widget_image' for 50x50. ( Requires thumbnail regeneration to use it )
+
 **New in v.2.6.3**
+
  - Fixed custom icons bug
  - Fixed sorting order to top products widget
  - Added 100% influence on visitators rating

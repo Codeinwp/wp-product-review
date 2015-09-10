@@ -39,22 +39,16 @@ jQuery(document).ready(function(){
     });
 
     jQuery('input:radio[name="cwp_meta_box_check"]').change(function(){
+        var value = jQuery(this).val();
+        if(value === "Yes"){
 
-
-
-    if(jQuery(this).is(':checked')){
-
-       jQuery(".review-settings-notice").show();
-
-       jQuery(".review-settings-group").show();
-
-       jQuery(".isReviewYes").show();
-
-       
-
-    }
-
-});
+            jQuery("#cwp_review_meta_box .product-review-meta-No").show();
+            jQuery("#cwp_review_meta_box .product-review-meta-Yes").show();
+        }else{
+            jQuery("#cwp_review_meta_box .product-review-meta-Yes").hide();
+            jQuery("#cwp_review_meta_box .product-review-meta-No").hide();
+        }
+    });
 
 
 
