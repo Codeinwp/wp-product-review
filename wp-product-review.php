@@ -48,7 +48,7 @@ if ( wp_get_theme() !== 'Reviewgine Affiliate PRO' ) {
             ${"comment_meta_option_".$i} = 0;
 
         }
-
+        $nr_of_comments = 0;
         if( $options['cwppos_show_userreview'] == "yes" ) {
             $args = array(
                 'status' => 'approve',
@@ -298,7 +298,7 @@ if ( wp_get_theme() !== 'Reviewgine Affiliate PRO' ) {
 		if(!empty($image_url) && $image_url !== false ) {
 
 			$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url ));
-			$image_id  = $attachment[0];
+			$image_id  = isset($attachment[0]) ? $attachment[0] : '';
 		}else{
 			$image_id = get_post_thumbnail_id($post_id );
 
