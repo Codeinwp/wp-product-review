@@ -149,10 +149,18 @@ function cwppos_show_review($id = "") {
                                     <meta itemprop="datePublished" datetime="'.get_the_time("Y-m-d", $id).'">
                                     <span itemprop="author" itemscope itemtype="http://schema.org/Person" display="none" >
                                          <meta itemprop="name"  content="'.get_the_author().'">
-                                    </span>
-                                        <div    itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" class="cwp-review-percentage" data-percent="';
-		$return_string .= $rating['overall'].'"><span itemprop="ratingValue" class="cwp-review-rating">'.$divrating.'</span><meta itemprop="bestRating" content = "10"/>
-                     <meta itemprop="reviewCount" content="'. $commentNr.'"> </div>
+                                    </span>';
+		if(cwppos("cwppos_infl_userreview") == 0) {
+
+			$return_string .= '<div    itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="cwp-review-percentage" data-percent="';
+			$return_string .= $rating['overall'] . '"><span itemprop="ratingValue" class="cwp-review-rating">' . $divrating . '</span>  </div>';
+
+		}else {
+			$return_string .= '<div    itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" class="cwp-review-percentage" data-percent="';
+			$return_string .= $rating['overall'] . '"><span itemprop="ratingValue" class="cwp-review-rating">' . $divrating . '</span><meta itemprop="bestRating" content = "10"/>
+                     <meta itemprop="reviewCount" content="' . $commentNr . '"> </div>';
+		}
+		$return_string .='
                                     </div><!-- end .chart -->
                                 </div><!-- end .review-wu-grade -->
                                 <div class="review-wu-bars">';
@@ -319,7 +327,9 @@ function cwp_def_settings() {
 
 	if(!empty($uni_font)){
 		if(function_exists("wppr_ci_custom_bar_icon") || cwppos('cwppos_show_poweredby') == 'yes'){
-			wp_enqueue_style( 'cwp-pac-fontawesome-stylesheet',  WPPR_URL.'/css/font-awesome.min.css' );
+			if(cwppos("cwppos_fontawesome") === "no"){
+				wp_enqueue_style( 'cwp-pac-fontawesome-stylesheet',  WPPR_URL.'/css/font-awesome.min.css' );
+			}
 		}
 	}
 	echo    "<script type='text/javascript'>

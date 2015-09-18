@@ -224,7 +224,10 @@
             	if (cwppos('cwppos_show_poweredby') == 'yes' || function_exists('wppr_ci_custom_bar_icon')) {
 
 		            wp_enqueue_script("cwp-custom-bar-icon", WPPR_URL."/admin/layout/js/custom-bar-icon.js", false, WPPR_LITE_VERSION, "all");
-		            wp_enqueue_style("font-awesome-cdn", "//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+		            if( cwppos("cwppos_fontawesome")  === 'no' )
+		            {
+			            wp_enqueue_style("font-awesome-cdn", "//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+		            }
 
 		            $html .= "<button id='cwp_select_bar_icon'>Select Bar Icon</button>";
 					$html .= "<input type='hidden' id='cwp_bar_icon_field' name='".cwppos_config("menu_slug")."[".$id."][]' value='";

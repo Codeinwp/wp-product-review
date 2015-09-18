@@ -170,6 +170,20 @@
 									"default"=>"no"
 
 								),
+								array(
+
+									"type"=>"select",
+
+									"name"=>"Font Awesome",
+
+									"description"=>"Disable Font Awesome for websites that already are including it",
+
+									"id"=>"cwppos_fontawesome",
+									"options"=>array("yes"=>"Yes","no"=>"No"),
+
+									"default"=>"no"
+
+								),
 
 
 
