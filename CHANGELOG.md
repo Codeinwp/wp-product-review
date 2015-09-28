@@ -1,5 +1,15 @@
 
 
+### 2.6.7 - 28/09/2015
+
+ Changes: 
+
+
+ *  !!! typos fix
+ * Fixed issue with bestRating when  visitator influence is off
+ * Fixed issue with auto optimization plugins
+
+
 ### 2.6.6 - 18/09/2015
 
  Changes: 
