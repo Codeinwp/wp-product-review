@@ -153,7 +153,7 @@ function cwppos_show_review($id = "") {
 		if(cwppos("cwppos_infl_userreview") == 0) {
 
 			$return_string .= '<div    itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="cwp-review-percentage" data-percent="';
-			$return_string .= $rating['overall'] . '"><span itemprop="ratingValue" class="cwp-review-rating">' . $divrating . '</span>  </div>';
+			$return_string .= $rating['overall'] . '"><span itemprop="ratingValue" class="cwp-review-rating">' . $divrating . '</span> <meta itemprop="bestRating" content="10">  </div>';
 
 		}else {
 			$return_string .= '<div    itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" class="cwp-review-percentage" data-percent="';
