@@ -64,6 +64,9 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 
 == Changelog ==
 
+**New in 2.6.7**
+ - Fixed issue with rating value when visitator influence is off
+
 **New in v.2.6.6**
 
  - Added option to remove loading of Font Awesome for websites that already enque it.
