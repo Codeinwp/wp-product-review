@@ -2,10 +2,10 @@
  * Main JavaScript File
  */
 jQuery(document).ready(function($) {
-    // Review Pie Charts
+    
     var initPieChart = function() {
         returnColor = function(percent) {
-            // Sets color based on value
+            
             if (percent > 0 && percent <= 25) {
                 return c1;
             } else if (percent > 25 && percent <= 50) {
@@ -36,7 +36,7 @@ jQuery(document).ready(function($) {
             animate: 1,
             onStep: function(value) {
                 var c = returnColor(value);
-                // Sets the value inside empty span
+                
                 this.$el.find('span').text(~~value / 10);
                 this.$el.find('span').css({
                     color: c
@@ -49,8 +49,8 @@ jQuery(document).ready(function($) {
 
     function wuReview() {
 
-    	//alert(cwpCustomBarIcon);
-		//(!(typeof(cwpCustomBarIcon) === "undefined") || !(cwpCustomBarIcon === null) || !(cwpCustomBarIcon === ""))
+    	
+		
 
     	if( !(typeof(cwpCustomBarIcon) === "undefined") && !(cwpCustomBarIcon === "") && isSetToPro) {
     		$(".rev-option").each(function() {
@@ -84,7 +84,7 @@ jQuery(document).ready(function($) {
         $(this).css("background", returnColor(theBarWidth));
     });
 
-    // Load wuReview Function
+    
     wuReview();
 
     $(".comment_meta_slider").each(function() {
