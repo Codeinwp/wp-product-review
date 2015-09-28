@@ -65,7 +65,10 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 == Changelog ==
 
 **New in 2.6.7**
+
  - Fixed issue with rating value when visitator influence is off
+ - Fixed issue with auto optimization plugins
+
 
 **New in v.2.6.6**
 
