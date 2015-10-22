@@ -63,6 +63,9 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+**New in 2.6.8**
+
+ - Improved responsive design of the review
 
 **New in 2.6.7**
 
