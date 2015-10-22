@@ -1,5 +1,13 @@
 
 
+### 2.6.8 - 22/10/2015
+
+ Changes: 
+
+
+ * Improved responsive design of the review
+
+
 ### 2.6.7 - 28/09/2015
 
  Changes: 
