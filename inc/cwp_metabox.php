@@ -16,8 +16,11 @@ function cwp_review_meta_boxes(){
         <input type="radio" id="cwp_meta_box_check_yes" name="cwp_meta_box_check" value="Yes" <?php  checked( $check, 'Yes' ); ?> />
         <label for="my_meta_box_check">Yes</label>
         <input type="radio" id="cwp_meta_box_check_no" name="cwp_meta_box_check" value="No" <?php  checked( $check, 'No' ); ?> />
-        <label for="my_meta_box_check">No</label>
-    </p>
+        <label for="my_meta_box_check" style="margin-right:30px;">No</label>
+        <?php if(!shortcode_exists("P_REVIEW")): ?>
+            <br/><br/> <label  > You can use the shortcode <b>[P_REVIEW]</b> to show a review you already made or <b>[wpr_landing]</b> to display a comparision table of them. The shortcodes are available on the <a target="_blank" href="http://themeisle.com/plugins/wp-product-review-pro-add-on/">Pro Bundle</a></label>
+        <?php endif; ?>
+        </p>
     <div class="product-review-meta-<?php  echo $check; ?>">
     <div class="review-settings-notice">
         <h4><?php  _e("Product Details", "cwppos"); ?></h4>
@@ -118,7 +121,7 @@ function cwp_review_meta_boxes(){
             $pageURL = admin_url('admin.php?page=cwppos_options#tab-upgrade_to_pro');
             $pageURL = str_replace(":80","",$pageURL);
             ?>
-            <a href="<?php  echo $pageURL; ?>" target="_blank" class="preload_info_upsell"><?php  _e("Preload Info","cwppos"); ?></a>
+            <a href="http://themeisle.com/plugins/wp-product-review-pro-add-on/" target="_blank" class="preload_info_upsell"><?php  _e("Preload Info","cwppos"); ?></a>
         <?php  } ?>
     </div><!-- end .review-settings-notice -->
     <div class="review-settings-group">

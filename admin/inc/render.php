@@ -247,7 +247,7 @@
                         } else {
                         	$html .= "* Currently set to the default styling</span>";
                         } } else {
-                        	$html .= '<span style="color:red;">'. __("You need the custom icon add-on in order to change this.","cwppos") . "</span>";
+                        	$html .= '<span style="color:red;">'. __('You need the custom icon <a style="color:red;" href="http://themeisle.com/plugins/wppr-custom-icon/" target="_blank" >add-on</a> in order to change this.',"cwppos") . "</span>";
                     	}
                     $html .= "</li>";
 
