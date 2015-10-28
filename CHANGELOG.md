@@ -1,5 +1,14 @@
 
 
+### 2.6.9 - 28/10/2015
+
+ Changes: 
+
+
+ * Fixed review image styling problem
+Added filters for review name, pros/cons and options
+
+
 ### 2.6.8 - 22/10/2015
 
  Changes: 
