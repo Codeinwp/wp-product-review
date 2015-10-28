@@ -27,6 +27,14 @@ Other notable features :
 * Unlimited Options
 * PROs/ Cons
 
+### Knowledgebase
+
+1. How to change the html format of the review name -> http://docs.themeisle.com/article/130-how-to-change-the-html-format-of-the-review-name
+2. How to change dynamically the name of the review -> http://docs.themeisle.com/article/131-how-to-change-dynamically-the-name-of-the-review
+3. How to change dynamically the option name format -> http://docs.themeisle.com/article/132-how-to-change-dynamically-the-option-name-format
+4. How to change dynamically the pros/cons heading text -> http://docs.themeisle.com/article/133-how-to-change-dynamically-the-pros-cons-heading-text
+
+
 ### User Review Enabled
 
 1. This review plugin helps you to interact with your users with improved comments, you can expose your reviews in a easier to read way and will help you generate money by adding a buy now button in your post. Rich snippets are also supported.
@@ -63,6 +71,12 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+
+**New in 2.6.9**
+
+ - Improved design of the featured image
+ - Added filters heading tags for review name, option name, pros headings and cons headings.
+
 **New in 2.6.8**
 
  - Improved responsive design of the review
