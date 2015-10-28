@@ -98,6 +98,5 @@ jQuery(document).ready(function($) {
             }
         });
     });
-    $(".wppr-product-image").css({"visibility":"visible"});
 
 });

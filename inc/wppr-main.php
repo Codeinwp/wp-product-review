@@ -105,7 +105,8 @@ function cwppos_show_review($id = "") {
 		$return_string  = '<section id="review-statistics"  class="article-section" itemscope itemtype="http://schema.org/Review">
                             <div class="review-wrap-up  cwpr_clearfix" >
                                 <div class="cwpr-review-top cwpr_clearfix" itemprop="itemReviewed">
-                                    <h2 class="cwp-item"  itemprop="name"  >'.get_post_meta($id, "cwp_rev_product_name", true).'</h2>
+                                	' . apply_filters("wppr_review_product_name", $id) . '
+
                                     <span class="cwp-item-price cwp-item"   >'.get_post_meta($id, "cwp_rev_price", true).'</span>
                                 </div><!-- end .cwpr-review-top -->
                                 <div class="review-wu-left">
@@ -129,7 +130,7 @@ function cwppos_show_review($id = "") {
 		} else {
 			$product_image = wppr_get_image_id($id);
 		}
-		$return_string .= '<a href="'.$feat_image.'" '.$lightbox.'  rel="nofollow"><img  src="'.$product_image.'" alt="'. get_post_meta($id, "cwp_rev_product_name", true).'" class="photo photo-wrapup wppr-product-image" style="visibility:hidden"/></a>';
+		$return_string .= '<a href="'.$feat_image.'" '.$lightbox.'  rel="nofollow"><img  src="'.$product_image.'" alt="'. get_post_meta($id, "cwp_rev_product_name", true).'" class="photo photo-wrapup wppr-product-image"  /></a>';
 
 		$rating = cwppos_calc_overall_rating($id);
 
@@ -170,7 +171,7 @@ function cwppos_show_review($id = "") {
 			if (!empty(${'option'.$i.'_content'}) && isset($rating['option'.$i]) && (!empty($rating['option'.$i]) || $rating['option'.$i] === '0' ) &&  strtoupper(${'option'.$i.'_content'}) != 'DEFAULT FEATURE '.$i) {
 				$return_string .= '<div class="rev-option" data-value='.$rating['option'.$i].'>
                                             <div class="cwpr_clearfix">
-                                                <h3>'. ${'option'.$i.'_content'}.'</h3>
+                                                '.apply_filters("wppr_option_name_html",$id, ${'option'.$i.'_content'} ).'
                                                 <span>'.$rating['option'.$i].'/10</span>
                                             </div>
                                             <ul class="cwpr_clearfix"></ul>
@@ -201,8 +202,7 @@ function cwppos_show_review($id = "") {
 
 		}
 
-		$return_string .=  '<h2>'.__(cwppos("cwppos_pros_text"), "cwppos").'</h2>
-                                    <ul>';
+		$return_string .=  apply_filters( 'wppr_review_pros_text',$id, __(cwppos("cwppos_pros_text"), "cwppos")).' <ul>';
 		for($i=1;$i<=cwppos("cwppos_option_nr");$i++) {
 			if(!empty(${"pro_option_".$i})) {
 				$return_string .=  '   <li>- '.${"pro_option_".$i}.'</li>';
@@ -212,7 +212,7 @@ function cwppos_show_review($id = "") {
 		$return_string .= '     </ul>
                                 </div><!-- end .pros -->
                                 <div class="cons">';
-		$return_string .=' <h2>'.__(cwppos("cwppos_cons_text"), "cwppos").'</h2>  <ul>';
+		$return_string .= apply_filters( 'wppr_review_cons_text',$id, __(cwppos("cwppos_cons_text"), "cwppos")).' <ul>';
 
 		for($i=1;$i<=cwppos("cwppos_option_nr");$i++){
 			if(!empty(${"cons_option_".$i})) {
