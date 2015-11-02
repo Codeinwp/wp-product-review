@@ -169,15 +169,15 @@
 
 #review-statistics .review-wrap-up .cwpr-review-top .cwp-item-category i { color:#e3e3e3; margin-right: 5px;}
 
-#review-statistics .review-wrap-up .review-wu-left {width: 48%; float: left;margin-top:10px;  }
+#review-statistics .review-wrap-up .review-wu-left {width: 48%; float: left;margin-top:0px;  }
 
-#review-statistics .review-wrap-up .review-wu-left .rev-wu-image {text-align:center; float: left; width: 40%;height:150px;  overflow: hidden; border-top: none;padding:0;margin-left: 5%;margin-right: 5%;}
+#review-statistics .review-wrap-up .review-wu-left .rev-wu-image {text-align:center; float: left; width: 40%;height:150px;  overflow: hidden; border-top: none; padding:10px 0 0;margin-left: 5%;margin-right: 5%;}
 
 #review-statistics .review-wrap-up .review-wu-left .rev-wu-image img { height: auto;width:auto; box-shadow:none;}
 
 #review-statistics .review-wrap-up .review-wu-left .review-wu-grade {width: 50%;
 	box-sizing: border-box; text-align:center;
-	height: 149px; display:block; float: left; border:1px solid #e6e6e6; border-top:none;position: relative; border-bottom:none;}
+	height: 150px; display:block; float: left; border:1px solid #e6e6e6; border-top:none;position: relative; padding-top: 10px; border-bottom:none;}
 
 #review-statistics  .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart { position: relative; margin:0px;float:none;display:inline-block;}
 
@@ -361,7 +361,7 @@ and (max-device-width : 321px) {
 		margin-left:10px;
 	}
 	#review-statistics .review-wu-bars {
-		padding : 0 5% 10px 3%;
+		padding: 0 4.9% 10px 5%;
 	}
 
 	#review-statistics .review-wrap-up .review-wu-left {
