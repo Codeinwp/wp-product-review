@@ -1,5 +1,14 @@
 
 
+### 2.7 - 05/11/2015
+
+ Changes: 
+
+
+ * Fixed responsive design bug
+Fixed border customization bug for review box
+
+
 ### 2.6.9 - 28/10/2015
 
  Changes: 
