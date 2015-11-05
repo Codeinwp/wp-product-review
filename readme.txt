@@ -72,6 +72,11 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 
 == Changelog ==
 
+**New in 2.7**
+
+ - Fixed responsive design bugs.
+ - Fixed border color and width customization for the review box
+
 **New in 2.6.9**
 
  - Improved design of the featured image
