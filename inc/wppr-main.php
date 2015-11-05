@@ -374,7 +374,7 @@ function cwppos_dynamic_stylesheet() {
 	$options = cwppos();
 	?>
 	<style type="text/css">
-		#review-statistics .review-wrap-up .cwpr-review-top { border-top: <?php  echo $options['cwppos_reviewboxbd_width']; ?>px solid <?php  echo $options['cwppos_reviewboxbd_color']; ?>;  }
+		#review-statistics .review-wrap-up div.cwpr-review-top { border-top: <?php  echo $options['cwppos_reviewboxbd_width']; ?>px solid <?php  echo $options['cwppos_reviewboxbd_color']; ?>;  }
 		.user-comments-grades .comment-meta-grade-bar,
 		#review-statistics  .review-wu-bars ul li{
 			background: <?php  echo $options['cwppos_rating_default']; ?>;
