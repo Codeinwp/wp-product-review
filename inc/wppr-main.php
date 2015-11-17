@@ -69,7 +69,11 @@ function cwppos_calc_overall_rating($id){
 
 		}
 		if(!empty(${'option'.$i.'_grade'})|| ${'option'.$i.'_grade'} === '0') {
-			${'option'.$i.'_grade'} = round((${'option'.$i.'_grade'}*(100-$infl) + ${'comment_meta_option_'.$i}*$infl)/100);
+			//if($infl !== 0 ){
+				${'option'.$i.'_grade'} = round((${'option'.$i.'_grade'}*(100-$infl) + ${'comment_meta_option_'.$i}*$infl)/100);
+			//}else{
+
+			//}
 			$iter++;
 			$rating['option'.$i] = round(${'option'.$i.'_grade'});
 			$overall_score+=${'option'.$i.'_grade'};
@@ -148,7 +152,7 @@ function cwppos_show_review($id = "") {
                                 <div class="review-wu-grade">
                                     <div class="cwp-review-chart">
                                     <meta itemprop="datePublished" datetime="'.get_the_time("Y-m-d", $id).'">
-                                    <span itemprop="author" itemscope itemtype="http://schema.org/Person" display="none" >
+                                    <span itemprop="author" itemscope itemtype="http://schema.org/Person" style="display:none" >
                                          <meta itemprop="name"  content="'.get_the_author().'">
                                     </span>';
 		if(cwppos("cwppos_infl_userreview") == 0) {
@@ -167,12 +171,11 @@ function cwppos_show_review($id = "") {
                                 <div class="review-wu-bars">';
 
 		for($i=1; $i<=cwppos("cwppos_option_nr"); $i++) {
-
 			if (!empty(${'option'.$i.'_content'}) && isset($rating['option'.$i]) && (!empty($rating['option'.$i]) || $rating['option'.$i] === '0' ) &&  strtoupper(${'option'.$i.'_content'}) != 'DEFAULT FEATURE '.$i) {
 				$return_string .= '<div class="rev-option" data-value='.$rating['option'.$i].'>
                                             <div class="cwpr_clearfix">
                                                 '.apply_filters("wppr_option_name_html",$id, ${'option'.$i.'_content'} ).'
-                                                <span>'.$rating['option'.$i].'/10</span>
+                                                <span>'.round($rating['option'.$i]/10).'/10</span>
                                             </div>
                                             <ul class="cwpr_clearfix"></ul>
                                         </div>';
@@ -275,6 +278,9 @@ function cwppos_pac_admin_init() {
 function wppr_get_image_id($post_id, $image_url = "", $size = "thumbnail" ) {
 
 	global $wpdb;
+	//filter for image size;
+	$size = apply_filters("wppr_review_image_size",$size,$post_id);
+
 	if(!empty($image_url) && $image_url !== false ) {
 
 		$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url ));

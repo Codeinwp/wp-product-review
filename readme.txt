@@ -33,6 +33,7 @@ Other notable features :
 2. How to change dynamically the name of the review -> http://docs.themeisle.com/article/131-how-to-change-dynamically-the-name-of-the-review
 3. How to change dynamically the option name format -> http://docs.themeisle.com/article/132-how-to-change-dynamically-the-option-name-format
 4. How to change dynamically the pros/cons heading text -> http://docs.themeisle.com/article/133-how-to-change-dynamically-the-pros-cons-heading-text
+5. How to change dynamically the image size for review -> http://docs.themeisle.com/article/135-how-to-change-dynamically-the-image-size-for-review
 
 
 ### User Review Enabled
@@ -71,6 +72,13 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+
+**New in 2.7.1**
+
+ - Fixed some design issues.
+ - Fixed rating problem on some instalation when display the numerator greater than denominator
+ - Added wppr_review_image_size for filter the image size;
+
 
 **New in 2.7**
 
