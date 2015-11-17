@@ -1,5 +1,15 @@
 
 
+### 2.7.1 - 17/11/2015
+
+ Changes: 
+
+
+ * Fixed some design issues.
+Fixed rating problem on some instalation when display the numerator greater than denominator
+Added wppr_review_image_size for filter the image size;
+
+
 ### 2.7 - 05/11/2015
 
  Changes: 
