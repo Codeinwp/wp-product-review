@@ -91,10 +91,6 @@ function cwppos_calc_overall_rating($id){
 function cwppos_show_review($id = "") {
 	global $post;
 	if ( post_password_required($post) ) return false;
-	wp_enqueue_style( 'cwp-pac-frontpage-stylesheet', WPPR_URL.'/css/frontpage.css',array(),WPPR_LITE_VERSION );
-
-	wp_enqueue_script( 'pie-chart', WPPR_URL.'/javascript/pie-chart.js',array("jquery"), WPPR_LITE_VERSION,true );
-	wp_enqueue_script( 'cwp-pac-main-script', WPPR_URL.'/javascript/main.js',array("jquery",'pie-chart'),WPPR_LITE_VERSION,true );
 
 	if ($id=="")
 		$id = $post->ID;
@@ -105,6 +101,9 @@ function cwppos_show_review($id = "") {
 
 	if(@$cwp_review_stored_meta['cwp_meta_box_check'][0]  == 'Yes' ) {
 
+		wp_enqueue_style( 'cwp-pac-frontpage-stylesheet', WPPR_URL.'/css/frontpage.css',array(),WPPR_LITE_VERSION );
+		wp_enqueue_script( 'pie-chart', WPPR_URL.'/javascript/pie-chart.js',array("jquery"), WPPR_LITE_VERSION,true );
+		wp_enqueue_script( 'cwp-pac-main-script', WPPR_URL.'/javascript/main.js',array("jquery",'pie-chart'),WPPR_LITE_VERSION,true );
 
 		$return_string  = '<section id="review-statistics"  class="article-section" itemscope itemtype="http://schema.org/Review">
                             <div class="review-wrap-up  cwpr_clearfix" >
