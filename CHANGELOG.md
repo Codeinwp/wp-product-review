@@ -1,5 +1,15 @@
 
 
+### 2.7.2 - 12/01/2016
+
+ Changes: 
+
+
+ * fixed styling on some themes for review comment bars
+fixed enque of styles and scripts on pages where review is not present
+ * fixed alt tags for images in widgets
+
+
 ### 2.7.1 - 17/11/2015
 
  Changes: 
