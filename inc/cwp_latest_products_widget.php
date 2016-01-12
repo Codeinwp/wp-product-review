@@ -109,6 +109,7 @@ array( 'description' => __( 'This widget displays the latest products based on t
 		while($cwp_latest_products_loop->have_posts()) : $cwp_latest_products_loop->the_post();
 
 			$product_image = wppr_get_image_id(get_the_ID(),get_post_meta(get_the_ID(), "cwp_rev_product_image", true),'wppr_widget_image');
+			$product_title = ($post_type==true) ? get_post_meta(get_the_ID(), "cwp_rev_product_name", true)  :  get_the_title();
 			?>
 
 
@@ -119,11 +120,11 @@ array( 'description' => __( 'This widget displays the latest products based on t
 		if ($show_image==true&&!empty($product_image)) {
 		?>
 
-		<img class="cwp_rev_image wppr-col" src="<?php echo $product_image;?>"\>
+		<img class="cwp_rev_image wppr-col" src="<?php echo $product_image;?>" alt="<?php echo $product_title; ?>"\>
 		<?php } ?>
 		<a class="wppr-col" href="<?php the_permalink(); ?>">
 
-		<?php if ($post_type==true) { $titlep = get_post_meta($cwp_latest_products_loop->post->ID, "cwp_rev_product_name", true);echo $titlep; } else the_title(); ?>
+			<?php echo $product_title; ?>
 
 		</a>
 

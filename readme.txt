@@ -3,7 +3,7 @@ Contributors: codeinwp,marius2012,marius_codeinwp,hardeepasrani,themeisle,Madali
 Tags:  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin,  google rating, product review, rating, review, star rating, user rating, wp rating, wp review,  google, hreview,rich snippets,seo,snippet
 Author URI: https://themeisle.com
 Requires at least: 3.5
-Tested up to: 4.3
+Tested up to: 4.4.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -72,6 +72,12 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+
+**New in 2.7.2**
+
+ - Fixed design issues in comments slider
+ - Fixed enque of media files when review is not available
+ - Fixed alt tags for images in the widgets
 
 **New in 2.7.1**
 
