@@ -23,7 +23,7 @@ jQuery(document).ready(function($) {
             trackColorRight = '#ebebeb';
         }
 
-
+        
         $('.cwp-review-percentage').cwp_easyPieChart({
             barColor: function(percent) {
                 return returnColor(percent);
@@ -32,8 +32,9 @@ jQuery(document).ready(function($) {
             scaleColor: false,
             lineCap: 'butt',
             rotate: 0,
-            lineWidth: 15,
+            lineWidth: 15 * Math.min($('.review-wrap-up .rev-wu-image').width(),150)/140,
             animate: 1,
+            size : Math.min($('.review-wrap-up .rev-wu-image').width(),150)*0.8,
             onStep: function(value) {
                 var c = returnColor(value);
                 
@@ -92,11 +93,12 @@ jQuery(document).ready(function($) {
         $(this).slider({
             min: 0,
             max: 100,
-            value: 0,
+            value: 4,
             slide: function(event, ui) {
                 $(comm_meta_input).val(ui.value / 10);
             }
         });
     });
+    
 
 });

@@ -1,7 +1,7 @@
 === Plugin Name ===
 Contributors: codeinwp,marius2012,marius_codeinwp,hardeepasrani,themeisle,Madalin_ThemeIsle
 Tags:  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin,  google rating, product review, rating, review, star rating, user rating, wp rating, wp review,  google, hreview,rich snippets,seo,snippet
-Author URI: https://themeisle.com
+Author URI: http://themeisle.com
 Requires at least: 3.5
 Tested up to: 4.4.1
 Stable tag: trunk
@@ -54,8 +54,7 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 **Fortcoming**
 
 - Direct amazon integration
-- Automatic landing page generation from the reviewed products
-- Easily embed multiple products in posts/pages
+
 
 **WP Product Review provides following features**
 
@@ -72,6 +71,17 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+
+**New in 2.7.3**
+
+ - Improved layout based on $content_width so make sure this is set correctly
+ - Improved some settings description
+ - Fixed lightbox image logic
+ - Open image affiliate link in new tab
+ - Fixed various issues with comment sliders
+ - Pre-fill features from the latest edited post in the same category
+ - Pre-fill image settings and aff_button text from latest edited post in the same category
+ - Optimize the space on post review metaboxes
 
 **New in 2.7.2**
 

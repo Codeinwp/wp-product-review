@@ -9,7 +9,50 @@ function cwp_review_meta_boxes(){
     wp_nonce_field( 'cwp_product_review_meta_box_nonce', 'cwp_meta_box_nonce' );
     $cwp_review_stored_meta = get_post_meta( $post->ID );
     $check = isset( $cwp_review_stored_meta['cwp_meta_box_check'][0] ) ? esc_attr( $cwp_review_stored_meta['cwp_meta_box_check'][0] ) : "No";
-    $checkset = isset( $cwp_review_stored_meta['cwp_image_link'][0] ) ? esc_attr( $cwp_review_stored_meta['cwp_image_link'][0] ) : "image";
+    
+    $query_args = array(
+
+    'posts_per_page'=> '1', // limit it to the specified no of posts
+    'post_type' =>  "any",
+    'post__not_in' => get_option('sticky_posts'),
+    'meta_key' => 'option_overall_score',
+
+        'meta_query'             => array(
+
+        array(
+
+            'key'       => 'cwp_meta_box_check',
+
+            'value'     => 'Yes',
+
+
+        ),
+
+        ),
+        'orderby'   => 'date',
+        'order'     => 'DESC'
+
+        );
+
+
+
+    $cwp_latest_products_loop = new WP_Query( $query_args );
+    while($cwp_latest_products_loop->have_posts()) : $cwp_latest_products_loop->the_post();
+    $id= get_the_ID();
+
+    endwhile;
+    wp_reset_postdata();
+    $p_meta = get_post_meta ($id);
+
+    if (isset( $cwp_review_stored_meta['cwp_image_link'][0])) {
+        $checkset = esc_attr( $cwp_review_stored_meta['cwp_image_link'][0]);
+    }
+    else {
+        $checkset = isset( $p_meta['cwp_image_link'][0] ) ? esc_attr( $p_meta['cwp_image_link'][0] ) : "image";
+    
+    }
+    //$checkset = isset( $cwp_review_stored_meta['cwp_image_link'][0] ) ?  ) : "image";
+
     ?>
     <p class="isReview<?php echo $check; ?>">
         <label for="my_meta_box_check">Is this a review post ? </label>
@@ -17,11 +60,10 @@ function cwp_review_meta_boxes(){
         <label for="my_meta_box_check">Yes</label>
         <input type="radio" id="cwp_meta_box_check_no" name="cwp_meta_box_check" value="No" <?php  checked( $check, 'No' ); ?> />
         <label for="my_meta_box_check" style="margin-right:30px;">No</label>
-        <?php if(!shortcode_exists("P_REVIEW")): ?>
-            <br/><br/> <label  > You can use the shortcode <b>[P_REVIEW]</b> to show a review you already made or <b>[wpr_landing]</b> to display a comparision table of them. The shortcodes are available on the <a target="_blank" href="http://themeisle.com/plugins/wp-product-review-pro-add-on/">Pro Bundle</a></label>
-        <?php endif; ?>
+        
         </p>
     <div class="product-review-meta-<?php  echo $check; ?>">
+
     <div class="review-settings-notice">
         <h4><?php  _e("Product Details", "cwppos"); ?></h4>
         <p style="margin:0;"><?php  _e("Specify the general details for the reviewed product.", "cwppos"); ?></p>
@@ -46,11 +88,11 @@ function cwp_review_meta_boxes(){
                     <p><?php _e("*If no image is provided, featured image is used"); ?>
                 </li>
                 <li class="cwp_image_link">
-                    <label for="cwp_image_link_aff">Product Image link : </label>
+                    <label for="cwp_image_link_aff">Product Image Click  : </label>
                     <input type="radio" id="cwp_image_link_aff" name="cwp_image_link" value="image" <?php  checked( $checkset, 'image' ); ?> />
-                    <label for="cwp_image_link_image">Featured Image</label>
+                    <label for="cwp_image_link_image">Show Whole Image</label>
                     <input type="radio" id="cwp_image_link_image" name="cwp_image_link" value="link" <?php  checked( $checkset, 'link' ); ?> />
-                    <label for="my_meta_box_check">Affiliate link</label>
+                    <label for="my_meta_box_check">Open Affiliate link</label>
                 </li>
                 <li>
                     <label for="cwp_product_affiliate_text"><?php  _e("Affiliate Button Text", "cwppos"); ?></label>
@@ -58,6 +100,9 @@ function cwp_review_meta_boxes(){
 
                     if(isset($cwp_review_stored_meta['cwp_product_affiliate_text'][0])) {
                         echo $cwp_review_stored_meta['cwp_product_affiliate_text'][0];
+                    } else {
+                        if(isset($p_meta['cwp_product_affiliate_text'][0])) 
+                            echo $p_meta['cwp_product_affiliate_text'][0];
                     }
 
                     ?>"/>
@@ -71,9 +116,15 @@ function cwp_review_meta_boxes(){
                     }
 
                     ?>"/>
+                    <?php 
+                    if (!isset($cwp_review_stored_meta['cwp_product_affiliate_text2'][0])) {
+                        $hide_button2 = true;
+                        ?>
+                        <a href="#" id="cwp_add_button" title="Add new button">+</a>
+                   <?php } ?>
                 </li>
 
-                                <li>
+                <li class="<?php if ($hide_button2) echo 'cwp_hide_button2';?>" >
                     <label for="cwp_product_affiliate_text2"><?php  _e("Affiliate Button Text 2", "cwppos"); ?></label>
                     <input type="text" name="cwp_product_affiliate_text2" id="cwp_product_affiliate_text2" value="<?php
 
@@ -83,7 +134,7 @@ function cwp_review_meta_boxes(){
 
                     ?>"/>
                 </li>
-                <li>
+                <li class="<?php if ($hide_button2) echo 'cwp_hide_button2';?>" >
                     <label for="cwp_product_affiliate_link2"><?php  _e("Affiliate Link 2", "cwppos"); ?></label>
                     <input type="text" name="cwp_product_affiliate_link2" id="cwp_product_affiliate_link2" value="<?php
 
@@ -134,6 +185,11 @@ function cwp_review_meta_boxes(){
             if(isset($cwp_review_stored_meta['option_'.$i.'_content'][0])) {
                 echo $cwp_review_stored_meta['option_'.$i.'_content'][0];
             }
+            else {
+                //Get latest modified post from the same category id
+                if (isset($p_meta['option_'.$i.'_content'][0]))
+                    echo $p_meta['option_'.$i.'_content'][0];
+            }
 
             ?>"/>
             <input type="text" name="option_<?php echo $i;?>_grade" class="option_grade" placeholder="Grade" value="<?php
@@ -147,6 +203,7 @@ function cwp_review_meta_boxes(){
         <?php } ?>
    
     </div><!-- end .review-settings group -->
+    <div class="cwp_proscons">
     <div class="review-settings-notice">
         <h4><?php  _e("Pro Features", "cwppos"); ?></h4>
         <p style="margin:0;"><?php  _e("Insert product's pro features below.", "cwppos"); ?></p>
@@ -167,6 +224,8 @@ function cwp_review_meta_boxes(){
     <?php } ?>
      
     </div><!-- end .review-settings group -->
+</div>
+<div class="cwp_proscons">
     <div class="review-settings-notice">
         <h4><?php  _e("Cons Features", "cwppos"); ?></h4>
         <p style="margin:0;"><?php  _e("Insert product's cons features below.", "cwppos"); ?></p>
@@ -185,8 +244,13 @@ function cwp_review_meta_boxes(){
             ?>"/>
         </div><!-- end .review-settings-group option -->
     <?php } ?>
+            
      
     </div><!-- end .review-settings group -->
+</div>
+<?php if(!shortcode_exists("P_REVIEW")): ?>
+             <label  > You can use the shortcode <b>[P_REVIEW]</b> to show a review you already made or <b>[wpr_landing]</b> to display a comparision table of them. The shortcodes are available on the <a target="_blank" href="http://themeisle.com/plugins/wp-product-review-pro-add-on/">Pro Bundle</a><br/><br/></label>
+        <?php endif; ?>
     </div>
 <?php
 }
