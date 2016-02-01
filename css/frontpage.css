@@ -120,7 +120,7 @@
 
 #review-statistics  .review-wrap-up { margin-top: 20px; border:1px solid #e6e6e6; border-top: none;}
 
-#review-statistics  .review-wu-bars h3, .review-wu-bars span { font-family: "Open Sans"; font-size: 13px !important;  text-transform: uppercase;  font-style: italic; line-height: 18px; margin: 0; padding: 0;  }
+#review-statistics  .review-wu-bars h3, .review-wu-bars span { font-family: "Open Sans"; font-size: 13px !important;  text-transform: uppercase;  font-style: italic; line-height: 2; margin: 0; padding: 0;  }
 
 #review-statistics  .review-wu-bars h3 {float:left;}
 
@@ -190,9 +190,9 @@
 #review-statistics .review-wrap-up .review-wu-right h2 { font-family: "Lato"; font-size: 15px; text-transform: uppercase; font-weight: 800; margin-bottom: 0;}
 
 #review-statistics .review-wrap-up .review-wu-right ul li {
-	font-size: 14px;padding-left: 0;
+	font-size: 16px;padding-left: 0;
 	margin: 0 0 2%;
-	font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Lato, Arial, sans-serif; }
+	font-family: "Lato"; }
 
 #review-statistics .review-wrap-up .review-wu-right ul li {
 

@@ -42,6 +42,7 @@ function cwp_review_meta_boxes(){
 
     endwhile;
     wp_reset_postdata();
+    wp_reset_query();
     $p_meta = get_post_meta ($id);
 
     if (isset( $cwp_review_stored_meta['cwp_image_link'][0])) {
