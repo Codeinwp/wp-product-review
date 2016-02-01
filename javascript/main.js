@@ -23,7 +23,8 @@ jQuery(document).ready(function($) {
             trackColorRight = '#ebebeb';
         }
 
-        
+        p_image_width = Math.min($('.review-wrap-up .rev-wu-image').width();
+        if (p_image_width==0)   p_image_width = 50;
         $('.cwp-review-percentage').cwp_easyPieChart({
             barColor: function(percent) {
                 return returnColor(percent);

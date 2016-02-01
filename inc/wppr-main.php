@@ -385,12 +385,14 @@ function cwppos_dynamic_stylesheet() {
 	$options = cwppos();
 	//Get theme content width or plugin setting content width 
 	global $content_width;
-	$c_width = 840;
+	$c_width = 700;
 	if ($options['cwppos_widget_size']!="")
 		$c_width = $options['cwppos_widget_size'];
 	else 
 		$c_width = $content_width;
 	
+	if ($c_width<200)
+		$c_width = 600;
 
 	$f_img_size = min(150,$c_width*0.51*0.4);
 	$h_tleft = $f_img_size +10;
