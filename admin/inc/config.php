@@ -149,7 +149,7 @@
 
 									"name"=>"Content width",
 
-									"description"=>"Write your content width in pixels in this format : 600 if you want to limit the review widget width.",
+									"description"=>"Write your content width in pixels in this format : 600 if you want to limit the review box width.",
 
 									"id"=>"cwppos_widget_size",
 
@@ -160,9 +160,9 @@
 
 									"type"=>"select",
 
-									"name"=>"Lighbox images",
+									"name"=>"Disable Lighbox images",
 
-									"description"=>"Disable lightbox effect on product images",
+									"description"=>"Disable lightbox effect on product images (increase loading speed)",
 
 									"id"=>"cwppos_lighbox",
 									"options"=>array("yes"=>"Yes","no"=>"No"),
@@ -174,9 +174,9 @@
 
 									"type"=>"select",
 
-									"name"=>"Font Awesome",
+									"name"=>"Disable Font Awesome",
 
-									"description"=>"Disable Font Awesome for websites that already are including it",
+									"description"=>"Disable Font Awesome for websites that already are including it (increase loading speed)",
 
 									"id"=>"cwppos_fontawesome",
 									"options"=>array("yes"=>"Yes","no"=>"No"),

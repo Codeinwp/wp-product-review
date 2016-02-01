@@ -118,22 +118,28 @@ function cwppos_show_review($id = "") {
 		$product_image = get_post_meta($id, "cwp_rev_product_image", true);
 		$imgurl = get_post_meta($id, "cwp_image_link", true);
 		$lightbox = "";
+		$feat_image = wp_get_attachment_url( get_post_thumbnail_id( $id ) );
+		
+		if(!empty($product_image)) {
+			$product_image_cropped  = wppr_get_image_id($id,$product_image);
+		} else {
+			$product_image_cropped = wppr_get_image_id($id);
+			$product_image = $feat_image;
+		}
+
 		if ($imgurl =="image") {
-			$feat_image = wp_get_attachment_url( get_post_thumbnail_id( $id ) );
+		
+			//no means no disabled
 			if(cwppos("cwppos_lighbox") == "no"){
-				$lightbox   = 'data-lightbox="' . $feat_image . '"';
+				$lightbox   = 'data-lightbox="' . $product_image . '"';
 				wp_enqueue_script("img-lightbox",WPPR_URL.'/javascript/lightbox.min.js',array(), WPPR_LITE_VERSION, array());
 				wp_enqueue_style("img-lightbox-css", WPPR_URL.'/css/lightbox.css' , array(), WPPR_LITE_VERSION  );
 			}
 		}else{
-			$feat_image = get_post_meta($id, "cwp_product_affiliate_link", true);
+			$product_image = get_post_meta($id, "cwp_product_affiliate_link", true);
 		}
-		if(!empty($product_image)) {
-			$product_image  = wppr_get_image_id($id,$product_image);
-		} else {
-			$product_image = wppr_get_image_id($id);
-		}
-		$return_string .= '<a href="'.$feat_image.'" '.$lightbox.'  rel="nofollow"><img  src="'.$product_image.'" alt="'. get_post_meta($id, "cwp_rev_product_name", true).'" class="photo photo-wrapup wppr-product-image"  /></a>';
+		//print_r($product_image);
+		$return_string .= '<a href="'.$product_image.'" '.$lightbox.'  rel="nofollow" target="_blank"><img  src="'.$product_image_cropped.'" alt="'. get_post_meta($id, "cwp_rev_product_name", true).'" class="photo photo-wrapup wppr-product-image"  /></a>';
 
 		$rating = cwppos_calc_overall_rating($id);
 
@@ -377,8 +383,37 @@ function cwp_addons_menu() {
 
 function cwppos_dynamic_stylesheet() {
 	$options = cwppos();
+	//Get theme content width or plugin setting content width 
+	global $content_width;
+	$c_width = 840;
+	if ($options['cwppos_widget_size']!="")
+		$c_width = $options['cwppos_widget_size'];
+	else 
+		$c_width = $content_width;
+	
+
+	$f_img_size = min(150,$c_width*0.51*0.4);
+	$h_tleft = $f_img_size +10;
+	$chart_size = 0.8 * $f_img_size;
+
 	?>
 	<style type="text/css">
+
+
+		@media (min-width: 820px) {
+			#review-statistics .review-wrap-up .review-wu-left .rev-wu-image, #review-statistics .review-wrap-up .review-wu-left .review-wu-grade { height:<?php echo $h_tleft;?>px;}
+
+			#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart .cwp-review-percentage {
+
+				margin-top: <?php echo $f_img_size*0.1;?>%;
+			}
+
+			#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart span {
+				font-size: <?php echo round(30*$f_img_size/140);?>px;
+			}
+
+		}
+		
 		#review-statistics .review-wrap-up div.cwpr-review-top { border-top: <?php  echo $options['cwppos_reviewboxbd_width']; ?>px solid <?php  echo $options['cwppos_reviewboxbd_color']; ?>;  }
 		.user-comments-grades .comment-meta-grade-bar,
 		#review-statistics  .review-wu-bars ul li{
@@ -423,12 +458,19 @@ function cwppos_dynamic_stylesheet() {
 		}
 		<?php  if($options['cwppos_show_icon'] == 'yes') { ?>
 		div.affiliate-button a span {
-			background:url("<?php  echo WPPR_URL ?>"/images/cart-icon.png") no-repeat left center;
+			background:url("<?php  echo WPPR_URL; ?>/images/cart-icon.png") no-repeat left center;
 		}
 		div.affiliate-button a:hover span{
 			background:url("<?php  echo WPPR_URL; ?>/images/cart-icon-hover.png") no-repeat left center;
 		}
 		<?php  } ?>
+
+		<?php if($options['cwppos_show_userreview'] == 'yes') { ?>
+		.commentlist .comment-body p {
+			clear:left;
+		}
+
+		<?php } ?>
 	</style>
 	<script type="text/javascript">
 		var c1 = "<?php echo $options['cwppos_rating_weak'] ; ?>";

@@ -50,6 +50,13 @@ jQuery(document).ready(function(){
         }
     });
 
+    jQuery('#cwp_add_button').click(function(e){
+        e.preventDefault();
+        jQuery('.cwp_hide_button2').show();
+        jQuery(this).hide();
+        return false;
+    })
+
 
 
 

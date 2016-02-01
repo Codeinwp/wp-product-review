@@ -490,3 +490,15 @@ a.preload_info:hover, a.preload_info_upsell:hover {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+#cwp_add_button{
+    font-size:20px;
+    text-decoration: none;
+    margin-left:5px;
+}
+.cwp_hide_button2 {
+    display:none;
+}
+.cwp_proscons {
+    float:left;
+    width:50%;
+}
