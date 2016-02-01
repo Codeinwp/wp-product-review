@@ -297,6 +297,7 @@ function wppr_get_image_id($post_id, $image_url = "", $size = "thumbnail" ) {
 	$image_thumb = "";
 	if(!empty($image_id)){
 		$image_thumb = wp_get_attachment_image_src($image_id, $size);
+		
 		if( $size !== 'thumbnail' ) {
 			if($image_thumb[0] === $image_url){
 				$image_thumb = wp_get_attachment_image_src($image_id, "thumbnail");

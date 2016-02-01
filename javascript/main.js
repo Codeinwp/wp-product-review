@@ -23,7 +23,7 @@ jQuery(document).ready(function($) {
             trackColorRight = '#ebebeb';
         }
 
-        p_image_width = Math.min($('.review-wrap-up .rev-wu-image').width();
+        p_image_width = $('.review-wrap-up .rev-wu-image').width();
         if (p_image_width==0)   p_image_width = 50;
         $('.cwp-review-percentage').cwp_easyPieChart({
             barColor: function(percent) {
@@ -33,9 +33,9 @@ jQuery(document).ready(function($) {
             scaleColor: false,
             lineCap: 'butt',
             rotate: 0,
-            lineWidth: 15 * Math.min($('.review-wrap-up .rev-wu-image').width(),150)/140,
+            lineWidth: 15 * Math.min(p_image_width,150)/140,
             animate: 1,
-            size : Math.min($('.review-wrap-up .rev-wu-image').width(),150)*0.8,
+            size : Math.min(p_image_width,150)*0.8,
             onStep: function(value) {
                 var c = returnColor(value);
                 
