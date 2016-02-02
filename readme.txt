@@ -72,6 +72,13 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 
 == Changelog ==
 
+**New in 2.7.5**
+
+ - Fixed WP_query issue in the wp backed
+ - Added a minium content_width, since some themes set this wrong
+ - Fixed responsive issues when content_width is set
+ - Fixed circles widget issue
+
 **New in 2.7.3**
 
  - Improved layout based on $content_width so make sure this is set correctly

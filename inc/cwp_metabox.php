@@ -36,14 +36,14 @@ function cwp_review_meta_boxes(){
 
 
 
-    $cwp_latest_products_loop = new WP_Query( $query_args );
-    while($cwp_latest_products_loop->have_posts()) : $cwp_latest_products_loop->the_post();
-    $id= get_the_ID();
+    $cwp_latest_products_loop = get_posts( $query_args );
+    foreach ( $cwp_latest_products_loop as $w_post ) : setup_postdata( $w_post ); 
+    $wppr_id= $w_post->ID;
 
-    endwhile;
+    endforeach;
     wp_reset_postdata();
-    wp_reset_query();
-    $p_meta = get_post_meta ($id);
+    
+    $p_meta = get_post_meta ($wppr_id);
 
     if (isset( $cwp_review_stored_meta['cwp_image_link'][0])) {
         $checkset = esc_attr( $cwp_review_stored_meta['cwp_image_link'][0]);

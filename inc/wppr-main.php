@@ -395,7 +395,7 @@ function cwppos_dynamic_stylesheet() {
 	if ($c_width<200)
 		$c_width = 600;
 
-	$f_img_size = min(150,$c_width*0.51*0.4);
+	$f_img_size = min(180,$c_width*0.51*0.4);
 	$h_tleft = $f_img_size +10;
 	$chart_size = 0.8 * $f_img_size;
 
@@ -415,6 +415,12 @@ function cwppos_dynamic_stylesheet() {
 				font-size: <?php echo round(30*$f_img_size/140);?>px;
 			}
 
+			<?php  if ($options['cwppos_widget_size']!="") { ?>
+				#review-statistics{
+					width:<?php  echo $options['cwppos_widget_size']; ?>px;
+				}
+			<?php  } ?>
+
 		}
 		
 		#review-statistics .review-wrap-up div.cwpr-review-top { border-top: <?php  echo $options['cwppos_reviewboxbd_width']; ?>px solid <?php  echo $options['cwppos_reviewboxbd_color']; ?>;  }
@@ -427,11 +433,7 @@ function cwppos_dynamic_stylesheet() {
 			color: <?php  echo $options['cwppos_rating_default']; ?>;
 		}
 
-		<?php  if ($options['cwppos_widget_size']!="") { ?>
-		#review-statistics{
-			width:<?php  echo $options['cwppos_widget_size']; ?>px!important;
-		}
-		<?php  } ?>
+	
 		#review-statistics .review-wrap-up .review-wu-right ul li,#review-statistics  .review-wu-bars h3, .review-wu-bars span,#review-statistics .review-wrap-up .cwpr-review-top .cwp-item-category a{
 			color:  <?php  echo $options['cwppos_font_color']; ?>;
 		}
