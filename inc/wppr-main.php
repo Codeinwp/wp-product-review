@@ -297,6 +297,7 @@ function wppr_get_image_id($post_id, $image_url = "", $size = "thumbnail" ) {
 	$image_thumb = "";
 	if(!empty($image_id)){
 		$image_thumb = wp_get_attachment_image_src($image_id, $size);
+		
 		if( $size !== 'thumbnail' ) {
 			if($image_thumb[0] === $image_url){
 				$image_thumb = wp_get_attachment_image_src($image_id, "thumbnail");
@@ -385,14 +386,16 @@ function cwppos_dynamic_stylesheet() {
 	$options = cwppos();
 	//Get theme content width or plugin setting content width 
 	global $content_width;
-	$c_width = 840;
+	$c_width = 700;
 	if ($options['cwppos_widget_size']!="")
 		$c_width = $options['cwppos_widget_size'];
 	else 
 		$c_width = $content_width;
 	
+	if ($c_width<200)
+		$c_width = 600;
 
-	$f_img_size = min(150,$c_width*0.51*0.4);
+	$f_img_size = min(180,$c_width*0.51*0.4);
 	$h_tleft = $f_img_size +10;
 	$chart_size = 0.8 * $f_img_size;
 
@@ -412,6 +415,12 @@ function cwppos_dynamic_stylesheet() {
 				font-size: <?php echo round(30*$f_img_size/140);?>px;
 			}
 
+			<?php  if ($options['cwppos_widget_size']!="") { ?>
+				#review-statistics{
+					width:<?php  echo $options['cwppos_widget_size']; ?>px;
+				}
+			<?php  } ?>
+
 		}
 		
 		#review-statistics .review-wrap-up div.cwpr-review-top { border-top: <?php  echo $options['cwppos_reviewboxbd_width']; ?>px solid <?php  echo $options['cwppos_reviewboxbd_color']; ?>;  }
@@ -424,11 +433,7 @@ function cwppos_dynamic_stylesheet() {
 			color: <?php  echo $options['cwppos_rating_default']; ?>;
 		}
 
-		<?php  if ($options['cwppos_widget_size']!="") { ?>
-		#review-statistics{
-			width:<?php  echo $options['cwppos_widget_size']; ?>px!important;
-		}
-		<?php  } ?>
+	
 		#review-statistics .review-wrap-up .review-wu-right ul li,#review-statistics  .review-wu-bars h3, .review-wu-bars span,#review-statistics .review-wrap-up .cwpr-review-top .cwp-item-category a{
 			color:  <?php  echo $options['cwppos_font_color']; ?>;
 		}
