@@ -72,6 +72,11 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 
 == Changelog ==
 
+**New in 2.7.6**
+
+ - Fixed empty inputs on comments and saving of non-reviews post metas
+ - Fixed circles widget issue
+
 **New in 2.7.5**
 
  - Fixed WP_query issue in the wp backed

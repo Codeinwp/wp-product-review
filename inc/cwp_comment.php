@@ -117,11 +117,15 @@ function cwp_pac_comment_single($text){
 }
 
 function cwp_additional_fields () {
+	global $post;
+	$is_review = get_post_meta($post->ID, "cwp_meta_box_check", true);
+
+	if ($is_review=="Yes") {
 
 
 	wp_enqueue_style( 'jqueryui', WPPR_URL.'/css/jquery-ui.css',array(),WPPR_LITE_VERSION );
 	wp_enqueue_script("jquery-ui-slider");
-	global $post;
+
 
 	$meta_options = array();
 
@@ -164,6 +168,7 @@ function cwp_additional_fields () {
 	}
 
 	echo "<div id='cwp-slider-comment'>".implode("",$sliders)."<div class='cwpr_clearfix'></div></div>";
+}
 
 }
 

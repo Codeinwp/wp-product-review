@@ -269,6 +269,7 @@ function cwp_review_meta_boxes_save($post_id){
         return;
     }
 
+    if( isset( $_POST[ 'cwp_meta_box_check' ] ) && $_POST[ 'cwp_meta_box_check' ]=="Yes") {
 
     if( isset( $_POST[ 'cwp_rev_product_name' ] ) ) {
         update_post_meta( $post_id, 'cwp_rev_product_name', sanitize_text_field( $_POST[ 'cwp_rev_product_name' ] ) );
@@ -317,12 +318,12 @@ function cwp_review_meta_boxes_save($post_id){
 
     for ($i=1;$i<=cwppos("cwppos_option_nr");$i++) {
 
-        if( isset( $_POST[ 'option_'.$i.'_content' ] ) ) {
+        if( isset( $_POST[ 'option_'.$i.'_content' ] )) {
             update_post_meta( $post_id, 'option_'.$i.'_content', sanitize_text_field( $_POST[ 'option_'.$i.'_content' ] ) );
         }
 
 
-        if( isset( $_POST[ 'option_'.$i.'_grade' ] ) ) {
+        if( isset( $_POST[ 'option_'.$i.'_grade' ])) {
             update_post_meta( $post_id, 'option_'.$i.'_grade', sanitize_text_field( $_POST[ 'option_'.$i.'_grade' ] ) );
         }
     }
@@ -381,6 +382,7 @@ function cwp_review_meta_boxes_save($post_id){
     }
 
     update_post_meta($post_id, 'option_overall_score', $overall_score/10);
+}
 }
 function cwp_review_plugin_activation() {
     

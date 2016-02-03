@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
         }
 
         p_image_width = $('.review-wrap-up .rev-wu-image').width();
-        if (p_image_width==0)   p_image_width = 50;
+        if (p_image_width==0 || p_image_width==null)   p_image_width = 50;
         $('.cwp-review-percentage').cwp_easyPieChart({
             barColor: function(percent) {
                 return returnColor(percent);
