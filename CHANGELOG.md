@@ -1,5 +1,24 @@
 
 
+### 2.7.3 - 01/02/2016
+
+ Changes: 
+
+
+ * Fixed styling issues mostly
+
+- Improved layout based on $content_width so make sure this is set
+correctly
+ - Improved some settings description
+ - Fixed lightbox image logic
+ - Open image affiliate link in new tab
+ - Fixed various issues with comment sliders
+ - Pre-fill features from the latest edited post in the same category
+ - Pre-fill image settings and aff_button text from latest edited post
+in the same category
+ - Optimize the space on post review metaboxes
+
+
 ### 2.7.2 - 12/01/2016
 
  Changes: 
