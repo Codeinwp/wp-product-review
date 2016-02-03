@@ -1,5 +1,17 @@
 
 
+### 2.7.6 - 03/02/2016
+
+ Changes: 
+
+
+ * Improved font options
+ * fixed wrong content on edit post
+ * fixed widget chart + failsave crop
+ * fixed js error
+ * fixed wp_query issue + c_width on responsive
+
+
 ### 2.7.3 - 01/02/2016
 
  Changes: 
