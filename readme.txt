@@ -74,6 +74,10 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 
 **New in 2.7.6**
 
+- Re-worked rich snippets (Added main Thing Object as Product, added Offers and improved review / aggregateRating)
+
+**New in 2.7.6**
+
  - Fixed empty inputs on comments and saving of non-reviews post metas
  - Fixed circles widget issue
 
