@@ -1,5 +1,15 @@
 
 
+### 2.7.7 - 08/02/2016
+
+ Changes: 
+
+
+ * Merge branch 'production' into development
+ * Merge branch 'production' into development
+ * re-worked rich snippets
+
+
 ### 2.7.6 - 03/02/2016
 
  Changes: 
