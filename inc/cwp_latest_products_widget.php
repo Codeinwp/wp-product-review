@@ -122,7 +122,7 @@ array( 'description' => __( 'This widget displays the latest products based on t
 
 		<img class="cwp_rev_image wppr-col" src="<?php echo $product_image;?>" alt="<?php echo $product_title; ?>"\>
 		<?php } ?>
-		<a class="wppr-col" href="<?php the_permalink(); ?>">
+		<a class="wppr-col" href="<?php the_permalink(); ?>" title="<?php echo $product_title; ?>">
 
 			<?php echo $product_title; ?>
 

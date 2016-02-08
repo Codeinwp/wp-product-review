@@ -119,7 +119,7 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 		<img class="cwp_rev_image wppr-col" src="<?php echo $product_image;?>" alt="<?php echo $product_title; ?>"\>
 		<?php } ?>
-		<a href="<?php the_permalink(); ?>" class="wppr-col">
+		<a href="<?php the_permalink(); ?>" class="wppr-col" title="<?php echo $product_title; ?>">
 
 			<?php echo $product_title; ?>
 
