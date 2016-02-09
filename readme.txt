@@ -72,7 +72,11 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 
 == Changelog ==
 
-**New in 2.7.6**
+**New in 2.7.8**
+
+- Fixed price issues when . is present
+
+**New in 2.7.7**
 
 - Re-worked rich snippets (Added main Thing Object as Product, added Offers and improved review / aggregateRating)
 
