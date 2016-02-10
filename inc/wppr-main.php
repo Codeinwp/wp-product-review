@@ -292,6 +292,14 @@ function cwppos_pac_admin_init() {
 	wp_register_script( 'cwp-pac-script', WPPR_URL.'/javascript/admin-review.js',array("jquery"),"20140101",true );
 	wp_localize_script( 'cwp-pac-script', 'ispro', array( 'value' => class_exists('CWP_PR_PRO_Core') ) );
 	wp_enqueue_script('cwp-pac-script' );
+
+    // Added by Ash/Upwork
+    if ( class_exists( 'WPPR_Amazon') ){
+        define( 'WPPR_Amazon', true);
+        global $WPPR_Amazon;
+        $WPPR_Amazon->enqueueScriptsAndStyles();
+    }
+    // Added by Ash/Upwork
 }
 
 function wppr_get_image_id($post_id, $image_url = "", $size = "thumbnail" ) {

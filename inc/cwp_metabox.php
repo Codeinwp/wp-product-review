@@ -72,6 +72,15 @@ function cwp_review_meta_boxes(){
     <div class="review-settings-group">
         <div class="review-settings-group-option">
             <ul>
+                <?php
+                    // Added by Ash/Upwork
+                    if( defined( 'WPPR_Amazon' ) ){
+                        global $WPPR_Amazon;
+                        $WPPR_Amazon->addFields($cwp_review_stored_meta);
+                    }
+                    // Added by Ash/Upwork
+                ?>
+
                 <li>
                     <label for="cwp_rev_product_name"><?php  _e("Product Name", "cwppos"); ?></label>
                     <input type="text" name="cwp_rev_product_name" id="cwp_rev_product_name" value="<?php
@@ -268,6 +277,13 @@ function cwp_review_meta_boxes_save($post_id){
     if ( $is_autosave || $is_revision || !$is_valid_nonce ) {
         return;
     }
+
+    // Added by Ash/Upwork
+    if( defined( 'WPPR_Amazon' ) ){
+        global $WPPR_Amazon;
+        $WPPR_Amazon->saveFields($post_id);
+    }
+    // Added by Ash/Upwork
 
     if( isset( $_POST[ 'cwp_meta_box_check' ] ) && $_POST[ 'cwp_meta_box_check' ]=="Yes") {
 
