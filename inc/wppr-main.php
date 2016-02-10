@@ -104,13 +104,25 @@ function cwppos_show_review($id = "") {
 		wp_enqueue_style( 'cwp-pac-frontpage-stylesheet', WPPR_URL.'/css/frontpage.css',array(),WPPR_LITE_VERSION );
 		wp_enqueue_script( 'pie-chart', WPPR_URL.'/javascript/pie-chart.js',array("jquery"), WPPR_LITE_VERSION,true );
 		wp_enqueue_script( 'cwp-pac-main-script', WPPR_URL.'/javascript/main.js',array("jquery",'pie-chart'),WPPR_LITE_VERSION,true );
+		$cwp_price = get_post_meta($id, "cwp_rev_price", true);
+		$p_string = $cwp_price;
+		$p_name = apply_filters("wppr_review_product_name", $id) ;
 
-		$return_string  = '<section id="review-statistics"  class="article-section" itemscope itemtype="http://schema.org/Review">
+		if ($p_string!="") {
+			$p_price = preg_replace("/[^0-9.,]/","",$cwp_price);
+			$p_currency = preg_replace("/[0-9.,]/","",$cwp_price);
+			if (is_numeric($cwp_price[0]))
+				$p_string = '<span itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span itemprop="price">'.$p_price.'</span><span itemprop="priceCurrency">'.$p_currency.'</span></span>';
+			else
+				$p_string = '<span itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span itemprop="priceCurrency">'.$p_currency.'</span><span itemprop="price">'.$p_price.'</span></span>';
+		}
+
+		$return_string  = '<section id="review-statistics"  class="article-section" itemscope itemtype="http://schema.org/Product">
                             <div class="review-wrap-up  cwpr_clearfix" >
-                                <div class="cwpr-review-top cwpr_clearfix" itemprop="itemReviewed">
-                                	' . apply_filters("wppr_review_product_name", $id) . '
+                                <div class="cwpr-review-top cwpr_clearfix">
+                                	<span itemprop="name">' . $p_name. '</span>
 
-                                    <span class="cwp-item-price cwp-item"   >'.get_post_meta($id, "cwp_rev_price", true).'</span>
+                                    <span class="cwp-item-price cwp-item">'.$p_string.'</span>
                                 </div><!-- end .cwpr-review-top -->
                                 <div class="review-wu-left">
                                     <div class="rev-wu-image">';
@@ -139,7 +151,7 @@ function cwppos_show_review($id = "") {
 			$product_image = get_post_meta($id, "cwp_product_affiliate_link", true);
 		}
 		//print_r($product_image);
-		$return_string .= '<a href="'.$product_image.'" '.$lightbox.'  rel="nofollow" target="_blank"><img  src="'.$product_image_cropped.'" alt="'. get_post_meta($id, "cwp_rev_product_name", true).'" class="photo photo-wrapup wppr-product-image"  /></a>';
+		$return_string .= '<a href="'.$product_image.'" '.$lightbox.'  rel="nofollow" target="_blank"><img itemprop="image" src="'.$product_image_cropped.'" alt="'. get_post_meta($id, "cwp_rev_product_name", true).'" class="photo photo-wrapup wppr-product-image"  /></a>';
 
 		$rating = cwppos_calc_overall_rating($id);
 
@@ -157,18 +169,20 @@ function cwppos_show_review($id = "") {
                                 <div class="review-wu-grade">
                                     <div class="cwp-review-chart">
                                     <meta itemprop="datePublished" datetime="'.get_the_time("Y-m-d", $id).'">
-                                    <span itemprop="author" itemscope itemtype="http://schema.org/Person" style="display:none" >
-                                         <meta itemprop="name"  content="'.get_the_author().'">
-                                    </span>';
-		if(cwppos("cwppos_infl_userreview") == 0) {
-
-			$return_string .= '<div    itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="cwp-review-percentage" data-percent="';
-			$return_string .= $rating['overall'] . '"><span itemprop="ratingValue" class="cwp-review-rating">' . $divrating . '</span> <meta itemprop="bestRating" content="10">  </div>';
-
-		}else {
-			$return_string .= '<div    itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" class="cwp-review-percentage" data-percent="';
+                                    ';
+		if(cwppos("cwppos_infl_userreview") !== 0 && $commentNr>1) {
+			$return_string .= '<div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" class="cwp-review-percentage" data-percent="';
 			$return_string .= $rating['overall'] . '"><span itemprop="ratingValue" class="cwp-review-rating">' . $divrating . '</span><meta itemprop="bestRating" content = "10"/>
-                     <meta itemprop="reviewCount" content="' . $commentNr . '"> </div>';
+                     <meta itemprop="ratingCount" content="' . $commentNr . '"> </div>';
+			
+		}else 
+		{
+			$return_string .= '<span itemscope itemtype="http://schema.org/Review"><span itemprop="author" itemscope itemtype="http://schema.org/Person"  >
+                                         <meta itemprop="name"  content="'.get_the_author().'"/>
+                                    </span><span itemprop="itemReviewed" itemscope itemtype="http://schema.org/Product"><meta itemprop="name" content="'.get_post_meta($id,'cwp_rev_product_name',true).'"/></span><div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="cwp-review-percentage" data-percent="';
+			$return_string .= $rating['overall'] . '"><span itemprop="ratingValue" class="cwp-review-rating">' . $divrating . '</span> <meta itemprop="bestRating" content="10">  </div></span>';
+
+			
 		}
 		$return_string .='
                                     </div><!-- end .chart -->
@@ -278,14 +292,6 @@ function cwppos_pac_admin_init() {
 	wp_register_script( 'cwp-pac-script', WPPR_URL.'/javascript/admin-review.js',array("jquery"),"20140101",true );
 	wp_localize_script( 'cwp-pac-script', 'ispro', array( 'value' => class_exists('CWP_PR_PRO_Core') ) );
 	wp_enqueue_script('cwp-pac-script' );
-
-    // Added by Ash/Upwork
-    if ( class_exists( 'WPPR_Amazon') ){
-        define( 'WPPR_Amazon', true);
-        global $WPPR_Amazon;
-        $WPPR_Amazon->enqueueScriptsAndStyles();
-    }
-    // Added by Ash/Upwork
 }
 
 function wppr_get_image_id($post_id, $image_url = "", $size = "thumbnail" ) {
@@ -305,6 +311,7 @@ function wppr_get_image_id($post_id, $image_url = "", $size = "thumbnail" ) {
 	$image_thumb = "";
 	if(!empty($image_id)){
 		$image_thumb = wp_get_attachment_image_src($image_id, $size);
+		
 		if( $size !== 'thumbnail' ) {
 			if($image_thumb[0] === $image_url){
 				$image_thumb = wp_get_attachment_image_src($image_id, "thumbnail");
@@ -393,14 +400,16 @@ function cwppos_dynamic_stylesheet() {
 	$options = cwppos();
 	//Get theme content width or plugin setting content width 
 	global $content_width;
-	$c_width = 840;
+	$c_width = 700;
 	if ($options['cwppos_widget_size']!="")
 		$c_width = $options['cwppos_widget_size'];
 	else 
 		$c_width = $content_width;
 	
+	if ($c_width<200)
+		$c_width = 600;
 
-	$f_img_size = min(150,$c_width*0.51*0.4);
+	$f_img_size = min(180,$c_width*0.51*0.4);
 	$h_tleft = $f_img_size +10;
 	$chart_size = 0.8 * $f_img_size;
 
@@ -420,6 +429,12 @@ function cwppos_dynamic_stylesheet() {
 				font-size: <?php echo round(30*$f_img_size/140);?>px;
 			}
 
+			<?php  if ($options['cwppos_widget_size']!="") { ?>
+				#review-statistics{
+					width:<?php  echo $options['cwppos_widget_size']; ?>px;
+				}
+			<?php  } ?>
+
 		}
 		
 		#review-statistics .review-wrap-up div.cwpr-review-top { border-top: <?php  echo $options['cwppos_reviewboxbd_width']; ?>px solid <?php  echo $options['cwppos_reviewboxbd_color']; ?>;  }
@@ -432,11 +447,7 @@ function cwppos_dynamic_stylesheet() {
 			color: <?php  echo $options['cwppos_rating_default']; ?>;
 		}
 
-		<?php  if ($options['cwppos_widget_size']!="") { ?>
-		#review-statistics{
-			width:<?php  echo $options['cwppos_widget_size']; ?>px!important;
-		}
-		<?php  } ?>
+	
 		#review-statistics .review-wrap-up .review-wu-right ul li,#review-statistics  .review-wu-bars h3, .review-wu-bars span,#review-statistics .review-wrap-up .cwpr-review-top .cwp-item-category a{
 			color:  <?php  echo $options['cwppos_font_color']; ?>;
 		}
