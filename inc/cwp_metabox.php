@@ -36,14 +36,13 @@ function cwp_review_meta_boxes(){
 
 
 
-    $cwp_latest_products_loop = get_posts( $query_args );
-    foreach ( $cwp_latest_products_loop as $w_post ) : setup_postdata( $w_post ); 
-    $wppr_id= $w_post->ID;
+    $cwp_latest_products_loop = new WP_Query( $query_args );
+    while($cwp_latest_products_loop->have_posts()) : $cwp_latest_products_loop->the_post();
+    $id= get_the_ID();
 
-    endforeach;
+    endwhile;
     wp_reset_postdata();
-    
-    $p_meta = get_post_meta ($wppr_id);
+    $p_meta = get_post_meta ($id);
 
     if (isset( $cwp_review_stored_meta['cwp_image_link'][0])) {
         $checkset = esc_attr( $cwp_review_stored_meta['cwp_image_link'][0]);
@@ -72,6 +71,14 @@ function cwp_review_meta_boxes(){
     <div class="review-settings-group">
         <div class="review-settings-group-option">
             <ul>
+                <?php
+                    // Added by Ash/Upwork
+                    if( defined( 'WPPR_Amazon' ) ){
+                        global $WPPR_Amazon;
+                        $WPPR_Amazon->addFields($cwp_review_stored_meta);
+                    }
+                    // Added by Ash/Upwork
+                ?>
                 <li>
                     <label for="cwp_rev_product_name"><?php  _e("Product Name", "cwppos"); ?></label>
                     <input type="text" name="cwp_rev_product_name" id="cwp_rev_product_name" value="<?php
@@ -269,7 +276,12 @@ function cwp_review_meta_boxes_save($post_id){
         return;
     }
 
-    if( isset( $_POST[ 'cwp_meta_box_check' ] ) && $_POST[ 'cwp_meta_box_check' ]=="Yes") {
+    // Added by Ash/Upwork
+    if( defined( 'WPPR_Amazon' ) ){
+        global $WPPR_Amazon;
+        $WPPR_Amazon->saveFields($post_id);
+    }
+    // Added by Ash/Upwork
 
     if( isset( $_POST[ 'cwp_rev_product_name' ] ) ) {
         update_post_meta( $post_id, 'cwp_rev_product_name', sanitize_text_field( $_POST[ 'cwp_rev_product_name' ] ) );
@@ -318,12 +330,12 @@ function cwp_review_meta_boxes_save($post_id){
 
     for ($i=1;$i<=cwppos("cwppos_option_nr");$i++) {
 
-        if( isset( $_POST[ 'option_'.$i.'_content' ] )) {
+        if( isset( $_POST[ 'option_'.$i.'_content' ] ) ) {
             update_post_meta( $post_id, 'option_'.$i.'_content', sanitize_text_field( $_POST[ 'option_'.$i.'_content' ] ) );
         }
 
 
-        if( isset( $_POST[ 'option_'.$i.'_grade' ])) {
+        if( isset( $_POST[ 'option_'.$i.'_grade' ] ) ) {
             update_post_meta( $post_id, 'option_'.$i.'_grade', sanitize_text_field( $_POST[ 'option_'.$i.'_grade' ] ) );
         }
     }
@@ -382,7 +394,6 @@ function cwp_review_meta_boxes_save($post_id){
     }
 
     update_post_meta($post_id, 'option_overall_score', $overall_score/10);
-}
 }
 function cwp_review_plugin_activation() {
     
