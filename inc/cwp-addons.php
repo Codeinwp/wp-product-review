@@ -20,7 +20,7 @@ function cwp_addons() {
     width: 75%;  
     float: left;  font-family: &quot;Helvetica Neue&quot;, HelveticaNeue, sans-serif;  color: #fff;  font-weight: 100;  font-size: 17px;  line-height: 1;  
     padding-left: 20px;
-">Get the PRO addons bundle (including all existing add-on and future ones ) starting from $59!</h2>
+">Get the PRO addons bundle (including all existing add-on and future ones ) starting from $75!</h2>
 		<a class="show-me" href="https://themeisle.com/plugins/wp-product-review-pro-add-on/?utm_source=addonsadmin&amp;utm_medium=announce&amp;utm_campaign=top" style="
     float: right;  background: #fff;  border-radius: 5px;  font-family: &quot;Helvetica Neue&quot;, HelveticaNeue, sans-serif;  color: #5c5c5c;  text-decoration: none;  text-transform: uppercase;  padding: 7px 15px;  margin-top: 9px;  margin-right: 20px;  -webkit-transition: all 0.3s ease-in-out;  -moz-transition: all 0.3s ease-in-out;  -o-transition: all 0.3s ease-in-out;  transition: all 0.3s ease-in-out;  line-height: 1;
 ">Show Me</a>

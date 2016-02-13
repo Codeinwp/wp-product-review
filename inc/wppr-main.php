@@ -109,8 +109,8 @@ function cwppos_show_review($id = "") {
 		$p_name = apply_filters("wppr_review_product_name", $id) ;
 
 		if ($p_string!="") {
-			$p_price = preg_replace("/[^0-9]/","",$cwp_price);
-			$p_currency = preg_replace("/[0-9]/","",$cwp_price);
+			$p_price = preg_replace("/[^0-9.,]/","",$cwp_price);
+			$p_currency = preg_replace("/[0-9.,]/","",$cwp_price);
 			if (is_numeric($cwp_price[0]))
 				$p_string = '<span itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span itemprop="price">'.$p_price.'</span><span itemprop="priceCurrency">'.$p_currency.'</span></span>';
 			else
@@ -292,6 +292,17 @@ function cwppos_pac_admin_init() {
 	wp_register_script( 'cwp-pac-script', WPPR_URL.'/javascript/admin-review.js',array("jquery"),"20140101",true );
 	wp_localize_script( 'cwp-pac-script', 'ispro', array( 'value' => class_exists('CWP_PR_PRO_Core') ) );
 	wp_enqueue_script('cwp-pac-script' );
+
+	if(class_exists('CWP_PR_PRO_Core'))
+		wp_enqueue_style( 'cwp-pac-pro-admin-stylesheet', WPPR_URL.'/css/pro_dashboard_styles.css' );
+
+    // Added by Ash/Upwork
+    if ( class_exists( 'WPPR_Amazon') ){
+        define( 'WPPR_Amazon', true);
+        global $WPPR_Amazon;
+        $WPPR_Amazon->enqueueScriptsAndStyles();
+    }
+    // Added by Ash/Upwork
 }
 
 function wppr_get_image_id($post_id, $image_url = "", $size = "thumbnail" ) {

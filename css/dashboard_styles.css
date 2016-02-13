@@ -499,6 +499,6 @@ a.preload_info:hover, a.preload_info_upsell:hover {
     display:none;
 }
 .cwp_proscons {
-    float:left;
-    width:50%;
+    display:inline-block;
+    width:49.8%;
 }
