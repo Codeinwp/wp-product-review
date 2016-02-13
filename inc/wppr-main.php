@@ -293,6 +293,9 @@ function cwppos_pac_admin_init() {
 	wp_localize_script( 'cwp-pac-script', 'ispro', array( 'value' => class_exists('CWP_PR_PRO_Core') ) );
 	wp_enqueue_script('cwp-pac-script' );
 
+	if(class_exists('CWP_PR_PRO_Core'))
+		wp_enqueue_style( 'cwp-pac-pro-admin-stylesheet', WPPR_URL.'/css/pro_dashboard_styles.css' );
+
     // Added by Ash/Upwork
     if ( class_exists( 'WPPR_Amazon') ){
         define( 'WPPR_Amazon', true);
