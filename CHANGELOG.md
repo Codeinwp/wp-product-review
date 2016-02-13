@@ -1,5 +1,23 @@
 
 
+### 2.7.8 - 13/02/2016
+
+ Changes: 
+
+
+ * fixed price issue
+ * support for fetching item from amazon
+
+support for fetching item from amazon
+ * Revert "support for fetching item from amazon"
+
+This reverts commit 4afecbadeea9df5a4f5b1e7e5c7fd6b133553003.
+ * support for fetching item from amazon
+
+support for fetching item from amazon
+ * optimized pro css and increased bundle price
+
+
 ### 2.7.7 - 08/02/2016
 
  Changes: 
