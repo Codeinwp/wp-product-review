@@ -297,11 +297,7 @@ function cwppos_pac_admin_init() {
 		wp_enqueue_style( 'cwp-pac-pro-admin-stylesheet', WPPR_URL.'/css/pro_dashboard_styles.css' );
 
     // Added by Ash/Upwork
-    if ( class_exists( 'WPPR_Amazon') ){
-        define( 'WPPR_Amazon', true);
-        global $WPPR_Amazon;
-        $WPPR_Amazon->enqueueScriptsAndStyles();
-    }
+    do_action("wppr-amazon-enqueue");
     // Added by Ash/Upwork
 }
 
