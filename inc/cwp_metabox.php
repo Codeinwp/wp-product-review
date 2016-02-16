@@ -74,10 +74,7 @@ function cwp_review_meta_boxes(){
             <ul>
                 <?php
                     // Added by Ash/Upwork
-                    if( defined( 'WPPR_Amazon' ) ){
-                        global $WPPR_Amazon;
-                        $WPPR_Amazon->addFields($cwp_review_stored_meta);
-                    }
+                    do_action("wppr-amazon-addfields", $cwp_review_stored_meta);
                     // Added by Ash/Upwork
                 ?>
 
@@ -279,10 +276,7 @@ function cwp_review_meta_boxes_save($post_id){
     }
 
     // Added by Ash/Upwork
-    if( defined( 'WPPR_Amazon' ) ){
-        global $WPPR_Amazon;
-        $WPPR_Amazon->saveFields($post_id);
-    }
+    do_action("wppr-amazon-savefields", $post_id);
     // Added by Ash/Upwork
 
     if( isset( $_POST[ 'cwp_meta_box_check' ] ) && $_POST[ 'cwp_meta_box_check' ]=="Yes") {
