@@ -1,5 +1,16 @@
 
 
+### 2.7.9 - 16/02/2016
+
+ Changes: 
+
+
+ * fixed fatal error when activating pro bundle
+
+created and used custom hooks
+ * added support for amazon
+
+
 ### 2.7.8 - 13/02/2016
 
  Changes: 
