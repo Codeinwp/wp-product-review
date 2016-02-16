@@ -123,7 +123,8 @@ function cwp_review_meta_boxes(){
                     }
 
                     ?>"/>
-                    <?php 
+                    <?php
+                    $hide_button2 = false;
                     if (!isset($cwp_review_stored_meta['cwp_product_affiliate_text2'][0])) {
                         $hide_button2 = true;
                         ?>
