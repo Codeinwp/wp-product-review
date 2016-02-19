@@ -117,11 +117,12 @@ function cwppos_show_review($id = "") {
 			$p_currency = preg_replace("/[0-9.,]/","",$cwp_price);
 
             // Added by Ash/Upwork
-            $p_string    = apply_filters("wppr_price_format", $p_price, $p_currency);
+            $p_disable    = apply_filters("wppr_disable_price_richsnippet", FALSE);
             // Added by Ash/Upwork
-            if(empty($p_string)){
+            if(!$p_disable){
                 $p_string = '<span itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span itemprop="priceCurrency">'.$p_currency.'</span><span itemprop="price">'.$p_price.'</span></span>';
             }
+
 		}
 
 		$return_string  = '<section id="review-statistics"  class="article-section" itemscope itemtype="http://schema.org/Product">
