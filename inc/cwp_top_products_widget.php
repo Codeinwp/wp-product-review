@@ -35,7 +35,22 @@ array( 'description' => __( 'This widget displays the top products based on thei
 		wp_enqueue_style( 'cwp-pac-widget-stylesheet',  WPPR_URL.'/css/cwppos-widget.css' );
 		wp_enqueue_script( 'cwp-pac-main-script', WPPR_URL.'/javascript/main.js',array("jquery",'pie-chart'),WPPR_LITE_VERSION,true );
 		wp_enqueue_script( 'pie-chart', WPPR_URL.'/javascript/pie-chart.js',array("jquery"), WPPR_LITE_VERSION,true );
+        // Added by Ash/Upwork
+        wp_enqueue_style( 'cwp-widget-stylesheet1',  WPPR_URL.'/css/cwppos-widget-style1.css' );
+        wp_enqueue_style( 'cwp-widget-rating',  WPPR_URL.'/css/cwppos-widget-rating.css' );
+        // Added by Ash/Upwork
 	}
+    // Added by Ash/Upwork
+    public function adminAssets(){
+        if(is_admin()){
+            wp_enqueue_script( 'cwp-widget-script', WPPR_URL.'/javascript/widget.js');
+            wp_localize_script("cwp-widget-script", "cwpw", array(
+                "layout"    => $this->get_field_id( 'cwp_tp_layout' ),
+                "rating"    => "ratingPara",
+            ));
+        }
+    }
+    // Added by Ash/Upwork
 	public function custom_order_by($orderby){
 
 		return 'mt1.meta_value DESC, mt2.meta_value+0 DESC';
@@ -97,72 +112,13 @@ array( 'description' => __( 'This widget displays the top products based on thei
 											)
 						);
 		add_filter('posts_orderby',array($this,'custom_order_by'));
-		$cwp_top_products_loop = new WP_Query( $query_args );
+		$cwp_products_loop = new WP_Query( $query_args );
 		remove_filter('posts_orderby',array($this,'custom_order_by'));
 		//echo $cwp_top_products_loop->request;
 
-		echo "<ul>";
-
-		while($cwp_top_products_loop->have_posts()) : $cwp_top_products_loop->the_post();
-
-			$product_image = wppr_get_image_id(get_the_ID(),get_post_meta(get_the_ID(), "cwp_rev_product_image", true),'wppr_widget_image');
-			$product_title = ($post_type==true) ? get_post_meta($cwp_top_products_loop->post->ID, "cwp_rev_product_name", true)  :  get_the_title();
-			?>
-
-
-
-		<li class="cwp-popular-review cwp_top_posts_widget_<?php the_ID(); if ($show_image==true&&!empty($product_image)) echo ' wppr-cols-3'; else echo ' wppr-cols-2' ?>">
-		<?php
-
-		if ($show_image==true&&!empty($product_image)) {
-		?>
-
-		<img class="cwp_rev_image wppr-col" src="<?php echo $product_image;?>" alt="<?php echo $product_title; ?>"\>
-		<?php } ?>
-		<a href="<?php the_permalink(); ?>" class="wppr-col" title="<?php echo $product_title; ?>">
-
-			<?php echo $product_title; ?>
-
-		</a>
-
-
-
-
-
-			<?php
-
-            for($i=1; $i<6; $i++) {
-                ${"option".$i."_content"} = get_post_meta($cwp_top_products_loop->post->ID, "option_".$i."_content", true);
-                //if(empty(${"option".$i."_content"})) { ${"option".$i."_content"} = __("Default Feature ".$i, "cwppos"); }
-            }
-            $review_score = cwppos_calc_overall_rating($cwp_top_products_loop->post->ID);
-			$review_score = $review_score['overall'];
-
-			if(!empty($review_score)) { ?>
-
-			<div class="review-grade-widget wppr-col">
-
-				<div class="cwp-review-chart">
-
-				<div class="cwp-review-percentage" data-percent="<?php echo $review_score; ?>"><span></span></div>
-
-				</div><!-- end .chart -->
-
-			</div>
-
-			<?php } ?>
-
-		</li><!-- end .popular-review -->
-
-
-
-		<?php endwhile; ?>
-
-		<?php wp_reset_postdata(); // reset the query
-
-
-
-		echo "</ul>";
+        // Added by Ash/Upwork
+        include trailingslashit(dirname(__FILE__)) . "/widget-layouts/" . $instance['cwp_tp_layout'];
+        // Added by Ash/Upwork
 
 		echo $args['after_widget'];
 
@@ -175,6 +131,9 @@ array( 'description' => __( 'This widget displays the top products based on thei
 	// Widget Backend
 
 	public function form( $instance ) {
+        // Added by Ash/Upwork
+        $this->adminAssets();
+        // Added by Ash/Upwork
 
 		if ( isset( $instance[ 'title' ] ) ) {
 
@@ -211,6 +170,27 @@ array( 'description' => __( 'This widget displays the top products based on thei
 		}
 
 
+        // Added by Ash/Upwork
+        $cwp_tp_buynow          = __("Buy Now", "cwppos");
+        if ( isset( $instance[ 'cwp_tp_buynow' ]) ) {
+			$cwp_tp_buynow  = $instance[ 'cwp_tp_buynow' ];
+        }
+
+        $cwp_tp_readreview      = __("Read Review", "cwppos");
+        if ( isset( $instance[ 'cwp_tp_readreview' ]) ) {
+			$cwp_tp_readreview  = $instance[ 'cwp_tp_readreview' ];
+        }
+
+        $cwp_tp_layout          = "";
+        if ( isset( $instance[ 'cwp_tp_layout' ]) ) {
+			$cwp_tp_layout  = $instance[ 'cwp_tp_layout' ];
+        }
+
+        $cwp_tp_rating_type     = "round";
+        if ( isset( $instance[ 'cwp_tp_rating_type' ]) ) {
+			$cwp_tp_rating_type = $instance[ 'cwp_tp_rating_type' ];
+        }
+        // Added by Ash/Upwork
 
 
 		$cwp_tp_categ_array = get_categories('hide_empty=0');
@@ -277,7 +257,85 @@ array( 'description' => __( 'This widget displays the top products based on thei
 	</select>
 
 	</p>
+    <?php // Added by Ash/Upwork ?>
+
 	<p>
+
+	<?php $cwp_tp_buynow = esc_attr( $cwp_tp_buynow ); ?>
+
+	<label for="<?php echo $this->get_field_id( 'cwp_tp_buynow' ); ?>"><?php _e( 'Buy Now text:', "cwppos" ); ?></label>
+
+	<input id="<?php echo $this->get_field_id( 'cwp_tp_buynow' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_buynow' ); ?>" class="widefat" type="text" value="<?php echo $cwp_tp_buynow; ?>" />
+
+	</p>
+
+	<p>
+
+	<?php $cwp_tp_readreview = esc_attr( $cwp_tp_readreview ); ?>
+
+	<label for="<?php echo $this->get_field_id( 'cwp_tp_readreview' ); ?>"><?php _e( 'Read Review text:', "cwppos" ); ?></label>
+
+	<input id="<?php echo $this->get_field_id( 'cwp_tp_readreview' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_readreview' ); ?>" class="widefat" type="text" value="<?php echo $cwp_tp_readreview; ?>" />
+
+	</p>
+
+	<p>
+
+	<?php $cwp_tp_layout = esc_attr( $cwp_tp_layout ); ?>
+
+	<label for="<?php echo $this->get_field_id( 'cwp_tp_layout' ); ?>"><?php _e( 'Layout:', "cwppos" ); ?></label>
+
+	<select id="<?php echo $this->get_field_id( 'cwp_tp_layout' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_layout' ); ?>">
+
+	<?php 
+
+        $layouts            = array();
+        $customLayoutFiles  = glob(trailingslashit(dirname(__FILE__)) . "widget-layouts/*.php");
+        foreach($customLayoutFiles as $file){
+            $layouts[basename($file)] = ucwords(basename($file, ".php"));
+        }
+    
+        foreach ($layouts as $key => $val):
+            $extra      = "";
+            if($key == $cwp_tp_layout) $extra = "selected";
+
+            echo "<option value='{$key}' {$extra}>{$val}</option>";
+	    endforeach;
+    ?>
+
+	</select>
+
+	</p>
+
+	<p id="ratingPara" style="display: none">
+
+	<?php $cwp_tp_rating_type = esc_attr( $cwp_tp_rating_type ); ?>
+
+	<label for="<?php echo $this->get_field_id( 'cwp_tp_rating_type' ); ?>"><?php _e( 'Rating Type:', "cwppos" ); ?></label>
+
+	<select id="<?php echo $this->get_field_id( 'cwp_tp_rating_type' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_rating_type' ); ?>">
+
+	<?php 
+
+        $ratingTypes    = array(
+            "round"     => __("Round", "cwppos"),
+            "star"      => __("Star", "cwppos"),
+        );
+    
+        foreach ($ratingTypes as $key => $val):
+            $extra      = "";
+            if($key == $cwp_tp_rating_type) $extra = "selected";
+
+            echo "<option value='{$key}' {$extra}>{$val}</option>";
+	    endforeach;
+    ?>
+
+	</select>
+
+	</p>
+
+    <?php // Added by Ash/Upwork ?>
+    <p>
 
 	<label for="<?php echo $this->get_field_id( 'title_type' ); ?>"><?php _e( 'Display Product Titles :', "cwppos" ); ?></label>
 
@@ -311,6 +369,12 @@ array( 'description' => __( 'This widget displays the top products based on thei
 		$instance['title_type'] = (bool) $new_instance['title_type'] ;
 		$instance['show_image'] = (bool) $new_instance['show_image'] ;
 
+        // Added by Ash/Upwork
+        $instance['cwp_tp_buynow'] = ( ! empty( $new_instance['cwp_tp_buynow'] ) ) ? strip_tags( $new_instance['cwp_tp_buynow'] ) : '';
+        $instance['cwp_tp_readreview'] = ( ! empty( $new_instance['cwp_tp_readreview'] ) ) ? strip_tags( $new_instance['cwp_tp_readreview'] ) : '';
+        $instance['cwp_tp_layout'] = ( ! empty( $new_instance['cwp_tp_layout'] ) ) ? strip_tags( $new_instance['cwp_tp_layout'] ) : '';
+        $instance['cwp_tp_rating_type'] = ( ! empty( $new_instance['cwp_tp_rating_type'] ) ) ? strip_tags( $new_instance['cwp_tp_rating_type'] ) : '';
+        // Added by Ash/Upwork
 		return $instance;
 
 	}
