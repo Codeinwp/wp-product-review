@@ -1,0 +1,12 @@
+span.styleimg{
+	position: relative;
+	display: none;
+	width: 100%;
+}
+
+span.styleimg img{
+	position: absolute;
+	top: -120px;
+	left: 10px;
+	opacity: 0.5;
+}

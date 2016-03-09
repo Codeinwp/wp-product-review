@@ -5,6 +5,10 @@
 
 			$product_image = wppr_get_image_id(get_the_ID(),get_post_meta(get_the_ID(), "cwp_rev_product_image", true),'wppr_widget_image');
 			$product_title = ($post_type==true) ? get_post_meta($cwp_products_loop->post->ID, "cwp_rev_product_name", true)  :  get_the_title();
+            $product_title_display  = $product_title;
+            if(strlen($product_title_display) > self::RESTRICT_TITLE_CHARS){
+                $product_title_display  = substr($product_title_display, 0, self::RESTRICT_TITLE_CHARS) . "...";
+            }
 			?>
 
 
@@ -19,7 +23,7 @@
 		<?php } ?>
 		<a href="<?php the_permalink(); ?>" class="wppr-col" title="<?php echo $product_title; ?>">
 
-			<?php echo $product_title; ?>
+			<?php echo $product_title_display; ?>
 
 		</a>
 

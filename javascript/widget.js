@@ -1,17 +1,27 @@
 (function($, w){
 
     $(document).ready(function(){
-        toggleRatingType();
-        $("#" + w.layout).on("change", function(e){
-            toggleRatingType();
+        toggleCustomFields(true, null);
+        $("input.stylestyle").on("click", function(e){
+            toggleCustomFields(false, $(this).val());
+        });
+
+        $("label.stylestyle").hover(function(e){
+            $("#" + $(this).attr("for") + "img").show();
+        }, function(e){
+            $("#" + $(this).attr("for") + "img").hide();
         });
     });
 
-    function toggleRatingType(){
-        if($("#" + w.layout).val() == "default.php"){
-            $("#" + w.rating).hide();
+    function toggleCustomFields(deflt, val){
+        if(val != null && val == "default.php"){
+            $(".customField").hide();
+            $(".defaultField").show();
         }else{
-            $("#" + w.rating).show();
+            if(!deflt) $("#" + w.ratingSelect).val("star");
+            $(".customField").show();
+            $(".defaultField").hide();
+            $("#" + w.imageCheckbox).prop("checked", true);
         }
     }
 

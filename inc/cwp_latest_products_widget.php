@@ -7,7 +7,7 @@
 
 class cwp_latest_products_widget extends WP_Widget {
 
-
+const RESTRICT_TITLE_CHARS  = 100;
 
 function __construct() {
 
@@ -35,22 +35,12 @@ array( 'description' => __( 'This widget displays the latest products based on t
 		wp_enqueue_style( 'cwp-pac-widget-stylesheet',  WPPR_URL.'/css/cwppos-widget.css' );
 		wp_enqueue_script( 'cwp-pac-main-script', WPPR_URL.'/javascript/main.js',array("jquery",'pie-chart'),WPPR_LITE_VERSION,true );
 		wp_enqueue_script( 'pie-chart', WPPR_URL.'/javascript/pie-chart.js',array("jquery"), WPPR_LITE_VERSION,true );
+
         // Added by Ash/Upwork
         wp_enqueue_style( 'cwp-widget-stylesheet1',  WPPR_URL.'/css/cwppos-widget-style1.css' );
         wp_enqueue_style( 'cwp-widget-rating',  WPPR_URL.'/css/cwppos-widget-rating.css' );
         // Added by Ash/Upwork
-	}
-    // Added by Ash/Upwork
-    public function adminAssets(){
-        if(is_admin()){
-            wp_enqueue_script( 'cwp-widget-script', WPPR_URL.'/javascript/widget.js');
-            wp_localize_script("cwp-widget-script", "cwpw", array(
-                "layout"    => $this->get_field_id( 'cwp_tp_layout' ),
-                "rating"    => "ratingPara",
-            ));
-        }
     }
-    // Added by Ash/Upwork
 
 	public function widget( $args, $instance ) {
 		$this->assets();
@@ -133,7 +123,22 @@ array( 'description' => __( 'This widget displays the latest products based on t
 
 	// Widget Backend
 
+    // Added by Ash/Upwork
+    public function adminAssets(){
+        if(is_admin()){
+            wp_enqueue_style( 'cwp-widget-admin-css',  WPPR_URL.'/css/cwppos-widget-admin.css' );
+            wp_enqueue_script( 'cwp-widget-script', WPPR_URL.'/javascript/widget.js');
+            wp_localize_script("cwp-widget-script", "cwpw", array(
+                "layout"        => $this->get_field_id( 'cwp_tp_layout' ),
+                "imageCheckbox" => $this->get_field_id( 'show_image' ),
+                "ratingSelect"  => $this->get_field_id( 'cwp_tp_rating_type' )
+            ));
+        }
+    }
+    // Added by Ash/Upwork
+
 	public function form( $instance ) {
+
         // Added by Ash/Upwork
         $this->adminAssets();
         // Added by Ash/Upwork
@@ -171,7 +176,6 @@ array( 'description' => __( 'This widget displays the latest products based on t
 		else {
 			$show_image = false;
 		}
-
 
         // Added by Ash/Upwork
         $cwp_tp_buynow          = __("Buy Now", "cwppos");
@@ -260,35 +264,14 @@ array( 'description' => __( 'This widget displays the latest products based on t
 	</select>
 
 	</p>
+
     <?php // Added by Ash/Upwork ?>
-
-	<p>
-
-	<?php $cwp_tp_buynow = esc_attr( $cwp_tp_buynow ); ?>
-
-	<label for="<?php echo $this->get_field_id( 'cwp_tp_buynow' ); ?>"><?php _e( 'Buy Now text:', "cwppos" ); ?></label>
-
-	<input id="<?php echo $this->get_field_id( 'cwp_tp_buynow' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_buynow' ); ?>" class="widefat" type="text" value="<?php echo $cwp_tp_buynow; ?>" />
-
-	</p>
-
-	<p>
-
-	<?php $cwp_tp_readreview = esc_attr( $cwp_tp_readreview ); ?>
-
-	<label for="<?php echo $this->get_field_id( 'cwp_tp_readreview' ); ?>"><?php _e( 'Read Review text:', "cwppos" ); ?></label>
-
-	<input id="<?php echo $this->get_field_id( 'cwp_tp_readreview' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_readreview' ); ?>" class="widefat" type="text" value="<?php echo $cwp_tp_readreview; ?>" />
-
-	</p>
 
 	<p>
 
 	<?php $cwp_tp_layout = esc_attr( $cwp_tp_layout ); ?>
 
 	<label for="<?php echo $this->get_field_id( 'cwp_tp_layout' ); ?>"><?php _e( 'Layout:', "cwppos" ); ?></label>
-
-	<select id="<?php echo $this->get_field_id( 'cwp_tp_layout' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_layout' ); ?>">
 
 	<?php 
 
@@ -300,17 +283,42 @@ array( 'description' => __( 'This widget displays the latest products based on t
     
         foreach ($layouts as $key => $val):
             $extra      = "";
-            if($key == $cwp_tp_layout) $extra = "selected";
+            if($key == $cwp_tp_layout) $extra = "checked";
 
-            echo "<option value='{$key}' {$extra}>{$val}</option>";
+            $id         = strtolower(str_replace(" ", "", $val));
+    ?>
+                <br>
+                <input type="radio" name="<?php echo $this->get_field_name( 'cwp_tp_layout' ); ?>" value="<?php echo $key;?>" id="<?php echo $id."style"?>" <?php echo $extra;?> class="stylestyle"><label for="<?php echo $id."style";?>" class="stylestyle"><?php echo $val;?></label>
+                <span class="styleimg" id="<?php echo $id."style"?>img">
+                    <img src="<?php echo WPPR_URL . "/assets/".$id. ".png";?>">
+                </span>
+    <?php
 	    endforeach;
     ?>
 
-	</select>
+	</p>
+
+	<p class="customField" style="display: none">
+
+	<?php $cwp_tp_buynow = esc_attr( $cwp_tp_buynow ); ?>
+
+	<label for="<?php echo $this->get_field_id( 'cwp_tp_buynow' ); ?>"><?php _e( 'Buy Now text:', "cwppos" ); ?></label>
+
+	<input id="<?php echo $this->get_field_id( 'cwp_tp_buynow' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_buynow' ); ?>" class="widefat" type="text" value="<?php echo $cwp_tp_buynow; ?>" />
 
 	</p>
 
-	<p id="ratingPara" style="display: none">
+	<p class="customField" style="display: none">
+
+	<?php $cwp_tp_readreview = esc_attr( $cwp_tp_readreview ); ?>
+
+	<label for="<?php echo $this->get_field_id( 'cwp_tp_readreview' ); ?>"><?php _e( 'Read Review text:', "cwppos" ); ?></label>
+
+	<input id="<?php echo $this->get_field_id( 'cwp_tp_readreview' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_readreview' ); ?>" class="widefat" type="text" value="<?php echo $cwp_tp_readreview; ?>" />
+
+	</p>
+
+	<p class="customField" style="display: none">
 
 	<?php $cwp_tp_rating_type = esc_attr( $cwp_tp_rating_type ); ?>
 
@@ -321,8 +329,8 @@ array( 'description' => __( 'This widget displays the latest products based on t
 	<?php 
 
         $ratingTypes    = array(
-            "round"     => __("Round", "cwppos"),
             "star"      => __("Star", "cwppos"),
+            "round"     => __("Round", "cwppos"),
         );
     
         foreach ($ratingTypes as $key => $val):
@@ -338,7 +346,8 @@ array( 'description' => __( 'This widget displays the latest products based on t
 	</p>
 
     <?php // Added by Ash/Upwork ?>
-    <p>
+
+	<p>
 
 	<label for="<?php echo $this->get_field_id( 'title_type' ); ?>"><?php _e( 'Display Product Titles :', "cwppos" ); ?></label>
 
@@ -378,6 +387,7 @@ array( 'description' => __( 'This widget displays the latest products based on t
         $instance['cwp_tp_layout'] = ( ! empty( $new_instance['cwp_tp_layout'] ) ) ? strip_tags( $new_instance['cwp_tp_layout'] ) : '';
         $instance['cwp_tp_rating_type'] = ( ! empty( $new_instance['cwp_tp_rating_type'] ) ) ? strip_tags( $new_instance['cwp_tp_rating_type'] ) : '';
         // Added by Ash/Upwork
+
 		return $instance;
 
 	}

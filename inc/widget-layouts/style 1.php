@@ -4,6 +4,10 @@
 
 			$product_image = wppr_get_image_id(get_the_ID(),get_post_meta(get_the_ID(), "cwp_rev_product_image", true),'wppr_widget_image');
 			$product_title = ($post_type==true) ? get_post_meta($cwp_products_loop->post->ID, "cwp_rev_product_name", true)  :  get_the_title();
+            $product_title_display  = $product_title;
+            if(strlen($product_title_display) > self::RESTRICT_TITLE_CHARS){
+                $product_title_display  = substr($product_title_display, 0, self::RESTRICT_TITLE_CHARS) . "...";
+            }
             $affiliate_link = get_post_meta(get_the_ID(), "cwp_product_affiliate_link", true);
             $review_link = get_the_permalink();
 			?>
@@ -21,7 +25,7 @@
                     </a>
                 </div>
                 <div class="prodrowright">
-                    <p><strong><?php echo $product_title; ?></strong></p>
+                    <p><strong><?php echo $product_title_display; ?></strong></p>
                         <?php
                         for($i=1; $i<6; $i++) {
                             ${"option".$i."_content"} = get_post_meta($cwp_products_loop->post->ID, "option_".$i."_content", true);
