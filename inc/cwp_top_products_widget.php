@@ -123,6 +123,22 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 
         // Added by Ash/Upwork
+        if ( !isset( $instance[ 'cwp_tp_buynow' ]) ) {
+			$instance[ 'cwp_tp_buynow' ]  = __("Buy Now", "cwppos");
+        }
+
+        if ( !isset( $instance[ 'cwp_tp_readreview' ]) ) {
+            $instance[ 'cwp_tp_readreview' ]    = __("Read Review", "cwppos");
+        }
+
+        if ( !isset( $instance[ 'cwp_tp_layout' ]) ) {
+			$instance[ 'cwp_tp_layout' ]    = "default.php";
+        }
+
+        if ( !isset( $instance[ 'cwp_tp_rating_type' ]) ) {
+			$instance[ 'cwp_tp_rating_type' ]   = "round";
+        }
+
         include trailingslashit(dirname(__FILE__)) . "/widget-layouts/" . $instance['cwp_tp_layout'];
         // Added by Ash/Upwork
 
@@ -188,7 +204,7 @@ array( 'description' => __( 'This widget displays the top products based on thei
 			$cwp_tp_readreview  = $instance[ 'cwp_tp_readreview' ];
         }
 
-        $cwp_tp_layout          = "";
+        $cwp_tp_layout          = "default.php";
         if ( isset( $instance[ 'cwp_tp_layout' ]) ) {
 			$cwp_tp_layout  = $instance[ 'cwp_tp_layout' ];
         }
