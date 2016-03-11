@@ -301,12 +301,13 @@ array( 'description' => __( 'This widget displays the latest products based on t
             $extra      = "";
             if($key == $cwp_tp_layout) $extra = "checked";
 
-            $id         = strtolower(str_replace(" ", "", $val));
+            $styleName  = strtolower(str_replace(" ", "", $val));
+            $id         = $this->get_field_id($styleName);
     ?>
                 <br>
                 <input type="radio" name="<?php echo $this->get_field_name( 'cwp_tp_layout' ); ?>" value="<?php echo $key;?>" id="<?php echo $id."style"?>" <?php echo $extra;?> class="stylestyle"><label for="<?php echo $id."style";?>" class="stylestyle"><?php echo $val;?></label>
                 <span class="styleimg" id="<?php echo $id."style"?>img">
-                    <img src="<?php echo WPPR_URL . "/assets/".$id. ".png";?>">
+                    <img src="<?php echo WPPR_URL . "/assets/".$styleName. ".png";?>">
                 </span>
     <?php
 	    endforeach;
