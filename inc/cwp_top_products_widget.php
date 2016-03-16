@@ -46,12 +46,14 @@ array( 'description' => __( 'This widget displays the top products based on thei
     public function adminAssets(){
         if(is_admin()){
             wp_enqueue_style( 'cwp-widget-admin-css',  WPPR_URL.'/css/cwppos-widget-admin.css' );
-            wp_enqueue_script( 'cwp-widget-script', WPPR_URL.'/javascript/widget.js');
-            wp_localize_script("cwp-widget-script", "cwpw", array(
-                "layout"        => $this->get_field_id( 'cwp_tp_layout' ),
+
+            wp_register_script('cwp-widget-script-top', WPPR_URL.'/javascript/widget-top.js');
+            wp_localize_script("cwp-widget-script-top", "cwpw_top", array(
+                "widgetName"    => $this->id_base,
                 "imageCheckbox" => $this->get_field_id( 'show_image' ),
                 "ratingSelect"  => $this->get_field_id( 'cwp_tp_rating_type' )
             ));
+            wp_enqueue_script('cwp-widget-script-top');
         }
     }
     // Added by Ash/Upwork
