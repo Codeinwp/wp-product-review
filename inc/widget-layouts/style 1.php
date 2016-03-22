@@ -46,14 +46,14 @@
                         <?php
                             }else{
                         ?>
-                            <p>
-                                <div class='rating'><div style='width:<?php echo $review_score; ?>%;'><?php echo $review_score; ?></div></div>
-                            </p>
+                                    <div class="rating">
+                                        <div style="width:<?php echo $review_score; ?>%;"> <?php echo $review_score; ?></div>
+                                    </div>
                         <?php
                             }
                         }
                         ?>
-                    <p>
+                    <p class="wppr-style1-buttons">
                        <a href='<?php echo $affiliate_link;?>' rel='nofollow' target='_blank' class='bttn'><?php _e($instance['cwp_tp_buynow'], "cwppos");?></a> 
                        <a href='<?php echo $review_link;?>' rel='nofollow' target='_blank' class='bttn'><?php _e($instance['cwp_tp_readreview'], "cwppos");?></a> 
                     </p>
