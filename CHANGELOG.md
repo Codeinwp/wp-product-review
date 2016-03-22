@@ -1,5 +1,31 @@
 
 
+### 2.8.1 - 22/03/2016
+
+ Changes: 
+
+
+ * Fix the undefined wppr_id error
+ * Fix the undefined hide_button2 error
+ * bug fix: problem with prices display
+
+1) added do_shortcode
+2) added support for filter wppr_price_format
+ * added price filter
+ * support for custom layouts + star rating
+ * removed redundant files
+ * updated version and changelog
+ * fixes as suggested by ionut/marius
+
+1) restrict title to 100 while showing
+2) show a sample image for each style
+ * give default value to style
+ * fixed issue with image overlay
+ * resolved widget behavior on WP 4.4.2
+ * Added new styles for widgets
+Fixed layout bugs for widgets
+
+
 ### 2.7.9 - 16/02/2016
 
  Changes: 
