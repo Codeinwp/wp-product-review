@@ -43,7 +43,7 @@ function cwp_review_meta_boxes(){
     endforeach;
     wp_reset_postdata();
     
-    $p_meta = get_post_meta ($wppr_id);
+    $p_meta = isset($wppr_id ) ? get_post_meta ($wppr_id) : array();
 
     if (isset( $cwp_review_stored_meta['cwp_image_link'][0])) {
         $checkset = esc_attr( $cwp_review_stored_meta['cwp_image_link'][0]);
@@ -123,7 +123,8 @@ function cwp_review_meta_boxes(){
                     }
 
                     ?>"/>
-                    <?php 
+                    <?php
+                    $hide_button2 = false;
                     if (!isset($cwp_review_stored_meta['cwp_product_affiliate_text2'][0])) {
                         $hide_button2 = true;
                         ?>

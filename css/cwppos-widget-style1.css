@@ -1,0 +1,44 @@
+.prodlist .prodrow {margin: 20px; padding: 20px 0px; width: 100%;}
+.prodlist .prodrow .prodrowleft {width: 30%; float: left;}
+.prodlist .prodrow .prodrowright {width: 60%; float: right;}
+.prodlist .prodrow .prodrowright p {margin: 0px 0px 10px 0px; line-height: 18px;}
+.clear {clear: both;}
+
+.cwp-review-chart.relative {position: relative;}
+.cwp-review-chart.absolute {position: absolute;}
+
+.prodlist .prodrow .prodrowright .bttn{
+
+  border-radius: 3px;
+
+  background-color: #3baeda;
+
+  line-height: 36px;
+
+  font-size: 12px;
+
+  font-weight: bold;
+
+  padding: 0;
+
+  color: #fff !important;
+
+  text-transform: uppercase;
+
+  text-decoration: none;
+
+  white-space: nowrap;
+  
+  transition: all 0.5s ease;
+
+  padding: 5px;
+
+}
+
+
+
+.prodlist .prodrow .prodrowright .bttn:hover{
+
+  opacity: 0.8;
+
+}

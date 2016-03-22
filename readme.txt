@@ -72,6 +72,15 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 
 == Changelog ==
 
+**New in 2.8.1**
+
+- Added different style for widgets
+- Fixed some layout bugs for widgets
+
+**New in 2.8.0**
+
+- Added a filter for price issues
+
 **New in 2.7.9**
 
 - Added support for amazon import in the pro version

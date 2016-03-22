@@ -109,12 +109,20 @@ function cwppos_show_review($id = "") {
 		$p_name = apply_filters("wppr_review_product_name", $id) ;
 
 		if ($p_string!="") {
+            // Added by Ash/Upwork
+            $cwp_price  = do_shortcode($cwp_price);
+            // Added by Ash/Upwork
+
 			$p_price = preg_replace("/[^0-9.,]/","",$cwp_price);
 			$p_currency = preg_replace("/[0-9.,]/","",$cwp_price);
-			if (is_numeric($cwp_price[0]))
-				$p_string = '<span itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span itemprop="price">'.$p_price.'</span><span itemprop="priceCurrency">'.$p_currency.'</span></span>';
-			else
-				$p_string = '<span itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span itemprop="priceCurrency">'.$p_currency.'</span><span itemprop="price">'.$p_price.'</span></span>';
+
+            // Added by Ash/Upwork
+            $p_disable    = apply_filters("wppr_disable_price_richsnippet", FALSE);
+            // Added by Ash/Upwork
+            if(!$p_disable){
+                $p_string = '<span itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span itemprop="priceCurrency">'.$p_currency.'</span><span itemprop="price">'.$p_price.'</span></span>';
+            }
+
 		}
 
 		$return_string  = '<section id="review-statistics"  class="article-section" itemscope itemtype="http://schema.org/Product">
