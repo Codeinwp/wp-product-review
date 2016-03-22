@@ -6,7 +6,6 @@ span.styleimg{
 
 span.styleimg img{
 	position: absolute;
-	top: -120px;
 	left: 10px;
-	opacity: 0.5;
+	border:1px solid  #000;
 }
