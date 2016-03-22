@@ -13,7 +13,7 @@ Easily turn your basic posts into in-depth reviews with ratings, pros and cons, 
 == Description ==
 
 
-> If you want to see a live demo of the review plugin + rich snippets you can check <a href="http://dev2.themeisle.com/reviewgine/?p=11">http://dev2.themeisle.com/reviewgine/?p=11</a>.
+> > If you want to see a live demo of the review plugin + rich snippets you can check <a href="http://demo.themeisle.com/parallax-one/wp-product-review/">http://demo.themeisle.com/parallax-one/wp-product-review/</a>.
 
 
 ### Why to get the PRO add-ons ?
