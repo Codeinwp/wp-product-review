@@ -1,23 +1,24 @@
 (function($, w){
 
     $(document).ready(function(){
-        $(".widget").each(function(){
-            if($(this).attr("id").indexOf(w.widgetName.toLowerCase()) != -1){
-                toggleCustomFields(true, $(this).attr("id"));
-            }
-        });
+        if($(".widget").length > 0){
+            $(".widget").each(function(){
+                if($(this).attr("id").indexOf(w.widgetName.toLowerCase()) != -1){
+                    toggleCustomFields(true, $(this).attr("id"));
+                }
+            });
+        }else{
+            toggleCustomFields(true, "wpcontent");
+        }
     });
 
     function toggleCustomFields(deflt, widgetID){
         var val = getWidgetStyle(widgetID);
         if(val == "default.php"){
-            $("#" + widgetID).find(".customField").hide();
-            $("#" + widgetID).find(".defaultField").show();
+            $("#" + widgetID).find(".wppr-customField").hide();
         }else{
-            if(!deflt) $("#" + widgetID).find("#" + w.ratingSelect).val("star");
-            $("#" + widgetID).find(".customField").show();
-            $("#" + widgetID).find(".defaultField").hide();
-            $("#" + widgetID).find("#" + w.imageCheckbox).prop("checked", true);
+            $("#" + widgetID).find(".wppr-customField").show();
+            if(!deflt) $("#" + widgetID).find("#" + w.imageCheckbox).prop("checked", true);
         }
 
         addListeners(widgetID);
@@ -28,10 +29,10 @@
     });
 
     function addListeners(widgetID){
-        $("#" + widgetID).find("input.stylestyle").on("click", function(e){
+        $("#" + widgetID).find("input.wppr-stylestyle").on("click", function(e){
             toggleCustomFields(false, widgetID);
         });
-        $("#" + widgetID).find("label.stylestyle").hover(function(e){
+        $("#" + widgetID).find("label.wppr-stylestyle").hover(function(e){
             $("#" + $(this).attr("for") + "img").show();
         }, function(e){
             $("#" + $(this).attr("for") + "img").hide();
@@ -39,7 +40,7 @@
     }
 
     function getWidgetStyle(id){
-        var name = $("#" + id).find("input:radio.stylestyle").attr("name");
+        var name = $("#" + id).find("input:radio.wppr-stylestyle").attr("name");
         return $("input:radio[name='" + name + "']:checked").val();
     }
 

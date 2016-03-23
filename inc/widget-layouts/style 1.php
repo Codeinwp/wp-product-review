@@ -1,4 +1,4 @@
-        <div class="prodlist">
+        <div class="wppr-prodlist">
 <?php
 		while($cwp_products_loop->have_posts()) : $cwp_products_loop->the_post();
 
@@ -10,21 +10,21 @@
             }
             $affiliate_link = get_post_meta(get_the_ID(), "cwp_product_affiliate_link", true);
             $review_link = get_the_permalink();
+
+            $showingImg = $show_image==true&&!empty($product_image);
 			?>
 
-            <div class="prodrow">
-                <div class="prodrowleft">
+            <div class="wppr-prodrow">
+                <?php if($showingImg){ ?>
+                <div class="wppr-prodrowleft">
                     <a href="<?php echo $review_link; ?>" class="wppr-col" title="<?php echo $product_title; ?>">
-                        <?php
-		                    if ($show_image==true&&!empty($product_image)) {
-		                ?>
                         <img class="cwp_rev_image wppr-col" src="<?php echo $product_image;?>" alt="<?php echo $product_title; ?>"/>
-                        <?php
-                            }
-                        ?>
                     </a>
                 </div>
-                <div class="prodrowright">
+                <?php
+                    }
+                ?>
+                <div class="wppr-prodrowright <?php echo $showingImg ? "wppr-prodrowrightadjust" : ""?>">
                     <p><strong><?php echo $product_title_display; ?></strong></p>
                         <?php
                         for($i=1; $i<6; $i++) {
@@ -46,7 +46,7 @@
                         <?php
                             }else{
                         ?>
-                                    <div class="rating">
+                                    <div class="wppr-rating">
                                         <div style="width:<?php echo $review_score; ?>%;"> <?php echo $review_score; ?></div>
                                     </div>
                         <?php
@@ -54,8 +54,8 @@
                         }
                         ?>
                     <p class="wppr-style1-buttons">
-                       <a href='<?php echo $affiliate_link;?>' rel='nofollow' target='_blank' class='bttn'><?php _e($instance['cwp_tp_buynow'], "cwppos");?></a> 
-                       <a href='<?php echo $review_link;?>' rel='nofollow' target='_blank' class='bttn'><?php _e($instance['cwp_tp_readreview'], "cwppos");?></a> 
+                       <a href='<?php echo $affiliate_link;?>' rel='nofollow' target='_blank' class='wppr-bttn'><?php _e($instance['cwp_tp_buynow'], "cwppos");?></a> 
+                       <a href='<?php echo $review_link;?>' rel='nofollow' class='wppr-bttn'><?php _e($instance['cwp_tp_readreview'], "cwppos");?></a> 
                     </p>
                 </div>
                 <div class="clear"></div>
