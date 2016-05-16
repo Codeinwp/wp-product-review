@@ -211,9 +211,10 @@ array( 'description' => __( 'This widget displays the top products based on thei
 			$cwp_tp_layout  = $instance[ 'cwp_tp_layout' ];
         }
 
-        $cwp_tp_rating_type     = "round";
-        if ( isset( $instance[ 'cwp_tp_rating_type' ]) ) {
-			$cwp_tp_rating_type = $instance[ 'cwp_tp_rating_type' ];
+        if($cwp_tp_layout == "default.php"){
+            $cwp_tp_rating_type     = "round";
+        }else{
+            $cwp_tp_rating_type     = "star";
         }
         // Added by Ash/Upwork
 
@@ -306,8 +307,8 @@ array( 'description' => __( 'This widget displays the top products based on thei
             $id         = $this->get_field_id($styleName);
     ?>
                 <br>
-                <input type="radio" name="<?php echo $this->get_field_name( 'cwp_tp_layout' ); ?>" value="<?php echo $key;?>" id="<?php echo $id."style"?>" <?php echo $extra;?> class="stylestyle"><label for="<?php echo $id."style";?>" class="stylestyle"><?php echo $val;?></label>
-                <span class="styleimg" id="<?php echo $id."style"?>img">
+                <input type="radio" name="<?php echo $this->get_field_name( 'cwp_tp_layout' ); ?>" value="<?php echo $key;?>" id="<?php echo $id."style"?>" <?php echo $extra;?> class="wppr-stylestyle"><label for="<?php echo $id."style";?>" class="wppr-stylestyle"><?php echo $val;?></label>
+                <span class="wppr-styleimg" id="<?php echo $id."style"?>img">
                     <img src="<?php echo WPPR_URL . "/assets/".$styleName. ".png";?>">
                 </span>
     <?php
@@ -316,7 +317,7 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 	</p>
 
-	<p class="customField" style="display: none">
+	<p class="wppr-customField" style="display: none">
 
 	<?php $cwp_tp_buynow = esc_attr( $cwp_tp_buynow ); ?>
 
@@ -326,40 +327,13 @@ array( 'description' => __( 'This widget displays the top products based on thei
 
 	</p>
 
-	<p class="customField" style="display: none">
+	<p class="wppr-customField" style="display: none">
 
 	<?php $cwp_tp_readreview = esc_attr( $cwp_tp_readreview ); ?>
 
 	<label for="<?php echo $this->get_field_id( 'cwp_tp_readreview' ); ?>"><?php _e( 'Read Review text:', "cwppos" ); ?></label>
 
 	<input id="<?php echo $this->get_field_id( 'cwp_tp_readreview' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_readreview' ); ?>" class="widefat" type="text" value="<?php echo $cwp_tp_readreview; ?>" />
-
-	</p>
-
-	<p class="customField" style="display: none">
-
-	<?php $cwp_tp_rating_type = esc_attr( $cwp_tp_rating_type ); ?>
-
-	<label for="<?php echo $this->get_field_id( 'cwp_tp_rating_type' ); ?>"><?php _e( 'Rating Type:', "cwppos" ); ?></label>
-
-	<select id="<?php echo $this->get_field_id( 'cwp_tp_rating_type' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_rating_type' ); ?>">
-
-	<?php 
-
-        $ratingTypes    = array(
-            "star"      => __("Star", "cwppos"),
-            "round"     => __("Round", "cwppos"),
-        );
-    
-        foreach ($ratingTypes as $key => $val):
-            $extra      = "";
-            if($key == $cwp_tp_rating_type) $extra = "selected";
-
-            echo "<option value='{$key}' {$extra}>{$val}</option>";
-	    endforeach;
-    ?>
-
-	</select>
 
 	</p>
 
@@ -372,7 +346,7 @@ array( 'description' => __( 'This widget displays the top products based on thei
 	<input  id="<?php echo $this->get_field_id( 'title_type' ); ?>" name="<?php echo $this->get_field_name( 'title_type' ); ?>"  type="checkbox" <?php checked( $title_type ); ?>  />
 	</p>
 
-	<p class="defaultField">
+	<p>
 
 	<label for="<?php echo $this->get_field_id( 'show_image' ); ?>"><?php _e( 'Display Product Image :', "cwppos" ); ?></label>
 
