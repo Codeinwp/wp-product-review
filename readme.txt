@@ -72,7 +72,7 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 
 == Changelog ==
 
-**New in 2.8.5**
+**New in 2.8.6**
 
 - Added compatibility with new pro addons
 - Fixed layout issues with the review
