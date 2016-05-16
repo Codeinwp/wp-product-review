@@ -280,6 +280,12 @@ function cwp_review_meta_boxes_save($post_id){
     do_action("wppr-amazon-savefields", $post_id);
     // Added by Ash/Upwork
 
+    // Moved from inside the if loop to here by Ash/Upwork
+    if( isset( $_POST[ 'cwp_meta_box_check' ] ) ) {
+        update_post_meta( $post_id, 'cwp_meta_box_check', sanitize_text_field( $_POST[ 'cwp_meta_box_check' ] ) );
+    }
+    // Moved from inside the if loop to here by Ash/Upwork
+
     if( isset( $_POST[ 'cwp_meta_box_check' ] ) && $_POST[ 'cwp_meta_box_check' ]=="Yes") {
 
     if( isset( $_POST[ 'cwp_rev_product_name' ] ) ) {
@@ -289,14 +295,6 @@ function cwp_review_meta_boxes_save($post_id){
     if( isset( $_POST[ 'cwp_rev_price' ] ) ) {
         update_post_meta( $post_id, 'cwp_rev_price', sanitize_text_field( $_POST[ 'cwp_rev_price' ] ) );
     }
-
-    
-
-
-    if( isset( $_POST[ 'cwp_meta_box_check' ] ) ) {
-        update_post_meta( $post_id, 'cwp_meta_box_check', sanitize_text_field( $_POST[ 'cwp_meta_box_check' ] ) );
-    }
-
 
     if( isset( $_POST[ 'cwp_image_link' ] ) ) {
         update_post_meta( $post_id, 'cwp_image_link', sanitize_text_field( $_POST[ 'cwp_image_link' ] ) );
