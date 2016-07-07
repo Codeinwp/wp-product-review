@@ -72,6 +72,11 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 
 == Changelog ==
 
+**New in 2.8.7**
+
+- Fixed img tag closing tag issue
+- Fixed rich snippet problem when comment influence is off 
+
 **New in 2.8.6**
 
 - Added compatibility with new pro addons
