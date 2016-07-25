@@ -7,12 +7,12 @@
  * @since 1.0.0
  *
  *
- * Plugin Name: WP Product Review
+ * Plugin Name: WP Product Review Lite
  * Description: The highest rated and most complete review plugin, now with rich snippets support. Easily turn your basic posts into in-depth reviews.
  * Version: 2.8.7
  * Author: Themeisle
- * Author URI:  https://themeisle.com/
- * Plugin URI: https://themeisle.com/plugins/wp-product-review-lite/
+ * Author URI:  http://themeisle.com/
+ * Plugin URI: http://themeisle.com/plugins/wp-product-review/
  * Requires at least: 3.5
  * Tested up to: 4.3.1
  * Stable tag: trunk
