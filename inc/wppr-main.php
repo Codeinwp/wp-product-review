@@ -235,7 +235,7 @@ function cwppos_show_review($id = "") {
 		$return_string .=  apply_filters( 'wppr_review_pros_text',$id, __(cwppos("cwppos_pros_text"), "cwppos")).' <ul>';
 		for($i=1;$i<=cwppos("cwppos_option_nr");$i++) {
 			if(!empty(${"pro_option_".$i})) {
-				$return_string .=  '   <li>- '.${"pro_option_".$i}.'</li>';
+				$return_string .=  '   <li>'.${"pro_option_".$i}.'</li>';
 			}
 		}
 
@@ -246,7 +246,7 @@ function cwppos_show_review($id = "") {
 
 		for($i=1;$i<=cwppos("cwppos_option_nr");$i++){
 			if(!empty(${"cons_option_".$i})) {
-				$return_string .=  '   <li>- '.${"cons_option_".$i}.'</li>';
+				$return_string .=  '   <li>'.${"cons_option_".$i}.'</li>';
 			}
 
 		}
@@ -403,13 +403,6 @@ function cwppos_pac_print() {
 
 }
 
-/**
- * Addons menu item
- */
-function cwp_addons_menu() {
-	add_submenu_page( 'cwppos_options', __( 'WP Product Review Add-ons/Extensions', 'cwppos_options' ),  __( 'Add-ons', 'cwppos' ) , 'manage_options', 'wp-addons', 'cwp_addons');
-}
-
 
 function cwppos_dynamic_stylesheet() {
 	$options = cwppos();
@@ -519,7 +512,6 @@ add_action('init', 'cwppos_pac_register');
 add_action('wp_head', 'cwppos_pac_print');
 add_action('wp_footer','cwppos_dynamic_stylesheet');
 add_action( 'admin_init', 'cwppos_pac_admin_init' );
-add_action('admin_menu', 'cwp_addons_menu');
 add_action('admin_enqueue_scripts', 'custom_bar_icon');
 
 if (!class_exists('TAV_Remote_Notification_Client')) require( WPPR_PATH.'/inc/class-remote-notification-client.php' );
