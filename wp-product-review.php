@@ -35,6 +35,5 @@ if ( wp_get_theme() !== 'Reviewgine Affiliate PRO' ) {
 	include 'inc/cwp_latest_products_widget.php';
 	include 'inc/cwp_comment.php';
 	include 'inc/cwp_js_preloader.php';
-	include 'inc/cwp-addons.php';
 	include 'inc/wppr-main.php';
 }
