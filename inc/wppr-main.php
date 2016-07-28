@@ -135,8 +135,8 @@ function cwppos_show_review($id = "") {
                                 <div class="review-wu-left">
                                     <div class="rev-wu-image">';
 
-		$product_image = get_post_meta($id, "cwp_rev_product_image", true);
-		$imgurl = get_post_meta($id, "cwp_image_link", true);
+		$product_image = do_shortcode(get_post_meta($id, "cwp_rev_product_image", true));
+		$imgurl = do_shortcode(get_post_meta($id, "cwp_image_link", true));
 		$lightbox = "";
 		$feat_image = wp_get_attachment_url( get_post_thumbnail_id( $id ) );
 		
@@ -156,15 +156,15 @@ function cwppos_show_review($id = "") {
 				wp_enqueue_style("img-lightbox-css", WPPR_URL.'/css/lightbox.css' , array(), WPPR_LITE_VERSION  );
 			}
 		}else{
-			$product_image = get_post_meta($id, "cwp_product_affiliate_link", true);
+			$product_image = do_shortcode(get_post_meta($id, "cwp_product_affiliate_link", true));
 		}
 		//print_r($product_image);
-		$return_string .= '<a href="'.$product_image.'" '.$lightbox.'  rel="nofollow" target="_blank"><img itemprop="image" src="'.$product_image_cropped.'" alt="'. get_post_meta($id, "cwp_rev_product_name", true).'" class="photo photo-wrapup wppr-product-image"  /></a>';
+		$return_string .= '<a href="'.$product_image.'" '.$lightbox.'  rel="nofollow" target="_blank"><img itemprop="image" src="'.$product_image_cropped.'" alt="'. do_shortcode(get_post_meta($id, "cwp_rev_product_name", true)).'" class="photo photo-wrapup wppr-product-image"  /></a>';
 
 		$rating = cwppos_calc_overall_rating($id);
 
 		for($i=1; $i<=cwppos("cwppos_option_nr"); $i++) {
-			${"option".$i."_content"} = get_post_meta($id, "option_".$i."_content", true);
+			${"option".$i."_content"} = do_shortcode(get_post_meta($id, "option_".$i."_content", true));
 
 			if(empty(${"option".$i."_content"})) {
 				${"option".$i."_content"} = __("Default Feature ".$i, "cwppos");
@@ -187,7 +187,7 @@ function cwppos_show_review($id = "") {
 		{
 			$return_string .= '<span itemscope itemtype="http://schema.org/Review"><span itemprop="author" itemscope itemtype="http://schema.org/Person"  >
                                          <meta itemprop="name"  content="'.get_the_author().'"/>
-                                    </span><span itemprop="itemReviewed" itemscope itemtype="http://schema.org/Product"><meta itemprop="name" content="'.get_post_meta($id,'cwp_rev_product_name',true).'"/></span><div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="cwp-review-percentage" data-percent="';
+                                    </span><span itemprop="itemReviewed" itemscope itemtype="http://schema.org/Product"><meta itemprop="name" content="'.do_shortcode(get_post_meta($id,'cwp_rev_product_name',true)).'"/></span><div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="cwp-review-percentage" data-percent="';
 			$return_string .= $rating['overall'] . '"><span itemprop="ratingValue" class="cwp-review-rating">' . $divrating . '</span> <meta itemprop="bestRating" content="10">  </div></span>';
 
 			
@@ -218,14 +218,14 @@ function cwppos_show_review($id = "") {
                                 <div class="pros">';
 
 		for($i=1; $i<=cwppos("cwppos_option_nr"); $i++) {
-			${"pro_option_".$i} = get_post_meta($id, "cwp_option_".$i."_pro", true);
+			${"pro_option_".$i} = do_shortcode(get_post_meta($id, "cwp_option_".$i."_pro", true));
 			if(empty(${"pro_option_".$i})) {
 				${"pro_option_".$i}  = "" ;
 			}
 		}
 
 		for($i=1; $i<=cwppos("cwppos_option_nr"); $i++) {
-			${"cons_option_".$i} = get_post_meta($id, "cwp_option_".$i."_cons", true);
+			${"cons_option_".$i} = do_shortcode(get_post_meta($id, "cwp_option_".$i."_cons", true));
 			if(empty(${"cons_option_".$i})) {
 				${"cons_option_".$i}  = "";
 			}
@@ -263,10 +263,10 @@ function cwppos_show_review($id = "") {
 			$return_string.='<div style="font-size:12px;width:100%;float:right"><p style="float:right;">Powered by <a href="http://wordpress.org/plugins/wp-product-review/" target="_blank" rel="nofollow" > WP Product Review</a></p></div>';
 		}
 
-		$affiliate_text = get_post_meta($id, "cwp_product_affiliate_text", true);
-		$affiliate_link = get_post_meta($id, "cwp_product_affiliate_link", true);
-		$affiliate_text2 = get_post_meta($id, "cwp_product_affiliate_text2", true);
-		$affiliate_link2 = get_post_meta($id, "cwp_product_affiliate_link2", true);
+		$affiliate_text = do_shortcode(get_post_meta($id, "cwp_product_affiliate_text", true));
+		$affiliate_link = do_shortcode(get_post_meta($id, "cwp_product_affiliate_link", true));
+		$affiliate_text2 = do_shortcode(get_post_meta($id, "cwp_product_affiliate_text2", true));
+		$affiliate_link2 = do_shortcode(get_post_meta($id, "cwp_product_affiliate_link2", true));
 
 		if(!empty($affiliate_text2) && !empty($affiliate_link2)) {
 			$bclass="affiliate-button2 affiliate-button";
