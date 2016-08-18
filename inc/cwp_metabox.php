@@ -172,7 +172,7 @@ function cwp_review_meta_boxes(){
         <h4><?php  _e("Product Options Setting", "cwppos"); ?></h4>
         <div class="preloadInfo"><?php  _e("Insert your options and their grades. Grading must be done <b><i>from 0 to 100</i></b>.");
          if(cwppos("cwppos_show_poweredby") !== 'yes' && !class_exists('CWP_PR_PRO_Core') && !function_exists('wppr_ep_js_preloader'))  
-        _e(" In order to be able to automatically preload your settings from another posts, you need to get the preloader add-on or the PRO bundle add-on", "cwppos"); ?>
+        _e(" In order to be able to automatically load your options from another posts, you need the PRO add-on", "cwppos"); ?>
         </div><?php  if(cwppos("cwppos_show_poweredby") === 'yes' || class_exists('CWP_PR_PRO_Core')|| function_exists('wppr_ep_js_preloader')) { ?>
             <a href="#" class="preload_info"><?php  _e("Preload Info","cwppos"); ?></a>
         <?php
@@ -180,7 +180,7 @@ function cwp_review_meta_boxes(){
             $pageURL = admin_url('admin.php?page=cwppos_options#tab-upgrade_to_pro');
             $pageURL = str_replace(":80","",$pageURL);
             ?>
-            <a href="http://themeisle.com/plugins/wp-product-review-pro-add-on/" target="_blank" class="preload_info_upsell"><?php  _e("Preload Info","cwppos"); ?></a>
+            <a href="http://bit.ly/2aYWkgu" target="_blank" class="preload_info_upsell"><?php  _e("View Preload features","cwppos"); ?></a>
         <?php  } ?>
     </div><!-- end .review-settings-notice -->
     <div class="review-settings-group">
@@ -257,7 +257,7 @@ function cwp_review_meta_boxes(){
     </div><!-- end .review-settings group -->
 </div>
 <?php if(!shortcode_exists("P_REVIEW")): ?>
-             <label  > You can use the shortcode <b>[P_REVIEW]</b> to show a review you already made or <b>[wpr_landing]</b> to display a comparision table of them. The shortcodes are available on the <a target="_blank" href="http://themeisle.com/plugins/wp-product-review-pro-add-on/">Pro Bundle</a><br/><br/></label>
+             <label  > You can use the shortcode <b>[P_REVIEW]</b> to show a review you already made or <b>[wpr_landing]</b> to display a comparision table of them. The shortcodes are available on the <a target="_blank" href="http://bit.ly/2bpKIlP">Pro Bundle</a><br/><br/></label>
         <?php endif; ?>
     </div>
 <?php

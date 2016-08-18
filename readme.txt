@@ -3,7 +3,7 @@ Contributors: codeinwp,marius2012,marius_codeinwp,hardeepasrani,themeisle,Madali
 Tags:  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin,  google rating, product review, rating, review, star rating, user rating, wp rating, wp review,  google, hreview,rich snippets,seo,snippet
 Author URI: http://themeisle.com
 Requires at least: 3.5
-Tested up to: 4.5.2
+Tested up to: 4.6
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -72,10 +72,16 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 
 == Changelog ==
 
+**New in 2.9.0**
+
+- Added shortcode support on all review fields
+- Removed addons page
+
+
 **New in 2.8.7**
 
 - Fixed img tag closing tag issue
-- Fixed rich snippet problem when comment influence is off 
+- Fixed rich snippet problem when comment influence is off
 
 **New in 2.8.6**
 

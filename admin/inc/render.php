@@ -247,7 +247,7 @@
                         } else {
                         	$html .= "* Currently set to the default styling</span>";
                         } } else {
-                        	$html .= '<span style="color:red;">'. __('You need the custom icon <a style="color:red;" href="http://themeisle.com/plugins/wppr-custom-icon/" target="_blank" >add-on</a> in order to change this.',"cwppos") . "</span>";
+                        	$html .= '<span style="color:red;">'. __('You need the PRO <a style="color:red;" href="http://bit.ly/2bhylar" target="_blank" >add-on</a> in order to change the review icons.',"cwppos") . "</span>";
                     	}
                     $html .= "</li>";
 
@@ -554,8 +554,8 @@
 		public function add_button($tabid,$name,$description,$id,$class = ''){
 		$html = '
 				<div class="controls '.$class.' ">
-				<div class="explain">'.$name.'</div><p class="field_description">'.$description.'</p>
-				<a href="'.get_bloginfo('wpurl') . '/wp-admin/admin.php?page=wp-addons'.'" class="button" style="color:red; text-decoration: none; ">'.$name.'</a>
+				<div class="explain">'.$name.'</div>
+				<a href="https://themeisle.com/plugins/wp-product-review-pro-add-on/" class="button" style="color:red; text-decoration: none; ">'.$name.'</a>
 				</div></div>';
 				$this->tabs[$tabid]["elements"][] = array(
 						"type"=>"button",
