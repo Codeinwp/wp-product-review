@@ -1,4 +1,11 @@
 
+### 2.9.0 - 18/08/2016
+**Changes:** 
+- Removed addons page
+- Changed title and urls
+- Updated Upsell texts
+- Apply do_shortcode on all review fields.
+
 ### 2.8.7 - 07/07/2016
 **Changes:** 
 - Fixed img closing tag issue
