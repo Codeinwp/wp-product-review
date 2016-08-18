@@ -1,4 +1,9 @@
 
+### 2.9.1 - 18/08/2016
+**Changes:** 
+- Removed buy now or read review if text values are empty
+- Fixed undefined notice on plugin activation.
+
 ### 2.9.0 - 18/08/2016
 **Changes:** 
 - Removed addons page
