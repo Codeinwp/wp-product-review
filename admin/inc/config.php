@@ -553,57 +553,7 @@
 
 							 )
 
-						) ,
-
-
-						array(
-
-							 "type"=>"tab",
-
-							 "name"=>"Get Pro features",
-
-							 "options"=>array(
-
-
-
-								array(
-
-									"type"=>"title",
-
-									"name"=>"In order to use the PRO features, you have 2 options ( Shortcode can't be used with the powered_by link) :"
-
-								),
-								array(
-
-									"type"=>"select",
-
-									"name"=>"Display the Powered by link ?",
-
-									"description"=>"If you wanna use our Preloader functionality and custom icons without paying for the plugin, just activate this box and a nofollow link will be added to your review posts",
-
-									"id"=>"cwppos_show_poweredby",
-
-									"options"=>array("yes"=>"Yes","no"=>"No"),
-
-									"default"=>"no"
-
-								),
-								array(
-
-									"type"=>"button",
-
-									"name"=>"Buy the add-ons or the PRO bundle ",
-
-									"description"=>"See the extensions",
-
-									"id"=>"cwppos_show_buypro",
-
-
-									"default"=>"no"
-
-								)
-								)
-							 )
+						)
 
 
 
