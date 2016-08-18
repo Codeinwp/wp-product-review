@@ -54,8 +54,12 @@
                         }
                         ?>
                     <p class="wppr-style1-buttons">
-                       <a href='<?php echo $affiliate_link;?>' rel='nofollow' target='_blank' class='wppr-bttn'><?php _e($instance['cwp_tp_buynow'], "cwppos");?></a> 
-                       <a href='<?php echo $review_link;?>' rel='nofollow' class='wppr-bttn'><?php _e($instance['cwp_tp_readreview'], "cwppos");?></a> 
+                        <?php if (!empty($instance['cwp_tp_buynow'])) { ?>
+                            <a href='<?php echo $affiliate_link;?>' rel='nofollow' target='_blank' class='wppr-bttn'><?php _e($instance['cwp_tp_buynow'], "cwppos");?></a> 
+                        <?php } ?>
+                        <?php if (!empty($instance['cwp_tp_readreview'])) { ?>
+                            <a href='<?php echo $review_link;?>' rel='nofollow' class='wppr-bttn'><?php _e($instance['cwp_tp_readreview'], "cwppos");?></a> 
+                        <?php } ?>
                     </p>
                 </div>
                 <div class="clear"></div>
