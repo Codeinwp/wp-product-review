@@ -340,7 +340,7 @@ function wppr_get_image_id($post_id, $image_url = "", $size = "thumbnail" ) {
 function custom_bar_icon() {
 	$options = cwppos();
 
-	if ($options['cwppos_show_poweredby']=="yes" || function_exists("wppr_ci_custom_bar_icon") || class_exists('CWP_PR_PRO_Core')) {
+	if (( isset($options['cwppos_show_poweredby']) && $options['cwppos_show_poweredby'] == "yes" ) || function_exists("wppr_ci_custom_bar_icon") || class_exists('CWP_PR_PRO_Core')) {
 		wp_register_script("cwp-custom-bar-icon", WPPR_URL.'/javascript/custom-bar-icon.js', false, "1.0", "all");
 		wp_enqueue_script("cwp-custom-bar-icon");
 	}
@@ -353,7 +353,7 @@ function cwppos_pac_register() {
 function cwp_def_settings() {
 	global $post;
 	$options = cwppos();
-	if (function_exists('wppr_ci_custom_bar_icon') || $options['cwppos_show_poweredby']=="yes") {
+	if (function_exists('wppr_ci_custom_bar_icon') || ( isset($options['cwppos_show_poweredby']) && $options['cwppos_show_poweredby']=="yes" ) ) {
 		$isSetToPro = true;
 	} else {
 		$isSetToPro = false;
