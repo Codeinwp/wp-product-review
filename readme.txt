@@ -72,6 +72,11 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 
 == Changelog ==
 
+**New in 2.9.1**
+
+- Fixed undefined notice on plugin activation
+- Removed review buttons on links when the values are empty for widgets
+
 **New in 2.9.0**
 
 - Added shortcode support on all review fields
