@@ -1,9 +1,9 @@
 <?php
 
-require_once dirname(__FILE__) . "/config.php";
-
 class ABTesting
 {
+    private $config;
+    private $slug;
 
     public function __construct()
     {
@@ -12,26 +12,27 @@ class ABTesting
 
     private function loadHooks()
     {
-        global $ABTESTING_PLUGIN_SLUG, $ABTESTING_CONFIG;
+        global $ABTESTING_PLUGIN_SLUG;
+        
+        $this->slug     = $ABTESTING_PLUGIN_SLUG;
+        $this->config   = apply_filters($this->slug . "_upsell_config", array());
 
-        foreach ($ABTESTING_CONFIG as $section=>$values) {
-            add_filter($ABTESTING_PLUGIN_SLUG . "_" . $section . "_upsell_text", array($this, "getUpsellText"), 10, 2);
+        foreach ($this->config as $section=>$values) {
+            add_filter($this->slug . "_" . $section . "_upsell_text", array($this, "getUpsellText"), 10, 2);
         }
     }
 
-    public function getUpsellText($default, $escapeHTML=false)
+    public function getUpsellText($default="", $escapeHTML=false)
     {
-        global $ABTESTING_PLUGIN_SLUG, $ABTESTING_CONFIG;
-
         $filter     = current_filter();
-        if (strpos($filter, $ABTESTING_PLUGIN_SLUG) !== false) {
-            $attr       = explode("_", str_replace($ABTESTING_PLUGIN_SLUG . "_", "", $filter));
+        if (strpos($filter, $this->slug) !== false) {
+            $attr       = explode("_", str_replace($this->slug . "_", "", $filter));
             if (is_array($attr) && !empty($attr)) {
                 $section    = $attr[0];
-                if (array_key_exists($section, $ABTESTING_CONFIG)) {
-                    $values     = $ABTESTING_CONFIG[$section];
+                if (array_key_exists($section, $this->config)) {
+                    $values     = $this->config[$section];
                     $html       = $values[rand(0, count($values) - 1)];
-                    $html       = __($html, $ABTESTING_PLUGIN_SLUG);
+                    $html       = __($html, $this->slug);
                     return $escapeHTML ? esc_html($html) : $html;
                 }
             }
