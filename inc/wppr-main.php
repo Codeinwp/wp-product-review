@@ -88,14 +88,27 @@ function cwppos_calc_overall_rating($id){
 
 }
 
-function cwppos_show_review($id = "") {
+function cwppos_show_review($id="", $visual="full") {
 	global $post;
 	if ( post_password_required($post) ) return false;
 
-	if ($id=="")
+	if ($id=="") {
 		$id = $post->ID;
+    }
+    
+    switch ($visual) {
+        case "full":
+            return cwppos_show_review_full($id);
+        case "yes":
+			$r = cwppos_calc_overall_rating($id);
+			return '<div class="cwp-review-chart cwp-chart-embed"><div class="cwp-review-percentage" data-percent="'.$r['overall'].'"><span  class="cwp-review-rating">'.$r['overall'].'</span></div></div>';
+        case "no":
+			$r = cwppos_calc_overall_rating($id);
+			return round($r['overall']/10);
+    }
+}
 
-
+function cwppos_show_review_full($id){
 	$cwp_review_stored_meta = get_post_meta( $id );
 	$return_string = "";
 
