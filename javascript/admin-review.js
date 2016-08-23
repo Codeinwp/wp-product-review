@@ -1,7 +1,5 @@
 jQuery(document).ready(function(){
 
-    if (ispro.value ==true) jQuery("#cwp_nav li:last").hide();
-    
     var meta_image_frame;
 
     
