@@ -163,25 +163,22 @@ function cwp_review_meta_boxes(){
 
                     ?>"/>
                 </li>
-               
+
 
             </ul>
         </div><!-- end .review-settings-group option -->
     </div><!-- end .review-settings group -->
     <div class="review-settings-notice">
         <h4><?php  _e("Product Options Setting", "cwppos"); ?></h4>
-        <div class="preloadInfo"><?php  _e("Insert your options and their grades. Grading must be done <b><i>from 0 to 100</i></b>.");
-         if(cwppos("cwppos_show_poweredby") !== 'yes' && !class_exists('CWP_PR_PRO_Core') && !function_exists('wppr_ep_js_preloader'))  
-        _e(" In order to be able to automatically load your options from another posts, you need the PRO add-on", "cwppos"); ?>
-        </div><?php  if(cwppos("cwppos_show_poweredby") === 'yes' || class_exists('CWP_PR_PRO_Core')|| function_exists('wppr_ep_js_preloader')) { ?>
+        <?php  _e("Insert your options and their grades. Grading must be done <b><i>from 0 to 100</i></b>.");
+         if(cwppos("cwppos_show_poweredby") === 'yes' || class_exists('CWP_PR_PRO_Core')|| function_exists('wppr_ep_js_preloader')) { ?>
             <a href="#" class="preload_info"><?php  _e("Preload Info","cwppos"); ?></a>
         <?php
         } else {
             $pageURL = admin_url('admin.php?page=cwppos_options#tab-upgrade_to_pro');
             $pageURL = str_replace(":80","",$pageURL);
-            ?>
-            <a href="http://bit.ly/2aYWkgu" target="_blank" class="preload_info_upsell"><?php  _e("View Preload features","cwppos"); ?></a>
-        <?php  } ?>
+             echo   apply_filters(WPPR_SLUG."_"."preloader"."_upsell_text", "");
+        } ?>
     </div><!-- end .review-settings-notice -->
     <div class="review-settings-group">
     <?php 

@@ -1,20 +1,18 @@
 <?php
 
-class ABTesting
+class TIABTesting
 {
     private $config;
     private $slug;
 
-    public function __construct()
+    public function __construct($slug = "")
     {
-        $this->loadHooks();
+        $this->loadHooks($slug);
     }
 
-    private function loadHooks()
+    private function loadHooks($slug)
     {
-        global $ABTESTING_PLUGIN_SLUG;
-        
-        $this->slug     = $ABTESTING_PLUGIN_SLUG;
+        $this->slug     = $slug;
         $this->config   = apply_filters($this->slug . "_upsell_config", array());
 
         foreach ($this->config as $section=>$values) {
@@ -32,7 +30,6 @@ class ABTesting
                 if (array_key_exists($section, $this->config)) {
                     $values     = $this->config[$section];
                     $html       = $values[rand(0, count($values) - 1)];
-                    $html       = __($html, $this->slug);
                     return $escapeHTML ? esc_html($html) : $html;
                 }
             }
@@ -47,5 +44,3 @@ class ABTesting
     }
 
 }
-
-$abtesting = new ABTesting();

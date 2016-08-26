@@ -1,4 +1,6 @@
-
+/*
+	Version: 2.9.2
+*/
 #review-statistics{
 
 	font-family:FontAwesome;
@@ -403,3 +405,12 @@
 			font-size: 30px;
 		}
 	}
+
+.cwp-review-percentage.cwp_easyPieChart canvas{
+	position: absolute;
+	left:0px;
+}
+.cwp-review-percentage.cwp_easyPieChart{
+	position: relative;
+	text-align: center;
+}

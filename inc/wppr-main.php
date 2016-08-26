@@ -95,10 +95,8 @@ function cwppos_show_review($id="", $visual="full") {
 	if ($id=="") {
 		$id = $post->ID;
     }
-
 	$cwp_review_stored_meta = get_post_meta( $id );
 	$return_string = "";
-
 	if(@$cwp_review_stored_meta['cwp_meta_box_check'][0]  == 'Yes' ) {
 
 		wp_enqueue_style( 'cwp-pac-frontpage-stylesheet', WPPR_URL.'/css/frontpage.css',array(),WPPR_LITE_VERSION );
@@ -176,7 +174,6 @@ function cwppos_show_review($id="", $visual="full") {
                                     </div><!-- end .rev-wu-image -->
                                     <div class="review-wu-grade">';
         }
-
         if ($visual == "full" || $visual == "yes") {
             $extra_class    = $visual == "yes" ? "cwp-chart-embed" : "";
             $return_string .= '<div class="cwp-review-chart ' . $extra_class . '">
