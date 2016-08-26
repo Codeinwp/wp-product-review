@@ -1,4 +1,10 @@
 
+### 2.9.2 - 26/08/2016
+**Changes:** 
+- Added color options in pro
+- Fixed issue with shortcode markup
+- Removed rel=friend
+
 ### 2.9.1 - 18/08/2016
 **Changes:** 
 - Removed buy now or read review if text values are empty
