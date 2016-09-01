@@ -9,7 +9,7 @@
  *
  * Plugin Name: WP Product Review Lite
  * Description: The highest rated and most complete review plugin, now with rich snippets support. Easily turn your basic posts into in-depth reviews.
- * Version: 2.9.2
+ * Version: 2.9.3
  * Author: Themeisle
  * Author URI:  http://themeisle.com/
  * Plugin URI: http://themeisle.com/plugins/wp-product-review-lite/
@@ -22,7 +22,7 @@
  * Domain Path: /languages
  */
 
-define( 'WPPR_LITE_VERSION','2.9.2' );
+define( 'WPPR_LITE_VERSION','2.9.3' );
 define( 'WPPR_PATH',dirname( __FILE__ ) );
 define( 'WPPR_SLUG', "wppr" );
 define( 'WPPR_URL',plugins_url( 'wp-product-review' ) );
@@ -53,7 +53,6 @@ function wppr_upsell_config($config)
 			__(" In order to be able to automatically load your options from another posts, you need the PRO add-on", "cwppos"). '<a href="http://bit.ly/2bpC3vT" target="_blank" class="preload_info_upsell">'.__("View Preload features","cwppos").'</a>',
 			"<i>".__(" You can always import options from other reviews using the preloader feature from the PRO add-on", "cwppos"). '</i><a href="http://bit.ly/2c1QNFK" target="_blank" class="preload_info_upsell">'.__("View more PRO features","cwppos").'</a>',
 			"<i>".__(" Build review more easily by importing them from other posts using the preloader feature from the pro addon", "cwppos"). '</i><a href="http://bit.ly/2bT89Sk" target="_blank" class="preload_info_upsell">'.__("View details","cwppos").'</a>',
-
 			)
 	);
 }

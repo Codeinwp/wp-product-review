@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== WP Product Review Lite ===
 Contributors: codeinwp,marius2012,marius_codeinwp,hardeepasrani,themeisle,Madalin_ThemeIsle
 Tags:  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin,  google rating, product review, rating, review, star rating, user rating, wp rating, wp review,  google, hreview,rich snippets,seo,snippet
 Author URI: http://themeisle.com
@@ -71,6 +71,11 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+
+**New in 2.9.3**
+
+- Added dashes for pro/cons list
+- Added filters for nofollow links in widgets area
 
 **New in 2.9.2**
 
