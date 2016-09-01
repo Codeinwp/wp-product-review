@@ -1,4 +1,9 @@
 
+### 2.9.3 - 01/09/2016
+**Changes:** 
+- Added filters for nofollow links in widgets
+- Added dashes in pros/cons list
+
 ### 2.9.2 - 26/08/2016
 **Changes:** 
 - Added color options in pro
