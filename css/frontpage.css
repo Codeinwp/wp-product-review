@@ -194,18 +194,20 @@
 #review-statistics .review-wrap-up .review-wu-right ul li {
 	font-size: 16px;padding-left: 0;
 	margin: 0 0 2%;
-	font-family: "Lato"; }
+	font-family: "Lato";
+	line-height:1;
+}
+
+#review-statistics .review-wrap-up .review-wu-right ul li:before {
+	content: "-";
+	margin-right: 5px;
+}
 
 #review-statistics .review-wrap-up .review-wu-right ul li {
-
-	line-height:1;
-
 }
 
 .review-wu-right ul li {
-
 	background:none !important;
-
 }
 
 .comment-form-meta-option  input{
