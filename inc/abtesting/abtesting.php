@@ -4,9 +4,11 @@ class TIABTesting
 {
     private $config;
     private $slug;
+    private $version;
 
-    public function __construct($slug = "")
+    public function __construct($slug, $version)
     {
+        $this->version  = $version;
         $this->loadHooks($slug);
     }
 
@@ -28,9 +30,14 @@ class TIABTesting
             if (is_array($attr) && !empty($attr)) {
                 $section    = $attr[0];
                 if (array_key_exists($section, $this->config)) {
+                    // check if a value has already been saved against this slug, version, section
+                    $savedVal   = get_option($this->slug . "_" . $this->version . "_" . $section, "");
+                    if (!empty($savedVal)) return $savedVal;
                     $values     = $this->config[$section];
                     $html       = $values[rand(0, count($values) - 1)];
-                    return $escapeHTML ? esc_html($html) : $html;
+                    $html       = $escapeHTML ? esc_html($html) : $html;
+                    update_option($this->slug . "_" . $this->version . "_" . $section, $html);
+                    return $html;
                 }
             }
         }

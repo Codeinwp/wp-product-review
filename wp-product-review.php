@@ -43,7 +43,7 @@ if ( wp_get_theme() !== 'Reviewgine Affiliate PRO' ) {
 add_filter(WPPR_SLUG . "_upsell_config", "wppr_upsell_config");
 if( class_exists("TIABTesting") ) {
 
-	$abtesting = new TIABTesting(WPPR_SLUG);
+	$abtesting = new TIABTesting(WPPR_SLUG, WPPR_LITE_VERSION);
 
 }
 function wppr_upsell_config($config)
