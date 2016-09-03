@@ -8,7 +8,7 @@ class TIABTesting
 
     public function __construct($slug, $version)
     {
-        $this->version  = $version;
+        $this->version  = str_replace(".", "_", $version);
         $this->loadHooks($slug);
     }
 
