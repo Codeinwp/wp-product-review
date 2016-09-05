@@ -53,6 +53,12 @@ function wppr_upsell_config($config)
 			__(" In order to be able to automatically load your options from another posts, you need the PRO add-on", "cwppos"). '<a href="http://bit.ly/2bpC3vT" target="_blank" class="preload_info_upsell">'.__("View Preload features","cwppos").'</a>',
 			"<i>".__(" You can always import options from other reviews using the preloader feature from the PRO add-on", "cwppos"). '</i><a href="http://bit.ly/2c1QNFK" target="_blank" class="preload_info_upsell">'.__("View more PRO features","cwppos").'</a>',
 			"<i>".__(" Build review more easily by importing them from other posts using the preloader feature from the pro addon", "cwppos"). '</i><a href="http://bit.ly/2bT89Sk" target="_blank" class="preload_info_upsell">'.__("View details","cwppos").'</a>',
-			)
+        ),
+        "amazon_title"    => array(
+            __("Amazing Amazon", "cwppos")
+        ),
+        "amazon_body"    => array(
+            __("Something here", "cwppos")
+        ),
 	);
 }

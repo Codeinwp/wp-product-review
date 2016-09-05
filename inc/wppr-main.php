@@ -344,7 +344,44 @@ function custom_bar_icon() {
 		wp_register_script("cwp-custom-bar-icon", WPPR_URL.'/javascript/custom-bar-icon.js', false, "1.0", "all");
 		wp_enqueue_script("cwp-custom-bar-icon");
 	}
+
+    cwp_add_pointers();
 }
+
+function cwp_add_pointers()
+{
+    $screen     = get_current_screen();
+    $screen_id  = $screen->id;
+     
+    // Get pointers for this screen
+    $pointers = apply_filters( 'cwp_admin_pointers-' . $screen_id, array() );
+     
+    if ( ! $pointers || ! is_array( $pointers ) ) return;
+
+    $dismissed      = explode( ',', (string) get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
+    $valid          = array();
+ 
+    foreach ( $pointers as $pointer_id => $pointer ) {
+ 
+        // Sanity check
+        if ( in_array( $pointer_id, $dismissed ) || empty( $pointer )  || empty( $pointer_id ) || empty( $pointer['target'] ) || empty( $pointer['options'] ) )
+            continue;
+ 
+        $pointer['pointer_id'] = $pointer_id;
+ 
+        // Add the pointer to $valid_pointers array
+        $valid['pointers'][] =  $pointer;
+    }
+ 
+    if ( empty( $valid ) ) return;
+ 
+    // Add pointers style to queue.
+    wp_enqueue_style( 'wp-pointer', array("jquery"));
+
+    wp_enqueue_script( 'cwp-pointers', WPPR_URL.'/javascript/cwp-pointers.js', array("wp-pointer"), WPPR_LITE_VERSION, true );
+    wp_localize_script( 'cwp-pointers', 'cwpp', array("pointers" => $valid) );
+}
+    
 
 function cwppos_pac_register() {
 	add_image_size("wppr_widget_image",50,50);

@@ -26,9 +26,8 @@ class TIABTesting
     {
         $filter     = current_filter();
         if (strpos($filter, $this->slug) !== false) {
-            $attr       = explode("_", str_replace($this->slug . "_", "", $filter));
-            if (is_array($attr) && !empty($attr)) {
-                $section    = $attr[0];
+            $section    = str_replace(array($this->slug . "_", "_upsell_text"), "", $filter);
+            if (!empty($section)) {
                 if (array_key_exists($section, $this->config)) {
                     // check if a value has already been saved against this slug, version, section
                     $savedVal   = get_option($this->slug . "_" . $this->version . "_" . $section, "");

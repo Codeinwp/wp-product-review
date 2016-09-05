@@ -123,6 +123,7 @@ function cwp_review_meta_boxes(){
                     }
 
                     ?>"/>
+                    <span id="cwp_product_affiliate_link_upsell" style="display: none">&nbsp;</span>
                     <?php
                     $hide_button2 = false;
                     if (!isset($cwp_review_stored_meta['cwp_product_affiliate_text2'][0])) {
