@@ -86,10 +86,10 @@ function wppr_review_cons_text_filter( $id = 0, $name = '' ) {
 }
 
 
-add_filter( 'cwp_admin_pointers-post', 'cwp_admin_pointers' );
-function cwp_admin_pointers( $p ) {
+add_filter( 'wppr_admin_pointers-post', 'wppr_admin_pointers' );
+function wppr_admin_pointers( $p ) {
     $p['amazon_upsell'] = array(
-        'target' => '#cwp_product_affiliate_link_upsell',
+        'target' => '#wppr_product_affiliate_link_upsell',
         'options' => array(
             'content' => sprintf( '<h3> %s </h3> <p> %s </p>',
                 apply_filters("wppr_amazon_title_upsell_text", null),
