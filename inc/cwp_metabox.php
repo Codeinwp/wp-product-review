@@ -270,25 +270,25 @@ function cwp_review_meta_boxes_save( $post_id ) {
 	// Moved from inside the if loop to here by Ash/Upwork
 	if ( isset( $_POST['cwp_meta_box_check'] ) && $_POST['cwp_meta_box_check'] == "Yes" ) {
 		if ( isset( $_POST['cwp_rev_product_name'] ) ) {
-			update_post_meta( $post_id, 'cwp_rev_product_name', sanitize_text_field( $_POST['cwp_rev_product_name'] ) );
+			update_post_meta( $post_id, 'cwp_rev_product_name', apply_filters('wppr_sanitize_product_title', $_POST['cwp_rev_product_name'] ) );
 		}
 		if ( isset( $_POST['cwp_rev_price'] ) ) {
-			update_post_meta( $post_id, 'cwp_rev_price', sanitize_text_field( $_POST['cwp_rev_price'] ) );
+			update_post_meta( $post_id, 'cwp_rev_price', apply_filters('wppr_sanitize_product_price', $_POST['cwp_rev_price'] ) );
 		}
 		if ( isset( $_POST['cwp_image_link'] ) ) {
-			update_post_meta( $post_id, 'cwp_image_link', sanitize_text_field( $_POST['cwp_image_link'] ) );
+			update_post_meta( $post_id, 'cwp_image_link', apply_filters('wppr_sanitize_product_image', $_POST['cwp_image_link'] ) );
 		}
 		if ( isset( $_POST['cwp_product_affiliate_text'] ) ) {
 			update_post_meta( $post_id, 'cwp_product_affiliate_text', sanitize_text_field( $_POST['cwp_product_affiliate_text'] ) );
 		}
 		if ( isset( $_POST['cwp_product_affiliate_link'] ) ) {
-			update_post_meta( $post_id, 'cwp_product_affiliate_link', esc_url( $_POST['cwp_product_affiliate_link'] ) );
+			update_post_meta( $post_id, 'cwp_product_affiliate_link', apply_filters('wppr_sanitize_link1', $_POST['cwp_product_affiliate_link'] ) );
 		}
 		if ( isset( $_POST['cwp_product_affiliate_text2'] ) ) {
 			update_post_meta( $post_id, 'cwp_product_affiliate_text2', sanitize_text_field( $_POST['cwp_product_affiliate_text2'] ) );
 		}
 		if ( isset( $_POST['cwp_product_affiliate_link2'] ) ) {
-			update_post_meta( $post_id, 'cwp_product_affiliate_link2', esc_url( $_POST['cwp_product_affiliate_link2'] ) );
+			update_post_meta( $post_id, 'cwp_product_affiliate_link2', apply_filters('wppr_sanitize_link2', $_POST['cwp_product_affiliate_link2'] ) );
 		}
 		if ( ! empty( $_POST['cwp_bar_icon'] ) ) {
 			update_post_meta( $post_id, 'cwp_bar_icon', esc_url( $_POST['cwp_bar_icon'] ) );

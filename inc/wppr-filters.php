@@ -100,3 +100,19 @@ function wppr_admin_pointers( $p ) {
     );
     return $p;
 }
+
+add_filter("wppr_sanitize_link1", "wppr_sanitize_link");
+add_filter("wppr_sanitize_link2", "wppr_sanitize_link");
+add_filter("wppr_sanitize_product_price", "wppr_sanitize_text");
+add_filter("wppr_sanitize_product_title", "wppr_sanitize_text");
+add_filter("wppr_sanitize_product_image", "wppr_sanitize_text");
+
+function wppr_sanitize_link($text)
+{
+    return esc_url($text);
+}
+
+function wppr_sanitize_text($text)
+{
+    return sanitize_text_field($text);
+}
