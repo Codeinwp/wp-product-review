@@ -72,6 +72,11 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 
 == Changelog ==
 
+**New in 2.9.5**
+
+- Added amazon integration support
+- Fixed some design issue with review
+
 **New in 2.9.3**
 
 - Added dashes for pro/cons list

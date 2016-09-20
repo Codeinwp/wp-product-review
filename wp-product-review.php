@@ -9,7 +9,7 @@
  *
  * Plugin Name: WP Product Review Lite
  * Description: The highest rated and most complete review plugin, now with rich snippets support. Easily turn your basic posts into in-depth reviews.
- * Version: 2.9.3
+ * Version: 2.9.5
  * Author: Themeisle
  * Author URI:  http://themeisle.com/
  * Plugin URI: http://themeisle.com/plugins/wp-product-review-lite/
@@ -22,7 +22,7 @@
  * Domain Path: /languages
  */
 
-define( 'WPPR_LITE_VERSION','2.9.3' );
+define( 'WPPR_LITE_VERSION','2.9.5' );
 define( 'WPPR_PATH',dirname( __FILE__ ) );
 define( 'WPPR_SLUG', "wppr" );
 define( 'WPPR_URL',plugins_url( 'wp-product-review' ) );
@@ -55,10 +55,14 @@ function wppr_upsell_config($config)
 			"<i>".__(" Build review more easily by importing them from other posts using the preloader feature from the pro addon", "cwppos"). '</i><a href="http://bit.ly/2bT89Sk" target="_blank" class="preload_info_upsell">'.__("View details","cwppos").'</a>',
         ),
         "amazon_title"    => array(
-            __("Amazing Amazon", "cwppos")
+            __("Hold on", "cwppos"),
+            __("Breaking news", "cwppos"),
+            __("Review tip", "cwppos"),
+            __("Integrate with Amazon", "cwppos"),
         ),
         "amazon_body"    => array(
-            __("Something here", "cwppos")
+            __("Do you know that you can import products directly from your amazon affiliate account using the <a href='http://bit.ly/2cjpsux'>PRO</a> version", "cwppos"),
+            __("Do you know that you can import products from amazon and keep them synced using the <a href='http://bit.ly/2cEefYy'>PRO</a> version ", "cwppos")
         ),
 	);
 }
