@@ -84,3 +84,19 @@ function wppr_review_cons_text_filter( $id = 0, $name = '' ) {
 	return ( ! empty( $name ) )  ? '<h2>'.$name.'</h2>' : '';
 
 }
+
+
+add_filter( 'wppr_admin_pointers-post', 'wppr_admin_pointers' );
+function wppr_admin_pointers( $p ) {
+    $p['amazon_upsell'] = array(
+        'target' => '#wppr_product_affiliate_link_upsell',
+        'options' => array(
+            'content' => sprintf( '<h3> %s </h3> <p> %s </p>',
+                apply_filters("wppr_amazon_title_upsell_text", null),
+                apply_filters("wppr_amazon_body_upsell_text", null)
+            ),
+            'position' => array( 'edge' => 'left', 'align' => 'left' )
+        )
+    );
+    return $p;
+}
