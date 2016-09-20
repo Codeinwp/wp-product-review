@@ -345,16 +345,16 @@ function custom_bar_icon() {
 		wp_enqueue_script("cwp-custom-bar-icon");
 	}
 
-    cwp_add_pointers();
+    wppr_add_pointers();
 }
 
-function cwp_add_pointers()
+function wppr_add_pointers()
 {
     $screen     = get_current_screen();
     $screen_id  = $screen->id;
      
     // Get pointers for this screen
-    $pointers = apply_filters( 'cwp_admin_pointers-' . $screen_id, array() );
+    $pointers = apply_filters( 'wppr_admin_pointers-' . $screen_id, array() );
      
     if ( ! $pointers || ! is_array( $pointers ) ) return;
 
@@ -378,8 +378,8 @@ function cwp_add_pointers()
     // Add pointers style to queue.
     wp_enqueue_style( 'wp-pointer', array("jquery"));
 
-    wp_enqueue_script( 'cwp-pointers', WPPR_URL.'/javascript/cwp-pointers.js', array("wp-pointer"), WPPR_LITE_VERSION, true );
-    wp_localize_script( 'cwp-pointers', 'cwpp', array("pointers" => $valid) );
+    wp_enqueue_script( 'wppr-pointers', WPPR_URL.'/javascript/cwp-pointers.js', array("wp-pointer"), WPPR_LITE_VERSION, true );
+    wp_localize_script( 'wppr-pointers', 'cwpp', array("pointers" => $valid) );
 }
     
 
@@ -550,6 +550,19 @@ add_action('wp_head', 'cwppos_pac_print');
 add_action('wp_footer','cwppos_dynamic_stylesheet');
 add_action( 'admin_init', 'cwppos_pac_admin_init' );
 add_action('admin_enqueue_scripts', 'custom_bar_icon');
+add_action("wp_ajax_wppr-dismiss-amazon-link", "wppr_dismiss_amazon_link");
+function wppr_dismiss_amazon_link()
+{
+    $pointer_id = isset($_POST["pointer"]) ? $_POST["pointer"] : null;
+    if ($pointer_id) {
+        $dismissed      = explode( ',', (string) get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
+        if (!$dismissed) {
+            $dismissed  = array();
+        }
+        $dismissed[]    = $pointer_id;
+        update_user_meta(get_current_user_id(), 'dismissed_wp_pointers', implode(",", $dismissed));
+    }
+}
 
 if (!class_exists('TAV_Remote_Notification_Client')) require( WPPR_PATH.'/inc/class-remote-notification-client.php' );
 $notification = new TAV_Remote_Notification_Client( 36, '71a28628279f6d55', 'https://themeisle.com/?post_type=notification' );
