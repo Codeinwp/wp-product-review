@@ -1,4 +1,9 @@
 
+### 2.9.5 - 20/09/2016
+**Changes:** 
+- Added amazon integration support
+- Fixed some design issues
+
 ### 2.9.3 - 01/09/2016
 **Changes:** 
 - Added filters for nofollow links in widgets
