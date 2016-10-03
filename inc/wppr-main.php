@@ -87,7 +87,7 @@ function cwppos_show_review( $id = "", $visual = "full" ) {
 	}
 	$cwp_review_stored_meta = get_post_meta( $id );
 	$return_string          = "";
-	if ( @$cwp_review_stored_meta['cwp_meta_box_check'][0] == 'Yes' ) {
+	if ( isset($cwp_review_stored_meta['cwp_meta_box_check'][0]) && $cwp_review_stored_meta['cwp_meta_box_check'][0] == 'Yes' ) {
 		wp_enqueue_style( 'cwp-pac-frontpage-stylesheet', WPPR_URL . '/css/frontpage.css', array(), WPPR_LITE_VERSION );
 		wp_enqueue_script( 'pie-chart', WPPR_URL . '/javascript/pie-chart.js', array( "jquery" ), WPPR_LITE_VERSION, true );
 		wp_enqueue_script( 'cwp-pac-main-script', WPPR_URL . '/javascript/main.js', array(
