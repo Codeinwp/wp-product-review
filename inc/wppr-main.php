@@ -79,7 +79,7 @@ function cwppos_calc_overall_rating( $id ) {
 
 function cwppos_show_review( $id = "", $visual = "full" ) {
 	global $post;
-	if ( post_password_required( $post ) ) {
+	if ( (is_null($post) && $id == "") || post_password_required( $post ) ) {
 		return false;
 	}
 	if ( $id == "" ) {
