@@ -507,10 +507,6 @@ function wppr_dismiss_amazon_link() {
 	}
 }
 
-if ( ! class_exists( 'TAV_Remote_Notification_Client' ) ) {
-	require( WPPR_PATH . '/inc/class-remote-notification-client.php' );
-}
-$notification = new TAV_Remote_Notification_Client( 36, '71a28628279f6d55', 'https://themeisle.com/?post_type=notification' );
 if ( class_exists( 'CWP_PR_PRO_Core' ) ) {
 	$cwp_pr_pro = new CWP_PR_PRO_Core();
 }
