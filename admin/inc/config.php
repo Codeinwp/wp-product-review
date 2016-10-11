@@ -32,6 +32,9 @@
 
 		public static $categories_ids;
 
+		public static $pro_page_menu_name ;
+
+		public static  $pro_page_title 	;
 
 
 		public static function init(){
@@ -60,6 +63,9 @@
 
 			self::$categories_array = array();
 
+			self::$pro_page_menu_name 	 = "Premium Features";
+
+			self::$pro_page_title 		 = "Go Premium";
 
 
 			self::$structure	= array(
