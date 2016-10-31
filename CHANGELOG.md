@@ -1,4 +1,8 @@
 
+### 2.9.6 - 31/10/2016
+**Changes:** 
+- Release 2.9.6
+
 ### 2.9.5 - 20/09/2016
 **Changes:** 
 - Added amazon integration support
