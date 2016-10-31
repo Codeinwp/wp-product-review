@@ -1,3 +1,4 @@
+/* jshint ignore:start */
 (function ($, cwpp){
 
     $(document).ready( function() {

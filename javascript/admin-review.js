@@ -1,3 +1,4 @@
+/* jshint ignore:start */
 jQuery(document).ready(function(){
 
     var meta_image_frame;

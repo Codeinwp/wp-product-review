@@ -1,4 +1,5 @@
-		jQuery("#cwp_select_bar_icon").click(function(a) {
+/* jshint ignore:start */
+jQuery("#cwp_select_bar_icon").click(function(a) {
 		    a.preventDefault();
 		    a.stopPropagation();
 		    var b = ["&#xf096","&#xf08a","&#xf11b","&#xf06d","&#xf1b2","&#xf005","&#xf155","&#xf1db","&#xf006","&#xf0c8","&#xf02d","&#xf135","&#xf013","&#xf0fa",];
