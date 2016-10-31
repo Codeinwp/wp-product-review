@@ -77,7 +77,6 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 - Fixed undefined notices
 - Fixed sanitization issues
 
-
 **New in 2.9.5**
 
 - Added amazon integration support
