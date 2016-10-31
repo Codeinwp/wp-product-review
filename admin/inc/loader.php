@@ -8,6 +8,14 @@ function cwppos_options_add_page() {
 	
 	$render = new cwpposRenderView();
 	add_menu_page( __( cwppos_config("admin_page_title"), 'cwppos' ), __( cwppos_config("admin_page_menu_name"), 'cwppos' ), 'manage_options', cwppos_config("menu_slug"), array($render,'show'), "dashicons-star-half" ,'99.87414' );
+    if (!class_exists('CWP_PR_PRO_Core')) {
+    	add_submenu_page( cwppos_config("menu_slug"), __( cwppos_config("pro_page_title"), 'cwppos' ), __( cwppos_config("pro_page_menu_name"), 'cwppos' ), 'manage_options', "cwppos_pro", array($render, 'pro'));
+    }
+}
+
+function cwppos_pro_features()
+{
+    include_once WPPR_PATH . "/admin/layout/pro.php";
 }
  
 function cwppos_config($config_name, $echo = 0){

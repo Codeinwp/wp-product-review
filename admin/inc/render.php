@@ -160,6 +160,10 @@
 			$this->render_view('main_page');
 
 		}
+		public  function pro(){
+			$this->render_view('pro');
+
+		}
 		public function add_css($name,$location =''){
 			if($location!='')
 				wp_register_style($name, $location, array(), "201306" );
