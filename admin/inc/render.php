@@ -235,7 +235,9 @@
 
 		            $html .= "<button id='cwp_select_bar_icon'>Select Bar Icon</button>";
 					$html .= "<input type='hidden' id='cwp_bar_icon_field' name='".cwppos_config("menu_slug")."[".$id."][]' value='";
-					 if(isset($this->options[$id])) { if (@$this->options[$id][0]=="#") { $html.=$this->options[$id]; } else $html .= @$this->options[$id][0]; }
+     				if(isset($this->options[$id])) {
+                        $html .= (isset($this->options[$id][0])) ? $this->options[$id][0] : $this->options[$id];
+                    }
 
 					$html .= "'/> <span class='current_bar_icon'>";
 				 		if(!empty($this->options[$id][0])) {
