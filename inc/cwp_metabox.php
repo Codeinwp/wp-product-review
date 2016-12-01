@@ -352,7 +352,7 @@ function cwp_review_plugin_activation() {
 		update_option( 'cwp_review_activate', 'yes' );
 		$html = '<div class="updated">';
 		$html .= '<p>';
-		$html .= __( 'In order to use the WP Product Review plugin, go on a edit a post and set : <strong>Is this a review to yes</strong>.', 'cwppos' );
+		$html .= __( 'In order to use the WP Product Review plugin, go on and edit a post and set : <strong>Is this a review to yes</strong>.', 'cwppos' );
 		$html .= '</p>';
 		$html .= '</div><!-- /.updated -->';
 		echo $html;
