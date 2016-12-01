@@ -27,8 +27,8 @@
 	<div class="pro-feature">
 		<div class="pro-feature-features">
 			<h2>Shortcodes</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae consectetur corporis culpa dolorem doloribus, error eum fugiat harum iusto libero nam nostrum nulla omnis praesentium quo ratione temporibus ullam voluptatem?</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae consectetur corporis culpa dolorem doloribus, error eum fugiat harum iusto libero nam nostrum nulla omnis praesentium quo ratione temporibus ullam voluptatem?</p>
+			<p>Position the review box anywhere in the post with the help of shortcodes. Add as many reviews as you want in the same page.</p>
+
 		</div>
 		<div class="pro-feature-image"><img src="<?php  echo WPPR_URL; ?>/images/wppr-shortcodes.jpg"></div>
 		<div class="clear"></div>
@@ -48,8 +48,8 @@
 	<div class="pro-feature">
 		<div class="pro-feature-features">
 			<h2>Import</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae consectetur corporis culpa dolorem doloribus, error eum fugiat harum iusto libero nam nostrum nulla omnis praesentium quo ratione temporibus ullam voluptatem?</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae consectetur corporis culpa dolorem doloribus, error eum fugiat harum iusto libero nam nostrum nulla omnis praesentium quo ratione temporibus ullam voluptatem?</p>
+			<p>No need to set up each product review separately. You can import options from other reviews you’ve previously built</p>
+
 		</div>
 		<div class="pro-feature-image"><img src="<?php  echo WPPR_URL; ?>/images/wppr-import.jpg"></div>
 		<div class="clear"></div>
