@@ -14,10 +14,7 @@
 	height: 70px;
 	background:#f9f9f9;
 	border: 1px solid #ccc;
-	-webkit-border-radius: 6px 6px 0 0;
-	-moz-border-radius: 6px 6px 0 0;
 	border-radius: 6px 6px 0 0;
-	-moz-box-shadow: inset 0 1px 0 #fff;
 	-webkit-box-shadow: inset 0 1px 0 #fff;
 	box-shadow: inset 0 1px 0 #fff;
 }
@@ -60,7 +57,6 @@
 	padding: 6px 20px 0 6px;
 	height: 31px;
 	text-align: right;
-	-moz-box-shadow: inset 0 1px 0 #fcfcfc;
 	-webkit-box-shadow: inset 0 1px 0 #fcfcfc;
 	box-shadow: inset 0 1px 0 #fcfcfc;
 }
@@ -75,8 +71,6 @@ font-size:0;
 text-indent: -9999px;
 margin: 0 0 0 10px;
 border: 1px solid #bbb;
--webkit-border-radius: 2px;
--moz-border-radius: 2px;
 border-radius: 2px;
 }
 #cwp_container  #info_bar .expand { background: url(../images/toggle_tabs.png) no-repeat -2px -1px; }
@@ -102,7 +96,6 @@ border-radius: 2px;
 }
 #cwp_container #cwp_nav li {
 	margin-bottom:0;
-	-moz-box-shadow: inset 0 1px 0 #f9f9f9;
 	-webkit-box-shadow: inset 0 1px 0 #f9f9f9;
 	box-shadow: inset 0 1px 0 #f9f9f9;
 	margin-right: 1px;
@@ -110,7 +103,6 @@ border-radius: 2px;
 }
 
 #cwp_container #cwp_nav li:last-child {
-	-moz-box-shadow: inset 0 1px 0 #f9f9f9, 0 1px 0 #f9f9f9;
 	-webkit-box-shadow: inset 0 1px 0 #f9f9f9, 0 1px 0 #f9f9f9;
 	box-shadow: inset 0 1px 0 #f9f9f9, 0 1px 0 #f9f9f9;
 }
@@ -169,7 +161,6 @@ border-radius: 2px;
 	font-family: "Lucida Grande", Sans-serif;
 	background-color: #FCFCFC;
 	border-left: 1px solid #d8d8d8;
-	-moz-box-shadow: inset 0 1px 0 #fff;
 	-webkit-box-shadow: inset 0 1px 0 #fff;
 	box-shadow: inset 0 1px 0 #fff;
 }
@@ -239,13 +230,9 @@ border-radius: 2px;
 	font-size: 12px
 }
 #cwp_container #content .section-info h3.heading {
-	-webkit-border-radius: 3px 3px 0 0;
-	-moz-border-radius: 3px 3px 0 0;
 	border-radius: 3px 3px 0 0;
 }
 #cwp_container #content .section-info .controls {
-	-webkit-border-radius: 0 0 3px 3px;
-	-moz-border-radius: 0 0 3px 3px;
 	border-radius: 0 0 3px 3px;
 }
 #cwp_container .sorter {margin-right: -20px;}
@@ -273,17 +260,12 @@ border-radius: 2px;
 	height: 40px;
 	line-height: 40px;
 	background-color: #F1F1F1;
-	background-image: -ms-linear-gradient(top,#f9f9f9,#ececec);
-	background-image: -moz-linear-gradient(top,#f9f9f9,#ececec);
-	background-image: -o-linear-gradient(top,#f9f9f9,#ececec);
 	background-image: -webkit-gradient(linear,left top,left bottom,from(#f9f9f9),to(#ececec));
 	background-image: -webkit-linear-gradient(top,#f9f9f9,#ececec);
+	background-image: -webkit-gradient(linear,left top, left bottom,from(#f9f9f9),to(#ececec));
 	background-image: linear-gradient(top,#f9f9f9,#ececec);
 	overflow: hidden;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
 	border-radius: 3px;
-	-moz-box-shadow: inset 0 1px 0 #fff;
 	-webkit-box-shadow: inset 0 1px 0 #fff;
 	box-shadow: inset 0 1px 0 #fff;
 	text-align:center;
@@ -302,8 +284,6 @@ border-radius: 2px;
 
 
 #cwp_container .cwp_textarea, #cwp_container .cwp_input, #cwp_container .cwp_select, #cwp_container .cwp_button{
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
 	border-radius: 3px;
 	border: 1px solid;
 }
@@ -473,8 +453,6 @@ label.radio, label.multicheck {
 	font-size:24px;
 	text-align:center;
 	display:none;
-	-webkit-border-radius: 12px;
-	-moz-border-radius: 12px;
 	border-radius: 12px;
 }
 
@@ -505,9 +483,6 @@ label.radio, label.multicheck {
 }
 
 #cwp_container .button {
-	-moz-border-radius: 3px;
--khtml-border-radius: 3px;
--webkit-border-radius: 3px;
 border-radius: 3px;
 	border: 1px solid #dfdfdf;
 	background-color: #fff;
@@ -546,8 +521,6 @@ color: #464646;
 	margin: 0 10px 0 0;
 	padding:3px 10px;
 	background:#FFDFEC;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
 	border-radius: 4px;
 }
 #cwp_container .reset-button {
@@ -573,10 +546,7 @@ color: #464646;
 	padding: 10px 20px 0 20px;
 	height: 35px;
 	text-align: right;
-	-webkit-border-radius: 0 0 3px 3px;
-	-moz-border-radius: 0 0 3px 3px;
 	border-radius: 0 0 3px 3px;
-	-moz-box-shadow: inset 0 1px 0 #fff;
 	-webkit-box-shadow: inset 0 1px 0 #fff;
 	box-shadow: inset 0 1px 0 #fff;
 }
@@ -623,14 +593,9 @@ color: #464646;
 	padding: 5px;
 	border:1px solid #e3e3e3;
 	background:#f7f7f7;
-	-moz-border-radius: 3px;
-	-khtml-border-radius: 3px;
-	-webkit-border-radius: 3px;
 	border-radius: 3px;
 }
 #cwp_container .select_wrapper {
--moz-border-radius: 4px;
--webkit-border-radius: 4px;
 border-radius: 4px;
 font-family: "Lucida Grande","Lucida Sans Unicode",Arial,Verdana,sans-serif;
 font-size: 12px;
@@ -672,10 +637,7 @@ position:relative;
 	border: 1px solid #dfdfdf;
 	background:#f9f9f9;
 	overflow:hidden;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
 	border-radius: 3px;
-	-moz-box-shadow: inset 0 1px 0 #fff;
 	-webkit-box-shadow: inset 0 1px 0 #fff;
 	box-shadow: inset 0 1px 0 #fff;
 }
@@ -689,11 +651,9 @@ position:relative;
 	background-color: #F1F1F1;
 	margin: 1px 0 -1px 0;
 	border-bottom: 1px solid #dfdfdf;
-	background-image: -ms-linear-gradient(top,#f9f9f9,#ececec);
-	background-image: -moz-linear-gradient(top,#f9f9f9,#ececec);
-	background-image: -o-linear-gradient(top,#f9f9f9,#ececec);
 	background-image: -webkit-gradient(linear,left top,left bottom,from(#f9f9f9),to(#ececec));
 	background-image: -webkit-linear-gradient(top,#f9f9f9,#ececec);
+	background-image: -webkit-gradient(linear,left top, left bottom,from(#f9f9f9),to(#ececec));
 	background-image: linear-gradient(top,#f9f9f9,#ececec);
 	overflow:hidden;
 	position: relative;
@@ -845,9 +805,6 @@ max-width: 270px;
 padding: 5px;
 border: 1px solid #E3E3E3;
 background: #F7F7F7;
--moz-border-radius: 3px;
--khtml-border-radius: 3px;
--webkit-border-radius: 3px;
 border-radius: 3px;
   }
   .tab-section{
@@ -1095,7 +1052,8 @@ border-radius: 3px;
 #pro-features .pro-features-header,
 #pro-features .pro-feature{
 	background-color: #fff;
-	box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
+	-webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
+	        box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
 	display: block;
 	margin: 30px 15px 0;
 }
@@ -1108,7 +1066,8 @@ border-radius: 3px;
 }
 
 #pro-features .pro-feature .pro-feature-features {
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	padding: 30px;
 }
 

@@ -72,6 +72,10 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 
 == Changelog ==
 
+**New in 2.9.8**
+
+- Added more features page
+
 **New in 2.9.6**
 
 - Fixed undefined notices

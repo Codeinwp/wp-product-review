@@ -1,5 +1,5 @@
 /*
-	Version: 2.9.7
+	Version: 2.9.8
 */
 #review-statistics {
 
@@ -307,12 +307,14 @@
 #review-statistics .review-wrap-up .review-wu-left .rev-wu-image img {
     height: auto;
     width: 100%;
-    box-shadow: none;
+    -webkit-box-shadow: none;
+            box-shadow: none;
 }
 
 #review-statistics .review-wrap-up .review-wu-left .review-wu-grade {
     width: 50%;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
     text-align: center;
     display: block;
     float: left;
@@ -398,7 +400,9 @@
 
 .review-wu-bars, .review-wu-right {
 
-    box-sizing: content-box !important;
+    -webkit-box-sizing: content-box !important;
+
+            box-sizing: content-box !important;
     text-align: left;
 
 }
@@ -495,7 +499,8 @@
     background: #f3f3f3;
     border: none;
     height: 7px;
-    box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
+            box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
     float: left;
     width: 100%;
 }
@@ -512,7 +517,8 @@
 
 #cwp-slider-comment .comment-form-meta-option .comment_meta_slider .ui-slider-handle:hover {
     cursor: pointer;
-    box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.3);
+    -webkit-box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.3);
+            box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.3);
 }
 
 #cwp-slider-comment cite.review-info {
