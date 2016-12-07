@@ -127,7 +127,7 @@ function cwp_review_meta_box_callback( $post ) {
 						echo 'cwp_hide_button2';
 } ?>">
 						<label
-							for="cwp_product_affiliate_text2"><?php _e( 'Affiliate Button Text 2', 'cwppos' ); ?></label>
+							for="cwp_product_affiliate_text2"><?php _e( 'Affiliate Text 2', 'cwppos' ); ?></label>
 						<input type="text" name="cwp_product_affiliate_text2" id="cwp_product_affiliate_text2"
 						       value="<?php
 								if ( isset( $cwp_review_stored_meta['cwp_product_affiliate_text2'][0] ) ) {
