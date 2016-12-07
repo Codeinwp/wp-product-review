@@ -1,4 +1,8 @@
 
+### 2.9.8 - 07/12/2016
+**Changes:** 
+- Development
+
 ### 2.9.7 - 01/12/2016
 **Changes:** 
 - Added premium features tab
