@@ -49,7 +49,7 @@ class cwpposConfig {
 		self::$all_categories_array = array();
 		self::$all_review_categories_array = array();
 		self::$categories_array = array();
-		self::$pro_page_menu_name = 'Premium Features <span class="dashicons 
+		self::$pro_page_menu_name = 'More Features <span class="dashicons 
 		dashicons-star-filled" 
 		style="vertical-align:-5px; padding-left:2px; color:#FFCA54;"></span>';
 		self::$pro_page_title = 'Go Premium';
