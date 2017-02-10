@@ -25,7 +25,10 @@
 define( 'WPPR_LITE_VERSION','2.9.5' );
 define( 'WPPR_PATH',dirname( __FILE__ ) );
 define( 'WPPR_SLUG', "wppr" );
+define( 'WPPR_DEBUG', true );
 define( 'WPPR_URL',plugins_url( 'wp-product-review' ) );
+
+require_once WPPR_PATH . '/inc/helpers/utils.php';
 
 if ( wp_get_theme() !== 'Reviewgine Affiliate PRO' ) {
 	include 'admin/functions.php';
@@ -40,6 +43,35 @@ if ( wp_get_theme() !== 'Reviewgine Affiliate PRO' ) {
 	include 'inc/abtesting/abtesting.php';
 }
 
+/**
+ * Load the required classes.
+ *
+ * @param string $class The class name to load.
+ *
+ * @return bool Either file was loaded or not.
+ */
+function wppr_autoload( $class ) {
+	$namespaces = array( 'WPPR' );
+	foreach ( $namespaces as $namespace ) {
+		if ( substr( $class, 0, strlen( $namespace ) ) == $namespace ) {
+			$filename = plugin_dir_path( __FILE__ ) . 'inc/models/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
+			if ( is_readable( $filename ) ) {
+				require_once $filename;
+				return true;
+			}
+
+			$filename = plugin_dir_path( __FILE__ ) . 'inc/helpers/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
+			if ( is_readable( $filename ) ) {
+				require_once $filename;
+				return true;
+			}
+		}
+	}
+	return false;
+}
+spl_autoload_register( 'wppr_autoload' );
+
+$review = new WPPR_Review();
 add_filter(WPPR_SLUG . "_upsell_config", "wppr_upsell_config");
 if( class_exists("TIABTesting") ) {
 
