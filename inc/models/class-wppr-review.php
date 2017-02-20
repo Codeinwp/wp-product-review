@@ -113,6 +113,7 @@ class WPPR_Review {
 				$this->setup_links();
 				$this->setup_pros_cons();
 				$this->setup_options();
+				$this->count_rating();
 
 				return true;
 			} else {
@@ -282,6 +283,15 @@ class WPPR_Review {
 	}
 
 	/**
+	 * Calculate the review rating.
+	 */
+	public function count_rating() {
+		$values      = wp_list_pluck( $this->options, 'value' );
+		$this->score = floatval( array_sum( $values ) / count( $this->options ) );
+		update_post_meta( $this->ID, 'wppr_rating', number_format( $this->score, 2 ) );
+	}
+
+	/**
 	 * Return the options array of the review.
 	 *
 	 * @return array The options array.
@@ -326,6 +336,7 @@ class WPPR_Review {
 				 * )
 				 */
 				$this->options[] = $options;
+				$this->count_rating();
 
 				return update_post_meta( $this->ID, 'wppr_options', $this->options );
 			} else {
@@ -333,6 +344,7 @@ class WPPR_Review {
 				 * Update the all list of options.
 				 */
 				$this->options = $options;
+				$this->count_rating();
 
 				return update_post_meta( $this->ID, 'wppr_options', $this->options );
 
@@ -342,6 +354,81 @@ class WPPR_Review {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Return the rating of the review.
+	 *
+	 * @return float Rating of the review.
+	 */
+	public function get_rating() {
+		$comment_influence = intval( wppr_get_option( 'cwppos_infl_userreview' ) );
+		$rating            = $this->score;
+		if ( $comment_influence > 0 ) {
+			$comments_rating = $this->get_comments_rating();
+			$rating          = $comments_rating * ( $comment_influence / 100 ) + $rating * ( ( 100 - $comment_influence ) / 100 );
+		}
+
+		return apply_filters( 'wppr_rating', $rating, $this->ID, $this );
+	}
+
+	/**
+	 * Get comments rating.
+	 *
+	 * @return float|int Comments rating.
+	 */
+	public function get_comments_rating() {
+
+		if ( $this->ID === 0 ) {
+			wppr_error( 'Can not get comments rating, id is not set' );
+
+			return 0;
+		}
+		$comments_query = new WP_Comment_Query;
+		$comments       = $comments_query->query( array(
+			'fields'  => 'ids',
+			'status'  => 'approve',
+			'post_id' => $this->ID,
+		) );
+		if ( $comments ) {
+			$options = array();
+			foreach ( $comments as $comment ) {
+				$options = array_merge( $options, $this->get_comment_options( $comment ) );
+			}
+
+			return ( array_sum( wp_list_pluck( 'values', $options ) ) / count( $options ) );
+		} else {
+			return 0;
+		}
+
+	}
+
+	/**
+	 * Return the options values and names associated with the comment.
+	 *
+	 * @param int $comment_id The comment id.
+	 *
+	 * @return array The options array.
+	 */
+	public function get_comment_options( $comment_id ) {
+		$options = array();
+
+		if ( wppr_get_option( 'cwppos_show_userreview' ) === 'yes' ) {
+			$options_names = wp_list_pluck( $this->options, 'name' );
+			foreach ( $options_names as $k => $name ) {
+				$value = get_comment_meta( $comment_id, 'meta_option_' . $k, true );
+				if ( ! empty( $value ) ) {
+					$value = 0;
+				}
+				$options[] = array(
+					'name'  => $name,
+					'value' => $value,
+				);
+			}
+		}
+
+		return $options;
+
 	}
 
 	/**
@@ -376,7 +463,6 @@ class WPPR_Review {
 			return update_post_meta( $this->ID, 'wppr_cons', $this->cons );
 		}
 
-		return false;
 	}
 
 	/**
@@ -410,8 +496,6 @@ class WPPR_Review {
 
 			return update_post_meta( $this->ID, 'wppr_pros', $this->pros );
 		}
-
-		return false;
 	}
 
 	/**
