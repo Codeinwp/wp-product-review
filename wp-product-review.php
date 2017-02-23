@@ -21,15 +21,12 @@
  * Text Domain: cwppos
  * Domain Path: /languages
  */
-
-define( 'WPPR_LITE_VERSION','2.9.5' );
-define( 'WPPR_PATH',dirname( __FILE__ ) );
+define( 'WPPR_LITE_VERSION', '2.9.5' );
+define( 'WPPR_PATH', dirname( __FILE__ ) );
 define( 'WPPR_SLUG', "wppr" );
 define( 'WPPR_DEBUG', true );
-define( 'WPPR_URL',plugins_url( 'wp-product-review' ) );
-
+define( 'WPPR_URL', plugins_url( 'wp-product-review' ) );
 require_once WPPR_PATH . '/inc/helpers/utils.php';
-
 if ( wp_get_theme() !== 'Reviewgine Affiliate PRO' ) {
 	include 'admin/functions.php';
 	include 'inc/wppr-filters.php';
@@ -42,7 +39,6 @@ if ( wp_get_theme() !== 'Reviewgine Affiliate PRO' ) {
 	include 'inc/wppr-main.php';
 	include 'inc/abtesting/abtesting.php';
 }
-
 /**
  * Load the required classes.
  *
@@ -57,44 +53,60 @@ function wppr_autoload( $class ) {
 			$filename = plugin_dir_path( __FILE__ ) . 'inc/models/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
 			if ( is_readable( $filename ) ) {
 				require_once $filename;
+
 				return true;
 			}
-
 			$filename = plugin_dir_path( __FILE__ ) . 'inc/helpers/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
 			if ( is_readable( $filename ) ) {
 				require_once $filename;
+
+				return true;
+			}
+			$filename = plugin_dir_path( __FILE__ ) . 'inc/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
+			if ( is_readable( $filename ) ) {
+				require_once $filename;
+
 				return true;
 			}
 		}
 	}
+
 	return false;
 }
+
 spl_autoload_register( 'wppr_autoload' );
 
+/**
+ * Global variable helper.
+ *
+ * @return WPPR The main WPPR object.
+ */
+function wppr_loader() {
+	return WPPR::init();
+}
+wppr_loader();
 $review = new WPPR_Review();
-add_filter(WPPR_SLUG . "_upsell_config", "wppr_upsell_config");
-if( class_exists("TIABTesting") ) {
-
-	$abtesting = new TIABTesting(WPPR_SLUG, WPPR_LITE_VERSION);
+add_filter( WPPR_SLUG . "_upsell_config", "wppr_upsell_config" );
+if ( class_exists( "TIABTesting" ) ) {
+	$abtesting = new TIABTesting( WPPR_SLUG, WPPR_LITE_VERSION );
 
 }
-function wppr_upsell_config($config)
-{
-	return array (
-		"preloader" => array(
-			__(" In order to be able to automatically load your options from another posts, you need the PRO add-on", "cwppos"). '<a href="http://bit.ly/2bpC3vT" target="_blank" class="preload_info_upsell">'.__("View Preload features","cwppos").'</a>',
-			"<i>".__(" You can always import options from other reviews using the preloader feature from the PRO add-on", "cwppos"). '</i><a href="http://bit.ly/2c1QNFK" target="_blank" class="preload_info_upsell">'.__("View more PRO features","cwppos").'</a>',
-			"<i>".__(" Build review more easily by importing them from other posts using the preloader feature from the pro addon", "cwppos"). '</i><a href="http://bit.ly/2bT89Sk" target="_blank" class="preload_info_upsell">'.__("View details","cwppos").'</a>',
-        ),
-        "amazon_title"    => array(
-            __("Hold on", "cwppos"),
-            __("Breaking news", "cwppos"),
-            __("Review tip", "cwppos"),
-            __("Integrate with Amazon", "cwppos"),
-        ),
-        "amazon_body"    => array(
-            __("Do you know that you can import products directly from your amazon affiliate account using the <a href='http://bit.ly/2cjpsux'>PRO</a> version", "cwppos"),
-            __("Do you know that you can import products from amazon and keep them synced using the <a href='http://bit.ly/2cEefYy'>PRO</a> version ", "cwppos")
-        ),
+function wppr_upsell_config( $config ) {
+	return array(
+		"preloader"    => array(
+			__( " In order to be able to automatically load your options from another posts, you need the PRO add-on", "cwppos" ) . '<a href="http://bit.ly/2bpC3vT" target="_blank" class="preload_info_upsell">' . __( "View Preload features", "cwppos" ) . '</a>',
+			"<i>" . __( " You can always import options from other reviews using the preloader feature from the PRO add-on", "cwppos" ) . '</i><a href="http://bit.ly/2c1QNFK" target="_blank" class="preload_info_upsell">' . __( "View more PRO features", "cwppos" ) . '</a>',
+			"<i>" . __( " Build review more easily by importing them from other posts using the preloader feature from the pro addon", "cwppos" ) . '</i><a href="http://bit.ly/2bT89Sk" target="_blank" class="preload_info_upsell">' . __( "View details", "cwppos" ) . '</a>',
+		),
+		"amazon_title" => array(
+			__( "Hold on", "cwppos" ),
+			__( "Breaking news", "cwppos" ),
+			__( "Review tip", "cwppos" ),
+			__( "Integrate with Amazon", "cwppos" ),
+		),
+		"amazon_body"  => array(
+			__( "Do you know that you can import products directly from your amazon affiliate account using the <a href='http://bit.ly/2cjpsux'>PRO</a> version", "cwppos" ),
+			__( "Do you know that you can import products from amazon and keep them synced using the <a href='http://bit.ly/2cEefYy'>PRO</a> version ", "cwppos" )
+		),
 	);
 }

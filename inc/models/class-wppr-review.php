@@ -378,7 +378,6 @@ class WPPR_Review {
 	 * @return float|int Comments rating.
 	 */
 	public function get_comments_rating() {
-
 		if ( $this->ID === 0 ) {
 			wppr_error( 'Can not get comments rating, id is not set' );
 
@@ -396,7 +395,7 @@ class WPPR_Review {
 				$options = array_merge( $options, $this->get_comment_options( $comment ) );
 			}
 
-			return ( array_sum( wp_list_pluck( 'values', $options ) ) / count( $options ) );
+			return ( array_sum( wp_list_pluck( $options, 'values' ) ) / count( $options ) );
 		} else {
 			return 0;
 		}
@@ -412,7 +411,6 @@ class WPPR_Review {
 	 */
 	public function get_comment_options( $comment_id ) {
 		$options = array();
-
 		if ( wppr_get_option( 'cwppos_show_userreview' ) === 'yes' ) {
 			$options_names = wp_list_pluck( $this->options, 'name' );
 			foreach ( $options_names as $k => $name ) {
