@@ -1,3 +1,4 @@
+/* jshint ignore:start */
 		jQuery("#cwp_select_bar_icon").click(function(a) {
 		    a.preventDefault();
 		    a.stopPropagation();
