@@ -384,15 +384,15 @@ function cwppos_dynamic_stylesheet() {
 	$h_tleft    = $f_img_size + 10;
 	$chart_size = 0.8 * $f_img_size;
 	?>
-	<style type="text/css">
+    <style type="text/css">
 
-		@media (min-width: 820px) {
-			#review-statistics .review-wrap-up .review-wu-left .rev-wu-image, #review-statistics .review-wrap-up .review-wu-left .review-wu-grade {
-				height: <?php echo $h_tleft;?>px;
-			}
+        @media (min-width: 820px) {
+            #review-statistics .review-wrap-up .review-wu-left .rev-wu-image, #review-statistics .review-wrap-up .review-wu-left .review-wu-grade {
+                height: <?php echo $h_tleft;?>px;
+            }
 
-			#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart .cwp-review-percentage {
-
+            #review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart .cwp-review-percentage {
+ 
 				margin-top: <?php echo $f_img_size * 0.1;?>%;
 			}
 
@@ -403,85 +403,85 @@ function cwppos_dynamic_stylesheet() {
 		<?php  if ( $options['cwppos_widget_size'] != '' ) { ?>
 			#review-statistics {
 				width: <?php  echo $options['cwppos_widget_size']; ?>px;
-			}
+			} 
 
-		<?php  } ?>
+        <?php  } ?>
 
-		}
+        }
 
-		#review-statistics .review-wrap-up div.cwpr-review-top {
-			border-top: <?php  echo $options['cwppos_reviewboxbd_width']; ?>px solid <?php  echo $options['cwppos_reviewboxbd_color']; ?>;
-		}
+        #review-statistics .review-wrap-up div.cwpr-review-top {
+            border-top: <?php  echo $options['cwppos_reviewboxbd_width']; ?>px solid <?php  echo $options['cwppos_reviewboxbd_color']; ?>;
+        }
 
-		.user-comments-grades .comment-meta-grade-bar,
-		#review-statistics .review-wu-bars ul li {
-			background: <?php  echo $options['cwppos_rating_default']; ?>;
-		}
+        .user-comments-grades .comment-meta-grade-bar,
+        #review-statistics .review-wu-bars ul li {
+            background: <?php  echo $options['cwppos_rating_default']; ?>;
+        }
 
-		#review-statistics .rev-option.customBarIcon ul li {
-			color: <?php  echo $options['cwppos_rating_default']; ?>;
-		}
+        #review-statistics .rev-option.customBarIcon ul li {
+            color: <?php  echo $options['cwppos_rating_default']; ?>;
+        }
 
-		#review-statistics .review-wrap-up .review-wu-right ul li, #review-statistics .review-wu-bars h3, .review-wu-bars span, #review-statistics .review-wrap-up .cwpr-review-top .cwp-item-category a {
-			color: <?php  echo $options['cwppos_font_color']; ?>;
-		}
+        #review-statistics .review-wrap-up .review-wu-right ul li, #review-statistics .review-wu-bars h3, .review-wu-bars span, #review-statistics .review-wrap-up .cwpr-review-top .cwp-item-category a {
+            color: <?php  echo $options['cwppos_font_color']; ?>;
+        }
 
-		#review-statistics .review-wrap-up .review-wu-right .pros h2 {
-			color: <?php  echo $options['cwppos_pros_color']; ?>;
-		}
+        #review-statistics .review-wrap-up .review-wu-right .pros h2 {
+            color: <?php  echo $options['cwppos_pros_color']; ?>;
+        }
 
-		#review-statistics .review-wrap-up .review-wu-right .cons h2 {
-			color: <?php  echo $options['cwppos_cons_color']; ?>;
-		}
+        #review-statistics .review-wrap-up .review-wu-right .cons h2 {
+            color: <?php  echo $options['cwppos_cons_color']; ?>;
+        }
 
-		div.affiliate-button a {
-			border: 2px solid <?php  echo $options['cwppos_buttonbd_color']; ?>;
-		}
+        div.affiliate-button a {
+            border: 2px solid <?php  echo $options['cwppos_buttonbd_color']; ?>;
+        }
 
-		div.affiliate-button a:hover {
-			border: 2px solid <?php  echo $options['cwppos_buttonbh_color']; ?>;
-		}
+        div.affiliate-button a:hover {
+            border: 2px solid <?php  echo $options['cwppos_buttonbh_color']; ?>;
+        }
 
-		div.affiliate-button a {
-			background: <?php  echo $options['cwppos_buttonbkd_color']; ?>;
-		}
+        div.affiliate-button a {
+            background: <?php  echo $options['cwppos_buttonbkd_color']; ?>;
+        }
 
-		div.affiliate-button a:hover {
-			background: <?php  echo $options['cwppos_buttonbkh_color']; ?>;
-		}
+        div.affiliate-button a:hover {
+            background: <?php  echo $options['cwppos_buttonbkh_color']; ?>;
+        }
 
-		div.affiliate-button a span {
-			color: <?php  echo $options['cwppos_buttontxtd_color']; ?>;
-		}
+        div.affiliate-button a span {
+            color: <?php  echo $options['cwppos_buttontxtd_color']; ?>;
+        }
 
-		div.affiliate-button a:hover span {
-			color: <?php  echo $options['cwppos_buttontxth_color']; ?>;
-		}
-
+        div.affiliate-button a:hover span {
+            color: <?php  echo $options['cwppos_buttontxth_color']; ?>;
+        }
+ 
 		<?php  if ( $options['cwppos_show_icon'] == 'yes' ) { ?>
 		div.affiliate-button a span {
 			background: url("<?php  echo WPPR_URL; ?>/images/cart-icon.png") no-repeat left center;
-		}
+		} 
 
-		div.affiliate-button a:hover span {
-			background: url("<?php  echo WPPR_URL; ?>/images/cart-icon-hover.png") no-repeat left center;
-		}
+        div.affiliate-button a:hover span {
+            background: url("<?php  echo WPPR_URL; ?>/images/cart-icon-hover.png") no-repeat left center;
+        }
 
-		<?php  } ?>
-
+        <?php  } ?>
+ 
 		<?php if ( $options['cwppos_show_userreview'] == 'yes' ) { ?>
 		.commentlist .comment-body p {
 			clear: left;
-		}
+		} 
 
-		<?php } ?>
-	</style>
-	<script type="text/javascript">
-		var c1 = "<?php echo $options['cwppos_rating_weak']; ?>";
-		var c2 = "<?php echo $options['cwppos_rating_notbad']; ?>";
-		var c3 = "<?php echo $options['cwppos_rating_good']; ?>";
-		var c4 = "<?php echo $options['cwppos_rating_very_good']; ?>";
-	</script>
+        <?php } ?>
+    </style>
+    <script type="text/javascript">
+        var c1 = "<?php echo $options['cwppos_rating_weak']; ?>";
+        var c2 = "<?php echo $options['cwppos_rating_notbad']; ?>";
+        var c3 = "<?php echo $options['cwppos_rating_good']; ?>";
+        var c4 = "<?php echo $options['cwppos_rating_very_good']; ?>";
+    </script>
 	<?php
 }
 
