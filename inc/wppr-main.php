@@ -155,7 +155,7 @@ function cwppos_show_review( $id = '', $visual = 'full' ) {
 		if ( $visual == 'full' || $visual == 'yes' ) {
 			$extra_class = $visual == 'yes' ? 'cwp-chart-embed' : '';
 			$return_string .= '<div class="cwp-review-chart ' . $extra_class . '">
-                                    <meta itemprop="datePublished" datetime="' . get_the_time( 'Y-m-d', $id ) . '">';
+                                    <meta itemprop="datePublished" content="' . get_the_time( 'Y-m-d', $id ) . '">';
 			if ( cwppos( 'cwppos_infl_userreview' ) != 0 && $commentNr > 1 ) {
 				$return_string .= '<div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" class="cwp-review-percentage" data-percent="';
 				$return_string .= $rating['overall'] . '"><span itemprop="ratingValue" class="cwp-review-rating">' . $divrating . '</span><meta itemprop="bestRating" content = "10"/>

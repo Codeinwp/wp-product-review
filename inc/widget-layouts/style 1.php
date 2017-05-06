@@ -55,12 +55,22 @@
 						?>
 					<p class="wppr-style1-buttons">
 						<?php
-							$link   = "<a href='{$affiliate_link}' rel='nofollow' target='_blank' class='wppr-bttn'>" . __( $instance['cwp_tp_buynow'], 'cwppos' ) . '</a>';
+						$site = get_site_url();
+						$find = '/';
+						$replace = '\/';
+						$site = str_replace( $find, $replace, $site );
+						if(preg_match( '/'.$site.'/', $affiliate_link)) {
+							$target = "target='_self'";
+						} else {
+							$target = "target='_blank'";
+						}
+
+							$link   = "<a href='{$affiliate_link}' rel='nofollow' {$target} class='wppr-bttn'>" . __( $instance['cwp_tp_buynow'], 'cwppos' ) . '</a>';
 						if ( ! empty( $instance['cwp_tp_buynow'] ) ) {
 							echo apply_filters( 'wppr_widget_style1_buynow_link', $link, get_the_ID(), $affiliate_link, $instance['cwp_tp_buynow'] );
 						}
 
-							$link   = "<a href='{$review_link}' rel='nofollow' target='_blank' class='wppr-bttn'>" . __( $instance['cwp_tp_readreview'], 'cwppos' ) . '</a>';
+							$link   = "<a href='{$review_link}' rel='nofollow' class='wppr-bttn'>" . __( $instance['cwp_tp_readreview'], 'cwppos' ) . '</a>';
 						if ( ! empty( $instance['cwp_tp_readreview'] ) ) {
 							echo apply_filters( 'wppr_widget_style1_readreview_link', $link, get_the_ID(), $review_link, $instance['cwp_tp_readreview'] );
 						}
