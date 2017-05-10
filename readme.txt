@@ -331,6 +331,4 @@ https://themeisle.com/contact
 3. Screenshot 3 Fully configurable theme options
 4. Screenshot 4 Rich Snippets displayed in Google
 
-for more you can check out
-
-https://themeisle.com/plugins/wp-product-review-lite/
+For more you can check out [WP Product Review on themeisle.com](https://themeisle.com/plugins/wp-product-review-lite/)
