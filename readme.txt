@@ -1,5 +1,5 @@
 === WP Product Review Lite ===
-Contributors: codeinwp,marius2012,marius_codeinwp,hardeepasrani,themeisle,Madalin_ThemeIsle
+Contributors: codeinwp,marius2012,marius_codeinwp,hardeepasrani,themeisle,Madalin_ThemeIsle,uriahs-victor
 Tags:  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin,  google rating, product review, rating, review, star rating, user rating, wp rating, wp review,  google, hreview,rich snippets,seo,snippet
 Author URI: http://themeisle.com
 Requires at least: 3.5
@@ -13,7 +13,7 @@ Easily turn your basic posts into in-depth reviews with ratings, pros and cons, 
 == Description ==
 
 
-> > If you want to see a live demo of the review plugin + rich snippets you can check <a href="http://demo.themeisle.com/parallax-one/wp-product-review/">http://demo.themeisle.com/parallax-one/wp-product-review/</a>.
+> If you want to see a live demo of the review plugin + rich snippets you can check here: [Live Demo](http://demo.themeisle.com/parallax-one/wp-product-review/)
 
 
 ### Why to get the PRO add-ons ?
@@ -29,11 +29,11 @@ Other notable features :
 
 ### Knowledgebase
 
-1. How to change the html format of the review name -> http://docs.themeisle.com/article/130-how-to-change-the-html-format-of-the-review-name
-2. How to change dynamically the name of the review -> http://docs.themeisle.com/article/131-how-to-change-dynamically-the-name-of-the-review
-3. How to change dynamically the option name format -> http://docs.themeisle.com/article/132-how-to-change-dynamically-the-option-name-format
-4. How to change dynamically the pros/cons heading text -> http://docs.themeisle.com/article/133-how-to-change-dynamically-the-pros-cons-heading-text
-5. How to change dynamically the image size for review -> http://docs.themeisle.com/article/135-how-to-change-dynamically-the-image-size-for-review
+1. [How to change the html format of the review name](http://docs.themeisle.com/article/130-how-to-change-the-html-format-of-the-review-name)
+2. [How to change dynamically the name of the review](http://docs.themeisle.com/article/131-how-to-change-dynamically-the-name-of-the-review)
+3. [How to change dynamically the option name format](http://docs.themeisle.com/article/132-how-to-change-dynamically-the-option-name-format)
+4. [How to change dynamically the pros/cons heading text](http://docs.themeisle.com/article/133-how-to-change-dynamically-the-pros-cons-heading-text)
+5. [How to change dynamically the image size for review](http://docs.themeisle.com/article/135-how-to-change-dynamically-the-image-size-for-review)
 
 
 ### User Review Enabled
@@ -42,16 +42,16 @@ Other notable features :
 
 1. After you install the plugin, go on a post admin page and you should be able to see a checkbox called : "Is this post a review ?", once this is checked you can add review details and those will appear on the post page.
 
-1. If you want to to edit the colors, enable/disable the affiliate button, change icons go on the plugin options page.
+1. If you want to edit the colors, enable/disable the affiliate button, change icons go on the plugin options page.
 
-1. All the plugin settings/colors are fully customizable, and you can read more about it <a rel="nofollow" href="https://themeisle.com/plugins/wp-product-review-lite/?utm_source=wpreadme&utm_medium=readme&utm_campaign=wporg">here</a>
+1. All the plugin settings/colors are fully customizable, and you can read more about it [here](href="https://themeisle.com/plugins/wp-product-review-lite/?utm_source=wpreadme&utm_medium=readme&utm_campaign=wporg)
 
-1. For updates follow https://twitter.com/themeisle.
+1. For updates [Follow Us on Twitter](https://twitter.com/themeisle)
 
-If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-wordpress-hosting/" rel="nofollow">fastest WordPress hosting</a> or which <a href="http://www.codeinwp.com/blog/15-best-wordpress-review-themes/" rel="nofollow">review themes</a> are playing nice with WP Product review, checkout our blog.
+If you would like to learn more about the [fastest WordPress hosting](http://www.codeinwp.com/blog/fastest-wordpress-hosting/) or which [review themes](http://www.codeinwp.com/blog/15-best-wordpress-review-themes/) are playing nice with WP Product Review, checkout our blog.
 
 
-**Fortcoming**
+**Forthcoming**
 
 - Direct amazon integration
 
@@ -67,8 +67,8 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 
 = Translations =
 
-* sk_SK translation by Patrik Žec (PATWIST) of http://patwist.com
-* fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
+* sk_SK translation by [Patrik Žec (PATWIST)](http://patwist.com)
+* fr_FR translation by [Jacques Soule](http://wordpress-pour-vous.com)
 
 == Changelog ==
 
@@ -321,8 +321,7 @@ Alternatively you can also follow the following steps to install the WP Product 
 
 By default user reviews are disabled since not all the themes are compatible with this option due to different designs for the comment box. You can easily activate them from General Settings
 
-If you have any questions please get in touch with us at,
-https://themeisle.com/contact
+If you have any questions please get in touch with us [here](https://themeisle.com/contact)
 
 == Screenshots ==
 
@@ -331,6 +330,4 @@ https://themeisle.com/contact
 3. Screenshot 3 Fully configurable theme options
 4. Screenshot 4 Rich Snippets displayed in Google
 
-for more you can check out
-
-https://themeisle.com/plugins/wp-product-review-lite/
+For more you can check out [WP Product Review on themeisle.com](https://themeisle.com/plugins/wp-product-review-lite/)
