@@ -321,8 +321,7 @@ Alternatively you can also follow the following steps to install the WP Product 
 
 By default user reviews are disabled since not all the themes are compatible with this option due to different designs for the comment box. You can easily activate them from General Settings
 
-If you have any questions please get in touch with us at,
-https://themeisle.com/contact
+If you have any questions please get in touch with us [here](https://themeisle.com/contact)
 
 == Screenshots ==
 
