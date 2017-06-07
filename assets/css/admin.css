@@ -1,0 +1,88 @@
+#wppr_top_tabs a{
+    text-decoration: none;
+}
+#wppr-admin{
+    margin-top:20px;
+}
+/* Tabbed Nav */
+#wppr_top_tabs ul#tabs_menu {
+    margin: 0;
+}
+
+#wppr_top_tabs ul#tabs_menu li.wppr-nav-tab {
+    border-top: 2px solid #52aae2;
+}
+
+#wppr_top_tabs ul#tabs_menu li {
+    display: inline-block;
+    margin: 0;
+    padding: 15px;
+    border: 1px solid #eaeaea;
+    border-bottom: none;
+    border-radius: 2px 2px 0 0;
+    background: rgb(252, 252, 252);
+    font-family: "Roboto",sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+#wppr_top_tabs ul#tabs_menu li.active,
+#wppr_top_tabs ul#tabs_menu li:hover {
+    background: none repeat scroll 0 0 #fff;
+    cursor: pointer;
+}
+
+#wppr_top_tabs div.wppr-tab {
+    display: none;
+    float: left;
+    width: 100%;
+    border: 1px solid #eaeaea;
+    border-bottom: 0;
+    background: #fff;
+}
+
+.wppr-tab .wppr_top_tabs_vertical .wppr-tab-vertical {
+    float: left;
+    width: 85%;
+}
+
+#wppr_top_tabs div.wppr-tab.active {
+    display: block;
+}
+#wppr_top_tabs ul#tabs_menu li:hover:after ,
+#wppr_top_tabs ul#tabs_menu li.active:after {
+    display: block;
+    position: absolute;
+    bottom: -5px;
+    left: -1px;
+    width: 100%;
+    height: 5px;
+    border-right: 1px solid #fff;
+    border-left: 1px solid #fff;
+    background: #fff;
+    content: "\00A0";
+}
+#wppr_top_tabs {
+    margin-top: 10px;
+    border-bottom: 5px solid #52aae2;
+}
+
+#wppr_top_tabs ul#tabs_menu li.wppr-nav-tab.active a,
+#wppr_top_tabs ul#tabs_menu li.wppr-nav-tab a:hover {
+
+    color: #f17052;
+}
+#wppr_top_tabs ul#tabs_menu li.wppr-nav-tab.active,
+#wppr_top_tabs ul#tabs_menu li.wppr-nav-tab:hover {
+    border-top: 2px  #f16848 solid;
+    position:relative;
+    color: #f17052;
+}
+.wppr-tab-content{
+    display:none;
+}
+#wppr-settings{
+    background:#fff;
+    padding:10px;
+}

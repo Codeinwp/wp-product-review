@@ -73,7 +73,7 @@ class WPPR_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, WPPR_PATH . '/assets/css/dashboard_styles.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name . '_admin_styles', WPPR_URL . '/assets/css/admin.css', array(), $this->version, 'all' );
 
 	}
 
