@@ -154,8 +154,9 @@ class WPPR {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
-		$plugin_render_controller = new WPPR_Admin_Render_Controller();
+		$plugin_render_controller = new WPPR_Admin_Render_Controller( $this->get_plugin_name(), $this->get_version() );
         $this->loader->add_action( 'admin_menu', $plugin_render_controller, 'menu_pages' );
+        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_render_controller, 'render_page_scripts' );
 
 	}
 

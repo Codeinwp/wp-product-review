@@ -73,8 +73,8 @@ class WPPR_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name . '_admin_styles', WPPR_URL . '/assets/css/admin.css', array(), $this->version, 'all' );
-		wp_enqueue_style( $this->plugin_name . '_admin_upsell_styles', WPPR_URL . '/assets/css/upsell.css', array(), $this->version, 'all' );
+//		wp_enqueue_style( $this->plugin_name . '_admin_styles', WPPR_URL . '/assets/css/admin.css', array(), $this->version, 'all' );
+//		wp_enqueue_style( $this->plugin_name . '_admin_upsell_styles', WPPR_URL . '/assets/css/upsell.css', array(), $this->version, 'all' );
 
 	}
 
@@ -97,7 +97,7 @@ class WPPR_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wppr-admin.js', array( 'jquery' ), $this->version, false );
+//		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wppr-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
 
