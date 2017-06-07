@@ -54,12 +54,6 @@ register_activation_hook( __FILE__, 'activate_wppr' );
 register_deactivation_hook( __FILE__, 'deactivate_wppr' );
 
 /**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
-require plugin_dir_path( __FILE__ ) . 'includes/class-wppr.php';
-
-/**
  * Load the required classes.
  *
  * @since   3.0.0
