@@ -60,6 +60,44 @@ register_deactivation_hook( __FILE__, 'deactivate_wppr' );
 require plugin_dir_path( __FILE__ ) . 'includes/class-wppr.php';
 
 /**
+ * Load the required classes.
+ *
+ * @since   3.0.0
+ * @param   string $class The class name to load.
+ * @return bool
+ */
+function wppr_autoload( $class ) {
+    $namespaces = array( 'WPPR' );
+    foreach ( $namespaces as $namespace ) {
+        if ( substr( $class, 0, strlen( $namespace ) ) == $namespace ) {
+            $filename = plugin_dir_path( __FILE__ ) . 'includes/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
+            if ( is_readable( $filename ) ) {
+                require_once $filename;
+                return true;
+            }
+            $filename = plugin_dir_path( __FILE__ ) . 'includes/admin/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
+            if ( is_readable( $filename ) ) {
+                require_once $filename;
+                return true;
+            }
+            $filename = plugin_dir_path( __FILE__ ) . 'includes/admin/models/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
+            if ( is_readable( $filename ) ) {
+                require_once $filename;
+                return true;
+            }
+            $filename = plugin_dir_path( __FILE__ ) . 'includes/admin/helpers/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
+            if ( is_readable( $filename ) ) {
+                require_once $filename;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+spl_autoload_register( 'wppr_autoload' );
+
+/**
  * Begins execution of the plugin.
  *
  * Since everything within the plugin is registered via hooks,
