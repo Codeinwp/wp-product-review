@@ -74,6 +74,7 @@ class WPPR_Admin {
 		 */
 
 		wp_enqueue_style( $this->plugin_name . '_admin_styles', WPPR_URL . '/assets/css/admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name . '_admin_upsell_styles', WPPR_URL . '/assets/css/upsell.css', array(), $this->version, 'all' );
 
 	}
 
