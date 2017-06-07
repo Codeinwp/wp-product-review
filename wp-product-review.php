@@ -102,7 +102,7 @@ spl_autoload_register( 'wppr_autoload' );
  */
 function run_wppr() {
 
-	$plugin = new Wppr();
+	$plugin = new WPPR();
 	$plugin->run();
 
 }
