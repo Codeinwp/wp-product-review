@@ -6,8 +6,8 @@
  * @link       https://themeisle.com/
  * @since      3.0.0
  *
- * @package    Wppr
- * @subpackage Wppr/includes
+ * @package    WPPR
+ * @subpackage WPPR/includes
  */
 
 /**
@@ -17,11 +17,11 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Wppr
- * @subpackage Wppr/includes
+ * @package    WPPR
+ * @subpackage WPPR/includes
  * @author     ThemeIsle <friends@themeisle.com>
  */
-class Wppr_Loader {
+class WPPR_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

@@ -6,8 +6,8 @@
  * @link       https://themeisle.com/
  * @since      3.0.0
  *
- * @package    Wppr
- * @subpackage Wppr/includes
+ * @package    WPPR
+ * @subpackage WPPR/includes
  */
 
 /**
@@ -16,11 +16,11 @@
  * This class defines all code necessary to run during the plugin's deactivation.
  *
  * @since      3.0.0
- * @package    Wppr
- * @subpackage Wppr/includes
+ * @package    WPPR
+ * @subpackage WPPR/includes
  * @author     ThemeIsle <friends@themeisle.com>
  */
-class Wppr_Deactivator {
+class WPPR_Deactivator {
 
 	/**
 	 * Short Description. (use period)

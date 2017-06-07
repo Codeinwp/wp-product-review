@@ -6,8 +6,8 @@
  * @link       https://themeisle.com/
  * @since      3.0.0
  *
- * @package    Wppr
- * @subpackage Wppr/admin
+ * @package    WPPR
+ * @subpackage WPPR/admin
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    Wppr
- * @subpackage Wppr/admin
+ * @package    WPPR
+ * @subpackage WPPR/admin
  * @author     ThemeIsle <friends@themeisle.com>
  */
-class Wppr_Admin {
+class WPPR_Admin {
 
 	/**
 	 * The ID of this plugin.
@@ -65,10 +65,10 @@ class Wppr_Admin {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Wppr_Loader as all of the hooks are defined
+		 * defined in WPPR_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Wppr_Loader will then create the relationship
+		 * The WPPR_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
@@ -88,10 +88,10 @@ class Wppr_Admin {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Wppr_Loader as all of the hooks are defined
+		 * defined in WPPR_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Wppr_Loader will then create the relationship
+		 * The WPPR_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */

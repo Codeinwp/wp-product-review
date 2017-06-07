@@ -9,8 +9,8 @@
  * @link       https://themeisle.com/
  * @since      3.0.0
  *
- * @package    Wppr
- * @subpackage Wppr/includes
+ * @package    WPPR
+ * @subpackage WPPR/includes
  */
 
 /**
@@ -20,11 +20,11 @@
  * so that it is ready for translation.
  *
  * @since      3.0.0
- * @package    Wppr
- * @subpackage Wppr/includes
+ * @package    WPPR
+ * @subpackage WPPR/includes
  * @author     ThemeIsle <friends@themeisle.com>
  */
-class Wppr_i18n {
+class WPPR_i18n {
 
 
 	/**

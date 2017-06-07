@@ -9,8 +9,8 @@
  * @link       https://themeisle.com/
  * @since      3.0.0
  *
- * @package    Wppr
- * @subpackage Wppr/includes
+ * @package    WPPR
+ * @subpackage WPPR/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      3.0.0
- * @package    Wppr
- * @subpackage Wppr/includes
+ * @package    WPPR
+ * @subpackage WPPR/includes
  * @author     ThemeIsle <friends@themeisle.com>
  */
-class Wppr {
+class WPPR {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -35,7 +35,7 @@ class Wppr {
 	 *
 	 * @since    3.0.0
 	 * @access   protected
-	 * @var      Wppr_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      WPPR_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -83,10 +83,10 @@ class Wppr {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Wppr_Loader. Orchestrates the hooks of the plugin.
-	 * - Wppr_i18n. Defines internationalization functionality.
-	 * - Wppr_Admin. Defines all hooks for the admin area.
-	 * - Wppr_Public. Defines all hooks for the public side of the site.
+	 * - WPPR_Loader. Orchestrates the hooks of the plugin.
+	 * - WPPR_i18n. Defines internationalization functionality.
+	 * - WPPR_Admin. Defines all hooks for the admin area.
+	 * - WPPR_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -119,14 +119,14 @@ class Wppr {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/public/class-wppr-public.php';
 
-		$this->loader = new Wppr_Loader();
+		$this->loader = new WPPR_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Wppr_i18n class in order to set the domain and to register the hook
+	 * Uses the WPPR_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    3.0.0
@@ -134,7 +134,7 @@ class Wppr {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Wppr_i18n();
+		$plugin_i18n = new WPPR_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -149,7 +149,7 @@ class Wppr {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Wppr_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new WPPR_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -165,7 +165,7 @@ class Wppr {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Wppr_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new WPPR_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -196,7 +196,7 @@ class Wppr {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     3.0.0
-	 * @return    Wppr_Loader    Orchestrates the hooks of the plugin.
+	 * @return    WPPR_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;
