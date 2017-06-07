@@ -74,7 +74,7 @@ class WPPR {
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
-		$this->define_public_hooks();
+		//$this->define_public_hooks();
 
 	}
 
@@ -96,28 +96,28 @@ class WPPR {
 	 */
 	private function load_dependencies() {
 
-		/**
-		 * The class responsible for orchestrating the actions and filters of the
-		 * core plugin.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wppr-loader.php';
-
-		/**
-		 * The class responsible for defining internationalization functionality
-		 * of the plugin.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wppr-i18n.php';
-
-		/**
-		 * The class responsible for defining all actions that occur in the admin area.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/admin/class-wppr-admin.php';
-
-		/**
-		 * The class responsible for defining all actions that occur in the public-facing
-		 * side of the site.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/public/class-wppr-public.php';
+//		/**
+//		 * The class responsible for orchestrating the actions and filters of the
+//		 * core plugin.
+//		 */
+//		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wppr-loader.php';
+//
+//		/**
+//		 * The class responsible for defining internationalization functionality
+//		 * of the plugin.
+//		 */
+//		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wppr-i18n.php';
+//
+//		/**
+//		 * The class responsible for defining all actions that occur in the admin area.
+//		 */
+//		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/admin/class-wppr-admin.php';
+//
+//		/**
+//		 * The class responsible for defining all actions that occur in the public-facing
+//		 * side of the site.
+//		 */
+//		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/public/class-wppr-public.php';
 
 		$this->loader = new WPPR_Loader();
 
@@ -153,6 +153,9 @@ class WPPR {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+
+		$plugin_render_controller = new WPPR_Admin_Render_Controller();
+        $this->loader->add_action( 'admin_menu', $plugin_render_controller, 'menu_pages' );
 
 	}
 
