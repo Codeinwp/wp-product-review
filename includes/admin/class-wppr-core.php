@@ -1,21 +1,17 @@
 <?php
 class WPPR_Core {
 
-    public function __construct() {
-    }
-
-    function register_options() {
-        $validator = new cwpposOptionsValidator();
-        $option = get_option( cwppos_config( 'menu_slug' ) );
-        $structure = cwpposConfig::$structure;
-        $defaults = cwppos_get_config_defaults( $structure );
+    public function register_options() {
+        $validator = new WPPR_Options_Validator_Helper();
+        $options_name = $validator->retrive_options_name();
+        $option = get_option( $options_name );
         $defaults = $validator->validate_defaults();
         $options = array_merge( $defaults,is_array( $option ) ? $option : array() );
 
         if ( ! is_array( $option ) ) {
-            add_option( cwppos_config( 'menu_slug' ),$options,'','no' ); } else { 			update_option( cwppos_config( 'menu_slug' ),$options ); }
+            add_option( $options_name, $options, '', 'no' ); } else { update_option( $options_name, $options ); }
         if ( function_exists( 'register_setting' ) ) {
-            register_setting( cwppos_config( 'menu_slug' ), cwppos_config( 'menu_slug' ),  array( $validator, 'validate' ) );
+            register_setting( $options_name, $options_name,  array( $validator, 'validate' ) );
         }
     }
 

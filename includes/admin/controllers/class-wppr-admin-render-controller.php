@@ -46,6 +46,7 @@ class WPPR_Admin_Render_Controller {
         $this->version = $version;
 
         $this->options = get_option( 'cwppos_options' );
+        var_dump( $this->options );
     }
 
     /**
@@ -111,22 +112,42 @@ class WPPR_Admin_Render_Controller {
         switch ( $field['type'] ) {
             case 'input_text':
 
-                $this->add_input_text( $tabid,esc_html( $field['name'] ),esc_html( $field['description'] ),esc_attr( $field['id'] ) );
+                $this->add_input_text( $tabid, esc_html( $field['name'] ), esc_html( $field['description'] ), esc_attr( $field['id'] ) );
 
+                break;
+            case 'select':
+                $no = array();
+                foreach ( $field['options'] as $ov => $op ) {
+                    $no[ esc_attr( $ov ) ] = esc_html( $op );
+                }
+                $this->add_select( $tabid, esc_html( $field['name'] ), esc_html( $field['description'] ), esc_attr( $field['id'] ), $no );
                 break;
         }
         if ( isset( $errors ) ) { return $errors; }
     }
 
+    public function add_select( $tabid, $name, $description, $id, $options, $class = '' ) {
+
+        $html = '
+				<div class="controls ' . $class . '">
+				<div class="explain">' . $name . '</div><p class="field_description">' . $description . '</p>';
+
+        $html .= '<select class=" cwp_select" name="' . 'cwppos_options' . '[' . $id . ']" > ';
+
+        foreach ( $options as $k => $v ) {
+
+            $html .= "<option value='" . $k . "' " . ( ( isset( $this->options[ 'cwpps_' . $id ] ) && $this->options[ 'cwpps_' . $id ] == $k ) ? 'selected' : '') . '>' . $v . '</option>';
+        }
+
+        $html .= '</select></div>';
+
+        echo $html;
+    }
+
     public function add_input_text( $tabid, $name, $description, $id, $class = '' ) {
         $html = '
 				<div class="controls ' . $class . '">
-				<div class="explain">' . $name . '</div><p class="field_description">' . $description . '</p> <input class="cwp_input " placeholder="' . $name . '" name="' . 'cwppos_options' . '[' . $id . ']" type="text" value="' . $this->options[ $id ] . '"></div>';
-
-        $this->tabs[ $tabid ]['elements'][] = array(
-            'type' => 'input_text',
-            'html' => $html,
-        );
-
+				<div class="explain">' . $name . '</div><p class="field_description">' . $description . '</p> <input class="cwp_input " placeholder="' . $name . '" name="' . 'cwppos_options' . '[' . $id . ']" type="text" value="' . $this->options[ 'cwppos_' . $id ] . '"></div>';
+        echo $html;
     }
 }
