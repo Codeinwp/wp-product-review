@@ -47,7 +47,7 @@ class WPPR_Global_Settings {
                         'cwppos_show_reviewbox'  => array(
                             'id'      => 'review_position',
                             'name'    => __( 'Position of the review box', 'wp-product-review' ),
-                            'desc'    => __( 'You can choose manually and use : <?php echo cwppos_show_review(\'postid\'); ?> or you can get the Product in post add-on and use :[P_REVIEW post_id=3067 visual=\'full\']', 'wp-product-review' ),
+                            'description'    => __( 'You can choose manually and use : <?php echo cwppos_show_review(\'postid\'); ?> or you can get the Product in post add-on and use :[P_REVIEW post_id=3067 visual=\'full\']', 'wp-product-review' ),
                             'type'    => 'select',
                             'options' => array(
                                 'yes'    => __( 'Before content', 'wp-product-review' ),
@@ -58,7 +58,7 @@ class WPPR_Global_Settings {
                         'cwppos_show_userreview' => array(
                             'id'      => 'show_review',
                             'name'    => __( 'Show review comment', 'wp-product-review' ),
-                            'desc'    => __( 'Activate comment review user', 'wp-product-review' ),
+                            'description'    => __( 'Activate comment review user', 'wp-product-review' ),
                             'type'    => 'select',
                             'options' => array(
                                 'yes' => __( 'Yes', 'wp-product-review' ),
@@ -68,7 +68,7 @@ class WPPR_Global_Settings {
                         'cwppos_infl_userreview' => array(
                             'id'      => 'comment_influence',
                             'name'    => __( 'Visitor Review Influence', 'wp-product-review' ),
-                            'desc'    => __( 'Select how much visitors rating will affect the main one', 'wp-product-review' ),
+                            'description'    => __( 'Select how much visitors rating will affect the main one', 'wp-product-review' ),
                             'type'    => 'select',
                             'options' => array(
                                 '0'   => 'No influence',
@@ -87,7 +87,7 @@ class WPPR_Global_Settings {
                         'cwppos_option_nr'       => array(
                             'id'      => 'options_no',
                             'name'    => __( 'Number of options/pros/cons', 'wp-product-review' ),
-                            'desc'    => __( 'You can select the default number of options / pros/ cons (3-10)', 'wp-product-review' ),
+                            'description'    => __( 'You can select the default number of options / pros/ cons (3-10)', 'wp-product-review' ),
                             'type'    => 'select',
                             'options' => array(
                                 3  => '3',

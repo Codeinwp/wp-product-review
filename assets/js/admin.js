@@ -1,4 +1,21 @@
 /* jshint ignore:start */
+jQuery(document).ready(function ($) {
+    update_nav($("#wppr_top_tabs .wppr-nav-tab:first"));
+    $("#wppr_top_tabs").on('click', '.wppr-nav-tab', function () {
+        update_nav($(this));
+        return false;
+    })
+    function update_nav(obj) {
+        var tab = obj.attr('data-tab');
+        var id = obj.find('a').attr('href');
+
+        $('.wppr-nav-tab').removeClass('active');
+        obj.addClass('active');
+        $('.wppr-tab-content').hide();
+        $(id).show();
+    }
+});
+
 jQuery("document").ready(function() {
  
 

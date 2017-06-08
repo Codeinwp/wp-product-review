@@ -10,7 +10,9 @@
  *
  */
 
-$sections = WPPR_Global_Settings::instance()->get_sections();
+$global_settings = WPPR_Global_Settings::instance();
+$sections = $global_settings->get_sections();
+$fields = $global_settings->get_fields();
 
 ?>
 <div id="wppr-admin">
@@ -35,7 +37,15 @@ $sections = WPPR_Global_Settings::instance()->get_sections();
 
         <?php foreach ( $sections as $section_key => $section_name ) : ?>
             <div id="wppr-tab-<?php echo $section_key; ?>" class="wppr-tab-content">
-                <?php echo $section_name; ?>
+                <?php
+                echo $section_name . PHP_EOL;
+                echo '<hr/>';
+                foreach ( $fields[ $section_key ] as $field ) {
+                    var_dump( $field );
+                    $this->add_element( $section_key, $field );
+                    echo '<hr/>';
+                }
+                ?>
             </div>
 
         <?php endforeach; ?>
