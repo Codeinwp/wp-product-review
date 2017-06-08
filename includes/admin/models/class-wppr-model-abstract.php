@@ -13,5 +13,5 @@
  * Class WPPR_Model_Abstract
  */
 abstract class WPPR_Model_Abstract {
-    
+
 }
