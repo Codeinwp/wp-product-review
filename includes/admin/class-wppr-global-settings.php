@@ -136,38 +136,38 @@ class WPPR_Global_Settings {
                             'type'        => 'color',
                             'name'        => __( 'Rating options default color', 'wp-product-review' ),
                             'description' => __( 'Select the color to be used by default on rating.', 'wp-product-review' ),
-                            'id'          => 'default_color',
+                            'id'          => 'rating_default',
                         ),
                         'cwppos_rating_chart_default' => array(
                             'type'        => 'color',
                             'name'        => __( 'Rating chart default color', 'wp-product-review' ),
                             'description' => __( 'Select the color to be used by default on rating chart.', 'wp-product-review' ),
-                            'id'          => 'chart_color',
+                            'id'          => 'rating_chart_default',
                         ),
                         'cwppos_rating_weak'          => array(
                             'type'        => 'color',
                             'name'        => __( 'Weak rating', 'wp-product-review' ),
                             'description' => __( 'Select the color to be used when the rating is weak. ( < 2.5)', 'wp-product-review' ),
-                            'id'          => 'weak_color',
+                            'id'          => 'rating_weak',
                         ),
                         'cwppos_rating_notbad'        => array(
                             'type'        => 'color',
                             'name'        => __( 'Not bad rating', 'wp-product-review' ),
                             'description' => __( 'Select the color to be used when the rating is not bad. ( > 2.5 and < 5)
 ', 'wp-product-review' ),
-                            'id'          => 'notbad_color',
+                            'id'          => 'rating_notbad',
                         ),
                         'cwppos_rating_very_good'     => array(
                             'type'        => 'color',
                             'name'        => __( 'Good rating', 'wp-product-review' ),
                             'description' => __( 'Select the color to be used when the rating is good. ( >5 and <7.5)', 'wp-product-review' ),
-                            'id'          => 'good_color',
+                            'id'          => 'rating_very_good',
                         ),
                         'cwppos_fontawesome'          => array(
                             'type'        => 'color',
                             'name'        => __( 'Very good rating', 'wp-product-review' ),
                             'description' => __( 'Select the color to be used when the rating is very good. ( 7.5 < and <10)', 'wp-product-review' ),
-                            'id'          => 'verygood_color',
+                            'id'          => 'fontawesome',
                         ),
 
                     ),
@@ -206,6 +206,7 @@ class WPPR_Global_Settings {
                             'type'        => 'color',
                             'name'        => __( 'Review box border', 'wp-product-review' ),
                             'description' => __( 'Select the border color to be used on the review box', 'wp-product-review' ),
+                            'id'          => 'reviewboxbd_color',
                         ),
                         'cwppos_reviewboxbd_width' => array(
                             'type'        => 'text',

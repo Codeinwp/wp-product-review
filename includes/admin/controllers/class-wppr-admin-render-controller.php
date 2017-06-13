@@ -107,47 +107,117 @@ class WPPR_Admin_Render_Controller {
         include_once( WPPR_PATH . '/includes/admin/layouts/' . $name . '_tpl.php' );
     }
 
+    /**
+     * Validate a class string.
+     *
+     * @param string $class String to validate.
+     *
+     * @return string The validate string.
+     */
+    private function validate_class( $class ) {
+        return implode( ' ', array_map( 'sanitize_html_class', explode( ' ', str_replace( '  ', ' ', $class ) ) ) );
+    }
+
     public function add_element( $tabid, $field ) {
 
         switch ( $field['type'] ) {
             case 'input_text':
-
-                $this->add_input_text( $tabid, esc_html( $field['name'] ), esc_html( $field['description'] ), esc_attr( $field['id'] ) );
-
+                echo $this->add_input_text( $field );
                 break;
             case 'select':
-                $no = array();
-                foreach ( $field['options'] as $ov => $op ) {
-                    $no[ esc_attr( $ov ) ] = esc_html( $op );
-                }
-                $this->add_select( $tabid, esc_html( $field['name'] ), esc_html( $field['description'] ), esc_attr( $field['id'] ), $no );
+                echo $this->add_select( $field );
+                break;
+            case 'color':
+                echo $this->add_color( $field );
                 break;
         }
         if ( isset( $errors ) ) { return $errors; }
     }
 
-    public function add_select( $tabid, $name, $description, $id, $options, $class = '' ) {
+    public function add_select( $args ) {
+        $option_name = WPPR_Global_Settings::instance()->get_options_name();
+        $defaults = array(
+            'name'        => null,
+            'id'          => null,
+            'value'       => null,
+            'class'       => 'wppr-text',
+            'placeholder' => '',
+            'disabled'    => false,
+        );
+        $args     = wp_parse_args( $args, $defaults );
+        $class    = $this->validate_class( $args['class'] );
 
-        $html = '
+        $options = array();
+        foreach ( $args['options'] as $ov => $op ) {
+            $options[ esc_attr( $ov ) ] = esc_html( $op );
+        }
+
+        $output = '
 				<div class="controls ' . $class . '">
-				<div class="explain">' . $name . '</div><p class="field_description">' . $description . '</p>';
+				<div class="explain">' . $args['name'] . '</div><p class="field_description">' . $args['description'] . '</p>';
 
-        $html .= '<select class=" cwp_select" name="' . 'cwppos_options' . '[' . $id . ']" > ';
+        $output .= '<select class=" cwp_select" name="' . $option_name . '[' . $args['id'] . ']" > ';
 
         foreach ( $options as $k => $v ) {
 
-            $html .= "<option value='" . $k . "' " . ( ( isset( $this->options[ 'cwpps_' . $id ] ) && $this->options[ 'cwpps_' . $id ] == $k ) ? 'selected' : '') . '>' . $v . '</option>';
+            $output .= "<option value='" . $k . "' " . ( ( isset( $this->options[ 'cwppos_' . $args['id'] ] ) && $this->options[ 'cwppos_' . $args['id'] ] == $k ) ? 'selected' : '') . '>' . $v . '</option>';
         }
 
-        $html .= '</select></div>';
+        $output .= '</select></div>';
 
-        echo $html;
+        return apply_filters( 'wppr_field', $output, $args );
     }
 
-    public function add_input_text( $tabid, $name, $description, $id, $class = '' ) {
-        $html = '
+    public function add_color( $args ) {
+        $option_name = WPPR_Global_Settings::instance()->get_options_name();
+        $defaults = array(
+            'name'        => null,
+            'id'          => null,
+            'value'       => null,
+            'class'       => 'wppr-text',
+            'placeholder' => '',
+            'disabled'    => false,
+        );
+        $args     = wp_parse_args( $args, $defaults );
+        $class    = $this->validate_class( $args['class'] );
+        $output = '
+				<div class="controls ' . $class . ' ">
+				    <div class="explain">' . $args['name'] . '</div>
+				    <p class="field_description">' . $args['description'] . '</p>
+				    <input type="hidden" id="' . esc_attr( $args['id'] ) . '_color" name="' . $option_name . '[' . esc_attr( $args['id'] ) . ']" value="' . $this->options[ 'cwppos_' . esc_attr( $args['id'] ) ] . '"/></br>
+				    <input type="text" name=""	class="subo-color-picker" id="' . esc_attr( $args['id'] ) . '_color_selector" value="' . $this->options[ 'cwppos_' . esc_attr( $args['id'] ) ] . '" /><br/>
+				</div>';
+
+        return apply_filters( 'wppr_field', $output, $args );
+    }
+
+    public function add_input_text( $args ) {
+        $option_name = WPPR_Global_Settings::instance()->get_options_name();
+        $defaults = array(
+            'name'        => null,
+            'id'          => null,
+            'value'       => null,
+            'class'       => 'wppr-text',
+            'placeholder' => '',
+            'disabled'    => false,
+        );
+        $args     = wp_parse_args( $args, $defaults );
+        $class    = $this->validate_class( $args['class'] );
+        $disabled = '';
+        if ( $args['disabled'] ) {
+            $disabled = ' disabled="disabled"';
+        }
+        if ( is_null( $args['id'] ) ) {
+            $args['id'] = $args['name'];
+        }
+
+        $output = '
 				<div class="controls ' . $class . '">
-				<div class="explain">' . $name . '</div><p class="field_description">' . $description . '</p> <input class="cwp_input " placeholder="' . $name . '" name="' . 'cwppos_options' . '[' . $id . ']" type="text" value="' . $this->options[ 'cwppos_' . $id ] . '"></div>';
-        echo $html;
+				    <div class="explain">' . $args['name'] . '</div>
+				    <p class="field_description">' . $args['description'] . '</p>
+				    <input type="text" ' . $disabled . ' name="' . $option_name . '[' . esc_attr( $args['id'] ) . ']" id="' . esc_attr( $args['id'] ) . '" class="' . $class . '"   value="' . esc_attr( $args['value'] ) . '" placeholder="' . esc_attr( $args['placeholder'] ) . '"  />
+				</div>';
+
+        return apply_filters( 'wppr_field', $output, $args );
     }
 }
