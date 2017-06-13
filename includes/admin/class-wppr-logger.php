@@ -71,7 +71,7 @@ class WPPR_Logger {
         $caller = array_shift( $bt );
         $msg    = $msg . ' [ ' . $caller['file'];
         $msg    = $msg . ' : ' . $caller['line'] . ' ]';
-        if ( WPPR_DEBUG ) {
+        if ( defined( 'WPPR_DEBUG' ) && WPPR_DEBUG ) {
             error_log( $msg );
         }
     }

@@ -12,7 +12,7 @@
 /**
  * Class WPPR_Editor_Abstract.
  */
-abstract class WPPR_Editor_Abstract {
+abstract class WPPR_Editor_Abstract extends WPPR_Logger {
 	/**
 	 * The WP_Post object.
 	 *
@@ -33,23 +33,49 @@ abstract class WPPR_Editor_Abstract {
 	 */
 	private $previous;
 
+
+	private $namespace;
+	private $options;
+
 	/**
 	 * WPPR_Default_Editor constructor.
 	 *
 	 * @param WP_Post $post The post object.
 	 */
 	public function __construct( $post ) {
+	    $this->namespace = WPPR_Global_Settings::instance()->get_options_name();
+	    $this->options = get_option( $this->namespace );
 		if ( $post instanceof WP_Post ) {
 			$this->post   = $post;
 			$this->review = new WPPR_Review( $this->post->ID );
 		} else {
-			wppr_error( 'No WP_Post provided = ' . var_export( $post, true ) );
+			$this->log_error( 'No WP_Post provided = ' . var_export( $post, true ) );
 		}
-		$previous = wppr_get_option( 'last_review' );
+		$previous = $this->get_var( 'last_review' );
 		if ( ! empty ( $previous ) ) {
 			$this->previous = new WPPR_Review( $previous );
 		}
 	}
+
+    public function get_var( $key ) {
+        $this->log_notice( 'Getting value for ' . $key );
+        if ( isset( $this->options[ $key ] ) ) {
+            return $this->options[ $key ];
+        }
+
+        return false;
+    }
+
+    public function set_var( $key, $value = '' ) {
+        $this->log_notice( 'Setting value for ' . $key . ' with ' . $value );
+        if ( ! isset( $this->options[ $key ] ) ) {
+            $this->options[ $key ] = '';
+        }
+        $this->options[ $key ] = apply_filters( 'wppr_pre_option' . $key, $value );
+
+        return update_option( $this->namespace, $this->options );
+
+    }
 
 	/**
 	 * Retrive the smart values based on the last saved review.

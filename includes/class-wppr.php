@@ -158,6 +158,11 @@ class WPPR {
         $this->loader->add_action( 'admin_menu', $plugin_render_controller, 'menu_pages' );
         $this->loader->add_action( 'admin_enqueue_scripts', $plugin_render_controller, 'render_page_scripts' );
 
+        $plugin_editor = new WPPR_Editor();
+        $this->loader->add_action( 'add_meta_boxes', $plugin_editor, 'set_editor' );
+        $this->loader->add_action( 'save_post', $plugin_editor, 'editor_save' );
+        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_editor, 'load_assets' );
+
         $plugin_core = new WPPR_Core();
         $this->loader->add_action( 'admin_init', $plugin_core,'register_options',999999 );
 
