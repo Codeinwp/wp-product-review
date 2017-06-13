@@ -46,7 +46,7 @@ class WPPR_Admin_Render_Controller {
         $this->version = $version;
 
         $this->options = get_option( 'cwppos_options' );
-        var_dump( $this->options );
+        //var_dump( $this->options );
     }
 
     /**
@@ -78,6 +78,7 @@ class WPPR_Admin_Render_Controller {
      */
     public function render_page_scripts( $hook ) {
         if ( $hook == 'toplevel_page_wppr' ) {
+            wp_enqueue_style( 'wp-color-picker' );
             wp_enqueue_style( $this->plugin_name . '-dashboard-css', WPPR_URL . '/assets/css/dashboard_styles.css', array(), $this->version );
             wp_enqueue_style( $this->plugin_name . '-admin-css', WPPR_URL . '/assets/css/admin.css', array(), $this->version );
             wp_enqueue_script( $this->plugin_name . '-tiplsy-js', WPPR_URL . '/assets/js/tipsy.js', array( 'jquery' ), $this->version );
@@ -129,6 +130,9 @@ class WPPR_Admin_Render_Controller {
                 break;
             case 'color':
                 echo $this->add_color( $field );
+                break;
+            case 'text':
+                echo $this->add_text( $field );
                 break;
         }
         if ( isset( $errors ) ) { return $errors; }
@@ -191,6 +195,55 @@ class WPPR_Admin_Render_Controller {
         return apply_filters( 'wppr_field', $output, $args );
     }
 
+    public function add_radio( $args ) {
+        $defaults = array(
+            'name'     => null,
+            'id'       => null,
+            'current'  => null,
+            'value'    => null,
+            'class'    => 'wppr-radio',
+            'disabled' => false,
+        );
+        $args     = wp_parse_args( $args, $defaults );
+        $disabled = '';
+        if ( ! empty( $args['options']['disabled'] ) ) {
+            $disabled .= ' disabled="disabled"';
+        }
+        if ( is_null( $args['id'] ) ) {
+            $args['id'] = $args['name'];
+        }
+        $class  = $this->validate_class( $args['class'] );
+        $output = '<div class="controls ' . $class . '">
+                        <div class="explain">' . $args['name'] . '</div>
+                        <p class="field_description">' . $args['description'] . '</p>
+                        <input type="radio" ' . $disabled . ' name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( $args['id'] ) . '" class="' . $class . '" ' . checked( $args['value'], $args['current'], false ) . ' value="' . esc_attr( $args['value'] ) . '" />
+                   </div>     
+                   ';
+
+        return apply_filters( 'wppr_field', $output, $args );
+    }
+
+    public function add_text( $args ) {
+        $option_name = WPPR_Global_Settings::instance()->get_options_name();
+        $defaults = array(
+            'name'        => null,
+            'id'          => null,
+            'value'       => null,
+            'class'       => 'wppr-text',
+            'placeholder' => '',
+            'disabled'    => false,
+        );
+        $args     = wp_parse_args( $args, $defaults );
+        $class    = $this->validate_class( $args['class'] );
+        $output = '
+				<div class="controls ' . $class . '">
+				    <div class="explain">' . $args['name'] . '</div>
+				    <p class="field_description">' . $args['description'] . '</p>
+				    <textarea class="cwp_textarea " placeholder="' . $args['name'] . '" name="' . $option_name . '[' . esc_attr( $args['id'] ) . ']"    >' . $this->options[ 'cwppos_' . esc_attr( $args['id'] ) ] . '</textarea>
+				</div>';
+        return apply_filters( 'wppr_field', $output, $args );
+    }
+
     public function add_input_text( $args ) {
         $option_name = WPPR_Global_Settings::instance()->get_options_name();
         $defaults = array(
@@ -215,7 +268,7 @@ class WPPR_Admin_Render_Controller {
 				<div class="controls ' . $class . '">
 				    <div class="explain">' . $args['name'] . '</div>
 				    <p class="field_description">' . $args['description'] . '</p>
-				    <input type="text" ' . $disabled . ' name="' . $option_name . '[' . esc_attr( $args['id'] ) . ']" id="' . esc_attr( $args['id'] ) . '" class="' . $class . '"   value="' . esc_attr( $args['value'] ) . '" placeholder="' . esc_attr( $args['placeholder'] ) . '"  />
+				    <input type="text" ' . $disabled . ' placeholder="' . $args['name'] . '" name="' . $option_name . '[' . esc_attr( $args['id'] ) . ']" id="' . esc_attr( $args['id'] ) . '" class="' . $class . '"   value="' . esc_attr( $args['value'] ) . '" />
 				</div>';
 
         return apply_filters( 'wppr_field', $output, $args );

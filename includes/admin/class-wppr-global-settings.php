@@ -209,7 +209,7 @@ class WPPR_Global_Settings {
                             'id'          => 'reviewboxbd_color',
                         ),
                         'cwppos_reviewboxbd_width' => array(
-                            'type'        => 'text',
+                            'type'        => 'input_text',
                             'name'        => __( 'Review box border width', 'wp-product-review' ),
                             'description' => __( 'Select the width in pixels of the top border of the review box', 'wp-product-review' ),
                             'id'          => 'review_box_border_width'
@@ -220,7 +220,7 @@ class WPPR_Global_Settings {
                             'type'        => 'select',
                             'name'        => __( 'Show button icon', 'wp-product-review' ),
                             'description' => __( 'Show icon on the cart icon on button.', 'wp-product-review' ),
-                            'id'          => 'show_cart_icon',
+                            'id'          => 'show_icon',
                             'options'     => array(
                                 'yes' => 'Yes',
                                 'no'  => 'No'
@@ -230,37 +230,37 @@ class WPPR_Global_Settings {
                             'type'        => 'color',
                             'name'        => __( 'Button border', 'wp-product-review' ),
                             'description' => __( 'Select the border color to be used on the buy button for the default state', 'wp-product-review' ),
-                            'id'          => 'button_border_color',
+                            'id'          => 'buttonbd_color',
                         ),
                         'cwppos_buttonbh_color'   => array(
                             'type'        => 'color',
                             'name'        => __( 'Button border hover', 'wp-product-review' ),
                             'description' => __( 'Select the border color to be used on the buy button for the hover state', 'wp-product-review' ),
-                            'id'          => 'button_buy_border_hcolor',
+                            'id'          => 'buttonbh_color',
                         ),
                         'cwppos_buttonbkd_color'  => array(
                             'type'        => 'color',
                             'name'        => __( 'Button background', 'wp-product-review' ),
                             'description' => __( 'Select the background color to be used on the buy button for the default state', 'wp-product-review' ),
-                            'id'          => 'button_buy_bg_hcolor',
+                            'id'          => 'buttonbkd_color',
                         ),
                         'cwppos_buttonbkh_color'  => array(
                             'type'        => 'color',
                             'name'        => __( 'Button background hover', 'wp-product-review' ),
                             'description' => __( 'Select the background color to be used on the buy button for the hover  state', 'wp-product-review' ),
-                            'id'          => 'button_buy_bgh_hcolor',
+                            'id'          => 'buttonbkh_color',
                         ),
                         'cwppos_buttontxtd_color' => array(
                             'type'        => 'color',
                             'name'        => __( 'Button text color', 'wp-product-review' ),
                             'description' => __( 'Select the text color to be used on the buy button for the default state', 'wp-product-review' ),
-                            'id'          => 'button_buy_txt_hcolor',
+                            'id'          => 'buttontxtd_color',
                         ),
                         'cwppos_buttontxth_color' => array(
                             'type'        => 'color',
                             'name'        => __( 'Button text color hover', 'wp-product-review' ),
                             'description' => __( 'Select the text color to be used on the buy button for the hover state', 'wp-product-review' ),
-                            'id'          => 'button_buy_txth_hcolor',
+                            'id'          => 'buttontxth_color',
                         )
                     )
                 )

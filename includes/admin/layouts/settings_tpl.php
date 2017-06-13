@@ -41,7 +41,6 @@ $fields = $global_settings->get_fields();
                 echo $section_name . PHP_EOL;
                 echo '<hr/>';
                 foreach ( $fields[ $section_key ] as $field ) {
-                    var_dump( $field );
                     $this->add_element( $section_key, $field );
                     echo '<hr/>';
                 }
