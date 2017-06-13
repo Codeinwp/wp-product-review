@@ -13,7 +13,7 @@ if ( ! class_exists( 'WPPR_Layout_Manager' ) ) {
 	 * Singleton class for options wrapper
 	 */
 	class WPPR_Layout_Manager {
-		
+
 		/**
 		 * The main instance var.
 		 *
@@ -28,7 +28,7 @@ if ( ! class_exists( 'WPPR_Layout_Manager' ) ) {
 		 * @since 3.0.3
 		 */
 		private $allowed_templates;
-		
+
 		/**
 		 * Init the main singleton instance class.
 		 *
@@ -39,19 +39,19 @@ if ( ! class_exists( 'WPPR_Layout_Manager' ) ) {
 				self::$instance = new WPPR_Layout_Manager;
 				self::$instance->init();
 			}
-			
+
 			return self::$instance;
 		}
-		
+
 		/**
 		 *  Init the proprieties used in the manager.
 		 */
 		public function init() {
 			$this->allowed_templates = array(
-				'admin' => array( 'header-layout', 'settings', 'upsell-page' )
+				'admin' => array( 'header-layout', 'settings', 'upsell-page' ),
 			);
 		}
-		
+
 		/**
 		 * Render the admin template.
 		 *
@@ -63,4 +63,4 @@ if ( ! class_exists( 'WPPR_Layout_Manager' ) ) {
 			}
 		}
 	}
-}
+}// End if().

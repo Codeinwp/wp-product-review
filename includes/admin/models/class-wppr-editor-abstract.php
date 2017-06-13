@@ -52,30 +52,30 @@ abstract class WPPR_Editor_Abstract extends WPPR_Logger {
 			$this->log_error( 'No WP_Post provided = ' . var_export( $post, true ) );
 		}
 		$previous = $this->get_var( 'last_review' );
-		if ( ! empty ( $previous ) ) {
+		if ( ! empty( $previous ) ) {
 			$this->previous = new WPPR_Review( $previous );
 		}
 	}
 
-    public function get_var( $key ) {
-        $this->log_notice( 'Getting value for ' . $key );
-        if ( isset( $this->options[ $key ] ) ) {
-            return $this->options[ $key ];
-        }
+	public function get_var( $key ) {
+		$this->log_notice( 'Getting value for ' . $key );
+		if ( isset( $this->options[ $key ] ) ) {
+			return $this->options[ $key ];
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    public function set_var( $key, $value = '' ) {
-        $this->log_notice( 'Setting value for ' . $key . ' with ' . $value );
-        if ( ! isset( $this->options[ $key ] ) ) {
-            $this->options[ $key ] = '';
-        }
-        $this->options[ $key ] = apply_filters( 'wppr_pre_option' . $key, $value );
+	public function set_var( $key, $value = '' ) {
+		$this->log_notice( 'Setting value for ' . $key . ' with ' . $value );
+		if ( ! isset( $this->options[ $key ] ) ) {
+			$this->options[ $key ] = '';
+		}
+		$this->options[ $key ] = apply_filters( 'wppr_pre_option' . $key, $value );
 
-        return update_option( $this->namespace, $this->options );
+		return update_option( $this->namespace, $this->options );
 
-    }
+	}
 
 	/**
 	 * Retrive the smart values based on the last saved review.
@@ -100,7 +100,7 @@ abstract class WPPR_Editor_Abstract extends WPPR_Logger {
 						return isset( $values[0] ) ? $values[0] : '';
 					}
 				} else {
-					if ( ! empty ( $this->previous ) ) {
+					if ( ! empty( $this->previous ) ) {
 						$links = $this->previous->get_links();
 						if ( ! empty( $links ) ) {
 							if ( $key == 'wppr-editor-button-text' ) {
@@ -122,7 +122,7 @@ abstract class WPPR_Editor_Abstract extends WPPR_Logger {
 				if ( $this->review->is_active() ) {
 					$options = $this->review->get_options();
 				} else {
-					if ( ! empty ( $this->previous ) ) {
+					if ( ! empty( $this->previous ) ) {
 						$options = $this->previous->get_options();
 					}
 				}
@@ -137,7 +137,7 @@ abstract class WPPR_Editor_Abstract extends WPPR_Logger {
 				if ( $this->review->is_active() ) {
 					return $this->review->get_click();
 				} else {
-					if ( ! empty ( $this->previous ) ) {
+					if ( ! empty( $this->previous ) ) {
 						return $this->previous->get_click();
 					}
 				}
@@ -146,7 +146,7 @@ abstract class WPPR_Editor_Abstract extends WPPR_Logger {
 				break;
 			default:
 				return '';
-		}
+		}// End switch().
 	}
 
 	/**

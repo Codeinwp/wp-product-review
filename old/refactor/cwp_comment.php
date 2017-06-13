@@ -82,7 +82,7 @@ function cwp_pac_comment_single( $text ) {
 
 		$return .= '</div><!-- end .user-comments-grades -->';
 
-	}
+	}// End if().
 
 			return  $return . $text . "<div class='cwpr_clearfix'></div>";
 
@@ -134,7 +134,7 @@ function cwp_additional_fields() {
 		}
 
 		echo "<div id='cwp-slider-comment'>" . implode( '',$sliders ) . "<div class='cwpr_clearfix'></div></div>";
-	}
+	}// End if().
 
 }
 

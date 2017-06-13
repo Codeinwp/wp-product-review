@@ -46,7 +46,7 @@ abstract class WPPR_Editor_Abstract {
 			wppr_error( 'No WP_Post provided = ' . var_export( $post, true ) );
 		}
 		$previous = wppr_get_option( 'last_review' );
-		if ( ! empty ( $previous ) ) {
+		if ( ! empty( $previous ) ) {
 			$this->previous = new WPPR_Review( $previous );
 		}
 	}
@@ -74,7 +74,7 @@ abstract class WPPR_Editor_Abstract {
 						return isset( $values[0] ) ? $values[0] : '';
 					}
 				} else {
-					if ( ! empty ( $this->previous ) ) {
+					if ( ! empty( $this->previous ) ) {
 						$links = $this->previous->get_links();
 						if ( ! empty( $links ) ) {
 							if ( $key == 'wppr-editor-button-text' ) {
@@ -96,7 +96,7 @@ abstract class WPPR_Editor_Abstract {
 				if ( $this->review->is_active() ) {
 					$options = $this->review->get_options();
 				} else {
-					if ( ! empty ( $this->previous ) ) {
+					if ( ! empty( $this->previous ) ) {
 						$options = $this->previous->get_options();
 					}
 				}
@@ -111,7 +111,7 @@ abstract class WPPR_Editor_Abstract {
 				if ( $this->review->is_active() ) {
 					return $this->review->get_click();
 				} else {
-					if ( ! empty ( $this->previous ) ) {
+					if ( ! empty( $this->previous ) ) {
 						return $this->previous->get_click();
 					}
 				}
@@ -120,7 +120,7 @@ abstract class WPPR_Editor_Abstract {
 				break;
 			default:
 				return '';
-		}
+		}// End switch().
 	}
 
 	/**

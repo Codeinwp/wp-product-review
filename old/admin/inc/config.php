@@ -75,7 +75,10 @@ class cwpposConfig {
 						'name' => 'Show review comment',
 						'description' => 'Activate comment review user',
 						'id' => 'cwppos_show_userreview',
-						'options' => array( 'yes' => 'Yes', 'no' => 'No' ),
+						'options' => array(
+							'yes' => 'Yes',
+							'no' => 'No',
+						),
 						'default' => 'no',
 					),
 					array(
@@ -134,7 +137,10 @@ class cwpposConfig {
 						'name' => 'Disable Lighbox images',
 						'description' => 'Disable lightbox effect on product images (increase loading speed)',
 						'id'      => 'cwppos_lighbox',
-						'options' => array( 'yes' => 'Yes', 'no' => 'No' ),
+						'options' => array(
+							'yes' => 'Yes',
+							'no' => 'No',
+						),
 						'default' => 'no',
 					),
 					array(
@@ -142,7 +148,10 @@ class cwpposConfig {
 						'name' => 'Disable Font Awesome',
 						'description' => 'Disable Font Awesome for websites that already are including it (increase loading speed)',
 						'id'      => 'cwppos_fontawesome',
-						'options' => array( 'yes' => 'Yes', 'no' => 'No' ),
+						'options' => array(
+							'yes' => 'Yes',
+							'no' => 'No',
+						),
 						'default' => 'no',
 					),
 				),
@@ -271,7 +280,10 @@ class cwpposConfig {
 						'name' => 'Show button icon',
 						'description' => 'Show icon on the cart icon on button.',
 						'id' => 'cwppos_show_icon',
-						'options' => array( 'yes' => 'Yes', 'no' => 'No' ),
+						'options' => array(
+							'yes' => 'Yes',
+							'no' => 'No',
+						),
 						'default' => 'yes',
 					),
 					array(

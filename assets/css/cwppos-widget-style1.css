@@ -10,39 +10,39 @@
 .cwp-review-chart.absolute {position: absolute;}
 
 .wppr-prodlist .wppr-prodrow .wppr-prodrowright .wppr-bttn:first-child{
-  margin-right: 10px;
+	margin-right: 10px;
 }
 .wppr-prodlist .wppr-prodrow .wppr-prodrowright p.wppr-style1-buttons{
-  margin-top:10px;
-    height: 32px;
-    overflow: hidden;
-    display: block;
+	margin-top:10px;
+	height: 32px;
+	overflow: hidden;
+	display: block;
 }
 .wppr-prodlist .wppr-prodrow .wppr-prodrowright .wppr-bttn{
 
-  font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Lato, Arial, sans-serif;
-  border-radius: 3px;
-  padding: 6px 9px;
-  background-color: #3baeda;
+	font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Lato, Arial, sans-serif;
+	border-radius: 3px;
+	padding: 6px 9px;
+	background-color: #3baeda;
 
-  line-height: 36px;
+	line-height: 36px;
 
-  font-size: 12px;
+	font-size: 12px;
 
-  font-weight: bold;
+	font-weight: bold;
 
 
-  color: #fff !important;
+	color: #fff !important;
 
-  text-transform: uppercase;
+	text-transform: uppercase;
 
-  text-decoration: none;
+	text-decoration: none;
 
-  white-space: nowrap;
-  
-  -webkit-transition: all 0.5s ease;
-  
-  transition: all 0.5s ease;
+	white-space: nowrap;
+
+	-webkit-transition: all 0.5s ease;
+
+	transition: all 0.5s ease;
 
 
 }
@@ -51,6 +51,6 @@
 
 .wppr-prodlist .wppr-prodrow .wppr-prodrowright .bttn:hover{
 
-  opacity: 0.8;
+	opacity: 0.8;
 
 }

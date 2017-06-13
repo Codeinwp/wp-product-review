@@ -28,7 +28,7 @@ if ( ! class_exists( 'WPPR' ) ) {
 		 * @var WPPR_Editor The metabox editor.
 		 */
 		public $editor;
-		
+
 		/**
 		 * Init the WPPR instance.
 		 *
@@ -40,7 +40,7 @@ if ( ! class_exists( 'WPPR' ) ) {
 				self::$instance->editor = new WPPR_Editor;
 				self::$instance->admin  = new WPPR_Admin_Dashboard;
 			}
-			
+
 			return self::$instance;
 		}
 	}

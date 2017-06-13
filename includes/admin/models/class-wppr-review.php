@@ -102,10 +102,10 @@ class WPPR_Review extends WPPR_Logger {
 		}
 		if ( $this->check_post( $review_id ) ) {
 			$this->ID = $review_id;
-            $this->log_notice( 'Checking review status for ID: ' . $review_id );
+			$this->log_notice( 'Checking review status for ID: ' . $review_id );
 			$this->setup_status();
 			if ( $this->is_active() ) {
-                $this->log_notice( 'Setting up review for ID: ' . $review_id );
+				$this->log_notice( 'Setting up review for ID: ' . $review_id );
 				$this->setup_price();
 				$this->setup_name();
 				$this->setup_click();
@@ -117,12 +117,12 @@ class WPPR_Review extends WPPR_Logger {
 
 				return true;
 			} else {
-                $this->log_warning( 'Review is not active for this ID: ' . $review_id );
+				$this->log_warning( 'Review is not active for this ID: ' . $review_id );
 
 				return false;
 			}
 		} else {
-            $this->log_error( 'No post id found to attach this review.' );
+			$this->log_error( 'No post id found to attach this review.' );
 		}
 
 		return false;
@@ -350,7 +350,7 @@ class WPPR_Review extends WPPR_Logger {
 
 			}
 		} else {
-            $this->log_error( 'Invalid value for options in review: ' . $this->ID );
+			$this->log_error( 'Invalid value for options in review: ' . $this->ID );
 		}
 
 		return false;
@@ -379,7 +379,7 @@ class WPPR_Review extends WPPR_Logger {
 	 */
 	public function get_comments_rating() {
 		if ( $this->ID === 0 ) {
-            $this->log_error( 'Can not get comments rating, id is not set' );
+			$this->log_error( 'Can not get comments rating, id is not set' );
 
 			return 0;
 		}
@@ -450,13 +450,13 @@ class WPPR_Review extends WPPR_Logger {
 		if ( is_array( $cons ) ) {
 			// We update the whole array.
 			$this->cons = $cons;
-            $this->log_notice( 'Update cons array for ID . ' . $this->ID );
+			$this->log_notice( 'Update cons array for ID . ' . $this->ID );
 
 			return update_post_meta( $this->ID, 'wppr_cons', $this->cons );
 		} else {
 			// We add the text to the old array.
 			$this->pros[] = $cons;
-            $this->log_notice( 'Adding cons option for ID . ' . $this->ID );
+			$this->log_notice( 'Adding cons option for ID . ' . $this->ID );
 
 			return update_post_meta( $this->ID, 'wppr_cons', $this->cons );
 		}
@@ -484,13 +484,13 @@ class WPPR_Review extends WPPR_Logger {
 		if ( is_array( $pros ) ) {
 			// We update the whole array.
 			$this->pros = $pros;
-            $this->log_notice( 'Update pros array for ID . ' . $this->ID );
+			$this->log_notice( 'Update pros array for ID . ' . $this->ID );
 
 			return update_post_meta( $this->ID, 'wppr_pros', $this->pros );
 		} else {
 			// We add the text to the old array.
 			$this->pros[] = $pros;
-            $this->log_notice( 'Adding pros option for ID . ' . $this->ID );
+			$this->log_notice( 'Adding pros option for ID . ' . $this->ID );
 
 			return update_post_meta( $this->ID, 'wppr_pros', $this->pros );
 		}
@@ -520,7 +520,7 @@ class WPPR_Review extends WPPR_Logger {
 
 			return update_post_meta( $this->ID, 'wppr_links', $links );
 		} else {
-            $this->log_error( 'Review: ' . $this->ID . ' Invalid array for links, it should be url=>text' );
+			$this->log_error( 'Review: ' . $this->ID . ' Invalid array for links, it should be url=>text' );
 		}
 
 		return false;
@@ -573,7 +573,7 @@ class WPPR_Review extends WPPR_Logger {
 
 			return update_post_meta( $this->ID, 'cwp_rev_product_image', $image );
 		} else {
-            $this->log_warning( 'Image already used for ID: ' . $this->ID );
+			$this->log_warning( 'Image already used for ID: ' . $this->ID );
 		}
 
 		return false;
@@ -602,10 +602,10 @@ class WPPR_Review extends WPPR_Logger {
 
 				return update_post_meta( $this->ID, 'cwp_image_link', $this->click );
 			} else {
-                $this->log_warning( 'Value for click already set in ID: ' . $this->ID );
+				$this->log_warning( 'Value for click already set in ID: ' . $this->ID );
 			}
 		} else {
-            $this->log_warning( 'Wrong value for click on ID : ' . $this->ID );
+			$this->log_warning( 'Wrong value for click on ID : ' . $this->ID );
 		}
 
 		return false;
@@ -662,7 +662,7 @@ class WPPR_Review extends WPPR_Logger {
 
 			return update_post_meta( $this->ID, 'cwp_rev_price', $price );
 		} else {
-            $this->log_warning( 'Review: ' . $this->ID . ' price is the same.' );
+			$this->log_warning( 'Review: ' . $this->ID . ' price is the same.' );
 		}
 
 		return false;
@@ -673,7 +673,7 @@ class WPPR_Review extends WPPR_Logger {
 	 */
 	public function deactivate() {
 		if ( $this->is_active === false ) {
-            $this->log_warning( 'Review is already inactive for ID: ' . $this->ID );
+			$this->log_warning( 'Review is already inactive for ID: ' . $this->ID );
 		}
 
 		$this->is_active = apply_filters( 'wppr_review_change_status', false, $this->ID, $this );
@@ -688,7 +688,7 @@ class WPPR_Review extends WPPR_Logger {
 	 */
 	public function activate() {
 		if ( $this->is_active === true ) {
-            $this->log_warning( 'Review is already active for ID: ' . $this->ID );
+			$this->log_warning( 'Review is already active for ID: ' . $this->ID );
 		}
 
 		$this->is_active = apply_filters( 'wppr_review_change_status', true, $this->ID, $this );

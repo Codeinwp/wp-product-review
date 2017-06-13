@@ -32,7 +32,7 @@ class WPPR_Global_Settings {
 	 * @var array|mixed|void Sections of the admin page.
 	 */
 	public $sections = array();
-	
+
 	public static function instance() {
 		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof WPPR_Global_Settings ) ) {
 			self::$instance           = new WPPR_Global_Settings;
@@ -53,7 +53,7 @@ class WPPR_Global_Settings {
 								'yes'    => __( 'Before content', 'wp-product-review' ),
 								'no'     => __( 'After content', 'wp-product-review' ),
 								'manual' => __( 'Manually placed', 'wp-product-review' ),
-							)
+							),
 						),
 						'cwppos_show_userreview' => array(
 							'id'      => 'show_review',
@@ -62,7 +62,7 @@ class WPPR_Global_Settings {
 							'type'    => 'select',
 							'options' => array(
 								'yes' => __( 'Yes', 'wp-product-review' ),
-								'no'  => __( 'No', 'wp-product-review' )
+								'no'  => __( 'No', 'wp-product-review' ),
 							),
 						),
 						'cwppos_infl_userreview' => array(
@@ -113,7 +113,7 @@ class WPPR_Global_Settings {
 							'id'          => 'use_lightbox',
 							'options'     => array(
 								'yes' => __( 'Yes', 'wp-product-review' ),
-								'no'  => __( 'No', 'wp-product-review' )
+								'no'  => __( 'No', 'wp-product-review' ),
 							),
 						),
 						'cwppos_fontawesome'     => array(
@@ -123,7 +123,7 @@ class WPPR_Global_Settings {
 							'id'          => 'use_fontawesome',
 							'options'     => array(
 								'yes' => __( 'Yes', 'wp-product-review' ),
-								'no'  => __( 'No', 'wp-product-review' )
+								'no'  => __( 'No', 'wp-product-review' ),
 							),
 						),
 					),
@@ -165,7 +165,7 @@ class WPPR_Global_Settings {
 							'description' => __( 'Select the color to be used when the rating is very good. ( 7.5 < and <10)', 'wp-product-review' ),
 							'id'          => 'verygood_color',
 						),
-					
+
 					),
 					'typography' => array(
 						'cwppos_font_color'        => array(
@@ -184,13 +184,13 @@ class WPPR_Global_Settings {
 							'type'        => 'color',
 							'name'        => __( 'Cons text color', 'wp-product-review' ),
 							'description' => __( 'Select the color to be used on the Cons text.', 'wp-product-review' ),
-							'id'          => 'cons_color'
+							'id'          => 'cons_color',
 						),
 						'cwppos_pros_text'         => array(
 							'type'        => 'text',
 							'name'        => __( 'Pros text', 'wp-product-review' ),
 							'description' => __( 'Specify text for pros heading', 'wp-product-review' ),
-							'id'          => 'pros_text'
+							'id'          => 'pros_text',
 						),
 						'cwppos_cons_text'         => array(
 							'type'        => 'text',
@@ -207,7 +207,7 @@ class WPPR_Global_Settings {
 							'type'        => 'text',
 							'name'        => __( 'Review box border width', 'wp-product-review' ),
 							'description' => __( 'Select the width in pixels of the top border of the review box', 'wp-product-review' ),
-							'id'          => 'review_box_border_width'
+							'id'          => 'review_box_border_width',
 						),
 					),
 					'buy'        => array(
@@ -218,7 +218,7 @@ class WPPR_Global_Settings {
 							'id'          => 'show_cart_icon',
 							'options'     => array(
 								'yes' => 'Yes',
-								'no'  => 'No'
+								'no'  => 'No',
 							),
 						),
 						'cwppos_buttonbd_color'   => array(
@@ -256,26 +256,28 @@ class WPPR_Global_Settings {
 							'name'        => __( 'Button text color hover', 'wp-product-review' ),
 							'description' => __( 'Select the text color to be used on the buy button for the hover state', 'wp-product-review' ),
 							'id'          => 'button_buy_txth_hcolor',
-						)
-					)
+						),
+					),
 				)
 			);
-			
-		}
-		
+
+		}// End if().
+
 		return self::$instance;
 	}
-	
+
 	/**
 	 * Return the section array.
+	 *
 	 * @return array The sections array.
 	 */
 	public function get_sections() {
 		return self::$instance->sections;
 	}
-	
+
 	/**
 	 * Return the fields array.
+	 *
 	 * @return array The fields array.
 	 */
 	public function get_fields() {

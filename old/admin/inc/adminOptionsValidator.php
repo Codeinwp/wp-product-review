@@ -64,8 +64,8 @@ class cwpposOptionsValidator {
 						$ninput[ $k ] = apply_filters( 'cwppos_sanitize_change_icon',$i['default'],$k );
 					break;
 
-			}
-		}
+			}// End switch().
+		}// End foreach().
 		return $ninput;
 	}
 	public function validate( $input ) {
@@ -119,8 +119,8 @@ class cwpposOptionsValidator {
 						$ninput[ $k ] = apply_filters( 'cwppos_sanitize_change_icon',$i,$k,$options[ $k ]['default'] );
 					break;
 
-			}
-		}
+			}// End switch().
+		}// End foreach().
 		return $ninput;
 	}
 	public function get_default_options() {

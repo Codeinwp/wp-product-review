@@ -61,42 +61,42 @@ register_deactivation_hook( __FILE__, 'deactivate_wppr' );
  * @return bool
  */
 function wppr_autoload( $class ) {
-    $namespaces = array( 'WPPR' );
-    foreach ( $namespaces as $namespace ) {
-        if ( substr( $class, 0, strlen( $namespace ) ) == $namespace ) {
-            $filename = plugin_dir_path( __FILE__ ) . 'includes/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
-            if ( is_readable( $filename ) ) {
-                require_once $filename;
-                return true;
-            }
-            $filename = plugin_dir_path( __FILE__ ) . 'includes/admin/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
-            if ( is_readable( $filename ) ) {
-                require_once $filename;
-                return true;
-            }
-            $filename = plugin_dir_path( __FILE__ ) . 'includes/admin/abstract/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
-            if ( is_readable( $filename ) ) {
-                require_once $filename;
-                return true;
-            }
-            $filename = plugin_dir_path( __FILE__ ) . 'includes/admin/controllers/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
-            if ( is_readable( $filename ) ) {
-                require_once $filename;
-                return true;
-            }
-            $filename = plugin_dir_path( __FILE__ ) . 'includes/admin/models/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
-            if ( is_readable( $filename ) ) {
-                require_once $filename;
-                return true;
-            }
-            $filename = plugin_dir_path( __FILE__ ) . 'includes/admin/helpers/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
-            if ( is_readable( $filename ) ) {
-                require_once $filename;
-                return true;
-            }
-        }
-    }
-    return false;
+	$namespaces = array( 'WPPR' );
+	foreach ( $namespaces as $namespace ) {
+		if ( substr( $class, 0, strlen( $namespace ) ) == $namespace ) {
+			$filename = plugin_dir_path( __FILE__ ) . 'includes/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
+			if ( is_readable( $filename ) ) {
+				require_once $filename;
+				return true;
+			}
+			$filename = plugin_dir_path( __FILE__ ) . 'includes/admin/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
+			if ( is_readable( $filename ) ) {
+				require_once $filename;
+				return true;
+			}
+			$filename = plugin_dir_path( __FILE__ ) . 'includes/admin/abstract/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
+			if ( is_readable( $filename ) ) {
+				require_once $filename;
+				return true;
+			}
+			$filename = plugin_dir_path( __FILE__ ) . 'includes/admin/controllers/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
+			if ( is_readable( $filename ) ) {
+				require_once $filename;
+				return true;
+			}
+			$filename = plugin_dir_path( __FILE__ ) . 'includes/admin/models/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
+			if ( is_readable( $filename ) ) {
+				require_once $filename;
+				return true;
+			}
+			$filename = plugin_dir_path( __FILE__ ) . 'includes/admin/helpers/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
+			if ( is_readable( $filename ) ) {
+				require_once $filename;
+				return true;
+			}
+		}
+	}
+	return false;
 }
 
 spl_autoload_register( 'wppr_autoload' );
@@ -112,10 +112,10 @@ spl_autoload_register( 'wppr_autoload' );
  */
 function run_wppr() {
 
-    define( 'WPPR_LITE_VERSION', '3.0.0' );
-    define( 'WPPR_PATH', dirname( __FILE__ ) );
-    define( 'WPPR_SLUG', 'wppr' );
-    define( 'WPPR_URL', plugins_url( 'wp-product-review' ) );
+	define( 'WPPR_LITE_VERSION', '3.0.0' );
+	define( 'WPPR_PATH', dirname( __FILE__ ) );
+	define( 'WPPR_SLUG', 'wppr' );
+	define( 'WPPR_URL', plugins_url( 'wp-product-review' ) );
 
 	$plugin = new WPPR();
 	$plugin->run();

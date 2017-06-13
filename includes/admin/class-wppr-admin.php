@@ -44,8 +44,8 @@ class WPPR_Admin {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    3.0.0
-	 * @param      string    $plugin_name       The name of this plugin.
-	 * @param      string    $version    The version of this plugin.
+	 * @param      string $plugin_name       The name of this plugin.
+	 * @param      string $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
@@ -73,9 +73,8 @@ class WPPR_Admin {
 		 * class.
 		 */
 
-//		wp_enqueue_style( $this->plugin_name . '_admin_styles', WPPR_URL . '/assets/css/admin.css', array(), $this->version, 'all' );
-//		wp_enqueue_style( $this->plugin_name . '_admin_upsell_styles', WPPR_URL . '/assets/css/upsell.css', array(), $this->version, 'all' );
-
+		// wp_enqueue_style( $this->plugin_name . '_admin_styles', WPPR_URL . '/assets/css/admin.css', array(), $this->version, 'all' );
+		// wp_enqueue_style( $this->plugin_name . '_admin_upsell_styles', WPPR_URL . '/assets/css/upsell.css', array(), $this->version, 'all' );
 	}
 
 	/**
@@ -97,8 +96,7 @@ class WPPR_Admin {
 		 * class.
 		 */
 
-//		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wppr-admin.js', array( 'jquery' ), $this->version, false );
-
+		// wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wppr-admin.js', array( 'jquery' ), $this->version, false );
 	}
 
 }

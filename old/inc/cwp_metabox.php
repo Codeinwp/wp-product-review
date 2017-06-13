@@ -343,7 +343,7 @@ function cwp_review_meta_boxes_save( $post_id ) {
 			$overall_score = $overall_score / $iter;
 		}
 		update_post_meta( $post_id, 'option_overall_score', $overall_score / 10 );
-	}
+	}// End if().
 }
 
 function cwp_review_plugin_activation() {
@@ -357,7 +357,7 @@ function cwp_review_plugin_activation() {
 		$html .= '</div><!-- /.updated -->';
 		echo $html;
 
-	} // end if
+	} // End if().
 } // end plugin_activation
 /**
  * Hooks.

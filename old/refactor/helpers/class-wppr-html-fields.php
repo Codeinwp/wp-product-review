@@ -101,7 +101,7 @@ class WPPR_Html_Fields {
 
 		return apply_filters( 'wppr_field', $output, $args );
 	}
-	
+
 	/**
 	 * Render a image field.
 	 *

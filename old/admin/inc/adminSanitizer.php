@@ -37,7 +37,13 @@ class cwpposSanitizer {
 		}
 		return '';
 	}
-	public function sanitize_background( $input, $default = array( 'bgcolor' => '', 'bgimage' => '', 'bgrepeat' => 'no-repeat', 'bgposition' => 'center center', 'bgattachment' => 'scroll' ) ) {
+	public function sanitize_background( $input, $default = array(
+		'bgcolor' => '',
+		'bgimage' => '',
+		'bgrepeat' => 'no-repeat',
+		'bgposition' => 'center center',
+		'bgattachment' => 'scroll',
+	) ) {
 			$render = new cwpposRenderView();
 			$repeat = $render->get_bg_repeat();
 			$repeat = array_keys( $repeat );
@@ -55,7 +61,12 @@ class cwpposSanitizer {
 			$input['bgattachment'] = $default['bgattachment']; }
 			return $input;
 	}
-	public function sanitize_typography( $input, $default = array( 'color' => '', 'size' => 12, 'style' => 'normal', 'font' => 'arial' ) ) {
+	public function sanitize_typography( $input, $default = array(
+		'color' => '',
+		'size' => 12,
+		'style' => 'normal',
+		'font' => 'arial',
+	) ) {
 			$render = new cwpposRenderView();
 			$fonts = $render->get_fonts();
 			$fonts = array_keys( $fonts );

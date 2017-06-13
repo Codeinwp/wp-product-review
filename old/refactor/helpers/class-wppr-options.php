@@ -94,4 +94,4 @@ if ( ! class_exists( 'WPPR_Options' ) ) {
 
 		}
 	}
-}
+}// End if().

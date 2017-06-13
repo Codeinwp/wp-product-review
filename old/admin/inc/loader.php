@@ -9,7 +9,7 @@ function cwppos_options_add_page() {
 	$render = new cwpposRenderView();
 	add_menu_page( __( cwppos_config( 'admin_page_title' ), 'cwppos' ), __( cwppos_config( 'admin_page_menu_name' ), 'cwppos' ), 'manage_options', cwppos_config( 'menu_slug' ), array( $render, 'show' ), 'dashicons-star-half' ,'99.87414' );
 	if ( ! class_exists( 'CWP_PR_PRO_Core' ) ) {
-		 add_submenu_page( cwppos_config("menu_slug"), __( cwppos_config("pro_page_title"), 'cwppos' ), __( cwppos_config("pro_page_menu_name"), 'cwppos' ), 'manage_options', "cwppos_pro", array($render, 'pro'));
+		 add_submenu_page( cwppos_config( 'menu_slug' ), __( cwppos_config( 'pro_page_title' ), 'cwppos' ), __( cwppos_config( 'pro_page_menu_name' ), 'cwppos' ), 'manage_options', 'cwppos_pro', array( $render, 'pro' ) );
 	}
 }
 
@@ -23,7 +23,8 @@ function cwppos_config( $config_name, $echo = 0 ) {
 			cwpposConfig::init();
 			$return = cwpposConfig::$$config_name;
 	if ( $echo ) {
-		echo $return; } else { 				return $return; }
+		echo $return;
+	} else { 				return $return; }
 }
 
 function cwppos_get_options() {
@@ -245,7 +246,7 @@ function cwppos_check_element( $field, $tab ) {
 
 		break;
 
-	}
+	}// End switch().
 					return $errors;
 }
 
@@ -309,9 +310,9 @@ function cwppos_check_config() {
 			} else {
 				$errors = array_merge( cwppos_check_element( $field,$fields['name'] ),$errors );
 			}
-		}
+		}// End foreach().
 		if ( ! empty( $errors ) ) { break; }
-	}
+	}// End foreach().
 
 	return $errors;
 }
@@ -371,7 +372,8 @@ function cwppos_add_options() {
 		$options = array_merge( $defaults,is_array( $option ) ? $option : array() );
 
 	if ( ! is_array( $option ) ) {
-		add_option( cwppos_config( 'menu_slug' ),$options,'','no' ); } else { 			update_option( cwppos_config( 'menu_slug' ),$options ); }
+		add_option( cwppos_config( 'menu_slug' ),$options,'','no' );
+	} else { 			update_option( cwppos_config( 'menu_slug' ),$options ); }
 	if ( function_exists( 'register_setting' ) ) {
 		register_setting( cwppos_config( 'menu_slug' ), cwppos_config( 'menu_slug' ),  array( $validator, 'validate' ) );
 	}

@@ -42,7 +42,8 @@ class cwpposRenderView {
 			break;
 			case 'textarea_html':
 				if ( current_user_can( 'unfiltered_html' ) ) {
-					$this->add_textarea( $tabid,esc_html( $field['name'] ),esc_html( $field['description'] ),esc_attr( $field['id'] ) ); } else { 					$this->add_restriction( $tabid,esc_html( $field['name'] ) ); }
+					$this->add_textarea( $tabid,esc_html( $field['name'] ),esc_html( $field['description'] ),esc_attr( $field['id'] ) );
+				} else { 					$this->add_restriction( $tabid,esc_html( $field['name'] ) ); }
 
 			break;
 			case 'editor':
@@ -115,7 +116,7 @@ class cwpposRenderView {
 				$this->change_review_icon( $tabid,esc_html( $field['name'] ),esc_html( $field['description'] ),esc_attr( $field['id'] ) );
 			break;
 
-		}
+		}// End switch().
 		if ( isset( $errors ) ) { return $errors; }
 	}
 	public  function show() {
@@ -246,7 +247,10 @@ class cwpposRenderView {
 
 			$html .= '</div>';
 
-			$this->tabs[ $tabid ]['elements'][] = array( 'type' => 'change_icon', 'html' => $html );
+			$this->tabs[ $tabid ]['elements'][] = array(
+				'type' => 'change_icon',
+				'html' => $html,
+			);
 	}
 
 

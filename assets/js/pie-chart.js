@@ -34,371 +34,368 @@ Thanks to Philip Thrasher for the jquery plugin boilerplate for coffee script
 
 (function($) {
 
-  $.cwp_easyPieChart = function(el, options) {
+	$.cwp_easyPieChart = function(el, options) {
 
-    var addScaleLine, animateLine, drawLine, easeInOutQuad, rAF, renderBackground, renderScale, renderTrack,
+		var addScaleLine, animateLine, drawLine, easeInOutQuad, rAF, renderBackground, renderScale, renderTrack,
 
-      _this = this;
+		_this = this;
 
-    this.el = el;
+		this.el = el;
 
-    this.$el = $(el);
+		this.$el = $( el );
 
-    this.$el.data("cwp_easyPieChart", this);
+		this.$el.data( "cwp_easyPieChart", this );
 
-    this.init = function() {
+		this.init = function() {
 
-      var percent, scaleBy;
+			var percent, scaleBy;
 
-      _this.options = $.extend({}, $.cwp_easyPieChart.defaultOptions, options);
+			_this.options = $.extend( {}, $.cwp_easyPieChart.defaultOptions, options );
 
-      percent = parseInt(_this.$el.data('percent'), 10);
+			percent = parseInt( _this.$el.data( 'percent' ), 10 );
 
-      _this.percentage = 0;
+			_this.percentage = 0;
 
-      _this.canvas = $("<canvas width='" + _this.options.size + "' height='" + _this.options.size + "'></canvas>").get(0);
+			_this.canvas = $( "<canvas width='" + _this.options.size + "' height='" + _this.options.size + "'></canvas>" ).get( 0 );
 
-      _this.$el.append(_this.canvas);
+			_this.$el.append( _this.canvas );
 
-      if (typeof G_vmlCanvasManager !== "undefined" && G_vmlCanvasManager !== null) {
+			if (typeof G_vmlCanvasManager !== "undefined" && G_vmlCanvasManager !== null) {
 
-        G_vmlCanvasManager.initElement(_this.canvas);
+				G_vmlCanvasManager.initElement( _this.canvas );
 
-      }
+			}
 
-      _this.ctx = _this.canvas.getContext('2d');
+			_this.ctx = _this.canvas.getContext( '2d' );
 
-      if (window.devicePixelRatio > 1) {
+			if (window.devicePixelRatio > 1) {
 
-        scaleBy = window.devicePixelRatio;
+				scaleBy = window.devicePixelRatio;
 
-        $(_this.canvas).css({
+				$( _this.canvas ).css({
 
-          width: _this.options.size,
+					width: _this.options.size,
 
-          height: _this.options.size
+					height: _this.options.size
 
-        });
+				});
 
-        _this.canvas.width *= scaleBy;
+				_this.canvas.width *= scaleBy;
 
-        _this.canvas.height *= scaleBy;
+				_this.canvas.height *= scaleBy;
 
-        _this.ctx.scale(scaleBy, scaleBy);
+				_this.ctx.scale( scaleBy, scaleBy );
 
-        _this.ctx.webkitImageSmoothingEnabled = true;
+				_this.ctx.webkitImageSmoothingEnabled = true;
 
-      }
+			}
 
-      _this.ctx.translate(_this.options.size / 2, _this.options.size / 2);
+			_this.ctx.translate( _this.options.size / 2, _this.options.size / 2 );
 
-      _this.ctx.rotate(_this.options.rotate * Math.PI / 180);
+			_this.ctx.rotate( _this.options.rotate * Math.PI / 180 );
 
-      _this.$el.addClass('cwp_easyPieChart');
+			_this.$el.addClass( 'cwp_easyPieChart' );
 
-      _this.$el.css({
+			_this.$el.css({
 
-        width: _this.options.size,
+				width: _this.options.size,
 
-        height: _this.options.size,
+				height: _this.options.size,
 
-        lineHeight: "" + _this.options.size + "px"
+				lineHeight: "" + _this.options.size + "px"
 
-      });
+			});
 
-      _this.update(percent);
+			_this.update( percent );
 
-      return _this;
+			return _this;
 
-    };
+		};
 
-    this.update = function(percent) {
+		this.update = function(percent) {
 
-      percent = parseFloat(percent) || 0;
+			percent = parseFloat( percent ) || 0;
 
-      if (_this.options.animate === false) {
+			if (_this.options.animate === false) {
 
-        drawLine(percent);
+				drawLine( percent );
 
-      } else {
+			} else {
 
-        if (_this.options.delay) {
+				if (_this.options.delay) {
 
-          animateLine(_this.percentage, 0);
+					animateLine( _this.percentage, 0 );
 
-          setTimeout(function() {
+					setTimeout(function() {
 
-            return animateLine(_this.percentage, percent);
+						return animateLine( _this.percentage, percent );
 
-          }, _this.options.delay);
+					}, _this.options.delay);
 
-        } else {
+				} else {
 
-          animateLine(_this.percentage, percent);
+					animateLine( _this.percentage, percent );
 
-        }
+				}
 
-      }
+			}
 
-      return _this;
+			return _this;
 
-    };
+		};
 
-    renderScale = function() {
+		renderScale = function() {
 
-      var i, _i, _results;
+			var i, _i, _results;
 
-      _this.ctx.fillStyle = _this.options.scaleColor;
+			_this.ctx.fillStyle = _this.options.scaleColor;
 
-      _this.ctx.lineWidth = 1;
+			_this.ctx.lineWidth = 1;
 
-      _results = [];
+			_results = [];
 
-      for (i = _i = 0; _i <= 24; i = ++_i) {
+			for (i = _i = 0; _i <= 24; i = ++_i) {
 
-        _results.push(addScaleLine(i));
+				_results.push( addScaleLine( i ) );
 
-      }
+			}
 
-      return _results;
+			return _results;
 
-    };
+		};
 
-    addScaleLine = function(i) {
+		addScaleLine = function(i) {
 
-      var offset;
+			var offset;
 
-      offset = i % 6 === 0 ? 0 : _this.options.size * 0.017;
+			offset = i % 6 === 0 ? 0 : _this.options.size * 0.017;
 
-      _this.ctx.save();
+			_this.ctx.save();
 
-      _this.ctx.rotate(i * Math.PI / 12);
+			_this.ctx.rotate( i * Math.PI / 12 );
 
-      _this.ctx.fillRect(_this.options.size / 2 - offset, 0, -_this.options.size * 0.05 + offset, 1);
+			_this.ctx.fillRect( _this.options.size / 2 - offset, 0, -_this.options.size * 0.05 + offset, 1 );
 
-      _this.ctx.restore();
+			_this.ctx.restore();
 
-    };
+		};
 
-    renderTrack = function() {
+		renderTrack = function() {
 
-      var offset;
+			var offset;
 
-      offset = _this.options.size / 2 - _this.options.lineWidth / 2;
+			offset = _this.options.size / 2 - _this.options.lineWidth / 2;
 
-      if (_this.options.scaleColor !== false) {
+			if (_this.options.scaleColor !== false) {
 
-        offset -= _this.options.size * 0.08;
+				offset -= _this.options.size * 0.08;
 
-      }
+			}
 
-      _this.ctx.beginPath();
+			_this.ctx.beginPath();
 
-      _this.ctx.arc(0, 0, offset, 0, Math.PI * 2, true);
+			_this.ctx.arc( 0, 0, offset, 0, Math.PI * 2, true );
 
-      _this.ctx.closePath();
+			_this.ctx.closePath();
 
-      _this.ctx.strokeStyle = _this.options.trackColor;
+			_this.ctx.strokeStyle = _this.options.trackColor;
 
-      _this.ctx.lineWidth = _this.options.lineWidth;
+			_this.ctx.lineWidth = _this.options.lineWidth;
 
-      _this.ctx.stroke();
+			_this.ctx.stroke();
 
-    };
+		};
 
-    renderBackground = function() {
+		renderBackground = function() {
 
-      if (_this.options.scaleColor !== false) {
+			if (_this.options.scaleColor !== false) {
 
-        renderScale();
+				renderScale();
 
-      }
+			}
 
-      if (_this.options.trackColor !== false) {
+			if (_this.options.trackColor !== false) {
 
-        renderTrack();
+				renderTrack();
 
-      }
+			}
 
-    };
+		};
 
+		drawLine = function(percent) {
 
+			var offset;
 
-    drawLine = function(percent) {
+			renderBackground();
 
-      var offset;
+			_this.ctx.strokeStyle = $.isFunction( _this.options.barColor ) ? _this.options.barColor( percent ) : _this.options.barColor;
 
-      renderBackground();
+			_this.ctx.lineCap = _this.options.lineCap;
 
-      _this.ctx.strokeStyle = $.isFunction(_this.options.barColor) ? _this.options.barColor(percent) : _this.options.barColor;
+			_this.ctx.lineWidth = _this.options.lineWidth;
 
-      _this.ctx.lineCap = _this.options.lineCap;
+			offset = _this.options.size / 2 - _this.options.lineWidth / 2;
 
-      _this.ctx.lineWidth = _this.options.lineWidth;
+			if (_this.options.scaleColor !== false) {
 
-      offset = _this.options.size / 2 - _this.options.lineWidth / 2;
+				offset -= _this.options.size * 0.08;
 
-      if (_this.options.scaleColor !== false) {
+			}
 
-        offset -= _this.options.size * 0.08;
+			_this.ctx.save();
 
-      }
+			_this.ctx.rotate( -Math.PI / 2 );
 
-      _this.ctx.save();
+			_this.ctx.beginPath();
 
-      _this.ctx.rotate(-Math.PI / 2);
+			_this.ctx.arc( 0, 0, offset, 0, Math.PI * 2 * percent / 100, false );
 
-      _this.ctx.beginPath();
+			_this.ctx.stroke();
 
-      _this.ctx.arc(0, 0, offset, 0, Math.PI * 2 * percent / 100, false);
+			_this.ctx.restore();
 
-      _this.ctx.stroke();
+		};
 
-      _this.ctx.restore();
+		rAF = (function() {
 
-    };
+			return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function(callback) {
 
-    rAF = (function() {
+				return window.setTimeout( callback, 1000 / 60 );
 
-      return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function(callback) {
+			};
 
-        return window.setTimeout(callback, 1000 / 60);
+		})();
 
-      };
+		animateLine = function(from, to) {
 
-    })();
+			var anim, startTime;
 
-    animateLine = function(from, to) {
+			_this.options.onStart.call( _this );
 
-      var anim, startTime;
+			_this.percentage = to;
 
-      _this.options.onStart.call(_this);
+			Date.now || (Date.now = function() {
 
-      _this.percentage = to;
+				return + (new Date);
 
-      Date.now || (Date.now = function() {
+			});
 
-        return +(new Date);
+			startTime = Date.now();
 
-      });
+			anim = function() {
 
-      startTime = Date.now();
+				var currentValue, process;
 
-      anim = function() {
+				process = Math.min( Date.now() - startTime, _this.options.animate );
 
-        var currentValue, process;
+				_this.ctx.clearRect( -_this.options.size / 2, -_this.options.size / 2, _this.options.size, _this.options.size );
 
-        process = Math.min(Date.now() - startTime, _this.options.animate);
+				renderBackground.call( _this );
 
-        _this.ctx.clearRect(-_this.options.size / 2, -_this.options.size / 2, _this.options.size, _this.options.size);
+				currentValue = [easeInOutQuad( process, from, to - from, _this.options.animate )];
 
-        renderBackground.call(_this);
+				_this.options.onStep.call( _this, currentValue );
 
-        currentValue = [easeInOutQuad(process, from, to - from, _this.options.animate)];
+				drawLine.call( _this, currentValue );
 
-        _this.options.onStep.call(_this, currentValue);
+				if (process >= _this.options.animate) {
 
-        drawLine.call(_this, currentValue);
+					return _this.options.onStop.call( _this, currentValue, to );
 
-        if (process >= _this.options.animate) {
+				} else {
 
-          return _this.options.onStop.call(_this, currentValue, to);
+					return rAF( anim );
 
-        } else {
+				}
 
-          return rAF(anim);
+			};
 
-        }
+			rAF( anim );
 
-      };
+		};
 
-      rAF(anim);
+		easeInOutQuad = function(t, b, c, d) {
 
-    };
+			var easeIn, easing;
 
-    easeInOutQuad = function(t, b, c, d) {
+			easeIn = function(t) {
 
-      var easeIn, easing;
+				return Math.pow( t, 2 );
 
-      easeIn = function(t) {
+			};
 
-        return Math.pow(t, 2);
+			easing = function(t) {
 
-      };
+				if (t < 1) {
 
-      easing = function(t) {
+					return easeIn( t );
 
-        if (t < 1) {
+				} else {
 
-          return easeIn(t);
+					return 2 - easeIn( (t / 2) * -2 + 2 );
 
-        } else {
+				}
 
-          return 2 - easeIn((t / 2) * -2 + 2);
+			};
 
-        }
+			t /= d / 2;
 
-      };
+			return c / 2 * easing( t ) + b;
 
-      t /= d / 2;
+		};
 
-      return c / 2 * easing(t) + b;
+		return this.init();
 
-    };
+	};
 
-    return this.init();
+	$.cwp_easyPieChart.defaultOptions = {
 
-  };
+		barColor: '#ef1e25',
 
-  $.cwp_easyPieChart.defaultOptions = {
+		trackColor: '#f2f2f2',
 
-    barColor: '#ef1e25',
+		scaleColor: '#dfe0e0',
 
-    trackColor: '#f2f2f2',
+		lineCap: 'round',
 
-    scaleColor: '#dfe0e0',
+		rotate: 0,
 
-    lineCap: 'round',
+		size: 110,
 
-    rotate: 0,
+		lineWidth: 3,
 
-    size: 110,
+		animate: false,
 
-    lineWidth: 3,
+		delay: false,
 
-    animate: false,
+		onStart: $.noop,
 
-    delay: false,
+		onStop: $.noop,
 
-    onStart: $.noop,
+		onStep: $.noop
 
-    onStop: $.noop,
+	};
 
-    onStep: $.noop
+	$.fn.cwp_easyPieChart = function(options) {
 
-  };
+		return $.each(this, function(i, el) {
 
-  $.fn.cwp_easyPieChart = function(options) {
+			var $el, instanceOptions;
 
-    return $.each(this, function(i, el) {
+			$el = $( el );
 
-      var $el, instanceOptions;
+			if ( ! $el.data( 'cwp_easyPieChart' )) {
 
-      $el = $(el);
+				instanceOptions = $.extend( {}, options, $el.data() );
 
-      if (!$el.data('cwp_easyPieChart')) {
+				return $el.data( 'cwp_easyPieChart', new $.cwp_easyPieChart( el, instanceOptions ) );
 
-        instanceOptions = $.extend({}, options, $el.data());
+			}
 
-        return $el.data('cwp_easyPieChart', new $.cwp_easyPieChart(el, instanceOptions));
+		});
 
-      }
+	};
 
-    });
-
-  };
-
-  return void 0;
+	return void 0;
 
 })(jQuery);
-

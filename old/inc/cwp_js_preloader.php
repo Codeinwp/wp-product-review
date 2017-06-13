@@ -89,7 +89,8 @@ function cwp_load_preloader() {
 		</ul><!-- end .cwp_pitem_options_cons -->
 	</div><!-- end .cwp_pitem_info -->
 	</li><!-- end .cwp_preloaded_item -->
-	<?php endwhile; wp_reset_postdata();
+	<?php endwhile;
+	wp_reset_postdata();
 
 	die(); // this is required to terminate immediately and return a proper response
 }

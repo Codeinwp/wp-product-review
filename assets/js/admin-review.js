@@ -1,63 +1,52 @@
 /* jshint ignore:start */
-jQuery(document).ready(function(){
+jQuery( document ).ready(function(){
 
-    var meta_image_frame;
+	var meta_image_frame;
 
-    
-    jQuery('#cwp_rev_product_image-button').click(function(e){
+	jQuery( '#cwp_rev_product_image-button' ).click(function(e){
 
-        
-        e.preventDefault();
+		e.preventDefault();
 
-        
-        if ( meta_image_frame ) {
-            wp.media.frame.open();
-            return;
-        }
-        var mtitle="Add a product image to the review";
-        var mbutton = "Attach the image ";
-        
-        meta_image_frame = wp.media.frames.meta_image_frame = wp.media({
-            title: mtitle,
-            button: { text:  mbutton },
-            library: { type: 'image' }
-        });
+		if ( meta_image_frame ) {
+			wp.media.frame.open();
+			return;
+		}
+		var mtitle = "Add a product image to the review";
+		var mbutton = "Attach the image ";
 
-        
-        meta_image_frame.on('select', function(){
+		meta_image_frame = wp.media.frames.meta_image_frame = wp.media({
+			title: mtitle,
+			button: { text:  mbutton },
+			library: { type: 'image' }
+		});
 
-            
-            var media_attachment = meta_image_frame.state().get('selection').first().toJSON();
+		meta_image_frame.on('select', function(){
 
-            
-            jQuery('#cwp_rev_product_image').val(media_attachment.url);
-        });
+			var media_attachment = meta_image_frame.state().get( 'selection' ).first().toJSON();
 
-        
-        wp.media.frame.open();
-    });
+			jQuery( '#cwp_rev_product_image' ).val( media_attachment.url );
+		});
 
-    jQuery('input:radio[name="cwp_meta_box_check"]').change(function(){
-        var value = jQuery(this).val();
-        if(value === "Yes"){
+		wp.media.frame.open();
+	});
 
-            jQuery("#cwp_review_meta_box .product-review-meta-No").show();
-            jQuery("#cwp_review_meta_box .product-review-meta-Yes").show();
-        }else{
-            jQuery("#cwp_review_meta_box .product-review-meta-Yes").hide();
-            jQuery("#cwp_review_meta_box .product-review-meta-No").hide();
-        }
-    });
+	jQuery( 'input:radio[name="cwp_meta_box_check"]' ).change(function(){
+		var value = jQuery( this ).val();
+		if (value === "Yes") {
 
-    jQuery('#cwp_add_button').click(function(e){
-        e.preventDefault();
-        jQuery('.cwp_hide_button2').show();
-        jQuery(this).hide();
-        return false;
-    })
+			jQuery( "#cwp_review_meta_box .product-review-meta-No" ).show();
+			jQuery( "#cwp_review_meta_box .product-review-meta-Yes" ).show();
+		} else {
+			jQuery( "#cwp_review_meta_box .product-review-meta-Yes" ).hide();
+			jQuery( "#cwp_review_meta_box .product-review-meta-No" ).hide();
+		}
+	});
 
-
-
-
+	jQuery( '#cwp_add_button' ).click(function(e){
+		e.preventDefault();
+		jQuery( '.cwp_hide_button2' ).show();
+		jQuery( this ).hide();
+		return false;
+	})
 
 });

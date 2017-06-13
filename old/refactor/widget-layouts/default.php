@@ -13,7 +13,9 @@ while ( $cwp_products_loop->have_posts() ) : $cwp_products_loop->the_post();
 
 
 
-<li class="cwp-popular-review cwp_top_posts_widget_<?php the_ID(); if ( $show_image == true&& ! empty( $product_image ) ) { echo ' wppr-cols-3'; } else { echo ' wppr-cols-2'; } ?>">
+<li class="cwp-popular-review cwp_top_posts_widget_<?php the_ID();
+if ( $show_image == true&& ! empty( $product_image ) ) { echo ' wppr-cols-3';
+} else { echo ' wppr-cols-2'; } ?>">
 <?php
 
 if ( $show_image == true&& ! empty( $product_image ) ) {

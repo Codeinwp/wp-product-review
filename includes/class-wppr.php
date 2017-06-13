@@ -74,8 +74,7 @@ class WPPR {
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
-		//$this->define_public_hooks();
-
+		// $this->define_public_hooks();
 	}
 
 	/**
@@ -96,29 +95,28 @@ class WPPR {
 	 */
 	private function load_dependencies() {
 
-//		/**
-//		 * The class responsible for orchestrating the actions and filters of the
-//		 * core plugin.
-//		 */
-//		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wppr-loader.php';
-//
-//		/**
-//		 * The class responsible for defining internationalization functionality
-//		 * of the plugin.
-//		 */
-//		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wppr-i18n.php';
-//
-//		/**
-//		 * The class responsible for defining all actions that occur in the admin area.
-//		 */
-//		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/admin/class-wppr-admin.php';
-//
-//		/**
-//		 * The class responsible for defining all actions that occur in the public-facing
-//		 * side of the site.
-//		 */
-//		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/public/class-wppr-public.php';
-
+		// **
+		// * The class responsible for orchestrating the actions and filters of the
+		// * core plugin.
+		// */
+		// require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wppr-loader.php';
+		//
+		// **
+		// * The class responsible for defining internationalization functionality
+		// * of the plugin.
+		// */
+		// require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wppr-i18n.php';
+		//
+		// **
+		// * The class responsible for defining all actions that occur in the admin area.
+		// */
+		// require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/admin/class-wppr-admin.php';
+		//
+		// **
+		// * The class responsible for defining all actions that occur in the public-facing
+		// * side of the site.
+		// */
+		// require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/public/class-wppr-public.php';
 		$this->loader = new WPPR_Loader();
 
 	}
@@ -155,16 +153,16 @@ class WPPR {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		$plugin_render_controller = new WPPR_Admin_Render_Controller( $this->get_plugin_name(), $this->get_version() );
-        $this->loader->add_action( 'admin_menu', $plugin_render_controller, 'menu_pages' );
-        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_render_controller, 'render_page_scripts' );
+		$this->loader->add_action( 'admin_menu', $plugin_render_controller, 'menu_pages' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_render_controller, 'render_page_scripts' );
 
-        $plugin_editor = new WPPR_Editor();
-        $this->loader->add_action( 'add_meta_boxes', $plugin_editor, 'set_editor' );
-        $this->loader->add_action( 'save_post', $plugin_editor, 'editor_save' );
-        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_editor, 'load_assets' );
+		$plugin_editor = new WPPR_Editor();
+		$this->loader->add_action( 'add_meta_boxes', $plugin_editor, 'set_editor' );
+		$this->loader->add_action( 'save_post', $plugin_editor, 'editor_save' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_editor, 'load_assets' );
 
-        $plugin_core = new WPPR_Core();
-        $this->loader->add_action( 'admin_init', $plugin_core,'register_options',999999 );
+		$plugin_core = new WPPR_Core();
+		$this->loader->add_action( 'admin_init', $plugin_core,'register_options',999999 );
 
 	}
 
