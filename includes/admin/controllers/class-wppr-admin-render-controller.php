@@ -111,7 +111,7 @@ class WPPR_Admin_Render_Controller {
 	public function add_element( $field ) {
 
 	    $render_helper = new WPPR_Render_Helper();
-        $output = '
+		$output = '
             <div class="controls">
 				<div class="explain">' . $field['name'] . '</div>
 				<p class="field_description">' . $field['description'] . '</p>
@@ -119,20 +119,20 @@ class WPPR_Admin_Render_Controller {
 		switch ( $field['type'] ) {
 			case 'input_text':
 
-                $output .= $render_helper->add_input_text( $field );
+				$output .= $render_helper->add_input_text( $field );
 				break;
 			case 'select':
-                $output .= $render_helper->add_select( $field );
+				$output .= $render_helper->add_select( $field );
 				break;
 			case 'color':
-                $output .= $render_helper->add_color( $field );
+				$output .= $render_helper->add_color( $field );
 				break;
 			case 'text':
-                $output .= $render_helper->add_text( $field );
+				$output .= $render_helper->add_text( $field );
 				break;
 		}
 
-        $output .= '</div>';
+		$output .= '</div>';
 		echo $output;
 
 		if ( isset( $errors ) ) { return $errors; }

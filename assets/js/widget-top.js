@@ -36,7 +36,7 @@
 		});
 		$( "#" + widgetID ).find( "label.wppr-stylestyle" ).hover(function(e){
 			$( "#" + $( this ).attr( "for" ) + "img" ).show();
-		}, function(e){
+            }, function(e){
 			$( "#" + $( this ).attr( "for" ) + "img" ).hide();
 		});
 	}

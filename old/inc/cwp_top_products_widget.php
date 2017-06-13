@@ -16,7 +16,9 @@ class cwp_top_products_widget extends WP_Widget {
 			'cwp_top_products_widget',
 			__( 'CWP Top Products Widget', 'cwppos' ),
 			// Widget description
-			array( 'description' => __( 'This widget displays the top products based on their rating.', 'cwppos' ) )
+			array(
+				'description' => __( 'This widget displays the top products based on their rating.', 'cwppos' ),
+			)
 		);
 
 	}

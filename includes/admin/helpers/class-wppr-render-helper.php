@@ -1,13 +1,13 @@
 <?php
 class WPPR_Render_Helper {
 
-    private $options;
+	private $options;
 
-    public function __construct() {
-        $this->options = get_option( 'cwppos_options' );
-    }
+	public function __construct() {
+		$this->options = get_option( 'cwppos_options' );
+	}
 
-    /**
+	/**
 	 * Validate a class string.
 	 *
 	 * @param string $class String to validate.
