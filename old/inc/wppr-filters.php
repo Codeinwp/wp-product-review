@@ -105,7 +105,10 @@ function wppr_admin_pointers( $p ) {
 				apply_filters( 'wppr_amazon_title_upsell_text', null ),
 				apply_filters( 'wppr_amazon_body_upsell_text', null )
 			),
-			'position' => array( 'edge' => 'left', 'align' => 'left' ),
+			'position' => array(
+				'edge' => 'left',
+				'align' => 'left',
+			),
 		),
 	);
 	return $p;

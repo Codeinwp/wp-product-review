@@ -38,7 +38,7 @@ $fields = $global_settings->get_fields();
 			<div id="wppr-tab-<?php echo $section_key; ?>" class="wppr-tab-content">
 				<?php
 				foreach ( $fields[ $section_key ] as $field ) {
-					$this->add_element( $section_key, $field );
+					$this->add_element( $field );
 				}
 				?>
 			</div>
