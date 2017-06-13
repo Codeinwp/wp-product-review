@@ -43,8 +43,6 @@ class WPPR_Admin_Render_Controller {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-
-		$this->options = get_option( 'cwppos_options' );
 		// var_dump( $this->options );
 	}
 
@@ -113,21 +111,30 @@ class WPPR_Admin_Render_Controller {
 	public function add_element( $field ) {
 
 	    $render_helper = new WPPR_Render_Helper();
-
+        $output = '
+            <div class="controls">
+				<div class="explain">' . $field['name'] . '</div>
+				<p class="field_description">' . $field['description'] . '</p>
+        ';
 		switch ( $field['type'] ) {
 			case 'input_text':
-				echo $render_helper->add_input_text( $field );
+
+                $output .= $render_helper->add_input_text( $field );
 				break;
 			case 'select':
-				echo $render_helper->add_select( $field );
+                $output .= $render_helper->add_select( $field );
 				break;
 			case 'color':
-				echo $render_helper->add_color( $field );
+                $output .= $render_helper->add_color( $field );
 				break;
 			case 'text':
-				echo $render_helper->add_text( $field );
+                $output .= $render_helper->add_text( $field );
 				break;
 		}
+
+        $output .= '</div>';
+		echo $output;
+
 		if ( isset( $errors ) ) { return $errors; }
 	}
 }
