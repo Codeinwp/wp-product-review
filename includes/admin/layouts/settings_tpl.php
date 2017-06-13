@@ -38,11 +38,8 @@ $fields = $global_settings->get_fields();
         <?php foreach ( $sections as $section_key => $section_name ) : ?>
             <div id="wppr-tab-<?php echo $section_key; ?>" class="wppr-tab-content">
                 <?php
-                echo $section_name . PHP_EOL;
-                echo '<hr/>';
                 foreach ( $fields[ $section_key ] as $field ) {
                     $this->add_element( $section_key, $field );
-                    echo '<hr/>';
                 }
                 ?>
             </div>
