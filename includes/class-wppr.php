@@ -167,7 +167,7 @@ class WPPR {
 		$plugin_comment = new WPPR_Comment();
 		$plugin_front_render_controller = new WPPR_Front_Render_Controller();
 		// $this->loader->add_action( 'wp_footer', $plugin_front_render_controller, 'cwppos_dynamic_stylesheet' );
-		$this->loader->add_action( 'save_post', $plugin_front_render_controller, 'cwp_review_meta_boxes_save' );
+		//$this->loader->add_action( 'save_post', $plugin_front_render_controller, 'cwp_review_meta_boxes_save' );
 
 	}
 
