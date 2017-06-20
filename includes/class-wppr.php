@@ -164,6 +164,11 @@ class WPPR {
 		$plugin_core = new WPPR_Core();
 		$this->loader->add_action( 'admin_init', $plugin_core,'register_options',999999 );
 
+		$plugin_comment = new WPPR_Comment();
+		$plugin_front_render_controller = new WPPR_Front_Render_Controller();
+		// $this->loader->add_action( 'wp_footer', $plugin_front_render_controller, 'cwppos_dynamic_stylesheet' );
+		$this->loader->add_action( 'save_post', $plugin_front_render_controller, 'cwp_review_meta_boxes_save' );
+
 	}
 
 	/**

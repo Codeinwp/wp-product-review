@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 3.0
  */
-class WPPR_Review extends WPPR_Logger {
+class WPPR_Review_Model extends WPPR_Model_Abstract {
 
 	/**
 	 * The review ID.
@@ -95,6 +95,7 @@ class WPPR_Review extends WPPR_Logger {
 	 * @param mixed $review_id The review id.
 	 */
 	public function __construct( $review_id = false ) {
+	    parent::__construct();
 		if ( $review_id === false ) {
 			$this->log_error( 'No review id provided.' );
 
@@ -231,7 +232,7 @@ class WPPR_Review extends WPPR_Logger {
 	 * Setup the pros and cons array.
 	 */
 	private function setup_pros_cons() {
-		$options_nr = wppr_get_option( 'cwppos_option_nr' );
+		$options_nr = $this->get_var( 'cwppos_option_nr' );
 		$pros       = array();
 		$cons       = array();
 		for ( $i = 1; $i <= $options_nr; $i ++ ) {
@@ -264,7 +265,7 @@ class WPPR_Review extends WPPR_Logger {
 	 */
 	private function setup_options() {
 		$options    = array();
-		$options_nr = wppr_get_option( 'cwppos_option_nr' );
+		$options_nr = $this->get_var( 'cwppos_option_nr' );
 		for ( $i = 1; $i <= $options_nr; $i ++ ) {
 			$tmp_name = get_post_meta( $this->ID, 'option_' . $i . '_content', true );
 			if ( ! empty( $tmp ) ) {

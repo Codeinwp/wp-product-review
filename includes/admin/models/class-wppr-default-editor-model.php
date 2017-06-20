@@ -16,7 +16,7 @@
  *
  * Class WPPR_Default_Editor.
  */
-class WPPR_Default_Editor extends WPPR_Editor_Abstract {
+class WPPR_Default_Editor_Model extends WPPR_Editor_Model_Abstract {
 	/**
 	 * Save the editor data.
 	 */

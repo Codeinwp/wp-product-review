@@ -19,6 +19,13 @@ $fields = $global_settings->get_fields();
 
 	<?php include WPPR_PATH . '/includes/admin/layouts/header_part.php'; ?>
 
+	<div id="info_bar">
+		<span class="spinner" ></span>
+		<button  type="button" class="button-primary cwp_save"><?php _e( 'Save All Changes','cwppos' ); ?></button>
+		<span class="spinner spinner-reset" ></span>
+		<button   type="button" class="button submit-button reset-button cwp_reset"><?php _e( 'Options Reset','cwppos' ); ?></button>
+	</div><!--.info_bar-->
+
 	<div id="wppr_top_tabs" class="clearfix">
 		<ul id="tabs_menu" role="menu">
 			<?php foreach ( $sections as $section_key => $section_name ) : ?>

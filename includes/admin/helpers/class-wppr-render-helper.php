@@ -4,7 +4,9 @@ class WPPR_Render_Helper {
 	private $options;
 
 	public function __construct() {
-		$this->options = get_option( 'cwppos_options' );
+		$this->options = get_option( WPPR_Global_Settings::instance()->options_name );
+		var_dump( $this->options );
+		var_dump( get_option( 'cwppos_options' ) );
 	}
 
 	/**
@@ -126,7 +128,7 @@ class WPPR_Render_Helper {
 			$args['id'] = $args['name'];
 		}
 
-		$output = '<input type="text" ' . $disabled . ' placeholder="' . $args['name'] . '" name="' . $option_name . '[' . esc_attr( $args['id'] ) . ']" id="' . esc_attr( $args['id'] ) . '" class="' . $class . '"   value="' . esc_attr( $args['value'] ) . '" />';
+		$output = '<input type="text" ' . $disabled . ' placeholder="' . $args['placeholder'] . '" name="' . $option_name . '[' . esc_attr( $args['id'] ) . ']" id="' . esc_attr( $args['id'] ) . '" class="' . $class . '"   value="' . esc_attr( $args['value'] ) . '" />';
 
 		return apply_filters( 'wppr_field', $output, $args );
 	}

@@ -84,6 +84,11 @@ function wppr_autoload( $class ) {
 				require_once $filename;
 				return true;
 			}
+			$filename = plugin_dir_path( __FILE__ ) . 'includes/admin/models/abstract/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
+			if ( is_readable( $filename ) ) {
+				require_once $filename;
+				return true;
+			}
 			$filename = plugin_dir_path( __FILE__ ) . 'includes/admin/models/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
 			if ( is_readable( $filename ) ) {
 				require_once $filename;
@@ -94,8 +99,8 @@ function wppr_autoload( $class ) {
 				require_once $filename;
 				return true;
 			}
-		}
-	}
+		}// End if().
+	}// End foreach().
 	return false;
 }
 

@@ -15,5 +15,4 @@ class WPPR_Core {
 			register_setting( $options_name, $options_name,  array( $validator, 'validate' ) );
 		}
 	}
-
 }

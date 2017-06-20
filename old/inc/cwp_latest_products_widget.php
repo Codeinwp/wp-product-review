@@ -16,7 +16,9 @@ class cwp_latest_products_widget extends WP_Widget {
 			'cwp_latest_products_widget',
 			__( 'CWP Latest Products Widget', 'cwppos' ),
 			// Widget description
-			array( 'description' => __( 'This widget displays the latest products based on their rating.', 'cwppos' ) )
+			array(
+				'description' => __( 'This widget displays the latest products based on their rating.', 'cwppos' ),
+			)
 		);
 
 	}
