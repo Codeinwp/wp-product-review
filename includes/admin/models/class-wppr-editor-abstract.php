@@ -12,7 +12,7 @@
 /**
  * Class WPPR_Editor_Abstract.
  */
-abstract class WPPR_Editor_Model_Abstract extends WPPR_Model_Abstract {
+abstract class WPPR_Editor_Abstract extends WPPR_Model_Abstract {
 	/**
 	 * The WP_Post object.
 	 *
@@ -33,22 +33,26 @@ abstract class WPPR_Editor_Model_Abstract extends WPPR_Model_Abstract {
 	 */
 	private $previous;
 
+	private $logger;
+
 	/**
 	 * WPPR_Default_Editor constructor.
 	 *
 	 * @param WP_Post $post The post object.
 	 */
 	public function __construct( $post ) {
-	    parent::__construct();
+
+	    $logger = new WPPR_Logger();
+
 		if ( $post instanceof WP_Post ) {
 			$this->post   = $post;
-			$this->review = new WPPR_Review_Model( $this->post->ID );
+			$this->review = new WPPR_Review( $this->post->ID );
 		} else {
-			$this->log_error( 'No WP_Post provided = ' . var_export( $post, true ) );
+			$logger->error( 'No WP_Post provided = ' . var_export( $post, true ) );
 		}
-		$previous = $this->get_var( 'last_review' );
+		$previous = $this->wppr_get_option( 'last_review' );
 		if ( ! empty( $previous ) ) {
-			$this->previous = new WPPR_Review_Model( $previous );
+			$this->previous = new WPPR_Review( $previous );
 		}
 	}
 

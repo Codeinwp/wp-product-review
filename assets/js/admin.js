@@ -73,11 +73,12 @@ jQuery("document").ready(function() {
 
 
   jQuery(".cwp_save").live("click",function(){
-				var b =  jQuery("#cwp_form").serialize();
+				var b =  jQuery("#wppr-settings").serialize();
+				console.log( b );
 				jQuery(".cwp_save").addClass("button-primary-disabled");
 				jQuery(".cwp_reset").addClass("button-disabled");
 				jQuery(".spinner").show();
-                jQuery.post( 'options.php', b ).error( 
+                jQuery.post( 'options.php', b ).error(
                     function() {
 						jQuery(".spinner").hide();
 						jQuery(".cwp_reset").removeClass("button-disabled");

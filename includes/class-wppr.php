@@ -148,26 +148,13 @@ class WPPR {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new WPPR_Admin( $this->get_plugin_name(), $this->get_version() );
-
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'menu_pages' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
-		$plugin_render_controller = new WPPR_Admin_Render_Controller( $this->get_plugin_name(), $this->get_version() );
-		$this->loader->add_action( 'admin_menu', $plugin_render_controller, 'menu_pages' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_render_controller, 'render_page_scripts' );
 
 		$plugin_editor = new WPPR_Editor();
 		$this->loader->add_action( 'add_meta_boxes', $plugin_editor, 'set_editor' );
 		$this->loader->add_action( 'save_post', $plugin_editor, 'editor_save' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_editor, 'load_assets' );
-
-		$plugin_core = new WPPR_Core();
-		$this->loader->add_action( 'admin_init', $plugin_core,'register_options',999999 );
-
-		$plugin_comment = new WPPR_Comment();
-		$plugin_front_render_controller = new WPPR_Front_Render_Controller();
-		// $this->loader->add_action( 'wp_footer', $plugin_front_render_controller, 'cwppos_dynamic_stylesheet' );
-		//$this->loader->add_action( 'save_post', $plugin_front_render_controller, 'cwp_review_meta_boxes_save' );
 
 	}
 

@@ -19,7 +19,7 @@ class WPPR_Editor {
 		if ( class_exists( $editor_name ) ) {
 			$editor = new $editor_name ( $post );
 		} else {
-			$editor = new WPPR_Default_Editor_Model( $post );
+			$editor = new WPPR_Default_Editor( $post );
 		}
 
 		return $editor;

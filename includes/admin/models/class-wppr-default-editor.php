@@ -16,7 +16,7 @@
  *
  * Class WPPR_Default_Editor.
  */
-class WPPR_Default_Editor_Model extends WPPR_Editor_Model_Abstract {
+class WPPR_Default_Editor extends WPPR_Editor_Abstract {
 	/**
 	 * Save the editor data.
 	 */
@@ -83,7 +83,7 @@ class WPPR_Default_Editor_Model extends WPPR_Editor_Model_Abstract {
 			$review->set_pros( $pros );
 			$review->set_cons( $cons );
 			$review->set_options( $options );
-			$this->set_var( 'last_review', $review->get_ID() );
+			$this->wppr_set_option( 'last_review', $review->get_ID() );
 		} else {
 			$review->deactivate();
 		}// End if().
@@ -94,14 +94,14 @@ class WPPR_Default_Editor_Model extends WPPR_Editor_Model_Abstract {
 	 * Render the editors data.
 	 */
 	public function render() {
+	    $html_helper = new WPPR_Html_Fields();
 		$review = $this->review;
 		$check  = $review->is_active() ? 'yes' : 'no';
 		?>
 		<p class="wppr-active wppr-<?php echo $check; ?>">
 			<label for="wppr-review-yes"><?php _e( 'Is this a review post ?', 'wp-product-review' ); ?> </label>
 			<?php
-			$rh = new WPPR_Render_Helper();
-			echo $rh->add_radio( array(
+			echo $html_helper->radio( array(
 				'name'    => 'wppr-review-status',
 				'id'      => 'wppr-review-yes',
 				'class'   => 'wppr-review-status',
@@ -111,7 +111,7 @@ class WPPR_Default_Editor_Model extends WPPR_Editor_Model_Abstract {
 			?>
 			<label for="wppr-review-no"><?php _e( 'Yes', 'wp-product-review' ); ?></label>
 			<?php
-			echo $rh->add_radio( array(
+			echo $html_helper->radio( array(
 				'name'    => 'wppr-review-status',
 				'id'      => 'wppr-review-no',
 				'class'   => 'wppr-review-status',
@@ -134,7 +134,7 @@ class WPPR_Default_Editor_Model extends WPPR_Editor_Model_Abstract {
 						<li>
 							<label for="wppr-editor-product-name"><?php _e( 'Product Name', 'wp-product-review' ); ?></label>
 							<?php
-							echo $rh->add_input_text( array(
+							echo $html_helper->text( array(
 								'name'        => 'wppr-editor-product-name',
 								'value'       => $review->get_name(),
 								'placeholder' => __( 'Product name', 'wp-product-review' ),
@@ -144,11 +144,11 @@ class WPPR_Default_Editor_Model extends WPPR_Editor_Model_Abstract {
 						<li>
 							<label for="wppr-editor-product-image"><?php _e( 'Product Image', 'wp-product-review' ); ?></label>
 							<?php
-							// echo $rh->add_image( array(
-							// 'name'   => 'wppr-editor-image',
-							// 'value'  => $review->get_image(),
-							// 'action' => __( 'Choose or Upload an Image', 'wp-product-review' ),
-							// ) )
+							echo $html_helper->image( array(
+								'name'   => 'wppr-editor-image',
+								'value'  => $review->get_image(),
+								'action' => __( 'Choose or Upload an Image', 'wp-product-review' ),
+							) )
 							?>
 							<small>
 								*<?php _e( 'If no image is provided, featured image is used', 'wp-product-review' ); ?></small>
@@ -157,7 +157,7 @@ class WPPR_Default_Editor_Model extends WPPR_Editor_Model_Abstract {
 							<span><?php _e( 'Product Image Click', 'wp-product-review' ); ?>
 								: </span>
 							<?php
-							echo $rh->add_radio( array(
+							echo $html_helper->radio( array(
 								'name'    => 'wppr-editor-link',
 								'id'      => 'wppr-editor-link-show',
 								'class'   => 'wppr-editor-link',
@@ -167,7 +167,7 @@ class WPPR_Default_Editor_Model extends WPPR_Editor_Model_Abstract {
 							?>
 							<label for="wppr-editor-link-show"><?php _e( 'Show Whole Image', 'wp-product-review' ); ?></label>
 							<?php
-							echo $rh->add_radio( array(
+							echo $html_helper->radio( array(
 								'name'    => 'wppr-editor-link',
 								'id'      => 'wppr-editor-link-open',
 								'class'   => 'wppr-editor-link',
@@ -184,7 +184,7 @@ class WPPR_Default_Editor_Model extends WPPR_Editor_Model_Abstract {
 						<li>
 							<label for="wppr-editor-button-text"><?php _e( 'Affiliate Button Text', 'wp-product-review' ); ?> </label>
 							<?php
-							echo $rh->add_input_text( array(
+							echo $html_helper->text( array(
 								'name'        => 'wppr-editor-button-text',
 								'value'       => $this->get_value( 'wppr-editor-button-text' ),
 								'placeholder' => __( 'Affiliate Button Text', 'wp-product-review' ),
@@ -194,7 +194,7 @@ class WPPR_Default_Editor_Model extends WPPR_Editor_Model_Abstract {
 						<li>
 							<label for="wppr-editor-button-link"><?php _e( 'Affiliate Link', 'wp-product-review' ); ?> </label>
 							<?php
-							echo $rh->add_input_text( array(
+							echo $html_helper->text( array(
 								'name'        => 'wppr-editor-button-link',
 								'value'       => $this->get_value( 'wppr-editor-button-link' ),
 								'placeholder' => __( 'Affiliate Link', 'wp-product-review' ),
@@ -216,7 +216,7 @@ class WPPR_Default_Editor_Model extends WPPR_Editor_Model_Abstract {
 										<li>
 											<label for="wppr-editor-button-text-<?php $i; ?>"><?php echo __( 'Affiliate Button Text', 'wp-product-review' ) . ' ' . $i; ?> </label>
 											<?php
-											echo $rh->add_input_text( array(
+											echo $html_helper->text( array(
 												'name'        => 'wppr-editor-button-text-' . $i,
 												'value'       => $text,
 												'placeholder' => __( 'Affiliate Button Text', 'wp-product-review' ) . ' ' . $i,
@@ -226,7 +226,7 @@ class WPPR_Default_Editor_Model extends WPPR_Editor_Model_Abstract {
 										<li>
 											<label for="wppr-editor-button-link-<?php $i; ?>"><?php echo __( 'Affiliate Link', 'wp-product-review' ) . ' ' . $i; ?> </label>
 											<?php
-											echo $rh->add_input_text( array(
+											echo $html_helper->text( array(
 												'name'        => 'wppr-editor-button-link-' . $i,
 												'value'       => $url,
 												'placeholder' => __( 'Affiliate Link', 'wp-product-review' ) . ' ' . $i,
@@ -244,7 +244,7 @@ class WPPR_Default_Editor_Model extends WPPR_Editor_Model_Abstract {
 						<li>
 							<label for="wppr-editor-price"><?php _e( 'Product Price', 'wp-product-review' ); ?> </label>
 							<?php
-							echo $rh->add_input_text( array(
+							echo $html_helper->text( array(
 								'name'        => 'wppr-editor-price',
 								'value'       => $review->get_price(),
 								'placeholder' => __( 'Product Price', 'wp-product-review' ),
@@ -264,19 +264,19 @@ class WPPR_Default_Editor_Model extends WPPR_Editor_Model_Abstract {
 				<div class="wppr-review-fieldset wppr-review-options-fields">
 					<ul class="wppr-review-options-list clear">
 						<?php
-						$options_nr = $this->get_var( 'cwppos_option_nr' );
+						$options_nr = $this->wppr_get_option( 'cwppos_option_nr' );
 						for ( $i = 1; $i <= $options_nr; $i ++ ) {
 							?>
 							<li>
 								<label for="wppr-editor-options-text-<?php echo $i; ?>"><?php echo $i; ?></label>
 								<?php
-								echo $rh->add_input_text( array(
+								echo $html_helper->text( array(
 									'name'        => 'wppr-editor-options-name[]',
 									'id'          => 'wppr-editor-options-name-' . $i,
 									'value'       => $this->get_value( 'wppr-option-name-' . $i ),
 									'placeholder' => __( 'Option', 'wp-product-review' ) . ' ' . $i,
 								) );
-								echo $rh->add_input_text( array(
+								echo $html_helper->text( array(
 									'name'        => 'wppr-editor-options-value[]',
 									'id'          => 'wppr-editor-options-value-' . $i,
 									'class'       => 'wppr-text wppr-option-number',
@@ -301,14 +301,14 @@ class WPPR_Default_Editor_Model extends WPPR_Editor_Model_Abstract {
 				<div class="wppr-review-fieldset wppr-review-pros-fields">
 					<ul class="wppr-review-options-list clear">
 						<?php
-						$options_nr = $this->get_var( 'cwppos_option_nr' );
+						$options_nr = $this->wppr_get_option( 'cwppos_option_nr' );
 						$pros       = $review->get_pros();
 						for ( $i = 1; $i <= $options_nr; $i ++ ) {
 							?>
 							<li>
 								<label for="wppr-editor-pros-<?php echo $i; ?>"><?php echo $i; ?></label>
 								<?php
-								echo $rh->add_input_text( array(
+								echo $html_helper->text( array(
 									'name'        => 'wppr-editor-pros[]',
 									'id'          => 'wppr-editor-pros-' . $i,
 									'value'       => isset( $pros[ $i - 1 ] ) ? $pros[ $i - 1 ] : '',
@@ -330,14 +330,14 @@ class WPPR_Default_Editor_Model extends WPPR_Editor_Model_Abstract {
 				<div class="wppr-review-fieldset wppr-review-cons-fields">
 					<ul class="wppr-review-options-list clear">
 						<?php
-						$options_nr = $this->get_var( 'cwppos_option_nr' );
+						$options_nr = $this->wppr_get_option( 'cwppos_option_nr' );
 						$cons       = $review->get_cons();
 						for ( $i = 1; $i <= $options_nr; $i ++ ) {
 							?>
 							<li>
 								<label for="wppr-editor-cons-<?php echo $i; ?>"><?php echo $i; ?></label>
 								<?php
-								echo $rh->add_input_text( array(
+								echo $html_helper->text( array(
 									'name'        => 'wppr-editor-cons[]',
 									'id'          => 'wppr-editor-cons-' . $i,
 									'value'       => isset( $cons[ $i - 1 ] ) ? $cons[ $i - 1 ] : '',

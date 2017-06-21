@@ -1,37 +1,26 @@
 <?php
+class WPPR_Model_Abstract {
 
-abstract class WPPR_Model_Abstract extends WPPR_Logger {
-
-	private $namespace;
-	private $options;
-
-	public function __construct() {
-		$this->namespace = WPPR_Global_Settings::instance()->get_options_name();
-		$this->options = get_option( $this->namespace );
+	/**
+	 * Get the global wppr option.
+	 *
+	 * @param string $key The option key.
+	 *
+	 * @return mixed The global wppr option
+	 */
+	function wppr_get_option( $key = '' ) {
+		return WPPR_Options::instance()->get_var( $key );
 	}
 
-	public function get_all_options() {
-	    return $this->options;
+	/**
+	 * Update a global wppr option.
+	 *
+	 * @param string $key The option key.
+	 * @param string $value The option value.
+	 *
+	 * @return mixed Either was updated or not.
+	 */
+	function wppr_set_option( $key = '', $value = '' ) {
+		return WPPR_Options::instance()->set_var( $key, $value );
 	}
-
-	public function get_var( $key ) {
-		$this->log_notice( 'Getting value for ' . $key );
-		if ( isset( $this->options[ $key ] ) ) {
-			return $this->options[ $key ];
-		}
-
-		return false;
-	}
-
-	public function set_var( $key, $value = '' ) {
-		$this->log_notice( 'Setting value for ' . $key . ' with ' . $value );
-		if ( ! isset( $this->options[ $key ] ) ) {
-			$this->options[ $key ] = '';
-		}
-		$this->options[ $key ] = apply_filters( 'wppr_pre_option' . $key, $value );
-
-		return update_option( $this->namespace, $this->options );
-
-	}
-
 }
