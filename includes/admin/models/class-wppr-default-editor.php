@@ -42,7 +42,6 @@ class WPPR_Default_Editor extends WPPR_Editor_Abstract {
 			$price          = isset( $data['wppr-editor-price'] ) ? sanitize_text_field( $data['wppr-editor-price'] ) : 0;
 			$options_names  = isset( $data['wppr-editor-options-name'] ) ? $data['wppr-editor-options-name'] : array();
 			$options_values = isset( $data['wppr-editor-options-value'] ) ? $data['wppr-editor-options-value'] : array();
-			$options_values = isset( $data['wppr-editor-options-value'] ) ? $data['wppr-editor-options-value'] : array();
 			$pros           = isset( $data['wppr-editor-pros'] ) ? $data['wppr-editor-pros'] : array();
 			$cons           = isset( $data['wppr-editor-cons'] ) ? $data['wppr-editor-cons'] : array();
 			$options        = array();
