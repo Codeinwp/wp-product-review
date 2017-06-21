@@ -42,13 +42,13 @@ abstract class WPPR_Editor_Abstract extends WPPR_Model_Abstract {
 	 */
 	public function __construct( $post ) {
 
-	    $logger = new WPPR_Logger();
+	    $this->logger = new WPPR_Logger();
 
 		if ( $post instanceof WP_Post ) {
 			$this->post   = $post;
 			$this->review = new WPPR_Review( $this->post->ID );
 		} else {
-			$logger->error( 'No WP_Post provided = ' . var_export( $post, true ) );
+            $this->logger->error( 'No WP_Post provided = ' . var_export( $post, true ) );
 		}
 		$previous = $this->wppr_get_option( 'last_review' );
 		if ( ! empty( $previous ) ) {

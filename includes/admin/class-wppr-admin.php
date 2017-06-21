@@ -137,4 +137,13 @@ class WPPR_Admin {
 		$render->retrive_template( 'upsell' );
 	}
 
+	public function update_options() {
+	    $data = $_POST['cwppos_options'];
+        foreach ( $data as $option ) {
+            var_dump( $option );
+            WPPR_Options::instance()->set_var( $option['name'], $option['value'] );
+        }
+	    die();
+    }
+
 }

@@ -150,6 +150,7 @@ class WPPR {
 		$plugin_admin = new WPPR_Admin( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'menu_pages' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+        $this->loader->add_action( 'wp_ajax_update_options', $plugin_admin, 'update_options' );
 
 		$plugin_editor = new WPPR_Editor();
 		$this->loader->add_action( 'add_meta_boxes', $plugin_editor, 'set_editor' );
