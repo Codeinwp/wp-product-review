@@ -39,6 +39,7 @@ $fields = $global_settings->get_fields();
 				<?php
 				foreach ( $fields[ $section_key ] as $name => $field ) {
 				    $field['name'] = $name;
+				    $field['value'] = WPPR_Options::instance()->get_var( $name );
 					$this->add_element( $field );
 				}
 				?>
