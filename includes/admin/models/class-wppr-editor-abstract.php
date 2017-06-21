@@ -26,6 +26,7 @@ abstract class WPPR_Editor_Abstract extends WPPR_Model_Abstract {
 	 * @var WPPR_Review $review .
 	 */
 	public $review;
+
 	/**
 	 * The last review id saved.
 	 *
@@ -33,6 +34,9 @@ abstract class WPPR_Editor_Abstract extends WPPR_Model_Abstract {
 	 */
 	private $previous;
 
+	/**
+	 * @var WPPR_Logger $logger.
+	 */
 	private $logger;
 
 	/**
