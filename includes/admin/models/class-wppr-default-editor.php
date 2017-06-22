@@ -359,7 +359,7 @@ class WPPR_Default_Editor extends WPPR_Editor_Abstract {
 	}
 
 	public function load_style() {
-		wp_enqueue_style( 'wppr-default-editor-css', WPPR_URL . '/css/editor.css', array(), WPPR_LITE_VERSION );
-		wp_enqueue_script( 'wppr-default-editor-js', WPPR_URL . '/javascript/editor.js', array( 'jquery' ), WPPR_LITE_VERSION, true );
+		wp_enqueue_style( 'wppr-default-editor-css', WPPR_URL . '/assets/css/editor.css', array(), WPPR_LITE_VERSION );
+		wp_enqueue_script( 'wppr-default-editor-js', WPPR_URL . '/assets/js/admin-review.js', array( 'jquery' ), WPPR_LITE_VERSION, true );
 	}
 }
