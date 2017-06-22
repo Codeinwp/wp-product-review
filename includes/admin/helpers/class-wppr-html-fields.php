@@ -65,7 +65,7 @@ class WPPR_Html_Fields {
 		if ( is_null( $args['id'] ) ) {
 			$args['id'] = $args['name'];
 		}
-		var_dump( $args );
+		//var_dump( $args );
 		$output = '<input type="radio" ' . $disabled . ' name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( $args['id'] ) . '" class="' . $class . '" ' . checked( $args['value'], $args['current'], false ) . ' value="' . esc_attr( $args['value'] ) . '" />';
 
 		return apply_filters( 'wppr_field', $output, $args );
@@ -94,7 +94,7 @@ class WPPR_Html_Fields {
 		if ( $args['value'] == null ) {
 			$args['value'] = $args['default'];
 		}
-		var_dump( $args );
+		//var_dump( $args );
 		$output = '<input type="text" ' . $disabled . ' name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( $args['id'] ) . '" class="' . $class . '"   value="' . esc_attr( $args['value'] ) . '" placeholder="' . esc_attr( $args['placeholder'] ) . '"  />';
 
 		return apply_filters( 'wppr_field', $output, $args );
@@ -121,7 +121,7 @@ class WPPR_Html_Fields {
 		if ( is_null( $args['id'] ) ) {
 			$args['id'] = $args['name'];
 		}
-		var_dump( $args );
+		//var_dump( $args );
 		$output = '<input type="text" ' . $disabled . ' name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( $args['id'] ) . '" class="' . $class . '"   value="' . esc_attr( $args['value'] ) . '" placeholder="' . esc_attr( $args['placeholder'] ) . '"  />';
 		$output .= '<input type="button" id="' . esc_attr( $args['id'] ) . '-button" class="wppr-image-button button"  value="' . esc_attr( $args['action'] ) . '"/>';
 
@@ -141,7 +141,7 @@ class WPPR_Html_Fields {
 		foreach ( $args['options'] as $ov => $op ) {
 			$options[ esc_attr( $ov ) ] = esc_html( $op );
 		}
-		var_dump( $args );
+		//var_dump( $args );
 		$output = '<select class="' . $class . '" name="' . esc_attr( $args['name'] ) . '" > ';
 		foreach ( $options as $k => $v ) {
 			$output .= "<option value='" . $k . "' " . ( ( isset( $args['value'] ) && $args['value'] == $k ) ? 'selected' : '') . '>' . $v . '</option>';
@@ -159,7 +159,7 @@ class WPPR_Html_Fields {
 		if ( $args['value'] == null ) {
 			$args['value'] = $args['default'];
 		}
-		var_dump( $args );
+		//var_dump( $args );
 		$output = '<input type="hidden" class="' . $class . '" id="' . esc_attr( $args['id'] ) . '_color" name="' . esc_attr( $args['name'] ) . '" value="' . esc_attr( $args['value'] ) . '"/></br>
 				   <input type="text" name="" class="subo-color-picker" id="' . esc_attr( $args['id'] ) . '_color_selector" value="' . esc_attr( $args['value'] ) . '" /><br/>';
 
