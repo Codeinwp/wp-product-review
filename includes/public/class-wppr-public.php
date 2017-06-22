@@ -72,8 +72,7 @@ class Wppr_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wppr-public.css', array(), $this->version, 'all' );
-
+		// wp_enqueue_style( $this->plugin_name . '-tiplsy-js', WPPR_URL . '/assets/css/public.css', array(), $this->version );
 	}
 
 	/**
@@ -94,9 +93,20 @@ class Wppr_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+		
+		// wp_enqueue_script( $this->plugin_name . '-tiplsy-js', WPPR_URL . '/assets/js/public.js', array( 'jquery' ), $this->version );
+	}
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wppr-public.js', array( 'jquery' ), $this->version, false );
-
+	/**
+	 * Temporary methods
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @param   mixed $content The page content.
+	 * @return mixed
+	 */
+	public function display_on_front( $content ) {
+		return $content . '<hr/>' . 'RENDER REVIEW HERE !!!';
 	}
 
 }

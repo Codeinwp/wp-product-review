@@ -128,12 +128,6 @@ class WPPR {
 		$this->loader->add_action( 'add_meta_boxes', $plugin_editor, 'set_editor' );
 		$this->loader->add_action( 'save_post', $plugin_editor, 'editor_save' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_editor, 'load_assets' );
-
-		$currentTheme = wp_get_theme();
-		if ( $currentTheme->get( 'Name' ) !== 'Bookrev' && $currentTheme->get( 'Name' ) !== 'Book Rev Lite' ) {
-			$this->loader->add_filter( 'the_content', $plugin_admin, 'display_on_front' );
-		}
-
 	}
 
 	/**
@@ -149,6 +143,11 @@ class WPPR {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+
+		$currentTheme = wp_get_theme();
+		if ( $currentTheme->get( 'Name' ) !== 'Bookrev' && $currentTheme->get( 'Name' ) !== 'Book Rev Lite' ) {
+			$this->loader->add_filter( 'the_content', $plugin_public, 'display_on_front' );
+		}
 
 	}
 

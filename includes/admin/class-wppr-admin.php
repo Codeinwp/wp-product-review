@@ -112,13 +112,6 @@ class WPPR_Admin {
 	}
 
 	/**
-	 * Temporary methods
-	 */
-	public function display_on_front() {
-	    echo 'RENDER REVIEW HERE !!!';
-	}
-
-	/**
 	 * Add admin menu items.
 	 *
 	 * @since   3.0.0
