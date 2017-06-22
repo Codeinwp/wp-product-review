@@ -20,26 +20,41 @@ class WPPR_Global_Settings {
 	/**
 	 * The main instance var.
 	 *
+	 * @since   3.0.0
+	 * @access  public
 	 * @var WPPR_Global_Settings The one WPPR_Global_Settings istance.
-	 * @since 3.0.0
 	 */
 	public static $instance;
 
-	public $options_name;
-
 	/**
-	 * @var array|mixed|void Options fields.
+	 * Stores the default fields data.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @var array|mixed|void $fields Options fields.
 	 */
 	public $fields = array();
+
 	/**
-	 * @var array|mixed|void Sections of the admin page.
+	 * Stores the sections for the settings page.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @var array|mixed|void $sections Sections of the admin page.
 	 */
 	public $sections = array();
 
+	/**
+	 * The instance method for the static class.
+	 * Defines and returns the instance of the static class.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @return WPPR_Global_Settings
+	 */
 	public static function instance() {
 		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof WPPR_Global_Settings ) ) {
 			self::$instance           = new WPPR_Global_Settings;
-			self::$instance->options_name = 'cwppos_options';
 			self::$instance->sections = apply_filters( 'wppr_settings_sections', array(
 				'general'    => __( 'General settings', 'wp-product-review' ),
 				'rating'     => __( 'Rating colors', 'wp-product-review' ),
@@ -297,14 +312,12 @@ class WPPR_Global_Settings {
 		return self::$instance;
 	}
 
-	public function get_options_name() {
-		return self::$instance->options_name;
-	}
-
 	/**
 	 * Return the section array.
 	 *
-	 * @return array The sections array.
+	 * @since   3.0.0
+	 * @access  public
+	 * @return array
 	 */
 	public function get_sections() {
 		return self::$instance->sections;
@@ -313,12 +326,21 @@ class WPPR_Global_Settings {
 	/**
 	 * Return the fields array.
 	 *
-	 * @return array The fields array.
+	 * @since   3.0.0
+	 * @access  public
+	 * @return array
 	 */
 	public function get_fields() {
 		return self::$instance->fields;
 	}
 
+	/**
+	 * Return a filterd array based on sections value.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @return array
+	 */
 	public function get_filtered_fields() {
 		$fields = array();
 		foreach ( self::$instance->sections as $key => $value ) {

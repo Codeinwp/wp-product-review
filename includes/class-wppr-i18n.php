@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Define the internationalization functionality
  *
@@ -24,7 +23,7 @@
  * @subpackage WPPR/includes
  * @author     ThemeIsle <friends@themeisle.com>
  */
-class WPPR_i18n {
+class WPPR_I18n {
 
 
 	/**

@@ -19,31 +19,45 @@ if ( ! class_exists( 'WPPR_Options' ) ) {
 		/**
 		 * The main instance var.
 		 *
-		 * @var WPPR_Options The one WPPR_Options istance.
-		 * @since 3.0.3
+		 * @since   3.0.0
+		 * @access  private
+		 * @var WPPR_Options $instance The one WPPR_Options istance.
 		 */
 		private static $instance;
 
 		/**
 		 * The main options array.
 		 *
-		 * @var array The options array.
-		 * @since 3.0.3
+		 * @since   3.0.0
+		 * @access  private
+		 * @var array $options The options array.
 		 */
 		private $options;
+
 		/**
 		 * The option namespace.
 		 *
+		 * @since   3.0.0
+		 * @access  private
 		 * @var string $namespace The options namespace.
 		 */
 		private $namespace = 'cwppos_options';
 
+		/**
+		 * The logger class.
+		 *
+		 * @since   3.0.0
+		 * @access  private
+		 * @var WPPR_Logger $logger The logger utility class.
+		 */
 		private $logger;
 
 		/**
 		 * Init the main singleton instance class.
 		 *
-		 * @return WPPR_Options Return the instance class
+		 * @since   3.0.0
+		 * @access  public
+		 * @return WPPR_Options
 		 */
 		public static function instance() {
 			if ( ! isset( self::$instance ) && ! ( self::$instance instanceof WPPR_Options ) ) {
@@ -55,7 +69,10 @@ if ( ! class_exists( 'WPPR_Options' ) ) {
 		}
 
 		/**
-		 *  Init the default values of the options class.
+		 * Init the default values of the options class.
+		 *
+		 * @since   3.0.0
+		 * @access  public
 		 */
 		public function init() {
 			self::$instance->options = get_option( $this->namespace );
@@ -65,9 +82,10 @@ if ( ! class_exists( 'WPPR_Options' ) ) {
 		/**
 		 * Get the key option value from DB.
 		 *
-		 * @param string $key The key name of the option.
-		 *
-		 * @return bool|mixed The value of the option
+		 * @since   3.0.0
+		 * @access  public
+		 * @param   string $key The key name of the option.
+		 * @return bool|mixed
 		 */
 		public function get_var( $key ) {
 			self::$instance->logger->notice( 'Getting value for ' . $key );
@@ -81,10 +99,11 @@ if ( ! class_exists( 'WPPR_Options' ) ) {
 		/**
 		 * Setter method for updating the options array.
 		 *
-		 * @param string $key The name of option.
-		 * @param string $value The value of the option.
-		 *
-		 * @return bool|mixed The value of the option.
+		 * @since   3.0.0
+		 * @access  public
+		 * @param   string $key The name of option.
+		 * @param   string $value The value of the option.
+		 * @return bool|mixed
 		 */
 		public function set_var( $key, $value = '' ) {
 			self::$instance->logger->notice( 'Setting value for ' . $key . ' with ' . $value );

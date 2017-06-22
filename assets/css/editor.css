@@ -1,117 +1,117 @@
 #wppr-review-yes,
 #wppr-review-no {
-    margin-left: 10px;
+	margin-left: 10px;
 }
 
 #wppr-meta-yes {
-    display: block;
+	display: block;
 }
 
 #wppr-meta-no {
-    display: none;
+	display: none;
 }
 
 .wppr-review-section p, h4 {
-    margin: 0px;
+	margin: 0px;
 }
 
 .wppr-review-section label[for='wppr-editor-link-show'],
 .wppr-review-section label[for='wppr-editor-link-open'] {
-    font-weight: normal;
+	font-weight: normal;
 }
 
 .wppr-review-section span {
-    padding-bottom: 10px;
-    font-weight: bold;
+	padding-bottom: 10px;
+	font-weight: bold;
 }
 
 #wppr-editor-link-show {
-    margin-left: 11px;
+	margin-left: 11px;
 }
 
 .wppr-review-section input[type='text'] {
-    width: 200px;
+	width: 200px;
 }
 
 .wppr-review-section li {
-    margin-bottom: 12px;
+	margin-bottom: 12px;
 }
 
 #wppr-editor-image-button {
-    margin-left: 5px;
+	margin-left: 5px;
 }
 
 .wppr-review-section small {
 
-    width: 100%;
-    display: inline-block;
-    padding-bottom: 10px;
-    padding-left: 144px;
+	width: 100%;
+	display: inline-block;
+	padding-bottom: 10px;
+	padding-left: 144px;
 }
 
 #wppr-editor-new-link {
 
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
 }
 
 .wppr-review-section h4,
 .wppr-review-section p,
 .wppr-review-section .wppr-review-fieldset {
-    padding: 3px 10px;
+	padding: 3px 10px;
 }
 
 .wppr-review-fieldset {
-    border-top: 1px solid #ddd;
+	border-top: 1px solid #ddd;
 }
 
 .wppr-review-section {
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 3px 3px 0 0;
+	margin-bottom: 10px;
+	border: 1px solid #ddd;
+	border-radius: 3px 3px 0 0;
 }
 
 .wppr-review-section label {
-    width: 140px;
-    display: inline-block;
-    font-weight: bold;
+	width: 140px;
+	display: inline-block;
+	font-weight: bold;
 }
 
 .wppr-review-options-list input {
-    margin: 0px;
+	margin: 0px;
 }
 
 .wppr-review-options-list label, input {
-    height: 30px;
+	height: 30px;
 
 }
 
 .wppr-review-section .wppr-review-options-list .wppr-option-number {
-    width: 60px;
+	width: 60px;
 }
 
 .wppr-review-options-list label {
-    width: 30px;
-    vertical-align: top;
-    margin-right: -4px;
-    text-align: center;
-    line-height: 30px;
-    height: 30px;
-    background: #ddd;
-    border-radius: 3px 0 0 3px;
+	width: 30px;
+	vertical-align: top;
+	margin-right: -4px;
+	text-align: center;
+	line-height: 30px;
+	height: 30px;
+	background: #ddd;
+	border-radius: 3px 0 0 3px;
 }
 
 .wppr-review-pros,
 .wppr-review-cons {
-    width: 49%;
+	width: 49%;
 }
 
 .wppr-review-pros {
 
-    float: left;
+	float: left;
 }
 
 .wppr-review-cons {
-    float: right;
+	float: right;
 }

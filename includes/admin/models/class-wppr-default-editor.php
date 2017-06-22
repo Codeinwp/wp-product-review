@@ -19,6 +19,9 @@
 class WPPR_Default_Editor extends WPPR_Editor_Abstract {
 	/**
 	 * Save the editor data.
+	 *
+	 * @since   3.0.0
+	 * @access  public
 	 */
 	public function save() {
 		$data = $_POST;
@@ -91,6 +94,9 @@ class WPPR_Default_Editor extends WPPR_Editor_Abstract {
 
 	/**
 	 * Render the editors data.
+	 *
+	 * @since   3.0.0
+	 * @access  public
 	 */
 	public function render() {
 	    $html_helper = new WPPR_Html_Fields();
@@ -205,29 +211,29 @@ class WPPR_Default_Editor extends WPPR_Editor_Abstract {
 								</a>
 							<?php endif; ?>
 						</li>
-                        <?php if ( count( $links ) < 2 ) { ?>
-                            <li class="hidden_fields" style="display: none;">
-                                <label for="wppr-editor-button-text"><?php _e( 'Affiliate Button Text', 'wp-product-review' ); ?> </label>
-                                <?php
-                                echo $html_helper->text( array(
-                                    'name'        => 'wppr-editor-button-text-2',
-                                    'value'       => $this->get_value( 'wppr-editor-button-text-2' ),
-                                    'placeholder' => __( 'Affiliate Button Text', 'wp-product-review' ),
-                                ) );
-                            ?>
-                            </li>
-                            <li class="hidden_fields" style="display: none;">
-                                <label for="wppr-editor-button-link"><?php _e( 'Affiliate Link', 'wp-product-review' ); ?> </label>
-                                <?php
-                                echo $html_helper->text( array(
-                                    'name'        => 'wppr-editor-button-link-2',
-                                    'value'       => $this->get_value( 'wppr-editor-button-link-2' ),
-                                    'placeholder' => __( 'Affiliate Link', 'wp-product-review' ),
-                                ) );
-                                ?>
-                            </li>
-                            <?php
-                        } ?>
+						<?php if ( count( $links ) < 2 ) { ?>
+							<li class="hidden_fields" style="display: none;">
+								<label for="wppr-editor-button-text"><?php _e( 'Affiliate Button Text', 'wp-product-review' ); ?> </label>
+								<?php
+								echo $html_helper->text( array(
+									'name'        => 'wppr-editor-button-text-2',
+									'value'       => $this->get_value( 'wppr-editor-button-text-2' ),
+									'placeholder' => __( 'Affiliate Button Text', 'wp-product-review' ),
+								) );
+							?>
+							</li>
+							<li class="hidden_fields" style="display: none;">
+								<label for="wppr-editor-button-link"><?php _e( 'Affiliate Link', 'wp-product-review' ); ?> </label>
+								<?php
+								echo $html_helper->text( array(
+									'name'        => 'wppr-editor-button-link-2',
+									'value'       => $this->get_value( 'wppr-editor-button-link-2' ),
+									'placeholder' => __( 'Affiliate Link', 'wp-product-review' ),
+								) );
+								?>
+							</li>
+							<?php
+} ?>
 						<?php
 						if ( ! empty( $links ) ) {
 							if ( count( $links ) > 1 ) {
@@ -381,6 +387,12 @@ class WPPR_Default_Editor extends WPPR_Editor_Abstract {
 		<?php
 	}
 
+	/**
+	 * Method to load styles for render.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 */
 	public function load_style() {
 		wp_enqueue_style( 'wppr-default-editor-css', WPPR_URL . '/assets/css/editor.css', array(), WPPR_LITE_VERSION );
 		wp_enqueue_script( 'wppr-default-editor-js', WPPR_URL . '/assets/js/admin-review.js', array( 'jquery' ), WPPR_LITE_VERSION, true );

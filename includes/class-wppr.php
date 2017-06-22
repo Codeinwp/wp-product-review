@@ -67,7 +67,6 @@ class WPPR {
 	 * @since    3.0.0
 	 */
 	public function __construct() {
-
 		$this->plugin_name = 'wppr';
 		$this->version = '3.0.0';
 
@@ -83,7 +82,7 @@ class WPPR {
 	 * Include the following files that make up the plugin:
 	 *
 	 * - WPPR_Loader. Orchestrates the hooks of the plugin.
-	 * - WPPR_i18n. Defines internationalization functionality.
+	 * - WPPR_I18n. Defines internationalization functionality.
 	 * - WPPR_Admin. Defines all hooks for the admin area.
 	 * - WPPR_Public. Defines all hooks for the public side of the site.
 	 *
@@ -94,48 +93,21 @@ class WPPR {
 	 * @access   private
 	 */
 	private function load_dependencies() {
-
-		// **
-		// * The class responsible for orchestrating the actions and filters of the
-		// * core plugin.
-		// */
-		// require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wppr-loader.php';
-		//
-		// **
-		// * The class responsible for defining internationalization functionality
-		// * of the plugin.
-		// */
-		// require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wppr-i18n.php';
-		//
-		// **
-		// * The class responsible for defining all actions that occur in the admin area.
-		// */
-		// require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/admin/class-wppr-admin.php';
-		//
-		// **
-		// * The class responsible for defining all actions that occur in the public-facing
-		// * side of the site.
-		// */
-		// require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/public/class-wppr-public.php';
 		$this->loader = new WPPR_Loader();
-
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the WPPR_i18n class in order to set the domain and to register the hook
+	 * Uses the WPPR_I18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    3.0.0
 	 * @access   private
 	 */
 	private function set_locale() {
-
-		$plugin_i18n = new WPPR_i18n();
-
+		$plugin_i18n = new WPPR_I18n();
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
 	}
 
 	/**
@@ -149,19 +121,19 @@ class WPPR {
 
 		$plugin_admin = new WPPR_Admin( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'menu_pages' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-        $this->loader->add_action( 'wp_ajax_update_options', $plugin_admin, 'update_options' );
+		$this->loader->add_action( 'wp_ajax_update_options', $plugin_admin, 'update_options' );
 
 		$plugin_editor = new WPPR_Editor();
 		$this->loader->add_action( 'add_meta_boxes', $plugin_editor, 'set_editor' );
 		$this->loader->add_action( 'save_post', $plugin_editor, 'editor_save' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_editor, 'load_assets' );
 
-        $currentTheme = wp_get_theme();
-        if ( $currentTheme->get( 'Name' ) !== 'Bookrev' && $currentTheme->get( 'Name' ) !== 'Book Rev Lite' ) {
-
-            $this->loader->add_filter( 'the_content', $plugin_admin, 'display_on_front' );
-        }
+		$currentTheme = wp_get_theme();
+		if ( $currentTheme->get( 'Name' ) !== 'Bookrev' && $currentTheme->get( 'Name' ) !== 'Book Rev Lite' ) {
+			$this->loader->add_filter( 'the_content', $plugin_admin, 'display_on_front' );
+		}
 
 	}
 

@@ -35,10 +35,10 @@ jQuery( document ).ready(function(){
 		if (value === "yes") {
 
 			jQuery( "#wppr-meta-yes" ).show();
-            jQuery( "#wppr-meta-no" ).show();
+			jQuery( "#wppr-meta-no" ).show();
 		} else {
-            jQuery( "#wppr-meta-yes" ).hide();
-            jQuery( "#wppr-meta-no" ).hide();
+			jQuery( "#wppr-meta-yes" ).hide();
+			jQuery( "#wppr-meta-no" ).hide();
 		}
 	});
 

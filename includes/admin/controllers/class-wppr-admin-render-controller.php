@@ -4,7 +4,7 @@
  *
  * @package     WPPR
  * @subpackage  Admin
- * @copyright   Copyright (c) 2017, Marius Cristea
+ * @copyright   Copyright (c) 2017, Bogdan Preda
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       3.0.0
  */
@@ -32,28 +32,33 @@ class WPPR_Admin_Render_Controller {
 	 */
 	private $version;
 
+	/**
+	 * Stores the helper class to render elements.
+	 *
+	 * @since   3.0.0
+	 * @access  private
+	 * @var WPPR_Html_Fields $html_helper The HTML helper class.
+	 */
 	private $html_helper;
 
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    3.0.0
-	 * @param      string $plugin_name       The name of this plugin.
-	 * @param      string $version    The version of this plugin.
+	 * @since   3.0.0
+	 * @param   string $plugin_name The name of this plugin.
+	 * @param   string $version     The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
-
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 		$this->html_helper = new WPPR_Html_Fields();
-		// var_dump( $this->options );
 	}
 
 	/**
 	 * Utility method to include required layout.
 	 *
 	 * @since   3.0.0
-	 * @access  protected
+	 * @access  public
 	 * @param   string $name   The name of the layout to be retrieved.
 	 */
 	public function retrive_template( $name ) {
@@ -63,6 +68,14 @@ class WPPR_Admin_Render_Controller {
 		include_once( WPPR_PATH . '/includes/admin/layouts/' . $name . '_tpl.php' );
 	}
 
+	/**
+	 * Method to controll what element is rendered based on type.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @param   array $field  The array to use when rendering.
+	 * @return mixed
+	 */
 	public function add_element( $field ) {
 		$output = '
             <div class="controls">

@@ -16,33 +16,45 @@ abstract class WPPR_Editor_Abstract extends WPPR_Model_Abstract {
 	/**
 	 * The WP_Post object.
 	 *
-	 * @var WP_Post $post .
+	 * @since   3.0.0
+	 * @access  public
+	 * @var WP_Post $post The WordPress post object.
 	 */
 	public $post;
 
 	/**
 	 * The WPPR_Review object.
 	 *
-	 * @var WPPR_Review $review .
+	 * @since   3.0.0
+	 * @access  public
+	 * @var WPPR_Review $review The Review Model class.
 	 */
 	public $review;
 
 	/**
 	 * The last review id saved.
 	 *
+	 * @since   3.0.0
+	 * @access  private
 	 * @var int The previous review id.
 	 */
 	private $previous;
 
 	/**
-	 * @var WPPR_Logger $logger.
+	 * The logger class.
+	 *
+	 * @since   3.0.0
+	 * @access  private
+	 * @var WPPR_Logger $logger The logger utility class.
 	 */
 	private $logger;
 
 	/**
 	 * WPPR_Default_Editor constructor.
 	 *
-	 * @param WP_Post $post The post object.
+	 * @since   3.0.0
+	 * @access  public
+	 * @param   WP_Post $post The post object.
 	 */
 	public function __construct( $post ) {
 
@@ -52,7 +64,7 @@ abstract class WPPR_Editor_Abstract extends WPPR_Model_Abstract {
 			$this->post   = $post;
 			$this->review = new WPPR_Review( $this->post->ID );
 		} else {
-            $this->logger->error( 'No WP_Post provided = ' . var_export( $post, true ) );
+			$this->logger->error( 'No WP_Post provided = ' . var_export( $post, true ) );
 		}
 		$previous = $this->wppr_get_option( 'last_review' );
 		if ( ! empty( $previous ) ) {
@@ -63,9 +75,10 @@ abstract class WPPR_Editor_Abstract extends WPPR_Model_Abstract {
 	/**
 	 * Retrive the smart values based on the last saved review.
 	 *
-	 * @param string $key The field name.
-	 *
-	 * @return string The default value.
+	 * @since   3.0.0
+	 * @access  public
+	 * @param   string $key The field name.
+	 * @return string
 	 */
 	public function get_value( $key ) {
 		switch ( true ) {

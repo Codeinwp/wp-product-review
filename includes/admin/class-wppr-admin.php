@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -57,9 +56,11 @@ class WPPR_Admin {
 	/**
 	 * Register the stylesheets for the admin area.
 	 *
-	 * @since    3.0.0
+	 * @since   3.0.0
+	 * @access  public
+	 * @param   string $hook   The hook used filter loaded styles.
 	 */
-	public function enqueue_styles() {
+	public function enqueue_styles( $hook ) {
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -73,20 +74,22 @@ class WPPR_Admin {
 		 * class.
 		 */
 
-        if ( $hook == 'toplevel_page_wppr' ) {
-            wp_enqueue_style( 'wp-color-picker' );
-            wp_enqueue_style( $this->plugin_name . '-dashboard-css', WPPR_URL . '/assets/css/dashboard_styles.css', array(), $this->version );
-            wp_enqueue_style( $this->plugin_name . '-admin-css', WPPR_URL . '/assets/css/admin.css', array(), $this->version );
-        }
-        if ( $hook == 'product-review_page_wppr_pro_upsell' || $hook == 'toplevel_page_wppr' ) {
-            wp_enqueue_style( $this->plugin_name . '-upsell-css', WPPR_URL . '/assets/css/upsell.css', array(), $this->version );
-        }
+		if ( $hook == 'toplevel_page_wppr' ) {
+			wp_enqueue_style( 'wp-color-picker' );
+			wp_enqueue_style( $this->plugin_name . '-dashboard-css', WPPR_URL . '/assets/css/dashboard_styles.css', array(), $this->version );
+			wp_enqueue_style( $this->plugin_name . '-admin-css', WPPR_URL . '/assets/css/admin.css', array(), $this->version );
+		}
+		if ( $hook == 'product-review_page_wppr_pro_upsell' || $hook == 'toplevel_page_wppr' ) {
+			wp_enqueue_style( $this->plugin_name . '-upsell-css', WPPR_URL . '/assets/css/upsell.css', array(), $this->version );
+		}
 	}
 
 	/**
 	 * Register the JavaScript for the admin area.
 	 *
-	 * @since    3.0.0
+	 * @since   3.0.0
+	 * @access  public
+	 * @param   string $hook   The hook used filter loaded scripts.
 	 */
 	public function enqueue_scripts( $hook ) {
 
@@ -108,12 +111,18 @@ class WPPR_Admin {
 		}
 	}
 
+	/**
+	 * Temporary methods
+	 */
 	public function display_on_front() {
 	    echo 'RENDER REVIEW HERE !!!';
-    }
+	}
 
 	/**
-	 * Add admin pages.
+	 * Add admin menu items.
+	 *
+	 * @since   3.0.0
+	 * @access  public
 	 */
 	public function menu_pages() {
 		add_menu_page( __( 'WP Product Review', 'wp-product-review' ), __( 'Product Review', 'wp-product-review' ), 'manage_options', 'wppr', array(
@@ -129,23 +138,41 @@ class WPPR_Admin {
 		}
 	}
 
+	/**
+	 * Method to render settings page.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 */
 	public function page_settings() {
 		$render = new WPPR_Admin_Render_Controller( $this->plugin_name, $this->version );
 		$render->retrive_template( 'settings' );
 	}
 
+	/**
+	 * Method to render up-sell page.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 */
 	public function page_upsell() {
 		$render = new WPPR_Admin_Render_Controller( $this->plugin_name, $this->version );
 		$render->retrive_template( 'upsell' );
 	}
 
+	/**
+	 * Method called from AJAX request to update options.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 */
 	public function update_options() {
 	    $data = $_POST['cwppos_options'];
-        foreach ( $data as $option ) {
-            var_dump( $option );
-            WPPR_Options::instance()->set_var( $option['name'], $option['value'] );
-        }
+		foreach ( $data as $option ) {
+			var_dump( $option );
+			WPPR_Options::instance()->set_var( $option['name'], $option['value'] );
+		}
 	    die();
-    }
+	}
 
 }
