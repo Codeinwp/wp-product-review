@@ -3,7 +3,7 @@ jQuery( document ).ready(function(){
 
 	var meta_image_frame;
 
-	jQuery( '#cwp_rev_product_image-button' ).click(function(e){
+	jQuery( '#wppr-editor-image-button' ).click(function(e){
 
 		e.preventDefault();
 
@@ -24,21 +24,19 @@ jQuery( document ).ready(function(){
 
 			var media_attachment = meta_image_frame.state().get( 'selection' ).first().toJSON();
 
-			jQuery( '#cwp_rev_product_image' ).val( media_attachment.url );
+			jQuery( '#wppr-editor-image' ).val( media_attachment.url );
 		});
 
 		wp.media.frame.open();
 	});
 
-	jQuery( 'input:radio[name="cwp_meta_box_check"]' ).change(function(){
+	jQuery( 'input:radio[name="wppr-review-status"]' ).change(function(){
 		var value = jQuery( this ).val();
-		if (value === "Yes") {
+		if (value === "yes") {
 
-			jQuery( "#cwp_review_meta_box .product-review-meta-No" ).show();
-			jQuery( "#cwp_review_meta_box .product-review-meta-Yes" ).show();
+			jQuery( "#wppr-meta-yes" ).show();
 		} else {
-			jQuery( "#cwp_review_meta_box .product-review-meta-Yes" ).hide();
-			jQuery( "#cwp_review_meta_box .product-review-meta-No" ).hide();
+            jQuery( "#wppr-meta-yes" ).hide();
 		}
 	});
 
