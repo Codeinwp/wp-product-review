@@ -271,13 +271,13 @@ class WPPR_Review extends WPPR_Model_Abstract {
 		$options_nr = $this->wppr_get_option( 'cwppos_option_nr' );
 		for ( $i = 1; $i <= $options_nr; $i ++ ) {
 			$tmp_name = get_post_meta( $this->ID, 'option_' . $i . '_content', true );
-			if ( ! empty( $tmp ) ) {
-				$tmp_score = get_post_meta( $this->ID, 'option_' . $i . '_grade', true );
-				$options[] = array(
-					'name'  => $tmp_name,
-					'score' => $tmp_score,
-				);
-			}
+			if( $tmp_name != '' ) {
+                $tmp_score = get_post_meta( $this->ID, 'option_' . $i . '_grade', true );
+                $options[] = array(
+                    'name'  => $tmp_name,
+                    'value' => $tmp_score,
+                );
+            }
 		}
 		$new_options = get_post_meta( $this->ID, 'wppr_options', true );
 		if ( ! empty( $new_options ) ) {

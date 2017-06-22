@@ -69,12 +69,12 @@ abstract class WPPR_Editor_Abstract extends WPPR_Model_Abstract {
 	 */
 	public function get_value( $key ) {
 		switch ( true ) {
-			case  ( $key === 'wppr-editor-button-text' ):
+			case  ( $key === 'wppr-editor-button-text' ) :
 			case  ( $key === 'wppr-editor-button-link' ) :
 				if ( $this->review->is_active() ) {
 					$links = $this->review->get_links();
 					if ( ! empty( $links ) ) {
-						if ( $key == 'wppr-editor-button-text' ) {
+						if ( $key == 'wppr-editor-button-link' ) {
 							$values = array_values( $links );
 						} else {
 							$values = array_keys( $links );
@@ -86,7 +86,7 @@ abstract class WPPR_Editor_Abstract extends WPPR_Model_Abstract {
 					if ( ! empty( $this->previous ) ) {
 						$links = $this->previous->get_links();
 						if ( ! empty( $links ) ) {
-							if ( $key == 'wppr-editor-button-text' ) {
+							if ( $key == 'wppr-editor-button-link' ) {
 								$values = array_values( $links );
 							} else {
 								$values = array_keys( $links );

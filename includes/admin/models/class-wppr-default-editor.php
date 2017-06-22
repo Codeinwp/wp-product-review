@@ -205,11 +205,34 @@ class WPPR_Default_Editor extends WPPR_Editor_Abstract {
 								</a>
 							<?php endif; ?>
 						</li>
+                        <?php if ( count( $links ) < 2 ) { ?>
+                            <li class="hidden_fields" style="display: none;">
+                                <label for="wppr-editor-button-text"><?php _e( 'Affiliate Button Text', 'wp-product-review' ); ?> </label>
+                                <?php
+                                echo $html_helper->text( array(
+                                    'name'        => 'wppr-editor-button-text-2',
+                                    'value'       => $this->get_value( 'wppr-editor-button-text-2' ),
+                                    'placeholder' => __( 'Affiliate Button Text', 'wp-product-review' ),
+                                ) );
+                            ?>
+                            </li>
+                            <li class="hidden_fields" style="display: none;">
+                                <label for="wppr-editor-button-link"><?php _e( 'Affiliate Link', 'wp-product-review' ); ?> </label>
+                                <?php
+                                echo $html_helper->text( array(
+                                    'name'        => 'wppr-editor-button-link-2',
+                                    'value'       => $this->get_value( 'wppr-editor-button-link-2' ),
+                                    'placeholder' => __( 'Affiliate Link', 'wp-product-review' ),
+                                ) );
+                                ?>
+                            </li>
+                            <?php
+                        } ?>
 						<?php
 						if ( ! empty( $links ) ) {
 							if ( count( $links ) > 1 ) {
 								$i = 1;
-								foreach ( $links as $url => $text ) {
+								foreach ( $links as $text => $url ) {
 									if ( $i > 1 ) {
 										?>
 										<li>

@@ -35,14 +35,16 @@ jQuery( document ).ready(function(){
 		if (value === "yes") {
 
 			jQuery( "#wppr-meta-yes" ).show();
+            jQuery( "#wppr-meta-no" ).show();
 		} else {
             jQuery( "#wppr-meta-yes" ).hide();
+            jQuery( "#wppr-meta-no" ).hide();
 		}
 	});
 
-	jQuery( '#cwp_add_button' ).click(function(e){
+	jQuery( '#wppr-editor-new-link' ).click(function(e){
 		e.preventDefault();
-		jQuery( '.cwp_hide_button2' ).show();
+		jQuery( '.hidden_fields' ).show();
 		jQuery( this ).hide();
 		return false;
 	})
