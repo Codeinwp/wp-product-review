@@ -73,8 +73,14 @@ class WPPR_Admin {
 		 * class.
 		 */
 
-		// wp_enqueue_style( $this->plugin_name . '_admin_styles', WPPR_URL . '/assets/css/admin.css', array(), $this->version, 'all' );
-		// wp_enqueue_style( $this->plugin_name . '_admin_upsell_styles', WPPR_URL . '/assets/css/upsell.css', array(), $this->version, 'all' );
+        if ( $hook == 'toplevel_page_wppr' ) {
+            wp_enqueue_style( 'wp-color-picker' );
+            wp_enqueue_style( $this->plugin_name . '-dashboard-css', WPPR_URL . '/assets/css/dashboard_styles.css', array(), $this->version );
+            wp_enqueue_style( $this->plugin_name . '-admin-css', WPPR_URL . '/assets/css/admin.css', array(), $this->version );
+        }
+        if ( $hook == 'product-review_page_wppr_pro_upsell' || $hook == 'toplevel_page_wppr' ) {
+            wp_enqueue_style( $this->plugin_name . '-upsell-css', WPPR_URL . '/assets/css/upsell.css', array(), $this->version );
+        }
 	}
 
 	/**
@@ -97,18 +103,14 @@ class WPPR_Admin {
 		 */
 
 		if ( $hook == 'toplevel_page_wppr' ) {
-			wp_enqueue_style( 'wp-color-picker' );
-			wp_enqueue_style( $this->plugin_name . '-dashboard-css', WPPR_URL . '/assets/css/dashboard_styles.css', array(), $this->version );
-			wp_enqueue_style( $this->plugin_name . '-admin-css', WPPR_URL . '/assets/css/admin.css', array(), $this->version );
 			wp_enqueue_script( $this->plugin_name . '-tiplsy-js', WPPR_URL . '/assets/js/tipsy.js', array( 'jquery' ), $this->version );
 			wp_enqueue_script( $this->plugin_name . '-admin-js', WPPR_URL . '/assets/js/admin.js', array( 'jquery', 'wp-color-picker' ), $this->version );
 		}
-		if ( $hook == 'product-review_page_wppr_pro_upsell' || $hook == 'toplevel_page_wppr' ) {
-			wp_enqueue_style( $this->plugin_name . '-upsell-css', WPPR_URL . '/assets/css/upsell.css', array(), $this->version );
-		}
-
-		// wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wppr-admin.js', array( 'jquery' ), $this->version, false );
 	}
+
+	public function display_on_front() {
+	    echo 'RENDER REVIEW HERE !!!';
+    }
 
 	/**
 	 * Add admin pages.

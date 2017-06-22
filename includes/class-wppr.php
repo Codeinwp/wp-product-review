@@ -157,6 +157,12 @@ class WPPR {
 		$this->loader->add_action( 'save_post', $plugin_editor, 'editor_save' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_editor, 'load_assets' );
 
+        $currentTheme = wp_get_theme();
+        if ( $currentTheme->get( 'Name' ) !== 'Bookrev' && $currentTheme->get( 'Name' ) !== 'Book Rev Lite' ) {
+
+            $this->loader->add_filter( 'the_content', $plugin_admin, 'display_on_front' );
+        }
+
 	}
 
 	/**
