@@ -69,6 +69,11 @@ function wppr_autoload( $class ) {
 				require_once $filename;
 				return true;
 			}
+			$filename = plugin_dir_path( __FILE__ ) . 'includes/public/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
+			if ( is_readable( $filename ) ) {
+				require_once $filename;
+				return true;
+			}
 			$filename = plugin_dir_path( __FILE__ ) . 'includes/admin/class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
 			if ( is_readable( $filename ) ) {
 				require_once $filename;

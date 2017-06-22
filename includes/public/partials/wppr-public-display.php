@@ -1,16 +1,13 @@
 <?php
+/**
+ * Silence is golden
+ *
+ * @package     WPPR
+ * @copyright   Copyright (c) 2017, Bogdan Preda
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since       3.0.0
+ */
 
 /**
- * Provide a public-facing view for the plugin
- *
- * This file is used to markup the public-facing aspects of the plugin.
- *
- * @link       https://themeisle.com/
- * @since      1.0.0
- *
- * @package    Wppr
- * @subpackage Wppr/public/partials
+ * Nothing to do here.
  */
-?>
-
-<!-- This file should primarily consist of HTML with a little bit of PHP. -->

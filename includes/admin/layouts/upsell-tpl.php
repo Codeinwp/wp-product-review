@@ -1,7 +1,19 @@
+<?php
+/**
+ *  Up-sell layout in the admin dashboard.
+ *
+ * @package     WPPR
+ * @subpackage  Layouts
+ * @copyright   Copyright (c) 2017, Marius Cristea
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since       3.0.0
+ */
+
+?>
 <div id="wppr-admin">
 
-    <?php
-	include WPPR_PATH . '/includes/admin/layouts/header_part.php';
+	<?php
+	include WPPR_PATH . '/includes/admin/layouts/header-part.php';
 	?>
 
 	<div class="pro-feature">

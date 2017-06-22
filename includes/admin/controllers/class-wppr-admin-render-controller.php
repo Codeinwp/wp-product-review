@@ -65,7 +65,7 @@ class WPPR_Admin_Render_Controller {
 		if ( file_exists( WPPR_PATH . '/includes/admin/layouts/css/' . $name . '.css' ) ) {
 			wp_enqueue_style( $this->plugin_name . '-' . $name . '-css', WPPR_URL . '/includes/admin/layouts/css/' . $name . '.css', array(), $this->version );
 		}
-		include_once( WPPR_PATH . '/includes/admin/layouts/' . $name . '_tpl.php' );
+		include_once( WPPR_PATH . '/includes/admin/layouts/' . $name . '-tpl.php' );
 	}
 
 	/**

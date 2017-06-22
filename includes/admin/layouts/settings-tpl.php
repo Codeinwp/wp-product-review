@@ -2,8 +2,8 @@
 /**
  *  Settings layout in the admin dashboard.
  *
- * @package
- * @subpackage
+ * @package     WPPR
+ * @subpackage  Layouts
  * @copyright   Copyright (c) 2017, Marius Cristea
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       3.0.0
@@ -17,7 +17,7 @@ $fields = $global_settings->get_fields();
 <div id="wppr-admin">
 	<?php do_action( 'wppr_admin_page_before' ); ?>
 
-	<?php include WPPR_PATH . '/includes/admin/layouts/header_part.php'; ?>
+	<?php include WPPR_PATH . '/includes/admin/layouts/header-part.php'; ?>
 
 	<div id="wppr_top_tabs" class="clearfix">
 		<ul id="tabs_menu" role="menu">

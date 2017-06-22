@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The file that defines the core plugin class
  *
@@ -73,7 +72,7 @@ class WPPR {
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
-		// $this->define_public_hooks();
+		$this->define_public_hooks();
 	}
 
 	/**
