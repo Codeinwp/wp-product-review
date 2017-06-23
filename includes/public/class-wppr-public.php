@@ -93,7 +93,7 @@ class Wppr_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		
+
 		// wp_enqueue_script( $this->plugin_name . '-tiplsy-js', WPPR_URL . '/assets/js/public.js', array( 'jquery' ), $this->version );
 	}
 

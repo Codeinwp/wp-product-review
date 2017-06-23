@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 3.0
  */
-class WPPR_Review extends WPPR_Model_Abstract {
+class WPPR_Review_Model extends WPPR_Model_Abstract {
 
 	/**
 	 * The review ID.
@@ -121,15 +121,6 @@ class WPPR_Review extends WPPR_Model_Abstract {
 	private $options = array();
 
 	/**
-	 * The logger class.
-	 *
-	 * @since   3.0.0
-	 * @access  private
-	 * @var WPPR_Logger $logger The logger utility class.
-	 */
-	private $logger;
-
-	/**
 	 * WPPR_Review constructor.
 	 *
 	 * @since   3.0.0
@@ -137,7 +128,7 @@ class WPPR_Review extends WPPR_Model_Abstract {
 	 * @param mixed $review_id The review id.
 	 */
 	public function __construct( $review_id = false ) {
-	    $this->logger = new WPPR_Logger();
+	    parent::__construct();
 
 		if ( $review_id === false ) {
 			$this->logger->error( 'No review id provided.' );

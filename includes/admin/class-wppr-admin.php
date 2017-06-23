@@ -138,8 +138,9 @@ class WPPR_Admin {
 	 * @access  public
 	 */
 	public function page_settings() {
+	    $model = new WPPR_Options_Model();
 		$render = new WPPR_Admin_Render_Controller( $this->plugin_name, $this->version );
-		$render->retrive_template( 'settings' );
+		$render->retrive_template( 'settings', $model );
 	}
 
 	/**

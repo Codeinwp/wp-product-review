@@ -15,14 +15,6 @@
 class WPPR_Logger {
 
 	/**
-	 * WPPR_Logger constructor.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
-	public function __construct() {}
-
-	/**
 	 * Report a message as warning.
 	 *
 	 * @since   3.0.0

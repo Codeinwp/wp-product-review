@@ -38,8 +38,9 @@ $fields = $global_settings->get_fields();
 			<div id="wppr-tab-<?php echo $section_key; ?>" class="wppr-tab-content">
 				<?php
 				foreach ( $fields[ $section_key ] as $name => $field ) {
+				    $field['title'] = $field['name'];
 				    $field['name'] = $name;
-				    $field['value'] = WPPR_Options::instance()->get_var( $name );
+				    $field['value'] = $model->wppr_get_option( $name );
 					$this->add_element( $field );
 				}
 				?>

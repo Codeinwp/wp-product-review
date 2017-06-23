@@ -16,7 +16,130 @@
  *
  * Class WPPR_Default_Editor.
  */
-class WPPR_Default_Editor extends WPPR_Editor_Abstract {
+class WPPR_Editor_Model extends WPPR_Model_Abstract {
+
+	/**
+	 * The WP_Post object.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @var WP_Post $post The WordPress post object.
+	 */
+	public $post;
+
+	/**
+	 * The WPPR_Review object.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @var WPPR_Review $review The Review Model class.
+	 */
+	public $review;
+
+	/**
+	 * The last review id saved.
+	 *
+	 * @since   3.0.0
+	 * @access  private
+	 * @var int The previous review id.
+	 */
+	private $previous;
+
+	/**
+	 * WPPR_Default_Editor constructor.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @param   WP_Post $post The post object.
+	 */
+	public function __construct( $post ) {
+		parent::__construct();
+
+		if ( $post instanceof WP_Post ) {
+			$this->post   = $post;
+			$this->review = new WPPR_Review_Model( $this->post->ID );
+		} else {
+			$this->logger->error( 'No WP_Post provided = ' . var_export( $post, true ) );
+		}
+		$previous = $this->wppr_get_option( 'last_review' );
+		if ( ! empty( $previous ) ) {
+			$this->previous = new WPPR_Review_Model( $previous );
+		}
+	}
+
+	/**
+	 * Retrive the smart values based on the last saved review.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @param   string $key The field name.
+	 * @return string
+	 */
+	public function get_value( $key ) {
+		switch ( true ) {
+			case  ( $key === 'wppr-editor-button-text' ) :
+			case  ( $key === 'wppr-editor-button-link' ) :
+				if ( $this->review->is_active() ) {
+					$links = $this->review->get_links();
+					if ( ! empty( $links ) ) {
+						if ( $key == 'wppr-editor-button-link' ) {
+							$values = array_values( $links );
+						} else {
+							$values = array_keys( $links );
+						}
+
+						return isset( $values[0] ) ? $values[0] : '';
+					}
+				} else {
+					if ( ! empty( $this->previous ) ) {
+						$links = $this->previous->get_links();
+						if ( ! empty( $links ) ) {
+							if ( $key == 'wppr-editor-button-link' ) {
+								$values = array_values( $links );
+							} else {
+								$values = array_keys( $links );
+							}
+
+							return isset( $values[0] ) ? $values[0] : '';
+						}
+					}
+				}
+
+				return '';
+				break;
+			case ( strpos( $key, 'wppr-option-name-' ) !== false ):
+			case ( strpos( $key, 'wppr-option-value-' ) !== false ):
+				$options = array();
+				if ( $this->review->is_active() ) {
+					$options = $this->review->get_options();
+				} else {
+					if ( ! empty( $this->previous ) ) {
+						$options = $this->previous->get_options();
+					}
+				}
+				$parts = explode( '-', $key );
+				$index = $parts[ count( $parts ) - 1 ];
+				$index = intval( $index ) - 1;
+				$type  = $parts[ count( $parts ) - 2 ];
+
+				return isset( $options[ $index ] ) ? $options[ $index ][ $type ] : '';
+				break;
+			case ( $key === 'wppr-editor-link' ):
+				if ( $this->review->is_active() ) {
+					return $this->review->get_click();
+				} else {
+					if ( ! empty( $this->previous ) ) {
+						return $this->previous->get_click();
+					}
+				}
+
+				return 'image';
+				break;
+			default:
+				return '';
+		}// End switch().
+	}
+
 	/**
 	 * Save the editor data.
 	 *

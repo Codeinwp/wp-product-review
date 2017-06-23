@@ -59,9 +59,10 @@ class WPPR_Admin_Render_Controller {
 	 *
 	 * @since   3.0.0
 	 * @access  public
-	 * @param   string $name   The name of the layout to be retrieved.
+	 * @param   string                   $name   The name of the layout to be retrieved.
+	 * @param   bool|WPPR_Abstract_Model $model Optional pass a model to use in template.
 	 */
-	public function retrive_template( $name ) {
+	public function retrive_template( $name, $model = false ) {
 		if ( file_exists( WPPR_PATH . '/includes/admin/layouts/css/' . $name . '.css' ) ) {
 			wp_enqueue_style( $this->plugin_name . '-' . $name . '-css', WPPR_URL . '/includes/admin/layouts/css/' . $name . '.css', array(), $this->version );
 		}
@@ -79,7 +80,7 @@ class WPPR_Admin_Render_Controller {
 	public function add_element( $field ) {
 		$output = '
             <div class="controls">
-				<div class="explain">' . $field['name'] . '</div>
+				<div class="explain">' . $field['title'] . '</div>
 				<p class="field_description">' . $field['description'] . '</p>
         ';
 		switch ( $field['type'] ) {

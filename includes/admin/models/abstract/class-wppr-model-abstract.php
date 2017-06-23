@@ -16,6 +16,80 @@
 class WPPR_Model_Abstract {
 
 	/**
+	 * The main options array.
+	 *
+	 * @since   3.0.0
+	 * @access  private
+	 * @var array $options The options array.
+	 */
+	private $options;
+
+	/**
+	 * The option namespace.
+	 *
+	 * @since   3.0.0
+	 * @access  private
+	 * @var string $namespace The options namespace.
+	 */
+	private $namespace = 'cwppos_options';
+
+	/**
+	 * The logger class.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @var WPPR_Logger $logger The logger utility class.
+	 */
+	public $logger;
+
+	/**
+	 * WPPR_Model_Abstract constructor.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 */
+	public function __construct() {
+		$this->options = get_option( $this->namespace );
+		$this->logger = new WPPR_Logger();
+	}
+
+	/**
+	 * Get the key option value from DB.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @param   string $key The key name of the option.
+	 * @return bool|mixed
+	 */
+	private function get_var( $key ) {
+		$this->logger->notice( 'Getting value for ' . $key );
+		if ( isset( $this->options[ $key ] ) ) {
+			return $this->options[ $key ];
+		}
+
+		return false;
+	}
+
+	/**
+	 * Setter method for updating the options array.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @param   string $key The name of option.
+	 * @param   string $value The value of the option.
+	 * @return bool|mixed
+	 */
+	private function set_var( $key, $value = '' ) {
+		$this->logger->notice( 'Setting value for ' . $key . ' with ' . $value );
+		if ( ! isset( $this->options[ $key ] ) ) {
+			$this->options[ $key ] = '';
+		}
+		$this->options = apply_filters( 'wppr_pre_option' . $key, $value );
+
+		return update_option( $this->namespace, $this->options );
+	}
+
+	/**
 	 * Get the global wppr option.
 	 *
 	 * @since   3.0.0
@@ -24,7 +98,7 @@ class WPPR_Model_Abstract {
 	 * @return mixed
 	 */
 	public function wppr_get_option( $key = '' ) {
-		return WPPR_Options::instance()->get_var( $key );
+	    return $this->get_var( $key );
 	}
 
 	/**
@@ -37,6 +111,6 @@ class WPPR_Model_Abstract {
 	 * @return mixed
 	 */
 	public function wppr_set_option( $key = '', $value = '' ) {
-		return WPPR_Options::instance()->set_var( $key, $value );
+		return $this->set_var( $key, $value );
 	}
 }
