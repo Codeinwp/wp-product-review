@@ -124,7 +124,7 @@ class WPPR {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'wp_ajax_update_options', $plugin_admin, 'update_options' );
 
-		$plugin_editor = new WPPR_Editor();
+		$plugin_editor = new WPPR_Editor( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'add_meta_boxes', $plugin_editor, 'set_editor' );
 		$this->loader->add_action( 'save_post', $plugin_editor, 'editor_save' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_editor, 'load_assets' );

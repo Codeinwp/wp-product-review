@@ -70,6 +70,22 @@ class WPPR_Admin_Render_Controller {
 	}
 
 	/**
+	 * Render editor metabox.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @param   string                   $template Path to template file or template name.
+	 * @param   bool|WPPR_Abstract_Model $model Optional pass a model to use in template.
+	 */
+	public function render_editor_metabox( $template, $model = false ) {
+	    if ( ! file_exists( $template ) ) {
+	        $template = WPPR_PATH . '/includes/admin/layouts/' . $template . '-tpl.php';
+		}
+		$html_helper = new WPPR_Html_Fields();
+		include_once( $template );
+	}
+
+	/**
 	 * Method to controll what element is rendered based on type.
 	 *
 	 * @since   3.0.0

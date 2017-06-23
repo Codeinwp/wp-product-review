@@ -15,6 +15,38 @@
 class WPPR_Editor {
 
 	/**
+	 * The ID of this plugin.
+	 *
+	 * @since    3.0.0
+	 * @access   private
+	 * @var      string    $plugin_name    The ID of this plugin.
+	 */
+	private $plugin_name;
+
+	/**
+	 * The version of this plugin.
+	 *
+	 * @since    3.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $version;
+
+	/**
+	 * Initialize the class and set its properties.
+	 *
+	 * @since    3.0.0
+	 * @param      string $plugin_name       The name of this plugin.
+	 * @param      string $version    The version of this plugin.
+	 */
+	public function __construct( $plugin_name, $version ) {
+
+		$this->plugin_name = $plugin_name;
+		$this->version = $version;
+
+	}
+
+	/**
 	 * Method to add editor meta box.
 	 *
 	 * @since   3.0.0
@@ -37,7 +69,8 @@ class WPPR_Editor {
 	public function render_metabox( $post ) {
 		$editor = $this->get_editor_name( $post );
 		wp_nonce_field( 'wppr_editor_save.' . $post->ID, '_wppr_nonce' );
-		$editor->render();
+		$render_controller = new WPPR_Admin_Render_Controller( $this->plugin_name, $this->version );
+		$render_controller->render_editor_metabox( $editor->get_template(), $editor );
 	}
 
 	/**
@@ -70,7 +103,24 @@ class WPPR_Editor {
 		global $post;
 		if ( is_a( $post, 'WP_Post' ) ) {
 			$editor = $this->get_editor_name( $post );
-			$editor->load_style();
+			$assets = $editor->get_assets();
+			if ( ! empty( $assets ) ) {
+				if ( isset( $assets['js'] ) ) {
+					foreach ( $assets['js'] as $handle => $data ) {
+						if ( isset( $data['path'] ) ) {
+							wp_enqueue_script( 'wppr-' . $handle . '-css', $data['path'], $data['required'], $this->version, true );
+						}
+					}
+				}
+
+				if ( isset( $assets['css'] ) ) {
+					foreach ( $assets['css'] as $handle => $data ) {
+						if ( isset( $data['path'] ) ) {
+							wp_enqueue_style( 'wppr-' . $handle . '-css', $data['path'], $data['required'], $this->version );
+						}
+					}
+				}
+			}
 		}
 	}
 
