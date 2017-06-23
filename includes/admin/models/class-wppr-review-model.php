@@ -358,17 +358,6 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	}
 
 	/**
-	 * Return the options array of the review.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @return array
-	 */
-	public function get_options() {
-		return apply_filters( 'wppr_options', $this->options, $this->ID, $this );
-	}
-
-	/**
 	 * Setter method for options.
 	 *
 	 * We update the options array if there is only a single component like :
@@ -426,95 +415,6 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	}
 
 	/**
-	 * Return the rating of the review.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @return float
-	 */
-	public function get_rating() {
-		$comment_influence = intval( $this->wppr_get_option( 'cwppos_infl_userreview' ) );
-		$rating            = $this->score;
-		if ( $comment_influence > 0 ) {
-			$comments_rating = $this->get_comments_rating();
-			$rating          = $comments_rating * ( $comment_influence / 100 ) + $rating * ( ( 100 - $comment_influence ) / 100 );
-		}
-
-		return apply_filters( 'wppr_rating', $rating, $this->ID, $this );
-	}
-
-	/**
-	 * Get comments rating.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @return float|int
-	 */
-	public function get_comments_rating() {
-		if ( $this->ID === 0 ) {
-			$this->logger->error( 'Can not get comments rating, id is not set' );
-
-			return 0;
-		}
-		$comments_query = new WP_Comment_Query;
-		$comments       = $comments_query->query( array(
-			'fields'  => 'ids',
-			'status'  => 'approve',
-			'post_id' => $this->ID,
-		) );
-		if ( $comments ) {
-			$options = array();
-			foreach ( $comments as $comment ) {
-				$options = array_merge( $options, $this->get_comment_options( $comment ) );
-			}
-
-			return ( array_sum( wp_list_pluck( $options, 'values' ) ) / count( $options ) );
-		} else {
-			return 0;
-		}
-
-	}
-
-	/**
-	 * Return the options values and names associated with the comment.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @param   int $comment_id The comment id.
-	 * @return array
-	 */
-	public function get_comment_options( $comment_id ) {
-		$options = array();
-		if ( $this->wppr_get_option( 'cwppos_show_userreview' ) === 'yes' ) {
-			$options_names = wp_list_pluck( $this->options, 'name' );
-			foreach ( $options_names as $k => $name ) {
-				$value = get_comment_meta( $comment_id, 'meta_option_' . $k, true );
-				if ( ! empty( $value ) ) {
-					$value = 0;
-				}
-				$options[] = array(
-					'name'  => $name,
-					'value' => $value,
-				);
-			}
-		}
-
-		return $options;
-
-	}
-
-	/**
-	 * Getter for the cons array.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @return array
-	 */
-	public function get_cons() {
-		return apply_filters( 'wppr_cons', $this->cons, $this->ID, $this );
-	}
-
-	/**
 	 * Update the cons array.
 	 *
 	 * @since   3.0.0
@@ -538,17 +438,6 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			return update_post_meta( $this->ID, 'wppr_cons', $this->cons );
 		}
 
-	}
-
-	/**
-	 * Getter for the pros array.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @return array
-	 */
-	public function get_pros() {
-		return apply_filters( 'wppr_pros', $this->pros, $this->ID, $this );
 	}
 
 	/**
@@ -577,18 +466,6 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	}
 
 	/**
-	 * Return the list of links in url=>text format.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @return array
-	 */
-	public function get_links() {
-		return apply_filters( 'wppr_links', $this->links, $this->ID );
-
-	}
-
-	/**
 	 * Save the links array ( url=>title ) to the postmeta.
 	 *
 	 * @since   3.0.0
@@ -610,43 +487,6 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	}
 
 	/**
-	 * Return the url of the thumbnail.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @return string
-	 */
-	public function get_small_thumbnail() {
-		global $wpdb;
-		// filter for image size;
-		$size        = apply_filters( 'wppr_review_image_size', 'thumbnail', $this->ID, $this );
-		$attachment  = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid='%s';", $this->image ) );
-		$image_id    = isset( $attachment[0] ) ? $attachment[0] : '';
-		$image_thumb = '';
-		if ( ! empty( $image_id ) ) {
-			$image_thumb = wp_get_attachment_image_src( $image_id, $size );
-			if ( $size !== 'thumbnail' ) {
-				if ( $image_thumb[0] === $this->image ) {
-					$image_thumb = wp_get_attachment_image_src( $image_id, 'thumbnail' );
-				}
-			}
-		}
-
-		return apply_filters( 'wppr_thumb', isset( $image_thumb[0] ) ? $image_thumb[0] : $this->image, $this->ID, $this );
-	}
-
-	/**
-	 * Get the list of images for the review.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @return array
-	 */
-	public function get_image() {
-		return apply_filters( 'wppr_images', $this->image, $this->ID, $this );
-	}
-
-	/**
 	 * Set the new image url.
 	 *
 	 * @since   3.0.0
@@ -665,17 +505,6 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Return the click behaviour.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @return string
-	 */
-	public function get_click() {
-		return apply_filters( 'wppr_click', $this->click, $this->ID, $this );
 	}
 
 	/**
@@ -703,17 +532,6 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	}
 
 	/**
-	 * Return the review name.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @return string
-	 */
-	public function get_name() {
-		return apply_filters( 'wppr_name', $this->name, $this->ID, $this );
-	}
-
-	/**
 	 * Setter method for saving the review name.
 	 *
 	 * @since   3.0.0
@@ -730,17 +548,6 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Returns the review price.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @return string
-	 */
-	public function get_price() {
-		return apply_filters( 'wppr_price', $this->price, $this->ID, $this );
 	}
 
 	/**
@@ -809,6 +616,224 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 */
 	public function get_ID() {
 		return $this->ID;
+	}
+
+	/**
+	 * Return the review name.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @return string
+	 */
+	public function get_name() {
+		return apply_filters( 'wppr_name', $this->name, $this->ID, $this );
+	}
+
+	/**
+	 * Returns the review price.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @return string
+	 */
+	public function get_price() {
+		return apply_filters( 'wppr_price', $this->price, $this->ID, $this );
+	}
+
+	/**
+	 * Return the click behaviour.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @return string
+	 */
+	public function get_click() {
+		return apply_filters( 'wppr_click', $this->click, $this->ID, $this );
+	}
+
+	/**
+	 * Return the url of the thumbnail.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @return string
+	 */
+	public function get_small_thumbnail() {
+		global $wpdb;
+		// filter for image size;
+		$size        = apply_filters( 'wppr_review_image_size', 'thumbnail', $this->ID, $this );
+		$attachment  = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid='%s';", $this->image ) );
+		$image_id    = isset( $attachment[0] ) ? $attachment[0] : '';
+		$image_thumb = '';
+		if ( ! empty( $image_id ) ) {
+			$image_thumb = wp_get_attachment_image_src( $image_id, $size );
+			if ( $size !== 'thumbnail' ) {
+				if ( $image_thumb[0] === $this->image ) {
+					$image_thumb = wp_get_attachment_image_src( $image_id, 'thumbnail' );
+				}
+			}
+		}
+
+		return apply_filters( 'wppr_thumb', isset( $image_thumb[0] ) ? $image_thumb[0] : $this->image, $this->ID, $this );
+	}
+
+	/**
+	 * Get the list of images for the review.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @return array
+	 */
+	public function get_image() {
+		return apply_filters( 'wppr_images', $this->image, $this->ID, $this );
+	}
+
+	/**
+	 * Return the list of links in url=>text format.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @return array
+	 */
+	public function get_links() {
+		return apply_filters( 'wppr_links', $this->links, $this->ID );
+
+	}
+
+	/**
+	 * Getter for the pros array.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @return array
+	 */
+	public function get_pros() {
+		return apply_filters( 'wppr_pros', $this->pros, $this->ID, $this );
+	}
+
+	/**
+	 * Getter for the cons array.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @return array
+	 */
+	public function get_cons() {
+		return apply_filters( 'wppr_cons', $this->cons, $this->ID, $this );
+	}
+
+	/**
+	 * Return the rating of the review.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @return float
+	 */
+	public function get_rating() {
+		$comment_influence = intval( $this->wppr_get_option( 'cwppos_infl_userreview' ) );
+		$rating            = $this->score;
+		if ( $comment_influence > 0 ) {
+			$comments_rating = $this->get_comments_rating();
+			$rating          = $comments_rating * ( $comment_influence / 100 ) + $rating * ( ( 100 - $comment_influence ) / 100 );
+		}
+
+		return apply_filters( 'wppr_rating', $rating, $this->ID, $this );
+	}
+
+	/**
+	 * Get comments rating.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @return float|int
+	 */
+	public function get_comments_rating() {
+		if ( $this->ID === 0 ) {
+			$this->logger->error( 'Can not get comments rating, id is not set' );
+
+			return 0;
+		}
+		$comments_query = new WP_Comment_Query;
+		$comments       = $comments_query->query( array(
+			'fields'  => 'ids',
+			'status'  => 'approve',
+			'post_id' => $this->ID,
+		) );
+		if ( $comments ) {
+			$options = array();
+			foreach ( $comments as $comment ) {
+				$options = array_merge( $options, $this->get_comment_options( $comment ) );
+			}
+
+			if ( count( $options ) != 0 ) {
+				return ( array_sum( wp_list_pluck( $options, 'values' ) ) / count( $options ) );
+			} else {
+				return 0;
+			}
+		} else {
+			return 0;
+		}
+
+	}
+
+	/**
+	 * Return the options values and names associated with the comment.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @param   int $comment_id The comment id.
+	 * @return array
+	 */
+	public function get_comment_options( $comment_id ) {
+		$options = array();
+		if ( $this->wppr_get_option( 'cwppos_show_userreview' ) === 'yes' ) {
+			$options_names = wp_list_pluck( $this->options, 'name' );
+			foreach ( $options_names as $k => $name ) {
+				$value = get_comment_meta( $comment_id, 'meta_option_' . $k, true );
+				if ( ! empty( $value ) ) {
+					$value = 0;
+				}
+				$options[] = array(
+					'name'  => $name,
+					'value' => $value,
+				);
+			}
+		}
+
+		return $options;
+
+	}
+
+	/**
+	 * Return the options array of the review.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @return array
+	 */
+	public function get_options() {
+		return apply_filters( 'wppr_options', $this->options, $this->ID, $this );
+	}
+
+	public function get_review_data() {
+		$data = array(
+			'id' => $this->get_ID(),
+			'name' => $this->get_name(),
+			'price' => $this->get_price(),
+			'image' => array(
+				'full' => $this->get_image(),
+				'thumb' => $this->get_small_thumbnail(),
+			),
+			'use_lightbox' => false,
+			'rating' => $this->get_rating(),
+			'comment_rating' => $this->get_comments_rating(),
+			'pros' => $this->get_pros(),
+			'cons' => $this->get_cons(),
+			'options' => $this->get_options(),
+			'links' => $this->get_links(),
+		);
+
+		return $data;
 	}
 
 }
