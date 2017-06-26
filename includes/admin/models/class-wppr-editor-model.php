@@ -200,6 +200,7 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 
 				}
 			}
+            //var_dump( $options ); die();
 			if ( is_array( $pros ) ) {
 				$pros = array_map( 'sanitize_text_field', $pros );
 			} else {

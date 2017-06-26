@@ -274,10 +274,10 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	private function setup_links() {
 		$link_text                = get_post_meta( $this->ID, 'cwp_product_affiliate_text', true );
 		$link_url                 = get_post_meta( $this->ID, 'cwp_product_affiliate_link', true );
-		$this->links[ $link_url ] = $link_text;
+		$this->links[ $link_text ] = $link_url;
 		$link_text                = get_post_meta( $this->ID, 'cwp_product_affiliate_text2', true );
 		$link_url                 = get_post_meta( $this->ID, 'cwp_product_affiliate_link2', true );
-		$this->links[ $link_url ] = $link_text;
+		$this->links[ $link_text ] = $link_url;
 		$new_links                = get_post_meta( $this->ID, 'wppr_links', true );
 		if ( ! empty( $new_links ) ) {
 			$this->links = $new_links;
@@ -338,6 +338,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 				);
 			}
 		}
+		var_dump( $options );
 		$new_options = get_post_meta( $this->ID, 'wppr_options', true );
 		if ( ! empty( $new_options ) ) {
 			$options = $new_options;

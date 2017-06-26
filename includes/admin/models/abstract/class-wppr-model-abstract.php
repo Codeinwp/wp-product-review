@@ -81,10 +81,10 @@ class WPPR_Model_Abstract {
 	 */
 	private function set_var( $key, $value = '' ) {
 		$this->logger->notice( 'Setting value for ' . $key . ' with ' . $value );
-		if ( ! isset( $this->options[ $key ] ) ) {
+		if ( ! array_key_exists( $key, $this->options ) ) {
 			$this->options[ $key ] = '';
 		}
-		$this->options = apply_filters( 'wppr_pre_option' . $key, $value );
+		$this->options[ $key ] = apply_filters( 'wppr_pre_option_' . $key, $value );
 
 		return update_option( $this->namespace, $this->options );
 	}

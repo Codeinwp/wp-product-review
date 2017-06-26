@@ -21,7 +21,13 @@ if ( $review['use_lightbox'] ) {
 }
 
 $multiple_affiliates_class = 'affiliate-button';
-if ( ! empty( $review['links'] ) && count( $review['links'] > 1 ) ) {
+$display_links_count = 0;
+foreach ( $review['links'] as $title => $link ) {
+    if ( $title != '' && $link != '' ) {
+        $display_links_count++;
+    }
+}
+if ( $display_links_count > 1 ) {
 	$multiple_affiliates_class = 'affiliate-button2 affiliate-button';
 }
 
@@ -31,7 +37,7 @@ $output = '
 <section id="review-statistics"  class="article-section" itemscope itemtype="http://schema.org/Product">
     <div class="review-wrap-up  cwpr_clearfix" >
         <div class="cwpr-review-top cwpr_clearfix">
-            <span itemprop="name">' . $review['name'] . '</span>
+            <span itemprop="name"><h2 class="cwp-item"  itemprop="name"  >' . $review['name'] . '</h2></span>
             <span class="cwp-item-price cwp-item">' . $sub_title_info . '</span>
         </div><!-- end .cwpr-review-top -->
         <div class="review-wu-left">
@@ -69,7 +75,7 @@ $output = '
                     $output .= '
                         <div class="rev-option" data-value=' . $option['value'] . '>
                             <div class="cwpr_clearfix">
-                                ' . apply_filters( 'wppr_option_name_html', $option['name'] ) . '
+                                <h3>' . apply_filters( 'wppr_option_name_html', $option['name'] ) . '</h3>
                                 <span>' . round( $option['value'] / 10 ) . '/10</span>
                             </div>
                             <ul class="cwpr_clearfix"></ul>
@@ -81,8 +87,9 @@ $output = '
             </div><!-- end .review-wu-bars -->
         </div><!-- end .review-wu-left -->
         <div class="review-wu-right">
-            <div class="pros">' .
-				apply_filters( 'wppr_review_pros_text', __( $options_model->wppr_get_option( 'cwppos_pros_text' ), 'cwppos' ) ) . ' <ul>';
+            <div class="pros">
+            <h2>' . apply_filters( 'wppr_review_pros_text', __( $options_model->wppr_get_option( 'cwppos_pros_text' ), 'cwppos' ) ) . '</h2>
+            <ul>';
 if ( isset( $review['pros'] ) && ! empty( $review['pros'] ) ) {
 	foreach ( $review['pros'] as $pro ) {
 		$output .= '<li>' . $pro . '</li>';
@@ -91,8 +98,9 @@ if ( isset( $review['pros'] ) && ! empty( $review['pros'] ) ) {
 				$output .= '
                 </ul>
             </div><!-- end .pros -->
-            <div class="cons">' .
-				apply_filters( 'wppr_review_cons_text', __( $options_model->wppr_get_option( 'cwppos_cons_text' ), 'cwppos' ) ) . ' <ul>';
+            <div class="cons">
+            <h2>' . apply_filters( 'wppr_review_cons_text', __( $options_model->wppr_get_option( 'cwppos_cons_text' ), 'cwppos' ) ) . '</h2>
+            <ul>';
 if ( isset( $review['cons'] ) && ! empty( $review['cons'] ) ) {
 	foreach ( $review['cons'] as $con ) {
 		$output .= '<li>' . $con . '</li>';
@@ -107,10 +115,12 @@ if ( isset( $review['cons'] ) && ! empty( $review['cons'] ) ) {
 ';
 if ( ! empty( $review['links'] ) ) {
 	foreach ( $review['links'] as $title => $link ) {
-		$output .= '
-        <div class="' . $multiple_affiliates_class . '">
-            <a href="' . $link . '" rel="nofollow" target="_blank"><span>' . $title . '</span> </a>
-        </div><!-- end .affiliate-button -->
-        ';
+	    if( $title != '' && $link != '' ) {
+            $output .= '
+            <div class="' . $multiple_affiliates_class . '">
+                <a href="' . $link . '" rel="nofollow" target="_blank"><span>' . $title . '</span> </a>
+            </div><!-- end .affiliate-button -->
+            ';
+        }
 	}
 }
