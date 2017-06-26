@@ -116,46 +116,138 @@ class Wppr_Public {
 	}
 
 	public function dynamic_stylesheet() {
-		$options_model = new WPPR_Options_Model();
+        if ( $this->review->is_active() ) {
 
-		$style = '
-            div.affiliate-button a {
-                border: 2px solid ' . $options_model->wppr_get_option( 'cwppos_buttonbd_color' ) . ';
-            }
-    
-            div.affiliate-button a:hover {
-                border: 2px solid ' . $options_model->wppr_get_option( 'cwppos_buttonbh_color' ) . ';
-            }
-    
-            div.affiliate-button a {
-                background: ' . $options_model->wppr_get_option( 'cwppos_buttonbkd_color' ) . ';
-            }
-    
-            div.affiliate-button a:hover {
-                background: ' . $options_model->wppr_get_option( 'cwppos_buttonbkh_color' ) . ';
-            }
-    
-            div.affiliate-button a span {
-                color: ' . $options_model->wppr_get_option( 'cwppos_buttontxtd_color' ) . ';
-            }
-    
-            div.affiliate-button a:hover span {
-                color: ' . $options_model->wppr_get_option( 'cwppos_buttontxth_color' ) . ';
-            }
-        ';
+            $options_model = new WPPR_Options_Model();
 
-		echo $style;
+            global $content_width;
+            if ( $options_model->wppr_get_option('cwppos_widget_size' ) != '' ) {
+                $width = $options_model->wppr_get_option( 'cwppos_widget_size' );
+            } else {
+                $width = $content_width;
+            }
+            if ( $width < 200 ) {
+                $width = 600;
+            }
+            $img_size = min( 180, $width * 0.51 * 0.4 );
+            $height_left    = $img_size + 10;
+            $chart_size = 0.8 * $img_size;
 
-	    $script = '
-	        <script type="text/javascript">
-                var c1 = "' . $options_model->wppr_get_option( 'cwppos_rating_weak' ) . '";
-                var c2 = "' . $options_model->wppr_get_option( 'cwppos_rating_notbad' ) . '";
-                var c3 = "' . $options_model->wppr_get_option( 'cwppos_rating_good' ) . '";
-                var c4 = "' . $options_model->wppr_get_option( 'cwppos_rating_very_good' ) . '";
-            </script>
-	    ';
+            $conditional_media_styles = '';
+            if ( $options_model->wppr_get_option( 'cwppos_widget_size' ) != '' ) {
+                $conditional_media_styles = '
+                #review-statistics {
+                    width: ' . $options_model->wppr_get_option( 'cwppos_widget_size' ) . 'px;
+                }
+                ';
+            }
 
-	    echo $script;
+            $conditional_styles = '';
+            if ( $options_model->wppr_get_option( 'cwppos_show_icon' ) == 'yes' ) {
+                $conditional_styles .= '
+                div.affiliate-button a span {
+                    background: url("' . WPPR_URL . '/assets/img/cart-icon.png") no-repeat left center;
+                } 
+        
+                div.affiliate-button a:hover span {
+                    background: url("' . WPPR_URL . '/assets/img/cart-icon-hover.png") no-repeat left center;
+                }
+                ';
+            }
+
+            if ( $options_model->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
+                $conditional_styles .= '
+                .commentlist .comment-body p {
+                    clear: left;
+                }
+                ';
+            }
+
+            $style = '
+                <style type="text/css">
+                    @media (min-width: 820px) {
+                        #review-statistics .review-wrap-up .review-wu-left .rev-wu-image, #review-statistics .review-wrap-up .review-wu-left .review-wu-grade {
+                            height: ' . $height_left . 'px;
+                        }
+            
+                        #review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart .cwp-review-percentage {
+                
+                            margin-top: ' . ( $img_size * 0.1 ) . '%;
+                        }
+            
+                        #review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart span {
+                            font-size: ' . round( 30 * $img_size / 140 ) . 'px;
+                        }
+                        
+                        ' . $conditional_media_styles . '
+			        }
+                
+                    #review-statistics .review-wrap-up div.cwpr-review-top {
+                        border-top: ' . $options_model->wppr_get_option('cwppos_reviewboxbd_width') . 'px solid ' . $options_model->wppr_get_option('cwppos_reviewboxbd_color') . ';
+                    }
+            
+                    .user-comments-grades .comment-meta-grade-bar,
+                    #review-statistics .review-wu-bars ul li {
+                        background: ' . $options_model->wppr_get_option('cwppos_rating_default') . ';
+                    }
+            
+                    #review-statistics .rev-option.customBarIcon ul li {
+                        color: ' . $options_model->wppr_get_option('cwppos_rating_default') . ';
+                    }
+            
+                    #review-statistics .review-wrap-up .review-wu-right ul li, #review-statistics .review-wu-bars h3, .review-wu-bars span, #review-statistics .review-wrap-up .cwpr-review-top .cwp-item-category a {
+                        color: ' . $options_model->wppr_get_option('cwppos_font_color') . ';
+                    }
+            
+                    #review-statistics .review-wrap-up .review-wu-right .pros h2 {
+                        color: ' . $options_model->wppr_get_option('cwppos_pros_color') . ';
+                    }
+            
+                    #review-statistics .review-wrap-up .review-wu-right .cons h2 {
+                        color: ' . $options_model->wppr_get_option('cwppos_cons_color') . ';
+                    }
+                
+                    div.affiliate-button a {
+                        border: 2px solid ' . $options_model->wppr_get_option('cwppos_buttonbd_color') . ';
+                    }
+            
+                    div.affiliate-button a:hover {
+                        border: 2px solid ' . $options_model->wppr_get_option('cwppos_buttonbh_color') . ';
+                    }
+            
+                    div.affiliate-button a {
+                        background: ' . $options_model->wppr_get_option('cwppos_buttonbkd_color') . ';
+                    }
+            
+                    div.affiliate-button a:hover {
+                        background: ' . $options_model->wppr_get_option('cwppos_buttonbkh_color') . ';
+                    }
+            
+                    div.affiliate-button a span {
+                        color: ' . $options_model->wppr_get_option('cwppos_buttontxtd_color') . ';
+                    }
+            
+                    div.affiliate-button a:hover span {
+                        color: ' . $options_model->wppr_get_option('cwppos_buttontxth_color') . ';
+                    }
+                    
+                    ' . $conditional_styles . '
+                </style>
+            ';
+
+            echo $style;
+
+            $script = '
+                <script type="text/javascript">
+                    var c1 = "' . $options_model->wppr_get_option('cwppos_rating_weak') . '";
+                    var c2 = "' . $options_model->wppr_get_option('cwppos_rating_notbad') . '";
+                    var c3 = "' . $options_model->wppr_get_option('cwppos_rating_good') . '";
+                    var c4 = "' . $options_model->wppr_get_option('cwppos_rating_very_good') . '";
+                </script>
+            ';
+
+            echo $script;
+        }
 	}
 
 	/**

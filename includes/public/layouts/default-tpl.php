@@ -64,19 +64,19 @@ $output = '
             </div><!-- end .review-wu-grade -->
             <div class="review-wu-bars">
                 ';
-if ( isset( $review['options'] ) && ! empty( $review['options'] ) ) {
-	foreach ( $review['options'] as $option ) {
-		$output .= '
-                            <div class="rev-option" data-value=' . $option['value'] . '>
-                                <div class="cwpr_clearfix">
-                                    ' . apply_filters( 'wppr_option_name_html', $option['name'] ) . '
-                                    <span>' . round( $option['value'] / 10 ) . '/10</span>
-                                </div>
-                                <ul class="cwpr_clearfix"></ul>
+            if ( isset( $review['options'] ) && ! empty( $review['options'] ) ) {
+                foreach ( $review['options'] as $option ) {
+                    $output .= '
+                        <div class="rev-option" data-value=' . $option['value'] . '>
+                            <div class="cwpr_clearfix">
+                                ' . apply_filters( 'wppr_option_name_html', $option['name'] ) . '
+                                <span>' . round( $option['value'] / 10 ) . '/10</span>
                             </div>
-                        ';
-	}
-}
+                            <ul class="cwpr_clearfix"></ul>
+                        </div>
+                    ';
+                }
+            }
 			$output .= '
             </div><!-- end .review-wu-bars -->
         </div><!-- end .review-wu-left -->
@@ -92,7 +92,7 @@ if ( isset( $review['pros'] ) && ! empty( $review['pros'] ) ) {
                 </ul>
             </div><!-- end .pros -->
             <div class="cons">' .
-				apply_filters( 'wppr_review_cons_text', __( $options_model->wppr_get_option( 'cwppos_pros_text' ), 'cwppos' ) ) . ' <ul>';
+				apply_filters( 'wppr_review_cons_text', __( $options_model->wppr_get_option( 'cwppos_cons_text' ), 'cwppos' ) ) . ' <ul>';
 if ( isset( $review['cons'] ) && ! empty( $review['cons'] ) ) {
 	foreach ( $review['cons'] as $con ) {
 		$output .= '<li>' . $con . '</li>';
