@@ -96,7 +96,7 @@ class WPPR_Admin_Render_Controller {
 	public function add_element( $field ) {
 		$output = '
             <div class="controls">
-				<div class="explain">' . $field['title'] . '</div>
+				<div class="explain"><h4>' . $field['title'] . '</h4></div>
 				<p class="field_description">' . $field['description'] . '</p>
         ';
 		switch ( $field['type'] ) {
@@ -114,7 +114,7 @@ class WPPR_Admin_Render_Controller {
 				break;
 		}
 
-		$output .= '</div>';
+		$output .= '</div><hr/>';
 		echo $output;
 
 		if ( isset( $errors ) ) { return $errors; }

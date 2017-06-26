@@ -276,7 +276,12 @@ class Wppr_Public {
 			$options_model = new WPPR_Options_Model();
 			$output = '';
 			include_once( WPPR_PATH . '/includes/public/layouts/default-tpl.php' );
-			$content = $content . '<hr/>' . $output;
+			$review_position_before_content = $options_model->wppr_get_option( 'cwppos_show_reviewbox' );
+			if ( $review_position_before_content == 'yes' ) {
+			    $content = $output . $content;
+			} elseif ( $review_position_before_content == 'no' ) {
+				$content = $content . $output;
+			}
 		}
 		return $content;
 	}
