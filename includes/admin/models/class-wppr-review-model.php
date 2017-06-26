@@ -338,7 +338,6 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 				);
 			}
 		}
-		var_dump( $options );
 		$new_options = get_post_meta( $this->ID, 'wppr_options', true );
 		if ( ! empty( $new_options ) ) {
 			$options = $new_options;

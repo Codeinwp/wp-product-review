@@ -94,7 +94,6 @@ $check  = $review->is_active() ? 'yes' : 'no';
 				</li>
 				<?php
 				$links = $review->get_links();
-				var_dump( $links );
 				?>
 				<li>
 					<label for="wppr-editor-button-text"><?php _e( 'Affiliate Button Text', 'wp-product-review' ); ?> </label>
@@ -203,8 +202,6 @@ $check  = $review->is_active() ? 'yes' : 'no';
 			<ul class="wppr-review-options-list clear">
 				<?php
 				$options_nr = $model->wppr_get_option( 'cwppos_option_nr' );
-				var_dump( $model->wppr_get_option( 'cwppos_option_nr' ) );
-				var_dump( $model->get_value( 'wppr_cons' ) );
 				for ( $i = 1; $i <= $options_nr; $i ++ ) {
 					?>
 					<li>
