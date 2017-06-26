@@ -289,7 +289,14 @@ $check  = $review->is_active() ? 'yes' : 'no';
 		</div>
 		<?php do_action( 'wppr_editor_cons_after', $model->post ); ?>
 	</div>
+
 	<br class="clear">
+
+	<?php if ( ! shortcode_exists( 'P_REVIEW' ) ) :  ?>
+		<label> You can use the shortcode <b>[P_REVIEW]</b> to show a review you already made or
+			<b>[wpr_landing]</b> to display a comparision table of them. The shortcodes are available on the <a
+					target="_blank" href="http://bit.ly/2bpKIlP">Pro Bundle</a><br/><br/></label>
+	<?php endif; ?>
 
 	<?php do_action( 'wppr_editor_after', $model->post ); ?>
 </div>

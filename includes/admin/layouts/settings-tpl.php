@@ -36,6 +36,11 @@ $fields = $global_settings->get_fields();
 
 		<?php foreach ( $sections as $section_key => $section_name ) : ?>
 			<div id="wppr-tab-<?php echo $section_key; ?>" class="wppr-tab-content">
+                <?php if ( ! shortcode_exists( 'P_REVIEW' ) && $section_key == 'general' ) :  ?>
+                    <label> You can use the shortcode <b>[P_REVIEW]</b> to show a review you already made or
+                        <b>[wpr_landing]</b> to display a comparision table of them. The shortcodes are available on the <a
+                                target="_blank" href="http://bit.ly/2bpKIlP">Pro Bundle</a><br/><br/></label>
+                <?php endif; ?>
 				<?php
 				foreach ( $fields[ $section_key ] as $name => $field ) {
 				    $field['title'] = $field['name'];
