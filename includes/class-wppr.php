@@ -128,6 +128,9 @@ class WPPR {
 		$this->loader->add_action( 'add_meta_boxes', $plugin_editor, 'set_editor' );
 		$this->loader->add_action( 'save_post', $plugin_editor, 'editor_save' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_editor, 'load_assets' );
+
+		$plugin_widget_latest = new WPPR_Latest_Products_Widget();
+		$this->loader->add_action( 'widgets_init', $plugin_widget_latest, 'register' );
 	}
 
 	/**
