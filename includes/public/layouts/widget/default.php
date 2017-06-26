@@ -6,7 +6,7 @@ while ( $cwp_products_loop->have_posts() ) : $cwp_products_loop->the_post();
 	$post_id = get_the_ID();
 	$review_model = new WPPR_Review_Model( $post_id );
 	$review = $review_model->get_review_data();
-	$product_image = $review['image']['full'];
+	$product_image = $review['image']['thumb'];
 	$product_title = ( $post_type == true ) ? $review['name']  :  get_the_title();
 	$product_title_display  = $product_title;
 	if ( strlen( $product_title_display ) > self::RESTRICT_TITLE_CHARS ) {
