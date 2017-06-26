@@ -138,7 +138,7 @@ class WPPR_Admin {
 	 * @access  public
 	 */
 	public function page_settings() {
-	    $model = new WPPR_Options_Model();
+        $model = new WPPR_Options_Model();
 		$render = new WPPR_Admin_Render_Controller( $this->plugin_name, $this->version );
 		$render->retrive_template( 'settings', $model );
 	}
@@ -161,9 +161,11 @@ class WPPR_Admin {
 	 * @access  public
 	 */
 	public function update_options() {
+        $model = new WPPR_Options_Model();
 	    $data = $_POST['cwppos_options'];
 		foreach ( $data as $option ) {
-			WPPR_Options::instance()->set_var( $option['name'], $option['value'] );
+            $option['value'];
+            $model->wppr_set_option( $option['name'], $option['value'] );
 		}
 	    die();
 	}

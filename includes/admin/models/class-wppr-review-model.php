@@ -827,11 +827,11 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			'id' => $this->get_ID(),
 			'name' => $this->get_name(),
 			'price' => $this->get_price(),
+			'click' => $this->get_click(),
 			'image' => array(
 				'full' => $this->get_image(),
 				'thumb' => $this->get_small_thumbnail(),
 			),
-			'use_lightbox' => false,
 			'rating' => $this->get_rating(),
 			'comment_rating' => $this->get_comments_rating(),
 			'pros' => $this->get_pros(),

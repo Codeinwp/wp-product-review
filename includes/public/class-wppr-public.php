@@ -94,6 +94,11 @@ class Wppr_Public {
 		 */
 		if ( $this->review->is_active() ) {
 			wp_enqueue_style( $this->plugin_name . '-frontpage-stylesheet', WPPR_URL . '/assets/css/frontpage.css', array(), $this->version );
+
+			$review_data = $this->review->get_review_data();
+            if ( $this->review->wppr_get_option( 'cwppos_lighbox' ) == 'no' && $review_data['click'] == 'image' ) {
+                wp_enqueue_style( $this->plugin_name . '-lightbox-css', WPPR_URL . '/assets/css/lightbox.css', array(), $this->version );
+            }
 		}
 	}
 
@@ -119,6 +124,10 @@ class Wppr_Public {
 		if ( $this->review->is_active() ) {
 			wp_enqueue_script( $this->plugin_name . '-pie-chart-js', WPPR_URL . '/assets/js/pie-chart.js', array( 'jquery' ), $this->version, true );
 			wp_enqueue_script( $this->plugin_name . '-frontpage-js', WPPR_URL . '/assets/js/main.js', array( 'jquery', $this->plugin_name . '-pie-chart-js' ), $this->version, true );
+            $review_data = $this->review->get_review_data();
+            if ( $this->review->wppr_get_option( 'cwppos_lighbox' ) == 'no' && $review_data['click'] == 'image' ) {
+                wp_enqueue_script( $this->plugin_name . '-lightbox-js', WPPR_URL . '/assets/js/lightbox.min.js', array( 'jquery' ), $this->version, true );
+            }
 		}
 	}
 

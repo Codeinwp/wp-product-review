@@ -24,14 +24,17 @@ if ( $sub_title_info != '' ) {
 }
 
 $lightbox = '';
-if ( $review['use_lightbox'] ) {
+if ( $this->review->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
 	$lightbox = 'data-lightbox="' . $review['image']['full'] . '"';
 }
-
+$image_link_url =  $review['image']['full'];
 $multiple_affiliates_class = 'affiliate-button';
 $display_links_count = 0;
 foreach ( $review['links'] as $title => $link ) {
 	if ( $title != '' && $link != '' ) {
+        if( $review['click'] != 'image' ) {
+            $image_link_url = $link;
+        }
 		$display_links_count++;
 	}
 }
@@ -50,7 +53,7 @@ $output = '
         </div><!-- end .cwpr-review-top -->
         <div class="review-wu-left">
             <div class="rev-wu-image">
-                <a href="' . $review['image']['full'] . '" ' . $lightbox . '  rel="nofollow" target="_blank"><img itemprop="image" src="' . $review['image']['thumb'] . '" alt="' . do_shortcode( $review['name'] ) . '" class="photo photo-wrapup wppr-product-image"  /></a>
+                <a href="' . $image_link_url . '" ' . $lightbox . '  rel="nofollow" target="_blank"><img itemprop="image" src="' . $review['image']['thumb'] . '" alt="' . do_shortcode( $review['name'] ) . '" class="photo photo-wrapup wppr-product-image"  /></a>
             </div><!-- end .rev-wu-image -->
             <div class="review-wu-grade">
                 <div class="cwp-review-chart ' . $extra_class . '">
