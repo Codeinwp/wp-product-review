@@ -107,7 +107,6 @@ class WPPR_Admin_Render_Controller {
 				$output .= $this->html_helper->select( $field );
 				break;
 			case 'color':
-                var_dump( $field );
 				$output .= $this->html_helper->color( $field );
 				break;
 			case 'text':

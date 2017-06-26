@@ -1,5 +1,17 @@
 /* jshint ignore:start */
 jQuery( document ).ready(function ($) {
+
+    jQuery("#cwp_container").fadeIn(200);
+
+    jQuery(".subo-color-picker").wpColorPicker({  change: function(event, ui){
+        var color = ui.color.toCSS();
+
+        var id = jQuery(this).attr('id').replace('_color_selector', '');
+
+
+        jQuery("#"+id+"_color").val(color);
+    }} );
+
 	update_nav( $( "#wppr_top_tabs .wppr-nav-tab:first" ) );
 	$( "#wppr_top_tabs" ).on('click', '.wppr-nav-tab', function () {
 		update_nav( $( this ) );

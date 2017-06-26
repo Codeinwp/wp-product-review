@@ -1,7 +1,15 @@
 <?php
+/**
+ *  WP Prodact Review front page layout.
+ *
+ * @package     WPPR
+ * @subpackage  Layouts
+ * @copyright   Copyright (c) 2017, Bogdan Preda
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since       3.0.0
+ */
 
 $review = $this->review->get_review_data();
-// var_dump( $review );
 $sub_title_info = '';
 $sub_title_info  = $review['price'];
 if ( $sub_title_info != '' ) {
@@ -23,9 +31,9 @@ if ( $review['use_lightbox'] ) {
 $multiple_affiliates_class = 'affiliate-button';
 $display_links_count = 0;
 foreach ( $review['links'] as $title => $link ) {
-    if ( $title != '' && $link != '' ) {
-        $display_links_count++;
-    }
+	if ( $title != '' && $link != '' ) {
+		$display_links_count++;
+	}
 }
 if ( $display_links_count > 1 ) {
 	$multiple_affiliates_class = 'affiliate-button2 affiliate-button';
@@ -70,9 +78,9 @@ $output = '
             </div><!-- end .review-wu-grade -->
             <div class="review-wu-bars">
                 ';
-            if ( isset( $review['options'] ) && ! empty( $review['options'] ) ) {
-                foreach ( $review['options'] as $option ) {
-                    $output .= '
+if ( isset( $review['options'] ) && ! empty( $review['options'] ) ) {
+	foreach ( $review['options'] as $option ) {
+		$output .= '
                         <div class="rev-option" data-value=' . $option['value'] . '>
                             <div class="cwpr_clearfix">
                                 <h3>' . apply_filters( 'wppr_option_name_html', $option['name'] ) . '</h3>
@@ -81,14 +89,18 @@ $output = '
                             <ul class="cwpr_clearfix"></ul>
                         </div>
                     ';
-                }
-            }
+	}
+}
 			$output .= '
             </div><!-- end .review-wu-bars -->
         </div><!-- end .review-wu-left -->
         <div class="review-wu-right">
             <div class="pros">
-            <h2>' . apply_filters( 'wppr_review_pros_text', __( $options_model->wppr_get_option( 'cwppos_pros_text' ), 'cwppos' ) ) . '</h2>
+            <h2>' .
+                // @codingStandardsIgnoreStart
+                apply_filters( 'wppr_review_pros_text', __( $options_model->wppr_get_option( 'cwppos_pros_text' ), 'cwppos' ) )
+                // @codingStandardsIgnoreEnd
+				. '</h2>
             <ul>';
 if ( isset( $review['pros'] ) && ! empty( $review['pros'] ) ) {
 	foreach ( $review['pros'] as $pro ) {
@@ -99,7 +111,11 @@ if ( isset( $review['pros'] ) && ! empty( $review['pros'] ) ) {
                 </ul>
             </div><!-- end .pros -->
             <div class="cons">
-            <h2>' . apply_filters( 'wppr_review_cons_text', __( $options_model->wppr_get_option( 'cwppos_cons_text' ), 'cwppos' ) ) . '</h2>
+            <h2>' .
+                    // @codingStandardsIgnoreStart
+                    apply_filters( 'wppr_review_cons_text', __( $options_model->wppr_get_option( 'cwppos_cons_text' ), 'cwppos' ) )
+                    // @codingStandardsIgnoreEnd
+					. '</h2>
             <ul>';
 if ( isset( $review['cons'] ) && ! empty( $review['cons'] ) ) {
 	foreach ( $review['cons'] as $con ) {
@@ -115,12 +131,12 @@ if ( isset( $review['cons'] ) && ! empty( $review['cons'] ) ) {
 ';
 if ( ! empty( $review['links'] ) ) {
 	foreach ( $review['links'] as $title => $link ) {
-	    if( $title != '' && $link != '' ) {
-            $output .= '
+	    if ( $title != '' && $link != '' ) {
+			$output .= '
             <div class="' . $multiple_affiliates_class . '">
                 <a href="' . $link . '" rel="nofollow" target="_blank"><span>' . $title . '</span> </a>
             </div><!-- end .affiliate-button -->
             ';
-        }
+		}
 	}
 }

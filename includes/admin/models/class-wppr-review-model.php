@@ -816,6 +816,13 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		return apply_filters( 'wppr_options', $this->options, $this->ID, $this );
 	}
 
+	/**
+	 * Method to retrieve the review model data as an array.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @return array
+	 */
 	public function get_review_data() {
 		$data = array(
 			'id' => $this->get_ID(),
