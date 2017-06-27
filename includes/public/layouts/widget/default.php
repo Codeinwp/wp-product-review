@@ -1,23 +1,31 @@
 <?php
+/**
+ * Default Widget Layout for front end.
+ *
+ * @package     WPPR
+ * @subpackage  Layouts
+ * @copyright   Copyright (c) 2017, Bogdan Preda
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since       3.0.0
+ */
+
 echo '<ul>';
-$post_type = true;
-$show_image = true;
 while ( $cwp_products_loop->have_posts() ) : $cwp_products_loop->the_post();
 	$post_id = get_the_ID();
 	$review_model = new WPPR_Review_Model( $post_id );
 	$review = $review_model->get_review_data();
 	$product_image = $review['image']['thumb'];
-	$product_title = ( $post_type == true ) ? $review['name']  :  get_the_title();
+	$product_title = ( $instance['post_type'] == true ) ? $review['name']  :  get_the_title();
 	$product_title_display  = $product_title;
 	if ( strlen( $product_title_display ) > self::RESTRICT_TITLE_CHARS ) {
 		$product_title_display  = substr( $product_title_display, 0, self::RESTRICT_TITLE_CHARS ) . '...';
 	}
 	?>
 	<li class="cwp-popular-review cwp_top_posts_widget_<?php the_ID();
-	if ( $show_image == true && ! empty( $product_image ) ) { echo ' wppr-cols-3';
+	if ( $instance['show_image'] == true && ! empty( $product_image ) ) { echo ' wppr-cols-3';
 	} else { echo ' wppr-cols-2'; } ?>">
 		<?php
-		if ( $show_image == true && ! empty( $product_image ) ) {
+		if ( $instance['show_image'] == true && ! empty( $product_image ) ) {
 			?>
 			<img class="cwp_rev_image wppr-col" src="<?php echo $product_image;?>" alt="<?php echo $product_title; ?>">
 		<?php } ?>

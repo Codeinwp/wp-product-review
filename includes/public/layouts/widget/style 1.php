@@ -1,15 +1,24 @@
-<div class="wppr-prodlist">
-    <?php
-	$post_type = true;
-	$show_image = true;
+<?php
+/**
+ * Style One Widget Layout for front end.
+ *
+ * @package     WPPR
+ * @subpackage  Layouts
+ * @copyright   Copyright (c) 2017, Bogdan Preda
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since       3.0.0
+ */
 
+?>
+<div class="wppr-prodlist">
+	<?php
 	while ( $cwp_products_loop->have_posts() ) : $cwp_products_loop->the_post();
 		$post_id = get_the_ID();
 		$review_model = new WPPR_Review_Model( $post_id );
 		$review = $review_model->get_review_data();
 
 		$product_image = $review['image']['thumb'];
-		$product_title = ($post_type == true) ? $review['name']  :  get_the_title();
+		$product_title = ( $instance['post_type'] == true ) ? $review['name']  :  get_the_title();
 		$product_title_display  = $product_title;
 		if ( strlen( $product_title_display ) > self::RESTRICT_TITLE_CHARS ) {
 			$product_title_display  = substr( $product_title_display, 0, self::RESTRICT_TITLE_CHARS ) . '...';
@@ -18,7 +27,7 @@
 		$affiliate_link = get_post_meta( get_the_ID(), 'cwp_product_affiliate_link', true );
 		$review_link = get_the_permalink();
 
-		$showingImg = $show_image == true && ! empty( $product_image );
+		$showingImg = $instance['show_image'] == true && ! empty( $product_image );
 	?>
 
 	<div class="wppr-prodrow">

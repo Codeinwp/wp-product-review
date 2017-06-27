@@ -46,4 +46,4 @@
 		return $( "input:radio[name='" + name + "']:checked" ).val();
 	}
 
-})(jQuery, cwpw_latest);
+})(jQuery, wppr_widget_localized_data);

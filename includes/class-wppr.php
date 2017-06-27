@@ -131,6 +131,9 @@ class WPPR {
 
 		$plugin_widget_latest = new WPPR_Latest_Products_Widget();
 		$this->loader->add_action( 'widgets_init', $plugin_widget_latest, 'register' );
+
+		$plugin_widget_top = new WPPR_Top_Products_Widget();
+		$this->loader->add_action( 'widgets_init', $plugin_widget_top, 'register' );
 	}
 
 	/**
