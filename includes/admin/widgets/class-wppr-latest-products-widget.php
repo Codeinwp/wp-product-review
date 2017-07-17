@@ -117,6 +117,6 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 		$instance = parent::form( $instance );
 		$instance['title'] = __( 'Latest Products', 'cwppos' );
 
-		include( WPPR_PATH . '/includes/admin/layouts/widget-latest-products-tpl.php' );
+		include( WPPR_PATH . '/includes/admin/layouts/widget-admin-tpl.php' );
 	}
 }

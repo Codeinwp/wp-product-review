@@ -6,7 +6,7 @@ jQuery( document ).ready(function($) {
 
 	var initPieChart = function() {
 		returnColor = function(percent) {
-
+			console.log( c1 );
 			if (percent > 0 && percent <= 25) {
 				return c1;
 			} else if (percent > 25 && percent <= 50) {

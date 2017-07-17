@@ -36,6 +36,8 @@
 		});
 		$( "#" + widgetID ).find( "label.wppr-stylestyle" ).hover(function(e){
 			$( "#" + $( this ).attr( "for" ) + "img" ).show();
+            $( "#" + $( this ).attr( "for" ) + "img" ).css('position','absolute');
+            $( "#" + $( this ).attr( "for" ) + "img" ).css('width','100%');
 		}, function(e){
 			$( "#" + $( this ).attr( "for" ) + "img" ).hide();
 		});
