@@ -183,11 +183,11 @@ class WPPR_Global_Settings {
 							'id'          => 'rating_notbad',
 							'default' => '#FFCE55',
 						),
-						'cwppos_rating_very_good'     => array(
+						'cwppos_rating_good'     => array(
 							'type'        => 'color',
 							'name'        => __( 'Good rating', 'wp-product-review' ),
 							'description' => __( 'Select the color to be used when the rating is good. ( >5 and <7.5)', 'wp-product-review' ),
-							'id'          => 'rating_very_good',
+							'id'          => 'rating_good',
 							'default' => '#50C1E9',
 						),
 						'cwppos_rating_very_good'          => array(

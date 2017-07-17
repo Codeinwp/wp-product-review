@@ -354,6 +354,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	public function count_rating() {
 		$values      = wp_list_pluck( $this->options, 'value' );
 		$this->score = ( count( $this->options ) > 0 ) ? floatval( array_sum( $values ) / count( $this->options ) ) : 0;
+
 		update_post_meta( $this->ID, 'wppr_rating', number_format( $this->score, 2 ) );
 	}
 
