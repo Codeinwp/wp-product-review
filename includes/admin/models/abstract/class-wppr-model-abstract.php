@@ -64,10 +64,9 @@ class WPPR_Model_Abstract {
 	private function get_var( $key ) {
 		$this->logger->notice( 'Getting value for ' . $key );
 		if ( isset( $this->options[ $key ] ) ) {
-			return $this->options[ $key ];
+			return apply_filters( 'wppr_get_old_option', $this->options[ $key ], $key );
 		}
-
-		return false;
+		return apply_filters( 'wppr_get_old_option', false, $key );
 	}
 
 	/**
