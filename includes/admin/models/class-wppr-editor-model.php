@@ -245,10 +245,10 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 	public function get_assets() {
 	    $assets = array(
 			'css' => array(
-                'dashboard-styles' => array(
-                    'path' => WPPR_URL . '/assets/css/dashboard_styles.css',
-                    'required' => array(),
-                ),
+				'dashboard-styles' => array(
+					'path' => WPPR_URL . '/assets/css/dashboard_styles.css',
+					'required' => array(),
+				),
 				'default-editor' => array(
 					'path' => WPPR_URL . '/assets/css/editor.css',
 					'required' => array(),

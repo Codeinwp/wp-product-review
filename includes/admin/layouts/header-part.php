@@ -15,9 +15,10 @@
 	<span class="slogan">by <a
 			href="https://themeisle.com/">ThemeIsle</a></span>
 	<div class="header-btns">
-
+		<?php if ( ! class_exists( 'WPPR_Pro' ) ) { ?>
 		<a target="_blank" href="https://themeisle.com/plugins/wp-product-review/" class="buy-now"><span
 				class="dashicons dashicons-cart"></span> Extend</a>
+		<?php } ?>
 	</div>
 	<div class="clear"></div>
 </div>
