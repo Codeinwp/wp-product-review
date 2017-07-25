@@ -193,16 +193,18 @@ $check  = $review->is_active() ? 'yes' : 'no';
 		</div>
 		<?php do_action( 'wppr_editor_details_after', $model->post ); ?>
 	</div><!-- end .review-settings-notice -->
-	<div class="wppr-review-options  wppr-review-section">
+	<div class="wppr-review-options wppr-review-section">
 		<h4><?php _e( 'Product Options', 'wp-product-review' ); ?></h4>
 		<p><?php _e( 'Insert your options and their grades. Grading must be done from 0 to 100.', 'wp-product-review' ); ?></p>
-		<?php
+		<div class="cwpr_clearfix">
+        <?php
 		if ( $model->wppr_get_option( 'cwppos_show_poweredby' ) === 'yes' || class_exists( 'WPPR_Pro' ) || function_exists( 'wppr_ep_js_preloader' ) ) { ?>
-		<a href="#" class="preload_info"><?php _e( 'Preload Info', 'cwppos' ); ?></a>
+		    <a href="#" class="preload_info"><?php _e( 'Preload Info', 'cwppos' ); ?></a>
 		<?php
 		} else {
 			echo __( ' In order to be able to automatically load your options from another posts, you need the PRO add-on', 'cwppos' ) . '<a href="http://bit.ly/2bpC3vT" target="_blank" class="preload_info_upsell">' . __( 'View Preload features','cwppos' ) . '</a>';
 		} ?>
+        </div>
 		<?php do_action( 'wppr_editor_options_before', $model->post ); ?>
 		<div class="wppr-review-fieldset wppr-review-options-fields">
 			<ul class="wppr-review-options-list clear">
