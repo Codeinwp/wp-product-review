@@ -57,11 +57,11 @@ class WPPR_Model_Abstract {
 	 * Get the key option value from DB.
 	 *
 	 * @since   3.0.0
-	 * @access  public
+	 * @access  protected
 	 * @param   string $key The key name of the option.
 	 * @return bool|mixed
 	 */
-	private function get_var( $key ) {
+	protected function get_var( $key ) {
 		$this->logger->notice( 'Getting value for ' . $key );
 		if ( isset( $this->options[ $key ] ) ) {
 			return apply_filters( 'wppr_get_old_option', $this->options[ $key ], $key );
@@ -73,12 +73,12 @@ class WPPR_Model_Abstract {
 	 * Setter method for updating the options array.
 	 *
 	 * @since   3.0.0
-	 * @access  public
+	 * @access  protected
 	 * @param   string $key The name of option.
 	 * @param   string $value The value of the option.
 	 * @return bool|mixed
 	 */
-	private function set_var( $key, $value = '' ) {
+    protected function set_var( $key, $value = '' ) {
 		$this->logger->notice( 'Setting value for ' . $key . ' with ' . $value );
 		if ( ! array_key_exists( $key, $this->options ) ) {
 			$this->options[ $key ] = '';
