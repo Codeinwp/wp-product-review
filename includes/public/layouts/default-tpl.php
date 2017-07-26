@@ -143,3 +143,36 @@ if ( ! empty( $review['links'] ) ) {
 		}
 	}
 }
+
+if( $visual == 'yes' ) {
+    $output = '
+    <div class="review-wu-grade">
+        <div class="cwp-review-chart ' . $extra_class . '">
+            <meta itemprop="datePublished" datetime="' . get_the_time( 'Y-m-d', $review['id'] ) . '"/>
+            <!--
+            <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" class="cwp-review-percentage" data-percent="' . $review['image']['full'] . '">
+                <span itemprop="ratingValue" class="cwp-review-rating">' . $review['comment_rating'] . '</span>
+                <meta itemprop="bestRating" content = "10"/>
+                <meta itemprop="ratingCount" content="' . $review['id'] . '"/>
+            </div>
+            -->
+            <span itemscope itemtype="http://schema.org/Review">
+                <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                    <meta itemprop="name"  content="' . get_the_author() . '"/>
+                </span>
+                <span itemprop="itemReviewed" itemscope itemtype="http://schema.org/Product">
+                    <meta itemprop="name" content="' . do_shortcode( $review['name'] ) . '"/>
+                </span>
+                <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="cwp-review-percentage" data-percent="' . $review['rating'] . '">
+                    <span itemprop="ratingValue" class="cwp-review-rating">' . $review['comment_rating'] . '</span>
+                    <meta itemprop="bestRating" content="10"/>
+                </div>
+            </span>
+        </div><!-- end .chart -->
+    </div>
+    ';
+}
+
+if( $visual == 'no' ) {
+    $output = round( $option['value'] / 10 );
+}
