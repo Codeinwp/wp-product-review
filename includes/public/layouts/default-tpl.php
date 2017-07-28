@@ -144,8 +144,8 @@ if ( ! empty( $review['links'] ) ) {
 	}
 }
 
-if( $visual == 'yes' ) {
-    $output = '
+if ( $visual == 'yes' ) {
+	$output = '
     <div class="review-wu-grade">
         <div class="cwp-review-chart ' . $extra_class . '">
             <meta itemprop="datePublished" datetime="' . get_the_time( 'Y-m-d', $review['id'] ) . '"/>
@@ -173,6 +173,6 @@ if( $visual == 'yes' ) {
     ';
 }
 
-if( $visual == 'no' ) {
-    $output = round( $option['value'] / 10 );
+if ( $visual == 'no' ) {
+	$output = round( $option['value'] / 10 );
 }

@@ -9,6 +9,7 @@
  * @since       3.0.0
  */
 
+// @codingStandardsIgnoreStart
 ?>
 <p>
 	<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'cwppos' ); ?></label>
@@ -76,3 +77,4 @@
 	<label for="<?php echo $this->get_field_id( 'show_image' ); ?>"><?php _e( 'Display Product Image :', 'cwppos' ); ?></label>
 	<input  id="<?php echo $this->get_field_id( 'show_image' ); ?>" name="<?php echo $this->get_field_name( 'show_image' ); ?>"  type="checkbox" <?php checked( $instance['show_image'] ); ?>  />
 </p>
+<?php // @codingStandardsIgnoreEnd ?>

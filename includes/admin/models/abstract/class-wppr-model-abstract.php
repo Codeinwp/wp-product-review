@@ -78,8 +78,8 @@ class WPPR_Model_Abstract {
 	 * @param   string $value The value of the option.
 	 * @return bool|mixed
 	 */
-    protected function set_var( $key, $value = '' ) {
-		$this->logger->notice( 'Setting value for ' . $key . ' with ' . $value );
+	protected function set_var( $key, $value = '' ) {
+		$this->logger->notice( 'Setting value for ' . $key . ' with ' . print_r( $value ) );
 		if ( ! array_key_exists( $key, $this->options ) ) {
 			$this->options[ $key ] = '';
 		}

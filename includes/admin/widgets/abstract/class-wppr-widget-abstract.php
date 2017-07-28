@@ -48,11 +48,13 @@ class WPPR_Widget_Abstract extends WP_Widget {
 		if ( isset( $instance['show_image'] ) ) {
 		    $instance['show_image'] = apply_filters( 'widget_content', $instance['show_image'] );
 		}
+        // @codingStandardsIgnoreStart
 		if ( $instance['cwp_tp_category'] == 'All' ) { $instance['cwp_tp_category'] = ''; }
 		if ( ! isset( $instance['cwp_tp_buynow'] ) ) { $instance['cwp_tp_buynow'] = __( 'Buy Now', 'cwppos' ); }
 		if ( ! isset( $instance['cwp_tp_readreview'] ) ) { $instance['cwp_tp_readreview'] = __( 'Read Review', 'cwppos' ); }
 		if ( ! isset( $instance['cwp_tp_layout'] ) ) { $instance['cwp_tp_layout'] = 'default.php'; }
 		if ( ! isset( $instance['cwp_tp_rating_type'] ) ) { $instance['cwp_tp_rating_type']   = 'round'; }
+        // @codingStandardsIgnoreEnd
 
 		return $instance;
 	}

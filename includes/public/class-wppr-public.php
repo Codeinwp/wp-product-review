@@ -284,7 +284,7 @@ class Wppr_Public {
 		if ( $this->review->is_active() ) {
 			$options_model = new WPPR_Options_Model();
 			$output = '';
-            $visual = 'full';
+			$visual = 'full';
 			include_once( WPPR_PATH . '/includes/public/layouts/default-tpl.php' );
 			$review_position_before_content = $options_model->wppr_get_option( 'cwppos_show_reviewbox' );
 			if ( $review_position_before_content == 'yes' ) {

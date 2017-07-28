@@ -9,6 +9,7 @@
  * @since       3.0.0
  */
 
+// @codingStandardsIgnoreStart
 ?>
 <div class="wppr-prodlist">
 	<?php
@@ -81,5 +82,7 @@
 		<div class="clear"></div>
 	</div>
 	<?php endwhile; ?>
-	<?php wp_reset_postdata(); // reset the query ?>
+	<?php wp_reset_postdata(); // reset the query
+    // @codingStandardsIgnoreEnd
+	?>
 </div>
