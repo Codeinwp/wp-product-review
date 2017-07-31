@@ -155,8 +155,8 @@ class WPPR_Global_Settings {
 						),
                         'wppr_rich_snippet'         => array(
                             'type'        => 'select',
-                            'name'        => __( 'Disable Rich Snippets', 'cwppos' ),
-                            'description' => __( 'Disable rich snippets on the product page.', 'cwppos' ),
+                            'name'        => __( 'Enable Rich Snippets', 'cwppos' ),
+                            'description' => __( 'Enable rich snippets on the product page.', 'cwppos' ),
                             'id'          => 'use_rich_snippet',
                             'options'     => array(
                                 'yes' => __( 'Yes', 'cwppos' ),
