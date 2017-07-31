@@ -285,7 +285,15 @@ class Wppr_Public {
 			$options_model = new WPPR_Options_Model();
 			$output = '';
 			$visual = 'full';
-			include_once( WPPR_PATH . '/includes/public/layouts/default-tpl.php' );
+
+			if( $visual == 'full' ) {
+                $theme_template = get_template_directory() . '/wppr/default.php';
+                if ( file_exists( $theme_template ) ) {
+                    include_once( $theme_template );
+                } else {
+                    include_once( WPPR_PATH . '/includes/public/layouts/default-tpl.php' );
+                }
+            }
 			$review_position_before_content = $options_model->wppr_get_option( 'cwppos_show_reviewbox' );
 			if ( $review_position_before_content == 'yes' ) {
 			    $content = $output . $content;
