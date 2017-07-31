@@ -16,9 +16,9 @@ if ( $sub_title_info != '' ) {
 	$is_disabled = apply_filters( 'wppr_disable_price_richsnippet', false );
 	$currency = preg_replace( '/[0-9.,]/', '', $review['price'] ); // TODO move in model
 	if ( ! $is_disabled ) {
-		$sub_title_info = '<span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                <span itemprop="priceCurrency">' . $currency . '</span>
-                                <span itemprop="price">' . $review['price'] . '</span>
+		$sub_title_info = '<span>
+                                <span>' . $currency . '</span>
+                                <span>' . $review['price'] . '</span>
                            </span>';
 	}
 }
@@ -42,22 +42,21 @@ if ( $display_links_count > 1 ) {
 	$multiple_affiliates_class = 'affiliate-button2 affiliate-button';
 }
 
-$extra_class = ''; // TODO add check for embeded
+$extra_class = '';
 
 $output = '
-<section id="review-statistics"  class="article-section" itemscope itemtype="http://schema.org/Product">
+<section id="review-statistics"  class="article-section">
     <div class="review-wrap-up  cwpr_clearfix" >
         <div class="cwpr-review-top cwpr_clearfix">
-            <span itemprop="name"><h2 class="cwp-item"  itemprop="name"  >' . $review['name'] . '</h2></span>
+            <span><h2 class="cwp-item">' . $review['name'] . '</h2></span>
             <span class="cwp-item-price cwp-item">' . $sub_title_info . '</span>
         </div><!-- end .cwpr-review-top -->
         <div class="review-wu-left">
             <div class="rev-wu-image">
-                <a href="' . $image_link_url . '" ' . $lightbox . '  rel="nofollow" target="_blank"><img itemprop="image" src="' . $review['image']['thumb'] . '" alt="' . do_shortcode( $review['name'] ) . '" class="photo photo-wrapup wppr-product-image"  /></a>
+                <a href="' . $image_link_url . '" ' . $lightbox . '  rel="nofollow" target="_blank"><img src="' . $review['image']['thumb'] . '" alt="' . do_shortcode( $review['name'] ) . '" class="photo photo-wrapup wppr-product-image"  /></a>
             </div><!-- end .rev-wu-image -->
             <div class="review-wu-grade">
                 <div class="cwp-review-chart ' . $extra_class . '">
-                    <meta itemprop="datePublished" datetime="' . get_the_time( 'Y-m-d', $review['id'] ) . '"/>
                     <!--
                     <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" class="cwp-review-percentage" data-percent="' . $review['image']['full'] . '">
                         <span itemprop="ratingValue" class="cwp-review-rating">' . $review['comment_rating'] . '</span>
@@ -65,16 +64,9 @@ $output = '
                         <meta itemprop="ratingCount" content="' . $review['id'] . '"/>
                     </div>
                     -->
-                    <span itemscope itemtype="http://schema.org/Review">
-                        <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-                            <meta itemprop="name"  content="' . get_the_author() . '"/>
-                        </span>
-                        <span itemprop="itemReviewed" itemscope itemtype="http://schema.org/Product">
-                            <meta itemprop="name" content="' . do_shortcode( $review['name'] ) . '"/>
-                        </span>
-                        <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="cwp-review-percentage" data-percent="' . $review['rating'] . '">
-                            <span itemprop="ratingValue" class="cwp-review-rating">' . $review['comment_rating'] . '</span>
-                            <meta itemprop="bestRating" content="10"/>
+                    <span>
+                        <div class="cwp-review-percentage" data-percent="' . $review['rating'] . '">
+                            <span class="cwp-review-rating">' . $review['rating'] . '</span>
                         </div>
                     </span>
                 </div><!-- end .chart -->

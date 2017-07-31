@@ -13,7 +13,7 @@ $review = $model->review;
 $check  = $review->is_active() ? 'yes' : 'no';
 ?>
 <p class="wppr-active wppr-<?php echo $check; ?>">
-	<label for="wppr-review-yes"><?php _e( 'Is this a review post ?', 'wp-product-review' ); ?> </label>
+	<label for="wppr-review-yes"><?php _e( 'Is this a review post ?', 'cwppos' ); ?> </label>
 	<?php
 	echo $html_helper->radio( array(
 		'name'    => 'wppr-review-status',
@@ -23,7 +23,7 @@ $check  = $review->is_active() ? 'yes' : 'no';
 		'current' => $check,
 	) );
 	?>
-	<label for="wppr-review-no"><?php _e( 'Yes', 'wp-product-review' ); ?></label>
+	<label for="wppr-review-no"><?php _e( 'Yes', 'cwppos' ); ?></label>
 	<?php
 	echo $html_helper->radio( array(
 		'name'    => 'wppr-review-status',
@@ -33,42 +33,42 @@ $check  = $review->is_active() ? 'yes' : 'no';
 		'current' => $check,
 	) );
 	?>
-	<label for="wppr-review-no"><?php _e( 'No', 'wp-product-review' ); ?></label>
+	<label for="wppr-review-no"><?php _e( 'No', 'cwppos' ); ?></label>
 
 </p>
 <div class="wppr-review-editor " id="wppr-meta-<?php echo $check; ?>">
 
 	<?php do_action( 'wppr_editor_before', $model->post ); ?>
 	<div class="wppr-review-details wppr-review-section">
-		<h4><?php _e( 'Product Details', 'wp-product-review' ); ?></h4>
-		<p><?php _e( 'Specify the general details for the reviewed product.', 'wp-product-review' ); ?></p>
+		<h4><?php _e( 'Product Details', 'cwppos' ); ?></h4>
+		<p><?php _e( 'Specify the general details for the reviewed product.', 'cwppos' ); ?></p>
 		<?php do_action( 'wppr_editor_details_before', $model->post ); ?>
 		<div class="wppr-review-details-fields wppr-review-fieldset">
 			<ul>
 				<li>
-					<label for="wppr-editor-product-name"><?php _e( 'Product Name', 'wp-product-review' ); ?></label>
+					<label for="wppr-editor-product-name"><?php _e( 'Product Name', 'cwppos' ); ?></label>
 					<?php
 					echo $html_helper->text( array(
 						'name'        => 'wppr-editor-product-name',
 						'value'       => $review->get_name(),
-						'placeholder' => __( 'Product name', 'wp-product-review' ),
+						'placeholder' => __( 'Product name', 'cwppos' ),
 					) );
 					?>
 				</li>
 				<li>
-					<label for="wppr-editor-product-image"><?php _e( 'Product Image', 'wp-product-review' ); ?></label>
+					<label for="wppr-editor-product-image"><?php _e( 'Product Image', 'cwppos' ); ?></label>
 					<?php
 					echo $html_helper->image( array(
 						'name'   => 'wppr-editor-image',
 						'value'  => $review->get_image(),
-						'action' => __( 'Choose or Upload an Image', 'wp-product-review' ),
+						'action' => __( 'Choose or Upload an Image', 'cwppos' ),
 					) )
 					?>
 					<small>
-						*<?php _e( 'If no image is provided, featured image is used', 'wp-product-review' ); ?></small>
+						*<?php _e( 'If no image is provided, featured image is used', 'cwppos' ); ?></small>
 				</li>
 				<li>
-							<span><?php _e( 'Product Image Click', 'wp-product-review' ); ?>
+							<span><?php _e( 'Product Image Click', 'cwppos' ); ?>
 								: </span>
 					<?php
 					echo $html_helper->radio( array(
@@ -79,7 +79,7 @@ $check  = $review->is_active() ? 'yes' : 'no';
 						'current' => $model->get_value( 'wppr-editor-link' ),
 					) );
 					?>
-					<label for="wppr-editor-link-show"><?php _e( 'Show Whole Image', 'wp-product-review' ); ?></label>
+					<label for="wppr-editor-link-show"><?php _e( 'Show Whole Image', 'cwppos' ); ?></label>
 					<?php
 					echo $html_helper->radio( array(
 						'name'    => 'wppr-editor-link',
@@ -89,55 +89,55 @@ $check  = $review->is_active() ? 'yes' : 'no';
 						'current' => $model->get_value( 'wppr-editor-link' ),
 					) );
 					?>
-					<label for="wppr-editor-link-open"><?php _e( 'Open Affiliate link', 'wp-product-review' ); ?> </label>
+					<label for="wppr-editor-link-open"><?php _e( 'Open Affiliate link', 'cwppos' ); ?> </label>
 
 				</li>
 				<?php
 				$links = $review->get_links();
 				?>
 				<li>
-					<label for="wppr-editor-button-text"><?php _e( 'Affiliate Button Text', 'wp-product-review' ); ?> </label>
+					<label for="wppr-editor-button-text"><?php _e( 'Affiliate Button Text', 'cwppos' ); ?> </label>
 					<?php
 					echo $html_helper->text( array(
 						'name'        => 'wppr-editor-button-text',
 						'value'       => $model->get_value( 'wppr-editor-button-text' ),
-						'placeholder' => __( 'Affiliate Button Text', 'wp-product-review' ),
+						'placeholder' => __( 'Affiliate Button Text', 'cwppos' ),
 					) );
 					?>
 				</li>
 				<li>
-					<label for="wppr-editor-button-link"><?php _e( 'Affiliate Link', 'wp-product-review' ); ?> </label>
+					<label for="wppr-editor-button-link"><?php _e( 'Affiliate Link', 'cwppos' ); ?> </label>
 					<?php
 					echo $html_helper->text( array(
 						'name'        => 'wppr-editor-button-link',
 						'value'       => $model->get_value( 'wppr-editor-button-link' ),
-						'placeholder' => __( 'Affiliate Link', 'wp-product-review' ),
+						'placeholder' => __( 'Affiliate Link', 'cwppos' ),
 					) );
 					?>
 					<?php if ( count( $links ) < 2 ) : ?>
 						<a id="wppr-editor-new-link"
-						   title="<?php _e( 'Add new link', 'wp-product-review' ); ?>">+
+						   title="<?php _e( 'Add new link', 'cwppos' ); ?>">+
 						</a>
 					<?php endif; ?>
 				</li>
 				<?php if ( count( $links ) < 2 ) { ?>
 					<li class="hidden_fields" style="display: none;">
-						<label for="wppr-editor-button-text"><?php _e( 'Affiliate Button Text', 'wp-product-review' ); ?> </label>
+						<label for="wppr-editor-button-text"><?php _e( 'Affiliate Button Text', 'cwppos' ); ?> </label>
 						<?php
 						echo $html_helper->text( array(
 							'name'        => 'wppr-editor-button-text-2',
 							'value'       => $model->get_value( 'wppr-editor-button-text-2' ),
-							'placeholder' => __( 'Affiliate Button Text', 'wp-product-review' ),
+							'placeholder' => __( 'Affiliate Button Text', 'cwppos' ),
 						) );
 						?>
 					</li>
 					<li class="hidden_fields" style="display: none;">
-						<label for="wppr-editor-button-link"><?php _e( 'Affiliate Link', 'wp-product-review' ); ?> </label>
+						<label for="wppr-editor-button-link"><?php _e( 'Affiliate Link', 'cwppos' ); ?> </label>
 						<?php
 						echo $html_helper->text( array(
 							'name'        => 'wppr-editor-button-link-2',
 							'value'       => $model->get_value( 'wppr-editor-button-link-2' ),
-							'placeholder' => __( 'Affiliate Link', 'wp-product-review' ),
+							'placeholder' => __( 'Affiliate Link', 'cwppos' ),
 						) );
 						?>
 					</li>
@@ -151,22 +151,22 @@ $check  = $review->is_active() ? 'yes' : 'no';
 							if ( $i > 1 ) {
 								?>
 								<li>
-									<label for="wppr-editor-button-text-<?php $i; ?>"><?php echo __( 'Affiliate Button Text', 'wp-product-review' ) . ' ' . $i; ?> </label>
+									<label for="wppr-editor-button-text-<?php $i; ?>"><?php echo __( 'Affiliate Button Text', 'cwppos' ) . ' ' . $i; ?> </label>
 									<?php
 									echo $html_helper->text( array(
 										'name'        => 'wppr-editor-button-text-' . $i,
 										'value'       => $text,
-										'placeholder' => __( 'Affiliate Button Text', 'wp-product-review' ) . ' ' . $i,
+										'placeholder' => __( 'Affiliate Button Text', 'cwppos' ) . ' ' . $i,
 									) );
 									?>
 								</li>
 								<li>
-									<label for="wppr-editor-button-link-<?php $i; ?>"><?php echo __( 'Affiliate Link', 'wp-product-review' ) . ' ' . $i; ?> </label>
+									<label for="wppr-editor-button-link-<?php $i; ?>"><?php echo __( 'Affiliate Link', 'cwppos' ) . ' ' . $i; ?> </label>
 									<?php
 									echo $html_helper->text( array(
 										'name'        => 'wppr-editor-button-link-' . $i,
 										'value'       => $url,
-										'placeholder' => __( 'Affiliate Link', 'wp-product-review' ) . ' ' . $i,
+										'placeholder' => __( 'Affiliate Link', 'cwppos' ) . ' ' . $i,
 									) );
 									?>
 								</li>
@@ -179,12 +179,12 @@ $check  = $review->is_active() ? 'yes' : 'no';
 				?>
 
 				<li>
-					<label for="wppr-editor-price"><?php _e( 'Product Price', 'wp-product-review' ); ?> </label>
+					<label for="wppr-editor-price"><?php _e( 'Product Price', 'cwppos' ); ?> </label>
 					<?php
 					echo $html_helper->text( array(
 						'name'        => 'wppr-editor-price',
 						'value'       => $review->get_price(),
-						'placeholder' => __( 'Product Price', 'wp-product-review' ),
+						'placeholder' => __( 'Product Price', 'cwppos' ),
 					) );
 					?>
 				</li>
@@ -194,8 +194,8 @@ $check  = $review->is_active() ? 'yes' : 'no';
 		<?php do_action( 'wppr_editor_details_after', $model->post ); ?>
 	</div><!-- end .review-settings-notice -->
 	<div class="wppr-review-options wppr-review-section">
-		<h4><?php _e( 'Product Options', 'wp-product-review' ); ?></h4>
-		<p><?php _e( 'Insert your options and their grades. Grading must be done from 0 to 100.', 'wp-product-review' ); ?></p>
+		<h4><?php _e( 'Product Options', 'cwppos' ); ?></h4>
+		<p><?php _e( 'Insert your options and their grades. Grading must be done from 0 to 100.', 'cwppos' ); ?></p>
 		<div class="cwpr_clearfix">
 		<?php
 		if ( $model->wppr_get_option( 'cwppos_show_poweredby' ) === 'yes' || class_exists( 'WPPR_Pro' ) || function_exists( 'wppr_ep_js_preloader' ) ) { ?>
@@ -219,14 +219,14 @@ $check  = $review->is_active() ? 'yes' : 'no';
 							'name'        => 'wppr-editor-options-name[]',
 							'id'          => 'wppr-editor-options-name-' . $i,
 							'value'       => $model->get_value( 'wppr-option-name-' . $i ),
-							'placeholder' => __( 'Option', 'wp-product-review' ) . ' ' . $i,
+							'placeholder' => __( 'Option', 'cwppos' ) . ' ' . $i,
 						) );
 						echo $html_helper->text( array(
 							'name'        => 'wppr-editor-options-value[]',
 							'id'          => 'wppr-editor-options-value-' . $i,
 							'class'       => 'wppr-text wppr-option-number',
 							'value'       => $model->get_value( 'wppr-option-value-' . $i ),
-							'placeholder' => __( 'Grade', 'wp-product-review' ),
+							'placeholder' => __( 'Grade', 'cwppos' ),
 						) );
 						?>
 					</li>
@@ -239,8 +239,8 @@ $check  = $review->is_active() ? 'yes' : 'no';
 
 	</div>
 	<div class="wppr-review-pros  wppr-review-section">
-		<h4><?php _e( 'Pro Features', 'wp-product-review' ); ?></h4>
-		<p><?php _e( 'Insert product\'s pro features below.', 'wp-product-review' ); ?></p>
+		<h4><?php _e( 'Pro Features', 'cwppos' ); ?></h4>
+		<p><?php _e( 'Insert product\'s pro features below.', 'cwppos' ); ?></p>
 
 		<?php do_action( 'wppr_editor_pros_before', $model->post ); ?>
 		<div class="wppr-review-fieldset wppr-review-pros-fields">
@@ -257,7 +257,7 @@ $check  = $review->is_active() ? 'yes' : 'no';
 							'name'        => 'wppr-editor-pros[]',
 							'id'          => 'wppr-editor-pros-' . $i,
 							'value'       => isset( $pros[ $i - 1 ] ) ? $pros[ $i - 1 ] : '',
-							'placeholder' => __( 'Option', 'wp-product-review' ) . ' ' . $i,
+							'placeholder' => __( 'Option', 'cwppos' ) . ' ' . $i,
 						) );
 						?>
 					</li>
@@ -269,8 +269,8 @@ $check  = $review->is_active() ? 'yes' : 'no';
 		<?php do_action( 'wppr_editor_pros_after', $model->post ); ?>
 	</div>
 	<div class="wppr-review-cons  wppr-review-section">
-		<h4><?php _e( 'Cons Features', 'wp-product-review' ); ?></h4>
-		<p><?php _e( 'Insert product\'s cons features below.', 'wp-product-review' ); ?></p>
+		<h4><?php _e( 'Cons Features', 'cwppos' ); ?></h4>
+		<p><?php _e( 'Insert product\'s cons features below.', 'cwppos' ); ?></p>
 		<?php do_action( 'wppr_editor_cons_before', $model->post ); ?>
 		<div class="wppr-review-fieldset wppr-review-cons-fields">
 			<ul class="wppr-review-options-list clear">
@@ -286,7 +286,7 @@ $check  = $review->is_active() ? 'yes' : 'no';
 							'name'        => 'wppr-editor-cons[]',
 							'id'          => 'wppr-editor-cons-' . $i,
 							'value'       => isset( $cons[ $i - 1 ] ) ? $cons[ $i - 1 ] : '',
-							'placeholder' => __( 'Option', 'wp-product-review' ) . ' ' . $i,
+							'placeholder' => __( 'Option', 'cwppos' ) . ' ' . $i,
 						) );
 						?>
 					</li>

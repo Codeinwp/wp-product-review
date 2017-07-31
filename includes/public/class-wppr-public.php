@@ -294,6 +294,9 @@ class Wppr_Public {
                     include_once( WPPR_PATH . '/includes/public/layouts/default-tpl.php' );
                 }
             }
+
+            include_once ( WPPR_PATH . '/includes/public/layouts/rich-json-ld.php' );
+
 			$review_position_before_content = $options_model->wppr_get_option( 'cwppos_show_reviewbox' );
 			if ( $review_position_before_content == 'yes' ) {
 			    $content = $output . $content;

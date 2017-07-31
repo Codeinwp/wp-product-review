@@ -118,12 +118,12 @@ class WPPR_Admin {
 	 * @access  public
 	 */
 	public function menu_pages() {
-		add_menu_page( __( 'WP Product Review', 'wp-product-review' ), __( 'Product Review', 'wp-product-review' ), 'manage_options', 'wppr', array(
+		add_menu_page( __( 'WP Product Review', 'cwppos' ), __( 'Product Review', 'cwppos' ), 'manage_options', 'wppr', array(
 			$this,
 			'page_settings',
 		), 'dashicons-star-half', '99.87414' );
 		if ( ! defined( 'WPPR_PRO_VERSION' ) ) {
-			add_submenu_page( 'wppr', __( 'More Features', 'wp-product-review' ), __( 'More Features ', 'wp-product-review' ) . '<span class="dashicons
+			add_submenu_page( 'wppr', __( 'More Features', 'cwppos' ), __( 'More Features ', 'cwppos' ) . '<span class="dashicons
 		dashicons-star-filled" style="vertical-align:-5px; padding-left:2px; color:#FFCA54;"></span>', 'manage_options', 'wppr_pro_upsell', array(
 				$this,
 				'page_upsell',

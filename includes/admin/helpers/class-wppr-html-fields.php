@@ -114,7 +114,7 @@ class WPPR_Html_Fields {
 	public function image( $args ) {
 		$defaults = $this->define_defaults( array(
 			'class' => 'wppr-image',
-			'action' => __( 'Choose image', 'wp-product-review' ),
+			'action' => __( 'Choose image', 'cwppos' ),
 		) );
 		$args     = wp_parse_args( $args, $defaults );
 		$class    = $this->validate_class( $args['class'] );
