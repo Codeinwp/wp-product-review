@@ -53,7 +53,7 @@ class WPPR_Editor {
 	 * @access  public
 	 */
 	public function set_editor() {
-		add_meta_box( 'wppr_editor_metabox', __( 'Product Review Extra Settings', 'cwppos' ), array(
+		add_meta_box( 'wppr_editor_metabox', __( 'Product Review Extra Settings', 'wp-product-review' ), array(
 			$this,
 			'render_metabox',
 		) );

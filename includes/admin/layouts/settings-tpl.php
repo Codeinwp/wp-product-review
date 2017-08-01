@@ -55,9 +55,9 @@ $fields = $global_settings->get_fields();
 
 		<div id="info_bar">
 			<span class="spinner" ></span>
-			<button  type="button" class="button-primary cwp_save"><?php _e( 'Save All Changes','cwppos' ); ?></button>
+			<button  type="button" class="button-primary cwp_save"><?php _e( 'Save All Changes','wp-product-review' ); ?></button>
 			<span class="spinner spinner-reset" ></span>
-			<button   type="button" class="button submit-button reset-button cwp_reset"><?php _e( 'Options Reset','cwppos' ); ?></button>
+			<button   type="button" class="button submit-button reset-button cwp_reset"><?php _e( 'Options Reset','wp-product-review' ); ?></button>
 		</div><!--.info_bar-->
 	</form>
 	<?php do_action( 'wppr_admin_page_after' ); ?>

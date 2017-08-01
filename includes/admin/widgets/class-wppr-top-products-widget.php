@@ -23,9 +23,9 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 	public function __construct() {
 		parent::__construct(
 			'cwp_top_products_widget',
-			__( 'CWP Top Products Widget', 'cwppos' ),
+			__( 'CWP Top Products Widget', 'wp-product-review' ),
 			array(
-				'description' => __( 'This widget displays the top products based on their rating.', 'cwppos' ),
+				'description' => __( 'This widget displays the top products based on their rating.', 'wp-product-review' ),
 			)
 		);
 	}
@@ -127,7 +127,7 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 		$this->adminAssets();
 
 		$instance = parent::form( $instance );
-		$instance['title'] = __( 'Top Products', 'cwppos' );
+		$instance['title'] = __( 'Top Products', 'wp-product-review' );
 
 		include( WPPR_PATH . '/includes/admin/layouts/widget-admin-tpl.php' );
 	}

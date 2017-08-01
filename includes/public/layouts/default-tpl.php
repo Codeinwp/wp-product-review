@@ -93,7 +93,7 @@ if ( isset( $review['options'] ) && ! empty( $review['options'] ) ) {
             <div class="pros">
             <h2>' .
                 // @codingStandardsIgnoreStart
-                apply_filters( 'wppr_review_pros_text', __( $options_model->wppr_get_option( 'cwppos_pros_text' ), 'cwppos' ) )
+                apply_filters( 'wppr_review_pros_text', __( $options_model->wppr_get_option( 'cwppos_pros_text' ), 'wp-product-review' ) )
                 // @codingStandardsIgnoreEnd
 				. '</h2>
             <ul>';
@@ -108,7 +108,7 @@ if ( isset( $review['pros'] ) && ! empty( $review['pros'] ) ) {
             <div class="cons">
             <h2>' .
                     // @codingStandardsIgnoreStart
-                    apply_filters( 'wppr_review_cons_text', __( $options_model->wppr_get_option( 'cwppos_cons_text' ), 'cwppos' ) )
+                    apply_filters( 'wppr_review_cons_text', __( $options_model->wppr_get_option( 'cwppos_cons_text' ), 'wp-product-review' ) )
                     // @codingStandardsIgnoreEnd
 					. '</h2>
             <ul>';

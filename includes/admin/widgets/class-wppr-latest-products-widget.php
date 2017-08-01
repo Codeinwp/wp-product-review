@@ -23,9 +23,9 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 	public function __construct() {
 		parent::__construct(
 			'wppr_latest_products_widget',
-			__( 'CWP Latest Products Widget', 'cwppos' ),
+			__( 'CWP Latest Products Widget', 'wp-product-review' ),
 			array(
-				'description' => __( 'This widget displays the latest products based on their rating.', 'cwppos' ),
+				'description' => __( 'This widget displays the latest products based on their rating.', 'wp-product-review' ),
 			)
 		);
 	}
@@ -115,7 +115,7 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 		$this->adminAssets();
 
 		$instance = parent::form( $instance );
-		$instance['title'] = __( 'Latest Products', 'cwppos' );
+		$instance['title'] = __( 'Latest Products', 'wp-product-review' );
 
 		include( WPPR_PATH . '/includes/admin/layouts/widget-admin-tpl.php' );
 	}

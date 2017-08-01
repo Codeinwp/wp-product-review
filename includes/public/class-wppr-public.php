@@ -286,16 +286,16 @@ class Wppr_Public {
 			$output = '';
 			$visual = 'full';
 
-			if( $visual == 'full' ) {
-                $theme_template = get_template_directory() . '/wppr/default.php';
-                if ( file_exists( $theme_template ) ) {
-                    include_once( $theme_template );
-                } else {
-                    include_once( WPPR_PATH . '/includes/public/layouts/default-tpl.php' );
-                }
-            }
+			if ( $visual == 'full' ) {
+				$theme_template = get_template_directory() . '/wppr/default.php';
+				if ( file_exists( $theme_template ) ) {
+					include_once( $theme_template );
+				} else {
+					include_once( WPPR_PATH . '/includes/public/layouts/default-tpl.php' );
+				}
+			}
 
-            include_once ( WPPR_PATH . '/includes/public/layouts/rich-json-ld.php' );
+			include_once( WPPR_PATH . '/includes/public/layouts/rich-json-ld.php' );
 
 			$review_position_before_content = $options_model->wppr_get_option( 'cwppos_show_reviewbox' );
 			if ( $review_position_before_content == 'yes' ) {

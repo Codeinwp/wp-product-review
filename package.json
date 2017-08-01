@@ -9,7 +9,7 @@
   "keywords": [
     "wordpress-plugin"
   ],
-  "textdomain": "cwppos",
+  "textdomain": "wp-product-review",
   "author": "ThemeIsle <friends@themeisle.com>",
   "license": "GPL-2.0+",
   "bugs": {

@@ -50,8 +50,8 @@ class WPPR_Widget_Abstract extends WP_Widget {
 		}
         // @codingStandardsIgnoreStart
 		if ( $instance['cwp_tp_category'] == 'All' ) { $instance['cwp_tp_category'] = ''; }
-		if ( ! isset( $instance['cwp_tp_buynow'] ) ) { $instance['cwp_tp_buynow'] = __( 'Buy Now', 'cwppos' ); }
-		if ( ! isset( $instance['cwp_tp_readreview'] ) ) { $instance['cwp_tp_readreview'] = __( 'Read Review', 'cwppos' ); }
+		if ( ! isset( $instance['cwp_tp_buynow'] ) ) { $instance['cwp_tp_buynow'] = __( 'Buy Now', 'wp-product-review' ); }
+		if ( ! isset( $instance['cwp_tp_readreview'] ) ) { $instance['cwp_tp_readreview'] = __( 'Read Review', 'wp-product-review' ); }
 		if ( ! isset( $instance['cwp_tp_layout'] ) ) { $instance['cwp_tp_layout'] = 'default.php'; }
 		if ( ! isset( $instance['cwp_tp_rating_type'] ) ) { $instance['cwp_tp_rating_type']   = 'round'; }
         // @codingStandardsIgnoreEnd
@@ -69,11 +69,11 @@ class WPPR_Widget_Abstract extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		if ( ! isset( $instance['title'] ) ) {
-			$instance['title'] = __( 'Latest Products', 'cwppos' );
+			$instance['title'] = __( 'Latest Products', 'wp-product-review' );
 		}
 
 		if ( ! isset( $instance['no_items'] ) ) {
-			$instance['no_items'] = __( '10', 'cwppos' );
+			$instance['no_items'] = __( '10', 'wp-product-review' );
 		}
 
 		if ( ! isset( $instance['cwp_tp_category'] ) ) {
@@ -89,11 +89,11 @@ class WPPR_Widget_Abstract extends WP_Widget {
 		}
 
 		if ( ! isset( $instance['cwp_tp_buynow'] ) ) {
-			$instance['cwp_tp_buynow'] = __( 'Buy Now', 'cwppos' );
+			$instance['cwp_tp_buynow'] = __( 'Buy Now', 'wp-product-review' );
 		}
 
 		if ( ! isset( $instance['cwp_tp_readreview'] ) ) {
-			$instance['cwp_tp_readreview'] = __( 'Read Review', 'cwppos' );
+			$instance['cwp_tp_readreview'] = __( 'Read Review', 'wp-product-review' );
 		}
 
 		if ( ! isset( $instance['cwp_tp_layout'] ) ) {
