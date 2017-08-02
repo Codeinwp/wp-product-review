@@ -317,7 +317,7 @@ class Wppr_Public {
 
             $options_model->wppr_get_option( 'cwppos_rating_default' );
 
-            if ( function_exists( 'wppr_ci_custom_bar_icon' ) || $options_model->wppr_get_option( 'cwppos_show_poweredby' ) == 'yes' ) {
+            if ( class_exists( 'WPPR_Pro' ) ) {
                 $isSetToPro = true;
             } else {
                 $isSetToPro = false;
@@ -328,6 +328,7 @@ class Wppr_Public {
 
         $uni_font = $options_model->wppr_get_option( 'cwppos_change_bar_icon' );
         $track    = $options_model->wppr_get_option( 'cwppos_rating_chart_default' );
+
         // if ($uni_font!=="&#")
         if ( isset( $uni_font[0] ) ) {
             if ( $uni_font[0] == '#' ) {
@@ -338,8 +339,9 @@ class Wppr_Public {
         } else {
             $uni_font = '';
         }
+
         if ( ! empty( $uni_font ) ) {
-            if ( function_exists( 'wppr_ci_custom_bar_icon' ) || $options_model->wppr_get_option( 'cwppos_show_poweredby' ) == 'yes' ) {
+            if ( $isSetToPro ) {
                 if ( $options_model->wppr_get_option( 'cwppos_fontawesome' ) === 'no' ) {
                     wp_enqueue_style( 'cwp-pac-fontawesome-stylesheet', WPPR_URL . '/assets/css/font-awesome.min.css' );
                 }
