@@ -196,7 +196,14 @@ class WPPR_Html_Fields {
 
         var_dump( $args );
 
-         $output = '';
+         $output = '
+         <button id="cwp_select_bar_icon">Select Bar Icon</button>
+         <input type="hidden" id="cwp_bar_icon_field" name="' . esc_attr( $args['name'] ) . '" value="' . esc_attr( $args['value'][0] ) . '">
+         <span class="current_bar_icon">
+            <i class="fa fa-fw"></i>
+            <a href="#" class="useDefault">Use Default Styling</a>
+         </span>
+         ';
 
 //        $defaults = $this->define_defaults( array(
 //            'class' => 'wppr-color',
