@@ -199,14 +199,54 @@ class WPPR_Html_Fields {
         $args     = wp_parse_args( $args, $defaults );
 
         var_dump( $args );
+        if( trim( $args['value'] ) != '' ) {
+            $active_icon = '
+            <i class="fa fa-fw">&' . $args['value'] . '</i>
+            <a href="#" class="useDefault">' . __( '. Use Default Styling', 'wp-product-review' ) . ' </a>
+            ';
+        } else {
+            $active_icon = __( '* Currently set to the default styling', 'wp-product-review' );
+        }
         $output = '
             <button id="cwp_select_bar_icon">Select Bar Icon</button>
             <input type="hidden" id="cwp_bar_icon_field" name="' . esc_attr( $args['name'] ) . '" value="' . esc_attr( $args['value'] ) . '">
             <span class="current_bar_icon">
-                <i class="fa fa-fw"></i>
-                <a href="#" class="useDefault">Use Default Styling</a>
+                ' . $active_icon . '
             </span>
         ';
+
+        if( ! class_exists( 'WPPR_PRO' ) ) {
+            $output = '<span style="color:red;">' . __( 'You need the PRO <a style="color:red;" href="http://bit.ly/2bhylar" target="_blank" >add-on</a> in order to change the review icons.','cwppos' ) . '</span>';
+        }
+
+//        if ( cwppos( 'cwppos_show_poweredby' ) == 'yes' || function_exists( 'wppr_ci_custom_bar_icon' ) ) {
+//
+//            wp_enqueue_script( 'cwp-custom-bar-icon', WPPR_URL . '/admin/layout/js/custom-bar-icon.js', false, WPPR_LITE_VERSION, 'all' );
+//            if ( cwppos( 'cwppos_fontawesome' ) === 'no' ) {
+//                wp_enqueue_style( 'font-awesome-cdn', '//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css' );
+//            }
+//
+//            $html .= "<button id='cwp_select_bar_icon'>Select Bar Icon</button>";
+//            $html .= "<input type='hidden' id='cwp_bar_icon_field' name='" . cwppos_config( 'menu_slug' ) . '[' . $id . "][]' value='";
+//            if ( isset( $this->options[ $id ] ) ) {
+//                $html .= (isset( $this->options[ $id ][0] )) ? $this->options[ $id ][0] : $this->options[ $id ];
+//            }
+//
+//            $html .= "'/> <span class='current_bar_icon'>";
+//            if ( ! empty( $this->options[ $id ][0] ) ) {
+//                // var_dump($this->options[$id][0]);
+//                if ( $this->options[ $id ][0] === '#' ) {
+//
+//                    $code = $this->options[ $id ];
+//                } else { 				$code = $this->options[ $id ][0]; }
+//
+//                $html .= "<i class='fa fa-fw'>&" . $code . "</i> <a href='#' class='useDefault'>Use Default Styling</a>";
+//            } else {
+//                $html .= '* Currently set to the default styling</span>';
+//            }
+//        } else {
+//            $html .= '<span style="color:red;">' . __( 'You need the PRO <a style="color:red;" href="http://bit.ly/2bhylar" target="_blank" >add-on</a> in order to change the review icons.','cwppos' ) . '</span>';
+//        }
 
 //        $defaults = $this->define_defaults( array(
 //            'class' => 'wppr-color',
