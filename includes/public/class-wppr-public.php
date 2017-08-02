@@ -184,6 +184,8 @@ class Wppr_Public {
                 ';
 			}
 
+			var_dump( $options_model->wppr_get_option( 'cwppos_rating_default' )  );
+
 			$style = '
                 <style type="text/css">
                     @media (min-width: 820px) {
@@ -289,9 +291,9 @@ class Wppr_Public {
 			if ( $visual == 'full' ) {
 				$theme_template = get_template_directory() . '/wppr/default.php';
 				if ( file_exists( $theme_template ) ) {
-					include_once( $theme_template );
+					include( $theme_template );
 				} else {
-					include_once( WPPR_PATH . '/includes/public/layouts/default-tpl.php' );
+					include( WPPR_PATH . '/includes/public/layouts/default-tpl.php' );
 				}
 			}
 

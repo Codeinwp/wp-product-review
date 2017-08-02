@@ -57,13 +57,6 @@ $output = '
             </div><!-- end .rev-wu-image -->
             <div class="review-wu-grade">
                 <div class="cwp-review-chart ' . $extra_class . '">
-                    <!--
-                    <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" class="cwp-review-percentage" data-percent="' . $review['image']['full'] . '">
-                        <span itemprop="ratingValue" class="cwp-review-rating">' . $review['comment_rating'] . '</span>
-                        <meta itemprop="bestRating" content = "10"/>
-                        <meta itemprop="ratingCount" content="' . $review['id'] . '"/>
-                    </div>
-                    -->
                     <span>
                         <div class="cwp-review-percentage" data-percent="' . $review['rating'] . '">
                             <span class="cwp-review-rating">' . $review['rating'] . '</span>

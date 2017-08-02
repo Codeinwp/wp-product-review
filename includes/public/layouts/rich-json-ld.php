@@ -12,7 +12,6 @@
 if ( $this->review->wppr_get_option( 'wppr_rich_snippet' ) == 'yes' ) {
     $review = $this->review->get_review_data();
     $currency = preg_replace( '/[0-9.,]/', '', $review['price'] );
-
     $output .= '
     <script type="application/ld+json">
     {
@@ -20,7 +19,7 @@ if ( $this->review->wppr_get_option( 'wppr_rich_snippet' ) == 'yes' ) {
       "@type": "Product",
       "name": "' . $review['name'] . '",
       "image": "' . $review['image']['thumb'] . '",
-      "description": "' . get_the_excerpt( $review['ID'] ) . '",
+      "description": "' . get_the_excerpt( $review['id'] ) . '",
       "aggregateRating": {
         "@type": "AggregateRating",
         "bestRating": "10",
