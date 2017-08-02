@@ -22,7 +22,7 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 	 */
 	public function __construct() {
 		parent::__construct(
-			'wppr_latest_products_widget',
+			'cwp_latest_products_widget',
 			__( 'CWP Latest Products Widget', 'wp-product-review' ),
 			array(
 				'description' => __( 'This widget displays the latest products based on their rating.', 'wp-product-review' ),

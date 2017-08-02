@@ -341,7 +341,7 @@ class Wppr_Public {
         if ( ! empty( $uni_font ) ) {
             if ( function_exists( 'wppr_ci_custom_bar_icon' ) || $options_model->wppr_get_option( 'cwppos_show_poweredby' ) == 'yes' ) {
                 if ( $options_model->wppr_get_option( 'cwppos_fontawesome' ) === 'no' ) {
-                    wp_enqueue_style( 'cwp-pac-fontawesome-stylesheet', WPPR_URL . '/css/font-awesome.min.css' );
+                    wp_enqueue_style( 'cwp-pac-fontawesome-stylesheet', WPPR_URL . '/assets/css/font-awesome.min.css' );
                 }
             }
         }

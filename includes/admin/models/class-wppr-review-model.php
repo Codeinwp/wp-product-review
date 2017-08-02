@@ -767,7 +767,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			}
 
 			if ( count( $options ) != 0 ) {
-				return ( array_sum( wp_list_pluck( $options, 'values' ) ) / count( $options ) );
+			    //die( var_dump( $options ) );
+				return ( array_sum( wp_list_pluck( $options, 'value' ) ) / count( $options ) );
 			} else {
 				return 0;
 			}
@@ -791,12 +792,12 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			$options_names = wp_list_pluck( $this->options, 'name' );
 			foreach ( $options_names as $k => $name ) {
 				$value = get_comment_meta( $comment_id, 'meta_option_' . $k, true );
-				if ( ! empty( $value ) ) {
+				if ( ! isset( $value ) && trim( $value ) != 0 ) {
 					$value = 0;
 				}
 				$options[] = array(
 					'name'  => $name,
-					'value' => $value,
+					'value' => number_format( (float) $value, 2 ),
 				);
 			}
 		}
