@@ -183,4 +183,32 @@ class WPPR_Html_Fields {
 
 		return apply_filters( 'wppr_field', $output, $args );
 	}
+
+    /**
+     * Render a Icon font picker.
+     *
+     * @since   3.0.0
+     * @access  public
+     * @param   array $args The settings of the input.
+     * @return mixed
+     */
+    public function icon_font( $args ) {
+
+        var_dump( $args );
+
+         $output = '';
+
+//        $defaults = $this->define_defaults( array(
+//            'class' => 'wppr-color',
+//        ) );
+//        $args     = wp_parse_args( $args, $defaults );
+//        $class    = $this->validate_class( $args['class'] );
+//        if ( $args['value'] == null ) {
+//            $args['value'] = $args['default'];
+//        }
+//        $output = '<input type="hidden" class="' . $class . '" id="' . esc_attr( $args['id'] ) . '_color" name="' . esc_attr( $args['name'] ) . '" value="' . esc_attr( $args['value'] ) . '"/></br>
+//				   <input type="text" name="" class="subo-color-picker" id="' . esc_attr( $args['id'] ) . '_color_selector" value="' . esc_attr( $args['value'] ) . '" /><br/>';
+
+        return apply_filters( 'wppr_field', $output, $args );
+    }
 }
