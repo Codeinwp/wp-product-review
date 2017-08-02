@@ -209,6 +209,7 @@ $check  = $review->is_active() ? 'yes' : 'no';
 		<div class="wppr-review-fieldset wppr-review-options-fields">
 			<ul class="wppr-review-options-list clear">
 				<?php
+
 				$options_nr = $model->wppr_get_option( 'cwppos_option_nr' );
 				for ( $i = 1; $i <= $options_nr; $i ++ ) {
 					?>

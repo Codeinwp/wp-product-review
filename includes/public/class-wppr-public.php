@@ -309,4 +309,47 @@ class Wppr_Public {
 		return $content;
 	}
 
+
+    public function default_settings() {
+        if ( $this->review->is_active() ) {
+
+            $options_model = new WPPR_Options_Model();
+
+            $options_model->wppr_get_option( 'cwppos_rating_default' );
+
+            if ( function_exists( 'wppr_ci_custom_bar_icon' ) || $options_model->wppr_get_option( 'cwppos_show_poweredby' ) == 'yes' ) {
+                $isSetToPro = true;
+            } else {
+                $isSetToPro = false;
+            }
+
+        }
+
+
+        $uni_font = $options_model->wppr_get_option( 'cwppos_change_bar_icon' );
+        $track    = $options_model->wppr_get_option( 'cwppos_rating_chart_default' );
+        // if ($uni_font!=="&#")
+        if ( isset( $uni_font[0] ) ) {
+            if ( $uni_font[0] == '#' ) {
+                $uni_font = $uni_font;
+            } else {
+                $uni_font = $uni_font[0];
+            }
+        } else {
+            $uni_font = '';
+        }
+        if ( ! empty( $uni_font ) ) {
+            if ( function_exists( 'wppr_ci_custom_bar_icon' ) || $options_model->wppr_get_option( 'cwppos_show_poweredby' ) == 'yes' ) {
+                if ( $options_model->wppr_get_option( 'cwppos_fontawesome' ) === 'no' ) {
+                    wp_enqueue_style( 'cwp-pac-fontawesome-stylesheet', WPPR_URL . '/css/font-awesome.min.css' );
+                }
+            }
+        }
+        echo "<script type='text/javascript'>
+                    var cwpCustomBarIcon = '" . $uni_font . "';
+                    var isSetToPro = '" . $isSetToPro . "';
+                    var trackcolor = '" . $track . "';
+                </script>";
+    }
+
 }
