@@ -197,11 +197,14 @@ class WPPR_Html_Fields {
             'class' => 'cwp_bar_icon_field',
         ) );
         $args     = wp_parse_args( $args, $defaults );
-
-        var_dump( $args );
-        if( trim( $args['value'] ) != '' ) {
+        if( is_array( $args['value'] ) ) {
+            $value = $args['value'][0];
+        } else {
+            $value = $args['value'];
+        }
+        if( trim( $value ) != '' ) {
             $active_icon = '
-            <i class="fa fa-fw">&' . $args['value'] . '</i>
+            <i class="fa fa-fw">&' . $value . '</i>
             <a href="#" class="useDefault">' . __( '. Use Default Styling', 'wp-product-review' ) . ' </a>
             ';
         } else {
@@ -209,7 +212,7 @@ class WPPR_Html_Fields {
         }
         $output = '
             <button id="cwp_select_bar_icon">Select Bar Icon</button>
-            <input type="hidden" id="cwp_bar_icon_field" name="' . esc_attr( $args['name'] ) . '" value="' . esc_attr( $args['value'] ) . '">
+            <input type="hidden" id="cwp_bar_icon_field" name="' . esc_attr( $args['name'] ) . '" value="' . esc_attr( $value ) . '">
             <span class="current_bar_icon">
                 ' . $active_icon . '
             </span>
@@ -218,46 +221,6 @@ class WPPR_Html_Fields {
         if( ! class_exists( 'WPPR_PRO' ) ) {
             $output = '<span style="color:red;">' . __( 'You need the PRO <a style="color:red;" href="http://bit.ly/2bhylar" target="_blank" >add-on</a> in order to change the review icons.','cwppos' ) . '</span>';
         }
-
-//        if ( cwppos( 'cwppos_show_poweredby' ) == 'yes' || function_exists( 'wppr_ci_custom_bar_icon' ) ) {
-//
-//            wp_enqueue_script( 'cwp-custom-bar-icon', WPPR_URL . '/admin/layout/js/custom-bar-icon.js', false, WPPR_LITE_VERSION, 'all' );
-//            if ( cwppos( 'cwppos_fontawesome' ) === 'no' ) {
-//                wp_enqueue_style( 'font-awesome-cdn', '//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css' );
-//            }
-//
-//            $html .= "<button id='cwp_select_bar_icon'>Select Bar Icon</button>";
-//            $html .= "<input type='hidden' id='cwp_bar_icon_field' name='" . cwppos_config( 'menu_slug' ) . '[' . $id . "][]' value='";
-//            if ( isset( $this->options[ $id ] ) ) {
-//                $html .= (isset( $this->options[ $id ][0] )) ? $this->options[ $id ][0] : $this->options[ $id ];
-//            }
-//
-//            $html .= "'/> <span class='current_bar_icon'>";
-//            if ( ! empty( $this->options[ $id ][0] ) ) {
-//                // var_dump($this->options[$id][0]);
-//                if ( $this->options[ $id ][0] === '#' ) {
-//
-//                    $code = $this->options[ $id ];
-//                } else { 				$code = $this->options[ $id ][0]; }
-//
-//                $html .= "<i class='fa fa-fw'>&" . $code . "</i> <a href='#' class='useDefault'>Use Default Styling</a>";
-//            } else {
-//                $html .= '* Currently set to the default styling</span>';
-//            }
-//        } else {
-//            $html .= '<span style="color:red;">' . __( 'You need the PRO <a style="color:red;" href="http://bit.ly/2bhylar" target="_blank" >add-on</a> in order to change the review icons.','cwppos' ) . '</span>';
-//        }
-
-//        $defaults = $this->define_defaults( array(
-//            'class' => 'wppr-color',
-//        ) );
-//        $args     = wp_parse_args( $args, $defaults );
-//        $class    = $this->validate_class( $args['class'] );
-//        if ( $args['value'] == null ) {
-//            $args['value'] = $args['default'];
-//        }
-//        $output = '<input type="hidden" class="' . $class . '" id="' . esc_attr( $args['id'] ) . '_color" name="' . esc_attr( $args['name'] ) . '" value="' . esc_attr( $args['value'] ) . '"/></br>
-//				   <input type="text" name="" class="subo-color-picker" id="' . esc_attr( $args['id'] ) . '_color_selector" value="' . esc_attr( $args['value'] ) . '" /><br/>';
 
         return apply_filters( 'wppr_field', $output, $args );
     }
