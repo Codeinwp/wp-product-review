@@ -767,7 +767,6 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			}
 
 			if ( count( $options ) != 0 ) {
-			    //die( var_dump( $options ) );
 				return ( array_sum( wp_list_pluck( $options, 'value' ) ) / count( $options ) );
 			} else {
 				return 0;

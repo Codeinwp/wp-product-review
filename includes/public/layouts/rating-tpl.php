@@ -8,6 +8,7 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       3.0.0
  */
+
 $review = $this->review->get_review_data();
 $sub_title_info = '';
 $sub_title_info  = $review['price'];

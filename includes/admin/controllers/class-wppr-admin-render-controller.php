@@ -112,9 +112,9 @@ class WPPR_Admin_Render_Controller {
 			case 'text':
 				$output .= $this->html_helper->text( $field );
 				break;
-            case 'icon_font':
-                $output .= $this->html_helper->icon_font( $field );
-                break;
+			case 'icon_font':
+				$output .= $this->html_helper->icon_font( $field );
+				break;
 		}
 
 		$output .= '</div><hr/>';

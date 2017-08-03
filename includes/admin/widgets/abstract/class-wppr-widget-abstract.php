@@ -43,13 +43,13 @@ class WPPR_Widget_Abstract extends WP_Widget {
 		if ( isset( $instance['title_type'] ) ) {
 		    $instance['post_type'] = apply_filters( 'widget_content', $instance['title_type'] );
 		} else {
-            $instance['post_type'] = false;
-        }
+			$instance['post_type'] = false;
+		}
 		if ( isset( $instance['show_image'] ) ) {
 		    $instance['show_image'] = apply_filters( 'widget_content', $instance['show_image'] );
 		} else {
-            $instance['show_image'] = false;
-        }
+			$instance['show_image'] = false;
+		}
         // @codingStandardsIgnoreStart
 		if ( $instance['cwp_tp_category'] == 'All' ) { $instance['cwp_tp_category'] = ''; }
 		if ( ! isset( $instance['cwp_tp_buynow'] ) ) { $instance['cwp_tp_buynow'] = __( 'Buy Now', 'wp-product-review' ); }

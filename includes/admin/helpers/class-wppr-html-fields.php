@@ -184,33 +184,33 @@ class WPPR_Html_Fields {
 		return apply_filters( 'wppr_field', $output, $args );
 	}
 
-    /**
-     * Render a Icon font picker.
-     *
-     * @since   3.0.0
-     * @access  public
-     * @param   array $args The settings of the input.
-     * @return mixed
-     */
-    public function icon_font( $args ) {
-        $defaults = $this->define_defaults( array(
-            'class' => 'cwp_bar_icon_field',
-        ) );
-        $args     = wp_parse_args( $args, $defaults );
-        if( is_array( $args['value'] ) ) {
-            $value = $args['value'][0];
-        } else {
-            $value = $args['value'];
-        }
-        if( trim( $value ) != '' ) {
-            $active_icon = '
+	/**
+	 * Render a Icon font picker.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @param   array $args The settings of the input.
+	 * @return mixed
+	 */
+	public function icon_font( $args ) {
+		$defaults = $this->define_defaults( array(
+			'class' => 'cwp_bar_icon_field',
+		) );
+		$args     = wp_parse_args( $args, $defaults );
+		if ( is_array( $args['value'] ) ) {
+			$value = $args['value'][0];
+		} else {
+			$value = $args['value'];
+		}
+		if ( trim( $value ) != '' ) {
+			$active_icon = '
             <i class="fa fa-fw">&' . $value . '</i>
             <a href="#" class="useDefault">' . __( '. Use Default Styling', 'wp-product-review' ) . ' </a>
             ';
-        } else {
-            $active_icon = __( '* Currently set to the default styling', 'wp-product-review' );
-        }
-        $output = '
+		} else {
+			$active_icon = __( '* Currently set to the default styling', 'wp-product-review' );
+		}
+		$output = '
             <button id="cwp_select_bar_icon">Select Bar Icon</button>
             <input type="hidden" id="cwp_bar_icon_field" name="' . esc_attr( $args['name'] ) . '" value="' . esc_attr( $value ) . '">
             <span class="current_bar_icon">
@@ -218,10 +218,10 @@ class WPPR_Html_Fields {
             </span>
         ';
 
-        if( ! class_exists( 'WPPR_PRO' ) ) {
-            $output = '<span style="color:red;">' . __( 'You need the PRO <a style="color:red;" href="http://bit.ly/2bhylar" target="_blank" >add-on</a> in order to change the review icons.','cwppos' ) . '</span>';
-        }
+		if ( ! class_exists( 'WPPR_PRO' ) ) {
+			$output = '<span style="color:red;">' . __( 'You need the PRO <a style="color:red;" href="http://bit.ly/2bhylar" target="_blank" >add-on</a> in order to change the review icons.','cwppos' ) . '</span>';
+		}
 
-        return apply_filters( 'wppr_field', $output, $args );
-    }
+		return apply_filters( 'wppr_field', $output, $args );
+	}
 }

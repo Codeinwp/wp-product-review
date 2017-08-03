@@ -184,7 +184,7 @@ class Wppr_Public {
                 ';
 			}
 
-			var_dump( $options_model->wppr_get_option( 'cwppos_rating_default' )  );
+			var_dump( $options_model->wppr_get_option( 'cwppos_rating_default' ) );
 
 			$style = '
                 <style type="text/css">
@@ -309,51 +309,55 @@ class Wppr_Public {
 		return $content;
 	}
 
+	/**
+	 * Sets the default settings for front end display
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 */
+	public function default_settings() {
+		if ( $this->review->is_active() ) {
 
-    public function default_settings() {
-        if ( $this->review->is_active() ) {
+			$options_model = new WPPR_Options_Model();
 
-            $options_model = new WPPR_Options_Model();
+			$options_model->wppr_get_option( 'cwppos_rating_default' );
 
-            $options_model->wppr_get_option( 'cwppos_rating_default' );
+			if ( class_exists( 'WPPR_Pro' ) ) {
+				$isSetToPro = true;
+			} else {
+				$isSetToPro = false;
+			}
 
-            if ( class_exists( 'WPPR_Pro' ) ) {
-                $isSetToPro = true;
-            } else {
-                $isSetToPro = false;
-            }
+			if ( $isSetToPro ) {
+				$uni_font = $options_model->wppr_get_option( 'cwppos_change_bar_icon' );
+			} else {
+				$uni_font = '';
+			}
+			$track    = $options_model->wppr_get_option( 'cwppos_rating_chart_default' );
 
-            if ( $isSetToPro ) {
-                $uni_font = $options_model->wppr_get_option('cwppos_change_bar_icon');
-            } else {
-                $uni_font = '';
-            }
-            $track    = $options_model->wppr_get_option( 'cwppos_rating_chart_default' );
+			if ( isset( $uni_font[0] ) ) {
+				if ( $uni_font[0] == '#' ) {
+					$uni_font = $uni_font;
+				} else {
+					$uni_font = $uni_font[0];
+				}
+			} else {
+				$uni_font = '';
+			}
 
-            // if ($uni_font!=="&#")
-            if ( isset( $uni_font[0] ) ) {
-                if ( $uni_font[0] == '#' ) {
-                    $uni_font = $uni_font;
-                } else {
-                    $uni_font = $uni_font[0];
-                }
-            } else {
-                $uni_font = '';
-            }
-
-            if ( ! empty( $uni_font ) ) {
-                if ( $isSetToPro ) {
-                    if ( $options_model->wppr_get_option( 'cwppos_fontawesome' ) === 'no' ) {
-                        wp_enqueue_style( 'cwp-pac-fontawesome-stylesheet', WPPR_URL . '/assets/css/font-awesome.min.css' );
-                    }
-                }
-            }
-            echo "<script type='text/javascript'>
+			if ( ! empty( $uni_font ) ) {
+				if ( $isSetToPro ) {
+					if ( $options_model->wppr_get_option( 'cwppos_fontawesome' ) === 'no' ) {
+						wp_enqueue_style( 'cwp-pac-fontawesome-stylesheet', WPPR_URL . '/assets/css/font-awesome.min.css' );
+					}
+				}
+			}
+			echo "<script type='text/javascript'>
                     var cwpCustomBarIcon = '" . $uni_font . "';
                     var isSetToPro = '" . $isSetToPro . "';
                     var trackcolor = '" . $track . "';
                 </script>";
-        }
-    }
+		}// End if().
+	}
 
 }
