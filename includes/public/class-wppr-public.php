@@ -337,9 +337,9 @@ class Wppr_Public {
 
 			if ( isset( $uni_font[0] ) ) {
 				if ( $uni_font[0] == '#' ) {
-					$uni_font = $uni_font;
-				} else {
 					$uni_font = $uni_font[0];
+				} else {
+					$uni_font = $uni_font;
 				}
 			} else {
 				$uni_font = '';
