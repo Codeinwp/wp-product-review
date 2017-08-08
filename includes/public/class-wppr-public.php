@@ -334,16 +334,14 @@ class Wppr_Public {
 				$uni_font = '';
 			}
 			$track    = $options_model->wppr_get_option( 'cwppos_rating_chart_default' );
-
-			if ( isset( $uni_font[0] ) ) {
-				if ( $uni_font[0] == '#' ) {
-					$uni_font = $uni_font[0];
-				} else {
-					$uni_font = $uni_font;
-				}
+			if ( is_array( $uni_font ) ) {
+				$uni_font = $uni_font[0];
+			} elseif ( substr( $uni_font, 0, 1 ) == '#' ) {
+				$uni_font = $uni_font;
 			} else {
 				$uni_font = '';
 			}
+			var_dump( $uni_font );
 
 			if ( ! empty( $uni_font ) ) {
 				if ( $isSetToPro ) {
