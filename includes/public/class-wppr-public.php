@@ -80,7 +80,6 @@ class Wppr_Public {
 	 * @access  public
 	 */
 	public function enqueue_styles() {
-
 		/**
 		 * This function is provided for demonstration purposes only.
 		 *
@@ -92,6 +91,7 @@ class Wppr_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+		$this->init();
 		if ( $this->review->is_active() ) {
 			wp_enqueue_style( $this->plugin_name . '-frontpage-stylesheet', WPPR_URL . '/assets/css/frontpage.css', array(), $this->version );
 
@@ -121,6 +121,7 @@ class Wppr_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+        $this->init();
 		if ( $this->review->is_active() ) {
 			wp_enqueue_script( $this->plugin_name . '-pie-chart-js', WPPR_URL . '/assets/js/pie-chart.js', array( 'jquery' ), $this->version, true );
 			wp_enqueue_script( $this->plugin_name . '-frontpage-js', WPPR_URL . '/assets/js/main.js', array( 'jquery', $this->plugin_name . '-pie-chart-js' ), $this->version, true );
@@ -138,6 +139,7 @@ class Wppr_Public {
 	 * @access  public
 	 */
 	public function dynamic_stylesheet() {
+        $this->init();
 		if ( $this->review->is_active() ) {
 
 			$options_model = new WPPR_Options_Model();
@@ -282,7 +284,7 @@ class Wppr_Public {
 	 * @return mixed
 	 */
 	public function display_on_front( $content ) {
-
+        $this->init();
 		if ( $this->review->is_active() ) {
 			$options_model = new WPPR_Options_Model();
 			$output = '';
@@ -316,6 +318,7 @@ class Wppr_Public {
 	 * @access  public
 	 */
 	public function default_settings() {
+        $this->init();
 		if ( $this->review->is_active() ) {
 
 			$options_model = new WPPR_Options_Model();
@@ -341,7 +344,6 @@ class Wppr_Public {
 			} else {
 				$uni_font = '';
 			}
-			var_dump( $uni_font );
 
 			if ( ! empty( $uni_font ) ) {
 				if ( $isSetToPro ) {
