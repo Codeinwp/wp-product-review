@@ -70,7 +70,11 @@ class Wppr_Public {
 	 */
 	public function init() {
 		global $post;
-		$this->review = new WPPR_Review_Model( $post->ID );
+		if ( $post ) {
+			$this->review = new WPPR_Review_Model( $post->ID );
+		} else {
+			$this->review = new WPPR_Review_Model( 0 );
+		}
 	}
 
 	/**
@@ -121,7 +125,7 @@ class Wppr_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-        $this->init();
+		$this->init();
 		if ( $this->review->is_active() ) {
 			wp_enqueue_script( $this->plugin_name . '-pie-chart-js', WPPR_URL . '/assets/js/pie-chart.js', array( 'jquery' ), $this->version, true );
 			wp_enqueue_script( $this->plugin_name . '-frontpage-js', WPPR_URL . '/assets/js/main.js', array( 'jquery', $this->plugin_name . '-pie-chart-js' ), $this->version, true );
@@ -139,7 +143,7 @@ class Wppr_Public {
 	 * @access  public
 	 */
 	public function dynamic_stylesheet() {
-        $this->init();
+		$this->init();
 		if ( $this->review->is_active() ) {
 
 			$options_model = new WPPR_Options_Model();
@@ -284,7 +288,7 @@ class Wppr_Public {
 	 * @return mixed
 	 */
 	public function display_on_front( $content ) {
-        $this->init();
+		$this->init();
 		if ( $this->review->is_active() ) {
 			$options_model = new WPPR_Options_Model();
 			$output = '';
@@ -318,7 +322,7 @@ class Wppr_Public {
 	 * @access  public
 	 */
 	public function default_settings() {
-        $this->init();
+		$this->init();
 		if ( $this->review->is_active() ) {
 
 			$options_model = new WPPR_Options_Model();
