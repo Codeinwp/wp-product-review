@@ -13,11 +13,11 @@ module.exports = {
 	},
 	style: {
 		options: {
-			prefix: 'Version\\:\\s'
+			prefix: 'Version\\:\.*\\s'
 		},
 		src: [
 			'wp-product-review.php',
-			'css/frontpage.css',
+			'assets/css/frontpage.css',
 		]
 	},
 	functions: {
@@ -26,6 +26,14 @@ module.exports = {
 		},
 		src: [
 			'wp-product-review.php',
+		]
+	},
+	class: {
+		options: {
+			prefix: '\\.*version\.*\\s=\.*\\s\''
+		},
+		src: [
+			'includes/class-wppr.php',
 		]
 	}
 };

@@ -10,9 +10,9 @@
  */
 
 if ( $this->review->wppr_get_option( 'wppr_rich_snippet' ) == 'yes' ) {
-    $review = $this->review->get_review_data();
-    $currency = preg_replace( '/[0-9.,]/', '', $review['price'] );
-    $output .= '
+	$review = $this->review->get_review_data();
+	$currency = preg_replace( '/[0-9.,]/', '', $review['price'] );
+	$output .= '
     <script type="application/ld+json">
     {
         "@context": "http://schema.org/",

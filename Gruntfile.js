@@ -1,3 +1,8 @@
+/**
+ * Grunt File
+ *
+ * @package feedzy-rss-feeds
+ */
 /* jshint node:true */
 /* global require */
 module.exports = function (grunt) {

@@ -21,6 +21,9 @@
  * Requires at least: 3.5
  * Tested up to:      4.6
  * Stable tag:        trunk
+ * WordPress Available:  yes
+ * Pro Slug:          wp-product-review-pro
+ * Requires License:    no
  * License:           GPLv2 or later
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       wp-product-review
@@ -71,7 +74,16 @@ function run_wppr() {
 
 	$plugin = new WPPR();
 	$plugin->run();
-
+	$vendor_file = WPPR_PATH . '/vendor/autoload_52.php';
+	if ( is_readable( $vendor_file ) ) {
+		require_once $vendor_file;
+	}
+	add_filter(
+		'themeisle_sdk_products', function ( $products ) {
+			$products[] = __FILE__;
+			return $products;
+		}
+	);
 }
 
 require( 'class-wppr-autoloader.php' );

@@ -1,0 +1,51 @@
+{
+  "name": "codeinwp/wp-product-review",
+  "description": "WP Product Review for WordPress.",
+  "keywords": [
+    "wordpress",
+    "reviews",
+    "amazon"
+  ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/Codeinwp/themeisle-sdk"
+    }
+  ],
+  "homepage": "https://themeisle.com/plugins/wp-product-review/",
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "ThemeIsle Team",
+      "email": "friends@themeisle.com.com",
+      "homepage": "https://themeisle.com"
+    }
+  ],
+  "type": "wordpress-plugin",
+  "support": {
+    "issues": "https://github.com/Codeinwp/wp-product-review/issues",
+    "source": "https://github.com/Codeinwp/wp-product-review"
+  },
+  "require": {
+    "codeinwp/themeisle-sdk": "master",
+    "xrstf/composer-php52": "^1.0.20"
+  },
+  "autoload": {
+    "files": [
+      "vendor/codeinwp/themeisle-sdk/load.php"
+    ]
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "scripts": {
+    "post-install-cmd": [
+      "xrstf\\Composer52\\Generator::onPostInstallCmd"
+    ],
+    "post-update-cmd": [
+      "xrstf\\Composer52\\Generator::onPostInstallCmd"
+    ],
+    "post-autoload-dump": [
+      "xrstf\\Composer52\\Generator::onPostInstallCmd"
+    ]
+  }
+}

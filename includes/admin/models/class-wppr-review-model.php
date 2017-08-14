@@ -128,7 +128,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 * @param mixed $review_id The review id.
 	 */
 	public function __construct( $review_id = false ) {
-	    parent::__construct();
+		parent::__construct();
 
 		if ( $review_id === false ) {
 			$this->logger->error( 'No review id provided.' );
@@ -755,11 +755,13 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			return 0;
 		}
 		$comments_query = new WP_Comment_Query;
-		$comments       = $comments_query->query( array(
-			'fields'  => 'ids',
-			'status'  => 'approve',
-			'post_id' => $this->ID,
-		) );
+		$comments       = $comments_query->query(
+			array(
+				'fields'  => 'ids',
+				'status'  => 'approve',
+				'post_id' => $this->ID,
+			)
+		);
 		if ( $comments ) {
 			$options = array();
 			foreach ( $comments as $comment ) {

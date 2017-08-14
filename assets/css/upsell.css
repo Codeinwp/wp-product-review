@@ -1,7 +1,7 @@
 #wppr-admin .pro-features-header {
-	background: #fff;
-	border-top: 5px solid #252b37;
 	padding: 20px 10px;
+	border-top: 5px solid #252b37;
+	background: #fff;
 }
 
 #wppr-admin .logo {
@@ -53,17 +53,17 @@
 }
 
 #wppr-admin .header-btns .buy-now {
-	background: #e33b3f;
+	display: inline-block;
+	margin-top: 2px;
+	margin-right: 5px;
+	padding: 15px 25px;
 	border-radius: 3px;
 	border-radius: 3px;
 	color: #fff;
-	display: inline-block;
+	background: #e33b3f;
 	font-family: "Open Sans", sans-serif;
 	font-size: 18px;
 	font-weight: bold;
-	margin-right: 5px;
-	margin-top: 2px;
-	padding: 15px 25px;
 	text-decoration: none;
 	text-transform: uppercase;
 	-webkit-transition: all 0.250s ease-in-out;
@@ -79,15 +79,15 @@
 }
 
 #wppr-admin .pro-features-header,
-#wppr-admin .pro-feature{
+#wppr-admin .pro-feature {
+	display: block;
 	background-color: #fff;
 	-webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
 	box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
-	display: block;
 }
 
 #wppr-admin .pro-feature .pro-feature-features,
-#wppr-admin .pro-feature .pro-feature-image{
+#wppr-admin .pro-feature .pro-feature-image {
 	display: table-cell;
 	margin: 0;
 	vertical-align: middle;
@@ -104,36 +104,38 @@
 }
 
 #wppr-admin .pro-feature .pro-feature-features h2 {
-	font-size: 28px;
 	margin: 0 0 20px;
+	font-size: 28px;
 }
 
 #wppr-admin .pro-feature .pro-feature-features h4 {
-	font-size: 20px;
 	margin: 0 0 10px;
+	font-size: 20px;
 }
 
 #wppr-admin .pro-feature .pro-feature-features p {
+	margin: 0 0 15px;
 	font-size: 16px;
 	line-height: 1.5;
-	margin: 0 0 15px;
 }
 
 #wppr-admin .pro-feature .pro-feature-image img {
-	height: auto;
 	width: 100%;
+	height: auto;
 }
 
 @media screen and (max-width: 1200px) {
 	#wppr-admin .pro-feature .pro-feature-features,
-	#wppr-admin .pro-feature .pro-feature-image{
+	#wppr-admin .pro-feature .pro-feature-image {
 		display: block;
 	}
+
 	#wppr-admin .pro-feature .pro-feature-image {
+		width: 470px;
 		margin: 0 auto 20px;
 		text-align: center;
-		width: 470px;
 	}
+
 	#wppr-admin .slogan {
 		display: none;
 	}
@@ -158,14 +160,15 @@
 
 @media screen and (max-width: 782px) {
 	#cwp_form #header .button {
-		font-size: 11px !important;
 		padding: 0 4px 1px !important;
+		font-size: 11px !important;
 	}
 
 	#cwp_form #header .logo h2 {
 		margin: 0 !important;
 		padding: 0 !important;
 	}
+
 	#wppr-admin .pro-feature .pro-feature-image {
 		width: 100%;
 	}

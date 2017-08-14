@@ -119,7 +119,7 @@ if ( isset( $review['cons'] ) && ! empty( $review['cons'] ) ) {
 ';
 if ( ! empty( $review['links'] ) ) {
 	foreach ( $review['links'] as $title => $link ) {
-	    if ( $title != '' && $link != '' ) {
+		if ( $title != '' && $link != '' ) {
 			$output .= '
             <div class="' . $multiple_affiliates_class . '">
                 <a href="' . $link . '" rel="nofollow" target="_blank"><span>' . $title . '</span> </a>

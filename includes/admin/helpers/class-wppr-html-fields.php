@@ -35,9 +35,9 @@ class WPPR_Html_Fields {
 	 * @return array
 	 */
 	private function define_defaults( $specific_defaults ) {
-	    $general_defaults = array(
+		$general_defaults = array(
 			'id'        => null,
-	        'name'      => null,
+			'name'      => null,
 			'value'     => null,
 			'class'     => '',
 			'default'   => '',
@@ -45,7 +45,7 @@ class WPPR_Html_Fields {
 			'disabled'    => false,
 		);
 
-	    return wp_parse_args( $specific_defaults, $general_defaults );
+		return wp_parse_args( $specific_defaults, $general_defaults );
 	}
 
 	/**
@@ -57,9 +57,11 @@ class WPPR_Html_Fields {
 	 * @return string
 	 */
 	public function radio( $args ) {
-		$defaults = $this->define_defaults( array(
-			'class' => 'wppr-radio',
-		) );
+		$defaults = $this->define_defaults(
+			array(
+				'class' => 'wppr-radio',
+			)
+		);
 		$args     = wp_parse_args( $args, $defaults );
 		$class  = $this->validate_class( $args['class'] );
 		$disabled = '';
@@ -83,9 +85,11 @@ class WPPR_Html_Fields {
 	 * @return string
 	 */
 	public function text( $args ) {
-		$defaults = $this->define_defaults( array(
-			'class' => 'wppr-text',
-		) );
+		$defaults = $this->define_defaults(
+			array(
+				'class' => 'wppr-text',
+			)
+		);
 		$args     = wp_parse_args( $args, $defaults );
 		$class    = $this->validate_class( $args['class'] );
 		$disabled = '';
@@ -112,10 +116,12 @@ class WPPR_Html_Fields {
 	 * @return string
 	 */
 	public function image( $args ) {
-		$defaults = $this->define_defaults( array(
-			'class' => 'wppr-image',
-			'action' => __( 'Choose image', 'wp-product-review' ),
-		) );
+		$defaults = $this->define_defaults(
+			array(
+				'class' => 'wppr-image',
+				'action' => __( 'Choose image', 'wp-product-review' ),
+			)
+		);
 		$args     = wp_parse_args( $args, $defaults );
 		$class    = $this->validate_class( $args['class'] );
 		$disabled = '';
@@ -140,9 +146,11 @@ class WPPR_Html_Fields {
 	 * @return mixed
 	 */
 	public function select( $args ) {
-		$defaults = $this->define_defaults( array(
-			'class' => 'wppr-select',
-		) );
+		$defaults = $this->define_defaults(
+			array(
+				'class' => 'wppr-select',
+			)
+		);
 		$args     = wp_parse_args( $args, $defaults );
 		$class    = $this->validate_class( $args['class'] );
 		if ( $args['value'] == null ) {
@@ -170,9 +178,11 @@ class WPPR_Html_Fields {
 	 * @return mixed
 	 */
 	public function color( $args ) {
-		$defaults = $this->define_defaults( array(
-			'class' => 'wppr-color',
-		) );
+		$defaults = $this->define_defaults(
+			array(
+				'class' => 'wppr-color',
+			)
+		);
 		$args     = wp_parse_args( $args, $defaults );
 		$class    = $this->validate_class( $args['class'] );
 		if ( $args['value'] == null ) {
@@ -193,9 +203,11 @@ class WPPR_Html_Fields {
 	 * @return mixed
 	 */
 	public function icon_font( $args ) {
-		$defaults = $this->define_defaults( array(
-			'class' => 'cwp_bar_icon_field',
-		) );
+		$defaults = $this->define_defaults(
+			array(
+				'class' => 'cwp_bar_icon_field',
+			)
+		);
 		$args     = wp_parse_args( $args, $defaults );
 		if ( is_array( $args['value'] ) ) {
 			$value = $args['value'][0];
@@ -219,7 +231,7 @@ class WPPR_Html_Fields {
         ';
 
 		if ( ! class_exists( 'WPPR_PRO' ) ) {
-			$output = '<span style="color:red;">' . __( 'You need the PRO <a style="color:red;" href="http://bit.ly/2bhylar" target="_blank" >add-on</a> in order to change the review icons.','cwppos' ) . '</span>';
+			$output = '<span style="color:red;">' . __( 'You need the PRO <a style="color:red;" href="http://bit.ly/2bhylar" target="_blank" >add-on</a> in order to change the review icons.','wp-product-review' ) . '</span>';
 		}
 
 		return apply_filters( 'wppr_field', $output, $args );
