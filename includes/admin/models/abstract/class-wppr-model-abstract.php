@@ -49,7 +49,7 @@ class WPPR_Model_Abstract {
 	 * @access  public
 	 */
 	public function __construct() {
-		$this->options = get_option( $this->namespace );
+		$this->options = get_option( $this->namespace, array() );
 		$this->logger = new WPPR_Logger();
 	}
 
