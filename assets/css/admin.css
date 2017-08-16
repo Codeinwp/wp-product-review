@@ -1,10 +1,12 @@
-#wppr_top_tabs a{
+#wppr_top_tabs a {
 	text-decoration: none;
 }
-#wppr-admin{
-	margin-top:20px;
+
+#wppr-admin {
+	margin-top: 20px;
 	margin-right: 20px;
 }
+
 /* Tabbed Nav */
 #wppr_top_tabs ul#tabs_menu {
 	margin: 0;
@@ -51,7 +53,8 @@
 #wppr_top_tabs div.wppr-tab.active {
 	display: block;
 }
-#wppr_top_tabs ul#tabs_menu li:hover:after ,
+
+#wppr_top_tabs ul#tabs_menu li:hover:after,
 #wppr_top_tabs ul#tabs_menu li.active:after {
 	display: block;
 	position: absolute;
@@ -64,6 +67,7 @@
 	background: #fff;
 	content: "\00A0";
 }
+
 #wppr_top_tabs {
 	margin-top: 10px;
 	border-bottom: 5px solid #52aae2;
@@ -71,19 +75,21 @@
 
 #wppr_top_tabs ul#tabs_menu li.wppr-nav-tab.active a,
 #wppr_top_tabs ul#tabs_menu li.wppr-nav-tab a:hover {
-
 	color: #f17052;
 }
+
 #wppr_top_tabs ul#tabs_menu li.wppr-nav-tab.active,
 #wppr_top_tabs ul#tabs_menu li.wppr-nav-tab:hover {
+	position: relative;
 	border-top: 2px  #f16848 solid;
-	position:relative;
 	color: #f17052;
 }
-.wppr-tab-content{
-	display:none;
+
+.wppr-tab-content {
+	display: none;
 }
-#wppr-settings{
-	background:#fff;
-	padding:10px;
+
+#wppr-settings {
+	padding: 10px;
+	background: #fff;
 }

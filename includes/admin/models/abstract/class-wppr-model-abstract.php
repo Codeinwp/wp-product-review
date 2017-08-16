@@ -97,7 +97,7 @@ class WPPR_Model_Abstract {
 	 * @return mixed
 	 */
 	public function wppr_get_option( $key = '' ) {
-	    return $this->get_var( $key );
+		return $this->get_var( $key );
 	}
 
 	/**

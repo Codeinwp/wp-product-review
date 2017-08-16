@@ -84,7 +84,7 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 	 * @return string
 	 */
 	public function get_template() {
-	    return $this->template_to_use;
+		return $this->template_to_use;
 	}
 
 	/**
@@ -97,8 +97,8 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 	 */
 	public function get_value( $key ) {
 		switch ( true ) {
-			case  ( $key === 'wppr-editor-button-text' ) :
-			case  ( $key === 'wppr-editor-button-link' ) :
+			case ( $key === 'wppr-editor-button-text' ):
+			case ( $key === 'wppr-editor-button-link' ):
 				if ( $this->review->is_active() ) {
 					$links = $this->review->get_links();
 					if ( ! empty( $links ) ) {
@@ -243,7 +243,7 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 	 * @return array
 	 */
 	public function get_assets() {
-	    $assets = array(
+		$assets = array(
 			'css' => array(
 				'dashboard-styles' => array(
 					'path' => WPPR_URL . '/assets/css/dashboard_styles.css',
@@ -262,6 +262,6 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 			),
 		);
 
-	    return $assets;
+		return $assets;
 	}
 }

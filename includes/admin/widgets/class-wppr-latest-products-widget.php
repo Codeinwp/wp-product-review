@@ -51,11 +51,13 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 			wp_enqueue_style( WPPR_SLUG . '-widget-admin-css',  WPPR_URL . '/assets/css/cwppos-widget-admin.css', array(), WPPR_LITE_VERSION );
 
 			 wp_register_script( WPPR_SLUG . '-widget-script-latest', WPPR_URL . '/assets/js/widget-latest.js', array(), WPPR_LITE_VERSION );
-			 wp_localize_script( WPPR_SLUG . '-widget-script-latest', 'wppr_widget_localized_data', array(
-				 'widgetName'    => $this->id_base,
-				 'imageCheckbox' => $this->get_field_id( 'show_image' ),
-				 'ratingSelect'  => $this->get_field_id( 'cwp_tp_rating_type' ),
-			 ));
+			 wp_localize_script(
+				 WPPR_SLUG . '-widget-script-latest', 'wppr_widget_localized_data', array(
+					 'widgetName'    => $this->id_base,
+					 'imageCheckbox' => $this->get_field_id( 'show_image' ),
+					 'ratingSelect'  => $this->get_field_id( 'cwp_tp_rating_type' ),
+				 )
+			 );
 			 wp_enqueue_script( WPPR_SLUG . '-widget-script-latest' );
 		}
 	}
@@ -70,14 +72,14 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 	 * @return mixed
 	 */
 	public function widget( $args, $instance ) {
-	    $this->assets();
+		$this->assets();
 
 		$instance = parent::widget( $args, $instance );
 
 		// Loop to get the most popular posts, ordered by the author's final grade.
 		$query_args = array(
 			'posts_per_page' => $instance['no_items'], // limit it to the specified no of posts
-			'post_type'	=> 'any',
+			'post_type' => 'any',
 			'post__not_in' => get_option( 'sticky_posts' ),
 			'category_name' => $instance['cwp_tp_category'], // limit it to the specified category
 			'meta_key' => 'option_overall_score',
@@ -87,8 +89,8 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 					'value'     => 'Yes',
 				),
 			),
-			'orderby'	=> 'date',
-			'order'		=> 'DESC',
+			'orderby'   => 'date',
+			'order'     => 'DESC',
 		);
 
 		$cwp_products_loop = new WP_Query( $query_args );
@@ -96,7 +98,8 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 		// before and after widget arguments are defined by themes
 		echo $args['before_widget'];
 
-		if ( ! empty( $instance['title'] ) ) { echo $args['before_title'] . $instance['title'] . $args['after_title']; }
+		if ( ! empty( $instance['title'] ) ) {
+			echo $args['before_title'] . $instance['title'] . $args['after_title']; }
 
 		include WPPR_PATH . '/includes/public/layouts/widget/' . $instance['cwp_tp_layout'];
 

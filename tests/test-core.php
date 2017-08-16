@@ -1,14 +1,18 @@
 <?php
 /**
- * Class CoreTest
+ * WordPress unit test plugin.
  *
- * @package Wp_Product_Review
+ * @package     WPPR
+ * @subpackage  Tests
+ * @copyright   Copyright (c) 2017, ThemeIsle
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since 3.0.10
  */
 
 /**
- * Core test case.
+ * Class Test_WPPR
  */
-class CoreTest extends WP_UnitTestCase {
+class Test_WPPR extends WP_UnitTestCase {
 
 	/**
 	 * A single example test.
@@ -83,4 +87,8 @@ class CoreTest extends WP_UnitTestCase {
 
 		// var_dump( $review );
 	}
+
+    public function test_sdk_exists() {
+        $this->assertTrue( class_exists( 'ThemeIsle_SDK_Loader' ) );
+    }
 }

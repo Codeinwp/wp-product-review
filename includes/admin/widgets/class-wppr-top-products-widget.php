@@ -51,11 +51,13 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 			wp_enqueue_style( WPPR_SLUG . '-widget-admin-css',  WPPR_URL . '/assets/css/cwppos-widget-admin.css', array(), WPPR_LITE_VERSION );
 
 			wp_register_script( WPPR_SLUG . '-widget-script-top', WPPR_URL . '/assets/js/widget-top.js', array(), WPPR_LITE_VERSION );
-			wp_localize_script( WPPR_SLUG . '-widget-script-top', 'wppr_widget_localized_data', array(
-				'widgetName'    => $this->id_base,
-				'imageCheckbox' => $this->get_field_id( 'show_image' ),
-				'ratingSelect'  => $this->get_field_id( 'cwp_tp_rating_type' ),
-			));
+			wp_localize_script(
+				WPPR_SLUG . '-widget-script-top', 'wppr_widget_localized_data', array(
+					'widgetName'    => $this->id_base,
+					'imageCheckbox' => $this->get_field_id( 'show_image' ),
+					'ratingSelect'  => $this->get_field_id( 'cwp_tp_rating_type' ),
+				)
+			);
 			wp_enqueue_script( WPPR_SLUG . '-widget-script-top' );
 		}
 	}
@@ -88,7 +90,7 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 
 		$query_args = array(
 			'posts_per_page' => $instance['no_items'], // limit it to the specified no of posts
-			'post_type'	=> 'any',
+			'post_type' => 'any',
 			'post__not_in' => get_option( 'sticky_posts' ),
 			'category_name' => $instance['cwp_tp_category'],
 			'meta_key' => 'cwp_meta_box_check',
@@ -109,7 +111,8 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 		// before and after widget arguments are defined by themes
 		echo $args['before_widget'];
 
-		if ( ! empty( $instance['title'] ) ) { echo $args['before_title'] . $instance['title'] . $args['after_title']; }
+		if ( ! empty( $instance['title'] ) ) {
+			echo $args['before_title'] . $instance['title'] . $args['after_title']; }
 		include WPPR_PATH . '/includes/public/layouts/widget/' . $instance['cwp_tp_layout'];
 
 		echo $args['after_widget'];

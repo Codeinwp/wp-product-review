@@ -17,7 +17,7 @@
 	<div class="header-btns">
 		<?php if ( ! class_exists( 'WPPR_Pro' ) ) { ?>
 		<a target="_blank" href="https://themeisle.com/plugins/wp-product-review/" class="buy-now"><span
-				class="dashicons dashicons-cart"></span> Extend</a>
+				class="dashicons dashicons-cart"></span> More features</a>
 		<?php } ?>
 	</div>
 	<div class="clear"></div>

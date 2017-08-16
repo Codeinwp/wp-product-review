@@ -307,7 +307,7 @@ class Wppr_Public {
 
 			$review_position_before_content = $options_model->wppr_get_option( 'cwppos_show_reviewbox' );
 			if ( $review_position_before_content == 'yes' ) {
-			    $content = $output . $content;
+				$content = $output . $content;
 			} elseif ( $review_position_before_content == 'no' ) {
 				$content = $content . $output;
 			}

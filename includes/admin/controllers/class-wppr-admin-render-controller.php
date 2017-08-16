@@ -78,8 +78,8 @@ class WPPR_Admin_Render_Controller {
 	 * @param   bool|WPPR_Abstract_Model $model Optional pass a model to use in template.
 	 */
 	public function render_editor_metabox( $template, $model = false ) {
-	    if ( ! file_exists( $template ) ) {
-	        $template = WPPR_PATH . '/includes/admin/layouts/' . $template . '-tpl.php';
+		if ( ! file_exists( $template ) ) {
+			$template = WPPR_PATH . '/includes/admin/layouts/' . $template . '-tpl.php';
 		}
 		$html_helper = new WPPR_Html_Fields();
 		include_once( $template );
@@ -120,6 +120,7 @@ class WPPR_Admin_Render_Controller {
 		$output .= '</div><hr/>';
 		echo $output;
 
-		if ( isset( $errors ) ) { return $errors; }
+		if ( isset( $errors ) ) {
+			return $errors; }
 	}
 }
