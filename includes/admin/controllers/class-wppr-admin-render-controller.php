@@ -97,7 +97,7 @@ class WPPR_Admin_Render_Controller {
 		$output = '
             <div class="controls">
 				<div class="explain"><h4>' . $field['title'] . '</h4></div>
-				<p class="field_description">' . $field['description'] . '</p>
+				<div class="controls-content">
         ';
 		switch ( $field['type'] ) {
 			case 'input_text':
@@ -117,7 +117,7 @@ class WPPR_Admin_Render_Controller {
 				break;
 		}
 
-		$output .= '</div><hr/>';
+		$output .= '<p class="field_description">' . $field['description'] . '</p></div></div><hr/>';
 		echo $output;
 
 		if ( isset( $errors ) ) {
