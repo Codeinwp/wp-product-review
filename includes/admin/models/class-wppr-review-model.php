@@ -732,10 +732,11 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 */
 	public function get_rating() {
 		$comment_influence = intval( $this->wppr_get_option( 'cwppos_infl_userreview' ) );
+
 		$rating            = $this->score;
 		if ( $comment_influence > 0 ) {
 			$comments_rating = $this->get_comments_rating();
-			$rating          = $comments_rating * ( $comment_influence / 100 ) + $rating * ( ( 100 - $comment_influence ) / 100 );
+			$rating          = $comments_rating * 10 * ( $comment_influence / 100 ) + $rating * ( ( 100 - $comment_influence ) / 100 );
 		}
 
 		return apply_filters( 'wppr_rating', $rating, $this->ID, $this );

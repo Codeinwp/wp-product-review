@@ -91,7 +91,7 @@ class Wppr_Public {
 			}
 			if ( $this->review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
 
-				wp_enqueue_style( $this->plugin_name . 'jqueryui', WPPR_URL . '/css/jquery-ui.css', array(), $this->version );
+				wp_enqueue_style( $this->plugin_name . 'jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
 			}
 		}
 	}
@@ -133,10 +133,12 @@ class Wppr_Public {
 		$this->init();
 		if ( $this->review->is_active() ) {
 			wp_enqueue_script( $this->plugin_name . '-pie-chart-js', WPPR_URL . '/assets/js/pie-chart.js', array( 'jquery' ), $this->version, true );
-			wp_enqueue_script( $this->plugin_name . '-frontpage-js', WPPR_URL . '/assets/js/main.js', array(
-				'jquery',
-				$this->plugin_name . '-pie-chart-js'
-			), $this->version, true );
+			wp_enqueue_script(
+				$this->plugin_name . '-frontpage-js', WPPR_URL . '/assets/js/main.js', array(
+					'jquery',
+					$this->plugin_name . '-pie-chart-js',
+				), $this->version, true
+			);
 			$review_data = $this->review->get_review_data();
 			if ( $this->review->wppr_get_option( 'cwppos_lighbox' ) == 'no' && $review_data['click'] == 'image' ) {
 				wp_enqueue_script( $this->plugin_name . '-lightbox-js', WPPR_URL . '/assets/js/lightbox.min.js', array( 'jquery' ), $this->version, true );
@@ -377,22 +379,105 @@ class Wppr_Public {
 		}// End if().
 	}
 
+	/**
+	 * Adds the comment form fields.
+	 *
+	 * @return string The comment form fields.
+	 */
 	function add_comment_fields() {
 		$this->init();
-		if ( $this->review->is_active() ) {
-			$options      = $this->review->get_options();
-			$option_names = wp_list_pluck( $options, 'name' );
-			foreach ( $option_names as $k => $value ) {
-				$sliders[] =
-					"<div class='comment-form-meta-option'>
-            <label for='$k'>$meta_options[$k]</label>
-            <input type='text' id='$k' class='meta_option_input' value='' name='$k' readonly='readonly'>
-            <div class='comment_meta_slider'></div>
-            <div class='cwpr_clearfix'></div>
-		</div>";
-			}
-			echo "<div id='cwp-slider-comment'>" . implode( '', $sliders ) . "<div class='cwpr_clearfix'></div></div>";
+		if ( ! $this->review->is_active() ) {
+			return '';
 		}
+		if ( $this->review->wppr_get_option( 'cwppos_show_userreview' ) != 'yes' ) {
+			return '';
+		}
+		$options      = $this->review->get_options();
+		$option_names = wp_list_pluck( $options, 'name' );
+		foreach ( $option_names as $k => $value ) {
+			$sliders[] =
+				'<div class="wppr-comment-form-meta">
+            <label for="wppr-slider-option-' . $k . '">' . $value . '</label>
+            <input type="text" id="wppr-slider-option-' . $k . '" class="meta_option_input" value="0" name="wppr-slider-option-' . $k . '" readonly="readonly">
+            <div class="wppr-comment-meta-slider"></div>
+            <div class="cwpr_clearfix"></div>
+		</div>';
+		}
+		echo '<div id="wppr-slider-comment">' . implode( '', $sliders ) . '<div class="cwpr_clearfix"></div></div>';
+
+	}
+
+	/**
+	 * Update the comment meta fields with the rating.
+	 *
+	 * @param int $comment_id The comment id.
+	 */
+	public function save_comment_fields( $comment_id ) {
+		$comment = get_comment( $comment_id );
+		if ( empty( $comment ) ) {
+			return;
+		}
+		$review = new WPPR_Review_Model( $comment->comment_post_ID );
+		if ( empty( $review ) ) {
+			return;
+
+		}
+		if ( ! $review->is_active() ) {
+			return;
+		}
+		if ( $review->wppr_get_option( 'cwppos_show_userreview' ) != 'yes' ) {
+			return;
+		}
+
+		$options      = $review->get_options();
+		$option_names = wp_list_pluck( $options, 'name' );
+		foreach ( $option_names as $k => $value ) {
+			if ( isset( $_POST[ 'wppr-slider-option-' . $k ] ) ) {
+				$option_value = wp_filter_nohtml_kses( $_POST[ 'wppr-slider-option-' . $k ] );
+				update_comment_meta( $comment_id, 'meta_option_' . $k, $option_value );
+			}
+		}
+	}
+
+	/**
+	 * Alter the comment text and add the review ratings.
+	 *
+	 * @param string $text Comment text.
+	 *
+	 * @return string Comment text with review.
+	 */
+	public function show_comment_ratings( $text ) {
+		$this->init();
+		if ( ! $this->review->is_active() ) {
+			return $text;
+		}
+		if ( $this->review->wppr_get_option( 'cwppos_show_userreview' ) != 'yes' ) {
+			return $text;
+		}
+
+		global $comment;
+
+		$options = $this->review->get_comment_options( $comment->comment_ID );
+		if ( empty( $options ) ) {
+			return $text;
+		}
+		$return = '';
+		$return .= '<div class="user-comments-grades">';
+		foreach ( $options as $k => $option ) {
+			$comment_meta_score = $option['value'] * 10;
+			$return             .= '<div class="comment-meta-option">
+                            <p class="comment-meta-option-name">' . $option['name'] . '</p>
+                            <p class="comment-meta-option-grade">' . $option['value'] . '</p>
+                            <div class="cwpr_clearfix"></div>
+                            <div class="comment-meta-grade-bar">
+                                <div class="comment-meta-grade" style="width: ' . $option['value'] . '%"></div>
+                            </div><!-- end .comment-meta-grade-bar -->
+                        </div><!-- end .comment-meta-option -->
+					';
+		}
+		$return .= '</div>';
+
+		return $return . $text . '<div class="cwpr_clearfix"></div>';
 	}
 
 }

@@ -18,9 +18,9 @@ jQuery( document ).ready(function ($) {
 		return false;
 	})
 	function update_nav(obj) {
+
 		var tab = obj.attr( 'data-tab' );
 		var id = obj.find( 'a' ).attr( 'href' );
-
 		$( '.wppr-nav-tab' ).removeClass( 'active' );
 		obj.addClass( 'active' );
 		$( '.wppr-tab-content' ).hide();

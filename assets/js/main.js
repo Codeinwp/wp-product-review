@@ -87,8 +87,8 @@ jQuery( document ).ready(function($) {
 
 	wuReview();
 
-	$( ".comment_meta_slider" ).each(function() {
-		var comm_meta_input = $( this ).parent( ".comment-form-meta-option" ).children( "input" );
+	$( ".wppr-comment-meta-slider" ).each(function() {
+		var comm_meta_input = $( this ).parent( ".wppr-comment-form-meta" ).children( "input" );
 		$( this ).slider({
 			min: 0,
 			max: 100,
