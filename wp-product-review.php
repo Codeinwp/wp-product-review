@@ -12,7 +12,7 @@
  * @package           Wppr
  *
  * @wordpress-plugin
- * Plugin Name:       WP Product Review
+ * Plugin Name:       WP Product Review Lite
  * Plugin URI:        https://themeisle.com/plugins/wp-product-review/
  * Description:       The highest rated and most complete review plugin, now with rich snippets support. Easily turn your basic posts into in-depth reviews.
  * Version:           3.0.0
