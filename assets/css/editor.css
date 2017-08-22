@@ -113,3 +113,17 @@ input {
 .wppr-review-cons {
 	float: right;
 }
+
+label.wppr-upsell-label {
+	display: block;
+	width: 98%;
+	padding: 1%;
+	background: #cae9ff;
+	line-height: 7px;
+	text-align: center;
+}
+
+.wppr-review-options a.preload_info {
+	margin-top: -42px;
+	margin-right: 10px;
+}

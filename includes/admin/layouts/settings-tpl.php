@@ -36,10 +36,10 @@ $fields = $global_settings->get_fields();
 
 		<?php foreach ( $sections as $section_key => $section_name ) : ?>
 			<div id="wppr-tab-<?php echo $section_key; ?>" class="wppr-tab-content">
-				<?php if ( ! shortcode_exists( 'P_REVIEW' ) && $section_key == 'general' ) : ?>
-					<label> You can use the shortcode <b>[P_REVIEW]</b> to show a review you already made or
+				<?php if ( ! shortcode_exists( 'P_REVIEW' ) ) : ?>
+					<label class="wppr-upsell-label"> You can use the shortcode <b>[P_REVIEW]</b> to show a review you already made or
 						<b>[wpr_landing]</b> to display a comparision table of them. The shortcodes are available on the <a
-								target="_blank" href="http://bit.ly/2bpKIlP">Pro Bundle</a><br/><br/></label>
+								target="_blank" href="<?php echo WPPR_UPSELL_LINK; ?>">Pro Bundle</a><br/><br/></label>
 				<?php endif; ?>
 				<?php
 				foreach ( $fields[ $section_key ] as $name => $field ) {
@@ -54,10 +54,8 @@ $fields = $global_settings->get_fields();
 		<?php endforeach; ?>
 
 		<div id="info_bar">
-			<span class="spinner" ></span>
 			<button  type="button" class="button-primary cwp_save"><?php _e( 'Save All Changes','wp-product-review' ); ?></button>
-			<span class="spinner spinner-reset" ></span>
-			<button   type="button" class="button submit-button reset-button cwp_reset"><?php _e( 'Options Reset','wp-product-review' ); ?></button>
+			<span class="spinner" ></span>
 		</div><!--.info_bar-->
 	</form>
 	<?php do_action( 'wppr_admin_page_after' ); ?>

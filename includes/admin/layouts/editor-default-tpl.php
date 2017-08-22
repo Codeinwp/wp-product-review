@@ -230,7 +230,7 @@ $check  = $review->is_active() ? 'yes' : 'no';
 			<a href="#" class="preload_info"><?php _e( 'Preload Info', 'wp-product-review' ); ?></a>
 		<?php
 		} else {
-			echo __( ' In order to be able to automatically load your options from another posts, you need the PRO add-on', 'wp-product-review' ) . '<a href="http://bit.ly/2bpC3vT" target="_blank" class="preload_info_upsell">' . __( 'View Preload features','wp-product-review' ) . '</a>';
+			echo '<label class="wppr-upsell-label">' . __( ' In order to be able to automatically load your options from another posts, you need the ', 'wp-product-review' ) . '<a href="' . WPPR_UPSELL_LINK . '" target="_blank" >' . __( 'PRO add-on','wp-product-review' ) . '</a></label>';
 		}
 		?>
 		</div>
@@ -339,9 +339,9 @@ $check  = $review->is_active() ? 'yes' : 'no';
 	<br class="clear">
 
 	<?php if ( ! shortcode_exists( 'P_REVIEW' ) ) : ?>
-		<label> You can use the shortcode <b>[P_REVIEW]</b> to show a review you already made or
+		<label class="wppr-upsell-label"> You can use the shortcode <b>[P_REVIEW]</b> to show a review you already made or
 			<b>[wpr_landing]</b> to display a comparision table of them. The shortcodes are available on the <a
-					target="_blank" href="http://bit.ly/2bpKIlP">Pro Bundle</a><br/><br/></label>
+					target="_blank" href="<?php echo WPPR_UPSELL_LINK; ?>">Pro Bundle</a><br/><br/></label>
 	<?php endif; ?>
 
 	<?php do_action( 'wppr_editor_after', $model->post ); ?>

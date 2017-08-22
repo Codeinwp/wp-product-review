@@ -31,6 +31,9 @@ jQuery( document ).ready(function ($) {
 jQuery( "document" ).ready(function() {
 
 	jQuery( '.cwp_save' ).on('click', function(){
+		var $btn = jQuery(this);
+		$btn.parent().find( '.spinner' ).addClass( 'is-active' );
+		$btn.addClass('disabled');
 		var form_data = jQuery( '#wppr-settings' ).serializeArray()
 		var data = {
 			'action': 'update_options',
@@ -39,7 +42,8 @@ jQuery( "document" ).ready(function() {
 
 		// since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
 		jQuery.post(ajaxurl, data, function(response) {
-			console.log( response );
+			$btn.parent().find( '.spinner' ).removeClass( 'is-active' );
+			$btn.removeClass('disabled');
 		});
 	});
 });

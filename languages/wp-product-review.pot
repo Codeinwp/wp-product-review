@@ -1,10 +1,10 @@
 # Copyright (C) 2017 ThemeIsle
-# This file is distributed under the GPLv2 or later.
+# This file is distributed under the no.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Product Review 3.0.0\n"
+"Project-Id-Version: WP Product Review Lite 3.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/Codeinwp/wp-product-review/issues\n"
-"POT-Creation-Date: 2017-08-14 08:32:52+00:00\n"
+"POT-Creation-Date: 2017-08-22 16:17:19+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,7 +28,7 @@ msgstr ""
 msgid "10"
 msgstr ""
 
-#. Plugin Name of the plugin/theme
+#: includes/admin/class-wppr-admin.php:132
 msgid "WP Product Review"
 msgstr ""
 
@@ -431,11 +431,11 @@ msgstr ""
 #: includes/admin/layouts/editor-default-tpl.php:233
 msgid ""
 " In order to be able to automatically load your options from another posts, "
-"you need the PRO add-on"
+"you need the "
 msgstr ""
 
 #: includes/admin/layouts/editor-default-tpl.php:233
-msgid "View Preload features"
+msgid "PRO add-on"
 msgstr ""
 
 #: includes/admin/layouts/editor-default-tpl.php:253
@@ -464,12 +464,8 @@ msgstr ""
 msgid "Insert product's cons features below."
 msgstr ""
 
-#: includes/admin/layouts/settings-tpl.php:58
+#: includes/admin/layouts/settings-tpl.php:57
 msgid "Save All Changes"
-msgstr ""
-
-#: includes/admin/layouts/settings-tpl.php:60
-msgid "Options Reset"
 msgstr ""
 
 #: includes/admin/layouts/widget-admin-tpl.php:15
@@ -537,6 +533,10 @@ msgstr ""
 
 #: includes/admin/widgets/class-wppr-top-products-widget.php:133
 msgid "Top Products"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "WP Product Review Lite"
 msgstr ""
 
 #. Plugin URI of the plugin/theme

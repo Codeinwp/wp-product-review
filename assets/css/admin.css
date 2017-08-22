@@ -3,8 +3,9 @@
 }
 
 #wppr_top_tabs a:focus {
-	box-shadow: none;
 	outline: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
 }
 
 #wppr-admin {
@@ -111,8 +112,8 @@
 }
 
 #wppr-settings .explain {
-	padding: 1em 20px 1em 0;
 	width: 200px;
+	padding: 1em 20px 1em 0;
 }
 
 #wppr-settings .explain h4 {
@@ -120,32 +121,44 @@
 }
 
 #wppr-settings .controls-content p {
-    color: #666;
-    font-size: 12px;
-    font-style: italic;
-    margin: 7px 0 1em;
+	margin: 7px 0 1em;
+	color: #666;
+	font-size: 12px;
+	font-style: italic;
 }
 
 #wppr-settings .controls-content .wp-picker-container {
-    margin-top: -12px;
+	margin-top: -12px;
 }
 
 @media screen and (max-width: 1100px) {
-    #wppr-settings .explain,
-    #wppr-settings .controls-content {
-        text-align: left;
-    }
+	#wppr-settings .explain,
+	#wppr-settings .controls-content {
+		text-align: left;
+	}
 }
 
 @media screen and (max-width: 992px) {
-    #wppr_top_tabs ul#tabs_menu li:hover:after,
-    #wppr_top_tabs ul#tabs_menu li.active:after {
-        display: none;
-    }
+	#wppr_top_tabs ul#tabs_menu li:hover:after,
+	#wppr_top_tabs ul#tabs_menu li.active:after {
+		display: none;
+	}
 }
 
 @media screen and (max-width: 480px) {
-    #wppr-settings .explain {
-        width: 150px;
-    }
+	#wppr-settings .explain {
+		width: 150px;
+	}
+}
+
+#wppr-settings #info_bar .spinner {
+	float: none;
+}
+
+#wppr-settings label.wppr-upsell-label {
+	display: block;
+	padding: 10px;
+	background: #cae9ff;
+	line-height: 7px;
+	text-align: center;
 }
