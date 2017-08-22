@@ -152,6 +152,8 @@ class WPPR {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_action( 'wp_footer', $plugin_public, 'dynamic_stylesheet' );
 		$this->loader->add_action( 'wp_head', $plugin_public, 'default_settings' );
+		$this->loader->add_action( 'comment_form_logged_in_after', $plugin_public, 'add_comment_fields' );
+		$this->loader->add_action( 'comment_form_after_fields', $plugin_public, 'add_comment_fields' );
 
 		$currentTheme = wp_get_theme();
 		if ( $currentTheme->get( 'Name' ) !== 'Bookrev' && $currentTheme->get( 'Name' ) !== 'Book Rev Lite' ) {

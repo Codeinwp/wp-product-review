@@ -26,7 +26,7 @@ class Wppr_Public {
 	 *
 	 * @since    3.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
@@ -35,7 +35,7 @@ class Wppr_Public {
 	 *
 	 * @since    3.0.0
 	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var      string $version The current version of this plugin.
 	 */
 	private $version;
 
@@ -44,7 +44,7 @@ class Wppr_Public {
 	 *
 	 * @since   3.0.0
 	 * @access  private
-	 * @var WPPR_Review_Model $review  The review model.
+	 * @var WPPR_Review_Model $review The review model.
 	 */
 	private $review;
 
@@ -53,28 +53,14 @@ class Wppr_Public {
 	 *
 	 * @since   3.0.0
 	 * @access  public
-	 * @param   string $plugin_name       The name of the plugin.
-	 * @param   string $version    The version of this plugin.
+	 *
+	 * @param   string $plugin_name The name of the plugin.
+	 * @param   string $version The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 
-	}
-
-	/**
-	 * Method for loading the Review Model.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
-	public function init() {
-		global $post;
-		if ( $post ) {
-			$this->review = new WPPR_Review_Model( $post->ID );
-		} else {
-			$this->review = new WPPR_Review_Model( 0 );
-		}
 	}
 
 	/**
@@ -103,6 +89,25 @@ class Wppr_Public {
 			if ( $this->review->wppr_get_option( 'cwppos_lighbox' ) == 'no' && $review_data['click'] == 'image' ) {
 				wp_enqueue_style( $this->plugin_name . '-lightbox-css', WPPR_URL . '/assets/css/lightbox.css', array(), $this->version );
 			}
+			if ( $this->review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
+
+				wp_enqueue_style( $this->plugin_name . 'jqueryui', WPPR_URL . '/css/jquery-ui.css', array(), $this->version );
+			}
+		}
+	}
+
+	/**
+	 * Method for loading the Review Model.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 */
+	public function init() {
+		global $post;
+		if ( $post ) {
+			$this->review = new WPPR_Review_Model( $post->ID );
+		} else {
+			$this->review = new WPPR_Review_Model( 0 );
 		}
 	}
 
@@ -128,10 +133,17 @@ class Wppr_Public {
 		$this->init();
 		if ( $this->review->is_active() ) {
 			wp_enqueue_script( $this->plugin_name . '-pie-chart-js', WPPR_URL . '/assets/js/pie-chart.js', array( 'jquery' ), $this->version, true );
-			wp_enqueue_script( $this->plugin_name . '-frontpage-js', WPPR_URL . '/assets/js/main.js', array( 'jquery', $this->plugin_name . '-pie-chart-js' ), $this->version, true );
+			wp_enqueue_script( $this->plugin_name . '-frontpage-js', WPPR_URL . '/assets/js/main.js', array(
+				'jquery',
+				$this->plugin_name . '-pie-chart-js'
+			), $this->version, true );
 			$review_data = $this->review->get_review_data();
 			if ( $this->review->wppr_get_option( 'cwppos_lighbox' ) == 'no' && $review_data['click'] == 'image' ) {
 				wp_enqueue_script( $this->plugin_name . '-lightbox-js', WPPR_URL . '/assets/js/lightbox.min.js', array( 'jquery' ), $this->version, true );
+			}
+
+			if ( $this->review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
+				wp_enqueue_script( 'jquery-ui-slider' );
 			}
 		}
 	}
@@ -157,8 +169,8 @@ class Wppr_Public {
 			if ( $width < 200 ) {
 				$width = 600;
 			}
-			$img_size = min( 180, $width * 0.51 * 0.4 );
-			$height_left    = $img_size + 10;
+			$img_size    = min( 180, $width * 0.51 * 0.4 );
+			$height_left = $img_size + 10;
 
 			$conditional_media_styles = '';
 			if ( $options_model->wppr_get_option( 'cwppos_widget_size' ) != '' ) {
@@ -189,8 +201,6 @@ class Wppr_Public {
                 }
                 ';
 			}
-
-			var_dump( $options_model->wppr_get_option( 'cwppos_rating_default' ) );
 
 			$style = '
                 <style type="text/css">
@@ -284,15 +294,17 @@ class Wppr_Public {
 	 *
 	 * @since   3.0.0
 	 * @access  public
+	 *
 	 * @param   mixed $content The page content.
+	 *
 	 * @return mixed
 	 */
 	public function display_on_front( $content ) {
 		$this->init();
 		if ( $this->review->is_active() ) {
 			$options_model = new WPPR_Options_Model();
-			$output = '';
-			$visual = 'full';
+			$output        = '';
+			$visual        = 'full';
 
 			if ( $visual == 'full' ) {
 				$theme_template = get_template_directory() . '/wppr/default.php';
@@ -312,6 +324,7 @@ class Wppr_Public {
 				$content = $content . $output;
 			}
 		}
+
 		return $content;
 	}
 
@@ -340,7 +353,7 @@ class Wppr_Public {
 			} else {
 				$uni_font = '';
 			}
-			$track    = $options_model->wppr_get_option( 'cwppos_rating_chart_default' );
+			$track = $options_model->wppr_get_option( 'cwppos_rating_chart_default' );
 			if ( is_array( $uni_font ) ) {
 				$uni_font = $uni_font[0];
 			} elseif ( substr( $uni_font, 0, 1 ) == '#' ) {
@@ -362,6 +375,24 @@ class Wppr_Public {
                     var trackcolor = '" . $track . "';
                 </script>";
 		}// End if().
+	}
+
+	function add_comment_fields() {
+		$this->init();
+		if ( $this->review->is_active() ) {
+			$options      = $this->review->get_options();
+			$option_names = wp_list_pluck( $options, 'name' );
+			foreach ( $option_names as $k => $value ) {
+				$sliders[] =
+					"<div class='comment-form-meta-option'>
+            <label for='$k'>$meta_options[$k]</label>
+            <input type='text' id='$k' class='meta_option_input' value='' name='$k' readonly='readonly'>
+            <div class='comment_meta_slider'></div>
+            <div class='cwpr_clearfix'></div>
+		</div>";
+			}
+			echo "<div id='cwp-slider-comment'>" . implode( '', $sliders ) . "<div class='cwpr_clearfix'></div></div>";
+		}
 	}
 
 }
