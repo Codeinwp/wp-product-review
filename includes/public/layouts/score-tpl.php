@@ -9,4 +9,4 @@
  * @since       3.0.0
  */
 
-$output = round( $review['rating'] / 10 );
+$output = number_format( floor( $this->review->get_rating() ) / 10, 1 );
