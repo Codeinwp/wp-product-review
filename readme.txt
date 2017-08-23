@@ -320,8 +320,6 @@ Alternatively you can also follow the following steps to install the WP Product 
 
 == Frequently Asked Questions ==
 
-== Frequently Asked Questions ==
-
 
 = How to activate user reviews =
 
