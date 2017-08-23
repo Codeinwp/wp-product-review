@@ -67,6 +67,12 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+= 3.0.1 - 2017-08-23  = 
+
+* Fixed backwards compatibility when using cwppos_show_review.
+* Fixed undefined index error in widgets.
+
+
 = 3.0.0 - 2017-08-23  = 
 
 * Major code refactor ( Please test before update ) 

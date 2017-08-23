@@ -1,4 +1,9 @@
 
+ ### v3.0.1 - 2017-08-23 
+ **Changes:** 
+ * Fixed backwards compatibility when using cwppos_show_review.
+* Fixed undefined index error in widgets.
+ 
  ### v3.0.0 - 2017-08-23 
  **Changes:** 
  * Major code refactor ( Please test before update ) 
