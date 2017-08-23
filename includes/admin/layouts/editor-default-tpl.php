@@ -209,7 +209,7 @@ $check  = $review->is_active() ? 'yes' : 'no';
 					echo $html_helper->text(
 						array(
 							'name'        => 'wppr-editor-price',
-							'value'       => $review->get_price(),
+							'value'       => $review->get_price_raw(),
 							'placeholder' => __( 'Product Price', 'wp-product-review' ),
 						)
 					);

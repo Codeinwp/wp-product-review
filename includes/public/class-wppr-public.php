@@ -470,7 +470,7 @@ class Wppr_Public {
                             <p class="comment-meta-option-grade">' . $option['value'] . '</p>
                             <div class="cwpr_clearfix"></div>
                             <div class="comment-meta-grade-bar">
-                                <div class="comment-meta-grade" style="width: ' . $option['value'] . '%"></div>
+                                <div class="comment-meta-grade" style="width: ' . intval( $option['value'] ) * 10 . '%"></div>
                             </div><!-- end .comment-meta-grade-bar -->
                         </div><!-- end .comment-meta-option -->
 					';
