@@ -67,6 +67,13 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+= 3.0.0 - 2017-08-23  = 
+
+* Major code refactor ( Please test before update ) 
+* Added JSON-LD support
+* Improved compatibility with themes
+
+
 
 **New in 2.9.8**
 

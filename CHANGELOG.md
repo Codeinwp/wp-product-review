@@ -1,4 +1,10 @@
 
+ ### v3.0.0 - 2017-08-23 
+ **Changes:** 
+ * Major code refactor ( Please test before update ) 
+* Added JSON-LD support
+* Improved compatibility with themes
+ 
 ### 2.9.8 - 07/12/2016
 **Changes:** 
 - Development
