@@ -9,8 +9,8 @@
  * @since       3.0.0
  */
 
-if ( $this->review->wppr_get_option( 'wppr_rich_snippet' ) == 'yes' ) {
-	$review   = $this->review->get_review_data();
+if ( $review_object->wppr_get_option( 'wppr_rich_snippet' ) == 'yes' ) {
+	$review   = $review_object->get_review_data();
 	$currency = $review['currency'];
 	$output   .= '
     <script type="application/ld+json">

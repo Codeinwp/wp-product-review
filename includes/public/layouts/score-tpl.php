@@ -9,4 +9,4 @@
  * @since       3.0.0
  */
 
-$output = number_format( floor( $this->review->get_rating() ) / 10, 1 );
+$output = number_format( floor( $review_object->get_rating() ) / 10, 1 );

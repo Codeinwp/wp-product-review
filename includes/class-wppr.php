@@ -67,7 +67,7 @@ class WPPR {
 	 */
 	public function __construct() {
 		$this->plugin_name = 'wppr';
-		$this->version = '3.0.0';
+		$this->version = '3.0.1';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -147,11 +147,8 @@ class WPPR {
 
 		$plugin_public = new WPPR_Public( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'wp', $plugin_public, 'init' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-		$this->loader->add_action( 'wp_footer', $plugin_public, 'dynamic_stylesheet' );
-		$this->loader->add_action( 'wp_head', $plugin_public, 'default_settings' );
+		$this->loader->add_action( 'wp', $plugin_public, 'setup_post' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'load_review_assets' );
 		$this->loader->add_action( 'comment_form_logged_in_after', $plugin_public, 'add_comment_fields' );
 		$this->loader->add_action( 'comment_form_after_fields', $plugin_public, 'add_comment_fields' );
 		$this->loader->add_action( 'comment_post', $plugin_public, 'save_comment_fields',1 );

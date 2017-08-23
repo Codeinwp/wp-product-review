@@ -9,9 +9,9 @@
  * @since       3.0.0
  */
 
-$review = $this->review->get_review_data();
+$review         = $review_object->get_review_data();
 $sub_title_info = '';
-$sub_title_info  = $review['price'];
+$sub_title_info = $review['price'];
 if ( $sub_title_info != '' ) {
 	$is_disabled = apply_filters( 'wppr_disable_price_richsnippet', false );
 	if ( ! $is_disabled ) {
@@ -22,18 +22,18 @@ if ( $sub_title_info != '' ) {
 }
 
 $lightbox = '';
-if ( $this->review->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
+if ( $review_object->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
 	$lightbox = 'data-lightbox="' . $review['image']['full'] . '"';
 }
-$image_link_url = $review['image']['full'];
+$image_link_url            = $review['image']['full'];
 $multiple_affiliates_class = 'affiliate-button';
-$display_links_count = 0;
+$display_links_count       = 0;
 foreach ( $review['links'] as $title => $link ) {
 	if ( $title != '' && $link != '' ) {
 		if ( $review['click'] != 'image' ) {
 			$image_link_url = $link;
 		}
-		$display_links_count++;
+		$display_links_count ++;
 	}
 }
 if ( $display_links_count > 1 ) {
@@ -77,38 +77,38 @@ if ( isset( $review['options'] ) && ! empty( $review['options'] ) ) {
                     ';
 	}
 }
-			$output .= '
+$output .= '
             </div><!-- end .review-wu-bars -->
         </div><!-- end .review-wu-left -->
         <div class="review-wu-right">
             <div class="pros">
             <h2>' .
-                // @codingStandardsIgnoreStart
-                apply_filters( 'wppr_review_pros_text', __( $options_model->wppr_get_option( 'cwppos_pros_text' ), 'wp-product-review' ) )
-                // @codingStandardsIgnoreEnd
-				. '</h2>
+           // @codingStandardsIgnoreStart
+           apply_filters( 'wppr_review_pros_text', __( $review_object->wppr_get_option( 'cwppos_pros_text' ), 'wp-product-review' ) )
+           // @codingStandardsIgnoreEnd
+		   . '</h2>
             <ul>';
 if ( isset( $review['pros'] ) && ! empty( $review['pros'] ) ) {
 	foreach ( $review['pros'] as $pro ) {
 		$output .= '<li>' . $pro . '</li>';
 	}
 }
-				$output .= '
+$output .= '
                 </ul>
             </div><!-- end .pros -->
             <div class="cons">
             <h2>' .
-                    // @codingStandardsIgnoreStart
-                    apply_filters( 'wppr_review_cons_text', __( $options_model->wppr_get_option( 'cwppos_cons_text' ), 'wp-product-review' ) )
-                    // @codingStandardsIgnoreEnd
-					. '</h2>
+           // @codingStandardsIgnoreStart
+           apply_filters( 'wppr_review_cons_text', __( $review_object->wppr_get_option( 'cwppos_cons_text' ), 'wp-product-review' ) )
+           // @codingStandardsIgnoreEnd
+		   . '</h2>
             <ul>';
 if ( isset( $review['cons'] ) && ! empty( $review['cons'] ) ) {
 	foreach ( $review['cons'] as $con ) {
 		$output .= '<li>' . $con . '</li>';
 	}
 }
-				$output .= '
+$output .= '
                 </ul>
             </div>
         </div><!-- end .review-wu-right -->

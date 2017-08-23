@@ -64,142 +64,85 @@ class Wppr_Public {
 	}
 
 	/**
-	 * Register the stylesheets for the public-facing side of the site.
-	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * Setup review of the current post.
 	 */
-	public function enqueue_styles() {
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Wppr_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Wppr_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-		$this->init();
-		if ( $this->review->is_active() || $this->is_shortcode_used() ) {
-			wp_enqueue_style( $this->plugin_name . '-frontpage-stylesheet', WPPR_URL . '/assets/css/frontpage.css', array(), $this->version );
+	public function setup_post() {
 
-			if ( $this->review->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
-				wp_enqueue_style( $this->plugin_name . '-lightbox-css', WPPR_URL . '/assets/css/lightbox.css', array(), $this->version );
-			}
-			if ( $this->review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
-
-				wp_enqueue_style( $this->plugin_name . 'jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
-			}
-		}
+		global $post;
+		$this->review = new WPPR_Review_Model( ! empty( $post ) ? $post->ID : 0 );
 	}
 
 	/**
-	 * Method for loading the Review Model.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * Load the review assets based on the context.
+	 *
+	 * @param WPPR_Review_Model $review Review model.
 	 */
-	public function init() {
-		global $post;
-		if ( $post ) {
-			$this->review = new WPPR_Review_Model( $post->ID );
+	public function load_review_assets( $review = null ) {
+		$load = false;
+		if ( ! empty( $review ) ) {
+			if ( $review->is_active() ) {
+				$load = true;
+			}
 		} else {
-			$this->review = new WPPR_Review_Model( 0 );
-		}
-	}
-
-	/**
-	 * Check if the current post has a shortcode or not.
-	 *
-	 * @return bool Either we use the shortcode or not.
-	 */
-	public function is_shortcode_used() {
-		global $post;
-
-		if ( ! has_shortcode( $post->post_content, 'P_REVIEW' ) ) {
-			return false;
-		}
-
-		return true;
-	}
-
-	/**
-	 * Register the JavaScript for the public-facing side of the site.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
-	public function enqueue_scripts() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Wppr_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Wppr_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-		$this->init();
-		if ( $this->review->is_active() || $this->is_shortcode_used() ) {
-
-			wp_enqueue_script( $this->plugin_name . '-pie-chart-js', WPPR_URL . '/assets/js/pie-chart.js', array( 'jquery' ), $this->version, true );
-			wp_enqueue_script(
-				$this->plugin_name . '-frontpage-js', WPPR_URL . '/assets/js/main.js', array(
-					'jquery',
-					$this->plugin_name . '-pie-chart-js',
-				), $this->version, true
-			);
-			if ( $this->review->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
-				wp_enqueue_script( $this->plugin_name . '-lightbox-js', WPPR_URL . '/assets/js/lightbox.min.js', array( 'jquery' ), $this->version, true );
-			}
-
-			if ( $this->review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
-				wp_enqueue_script( 'jquery-ui-slider' );
+			$review = $this->review;
+			if ( $review->is_active() ) {
+				$load = true;
 			}
 		}
-	}
 
-	/**
-	 * Method to define dynamic style and script options based on saved settings.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
-	public function dynamic_stylesheet() {
-		$this->init();
-		if ( $this->review->is_active() || $this->is_shortcode_used() ) {
+		if ( ! $load ) {
+			return;
+		}
 
-			$options_model = new WPPR_Options_Model();
+		wp_enqueue_script( $this->plugin_name . '-pie-chart-js', WPPR_URL . '/assets/js/pie-chart.js', array( 'jquery' ), $this->version, true );
+		wp_enqueue_script(
+			$this->plugin_name . '-frontpage-js', WPPR_URL . '/assets/js/main.js', array(
+				'jquery',
+				$this->plugin_name . '-pie-chart-js',
+			), $this->version, true
+		);
+		if ( $review->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
+			wp_enqueue_script( $this->plugin_name . '-lightbox-js', WPPR_URL . '/assets/js/lightbox.min.js', array( 'jquery' ), $this->version, true );
+		}
 
-			global $content_width;
-			if ( $options_model->wppr_get_option( 'cwppos_widget_size' ) != '' ) {
-				$width = $options_model->wppr_get_option( 'cwppos_widget_size' );
-			} else {
-				$width = $content_width;
-			}
-			if ( $width < 200 ) {
-				$width = 600;
-			}
-			$img_size    = min( 180, $width * 0.51 * 0.4 );
-			$height_left = $img_size + 10;
+		if ( $review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
+			wp_enqueue_script( 'jquery-ui-slider' );
+		}
 
-			$conditional_media_styles = '';
-			if ( $options_model->wppr_get_option( 'cwppos_widget_size' ) != '' ) {
-				$conditional_media_styles = '
+		wp_enqueue_style( $this->plugin_name . '-frontpage-stylesheet', WPPR_URL . '/assets/css/frontpage.css', array(), $this->version );
+		if ( $review->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
+			wp_enqueue_style( $this->plugin_name . '-lightbox-css', WPPR_URL . '/assets/css/lightbox.css', array(), $this->version );
+		}
+		if ( $review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
+
+			wp_enqueue_style( $this->plugin_name . 'jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
+		}
+
+		global $content_width;
+		if ( $review->wppr_get_option( 'cwppos_widget_size' ) != '' ) {
+			$width = $options_model->wppr_get_option( 'cwppos_widget_size' );
+		} else {
+			$width = $content_width;
+		}
+		if ( $width < 200 ) {
+			$width = 600;
+		}
+		$img_size    = min( 180, $width * 0.51 * 0.4 );
+		$height_left = $img_size + 10;
+
+		$conditional_media_styles = '';
+		if ( $review->wppr_get_option( 'cwppos_widget_size' ) != '' ) {
+			$conditional_media_styles = '
                 #review-statistics {
-                    width: ' . $options_model->wppr_get_option( 'cwppos_widget_size' ) . 'px;
+                    width: ' . $review->wppr_get_option( 'cwppos_widget_size' ) . 'px;
                 }
                 ';
-			}
+		}
 
-			$conditional_styles = '';
-			if ( $options_model->wppr_get_option( 'cwppos_show_icon' ) == 'yes' ) {
-				$conditional_styles .= '
+		$conditional_styles = '';
+		if ( $review->wppr_get_option( 'cwppos_show_icon' ) == 'yes' ) {
+			$conditional_styles .= '
                 div.affiliate-button a span {
                     background: url("' . WPPR_URL . '/assets/img/cart-icon.png") no-repeat left center;
                 } 
@@ -208,18 +151,18 @@ class Wppr_Public {
                     background: url("' . WPPR_URL . '/assets/img/cart-icon-hover.png") no-repeat left center;
                 }
                 ';
-			}
+		}
 
-			if ( $options_model->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
-				$conditional_styles .= '
+		if ( $review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
+			$conditional_styles .= '
                 .commentlist .comment-body p {
                     clear: left;
                 }
                 ';
-			}
+		}
 
-			$style = '
-                <style type="text/css">
+		$style = '
+                 
                     @media (min-width: 820px) {
                         #review-statistics .review-wrap-up .review-wu-left .rev-wu-image, #review-statistics .review-wrap-up .review-wu-left .review-wu-grade {
                             height: ' . $height_left . 'px;
@@ -238,71 +181,100 @@ class Wppr_Public {
 			        }
                 
                     #review-statistics .review-wrap-up div.cwpr-review-top {
-                        border-top: ' . $options_model->wppr_get_option( 'cwppos_reviewboxbd_width' ) . 'px solid ' . $options_model->wppr_get_option( 'cwppos_reviewboxbd_color' ) . ';
+                        border-top: ' . $review->wppr_get_option( 'cwppos_reviewboxbd_width' ) . 'px solid ' . $review->wppr_get_option( 'cwppos_reviewboxbd_color' ) . ';
                     }
             
                     .user-comments-grades .comment-meta-grade-bar,
                     #review-statistics .review-wu-bars ul li {
-                        background: ' . $options_model->wppr_get_option( 'cwppos_rating_default' ) . ';
+                        background: ' . $review->wppr_get_option( 'cwppos_rating_default' ) . ';
                     }
             
                     #review-statistics .rev-option.customBarIcon ul li {
-                        color: ' . $options_model->wppr_get_option( 'cwppos_rating_default' ) . ';
+                        color: ' . $review->wppr_get_option( 'cwppos_rating_default' ) . ';
                     }
             
                     #review-statistics .review-wrap-up .review-wu-right ul li, #review-statistics .review-wu-bars h3, .review-wu-bars span, #review-statistics .review-wrap-up .cwpr-review-top .cwp-item-category a {
-                        color: ' . $options_model->wppr_get_option( 'cwppos_font_color' ) . ';
+                        color: ' . $review->wppr_get_option( 'cwppos_font_color' ) . ';
                     }
             
                     #review-statistics .review-wrap-up .review-wu-right .pros h2 {
-                        color: ' . $options_model->wppr_get_option( 'cwppos_pros_color' ) . ';
+                        color: ' . $review->wppr_get_option( 'cwppos_pros_color' ) . ';
                     }
             
                     #review-statistics .review-wrap-up .review-wu-right .cons h2 {
-                        color: ' . $options_model->wppr_get_option( 'cwppos_cons_color' ) . ';
+                        color: ' . $review->wppr_get_option( 'cwppos_cons_color' ) . ';
                     }
                 
                     div.affiliate-button a {
-                        border: 2px solid ' . $options_model->wppr_get_option( 'cwppos_buttonbd_color' ) . ';
+                        border: 2px solid ' . $review->wppr_get_option( 'cwppos_buttonbd_color' ) . ';
                     }
             
                     div.affiliate-button a:hover {
-                        border: 2px solid ' . $options_model->wppr_get_option( 'cwppos_buttonbh_color' ) . ';
+                        border: 2px solid ' . $review->wppr_get_option( 'cwppos_buttonbh_color' ) . ';
                     }
             
                     div.affiliate-button a {
-                        background: ' . $options_model->wppr_get_option( 'cwppos_buttonbkd_color' ) . ';
+                        background: ' . $review->wppr_get_option( 'cwppos_buttonbkd_color' ) . ';
                     }
             
                     div.affiliate-button a:hover {
-                        background: ' . $options_model->wppr_get_option( 'cwppos_buttonbkh_color' ) . ';
+                        background: ' . $review->wppr_get_option( 'cwppos_buttonbkh_color' ) . ';
                     }
             
                     div.affiliate-button a span {
-                        color: ' . $options_model->wppr_get_option( 'cwppos_buttontxtd_color' ) . ';
+                        color: ' . $review->wppr_get_option( 'cwppos_buttontxtd_color' ) . ';
                     }
             
                     div.affiliate-button a:hover span {
-                        color: ' . $options_model->wppr_get_option( 'cwppos_buttontxth_color' ) . ';
+                        color: ' . $review->wppr_get_option( 'cwppos_buttontxth_color' ) . ';
                     }
                     
                     ' . $conditional_styles . '
-                </style>
+              
             ';
 
-			echo $style;
-
-			$script = '
-                <script type="text/javascript">
-                    var c1 = "' . $options_model->wppr_get_option( 'cwppos_rating_weak' ) . '";
-                    var c2 = "' . $options_model->wppr_get_option( 'cwppos_rating_notbad' ) . '";
-                    var c3 = "' . $options_model->wppr_get_option( 'cwppos_rating_good' ) . '";
-                    var c4 = "' . $options_model->wppr_get_option( 'cwppos_rating_very_good' ) . '";
-                </script>
+		$script = ' 
+                    var c1 = "' . $review->wppr_get_option( 'cwppos_rating_weak' ) . '";
+                    var c2 = "' . $review->wppr_get_option( 'cwppos_rating_notbad' ) . '";
+                    var c3 = "' . $review->wppr_get_option( 'cwppos_rating_good' ) . '";
+                    var c4 = "' . $review->wppr_get_option( 'cwppos_rating_very_good' ) . '"; 
+                    
             ';
 
-			echo $script;
-		}// End if().
+		if ( class_exists( 'WPPR_Pro' ) ) {
+			$isSetToPro = true;
+		} else {
+			$isSetToPro = false;
+		}
+
+		if ( $isSetToPro ) {
+			$uni_font = $review->wppr_get_option( 'cwppos_change_bar_icon' );
+		} else {
+			$uni_font = '';
+		}
+		$track = $review->wppr_get_option( 'cwppos_rating_chart_default' );
+		if ( is_array( $uni_font ) ) {
+			$uni_font = $uni_font[0];
+		} elseif ( substr( $uni_font, 0, 1 ) == '#' ) {
+			$uni_font = $uni_font;
+		} else {
+			$uni_font = '';
+		}
+
+		if ( ! empty( $uni_font ) ) {
+			if ( $isSetToPro ) {
+				if ( $review->wppr_get_option( 'cwppos_fontawesome' ) === 'no' ) {
+					wp_enqueue_style( 'cwp-pac-fontawesome-stylesheet', WPPR_URL . '/assets/css/font-awesome.min.css' );
+				}
+			}
+		}
+		$script .= "
+                    var cwpCustomBarIcon = '" . $uni_font . "';
+                    var isSetToPro = '" . $isSetToPro . "';
+                    var trackcolor = '" . $track . "';
+                ";
+		wp_add_inline_style( $this->plugin_name . '-frontpage-stylesheet', $style );
+		wp_add_inline_script( $this->plugin_name . '-frontpage-js', $script );
 	}
 
 	/**
@@ -316,12 +288,11 @@ class Wppr_Public {
 	 * @return mixed
 	 */
 	public function display_on_front( $content ) {
-		$this->init();
+
 		if ( $this->review->is_active() ) {
-			$options_model = new WPPR_Options_Model();
 			$output        = '';
 			$visual        = 'full';
-
+			$review_object = $this->review;
 			if ( $visual == 'full' ) {
 				$theme_template = get_template_directory() . '/wppr/default.php';
 				if ( file_exists( $theme_template ) ) {
@@ -333,65 +304,17 @@ class Wppr_Public {
 
 			include_once( WPPR_PATH . '/includes/public/layouts/rich-json-ld.php' );
 
-			$review_position_before_content = $options_model->wppr_get_option( 'cwppos_show_reviewbox' );
+			$review_position_before_content = $this->review->wppr_get_option( 'cwppos_show_reviewbox' );
 			if ( $review_position_before_content == 'yes' ) {
 				$content = $content . $output;
 			} elseif ( $review_position_before_content == 'no' ) {
-				$content = $output . $content ;
+				$content = $output . $content;
 			}
 		}
 
 		return $content;
 	}
 
-	/**
-	 * Sets the default settings for front end display
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
-	public function default_settings() {
-		$this->init();
-		if ( $this->review->is_active() ) {
-
-			$options_model = new WPPR_Options_Model();
-
-			$options_model->wppr_get_option( 'cwppos_rating_default' );
-
-			if ( class_exists( 'WPPR_Pro' ) ) {
-				$isSetToPro = true;
-			} else {
-				$isSetToPro = false;
-			}
-
-			if ( $isSetToPro ) {
-				$uni_font = $options_model->wppr_get_option( 'cwppos_change_bar_icon' );
-			} else {
-				$uni_font = '';
-			}
-			$track = $options_model->wppr_get_option( 'cwppos_rating_chart_default' );
-			if ( is_array( $uni_font ) ) {
-				$uni_font = $uni_font[0];
-			} elseif ( substr( $uni_font, 0, 1 ) == '#' ) {
-				$uni_font = $uni_font;
-			} else {
-				$uni_font = '';
-			}
-
-			if ( ! empty( $uni_font ) ) {
-				if ( $isSetToPro ) {
-					if ( $options_model->wppr_get_option( 'cwppos_fontawesome' ) === 'no' ) {
-						wp_enqueue_style( 'cwp-pac-fontawesome-stylesheet', WPPR_URL . '/assets/css/font-awesome.min.css' );
-					}
-				}
-			}
-			echo "<script type='text/javascript'>
-                    var cwpCustomBarIcon = '" . $uni_font . "';
-                    var isSetToPro = '" . $isSetToPro . "';
-                    var trackcolor = '" . $track . "';
-                </script>";
-		}// End if().
-	}
 
 	/**
 	 * Adds the comment form fields.
@@ -399,7 +322,6 @@ class Wppr_Public {
 	 * @return string The comment form fields.
 	 */
 	function add_comment_fields() {
-		$this->init();
 		if ( ! $this->review->is_active() ) {
 			return '';
 		}
@@ -462,7 +384,6 @@ class Wppr_Public {
 	 * @return string Comment text with review.
 	 */
 	public function show_comment_ratings( $text ) {
-		$this->init();
 		if ( ! $this->review->is_active() ) {
 			return $text;
 		}
