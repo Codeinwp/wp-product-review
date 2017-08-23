@@ -121,7 +121,7 @@ class Wppr_Public {
 
 		global $content_width;
 		if ( $review->wppr_get_option( 'cwppos_widget_size' ) != '' ) {
-			$width = $options_model->wppr_get_option( 'cwppos_widget_size' );
+			$width = $review->wppr_get_option( 'cwppos_widget_size' );
 		} else {
 			$width = $content_width;
 		}
