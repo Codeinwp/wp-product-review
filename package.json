@@ -1,7 +1,7 @@
 {
   "name": "wp-product-review",
-  "version": "2.9.8",
-  "description": "WP Product Review Lite",
+  "version": "3.0.0",
+  "description": "WP Product Review WordPress plugin",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Codeinwp/wp-product-review.git"
@@ -9,7 +9,8 @@
   "keywords": [
     "wordpress-plugin"
   ],
-  "textdomain": "cwppos",
+  "textdomain": "wp-product-review",
+  "category": "plugins",
   "author": "ThemeIsle <friends@themeisle.com>",
   "license": "GPL-2.0+",
   "bugs": {
@@ -23,5 +24,8 @@
   "devDependencies": {
     "grunt-plugin-fleet": "codeinwp/grunt-plugin-fleet",
     "load-project-config": "~0.2.0"
-  }
+  },
+  "wraithSlug": [
+    "wp-product-review-pro"
+  ]
 }

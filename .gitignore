@@ -1,3 +1,8 @@
 .idea
 node_modules
 logs
+dist
+artifact
+vendor
+bin
+composer.lock

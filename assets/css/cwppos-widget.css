@@ -1,0 +1,137 @@
+/* Sidebar Popular Reviews Widget */
+
+.cwp-popular-review {
+	position: relative;
+	margin: 0;
+	padding: 15px 0 !important;
+	border-bottom: 1px solid #ddd;
+	list-style: none;
+}
+
+.cwp-popular-review .cwp-review-chart canvas,
+.cwp-popular-review .cwp-review-chart span {
+	width: 40px!important;
+	height: 40px!important;
+	line-height: 2.3;
+}
+
+.cwp-popular-review .cwp-review-chart .cwp-review-percentage {
+	top: -1px;
+	left: -1px;
+	width: 40px!important;
+	height: 40px !important;
+}
+
+.cwp-popular-review .cwp-review-chart {
+	top: 56%;
+	width: 40px;
+	height: 40px;
+	margin-top: -22px;
+	border: 0 solid #fff;
+}
+
+/* Review Pie Chart Styles */
+.cwp-review-chart {
+	float: left;
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 10px 0 10px 10px;
+	border: 3px solid #fff;
+	border-radius: 50%;
+}
+
+.cwp-review-percentage span {
+	display: block;
+	border-radius: 50%;
+	background: #fff;
+	font-family: "Lato";
+	font-size: 17px;
+	font-weight: 900;
+}
+
+.cwp_easyPieChart {
+	position: relative;
+	text-align: center;
+}
+
+.cwp_easyPieChart canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.cwp-popular-review .cwp_easyPieChart span {
+	text-align: center;
+}
+
+.cwp-popular-review:before {
+	content: ""!important;
+}
+
+.cwp-popular-review .cwp_rev_image {
+	max-width: 50px!important;
+	max-height: 50px!important;
+	margin-right: 10px;
+	border-radius: 3px;
+	vertical-align: middle;
+}
+
+.widget_cwp_top_products_widget ul,
+.widget_cwp_latest_products_widget ul {
+	margin-left: 0 !important;
+	padding-left: 0 !important;
+}
+
+.widget_cwp_top_products_widget li,
+.widget_cwp_latest_products_widget li {
+	margin-left: 0 !important;
+	background-image: none;
+	list-style: none!important;
+}
+
+.widget_cwp_top_products_widget li a,
+.widget_cwp_latest_products_widget li a {
+	padding: 0 !important;
+	border: none!important;
+}
+
+.wppr-cols-2 > div.wppr-col,
+.wppr-cols-3 > div.wppr-col {
+	width: 15%;
+}
+
+.wppr-cols-2 > a.wppr-col,
+.wppr-cols-3 > a.wppr-col {
+	overflow: hidden;
+	width: 66%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	;
+}
+
+.wppr-cols-3 a.wppr-col {
+	position: relative;
+	top: 40%;
+	margin-right: -60px;
+	-webkit-transform: translateY(40%);
+	-ms-transform: translateY(40%);
+	transform: translateY(40%);
+}
+
+.wppr-cols-2 .wppr-col,
+.wppr-cols-3 .wppr-col {
+	float: left;
+}
+
+.wppr-cols-3:after,
+.wppr-cols-2:after {
+	display: table;
+	clear: both;
+	position: relative !important;
+	content: "";
+}
+
+.widget_cwp_top_products_widget {
+	overflow: hidden;
+}
