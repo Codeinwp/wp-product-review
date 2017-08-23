@@ -24,5 +24,8 @@
   "devDependencies": {
     "grunt-plugin-fleet": "codeinwp/grunt-plugin-fleet",
     "load-project-config": "~0.2.0"
-  }
+  },
+  "wraithSlug": [
+    "wp-product-review-pro"
+  ]
 }
