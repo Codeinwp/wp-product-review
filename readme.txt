@@ -357,6 +357,10 @@ https://themeisle.com/contact
 = Prevent users from posting multiple review on a single post in WP Product Review =
 [http://docs.themeisle.com/article/578-prevent-users-from-posting-multiple-review-on-a-single-post-in-wp-product-review](http://docs.themeisle.com/article/578-prevent-users-from-posting-multiple-review-on-a-single-post-in-wp-product-review)
 
+== Upgrade Notice ==
+
+= 3.0 =
+3.0 is a major update. It is important that you make backups and ensure themes are 3.0 compatible before upgrading.
 
 == Screenshots ==
 
@@ -369,7 +373,4 @@ for more you can check out
 
 https://themeisle.com/plugins/wp-product-review-lite/
 
-== Upgrade Notice ==
 
-= 3.0 =
-3.0 is a major update. It is important that you make backups and ensure themes are 3.0 compatible before upgrading.
