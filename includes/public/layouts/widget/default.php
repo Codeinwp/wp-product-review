@@ -11,7 +11,7 @@
 
 echo '<ul>';
 foreach ( $results as $review ) :
-	$product_title_display = $review['cwp_rev_product_name'];
+	$product_title_display = ( $post_type == true ) ? $review['cwp_rev_product_name'] : get_the_title();
 	$product_image = $review['cwp_rev_product_image'];
 
 	if ( strlen( $product_title_display ) > self::RESTRICT_TITLE_CHARS ) {
@@ -20,7 +20,6 @@ foreach ( $results as $review ) :
 	?>
 	<li class="cwp-popular-review cwp_top_posts_widget_
 	<?php
-	the_ID();
 	if ( $instance['show_image'] == true && ! empty( $product_image ) ) {
 		echo ' wppr-cols-3';
 	} else {
@@ -31,9 +30,11 @@ foreach ( $results as $review ) :
 		<?php
 		if ( $instance['show_image'] == true && ! empty( $product_image ) ) {
 			?>
-			<img class="cwp_rev_image wppr-col" src="<?php echo $product_image; ?>" alt="<?php echo $review['cwp_rev_product_name']; ?>">
+			<img class="cwp_rev_image wppr-col" src="<?php echo $product_image; ?>"
+				 alt="<?php echo $review['cwp_rev_product_name']; ?>">
 		<?php } ?>
-		<a href="<?php echo get_the_permalink( $review['ID'] ); ?>" class="wppr-col" title="<?php echo $review['cwp_rev_product_name']; ?>">
+		<a href="<?php echo get_the_permalink( $review['ID'] ); ?>" class="wppr-col"
+		   title="<?php echo $review['cwp_rev_product_name']; ?>">
 			<?php echo $product_title_display; ?>
 		</a>
 		<?php
@@ -46,8 +47,8 @@ foreach ( $results as $review ) :
 				</div><!-- end .chart -->
 			</div>
 		<?php } ?>
-	</li> 
+	</li>
 	<?php
-	endforeach;
+endforeach;
 ?>
 </ul>
