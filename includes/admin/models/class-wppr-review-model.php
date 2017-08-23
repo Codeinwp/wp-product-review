@@ -248,7 +248,6 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 */
 	private function format_currency( $string ) {
 		$currency = preg_replace( '/[0-9.,]/', '', $string );
-		;
 
 		return $currency;
 	}
@@ -536,6 +535,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			$update = update_post_meta( $this->ID, 'cwp_rev_price', $price );
 
 			$this->setup_price();
+
 			return $update;
 		} else {
 			$this->logger->warning( 'Review: ' . $this->ID . ' price is the same.' );
@@ -552,7 +552,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 * @return string
 	 */
 	public function get_currency() {
-		return apply_filters( 'wppr_currency', $this->currency, $this->ID, $this );
+		return apply_filters( 'wppr_currency', empty( $this->currency ) ? '$' : $this->currency, $this->ID, $this );
 	}
 
 	/**
