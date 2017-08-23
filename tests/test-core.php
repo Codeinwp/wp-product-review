@@ -83,7 +83,7 @@ class Test_WPPR extends WP_UnitTestCase {
 		add_comment_meta( $c, 'meta_option_5', 1.2 );
 		$this->assertEquals( 3.04, $review->get_comments_rating() );
 		$review->wppr_set_option( 'cwppos_infl_userreview', '30' );
-		$this->assertEquals( 55.51, number_format( $review->get_rating(), 2 ) );
+		$this->assertEquals( '63.72', number_format( $review->get_rating(), 2 ) );
 
 		// var_dump( $review );
 	}
