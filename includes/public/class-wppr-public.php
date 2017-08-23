@@ -82,11 +82,10 @@ class Wppr_Public {
 		 * class.
 		 */
 		$this->init();
-		if ( $this->review->is_active() ) {
+		if ( $this->review->is_active() || $this->is_shortcode_used() ) {
 			wp_enqueue_style( $this->plugin_name . '-frontpage-stylesheet', WPPR_URL . '/assets/css/frontpage.css', array(), $this->version );
 
-			$review_data = $this->review->get_review_data();
-			if ( $this->review->wppr_get_option( 'cwppos_lighbox' ) == 'no' && $review_data['click'] == 'image' ) {
+			if ( $this->review->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
 				wp_enqueue_style( $this->plugin_name . '-lightbox-css', WPPR_URL . '/assets/css/lightbox.css', array(), $this->version );
 			}
 			if ( $this->review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
@@ -112,6 +111,21 @@ class Wppr_Public {
 	}
 
 	/**
+	 * Check if the current post has a shortcode or not.
+	 *
+	 * @return bool Either we use the shortcode or not.
+	 */
+	public function is_shortcode_used() {
+		global $post;
+
+		if ( ! has_shortcode( $post->post_content, 'P_REVIEW' ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Register the JavaScript for the public-facing side of the site.
 	 *
 	 * @since   3.0.0
@@ -131,7 +145,8 @@ class Wppr_Public {
 		 * class.
 		 */
 		$this->init();
-		if ( $this->review->is_active() ) {
+		if ( $this->review->is_active() || $this->is_shortcode_used() ) {
+
 			wp_enqueue_script( $this->plugin_name . '-pie-chart-js', WPPR_URL . '/assets/js/pie-chart.js', array( 'jquery' ), $this->version, true );
 			wp_enqueue_script(
 				$this->plugin_name . '-frontpage-js', WPPR_URL . '/assets/js/main.js', array(
@@ -139,8 +154,7 @@ class Wppr_Public {
 					$this->plugin_name . '-pie-chart-js',
 				), $this->version, true
 			);
-			$review_data = $this->review->get_review_data();
-			if ( $this->review->wppr_get_option( 'cwppos_lighbox' ) == 'no' && $review_data['click'] == 'image' ) {
+			if ( $this->review->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
 				wp_enqueue_script( $this->plugin_name . '-lightbox-js', WPPR_URL . '/assets/js/lightbox.min.js', array( 'jquery' ), $this->version, true );
 			}
 
@@ -158,7 +172,7 @@ class Wppr_Public {
 	 */
 	public function dynamic_stylesheet() {
 		$this->init();
-		if ( $this->review->is_active() ) {
+		if ( $this->review->is_active() || $this->is_shortcode_used() ) {
 
 			$options_model = new WPPR_Options_Model();
 
@@ -394,6 +408,7 @@ class Wppr_Public {
 		}
 		$options      = $this->review->get_options();
 		$option_names = wp_list_pluck( $options, 'name' );
+		$sliders      = array();
 		foreach ( $option_names as $k => $value ) {
 			$sliders[] =
 				'<div class="wppr-comment-form-meta">

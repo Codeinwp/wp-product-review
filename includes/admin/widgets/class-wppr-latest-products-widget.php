@@ -23,7 +23,7 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 	public function __construct() {
 		parent::__construct(
 			'cwp_latest_products_widget',
-			__( 'CWP Latest Products Widget', 'wp-product-review' ),
+			__( 'Latest Products Widget', 'wp-product-review' ),
 			array(
 				'description' => __( 'This widget displays the latest products based on their rating.', 'wp-product-review' ),
 			)
@@ -76,24 +76,15 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 
 		$instance = parent::widget( $args, $instance );
 
-		// Loop to get the most popular posts, ordered by the author's final grade.
-		$query_args = array(
-			'posts_per_page' => $instance['no_items'], // limit it to the specified no of posts
-			'post_type' => 'any',
-			'post__not_in' => get_option( 'sticky_posts' ),
-			'category_name' => $instance['cwp_tp_category'], // limit it to the specified category
-			'meta_key' => 'option_overall_score',
-			'meta_query' => array(
-				array(
-					'key'       => 'cwp_meta_box_check',
-					'value'     => 'Yes',
-				),
-			),
-			'orderby'   => 'date',
-			'order'     => 'DESC',
-		);
+		$reviews    = new WPPR_Query_Model();
+		$post       = array();
+		if ( isset( $instance['cwp_tp_category'] ) && trim( $instance['cwp_tp_category'] ) != '' ) {
+			$post['category_name'] = $instance['cwp_tp_category'];
+		}
+		$order           = array();
+		$order['date'] = 'DESC';
 
-		$cwp_products_loop = new WP_Query( $query_args );
+		$results = $reviews->find( $post, $instance['no_items'], array(), $order );
 
 		// before and after widget arguments are defined by themes
 		echo $args['before_widget'];

@@ -13,7 +13,7 @@ $review = $this->review->get_review_data();
 $sub_title_info = '';
 $sub_title_info  = $review['price'];
 if ( $sub_title_info != '' ) {
-	$is_disabled = apply_filters( 'wppr_disable_price_richsnippet', false ); 
+	$is_disabled = apply_filters( 'wppr_disable_price_richsnippet', false );
 	if ( ! $is_disabled ) {
 		$sub_title_info = '<span>
                                 <span>' . $review['currency'] . ' </span >
