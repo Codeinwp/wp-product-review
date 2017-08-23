@@ -307,7 +307,7 @@ Following are the steps to install the WP Product Review
 5. You should see WP Product Review Plugin listed. If not, with your FTP program, check the folder to see if it is installed. If it isn?t, upload the file(s) again. If it is, delete the files and upload them again.
 6. To turn the WP Product Review on, click Activate.
 7. Check your Administration Panels or WordPress blog to see if the Plugin is working.
-8. You can change the plugin options from Tweet Old Posts under settings menu.
+8. You can change the plugin options from WP Product Review under settings menu.
 
 Alternatively you can also follow the following steps to install the WP Product Review plugin
 
@@ -316,7 +316,7 @@ Alternatively you can also follow the following steps to install the WP Product 
 3. Browse the location and select the WP Product Review Plugin and click install now.
 4. To turn the WP Product Review Plugin on, click Activate.
 5. Check your Administration Panels or WordPress blog to see if the Plugin is working.
-6. You can change the plugin options from Tweet Old Posts under settings menu.
+6. You can change the plugin options from WP Product Review under settings menu.
 
 == Frequently Asked Questions ==
 
