@@ -11,7 +11,7 @@
 
 echo '<ul>';
 foreach ( $results as $review ) :
-	$product_title_display = ( $post_type == true ) ? $review['cwp_rev_product_name'] : get_the_title();
+	$product_title_display = ( $instance['post_type'] == true ) ? $review['cwp_rev_product_name'] : get_the_title();
 	$product_image = $review['cwp_rev_product_image'];
 
 	if ( strlen( $product_title_display ) > self::RESTRICT_TITLE_CHARS ) {
