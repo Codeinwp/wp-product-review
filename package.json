@@ -1,6 +1,6 @@
 {
   "name": "wp-product-review",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "WP Product Review WordPress plugin",
   "repository": {
     "type": "git",
@@ -26,6 +26,6 @@
     "load-project-config": "~0.2.0"
   },
   "wraithSlug": [
-    "wp-product-review-pro"
+    "wp-product-review"
   ]
 }

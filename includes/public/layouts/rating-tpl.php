@@ -9,7 +9,7 @@
  * @since       3.0.0
  */
 
-$review = $this->review->get_review_data();
+$review = $review_object->get_review_data();
 $sub_title_info = '';
 $sub_title_info  = $review['price'];
 if ( $sub_title_info != '' ) {
@@ -24,7 +24,7 @@ if ( $sub_title_info != '' ) {
 }
 
 $lightbox = '';
-if ( $this->review->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
+if ( $review_object->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
 	$lightbox = 'data-lightbox="' . $review['image']['full'] . '"';
 }
 $image_link_url = $review['image']['full'];
