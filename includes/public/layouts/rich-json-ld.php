@@ -23,8 +23,9 @@ if ( $this->review->wppr_get_option( 'wppr_rich_snippet' ) == 'yes' ) {
       "aggregateRating": {
         "@type": "AggregateRating",
         "bestRating": "10",
-        "ratingValue": "' . $review['rating'] . '",
-        "reviewCount": "' . count( $review['options'] ) * 10 . '"
+        "worstRating": "1",
+        "ratingValue": "' . ( $review['rating'] / 10 ) . '",
+        "reviewCount": "1"
       },
       "offers": {
         "@type": "Offer",

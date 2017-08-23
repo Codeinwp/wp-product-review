@@ -3,7 +3,7 @@ Contributors: codeinwp,marius2012,marius_codeinwp,hardeepasrani,themeisle,Madali
 Tags:  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin,  google rating, product review, rating, review, star rating, user rating, wp rating, wp review,  google, hreview,rich snippets,seo,snippet
 Author URI: http://themeisle.com
 Requires at least: 3.5
-Tested up to: 4.7.3
+Tested up to: 4.8
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -11,30 +11,6 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Easily turn your basic posts into in-depth reviews with ratings, pros and cons, affiliate links, rich snippets and user reviews.
 == Description ==
-
-
-> > If you want to see a live demo of the review plugin + rich snippets you can check <a href="http://demo.themeisle.com/parallax-one/wp-product-review/">http://demo.themeisle.com/parallax-one/wp-product-review/</a>.
-
-
-### Why to get the PRO add-ons ?
-
-Using the add-ons you will unleash the most important functionality : SHORTCODE . Using something like : [P_REVIEW post_id=3067 visual='full'] you are able to display the review box anywhere in the post, or you can even display 5 boxes in the same page (different products).
-
-Other notable features :
-
-* Custom Review Icons
-* Preloader functionality
-* Unlimited Options
-* PROs/ Cons
-
-### Knowledgebase
-
-1. How to change the html format of the review name -> http://docs.themeisle.com/article/130-how-to-change-the-html-format-of-the-review-name
-2. How to change dynamically the name of the review -> http://docs.themeisle.com/article/131-how-to-change-dynamically-the-name-of-the-review
-3. How to change dynamically the option name format -> http://docs.themeisle.com/article/132-how-to-change-dynamically-the-option-name-format
-4. How to change dynamically the pros/cons heading text -> http://docs.themeisle.com/article/133-how-to-change-dynamically-the-pros-cons-heading-text
-5. How to change dynamically the image size for review -> http://docs.themeisle.com/article/135-how-to-change-dynamically-the-image-size-for-review
-
 
 ### User Review Enabled
 
@@ -48,12 +24,32 @@ Other notable features :
 
 1. For updates follow https://twitter.com/themeisle.
 
+> **Time-saving features available in the Pro version:**
+>
+> * Shortcodes
+> * Custom Rating Icons
+> * Product Review Listings
+> * Comparison Table
+> * Amazon Integration
+> * Priority email support from the developer of the plugin
+> * Support and updates for 12 months
+>
+> **[Learn more about WP Product Review](http://themeisle.com/plugins/wp-product-review/)**
+
+
 If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-wordpress-hosting/" rel="nofollow">fastest WordPress hosting</a> or which <a href="http://www.codeinwp.com/blog/15-best-wordpress-review-themes/" rel="nofollow">review themes</a> are playing nice with WP Product review, checkout our blog.
 
+ = See how WP Product Review can integrate with your website  =
 
-**Fortcoming**
+* [Default review](https://demo.themeisle.com/wp-product-review/sample-review/)
+* [Custom icons ratings](https://demo.themeisle.com/wp-product-review/custom-icons/)
+* [Comparision table](https://demo.themeisle.com/wp-product-review/comparison-table/)
+* [Shortcode reviews](https://demo.themeisle.com/wp-product-review/shortcode-review/)
+* [Listing table](https://demo.themeisle.com/wp-product-review/listing-table/)
+* [Reviews by visitors](https://demo.themeisle.com/wp-product-review/review-with-comments/)
 
-- Direct amazon integration
+
+
 
 
 **WP Product Review provides following features**
@@ -317,12 +313,43 @@ Alternatively you can also follow the following steps to install the WP Product 
 
 == Frequently Asked Questions ==
 
-1. How to activate user reviews ?
+== Frequently Asked Questions ==
+
+
+= How to activate user reviews =
 
 By default user reviews are disabled since not all the themes are compatible with this option due to different designs for the comment box. You can easily activate them from General Settings
 
 If you have any questions please get in touch with us at,
 https://themeisle.com/contact
+
+= How to change the html format of the review name =
+[http://docs.themeisle.com/article/130-how-to-change-the-html-format-of-the-review-name](http://docs.themeisle.com/article/130-how-to-change-the-html-format-of-the-review-name)
+
+= How to change dynamically the image size for review =
+[http://docs.themeisle.com/article/135-how-to-change-dynamically-the-image-size-for-review](http://docs.themeisle.com/article/135-how-to-change-dynamically-the-image-size-for-review)
+
+= How to change dynamically the pros/cons heading text =
+[http://docs.themeisle.com/article/133-how-to-change-dynamically-the-pros-cons-heading-text](http://docs.themeisle.com/article/133-how-to-change-dynamically-the-pros-cons-heading-text)
+
+= How to change dynamically the name of the review =
+[http://docs.themeisle.com/article/131-how-to-change-dynamically-the-name-of-the-review](http://docs.themeisle.com/article/131-how-to-change-dynamically-the-name-of-the-review)
+
+= How to change dynamically the option name format =
+[http://docs.themeisle.com/article/132-how-to-change-dynamically-the-option-name-format](http://docs.themeisle.com/article/132-how-to-change-dynamically-the-option-name-format)
+
+= How to make Comment Review option work in any theme =
+[http://docs.themeisle.com/article/54-why-comment-review-option-is-not-working-with-my-theme](http://docs.themeisle.com/article/54-why-comment-review-option-is-not-working-with-my-theme)
+
+= How to fix the review boxes issue =
+[http://docs.themeisle.com/article/210-how-to-fix-the-review-boxes-issue](http://docs.themeisle.com/article/210-how-to-fix-the-review-boxes-issue)
+
+= Price in WP Product Review is messed up =
+[http://docs.themeisle.com/article/216-price-in-wp-product-review-is-messed-up](http://docs.themeisle.com/article/216-price-in-wp-product-review-is-messed-up)
+
+= Prevent users from posting multiple review on a single post in WP Product Review =
+[http://docs.themeisle.com/article/578-prevent-users-from-posting-multiple-review-on-a-single-post-in-wp-product-review](http://docs.themeisle.com/article/578-prevent-users-from-posting-multiple-review-on-a-single-post-in-wp-product-review)
+
 
 == Screenshots ==
 
