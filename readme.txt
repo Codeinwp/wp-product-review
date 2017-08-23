@@ -361,3 +361,8 @@ https://themeisle.com/contact
 for more you can check out
 
 https://themeisle.com/plugins/wp-product-review-lite/
+
+== Upgrade Notice ==
+
+= 3.0 =
+3.0 is a major update. It is important that you make backups and ensure themes are 3.0 compatible before upgrading.
