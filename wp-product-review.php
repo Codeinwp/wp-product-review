@@ -71,7 +71,7 @@ function run_wppr() {
 	define( 'WPPR_PATH', dirname( __FILE__ ) );
 	define( 'WPPR_SLUG', 'wppr' );
 	define( 'WPPR_UPSELL_LINK', 'https://themeisle.com/plugins/wp-product-review/' );
-	define( 'WPPR_URL', plugins_url( 'wp-product-review' ) );
+	define( 'WPPR_URL', plugins_url( '/', __FILE__ ) );
 
 	$plugin = new WPPR();
 	$plugin->run();

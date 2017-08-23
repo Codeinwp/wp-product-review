@@ -413,7 +413,7 @@ class Wppr_Public {
 			$sliders[] =
 				'<div class="wppr-comment-form-meta">
             <label for="wppr-slider-option-' . $k . '">' . $value . '</label>
-            <input type="text" id="wppr-slider-option-' . $k . '" class="meta_option_input" value="0" name="wppr-slider-option-' . $k . '" readonly="readonly">
+            <input type="text" id="wppr-slider-option-' . $k . '" class="meta_option_input" value="" name="wppr-slider-option-' . $k . '" readonly="readonly">
             <div class="wppr-comment-meta-slider"></div>
             <div class="cwpr_clearfix"></div>
 		</div>';
