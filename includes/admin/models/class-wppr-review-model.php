@@ -532,9 +532,11 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		$price = apply_filters( 'wppr_price_raw', $price, $this->ID, $this );
 		if ( $price !== $this->price_raw ) {
 			$this->price_raw = $price;
-			$this->setup_price();
 
-			return update_post_meta( $this->ID, 'cwp_rev_price', $price );
+			$update = update_post_meta( $this->ID, 'cwp_rev_price', $price );
+
+			$this->setup_price();
+			return $update;
 		} else {
 			$this->logger->warning( 'Review: ' . $this->ID . ' price is the same.' );
 		}
