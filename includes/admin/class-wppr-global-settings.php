@@ -73,8 +73,8 @@ class WPPR_Global_Settings {
 							'description'    => __( 'You can choose manually and use : <?php echo cwppos_show_review(\'postid\'); ?> or you can get the Product in post add-on and use :[P_REVIEW post_id=3067 visual=\'full\']', 'wp-product-review' ),
 							'type'    => 'select',
 							'options' => array(
-								'yes'    => __( 'Before content', 'wp-product-review' ),
-								'no'     => __( 'After content', 'wp-product-review' ),
+								'yes'    => __( 'After content', 'wp-product-review' ),
+								'no'     => __( 'Before content', 'wp-product-review' ),
 								'manual' => __( 'Manually placed', 'wp-product-review' ),
 							),
 							'default' => 'yes',
