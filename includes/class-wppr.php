@@ -34,7 +34,7 @@ class WPPR {
 	 *
 	 * @since    3.0.0
 	 * @access   protected
-	 * @var      WPPR_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      WPPR_Loader $loader Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -43,7 +43,7 @@ class WPPR {
 	 *
 	 * @since    3.0.0
 	 * @access   protected
-	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
+	 * @var      string $plugin_name The string used to uniquely identify this plugin.
 	 */
 	protected $plugin_name;
 
@@ -52,7 +52,7 @@ class WPPR {
 	 *
 	 * @since    3.0.0
 	 * @access   protected
-	 * @var      string    $version    The current version of the plugin.
+	 * @var      string $version The current version of the plugin.
 	 */
 	protected $version;
 
@@ -67,7 +67,7 @@ class WPPR {
 	 */
 	public function __construct() {
 		$this->plugin_name = 'wppr';
-		$this->version = '3.0.1';
+		$this->version     = '3.0.2';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -137,6 +137,27 @@ class WPPR {
 	}
 
 	/**
+	 * The name of the plugin used to uniquely identify it within the context of
+	 * WordPress and to define internationalization functionality.
+	 *
+	 * @since     3.0.0
+	 * @return    string    The name of the plugin.
+	 */
+	public function get_plugin_name() {
+		return $this->plugin_name;
+	}
+
+	/**
+	 * Retrieve the version number of the plugin.
+	 *
+	 * @since     3.0.0
+	 * @return    string    The version number of the plugin.
+	 */
+	public function get_version() {
+		return $this->version;
+	}
+
+	/**
 	 * Register all of the hooks related to the public-facing functionality
 	 * of the plugin.
 	 *
@@ -147,11 +168,15 @@ class WPPR {
 
 		$plugin_public = new WPPR_Public( $this->get_plugin_name(), $this->get_version() );
 
+		$this->loader->add_action( 'comment_post', $plugin_public, 'save_comment_fields', 1 );
+
+		if ( is_admin() ) {
+			return;
+		}
 		$this->loader->add_action( 'wp', $plugin_public, 'setup_post' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'load_review_assets' );
 		$this->loader->add_action( 'comment_form_logged_in_after', $plugin_public, 'add_comment_fields' );
 		$this->loader->add_action( 'comment_form_after_fields', $plugin_public, 'add_comment_fields' );
-		$this->loader->add_action( 'comment_post', $plugin_public, 'save_comment_fields',1 );
 		$this->loader->add_filter( 'comment_text', $plugin_public, 'show_comment_ratings' );
 
 		$currentTheme = wp_get_theme();
@@ -171,17 +196,6 @@ class WPPR {
 	}
 
 	/**
-	 * The name of the plugin used to uniquely identify it within the context of
-	 * WordPress and to define internationalization functionality.
-	 *
-	 * @since     3.0.0
-	 * @return    string    The name of the plugin.
-	 */
-	public function get_plugin_name() {
-		return $this->plugin_name;
-	}
-
-	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     3.0.0
@@ -189,16 +203,6 @@ class WPPR {
 	 */
 	public function get_loader() {
 		return $this->loader;
-	}
-
-	/**
-	 * Retrieve the version number of the plugin.
-	 *
-	 * @since     3.0.0
-	 * @return    string    The version number of the plugin.
-	 */
-	public function get_version() {
-		return $this->version;
 	}
 
 }

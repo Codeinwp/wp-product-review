@@ -66,12 +66,11 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 	 * @return mixed
 	 */
 	public function widget( $args, $instance ) {
-		$this->assets();
 
 		$instance = parent::widget( $args, $instance );
 
-		$reviews    = new WPPR_Query_Model();
-		$post       = array();
+		$reviews = new WPPR_Query_Model();
+		$post    = array();
 		if ( isset( $instance['cwp_tp_category'] ) && trim( $instance['cwp_tp_category'] ) != '' ) {
 			$post['category_name'] = $instance['cwp_tp_category'];
 		}
@@ -79,7 +78,13 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 		$order['rating'] = 'DESC';
 
 		$results = $reviews->find( $post, $instance['no_items'], array(), $order );
+		if ( ! empty( $results ) ) {
+			$first  = reset( $results );
+			$first  = isset( $first['ID'] ) ? $first['ID'] : 0;
+			$review = new WPPR_Review_Model( $first );
 
+			$this->assets( $review );
+		}
 		// before and after widget arguments are defined by themes
 		echo $args['before_widget'];
 

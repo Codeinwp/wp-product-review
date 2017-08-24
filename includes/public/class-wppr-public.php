@@ -60,7 +60,6 @@ class Wppr_Public {
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
-
 	}
 
 	/**
@@ -121,7 +120,7 @@ class Wppr_Public {
 
 		global $content_width;
 		if ( $review->wppr_get_option( 'cwppos_widget_size' ) != '' ) {
-			$width = $options_model->wppr_get_option( 'cwppos_widget_size' );
+			$width = $review->wppr_get_option( 'cwppos_widget_size' );
 		} else {
 			$width = $content_width;
 		}
@@ -289,7 +288,7 @@ class Wppr_Public {
 	 */
 	public function display_on_front( $content ) {
 
-		if ( $this->review->is_active() ) {
+		if ( $this->review->is_active() && is_singular() ) {
 			$output        = '';
 			$visual        = 'full';
 			$review_object = $this->review;

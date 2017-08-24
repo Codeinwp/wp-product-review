@@ -126,8 +126,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
                 GROUP_CONCAT( DISTINCT IF( `meta_key` = 'wppr_options', `meta_value`, '' ) SEPARATOR '' ) AS 'wppr_options',
                 GROUP_CONCAT( DISTINCT IF( `meta_key` = 'wppr_links', `meta_value`, '' ) SEPARATOR '' ) AS 'wppr_links'
             FROM {$this->db->postmeta}
-            WHERE 
-            `post_id` IN ( " . $sub_query_posts . " )
+           {$sub_query_posts}
             GROUP BY `ID`
         ) `pivoted_meta`
         WHERE `cwp_meta_box_check` = 'Yes'
@@ -137,7 +136,6 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
         `cwp_rev_product_name` ASC
         LIMIT {$limit}
         ";
-
 		$key           = hash( 'sha256', $query );
 		$processed_res = wp_cache_get( $key, 'wppr' );
 		if ( ! is_array( $processed_res ) ) {
@@ -192,16 +190,24 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	 */
 	private function get_sub_query_posts( $post ) {
 		$sub_query_conditions = $this->get_sub_query_conditions( $post );
-
+		$sub_selection_query = '';
+		if ( ! empty( $sub_query_conditions ) ) {
+			$sub_selection_query = "INNER JOIN {$this->db->term_relationships } wtr ON wtr.object_id = p.ID
+	            INNER JOIN {$this->db->term_taxonomy} wtt on wtt.term_taxonomy_id = wtr.term_taxonomy_id
+	            INNER JOIN {$this->db->terms} wt
+	            ON wt.term_id = wtt.term_id";
+		}
 		$sub_query_posts = "
-            SELECT `ID` 
-            FROM {$this->db->terms} wt
-            INNER JOIN {$this->db->term_taxonomy} wtt ON wt.term_id = wtt.term_id
-            INNER JOIN {$this->db->term_relationships} wtr ON wtt.term_taxonomy_id = wtr.term_taxonomy_id
-            INNER JOIN {$this->db->posts} p ON wtr.object_id = p.ID
             WHERE 
-            p.post_type = 'post' AND p.post_status = 'publish'
-            {$sub_query_conditions}
+            `post_id` IN ( 
+	            SELECT `ID` 
+	             FROM {$this->db->posts} p  
+	            {$sub_selection_query}
+	            WHERE 
+	            ( p.post_type = 'post' or 
+	            p.post_type = 'page' ) AND p.post_status = 'publish'
+	            {$sub_query_conditions}
+            )
         ";
 
 		return $sub_query_posts;
@@ -228,7 +234,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		}
 
 		if ( isset( $post['category_name'] ) && $post['category_name'] != false ) {
-			$sub_query_conditions .= $this->db->prepare( " AND wt.name = '%%%s%%' ", $post['category_name'] );
+			$sub_query_conditions .= $this->db->prepare( " AND wt.slug like '%%%s%%' ", $post['category_name'] );
 		}
 
 		return $sub_query_conditions;

@@ -60,6 +60,7 @@ class Test_WPPR extends WP_UnitTestCase {
 		$review_data = $review->get_review_data();
 		$review_data['name'] = 'Test param change';
 		$review_data['price'] = floatval('10.00');
+		$review_data['price_raw'] = floatval('10.00');
 		$review->set_name( $review_data['name'] );
 		$review->set_price( $review_data['price'] );
 		// Check Param save
