@@ -67,6 +67,13 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+= 3.0.2 - 2017-08-24  = 
+
+* Fixed fatal error with is_active method.
+* Fixed query reviews class.
+* Fixed widget assets loading when there is no review on the page.
+
+
 = 3.0.1 - 2017-08-23  = 
 
 * Fixed backwards compatibility when using cwppos_show_review.
