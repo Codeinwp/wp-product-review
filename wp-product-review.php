@@ -81,12 +81,20 @@ function run_wppr() {
 	if ( is_readable( $vendor_file ) ) {
 		require_once $vendor_file;
 	}
-	add_filter(
-		'themeisle_sdk_products', function ( $products ) {
-			$products[] = __FILE__;
-			return $products;
-		}
-	);
+	add_filter( 'themeisle_sdk_products', 'wppr_lite_register_sdk' );
+}
+
+/**
+ * Register product to sdk.
+ *
+ * @param array $products Array of products.
+ *
+ * @return array Products registered to sdk.
+ */
+function wppr_lite_register_sdk( $products ) {
+	$products[] = __FILE__;
+
+	return $products;
 }
 
 require( 'class-wppr-autoloader.php' );
