@@ -67,7 +67,6 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 			$first  = reset( $results );
 			$first  = isset( $first['ID'] ) ? $first['ID'] : 0;
 			$review = new WPPR_Review_Model( $first );
-
 			$this->assets( $review );
 		}
 		// before and after widget arguments are defined by themes
