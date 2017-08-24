@@ -52,8 +52,6 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 	 * @return mixed
 	 */
 	public function widget( $args, $instance ) {
-		$this->assets();
-
 		$instance = parent::widget( $args, $instance );
 
 		$reviews = new WPPR_Query_Model();
