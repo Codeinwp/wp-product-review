@@ -9,6 +9,7 @@
  * @since       3.0.0
  */
 
+
 $review         = $review_object->get_review_data();
 $sub_title_info = '';
 $sub_title_info = $review['price'];
@@ -22,7 +23,7 @@ if ( $sub_title_info != '' ) {
 }
 
 $lightbox = '';
-if ( $review_object->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
+if ( $review_object->get_click() == 'image' ) {
 	$lightbox = 'data-lightbox="' . $review['image']['full'] . '"';
 }
 $image_link_url            = $review['image']['full'];
@@ -86,7 +87,7 @@ $output .= '
            // @codingStandardsIgnoreStart
            apply_filters( 'wppr_review_pros_text', __( $review_object->wppr_get_option( 'cwppos_pros_text' ), 'wp-product-review' ) )
            // @codingStandardsIgnoreEnd
-		   . '</h2>
+           . '</h2>
             <ul>';
 if ( isset( $review['pros'] ) && ! empty( $review['pros'] ) ) {
 	foreach ( $review['pros'] as $pro ) {
@@ -101,7 +102,7 @@ $output .= '
            // @codingStandardsIgnoreStart
            apply_filters( 'wppr_review_cons_text', __( $review_object->wppr_get_option( 'cwppos_cons_text' ), 'wp-product-review' ) )
            // @codingStandardsIgnoreEnd
-		   . '</h2>
+           . '</h2>
             <ul>';
 if ( isset( $review['cons'] ) && ! empty( $review['cons'] ) ) {
 	foreach ( $review['cons'] as $con ) {
