@@ -1,4 +1,10 @@
 
+ ### v3.0.2 - 2017-08-24 
+ **Changes:** 
+ * Fixed fatal error with is_active method.
+* Fixed query reviews class.
+* Fixed widget assets loading when there is no review on the page.
+ 
  ### v3.0.1 - 2017-08-23 
  **Changes:** 
  * Fixed backwards compatibility when using cwppos_show_review.
