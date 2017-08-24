@@ -67,6 +67,11 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+= 3.0.3 - 2017-08-24  = 
+
+* Fixed widget assets loading error.
+
+
 = 3.0.2 - 2017-08-24  = 
 
 * Fixed fatal error with is_active method.

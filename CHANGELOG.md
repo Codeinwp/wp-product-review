@@ -1,4 +1,8 @@
 
+ ### v3.0.3 - 2017-08-24 
+ **Changes:** 
+ * Fixed widget assets loading error.
+ 
  ### v3.0.2 - 2017-08-24 
  **Changes:** 
  * Fixed fatal error with is_active method.
