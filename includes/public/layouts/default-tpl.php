@@ -16,7 +16,7 @@ if ( $sub_title_info != '' ) {
 	$is_disabled = apply_filters( 'wppr_disable_price_richsnippet', false );
 	if ( ! $is_disabled ) {
 		$sub_title_info = '<span>
-                                <span>' . $review['currency'] . $review['price'] . '</span>
+                                <span>' . esc_html( $review['price_raw'] ) . '</span>
                            </span>';
 	}
 }

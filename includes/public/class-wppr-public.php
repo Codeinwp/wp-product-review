@@ -288,7 +288,7 @@ class Wppr_Public {
 	 */
 	public function display_on_front( $content ) {
 
-		if ( $this->review->is_active() ) {
+		if ( $this->review->is_active() && is_singular() ) {
 			$output        = '';
 			$visual        = 'full';
 			$review_object = $this->review;

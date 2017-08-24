@@ -446,6 +446,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			'id'             => $this->get_ID(),
 			'name'           => $this->get_name(),
 			'price'          => $this->get_price(),
+			'price_raw'          => $this->get_price_raw(),
 			'currency'       => $this->get_currency(),
 			'click'          => $this->get_click(),
 			'image'          => array(

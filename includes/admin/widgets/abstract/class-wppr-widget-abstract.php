@@ -21,10 +21,14 @@ class WPPR_Widget_Abstract extends WP_Widget {
 	 * @since   3.0.0
 	 * @access  public
 	 */
-	public function assets() {
+	public function assets( $review_object ) {
 		wp_enqueue_style( WPPR_SLUG . '-pac-widget-stylesheet',  WPPR_URL . '/assets/css/cwppos-widget.css', array(), WPPR_LITE_VERSION );
 		wp_enqueue_style( WPPR_SLUG . '-widget-stylesheet-one',  WPPR_URL . '/assets/css/cwppos-widget-style1.css', array(), WPPR_LITE_VERSION );
 		wp_enqueue_style( WPPR_SLUG . '-widget-rating',  WPPR_URL . '/assets/css/cwppos-widget-rating.css', array(), WPPR_LITE_VERSION );
+		$plugin        = new WPPR();
+		$public        = new Wppr_Public( $plugin->get_plugin_name(), $plugin->get_version() );
+
+		$public->load_review_assets( $review_object );
 	}
 
 	/**
@@ -50,13 +54,13 @@ class WPPR_Widget_Abstract extends WP_Widget {
 		} else {
 			$instance['show_image'] = false;
 		}
-        // @codingStandardsIgnoreStart
+		// @codingStandardsIgnoreStart
 		if ( $instance['cwp_tp_category'] == 'All' ) { $instance['cwp_tp_category'] = ''; }
 		if ( ! isset( $instance['cwp_tp_buynow'] ) ) { $instance['cwp_tp_buynow'] = __( 'Buy Now', 'wp-product-review' ); }
 		if ( ! isset( $instance['cwp_tp_readreview'] ) ) { $instance['cwp_tp_readreview'] = __( 'Read Review', 'wp-product-review' ); }
 		if ( ! isset( $instance['cwp_tp_layout'] ) ) { $instance['cwp_tp_layout'] = 'default.php'; }
 		if ( ! isset( $instance['cwp_tp_rating_type'] ) ) { $instance['cwp_tp_rating_type']   = 'round'; }
-        // @codingStandardsIgnoreEnd
+		// @codingStandardsIgnoreEnd
 
 		return $instance;
 	}
