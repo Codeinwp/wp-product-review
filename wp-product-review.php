@@ -9,7 +9,7 @@
  *
  * @link              https://themeisle.com/
  * @since             3.0.0
- * @package           Wppr
+ * @package           WPPR
  *
  * @wordpress-plugin
  * Plugin Name:       WP Product Review Lite
