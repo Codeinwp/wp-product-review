@@ -74,9 +74,6 @@ class WPPR_Widget_Abstract extends WP_Widget {
 	 * @return array
 	 */
 	public function form( $instance ) {
-		if ( ! isset( $instance['title'] ) ) {
-			$instance['title'] = __( 'Latest Products', 'wp-product-review' );
-		}
 
 		if ( ! isset( $instance['no_items'] ) ) {
 			$instance['no_items'] = __( '10', 'wp-product-review' );

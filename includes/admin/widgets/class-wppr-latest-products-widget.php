@@ -93,9 +93,11 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 	 */
 	public function form( $instance ) {
 		$this->adminAssets();
+		if ( ! isset( $instance['title'] ) ) {
+			$instance['title'] = __( 'Latest Products', 'wp-product-review' );
+		}
 
 		$instance          = parent::form( $instance );
-		$instance['title'] = __( 'Latest Products', 'wp-product-review' );
 
 		include( WPPR_PATH . '/includes/admin/layouts/widget-admin-tpl.php' );
 	}
