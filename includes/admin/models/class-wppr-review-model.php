@@ -666,7 +666,9 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		$rating = $this->score;
 		if ( $comment_influence > 0 ) {
 			$comments_rating = $this->get_comments_rating();
-			$rating          = $comments_rating * 10 * ( $comment_influence / 100 ) + $rating * ( ( 100 - $comment_influence ) / 100 );
+			if ( $comments_rating > 0 ) {
+				$rating          = $comments_rating * 10 * ( $comment_influence / 100 ) + $rating * ( ( 100 - $comment_influence ) / 100 );
+			}
 		}
 
 		return apply_filters( 'wppr_rating', $rating, $this->ID, $this );
