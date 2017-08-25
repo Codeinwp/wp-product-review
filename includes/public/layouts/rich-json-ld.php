@@ -14,11 +14,11 @@ if ( $review_object->wppr_get_option( 'wppr_rich_snippet' ) == 'yes' ) {
 	$output   .= '
     <script type="application/ld+json">
     {
-        "@context": "http://schema.org/",
-      "@type": "Product",
-      "name": "' . $review_object->get_name() . '",
-      "image": "' . $review_object->get_small_thumbnail() . '",
-      "description": "' . get_the_excerpt( $review_object->get_ID() ) . '",';
+              "@context": "http://schema.org/",
+		      "@type": "Product",
+		      "name": "' . $review_object->get_name() . '",
+		      "image": "' . $review_object->get_small_thumbnail() . '",
+		      "description": "' . get_the_excerpt( $review_object->get_ID() ) . '",';
 	$comments = $review_object->get_comments_options();
 	if ( intval( $review_object->wppr_get_option( 'cwppos_infl_userreview' ) ) > 0 && count( $comments ) > 0 ) {
 		$output .= '"aggregateRating": {
@@ -29,7 +29,8 @@ if ( $review_object->wppr_get_option( 'wppr_rich_snippet' ) == 'yes' ) {
 				        "reviewCount": "' . count( $comments ) . '"
 				    },';
 	} else {
-		$output .= '"review": {
+		$output .= '
+					 "review": {
 					    "@type": "Review",
 					    "reviewRating": {
 					      "@type": "Rating",
@@ -40,18 +41,18 @@ if ( $review_object->wppr_get_option( 'wppr_rich_snippet' ) == 'yes' ) {
 					      "@type": "Person",
 					      "name": "' . get_the_author() . '"
 					    },
-                        "datePublished": "' . get_the_time( 'Y-m-d', $review_object->get_ID() ) . '",
+                        "datePublished": "' . get_the_time( 'Y-m-d', $review_object->get_ID() ) . '"
 					  },';
 	}
-	$output .= '"offers": {
-        "@type": "Offer",
-        "price": "' . number_format( $review_object->get_price(), 2 ) . '",
-        "priceCurrency": "' . $review_object->get_currency() . '",
-        "seller": {
-            "@type": "Organization",
-          "name": "' . get_the_author() . '"
-        }
-      }
-    }
-    </script>';
+	$output .= '
+					"offers": {
+				        "@type": "Offer",
+				        "price": "' . number_format( $review_object->get_price(), 2 ) . '",
+				        "priceCurrency": "' . $review_object->get_currency() . '",
+				        "seller": {
+				            "@type": "Organization",
+				          "name": "' . get_the_author() . '"
+				        }
+				      }
+				    }</script>';
 }
