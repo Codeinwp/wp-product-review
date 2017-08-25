@@ -372,8 +372,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		for ( $i = 1; $i <= $options_nr; $i ++ ) {
 			$tmp_name = get_post_meta( $this->ID, 'option_' . $i . '_content', true );
 			if ( $tmp_name != '' ) {
-				$tmp_score = get_post_meta( $this->ID, 'option_' . $i . '_grade', true );
-				$options[] = array(
+				$tmp_score     = get_post_meta( $this->ID, 'option_' . $i . '_grade', true );
+				$options[ $i ] = array(
 					'name'  => $tmp_name,
 					'value' => $tmp_score,
 				);
@@ -737,6 +737,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 				$valid[] = $options;
 			}
 		}
+
 		return $valid;
 	}
 

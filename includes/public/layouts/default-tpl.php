@@ -62,8 +62,8 @@ $output .= '
         <div class="review-wu-right">
             <div class="pros">
             <h2>' .
-           esc_html( apply_filters( 'wppr_review_pros_text', $review_object->wppr_get_option( 'cwppos_pros_text' ) ) )
-           . '</h2>
+		   esc_html( apply_filters( 'wppr_review_pros_text', $review_object->wppr_get_option( 'cwppos_pros_text' ) ) )
+		   . '</h2>
             <ul>';
 foreach ( $review_object->get_pros() as $pro ) {
 	$output .= '<li>' . esc_html( $pro ) . '</li>';
@@ -73,9 +73,9 @@ $output .= '
             </div><!-- end .pros -->
             <div class="cons">
             <h2>' .
-           esc_html( apply_filters( 'wppr_review_cons_text', $review_object->wppr_get_option( 'cwppos_cons_text' ) ) )
-           .
-           '</h2>
+		   esc_html( apply_filters( 'wppr_review_cons_text', $review_object->wppr_get_option( 'cwppos_cons_text' ) ) )
+		   .
+		   '</h2>
             <ul>';
 foreach ( $review_object->get_cons() as $con ) {
 	$output .= '<li>' . esc_html( $con ) . '</li>';
