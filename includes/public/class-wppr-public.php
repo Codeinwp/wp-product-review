@@ -412,7 +412,6 @@ class Wppr_Public {
 		$return = '';
 		$return .= '<div class="user-comments-grades">';
 		foreach ( $options as $k => $option ) {
-			$comment_meta_score = $option['value'] * 10;
 			$return             .= '<div class="comment-meta-option">
                             <p class="comment-meta-option-name">' . $option['name'] . '</p>
                             <p class="comment-meta-option-grade">' . $option['value'] . '</p>

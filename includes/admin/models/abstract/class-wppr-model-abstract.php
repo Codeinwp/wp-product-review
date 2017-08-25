@@ -134,7 +134,7 @@ class WPPR_Model_Abstract {
 	 * @return bool|mixed
 	 */
 	protected function set_var( $key, $value = '' ) {
-		$this->logger->notice( 'Setting value for ' . $key . ' with ' . print_r( $value ) );
+		$this->logger->notice( 'Setting value for ' . $key . ' with ' . print_r( $value, true ) );
 		if ( ! array_key_exists( $key, $this->options ) ) {
 			$this->options[ $key ] = '';
 		}
