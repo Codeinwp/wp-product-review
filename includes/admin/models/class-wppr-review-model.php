@@ -693,19 +693,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 * @return float|int
 	 */
 	public function get_comments_rating() {
-		if ( $this->ID === 0 ) {
-			$this->logger->error( 'Can not get comments rating, id is not set' );
-
-			return 0;
-		}
-		$comments_query = new WP_Comment_Query;
-		$comments       = $comments_query->query(
-			array(
-				'fields'  => 'ids',
-				'status'  => 'approve',
-				'post_id' => $this->ID,
-			)
-		);
+		$comments = $this->get_comments_options();
 		if ( $comments ) {
 			$options = array();
 			foreach ( $comments as $comment ) {
@@ -721,6 +709,29 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			return 0;
 		}
 
+	}
+
+	/**
+	 * Get all comments associated with the review.
+	 *
+	 * @return array|int The list of comments..
+	 */
+	public function get_comments_options() {
+		if ( $this->ID === 0 ) {
+			$this->logger->error( 'Can not get comments rating, id is not set' );
+
+			return array();
+		}
+		$comments_query = new WP_Comment_Query;
+		$comments       = $comments_query->query(
+			array(
+				'fields'  => 'ids',
+				'status'  => 'approve',
+				'post_id' => $this->ID,
+			)
+		);
+
+		return $comments;
 	}
 
 	/**
