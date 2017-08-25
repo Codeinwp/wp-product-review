@@ -446,7 +446,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			'id'             => $this->get_ID(),
 			'name'           => $this->get_name(),
 			'price'          => $this->get_price(),
-			'price_raw'          => $this->get_price_raw(),
+			'price_raw'      => $this->get_price_raw(),
 			'currency'       => $this->get_currency(),
 			'click'          => $this->get_click(),
 			'image'          => array(
@@ -543,6 +543,17 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Returns the raw price.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @return string
+	 */
+	public function get_price_raw() {
+		return apply_filters( 'wppr_price_raw', $this->price_raw, $this->ID, $this );
 	}
 
 	/**
@@ -667,7 +678,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		if ( $comment_influence > 0 ) {
 			$comments_rating = $this->get_comments_rating();
 			if ( $comments_rating > 0 ) {
-				$rating          = $comments_rating * 10 * ( $comment_influence / 100 ) + $rating * ( ( 100 - $comment_influence ) / 100 );
+				$rating = $comments_rating * 10 * ( $comment_influence / 100 ) + $rating * ( ( 100 - $comment_influence ) / 100 );
 			}
 		}
 
@@ -725,17 +736,25 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	public function get_comment_options( $comment_id ) {
 		$options = array();
 		if ( $this->wppr_get_option( 'cwppos_show_userreview' ) === 'yes' ) {
-			$options_names = wp_list_pluck( $this->options, 'name' );
+			$options_names   = wp_list_pluck( $this->options, 'name' );
+			$comment_options = array();
+			$valid_comment   = false;
 			foreach ( $options_names as $k => $name ) {
 				$value = get_comment_meta( $comment_id, 'meta_option_' . $k, true );
-				if ( ! isset( $value ) && trim( $value ) != 0 ) {
-					$value = 0;
-				}
-				$options[] = array(
+
+				$comment_options[] = array(
 					'name'  => $name,
 					'value' => number_format( (float) $value, 2 ),
 				);
+				if ( is_numeric( $value ) ) {
+					$valid_comment = true;
+				}
 			}
+			if ( ! $valid_comment ) {
+				return array();
+			}
+
+			$options = $comment_options;
 		}
 
 		return $options;
@@ -922,17 +941,6 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Returns the raw price.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @return string
-	 */
-	public function get_price_raw() {
-		return apply_filters( 'wppr_price_raw', $this->price_raw, $this->ID, $this );
 	}
 
 }
