@@ -178,8 +178,19 @@ class WPPR_Admin {
 	public function update_options() {
 		$model = new WPPR_Options_Model();
 		$data  = $_POST['cwppos_options'];
+
+		$nonce = $data[ count( $data ) - 1 ];
+		if ( ! isset( $nonce['name'] ) ) {
+			die( 'invalid nonce field' );
+		}
+		if ( $nonce['name'] != 'wppr_nonce_settings' ) {
+			die( 'invalid nonce name' );
+		}
+		if ( wp_verify_nonce( $nonce['value'],'wppr_save_global_settings' ) != 1 ) {
+			die( 'invalid nonce value' );
+		}
+
 		foreach ( $data as $option ) {
-			$option['value'];
 			$model->wppr_set_option( $option['name'], $option['value'] );
 		}
 		die();

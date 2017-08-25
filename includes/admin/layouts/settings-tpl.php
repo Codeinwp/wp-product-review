@@ -10,8 +10,8 @@
  */
 
 $global_settings = WPPR_Global_Settings::instance();
-$sections = $global_settings->get_sections();
-$fields = $global_settings->get_fields();
+$sections        = $global_settings->get_sections();
+$fields          = $global_settings->get_fields();
 
 ?>
 <div id="wppr-admin">
@@ -37,14 +37,16 @@ $fields = $global_settings->get_fields();
 		<?php foreach ( $sections as $section_key => $section_name ) : ?>
 			<div id="wppr-tab-<?php echo $section_key; ?>" class="wppr-tab-content">
 				<?php if ( ! shortcode_exists( 'P_REVIEW' ) ) : ?>
-					<label class="wppr-upsell-label"> You can use the shortcode <b>[P_REVIEW]</b> to show a review you already made or
-						<b>[wpr_landing]</b> to display a comparision table of them. The shortcodes are available on the <a
+					<label class="wppr-upsell-label"> You can use the shortcode <b>[P_REVIEW]</b> to show a review you
+						already made or
+						<b>[wpr_landing]</b> to display a comparision table of them. The shortcodes are available on the
+						<a
 								target="_blank" href="<?php echo WPPR_UPSELL_LINK; ?>">Pro Bundle</a><br/><br/></label>
 				<?php endif; ?>
 				<?php
 				foreach ( $fields[ $section_key ] as $name => $field ) {
 					$field['title'] = $field['name'];
-					$field['name'] = $name;
+					$field['name']  = $name;
 					$field['value'] = $model->wppr_get_option( $name );
 					$this->add_element( $field );
 				}
@@ -54,9 +56,11 @@ $fields = $global_settings->get_fields();
 		<?php endforeach; ?>
 
 		<div id="info_bar">
-			<button  type="button" class="button-primary cwp_save"><?php _e( 'Save All Changes','wp-product-review' ); ?></button>
-			<span class="spinner" ></span>
+			<button type="button"
+					class="button-primary cwp_save"><?php _e( 'Save All Changes', 'wp-product-review' ); ?></button>
+			<span class="spinner"></span>
 		</div><!--.info_bar-->
+		<?php wp_nonce_field( 'wppr_save_global_settings', 'wppr_nonce_settings', false ); ?>
 	</form>
 	<?php do_action( 'wppr_admin_page_after' ); ?>
 </div>
