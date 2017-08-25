@@ -697,7 +697,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		if ( $comments ) {
 			$options = array();
 			foreach ( $comments as $comment ) {
-				$options = array_merge( $options, $this->get_comment_options( $comment ) );
+				$options = array_merge( $options, $comment );
 			}
 
 			if ( count( $options ) != 0 ) {
@@ -730,8 +730,14 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 				'post_id' => $this->ID,
 			)
 		);
-
-		return $comments;
+		$valid          = array();
+		foreach ( $comments as $comment ) {
+			$options = $this->get_comment_options( $comment  );
+			if ( ! empty( $options ) ) {
+				$valid[] = $options;
+			}
+		}
+		return $valid;
 	}
 
 	/**

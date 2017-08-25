@@ -20,7 +20,7 @@ if ( $review_object->wppr_get_option( 'wppr_rich_snippet' ) == 'yes' ) {
       "image": "' . $review_object->get_small_thumbnail() . '",
       "description": "' . get_the_excerpt( $review_object->get_ID() ) . '",';
 	$comments = $review_object->get_comments_options();
-	if ( intval( $review_object->wppr_get_option( 'cwppos_infl_userreview' ) ) > 0 && $comments > 0 ) {
+	if ( intval( $review_object->wppr_get_option( 'cwppos_infl_userreview' ) ) > 0 && count( $comments ) > 0 ) {
 		$output .= '"aggregateRating": {
 				        "@type": "AggregateRating",
 				        "bestRating": "10",
