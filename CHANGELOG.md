@@ -1,4 +1,16 @@
 
+ ### v3.0.4 - 2017-08-25 
+ **Changes:** 
+ * Fix for rich snippets schema.
+* Fix post update white screen of death.
+* Fix for thumbnails in widgets.
+* Fix for duplicate title for widgets list.
+* Fix for link of the review in the widgets.
+* Fix for click link behavior on review picture.
+* Fix widget titles default values. 
+* Fix review rating when comments influence is on.
+* Improved security.
+ 
  ### v3.0.3 - 2017-08-24 
  **Changes:** 
  * Fixed widget assets loading error.
