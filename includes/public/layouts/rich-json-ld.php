@@ -34,6 +34,8 @@ if ( $review_object->wppr_get_option( 'wppr_rich_snippet' ) == 'yes' ) {
 					    "@type": "Review",
 					    "reviewRating": {
 					      "@type": "Rating",
+				           "bestRating": "10",
+				           "worstRating": "1",
 					      "ratingValue": "' . number_format( ( $review_object->get_rating() / 10 ), 2 ) . '"
 					    },
 					    "name": "' . $review_object->get_name() . '",
