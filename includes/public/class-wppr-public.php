@@ -367,10 +367,23 @@ class Wppr_Public {
 
 		$options      = $review->get_options();
 		$option_names = wp_list_pluck( $options, 'name' );
+		$valid_review = false;
+		foreach ( $option_names as $k => $value ) {
+			if ( isset( $_POST[ 'wppr-slider-option-' . $k ] ) && ! empty( $_POST[ 'wppr-slider-option-' . $k ] ) ) {
+				$valid_review = true;
+				break;
+			}
+		}
+		if ( ! $valid_review ) {
+			return;
+		}
 		foreach ( $option_names as $k => $value ) {
 			if ( isset( $_POST[ 'wppr-slider-option-' . $k ] ) ) {
+
 				$option_value = wp_filter_nohtml_kses( $_POST[ 'wppr-slider-option-' . $k ] );
+				$option_value = empty( $value ) ? 0 : $option_value;
 				update_comment_meta( $comment_id, 'meta_option_' . $k, $option_value );
+
 			}
 		}
 	}

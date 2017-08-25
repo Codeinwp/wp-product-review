@@ -2,9 +2,9 @@
 # This file is distributed under the no.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Product Review Lite 3.0.1\n"
+"Project-Id-Version: WP Product Review Lite 3.0.3\n"
 "Report-Msgid-Bugs-To: https://github.com/Codeinwp/wp-product-review/issues\n"
-"POT-Creation-Date: 2017-08-24 13:46:47+00:00\n"
+"POT-Creation-Date: 2017-08-25 12:02:47+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
-#: includes/admin/widgets/abstract/class-wppr-widget-abstract.php:82
+#: includes/admin/widgets/abstract/class-wppr-widget-abstract.php:79
 msgid "10"
 msgstr ""
 
@@ -501,18 +501,13 @@ msgid "Display Product Image :"
 msgstr ""
 
 #: includes/admin/widgets/abstract/class-wppr-widget-abstract.php:59
-#: includes/admin/widgets/abstract/class-wppr-widget-abstract.php:98
+#: includes/admin/widgets/abstract/class-wppr-widget-abstract.php:95
 msgid "Buy Now"
 msgstr ""
 
 #: includes/admin/widgets/abstract/class-wppr-widget-abstract.php:60
-#: includes/admin/widgets/abstract/class-wppr-widget-abstract.php:102
+#: includes/admin/widgets/abstract/class-wppr-widget-abstract.php:99
 msgid "Read Review"
-msgstr ""
-
-#: includes/admin/widgets/abstract/class-wppr-widget-abstract.php:78
-#: includes/admin/widgets/class-wppr-latest-products-widget.php:101
-msgid "Latest Products"
 msgstr ""
 
 #: includes/admin/widgets/class-wppr-latest-products-widget.php:26
@@ -523,6 +518,10 @@ msgstr ""
 msgid "This widget displays the latest products based on their rating."
 msgstr ""
 
+#: includes/admin/widgets/class-wppr-latest-products-widget.php:97
+msgid "Latest Products"
+msgstr ""
+
 #: includes/admin/widgets/class-wppr-top-products-widget.php:26
 msgid "Top Products Widget"
 msgstr ""
@@ -531,7 +530,7 @@ msgstr ""
 msgid "This widget displays the top products based on their rating."
 msgstr ""
 
-#: includes/admin/widgets/class-wppr-top-products-widget.php:113
+#: includes/admin/widgets/class-wppr-top-products-widget.php:112
 msgid "Top Products"
 msgstr ""
 
