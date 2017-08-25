@@ -732,7 +732,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		);
 		$valid          = array();
 		foreach ( $comments as $comment ) {
-			$options = $this->get_comment_options( $comment  );
+			$options = $this->get_comment_options( $comment );
 			if ( ! empty( $options ) ) {
 				$valid[] = $options;
 			}
