@@ -4,39 +4,57 @@
  *
  * @package     WPPR
  * @subpackage  Layouts
+ * @global      WPPR_Review_Model $review_object The review object.
  * @copyright   Copyright (c) 2017, Bogdan Preda
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       3.0.0
  */
 
 if ( $review_object->wppr_get_option( 'wppr_rich_snippet' ) == 'yes' ) {
-	$review   = $review_object->get_review_data();
-	$currency = $review['currency'];
 	$output   .= '
     <script type="application/ld+json">
     {
-        "@context": "http://schema.org/",
-      "@type": "Product",
-      "name": "' . $review['name'] . '",
-      "image": "' . $review['image']['thumb'] . '",
-      "description": "' . get_the_excerpt( $review['id'] ) . '",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "bestRating": "10",
-        "worstRating": "1",
-        "ratingValue": "' . ( $review['rating'] / 10 ) . '",
-        "reviewCount": "1"
-      },
-      "offers": {
-        "@type": "Offer",
-        "price": "' . number_format( $review['price'], 2 ) . '",
-        "priceCurrency": "' . $currency . '",
-        "availability": "http://schema.org/InStock",
-        "seller": {
-            "@type": "Organization",
-          "name": "' . get_the_author() . '"
-        }
-      }
-    }
-    </script>';
+              "@context": "http://schema.org/",
+		      "@type": "Product",
+		      "name": "' . $review_object->get_name() . '",
+		      "image": "' . $review_object->get_small_thumbnail() . '",
+		      "description": "' . get_the_excerpt( $review_object->get_ID() ) . '",';
+	$comments = $review_object->get_comments_options();
+	if ( intval( $review_object->wppr_get_option( 'cwppos_infl_userreview' ) ) > 0 && count( $comments ) > 0 ) {
+		$output .= '"aggregateRating": {
+				        "@type": "AggregateRating",
+				        "bestRating": "10",
+				        "worstRating": "1",
+				        "ratingValue": "' . number_format( ( $review_object->get_rating() / 10 ), 2 ) . '",
+				        "reviewCount": "' . count( $comments ) . '"
+				    },';
+	} else {
+		$output .= '
+					 "review": {
+					    "@type": "Review",
+					    "reviewRating": {
+					      "@type": "Rating",
+				           "bestRating": "10",
+				           "worstRating": "1",
+					      "ratingValue": "' . number_format( ( $review_object->get_rating() / 10 ), 2 ) . '"
+					    },
+					    "name": "' . $review_object->get_name() . '",
+					    "author": {
+					      "@type": "Person",
+					      "name": "' . get_the_author() . '"
+					    },
+                        "datePublished": "' . get_the_time( 'Y-m-d', $review_object->get_ID() ) . '"
+					  },';
+	}
+	$output .= '
+					"offers": {
+				        "@type": "Offer",
+				        "price": "' . number_format( $review_object->get_price(), 2 ) . '",
+				        "priceCurrency": "' . $review_object->get_currency() . '",
+				        "seller": {
+				            "@type": "Organization",
+				          "name": "' . get_the_author() . '"
+				        }
+				      }
+				    }</script>';
 }

@@ -11,8 +11,9 @@
 
 echo '<ul>';
 foreach ( $results as $review ) :
-	$product_title_display = ( $instance['post_type'] == true ) ? $review['cwp_rev_product_name'] : get_the_title();
-	$product_image = $review['cwp_rev_product_image'];
+	$rview_obj = new WPPR_Review_Model( $review['ID'] );
+	$product_title_display = ( $instance['post_type'] == true ) ? $review['cwp_rev_product_name'] : get_the_title( $review['ID'] );
+	$product_image = $rview_obj->get_small_thumbnail();
 
 	if ( strlen( $product_title_display ) > self::RESTRICT_TITLE_CHARS ) {
 		$product_title_display = substr( $product_title_display, 0, self::RESTRICT_TITLE_CHARS ) . '...';
