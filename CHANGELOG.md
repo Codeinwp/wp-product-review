@@ -1,4 +1,9 @@
 
+ ### v3.0.5 - 2017-08-26 
+ **Changes:** 
+ * Fix for review links opening issue.
+* Fix for comments legacy import.
+ 
  ### v3.0.4 - 2017-08-25 
  **Changes:** 
  * Fix for rich snippets schema.

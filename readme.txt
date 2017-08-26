@@ -67,6 +67,12 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+= 3.0.5 - 2017-08-26  = 
+
+* Fix for review links opening issue.
+* Fix for comments legacy import.
+
+
 = 3.0.4 - 2017-08-25  = 
 
 * Fix for rich snippets schema.
