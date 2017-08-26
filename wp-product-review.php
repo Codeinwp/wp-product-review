@@ -89,7 +89,7 @@ function run_wppr() {
  *
  * @param array $products Array of products.
  *
- * @return array Products registered to sdk.
+ * @return array All products registered to sdk.
  */
 function wppr_lite_register_sdk( $products ) {
 	$products[] = __FILE__;
