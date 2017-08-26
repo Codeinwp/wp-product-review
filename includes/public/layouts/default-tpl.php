@@ -16,7 +16,11 @@ $lightbox = '';
 if ( $review_object->get_click() == 'image' ) {
 	$lightbox = 'data-lightbox="' . esc_url( $review_object->get_small_thumbnail() ) . '"';
 }
-
+$links                     = $review_object->get_links();
+$multiple_affiliates_class = 'affiliate-button';
+if ( count( $links ) > 1 ) {
+	$multiple_affiliates_class = 'affiliate-button2 affiliate-button';
+}
 $output = '
 <section id="review-statistics"  class="article-section">
     <div class="review-wrap-up  cwpr_clearfix" >
@@ -28,7 +32,7 @@ $output = '
         </div><!-- end .cwpr-review-top -->
         <div class="review-wu-left">
             <div class="rev-wu-image">
-                <a href="' . esc_url( $review_object->get_image() ) . '" ' . $lightbox . '  rel="nofollow" target="_blank"><img src="' . esc_attr( $review_object->get_small_thumbnail() ) . '" alt="' . esc_attr( $review_object->get_name() ) . '" class="photo photo-wrapup wppr-product-image"  /></a>
+                <a href="' . esc_url( reset( $links ) ) . '" ' . $lightbox . '  rel="nofollow" target="_blank"><img src="' . esc_attr( $review_object->get_small_thumbnail() ) . '" alt="' . esc_attr( $review_object->get_name() ) . '" class="photo photo-wrapup wppr-product-image"  /></a>
             </div><!-- end .rev-wu-image -->
             <div class="review-wu-grade">
                 <div class="cwp-review-chart ">
@@ -76,18 +80,14 @@ $output .= '
 foreach ( $review_object->get_cons() as $con ) {
 	$output .= '<li>' . esc_html( $con ) . '</li>';
 }
-$output                    .= '
+$output .= '
                 </ul>
             </div>
         </div><!-- end .review-wu-right -->
     </div><!-- end .review-wrap-up -->
 </section><!-- end #review-statistics -->
 ';
-$links                     = $review_object->get_links();
-$multiple_affiliates_class = 'affiliate-button';
-if ( count( $links ) > 1 ) {
-	$multiple_affiliates_class = 'affiliate-button2 affiliate-button';
-}
+
 foreach ( $links as $title => $link ) {
 	if ( ! empty( $title ) && ! empty( $link ) ) {
 		$output .= '
