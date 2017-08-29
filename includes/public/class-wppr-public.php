@@ -99,9 +99,9 @@ class Wppr_Public {
 		wp_enqueue_script( $this->plugin_name . '-pie-chart-js', WPPR_URL . '/assets/js/pie-chart.js', array( 'jquery' ), $this->version, true );
 		wp_enqueue_script(
 			$this->plugin_name . '-frontpage-js', WPPR_URL . '/assets/js/main.js', array(
-			'jquery',
-			$this->plugin_name . '-pie-chart-js',
-		), $this->version, true
+				'jquery',
+				$this->plugin_name . '-pie-chart-js',
+			), $this->version, true
 		);
 		if ( $review->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
 			wp_enqueue_script( $this->plugin_name . '-lightbox-js', WPPR_URL . '/assets/js/lightbox.min.js', array( 'jquery' ), $this->version, true );
