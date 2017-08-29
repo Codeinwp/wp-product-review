@@ -1,4 +1,9 @@
 
+ ### v3.0.6 - 2017-08-29 
+ **Changes:** 
+ * Fix for category name matching when filtering reviews.
+* Fix for is_active error on null object.
+ 
  ### v3.0.5 - 2017-08-26 
  **Changes:** 
  * Fix for review links opening issue.
