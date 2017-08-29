@@ -234,7 +234,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		}
 
 		if ( isset( $post['category_name'] ) && $post['category_name'] != false ) {
-			$sub_query_conditions .= $this->db->prepare( " AND wt.slug like '%s%' ", $post['category_name'] );
+			$sub_query_conditions .= $this->db->prepare( ' AND wt.slug = %s ', $post['category_name'] );
 		}
 
 		return $sub_query_conditions;

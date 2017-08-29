@@ -10,7 +10,10 @@
  */
 
 $review = $model->review;
-$check  = $review->is_active() ? 'yes' : 'no';
+if ( empty( $review ) ) {
+	return;
+}
+$check = $review->is_active() ? 'yes' : 'no';
 ?>
 <p class="wppr-active wppr-<?php echo $check; ?>">
 	<label for="wppr-review-yes"><?php _e( 'Is this a review post ?', 'wp-product-review' ); ?> </label>
@@ -163,7 +166,7 @@ $check  = $review->is_active() ? 'yes' : 'no';
 					</li>
 					<?php
 }
-?>
+				?>
 				<?php
 				if ( ! empty( $links ) ) {
 					if ( count( $links ) > 1 ) {
@@ -224,15 +227,15 @@ $check  = $review->is_active() ? 'yes' : 'no';
 		<h4><?php _e( 'Product Options', 'wp-product-review' ); ?></h4>
 		<p><?php _e( 'Insert your options and their grades. Grading must be done from 0 to 100.', 'wp-product-review' ); ?></p>
 		<div class="cwpr_clearfix">
-		<?php
-		if ( $model->wppr_get_option( 'cwppos_show_poweredby' ) === 'yes' || class_exists( 'WPPR_Pro' ) || function_exists( 'wppr_ep_js_preloader' ) ) {
-		?>
-			<a href="#" class="preload_info"><?php _e( 'Preload Info', 'wp-product-review' ); ?></a>
-		<?php
-		} else {
-			echo '<label class="wppr-upsell-label">' . __( ' In order to be able to automatically load your options from another posts, you need the ', 'wp-product-review' ) . '<a href="' . WPPR_UPSELL_LINK . '" target="_blank" >' . __( 'PRO add-on','wp-product-review' ) . '</a></label>';
-		}
-		?>
+			<?php
+			if ( $model->wppr_get_option( 'cwppos_show_poweredby' ) === 'yes' || class_exists( 'WPPR_Pro' ) || function_exists( 'wppr_ep_js_preloader' ) ) {
+				?>
+				<a href="#" class="preload_info"><?php _e( 'Preload Info', 'wp-product-review' ); ?></a>
+				<?php
+			} else {
+				echo '<label class="wppr-upsell-label">' . __( ' In order to be able to automatically load your options from another posts, you need the ', 'wp-product-review' ) . '<a href="' . WPPR_UPSELL_LINK . '" target="_blank" >' . __( 'PRO add-on', 'wp-product-review' ) . '</a></label>';
+			}
+			?>
 		</div>
 		<?php do_action( 'wppr_editor_options_before', $model->post ); ?>
 		<div class="wppr-review-fieldset wppr-review-options-fields">
@@ -339,7 +342,8 @@ $check  = $review->is_active() ? 'yes' : 'no';
 	<br class="clear">
 
 	<?php if ( ! shortcode_exists( 'P_REVIEW' ) ) : ?>
-		<label class="wppr-upsell-label"> You can use the shortcode <b>[P_REVIEW]</b> to show a review you already made or
+		<label class="wppr-upsell-label"> You can use the shortcode <b>[P_REVIEW]</b> to show a review you already made
+			or
 			<b>[wpr_landing]</b> to display a comparision table of them. The shortcodes are available on the <a
 					target="_blank" href="<?php echo WPPR_UPSELL_LINK; ?>">Pro Bundle</a><br/><br/></label>
 	<?php endif; ?>
