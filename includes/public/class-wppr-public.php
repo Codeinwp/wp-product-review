@@ -85,7 +85,9 @@ class Wppr_Public {
 			}
 		} else {
 			$review = $this->review;
-			if ( $review->is_active() ) {
+			if ( empty( $review ) ) {
+				$load = false;
+			} elseif ( $review->is_active() ) {
 				$load = true;
 			}
 		}
@@ -287,7 +289,9 @@ class Wppr_Public {
 	 * @return mixed
 	 */
 	public function display_on_front( $content ) {
-
+		if ( empty( $this->review ) ) {
+			return $content;
+		}
 		if ( $this->review->is_active() && is_singular() ) {
 			$output        = '';
 			$visual        = 'full';
@@ -356,7 +360,6 @@ class Wppr_Public {
 		$review = new WPPR_Review_Model( $comment->comment_post_ID );
 		if ( empty( $review ) ) {
 			return;
-
 		}
 		if ( ! $review->is_active() ) {
 			return;
@@ -396,6 +399,10 @@ class Wppr_Public {
 	 * @return string Comment text with review.
 	 */
 	public function show_comment_ratings( $text ) {
+
+		if ( empty( $this->review ) ) {
+			return $text;
+		}
 		if ( ! $this->review->is_active() ) {
 			return $text;
 		}
@@ -412,7 +419,7 @@ class Wppr_Public {
 		$return = '';
 		$return .= '<div class="user-comments-grades">';
 		foreach ( $options as $k => $option ) {
-			$return             .= '<div class="comment-meta-option">
+			$return .= '<div class="comment-meta-option">
                             <p class="comment-meta-option-name">' . $option['name'] . '</p>
                             <p class="comment-meta-option-grade">' . $option['value'] . '</p>
                             <div class="cwpr_clearfix"></div>
