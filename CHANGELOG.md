@@ -1,4 +1,9 @@
 
+ ### v3.0.7 - 2017-08-29 
+ **Changes:** 
+ * Fixed empty links for reviews.
+* Fixed widget and reviews query.
+ 
  ### v3.0.6 - 2017-08-29 
  **Changes:** 
  * Fix for category name matching when filtering reviews.

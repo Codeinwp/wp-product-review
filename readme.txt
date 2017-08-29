@@ -67,6 +67,12 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+= 3.0.7 - 2017-08-29  = 
+
+* Fixed empty links for reviews.
+* Fixed widget and reviews query.
+
+
 = 3.0.6 - 2017-08-29  = 
 
 * Fix for category name matching when filtering reviews.
