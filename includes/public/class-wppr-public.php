@@ -289,7 +289,9 @@ class Wppr_Public {
 	 * @return mixed
 	 */
 	public function display_on_front( $content ) {
-
+		if ( empty( $this->review ) ) {
+			return $content;
+		}
 		if ( $this->review->is_active() && is_singular() ) {
 			$output        = '';
 			$visual        = 'full';
