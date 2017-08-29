@@ -18,6 +18,7 @@ if ( $review_object->get_click() == 'image' ) {
 }
 $links                     = $review_object->get_links();
 $multiple_affiliates_class = 'affiliate-button';
+$links                     = array_filter( $links );
 if ( count( $links ) > 1 ) {
 	$multiple_affiliates_class = 'affiliate-button2 affiliate-button';
 }
