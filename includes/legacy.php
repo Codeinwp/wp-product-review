@@ -35,3 +35,16 @@ function cwppos_show_review( $post_id ) {
 
 	return $output;
 }
+
+/**
+ * Legacy functions for return all the options.
+ *
+ * @deprecated
+ *
+ * @return mixed Array of global options.
+ */
+function cwppos() {
+	$options = new WPPR_Options_Model();
+
+	return $options->get_all();
+}
