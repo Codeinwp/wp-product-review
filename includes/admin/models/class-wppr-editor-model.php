@@ -59,6 +59,7 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 	 *
 	 * @since   3.0.0
 	 * @access  public
+	 *
 	 * @param   WP_Post $post The post object.
 	 */
 	public function __construct( $post ) {
@@ -92,7 +93,9 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 	 *
 	 * @since   3.0.0
 	 * @access  public
+	 *
 	 * @param   string $key The field name.
+	 *
 	 * @return string
 	 */
 	public function get_value( $key ) {
@@ -192,10 +195,10 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 			$cons           = isset( $data['wppr-editor-cons'] ) ? $data['wppr-editor-cons'] : array();
 			$options        = array();
 			foreach ( $options_names as $k => $op_name ) {
-				if ( isset( $options_values[ $k ] ) && ! empty( $op_name ) && ! empty( $options_values[ $k ] ) ) {
+				if ( ! empty( $op_name ) ) {
 					$options[] = array(
 						'name'  => sanitize_text_field( $op_name ),
-						'value' => sanitize_text_field( $options_values[ $k ] ),
+						'value' => sanitize_text_field( isset( $options_values[ $k ] ) ? ( empty( $options_values[ $k ] ) ? 0 : $options_values[ $k ] ) : 0 ),
 					);
 
 				}
@@ -246,17 +249,17 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 		$assets = array(
 			'css' => array(
 				'dashboard-styles' => array(
-					'path' => WPPR_URL . '/assets/css/dashboard_styles.css',
+					'path'     => WPPR_URL . '/assets/css/dashboard_styles.css',
 					'required' => array(),
 				),
-				'default-editor' => array(
-					'path' => WPPR_URL . '/assets/css/editor.css',
+				'default-editor'   => array(
+					'path'     => WPPR_URL . '/assets/css/editor.css',
 					'required' => array(),
 				),
 			),
-			'js' => array(
+			'js'  => array(
 				'default-editor' => array(
-					'path' => WPPR_URL . '/assets/js/admin-review.js',
+					'path'     => WPPR_URL . '/assets/js/admin-review.js',
 					'required' => array( 'jquery' ),
 				),
 			),
