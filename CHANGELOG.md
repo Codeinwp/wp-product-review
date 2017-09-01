@@ -1,4 +1,11 @@
 
+ ### v3.0.8 - 2017-09-01 
+ **Changes:** 
+ * Fix for out of memory errors.
+* Fix for options saving when there is no value for each option.
+* Fix for compatibility with Bookrev.
+* Fix for rich snippet reviewer author.
+ 
  ### v3.0.7 - 2017-08-29 
  **Changes:** 
  * Fixed empty links for reviews.

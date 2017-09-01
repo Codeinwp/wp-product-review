@@ -67,6 +67,14 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+= 3.0.8 - 2017-09-01  = 
+
+* Fix for out of memory errors.
+* Fix for options saving when there is no value for each option.
+* Fix for compatibility with Bookrev.
+* Fix for rich snippet reviewer author.
+
+
 = 3.0.7 - 2017-08-29  = 
 
 * Fixed empty links for reviews.
