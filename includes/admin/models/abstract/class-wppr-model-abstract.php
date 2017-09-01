@@ -81,6 +81,7 @@ class WPPR_Model_Abstract {
 			return apply_filters( 'wppr_get_old_option', $this->options[ $key ], $key );
 		}
 		$default = $this->get_default( $key );
+
 		return apply_filters( 'wppr_get_old_option', $default, $key );
 	}
 
@@ -105,6 +106,15 @@ class WPPR_Model_Abstract {
 		}
 
 		return $all[ $key ]['default'];
+	}
+
+	/**
+	 * Return all options.
+	 *
+	 * @return array All options.
+	 */
+	public function get_all() {
+		return $this->options;
 	}
 
 	/**

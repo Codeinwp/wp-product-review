@@ -52,8 +52,8 @@ if ( $review_object->wppr_get_option( 'wppr_rich_snippet' ) == 'yes' ) {
 				        "price": "' . number_format( $review_object->get_price(), 2 ) . '",
 				        "priceCurrency": "' . $review_object->get_currency() . '",
 				        "seller": {
-				            "@type": "Organization",
-				          "name": "' . get_the_author() . '"
+				            "@type": "Person",
+				            "name": "' . get_the_author() . '"
 				        }
 				      }
 				    }</script>';
