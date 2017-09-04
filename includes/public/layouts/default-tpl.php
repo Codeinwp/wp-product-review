@@ -13,14 +13,17 @@
 $price_raw = $review_object->get_price_raw();
 
 $lightbox = '';
-if ( $review_object->get_click() == 'image' ) {
-	$lightbox = 'data-lightbox="' . esc_url( $review_object->get_small_thumbnail() ) . '"';
-}
+
 $links                     = $review_object->get_links();
 $multiple_affiliates_class = 'affiliate-button';
 $links                     = array_filter( $links );
+$image_link = reset( $links );
 if ( count( $links ) > 1 ) {
 	$multiple_affiliates_class = 'affiliate-button2 affiliate-button';
+}
+if ( $review_object->get_click() == 'image' ) {
+	$lightbox = 'data-lightbox="' . esc_url( $review_object->get_small_thumbnail() ) . '"';
+	$image_link = $review_object->get_image();
 }
 $output = '
 <section id="review-statistics"  class="article-section">
@@ -33,7 +36,7 @@ $output = '
         </div><!-- end .cwpr-review-top -->
         <div class="review-wu-left">
             <div class="rev-wu-image">
-                <a href="' . esc_url( reset( $links ) ) . '" ' . $lightbox . '  rel="nofollow" target="_blank"><img src="' . esc_attr( $review_object->get_small_thumbnail() ) . '" alt="' . esc_attr( $review_object->get_name() ) . '" class="photo photo-wrapup wppr-product-image"  /></a>
+                <a href="' . esc_url( $image_link ) . '" ' . $lightbox . '  rel="nofollow" target="_blank"><img src="' . esc_attr( $review_object->get_small_thumbnail() ) . '" alt="' . esc_attr( $review_object->get_name() ) . '" class="photo photo-wrapup wppr-product-image"  /></a>
             </div><!-- end .rev-wu-image -->
             <div class="review-wu-grade">
                 <div class="cwp-review-chart ">
