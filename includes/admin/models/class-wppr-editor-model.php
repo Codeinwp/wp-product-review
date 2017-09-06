@@ -140,10 +140,11 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 						$options = $this->previous->get_options();
 					}
 				}
-				$parts = explode( '-', $key );
-				$index = $parts[ count( $parts ) - 1 ];
-				$index = intval( $index ) - 1;
-				$type  = $parts[ count( $parts ) - 2 ];
+				$first_key = key( $options );
+				$parts     = explode( '-', $key );
+				$index     = $parts[ count( $parts ) - 1 ];
+				$index     = intval( $index ) - ( $first_key === 0 ? 1 : 0 );
+				$type      = $parts[ count( $parts ) - 2 ];
 
 				return isset( $options[ $index ] ) ? $options[ $index ][ $type ] : '';
 				break;
@@ -196,7 +197,7 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 			$options        = array();
 			foreach ( $options_names as $k => $op_name ) {
 				if ( ! empty( $op_name ) ) {
-					$options[] = array(
+					$options[ $k ] = array(
 						'name'  => sanitize_text_field( $op_name ),
 						'value' => sanitize_text_field( isset( $options_values[ $k ] ) ? ( empty( $options_values[ $k ] ) ? 0 : $options_values[ $k ] ) : 0 ),
 					);

@@ -251,7 +251,7 @@ $check = $review->is_active() ? 'yes' : 'no';
 						<?php
 						echo $html_helper->text(
 							array(
-								'name'        => 'wppr-editor-options-name[]',
+								'name'        => 'wppr-editor-options-name['.$i.']',
 								'id'          => 'wppr-editor-options-name-' . $i,
 								'value'       => $model->get_value( 'wppr-option-name-' . $i ),
 								'placeholder' => __( 'Option', 'wp-product-review' ) . ' ' . $i,
@@ -259,7 +259,7 @@ $check = $review->is_active() ? 'yes' : 'no';
 						);
 						echo $html_helper->text(
 							array(
-								'name'        => 'wppr-editor-options-value[]',
+								'name'        => 'wppr-editor-options-value['.$i.']',
 								'id'          => 'wppr-editor-options-value-' . $i,
 								'class'       => 'wppr-text wppr-option-number',
 								'value'       => $model->get_value( 'wppr-option-value-' . $i ),
