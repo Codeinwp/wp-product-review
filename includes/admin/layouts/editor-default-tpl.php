@@ -239,7 +239,7 @@ $check = $review->is_active() ? 'yes' : 'no';
 		</div>
 		<?php do_action( 'wppr_editor_options_before', $model->post ); ?>
 		<div class="wppr-review-fieldset wppr-review-options-fields">
-			<ul class="wppr-review-options-list clear">
+			<ul class="wppr-review-options-list">
 				<?php
 
 				$options_nr = $model->wppr_get_option( 'cwppos_option_nr' );
@@ -281,7 +281,7 @@ $check = $review->is_active() ? 'yes' : 'no';
 
 		<?php do_action( 'wppr_editor_pros_before', $model->post ); ?>
 		<div class="wppr-review-fieldset wppr-review-pros-fields">
-			<ul class="wppr-review-options-list clear">
+			<ul class="wppr-review-options-list ">
 				<?php
 				$options_nr = $model->wppr_get_option( 'cwppos_option_nr' );
 				$pros       = $review->get_pros();
@@ -312,7 +312,7 @@ $check = $review->is_active() ? 'yes' : 'no';
 		<p><?php _e( 'Insert product\'s cons features below.', 'wp-product-review' ); ?></p>
 		<?php do_action( 'wppr_editor_cons_before', $model->post ); ?>
 		<div class="wppr-review-fieldset wppr-review-cons-fields">
-			<ul class="wppr-review-options-list clear">
+			<ul class="wppr-review-options-list ">
 				<?php
 				$options_nr = $model->wppr_get_option( 'cwppos_option_nr' );
 				$cons       = $review->get_cons();
