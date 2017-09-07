@@ -738,7 +738,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 					'options' => $options,
 					'date'    => get_comment_date( '', $comment ),
 					'author'  => get_comment_author( $comment ),
-					'title'   => get_comment_excerpt( $comment ),
+					'title'   => wp_strip_all_tags( get_comment_excerpt( $comment ) ),
 					'content' => get_comment_text( $comment ),
 				);
 			}
