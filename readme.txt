@@ -67,6 +67,15 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+= 3.0.9 - 2017-09-07  = 
+
+* Improved JSON-LD scheme.
+* Fix for image lightbox link.
+* FIx for json-ld description when html tags are present.
+* Fix for widget layout margin when image is used.
+* Improvements compatibility with various themes.
+
+
 = 3.0.8 - 2017-09-01  = 
 
 * Fix for out of memory errors.
