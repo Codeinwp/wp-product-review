@@ -697,7 +697,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		if ( $comments ) {
 			$options = array();
 			foreach ( $comments as $comment ) {
-				$options = array_merge( $options, $comment );
+				$options = array_merge( $options, $comment['options'] );
 			}
 
 			if ( count( $options ) != 0 ) {
@@ -734,7 +734,13 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		foreach ( $comments as $comment ) {
 			$options = $this->get_comment_options( $comment );
 			if ( ! empty( $options ) ) {
-				$valid[] = $options;
+				$valid[ $comment ] = array(
+					'options' => $options,
+					'date'    => get_comment_date( '', $comment ),
+					'author'  => get_comment_author( $comment ),
+					'title'   => get_comment_excerpt( $comment ),
+					'content' => get_comment_text( $comment ),
+				);
 			}
 		}
 
@@ -959,6 +965,141 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Returns the JSON-LD array.
+	 *
+	 * @return array The JSON-LD array.
+	 */
+	public function get_json_ld() {
+		$ld           = array(
+			'@context'    => 'http://schema.org/',
+			'@type'       => 'Product',
+			'name'        => $this->get_name(),
+			'image'       => $this->get_small_thumbnail(),
+			'description' => $this->get_excerpt(),
+		);
+		$ld['offers'] = array(
+			'@type'         => 'Offer',
+			'price'         => number_format( $this->get_price(), 2 ),
+			'priceCurrency' => $this->get_currency(),
+			'seller'        => array(
+				'@type' => 'Person',
+				'name'  => $this->get_author(),
+			),
+		);
+
+		$review_default = array(
+			'@type'         => 'Review',
+			'reviewRating'  => array(
+				'@type'       => 'Rating',
+				'bestRating'  => '10',
+				'worstRating' => '0',
+				'ratingValue' => number_format( ( $this->get_rating() / 10 ), 2 ),
+			),
+			'name'          => $this->get_name(),
+			'reviewBody'    => $this->get_content(),
+			'author'        => array(
+				'@type' => 'Person',
+				'name'  => $this->get_author(),
+			),
+			'datePublished' => get_the_time( 'Y-m-d', $this->get_ID() ),
+		);
+
+		if ( $this->wppr_get_option( 'cwppos_show_userreview' ) != 'yes' ) {
+			$ld['review'] = $review_default;
+
+			return $ld;
+		}
+		$ld['review'][] = $review_default;
+
+		$comments = $this->get_comments_options();
+		foreach ( $comments as $comment ) {
+			$ld['review'][] = array(
+				'@type'         => 'Review',
+				'reviewRating'  => array(
+					'@type'       => 'Rating',
+					'bestRating'  => '10',
+					'worstRating' => '0',
+					'ratingValue' => number_format( ( $this->rating_by_options( $comment['options'] ) ), 2 ),
+				),
+				'name'          => $comment['title'],
+				'reviewBody'    => $comment['content'],
+				'author'        => array(
+					'@type' => 'Person',
+					'name'  => $comment['author'],
+				),
+				'datePublished' => get_the_time( 'Y-m-d', $comment['date'] ),
+			);
+		}
+		$ld['aggregateRating'] = array(
+			'@type'       => 'AggregateRating',
+			'bestRating'  => '10',
+			'worstRating' => '0',
+			'ratingValue' => number_format( ( $this->get_rating() / 10 ), 2 ),
+			'reviewCount' => count( $ld['review'] ),
+		);
+
+		return $ld;
+	}
+
+	/**
+	 * Returns the excerpt of the description
+	 *
+	 * @return string The excerpt of description.
+	 */
+	public function get_excerpt() {
+		if ( ! $this->is_active() ) {
+			return '';
+		}
+		$content = $this->get_content();
+
+		$excerpt_length = apply_filters( 'excerpt_length', 55 );
+
+		return wp_trim_words( $content, $excerpt_length, '' );
+	}
+
+	/**
+	 * Get the review post content.
+	 *
+	 * @return string The review post content.
+	 */
+	public function get_content() {
+		if ( ! $this->is_active() ) {
+			return '';
+		}
+
+		return apply_filters( 'wppr_excerpt', wp_strip_all_tags( preg_replace( '/<!-- Start WPPR Review -->[\s\S]*?<!-- End WPPR Review -->/', '', apply_filters( 'the_content', get_post_field( 'post_content', $this->get_ID() ) ) ) ), $this->ID, $this );
+	}
+
+	/**
+	 * Get the review author.
+	 */
+	public function get_author() {
+		if ( ! $this->is_active() ) {
+			return '';
+		}
+
+		$author_id = get_post_field( 'post_author', $this->get_ID() );
+
+		return get_the_author_meta( 'display_name', $author_id );
+	}
+
+	/**
+	 * Calculate rating by options pair.
+	 *
+	 * @param array $options Options pair.
+	 *
+	 * @return float|int The rating by options pairs.
+	 */
+	public function rating_by_options( $options ) {
+		if ( empty( $options ) ) {
+			return 0;
+		}
+
+		return ( array_sum( wp_list_pluck( $options, 'value' ) ) / count( $options ) );
+
 	}
 
 }

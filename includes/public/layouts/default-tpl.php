@@ -25,7 +25,7 @@ if ( $review_object->get_click() == 'image' ) {
 	$lightbox = 'data-lightbox="' . esc_url( $review_object->get_small_thumbnail() ) . '"';
 	$image_link = $review_object->get_image();
 }
-$output = '
+$output = '<!-- Start WPPR Review -->
 <section id="review-statistics"  class="article-section">
     <div class="review-wrap-up  cwpr_clearfix" >
         <div class="cwpr-review-top cwpr_clearfix">
@@ -101,3 +101,4 @@ foreach ( $links as $title => $link ) {
             ';
 	}
 }
+$output .= '<!-- End WPPR Review -->';
