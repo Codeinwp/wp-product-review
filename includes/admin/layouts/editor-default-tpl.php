@@ -4,6 +4,7 @@
  *
  * @package     WPPR
  * @subpackage  Layouts
+ * @global      $model WPPR_Editor_Model
  * @copyright   Copyright (c) 2017, Bogdan Preda
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       3.0.0
@@ -239,7 +240,7 @@ $check = $review->is_active() ? 'yes' : 'no';
 		</div>
 		<?php do_action( 'wppr_editor_options_before', $model->post ); ?>
 		<div class="wppr-review-fieldset wppr-review-options-fields">
-			<ul class="wppr-review-options-list clear">
+			<ul class="wppr-review-options-list">
 				<?php
 
 				$options_nr = $model->wppr_get_option( 'cwppos_option_nr' );
@@ -250,7 +251,7 @@ $check = $review->is_active() ? 'yes' : 'no';
 						<?php
 						echo $html_helper->text(
 							array(
-								'name'        => 'wppr-editor-options-name[]',
+								'name'        => 'wppr-editor-options-name[' . $i . ']',
 								'id'          => 'wppr-editor-options-name-' . $i,
 								'value'       => $model->get_value( 'wppr-option-name-' . $i ),
 								'placeholder' => __( 'Option', 'wp-product-review' ) . ' ' . $i,
@@ -258,7 +259,7 @@ $check = $review->is_active() ? 'yes' : 'no';
 						);
 						echo $html_helper->text(
 							array(
-								'name'        => 'wppr-editor-options-value[]',
+								'name'        => 'wppr-editor-options-value[' . $i . ']',
 								'id'          => 'wppr-editor-options-value-' . $i,
 								'class'       => 'wppr-text wppr-option-number',
 								'value'       => $model->get_value( 'wppr-option-value-' . $i ),
@@ -281,7 +282,7 @@ $check = $review->is_active() ? 'yes' : 'no';
 
 		<?php do_action( 'wppr_editor_pros_before', $model->post ); ?>
 		<div class="wppr-review-fieldset wppr-review-pros-fields">
-			<ul class="wppr-review-options-list clear">
+			<ul class="wppr-review-options-list ">
 				<?php
 				$options_nr = $model->wppr_get_option( 'cwppos_option_nr' );
 				$pros       = $review->get_pros();
@@ -312,7 +313,7 @@ $check = $review->is_active() ? 'yes' : 'no';
 		<p><?php _e( 'Insert product\'s cons features below.', 'wp-product-review' ); ?></p>
 		<?php do_action( 'wppr_editor_cons_before', $model->post ); ?>
 		<div class="wppr-review-fieldset wppr-review-cons-fields">
-			<ul class="wppr-review-options-list clear">
+			<ul class="wppr-review-options-list ">
 				<?php
 				$options_nr = $model->wppr_get_option( 'cwppos_option_nr' );
 				$cons       = $review->get_cons();
