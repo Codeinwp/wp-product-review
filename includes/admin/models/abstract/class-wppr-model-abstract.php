@@ -82,7 +82,7 @@ class WPPR_Model_Abstract {
 		}
 		$default = $this->get_default( $key );
 
-		return apply_filters( 'wppr_get_old_option', $default, $key );
+		return apply_filters( 'wppr_get_default_option', $default, $key );
 	}
 
 	/**
