@@ -92,11 +92,13 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 			echo $args['before_title'] . $instance['title'] . $args['after_title'];
 		}
 		$template = new WPPR_Template();
-		$template->render( 'widget/' . $instance['cwp_tp_layout'], array(
-			'results'      => $results,
-			'title_length' => self::RESTRICT_TITLE_CHARS,
-			'instance'     => $instance
-		) );
+		$template->render(
+			'widget/' . $instance['cwp_tp_layout'], array(
+				'results'      => $results,
+				'title_length' => self::RESTRICT_TITLE_CHARS,
+				'instance'     => $instance,
+			)
+		);
 		echo $args['after_widget'];
 	}
 
