@@ -91,8 +91,12 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 		if ( ! empty( $instance['title'] ) ) {
 			echo $args['before_title'] . $instance['title'] . $args['after_title'];
 		}
-		include WPPR_PATH . '/includes/public/layouts/widget/' . $instance['cwp_tp_layout'];
-
+		$template = new WPPR_Template();
+		$template->render( 'widget/' . $instance['cwp_tp_layout'], array(
+			'results'      => $results,
+			'title_length' => self::RESTRICT_TITLE_CHARS,
+			'instance'     => $instance
+		) );
 		echo $args['after_widget'];
 	}
 
@@ -111,7 +115,7 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 		if ( ! isset( $instance['title'] ) ) {
 			$instance['title'] = __( 'Top Products', 'wp-product-review' );
 		}
-		$instance          = parent::form( $instance );
+		$instance = parent::form( $instance );
 
 		include( WPPR_PATH . '/includes/admin/layouts/widget-admin-tpl.php' );
 	}

@@ -11,6 +11,7 @@
  */
 
 if ( $review_object->wppr_get_option( 'wppr_rich_snippet' ) == 'yes' ) {
-	$output .= '
-    <script type="application/ld+json">' . json_encode( $review_object->get_json_ld() ) . '</script>';
+	?>
+	<script type="application/ld+json"><?php echo json_encode( $review_object->get_json_ld() ); ?></script>
+	<?php
 }
