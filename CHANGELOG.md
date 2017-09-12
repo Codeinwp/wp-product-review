@@ -1,4 +1,10 @@
 
+ ### v3.0.10 - 2017-09-12 
+ **Changes:** 
+ * Fix for decimal separator in rich snippet.
+* Improvements for template engine, allowing overwriting in child themes also.
+* Added review content and excerpt proprieties.
+ 
  ### v3.0.9 - 2017-09-07 
  **Changes:** 
  * Improved JSON-LD scheme.
