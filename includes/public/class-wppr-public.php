@@ -294,18 +294,20 @@ class Wppr_Public {
 		}
 		if ( $this->review->is_active() && is_singular() ) {
 			$output        = '';
-			$visual        = 'full';
 			$review_object = $this->review;
-			if ( $visual == 'full' ) {
-				$theme_template = get_template_directory() . '/wppr/default.php';
-				if ( file_exists( $theme_template ) ) {
-					include( $theme_template );
-				} else {
-					include( WPPR_PATH . '/includes/public/layouts/default-tpl.php' );
-				}
-			}
+			$template      = new WPPR_Template();
 
-			include_once( WPPR_PATH . '/includes/public/layouts/rich-json-ld.php' );
+			$output .= $template->render(
+				'default', array(
+					'review_object' => $review_object,
+				), false
+			);
+
+			$output .= $template->render(
+				'rich-json-ld', array(
+					'review_object' => $review_object,
+				), false
+			);
 
 			$review_position_before_content = $this->review->wppr_get_option( 'cwppos_show_reviewbox' );
 			if ( $review_position_before_content == 'yes' ) {

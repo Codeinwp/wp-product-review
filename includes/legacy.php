@@ -24,13 +24,18 @@ function cwppos_show_review( $post_id ) {
 	$public->load_review_assets( $review_object );
 	$output = '';
 	if ( $review_object->is_active() ) {
-		$theme_template = get_template_directory() . '/wppr/default.php';
-		if ( file_exists( $theme_template ) ) {
-			include( $theme_template );
-		} else {
-			include( WPPR_PATH . '/includes/public/layouts/default-tpl.php' );
-		}
-		include( WPPR_PATH . '/includes/public/layouts/rich-json-ld.php' );
+		$template = new WPPR_Template();
+		$output   .= $template->render(
+			'default', array(
+				'review_object' => $review_object,
+			), false
+		);
+
+		$output .= $template->render(
+			'rich-json-ld', array(
+				'review_object' => $review_object,
+			), false
+		);
 	}
 
 	return $output;

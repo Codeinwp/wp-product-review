@@ -982,7 +982,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		);
 		$ld['offers'] = array(
 			'@type'         => 'Offer',
-			'price'         => number_format( $this->get_price(), 2 ),
+			'price'         => number_format( $this->get_price(), 2, '.', '' ),
 			'priceCurrency' => $this->get_currency(),
 			'seller'        => array(
 				'@type' => 'Person',
@@ -1054,6 +1054,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			return '';
 		}
 		$content = $this->get_content();
+		$content = strip_shortcodes( $content );
 
 		$excerpt_length = apply_filters( 'excerpt_length', 55 );
 
