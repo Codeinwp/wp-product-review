@@ -67,7 +67,7 @@ class WPPR {
 	 */
 	public function __construct() {
 		$this->plugin_name = 'wppr';
-		$this->version     = '3.0.10';
+		$this->version     = '3.0.11';
 
 		$this->load_dependencies();
 		$this->set_locale();
