@@ -67,6 +67,11 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+= 3.0.11 - 2017-09-15  = 
+
+* Fix for issue of hidden review box and widget area.
+
+
 = 3.0.10 - 2017-09-12  = 
 
 * Fix for decimal separator in rich snippet.

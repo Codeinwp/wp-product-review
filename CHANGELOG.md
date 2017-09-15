@@ -1,4 +1,8 @@
 
+ ### v3.0.11 - 2017-09-15 
+ **Changes:** 
+ * Fix for issue of hidden review box and widget area.
+ 
  ### v3.0.10 - 2017-09-12 
  **Changes:** 
  * Fix for decimal separator in rich snippet.
