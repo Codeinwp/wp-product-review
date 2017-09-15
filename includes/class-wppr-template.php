@@ -57,12 +57,19 @@ class WPPR_Template {
 			}
 			$$name = $value;
 		}
+		/**
+		 * Store the view output in cache based on the args it needs.
+		 */
+		$cache_key = md5( $location . serialize( $args ) );
+		$content   = wp_cache_get( $cache_key, 'wppr' );
+		if ( empty( $content ) ) {
+			ob_start();
+			require_once( $location );
+			$content = ob_get_contents();
+			ob_end_clean();
 
-		ob_start();
-		require_once( $location );
-		$content = ob_get_contents();
-
-		ob_end_clean();
+			wp_cache_set( $cache_key, $content, 'wppr', 5 * 60 );
+		}
 		if ( ! $echo ) {
 			return $content;
 		}
