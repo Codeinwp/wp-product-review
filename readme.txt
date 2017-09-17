@@ -67,6 +67,11 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+= 3.0.12 - 2017-09-17  = 
+
+* Fix for review box issues.
+
+
 = 3.0.11 - 2017-09-15  = 
 
 * Fix for issue of hidden review box and widget area.

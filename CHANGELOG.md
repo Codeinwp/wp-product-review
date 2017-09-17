@@ -1,4 +1,8 @@
 
+ ### v3.0.12 - 2017-09-17 
+ **Changes:** 
+ * Fix for review box issues.
+ 
  ### v3.0.11 - 2017-09-15 
  **Changes:** 
  * Fix for issue of hidden review box and widget area.
