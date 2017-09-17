@@ -1071,7 +1071,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			return '';
 		}
 
-		return apply_filters( 'wppr_excerpt', wp_strip_all_tags( preg_replace( '/<!-- Start WPPR Review -->[\s\S]*?<!-- End WPPR Review -->/', '', apply_filters( 'the_content', get_post_field( 'post_content', $this->get_ID() ) ) ) ), $this->ID, $this );
+		return apply_filters( 'wppr_excerpt', wp_strip_all_tags( preg_replace( '/<!-- Start WPPR Review -->[\s\S]*?<!-- End WPPR Review -->/', '', do_shortcode( get_post_field( 'post_content', $this->get_ID() ) ) ) ), $this->ID, $this );
 	}
 
 	/**
