@@ -16,45 +16,45 @@ jQuery(document).ready(function ($) {
 				return c4;
 			}
 		};
-		if (typeof trackcolor != 'undefined') {
+		if (typeof trackcolor !== 'undefined') {
 			trackColorRight = trackcolor.toUpperCase();
 		} else {
 			trackColorRight = '#ebebeb';
 		}
+		jQuery('.wppr-review-container').each(function () {
 
-		var box_width = $('.cwp-review-percentage').attr('data-box-size');
-
-		box_width = parseInt(box_width);
-		if (isNaN(box_width)) {
-
-			var p_image_width = $('.review-wrap-up .rev-wu-image').width();
-			if (p_image_width == 0 || p_image_width == null) {
-				p_image_width = 50;
+			var box_width = $(this).find('.cwp-review-percentage').attr('data-box-size');
+			box_width = parseInt(box_width);
+			if (isNaN(box_width)) {
+				var p_image_width = $(this).find('.review-wrap-up .rev-wu-image').width();
+				if (p_image_width == 0 || p_image_width == null) {
+					p_image_width = 50;
+				}
+				box_width = p_image_width;
+				box_width = Math.min(box_width, 150) * 0.8;
 			}
-			box_width = p_image_width;
-			box_width = Math.min(box_width, 150) * 0.8;
+			var line_width = 15 * Math.min(box_width, 150) / 140;
 
-		}
-		var line_width = 15 * Math.min(box_width, 150) / 140;
-		$('.cwp-review-percentage').cwp_easyPieChart({
-			barColor: function (percent) {
-				return returnColor(percent);
-			},
-			trackColor: trackColorRight,
-			scaleColor: false,
-			lineCap: 'butt',
-			rotate: 0,
-			lineWidth: line_width,
-			animate: 1,
-			size: box_width,
-			onStep: function (value) {
-				var c = returnColor(value);
+			$(this).find('.cwp-review-percentage').cwp_easyPieChart({
+				barColor: function (percent) {
+					return returnColor(percent);
+				},
+				trackColor: trackColorRight,
+				scaleColor: false,
+				lineCap: 'butt',
+				rotate: 0,
+				lineWidth: line_width,
+				animate: 1,
+				size: box_width,
+				onStep: function (value) {
+					var c = returnColor(value);
 
-				this.$el.find('span').text(~~value / 10);
-				this.$el.find('span').css({
-					color: c
-				});
-			}
+					this.$el.find('span').text(~~value / 10);
+					this.$el.find('span').css({
+						color: c
+					});
+				}
+			});
 		});
 	};
 

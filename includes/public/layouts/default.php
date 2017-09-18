@@ -26,7 +26,7 @@ if ( $review_object->get_click() == 'image' ) {
 	$image_link = $review_object->get_image();
 }
 ?>
-<div id="wppr-review-<?php echo $review_object->get_ID(); ?>">
+<div id="wppr-review-<?php echo $review_object->get_ID(); ?>" class="wppr-review-container">
 	<section id="review-statistics" class="article-section">
 		<div class="review-wrap-up  cwpr_clearfix">
 			<div class="cwpr-review-top cwpr_clearfix">
