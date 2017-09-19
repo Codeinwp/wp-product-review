@@ -47,7 +47,7 @@ if ( $review_object->get_click() == 'image' ) {
 					<div class="cwp-review-chart ">
 					<span>
 						<div class="cwp-review-percentage"
-						     data-percent="<?php echo esc_attr( $review_object->get_rating() ); ?>">
+							 data-percent="<?php echo esc_attr( $review_object->get_rating() ); ?>">
 							<span class="cwp-review-rating"><?php echo esc_html( $review_object->get_rating() ); ?></span>
 						</div>
 					</span>
@@ -76,8 +76,8 @@ if ( $review_object->get_click() == 'image' ) {
 						echo esc_html(
 							apply_filters(
 								'wppr_review_pros_text', $review_object->wppr_get_option(
-								'cwppos_pros_text'
-							)
+									'cwppos_pros_text'
+								)
 							)
 						);
 						?>
@@ -98,8 +98,8 @@ if ( $review_object->get_click() == 'image' ) {
 						echo esc_html(
 							apply_filters(
 								'wppr_review_cons_text', $review_object->wppr_get_option(
-								'cwppos_cons_text'
-							)
+									'cwppos_cons_text'
+								)
 							)
 						);
 						?>
