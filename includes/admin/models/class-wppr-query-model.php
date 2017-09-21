@@ -90,7 +90,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		$post = array(
 			'category_id'   => false,
 			'category_name' => false,
-			'post_type'     => array( 'post', 'page' )
+			'post_type'     => array( 'post', 'page' ),
 		),
 		$limit = 20,
 		$filter = array(
@@ -217,15 +217,15 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		$conditions          = array( 'where' => '', 'having' => '' );
 		$conditions['where'] = $this->get_sub_query_conditions( $post );
 		if ( isset( $filter['name'] ) && $filter['name'] != false ) {
-			$conditions['having'] .= $this->db->prepare( " AND `name` LIKE %s ", '%' . $filter['name'] . '%' );
+			$conditions['having'] .= $this->db->prepare( ' AND `name` LIKE %s ', '%' . $filter['name'] . '%' );
 		}
 
 		if ( isset( $filter['price'] ) && $filter['price'] != false && is_numeric( $filter['price'] ) ) {
-			$conditions['having'] .= $this->db->prepare( " AND `price` > FORMAT( %d, 2 ) ", $filter['price'] );
+			$conditions['having'] .= $this->db->prepare( ' AND `price` > FORMAT( %d, 2 ) ', $filter['price'] );
 		}
 
 		if ( isset( $filter['rating'] ) && $filter['rating'] != false && is_numeric( $filter['rating'] ) ) {
-			$conditions['having'] .= $this->db->prepare( " AND `rating`  > %f ", $filter['rating'] );
+			$conditions['having'] .= $this->db->prepare( ' AND `rating`  > %f ', $filter['rating'] );
 		}
 
 		return $conditions;
