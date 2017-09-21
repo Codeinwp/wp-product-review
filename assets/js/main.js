@@ -32,10 +32,9 @@ jQuery(document).ready(function ($) {
 					p_image_width = 50;
 				}
 				box_width = p_image_width;
-				box_width = Math.min(box_width, 150) * 0.8;
 			}
 			var line_width = 15 * Math.min(box_width, 150) / 140;
-
+			box_width = Math.min(box_width, 150) * 0.8;
 			rating.cwp_easyPieChart({
 				barColor: function (percent) {
 					return returnColor(percent);
