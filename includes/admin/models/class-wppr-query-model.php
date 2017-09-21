@@ -164,10 +164,10 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	 * @return string
 	 */
 	private function get_sub_query_posts( $post ) {
+		// TODO Build validation methods for category name and id and reuse them here and in get_sub_query_conditions method.
 		if ( ! isset( $post['category_name'] ) && ! isset( $post['category_id'] ) ) {
 			return '';
 		}
-		$sub_selection_query = '';
 		$sub_selection_query = "INNER JOIN {$this->db->term_relationships } wtr ON wtr.object_id = p.ID
 	            INNER JOIN {$this->db->term_taxonomy} wtt on wtt.term_taxonomy_id = wtr.term_taxonomy_id
 	            INNER JOIN {$this->db->terms} wt
