@@ -21,7 +21,7 @@ jQuery(document).ready(function ($) {
 		} else {
 			trackColorRight = '#ebebeb';
 		}
-		jQuery('.review-wu-grade').each(function () {
+		jQuery('.review-wu-grade, .review-grade-widget').each(function () {
 			var box = $(this);
 			var rating = box.find('.cwp-review-percentage');
 			var box_width = rating.attr('data-box-size');;
