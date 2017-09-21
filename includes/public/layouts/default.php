@@ -25,8 +25,13 @@ if ( $review_object->get_click() == 'image' ) {
 	$lightbox   = 'data-lightbox="' . esc_url( $review_object->get_small_thumbnail() ) . '"';
 	$image_link = $review_object->get_image();
 }
+
+$pros = $review_object->get_pros();
+$cons = $review_object->get_cons();
+
 ?>
-<div id="wppr-review-<?php echo $review_object->get_ID(); ?>" class="wppr-review-container">
+<div id="wppr-review-<?php echo $review_object->get_ID(); ?>"
+	 class="wppr-review-container <?php echo( empty( $pros ) ? 'wppr-review-no-pros' : '' ); ?> <?php echo( empty( $cons ) ? 'wppr-review-no-cons' : '' ); ?>">
 	<section id="review-statistics" class="article-section">
 		<div class="review-wrap-up  cwpr_clearfix">
 			<div class="cwpr-review-top cwpr_clearfix">
@@ -69,52 +74,63 @@ if ( $review_object->get_click() == 'image' ) {
 					?>
 				</div><!-- end .review-wu-bars -->
 			</div><!-- end .review-wu-left -->
-			<div class="review-wu-right">
-				<div class="pros">
-					<h2>
-						<?php
-						echo esc_html(
-							apply_filters(
-								'wppr_review_pros_text', $review_object->wppr_get_option(
-									'cwppos_pros_text'
-								)
-							)
-						);
-						?>
-					</h2>
-					<ul>
-						<?php
-						foreach ( $review_object->get_pros() as $pro ) {
-							?>
-							<li><?php echo esc_html( $pro ); ?></li>
-							<?php
-						}
-						?>
-					</ul>
-				</div><!-- end .pros -->
-				<div class="cons">
-					<h2>
-						<?php
-						echo esc_html(
-							apply_filters(
-								'wppr_review_cons_text', $review_object->wppr_get_option(
-									'cwppos_cons_text'
-								)
-							)
-						);
-						?>
-					</h2>
-					<ul>
-						<?php
-						foreach ( $review_object->get_cons() as $con ) {
-							?>
+			<?php
+			if ( ! empty( $pros ) || ! empty( $cons ) ) :
+				?>
+				<div class="review-wu-right">
+					<?php if ( ! empty( $pros ) ) : ?>
+						<div class="pros">
+							<h2>
+								<?php
+								echo esc_html(
+									apply_filters(
+										'wppr_review_pros_text', $review_object->wppr_get_option(
+											'cwppos_pros_text'
+										)
+									)
+								);
+								?>
+							</h2>
+							<ul>
+								<?php
+								foreach ( $pros as $pro ) {
+									?>
+									<li><?php echo esc_html( $pro ); ?></li>
+									<?php
+								}
+								?>
+							</ul>
+						</div><!-- end .pros -->
+					<?php
+					endif;
+if ( ! empty( $cons ) ) :
+					?>
+						<div class="cons">
+							<h2>
+								<?php
+								echo esc_html(
+									apply_filters(
+										'wppr_review_cons_text', $review_object->wppr_get_option(
+											'cwppos_cons_text'
+										)
+									)
+								);
+			?>
+		</h2>
+		<ul>
+			<?php
+			foreach ( $cons as $con ) {
+				?>
 
-							<li><?php echo esc_html( $con ); ?></li>
+				<li><?php echo esc_html( $con ); ?></li>
 
-						<?php } ?>
-					</ul>
-				</div>
-			</div><!-- end .review-wu-right -->
+								<?php } ?>
+		</ul>
+	</div>
+
+<?php endif; ?>
+				</div><!-- end .review-wu-right -->
+			<?php endif; ?>
 		</div><!-- end .review-wrap-up -->
 	</section>
 	<?php

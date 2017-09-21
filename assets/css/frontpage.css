@@ -270,6 +270,10 @@
 	margin-top: 10px;
 }
 
+.wppr-review-container.wppr-review-no-pros.wppr-review-no-cons #review-statistics .review-wrap-up .review-wu-left {
+	width: 100%;
+}
+
 #review-statistics .review-wrap-up .review-wu-left .rev-wu-image {
 	float: left;
 	overflow: hidden;
