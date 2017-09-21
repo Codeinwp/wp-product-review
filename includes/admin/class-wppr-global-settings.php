@@ -70,7 +70,7 @@ class WPPR_Global_Settings {
 						'cwppos_show_reviewbox'  => array(
 							'id'      => 'review_position',
 							'name'    => __( 'Position of the review box', 'wp-product-review' ),
-							'description'    => __( 'You can choose manually and use : <?php echo cwppos_show_review(\'postid\'); ?> or you can get the Product in post add-on and use :[P_REVIEW post_id=3067 visual=\'full\']', 'wp-product-review' ),
+							'description'    => __( 'You display the review using the shortcode available in the pro version <code> [P_REVIEW post_id=3067 visual=\'full\']</code>', 'wp-product-review' ),
 							'type'    => 'select',
 							'options' => array(
 								'yes'    => __( 'After content', 'wp-product-review' ),
