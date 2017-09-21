@@ -16,8 +16,6 @@
  * @return string The review string.
  */
 function cwppos_show_review( $post_id ) {
-	$model = new WPPR_Query_Model();
-	$model->find();
 	$plugin        = new WPPR();
 	$review_object = new WPPR_Review_Model( $post_id );
 	$public        = new Wppr_Public( $plugin->get_plugin_name(), $plugin->get_version() );
