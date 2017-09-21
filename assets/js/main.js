@@ -21,12 +21,13 @@ jQuery(document).ready(function ($) {
 		} else {
 			trackColorRight = '#ebebeb';
 		}
-		jQuery('.wppr-review-container').each(function () {
+		jQuery('.review-wu-grade').each(function () {
 			var box = $(this);
-			var box_width = box.find('.cwp-review-percentage').attr('data-box-size');
+			var rating = box.find('.cwp-review-percentage');
+			var box_width = rating.attr('data-box-size');;
 			box_width = parseInt(box_width);
 			if (isNaN(box_width)) {
-				var p_image_width = box.find('.review-wrap-up .rev-wu-image').width();
+				var p_image_width = box.closest('.review-wrap-up').find('.rev-wu-image').width();
 				if (p_image_width == 0 || p_image_width == null) {
 					p_image_width = 50;
 				}
@@ -35,7 +36,7 @@ jQuery(document).ready(function ($) {
 			}
 			var line_width = 15 * Math.min(box_width, 150) / 140;
 
-			box.find('.cwp-review-percentage').cwp_easyPieChart({
+			rating.cwp_easyPieChart({
 				barColor: function (percent) {
 					return returnColor(percent);
 				},
