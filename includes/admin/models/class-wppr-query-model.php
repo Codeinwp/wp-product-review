@@ -129,7 +129,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
             GROUP_CONCAT( DISTINCT IF( `meta_key` = 'cwp_meta_box_check', `meta_value`, '' ) SEPARATOR '' ) AS 'check', 
             GROUP_CONCAT( DISTINCT IF( `meta_key` = 'cwp_rev_product_name', `meta_value`, '' ) SEPARATOR '' ) AS 'name',   
             GROUP_CONCAT( DISTINCT IF( `meta_key` = 'cwp_rev_price', FORMAT( `meta_value`, 2 ), '' ) SEPARATOR '' ) AS 'price', 
-            GROUP_CONCAT( DISTINCT IF( `meta_key` = 'wppr_rating', `meta_value`, '' ) SEPARATOR '' ) AS 'rating'
+            GROUP_CONCAT( DISTINCT IF( `meta_key` = 'wppr_rating', FORMAT( `meta_value`, 2 ), '' ) SEPARATOR '' ) AS 'rating'
         FROM {$this->db->postmeta} m INNER JOIN {$this->db->posts} p on p.ID = m.post_ID
         
         {$sub_query_posts}
