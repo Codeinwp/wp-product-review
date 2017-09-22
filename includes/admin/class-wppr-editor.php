@@ -19,7 +19,7 @@ class WPPR_Editor {
 	 *
 	 * @since    3.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
@@ -28,7 +28,7 @@ class WPPR_Editor {
 	 *
 	 * @since    3.0.0
 	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var      string $version The current version of this plugin.
 	 */
 	private $version;
 
@@ -36,13 +36,14 @@ class WPPR_Editor {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    3.0.0
-	 * @param      string $plugin_name       The name of this plugin.
-	 * @param      string $version    The version of this plugin.
+	 *
+	 * @param      string $plugin_name The name of this plugin.
+	 * @param      string $version The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 
 	}
 
@@ -66,7 +67,8 @@ class WPPR_Editor {
 	 *
 	 * @since   3.0.0
 	 * @access  public
-	 * @param   WP_Post $post   The post object.
+	 *
+	 * @param   WP_Post $post The post object.
 	 */
 	public function render_metabox( $post ) {
 		$editor = $this->get_editor_name( $post );
@@ -80,7 +82,9 @@ class WPPR_Editor {
 	 *
 	 * @since   3.0.0
 	 * @access  public
-	 * @param   WP_Post $post   The post object.
+	 *
+	 * @param   WP_Post $post The post object.
+	 *
 	 * @return WPPR_Editor_Abstract
 	 */
 	private function get_editor_name( $post ) {
@@ -99,7 +103,8 @@ class WPPR_Editor {
 	 *
 	 * @since   3.0.0
 	 * @access  public
-	 * @param   WP_Post $post   The post object.
+	 *
+	 * @param   WP_Post $post The post object.
 	 */
 	public function load_assets( $post ) {
 		global $post;
@@ -110,7 +115,10 @@ class WPPR_Editor {
 				if ( isset( $assets['js'] ) ) {
 					foreach ( $assets['js'] as $handle => $data ) {
 						if ( isset( $data['path'] ) ) {
-							wp_enqueue_script( 'wppr-' . $handle . '-css', $data['path'], $data['required'], $this->version, true );
+							wp_enqueue_script( 'wppr-' . $handle . '-js', $data['path'], $data['required'], $this->version, true );
+						}
+						if ( isset( $data['vars'] ) ) {
+							wp_localize_script( 'wppr-' . $handle . '-js', $handle . '_vars', $data['vars'] );
 						}
 					}
 				}
@@ -131,7 +139,8 @@ class WPPR_Editor {
 	 *
 	 * @since   3.0.0
 	 * @access  public
-	 * @param   int $post_id    The post ID.
+	 *
+	 * @param   int $post_id The post ID.
 	 */
 	public function editor_save( $post_id ) {
 		$editor = $this->get_editor_name( get_post( $post_id ) );

@@ -11,8 +11,8 @@ jQuery( document ).ready(function(){
 			wp.media.frame.open();
 			return;
 		}
-		var mtitle = "Add a product image to the review";
-		var mbutton = "Attach the image ";
+		var mtitle = editor_vars.image_title ;
+		var mbutton = editor_vars.image_button;
 
 		meta_image_frame = wp.media.frames.meta_image_frame = wp.media({
 			title: mtitle,
