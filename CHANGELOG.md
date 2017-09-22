@@ -1,4 +1,11 @@
 
+ ### v3.1.0 - 2017-09-22 
+ **Changes:** 
+ * Fix for some edge cases when the review box was gone. 
+* Improvements assets loading, removed redundant files.
+* Improvements perfomance of review query. 
+* Various bug fixes reported by clients.
+ 
  ### v3.0.12 - 2017-09-17 
  **Changes:** 
  * Fix for review box issues.

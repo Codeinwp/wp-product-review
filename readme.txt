@@ -67,6 +67,14 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+= 3.1.0 - 2017-09-22  = 
+
+* Fix for some edge cases when the review box was gone. 
+* Improvements assets loading, removed redundant files.
+* Improvements perfomance of review query. 
+* Various bug fixes reported by clients.
+
+
 = 3.0.12 - 2017-09-17  = 
 
 * Fix for review box issues.
