@@ -1070,8 +1070,31 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		if ( ! $this->is_active() ) {
 			return '';
 		}
+		$content = get_post_field( 'post_content', $this->get_ID() );
+		if ( empty( $content ) ) {
+			return '';
+		}
 
-		return apply_filters( 'wppr_excerpt', wp_strip_all_tags( preg_replace( '/<!-- Start WPPR Review -->[\s\S]*?<!-- End WPPR Review -->/', '', do_shortcode( get_post_field( 'post_content', $this->get_ID() ) ) ) ), $this->ID, $this );
+		/**
+		 * Prevent infinite loop by removing the wppr shortcodes from content.
+		 */
+		$wppr_shortcodes = apply_filters(
+			'wppr_shortcodes', array(
+				'P_REVIEW'    => '',
+				'wpr_landing' => '',
+				'wpr_listing' => '',
+			)
+		);
+		global $shortcode_tags;
+		$temp_shortcode_tags = $shortcode_tags;
+		$shortcode_tags      = $wppr_shortcodes;
+		$regex               = '/' . get_shortcode_regex() . '/s';
+		$shortcode_tags      = $temp_shortcode_tags;
+		$content             = preg_replace( $regex, '', $content );
+		$content             = do_shortcode( $content );
+		$content             = wp_strip_all_tags( $content );
+
+		return apply_filters( 'wppr_content', $content, $this->ID, $this );
 	}
 
 	/**

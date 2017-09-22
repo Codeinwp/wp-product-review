@@ -64,7 +64,7 @@ class WPPR_Template {
 		$content   = wp_cache_get( $cache_key, 'wppr' );
 		if ( empty( $content ) ) {
 			ob_start();
-			require_once( $location );
+			require( $location );
 			$content = ob_get_contents();
 			ob_end_clean();
 

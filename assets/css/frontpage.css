@@ -1,5 +1,5 @@
 /*
-	Version: 3.0.12
+	Version: 3.1.0
 */
 #review-statistics {
 	width: 100%;
@@ -268,6 +268,10 @@
 	float: left;
 	width: 51%;
 	margin-top: 10px;
+}
+
+.wppr-review-container.wppr-review-no-pros.wppr-review-no-cons #review-statistics .review-wrap-up .review-wu-left {
+	width: 100%;
 }
 
 #review-statistics .review-wrap-up .review-wu-left .rev-wu-image {

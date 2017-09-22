@@ -109,7 +109,6 @@ class WPPR_Admin {
 		 */
 
 		if ( $hook == 'toplevel_page_wppr' ) {
-			wp_enqueue_script( $this->plugin_name . '-tiplsy-js', WPPR_URL . '/assets/js/tipsy.js', array( 'jquery' ), $this->version );
 			wp_enqueue_script(
 				$this->plugin_name . '-admin-js', WPPR_URL . '/assets/js/admin.js',
 				array(

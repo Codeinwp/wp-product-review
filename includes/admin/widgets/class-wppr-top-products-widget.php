@@ -122,25 +122,5 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 		include( WPPR_PATH . '/includes/admin/layouts/widget-admin-tpl.php' );
 	}
 
-	/**
-	 * Method for loading admin widget assets.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
-	public function adminAssets() {
-		if ( is_admin() ) {
-			wp_enqueue_style( WPPR_SLUG . '-widget-admin-css', WPPR_URL . '/assets/css/cwppos-widget-admin.css', array(), WPPR_LITE_VERSION );
 
-			wp_register_script( WPPR_SLUG . '-widget-script-top', WPPR_URL . '/assets/js/widget-top.js', array(), WPPR_LITE_VERSION );
-			wp_localize_script(
-				WPPR_SLUG . '-widget-script-top', 'wppr_widget_localized_data', array(
-					'widgetName'    => $this->id_base,
-					'imageCheckbox' => $this->get_field_id( 'show_image' ),
-					'ratingSelect'  => $this->get_field_id( 'cwp_tp_rating_type' ),
-				)
-			);
-			wp_enqueue_script( WPPR_SLUG . '-widget-script-top' );
-		}
-	}
 }
