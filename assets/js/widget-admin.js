@@ -25,7 +25,7 @@
             search_contains     : true
         });
 
-        $('.wppr-chosen').on('change', function(evt, params) {
+        $('.wppr-post-types').on('change', function(evt, params) {
             get_categories(params, $(this), $('#' + $(this).attr('data-wppr-cat-combo')));
         });
     }
@@ -45,7 +45,7 @@
                     if(data.data.categories){
                         var $group = '<optgroup label="' + types.find('option[value="' + params.selected + '"]').text() + '">';
                         $.each(data.data.categories, function(id, name){
-                            $group += '<option value="' + id + '">' + name + '</option>';
+                            $group += '<option>' + name + '</option>';
                         });
                         $group += '</optgroup>';
                         categories.append($group);
