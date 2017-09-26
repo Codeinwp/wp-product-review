@@ -126,6 +126,11 @@ class WPPR_Widget_Abstract extends WP_Widget {
 			$instance['cwp_tp_rating_type'] = 'star';
 		}
 
+		if ( ! isset( $instance['cwp_tp_post_types'] ) || empty( $instance['cwp_tp_post_types'] ) ) {
+			// backward compatibility with previous versions where you could not select post types
+			$instance['cwp_tp_post_types']	= array( 'post', 'page' );
+		}
+
 		if ( isset( $instance['cwp_tp_post_types'] ) && ! empty( $instance['cwp_tp_post_types'] ) ) {
 			$categories		= array();
 			foreach ( $instance['cwp_tp_post_types'] as $type ) {
