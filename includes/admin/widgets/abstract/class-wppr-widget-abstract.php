@@ -25,6 +25,7 @@ class WPPR_Widget_Abstract extends WP_Widget {
 		wp_enqueue_style( WPPR_SLUG . '-pac-widget-stylesheet', WPPR_URL . '/assets/css/cwppos-widget.css', array(), WPPR_LITE_VERSION );
 		wp_enqueue_style( WPPR_SLUG . '-widget-stylesheet-one', WPPR_URL . '/assets/css/cwppos-widget-style1.css', array(), WPPR_LITE_VERSION );
 		wp_enqueue_style( WPPR_SLUG . '-widget-rating', WPPR_URL . '/assets/css/cwppos-widget-rating.css', array(), WPPR_LITE_VERSION );
+
 		$plugin = new WPPR();
 		$public = new Wppr_Public( $plugin->get_plugin_name(), $plugin->get_version() );
 
@@ -45,6 +46,7 @@ class WPPR_Widget_Abstract extends WP_Widget {
 	public function widget( $args, $instance ) {
 		$instance['title']           = apply_filters( 'widget_title', $instance['title'] );
 		$instance['no_items']        = apply_filters( 'widget_content', $instance['no_items'] );
+		$instance['cwp_tp_post_types'] = apply_filters( 'widget_content', $instance['cwp_tp_post_types'] );
 		$instance['cwp_tp_category'] = apply_filters( 'widget_content', $instance['cwp_tp_category'] );
 		if ( isset( $instance['title_type'] ) ) {
 			$instance['post_type'] = apply_filters( 'widget_content', $instance['title_type'] );
@@ -95,7 +97,7 @@ class WPPR_Widget_Abstract extends WP_Widget {
 		}
 
 		if ( ! isset( $instance['cwp_tp_category'] ) ) {
-			$instance['cwp_tp_category'] = 'Select Category';
+			$instance['cwp_tp_category'] = __( 'Select Category', 'wp-product-review' );
 		}
 
 		if ( ! isset( $instance['title_type'] ) ) {
@@ -124,9 +126,16 @@ class WPPR_Widget_Abstract extends WP_Widget {
 			$instance['cwp_tp_rating_type'] = 'star';
 		}
 
-		$instance['cwp_tp_categ_array'] = get_categories( 'hide_empty=0' );
-		foreach ( $instance['cwp_tp_categ_array'] as $categs ) {
-			$instance['cwp_tp_all_categories'][ $categs->slug ] = $categs->name;
+		if ( isset( $instance['cwp_tp_post_types'] ) && ! empty( $instance['cwp_tp_post_types'] ) ) {
+			$categories		= array();
+			foreach ( $instance['cwp_tp_post_types'] as $type ) {
+				$post_type	= get_post_type_object( $type );
+				$cats		= WPPR_Admin::get_category_for_post_type( $type );
+				if ( $cats ) {
+					$categories[ $post_type->label ] = $cats;
+				}
+			}
+			$instance['cwp_tp_all_categories'] = $categories;
 		}
 
 		return $instance;
@@ -151,6 +160,7 @@ class WPPR_Widget_Abstract extends WP_Widget {
 
 		$instance['no_items'] = ( ! empty( $new_instance['no_items'] ) ) ? strip_tags( $new_instance['no_items'] ) : '';
 
+		$instance['cwp_tp_post_types'] = ( ! empty( $new_instance['cwp_tp_post_types'] ) ) ? esc_sql( $new_instance['cwp_tp_post_types'] ) : '';
 		$instance['cwp_tp_category'] = ( ! empty( $new_instance['cwp_tp_category'] ) ) ? strip_tags( $new_instance['cwp_tp_category'] ) : '';
 
 		$instance['title_type'] = ( isset( $new_instance['title_type'] ) ) ? (bool) $new_instance['title_type'] : false;
@@ -173,11 +183,17 @@ class WPPR_Widget_Abstract extends WP_Widget {
 	public function adminAssets() {
 		if ( is_admin() ) {
 			wp_enqueue_style( WPPR_SLUG . '-widget-admin-css', WPPR_URL . '/assets/css/cwppos-widget-admin.css', array(), WPPR_LITE_VERSION );
+			wp_enqueue_style( WPPR_SLUG . '-chosen', WPPR_URL . '/assets/css/chosen.min.css', array(), WPPR_LITE_VERSION );
 
-			wp_register_script( WPPR_SLUG . '-widget-script', WPPR_URL . '/assets/js/widget-admin.js', array(), WPPR_LITE_VERSION );
+			wp_enqueue_script( WPPR_SLUG . '-chosen', WPPR_URL . '/assets/js/chosen.jquery.min.js', array( 'jquery' ), WPPR_LITE_VERSION );
+
+			wp_register_script( WPPR_SLUG . '-widget-script', WPPR_URL . '/assets/js/widget-admin.js', array( WPPR_SLUG . '-chosen' ), WPPR_LITE_VERSION );
 			wp_localize_script(
 				WPPR_SLUG . '-widget-script', 'wppr_widget', array(
 					'names' => array( 'cwp_top_products_widget', 'cwp_latest_products_widget' ),
+					'ajax'	=> array(
+						'nonce'		=> wp_create_nonce( WPPR_SLUG ),
+					),
 				)
 			);
 			wp_enqueue_script( WPPR_SLUG . '-widget-script' );
