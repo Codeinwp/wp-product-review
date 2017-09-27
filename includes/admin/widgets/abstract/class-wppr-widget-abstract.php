@@ -46,6 +46,11 @@ class WPPR_Widget_Abstract extends WP_Widget {
 	public function widget( $args, $instance ) {
 		$instance['title']           = apply_filters( 'widget_title', $instance['title'] );
 		$instance['no_items']        = apply_filters( 'widget_content', $instance['no_items'] );
+
+		if ( ! isset( $instance['cwp_tp_post_types'] ) || empty( $instance['cwp_tp_post_types'] ) ) {
+			$instance['cwp_tp_post_types'] = array( 'post', 'page' );
+		}
+
 		$instance['cwp_tp_post_types'] = apply_filters( 'widget_content', $instance['cwp_tp_post_types'] );
 		$instance['cwp_tp_category'] = apply_filters( 'widget_content', $instance['cwp_tp_category'] );
 		if ( isset( $instance['title_type'] ) ) {
@@ -128,14 +133,14 @@ class WPPR_Widget_Abstract extends WP_Widget {
 
 		if ( ! isset( $instance['cwp_tp_post_types'] ) || empty( $instance['cwp_tp_post_types'] ) ) {
 			// backward compatibility with previous versions where you could not select post types
-			$instance['cwp_tp_post_types']	= array( 'post', 'page' );
+			$instance['cwp_tp_post_types']  = array( 'post', 'page' );
 		}
 
 		if ( isset( $instance['cwp_tp_post_types'] ) && ! empty( $instance['cwp_tp_post_types'] ) ) {
-			$categories		= array();
+			$categories     = array();
 			foreach ( $instance['cwp_tp_post_types'] as $type ) {
-				$post_type	= get_post_type_object( $type );
-				$cats		= WPPR_Admin::get_category_for_post_type( $type );
+				$post_type  = get_post_type_object( $type );
+				$cats       = WPPR_Admin::get_category_for_post_type( $type );
 				if ( $cats ) {
 					$categories[ $post_type->label ] = $cats;
 				}
@@ -196,8 +201,8 @@ class WPPR_Widget_Abstract extends WP_Widget {
 			wp_localize_script(
 				WPPR_SLUG . '-widget-script', 'wppr_widget', array(
 					'names' => array( 'cwp_top_products_widget', 'cwp_latest_products_widget' ),
-					'ajax'	=> array(
-						'nonce'		=> wp_create_nonce( WPPR_SLUG ),
+					'ajax'  => array(
+						'nonce'     => wp_create_nonce( WPPR_SLUG ),
 					),
 				)
 			);

@@ -217,19 +217,21 @@ class WPPR_Admin {
 	 * @access  public
 	 */
 	public static function get_category_for_post_type( $post_type ) {
-		$categories	= array();
+		$categories = array();
 		if ( $post_type ) {
 			$taxonomies = get_taxonomies( array( 'object_type' => array( $post_type ), 'hierarchical' => true ), 'objects' );
 			if ( $taxonomies ) {
 				foreach ( $taxonomies as $tax ) {
-					$terms	= get_terms( $tax->name, array(
-						'hide_empty'	=> false,
-					));
+					$terms  = get_terms(
+						$tax->name, array(
+							'hide_empty'    => false,
+						)
+					);
 					if ( empty( $terms ) ) {
 						continue;
 					}
 					foreach ( $terms as $term ) {
-						$categories[ $term->term_id ] = $term->name;
+						$categories[ $term->slug ] = $term->name;
 					}
 				}
 			}

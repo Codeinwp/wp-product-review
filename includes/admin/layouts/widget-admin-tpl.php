@@ -25,7 +25,7 @@
 	<?php
 		foreach( get_post_types( '', 'objects' ) as $post_type ) {
 	?>
-		<option value="<?php echo $post_type->name;?>" <?php echo in_array($post_type->name, $instance['cwp_tp_post_types']) ? 'selected' : '';?>><?php echo $post_type->label;?></option>
+	<option value="<?php echo $post_type->name;?>" <?php echo in_array($post_type->name, $instance['cwp_tp_post_types']) ? 'selected' : '';?>><?php echo $post_type->label;?></option>
 	<?php
 		}
 	?>
@@ -39,19 +39,19 @@
 		<option>All</option>
 		<?php 
 			if ( $all_cats ) {
-				foreach ( $all_cats as $post_type => $cats ) {
+			foreach ( $all_cats as $post_type => $cats ) {
 		?>
 		<optgroup label='<?php echo $post_type;?>'>
 		<?php
-					foreach ( $cats as $k => $v ) {
+				foreach ( $cats as $k => $v ) {
 		?>
-			<option <?php selected($v, $instance['cwp_tp_category'])?>><?php echo $v;?></option>
+<option value="<?php echo $k;?>" <?php selected($k, $instance['cwp_tp_category'])?>><?php echo $v;?></option>
 		<?php
-					}
+				}
 		?>
 		</optgroup>
 		<?php
-				}
+		}
 			}
 		?>
 	</select>

@@ -44,8 +44,8 @@
                 success : function(data){
                     if(data.data.categories){
                         var $group = '<optgroup label="' + types.find('option[value="' + params.selected + '"]').text() + '">';
-                        $.each(data.data.categories, function(id, name){
-                            $group += '<option>' + name + '</option>';
+                        $.each(data.data.categories, function(slug, name){
+                            $group += '<option value="' + slug + '">' + name + '</option>';
                         });
                         $group += '</optgroup>';
                         categories.append($group);
