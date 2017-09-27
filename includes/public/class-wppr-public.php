@@ -78,23 +78,24 @@ class Wppr_Public {
 	 * @param WPPR_Review_Model $review Review model.
 	 */
 	public function load_review_assets( $review = null ) {
-		$load = false;
-		if ( ! empty( $review ) ) {
-			if ( $review->is_active() ) {
-				$load = true;
-			}
-		} else {
-			$review = $this->review;
-			if ( empty( $review ) ) {
-				$load = false;
-			} elseif ( $review->is_active() ) {
-				$load = true;
-			}
-		}
-
+		$load = ! empty( $review ) ? $review->is_active() : ( ! empty( $this->review ) ? $this->review->is_active() : false );
 		if ( ! $load ) {
 			return;
 		}
+
+/*
+		// register all the scripts/styles
+		wp_register_script( $this->plugin_name . '-pie-chart', WPPR_URL . '/assets/js/pie-chart.js', array( 'jquery' ), $this->version, true );
+		wp_register_script( $this->plugin_name . '-lightbox', WPPR_URL . '/assets/js/lightbox.min.js', array( 'jquery' ), $this->version, true );
+		wp_register_style( $this->plugin_name . '-lightbox', WPPR_URL . '/assets/css/lightbox.css', array(), $this->version );
+		wp_register_style( $this->plugin_name . '-jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
+		wp_register_style( $this->plugin_name . 'fontawesome', WPPR_URL . '/assets/css/font-awesome.min.css' );
+		wp_register_style( $this->plugin_name . 'fontawesome', WPPR_URL . '/assets/css/font-awesome.min.css' );
+*/
+
+
+
+
 
 		wp_enqueue_script( $this->plugin_name . '-pie-chart-js', WPPR_URL . '/assets/js/pie-chart.js', array( 'jquery' ), $this->version, true );
 		wp_enqueue_script(
