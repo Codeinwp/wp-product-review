@@ -76,9 +76,13 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 		}
 		if ( isset( $instance['cwp_timespan'] ) && trim( $instance['cwp_timespan'] ) != '' ) {
 			$min_max    = explode( ',', $instance['cwp_timespan'] );
-			$min        = reset( $min_max );
-			$max        = end( $min_max );
-			$post['post_date_range_weeks']  = array( $min, $max );
+			$min        = intval( reset( $min_max ) );
+			$max        = intval( end( $min_max ) );
+			if ( 0 === $min && 0 === $max ) {
+				$post['post_date_range_weeks']  = false;
+			} else {
+				$post['post_date_range_weeks']  = array( $min, $max );
+			}
 		}
 		$order           = array();
 		$order['rating'] = 'DESC';
@@ -125,7 +129,7 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 		}
 
 		if ( ! isset( $instance['cwp_timespan'] ) || empty( $instance['cwp_timespan'] ) ) {
-			$instance['cwp_timespan'] = '-1,0';
+			$instance['cwp_timespan'] = '0,0';
 		}
 
 		$instance = parent::form( $instance );
@@ -174,7 +178,6 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 		$instance   = parent::update( $new_instance, $old_instance );
 
 		$instance['cwp_timespan'] = ( ! empty( $new_instance['cwp_timespan'] ) ) ? strip_tags( $new_instance['cwp_timespan'] ) : '';
-		error_log( print_r( $instance,true ) );
 		return $instance;
 	}
 

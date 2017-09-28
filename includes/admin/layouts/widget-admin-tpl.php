@@ -38,9 +38,13 @@
 <?php
 	if ( 'cwp_top_products_widget' === $this->id_base ) {
 	$timespan	= $instance['cwp_timespan'];
-	$min_max	= explode( ',', $timespan );
-	$min		= reset( $min_max );
-	$max		= end( $min_max );
+	$min		= 0;
+	$max		= 0;
+	if ( ! empty( $timespan ) && false !== $timespan ) {
+		$min_max	= explode( ',', $timespan );
+		$min		= reset( $min_max );
+		$max		= end( $min_max );
+		}
 ?>
 <p>
 <label for="<?php echo $this->get_field_id( 'cwp_timespan' ); ?>"><?php _e( 'Timespan (weeks):', 'wp-product-review' ); ?></label>
