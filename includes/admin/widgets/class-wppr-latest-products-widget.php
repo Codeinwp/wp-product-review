@@ -108,4 +108,23 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 		include( WPPR_PATH . '/includes/admin/layouts/widget-admin-tpl.php' );
 	}
 
+	/**
+	 * Load public assets specific to this widget.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 */
+	public function load_assets() {
+		// empty.
+	}
+
+	/**
+	 * Load admin assets specific to this widget.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 */
+	public function load_admin_assets() {
+		// empty.
+	}
 }

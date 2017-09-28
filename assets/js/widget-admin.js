@@ -15,6 +15,22 @@
 		} else {
 			toggleCustomFields(true, "wpcontent");
 		}
+
+        $('.wppr-range-slider').each(function(){
+            $(this).slider({
+                range   : true,
+                step    : 1,
+                min     : parseInt($(this).attr('data-wppr-min')),
+                max     : parseInt($(this).attr('data-wppr-max')),
+                values  : JSON.parse('[' + $(this).attr('data-wppr-value') + ']'),
+                slide   : function( event, ui ) {
+                    var $desc = $('#' + $(this).attr('data-wppr-desc'));
+                    $desc.find('input').val(ui.values[0] + ',' + ui.values[1]);
+                    $desc.find('span.wppr-range-min').html(Math.abs(ui.values[0]));
+                    $desc.find('span.wppr-range-max').html(Math.abs(ui.values[1]));
+                }
+            });
+        });
 	});
 
 	function toggleCustomFields(deflt, widgetID) {

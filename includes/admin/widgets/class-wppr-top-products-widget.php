@@ -74,6 +74,12 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 		if ( isset( $instance['cwp_tp_category'] ) && trim( $instance['cwp_tp_category'] ) != '' ) {
 			$post['category_name'] = $instance['cwp_tp_category'];
 		}
+		if ( isset( $instance['cwp_timespan'] ) && trim( $instance['cwp_timespan'] ) != '' ) {
+			$min_max    = explode( ',', $instance['cwp_timespan'] );
+			$min        = reset( $min_max );
+			$max        = end( $min_max );
+			$post['post_date_range_weeks']  = array( $min, $max );
+		}
 		$order           = array();
 		$order['rating'] = 'DESC';
 
@@ -117,10 +123,59 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 		if ( ! isset( $instance['title'] ) ) {
 			$instance['title'] = __( 'Top Products', 'wp-product-review' );
 		}
+
+		if ( ! isset( $instance['cwp_timespan'] ) || empty( $instance['cwp_timespan'] ) ) {
+			$instance['cwp_timespan'] = '-1,0';
+		}
+
 		$instance = parent::form( $instance );
 
 		include( WPPR_PATH . '/includes/admin/layouts/widget-admin-tpl.php' );
 	}
 
+	/**
+	 * Load public assets specific to this widget.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 */
+	public function load_assets() {
+		// empty.
+	}
+
+	/**
+	 * Load admin assets specific to this widget.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 */
+	public function load_admin_assets() {
+		wp_enqueue_script( 'jquery-ui-slider' );
+		wp_enqueue_style( WPPR_SLUG . '-jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), WPPR_LITE_VERSION );
+
+		$deps           = array();
+		$deps['js']     = array( 'jquery-ui-slider' );
+		$deps['css']    = array( WPPR_SLUG . '-jqueryui' );
+		return $deps;
+	}
+
+	/**
+	 * Method to update widget data.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 *
+	 * @param   array $new_instance The new instance array for the widget.
+	 * @param   array $old_instance The old instance array of the widget.
+	 *
+	 * @return array
+	 */
+	public function update( $new_instance, $old_instance ) {
+		$instance   = parent::update( $new_instance, $old_instance );
+
+		$instance['cwp_timespan'] = ( ! empty( $new_instance['cwp_timespan'] ) ) ? strip_tags( $new_instance['cwp_timespan'] ) : '';
+		error_log( print_r( $instance,true ) );
+		return $instance;
+	}
 
 }
