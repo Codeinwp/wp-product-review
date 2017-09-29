@@ -21,14 +21,24 @@ class WPPR_Widget_Abstract extends WP_Widget {
 	 * @since   3.0.0
 	 * @access  public
 	 */
-	public function assets( $review_object ) {
-		wp_enqueue_style( WPPR_SLUG . '-pac-widget-stylesheet', WPPR_URL . '/assets/css/cwppos-widget.css', array(), WPPR_LITE_VERSION );
-		wp_enqueue_style( WPPR_SLUG . '-widget-stylesheet-one', WPPR_URL . '/assets/css/cwppos-widget-style1.css', array(), WPPR_LITE_VERSION );
-		wp_enqueue_style( WPPR_SLUG . '-widget-rating', WPPR_URL . '/assets/css/cwppos-widget-rating.css', array(), WPPR_LITE_VERSION );
+	public function assets( $review_object, $instance ) {
 		$plugin = new WPPR();
 		$public = new Wppr_Public( $plugin->get_plugin_name(), $plugin->get_version() );
-
 		$public->load_review_assets( $review_object );
+
+		wp_enqueue_style( WPPR_SLUG . '-front-yes' );
+		wp_enqueue_script( WPPR_SLUG . '-front-yes' );
+		wp_enqueue_style( WPPR_SLUG . '-pac-widget-stylesheet', WPPR_URL . '/assets/css/cwppos-widget.css', array(), WPPR_LITE_VERSION );
+
+		if ( isset( $instance['cwp_tp_layout'] ) ) {
+			switch ( $instance['cwp_tp_layout'] ) {
+				case 'style 1.php':
+					wp_enqueue_style( WPPR_SLUG . '-widget-rating', WPPR_URL . '/assets/css/cwppos-widget-rating.css', array( WPPR_SLUG . '-pac-widget-stylesheet' ), WPPR_LITE_VERSION );
+					wp_enqueue_style( WPPR_SLUG . '-widget-stylesheet-one', WPPR_URL . '/assets/css/cwppos-widget-style1.css', array( WPPR_SLUG . '-widget-rating' ), WPPR_LITE_VERSION );
+					break;
+			}
+		}
+
 	}
 
 	/**

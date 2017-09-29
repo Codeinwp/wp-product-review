@@ -117,14 +117,6 @@
 	zoom: 1;
 }
 
-#review-statistics .cwp-review-chart {
-	float: left;
-	position: relative !important;
-	top: 0;
-	right: 0;
-	border-radius: 50%;
-}
-
 #review-statistics .cwp-review-percentage span {
 	display: block;
 	border-radius: 50%;
@@ -132,21 +124,6 @@
 	font-family: "Lato";
 	font-size: 17px;
 	font-weight: 900;
-}
-
-.cwp-review-rating {
-	line-height: inherit !important;
-}
-
-#review-statistics .cwp_easyPieChart {
-	position: relative;
-	text-align: center;
-}
-
-#review-statistics .cwp_easyPieChart canvas {
-	position: absolute;
-	top: 0;
-	left: 0;
 }
 
 #review-statistics .review-wrap-up {
@@ -290,30 +267,6 @@
 	height: auto;
 	-webkit-box-shadow: none;
 	box-shadow: none;
-}
-
-#review-statistics .review-wrap-up .review-wu-left .review-wu-grade {
-	display: block;
-	float: left;
-	position: relative;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	width: 50%;
-	border: 1px solid #e6e6e6;
-	border-top: none;
-	border-bottom: none;
-	text-align: center;
-}
-
-#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart {
-	display: inline-block;
-	float: none;
-	position: relative;
-	margin: 0;
-}
-
-#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart .cwp-review-percentage {
-	width: 150px;
 }
 
 #review-statistics .review-wrap-up .review-wu-right {
@@ -588,65 +541,19 @@
 		padding-left: 5%;
 	}
 
-	#review-statistics .review-wrap-up .review-wu-left .review-wu-grade {
-		border-right: none;
-	}
-
-	#review-statistics .review-wrap-up .review-wu-left .rev-wu-image,
-	#review-statistics .review-wrap-up .review-wu-left .review-wu-grade {
+	#review-statistics .review-wrap-up .review-wu-left .rev-wu-image {
 		height: 130px;
-	}
-
-	#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart .cwp-review-percentage {
-		margin-top: 10%;
-	}
-
-	#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart span {
-		font-size: 30px;
 	}
 }
 
 @media (min-width: 440px) and (max-width: 700px) {
-	#review-statistics .review-wrap-up .review-wu-left .rev-wu-image,
-	#review-statistics .review-wrap-up .review-wu-left .review-wu-grade {
+	#review-statistics .review-wrap-up .review-wu-left .rev-wu-image {
 		height: 100px;
-	}
-
-	#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart .cwp-review-percentage {
-		margin-top: 10%;
-	}
-
-	#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart span {
-		font-size: 30px;
 	}
 }
 
 @media (min-width: 700px) and (max-width: 820px) {
-	#review-statistics .review-wrap-up .review-wu-left .rev-wu-image,
-	#review-statistics .review-wrap-up .review-wu-left .review-wu-grade {
+	#review-statistics .review-wrap-up .review-wu-left .rev-wu-image {
 		height: 130px;
 	}
-
-	#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart .cwp-review-percentage {
-		margin-top: 10%;
-	}
-
-	#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart span {
-		font-size: 30px;
-	}
-}
-
-.cwp-review-percentage.cwp_easyPieChart canvas {
-	position: absolute;
-	left: 0;
-}
-
-.cwp-review-percentage.cwp_easyPieChart {
-	position: relative;
-	text-align: center;
-}
-
-.review-wu-grade .cwp-review-chart {
-	float: none;
-	position: relative;
 }

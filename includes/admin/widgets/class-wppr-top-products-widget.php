@@ -83,7 +83,7 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 			$first  = isset( $first['ID'] ) ? $first['ID'] : 0;
 			$review = new WPPR_Review_Model( $first );
 
-			$this->assets( $review );
+			$this->assets( $review, $instance );
 		}
 		// before and after widget arguments are defined by themes
 		echo $args['before_widget'];

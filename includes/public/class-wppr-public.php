@@ -78,47 +78,10 @@ class Wppr_Public {
 	 * @param WPPR_Review_Model $review Review model.
 	 */
 	public function load_review_assets( $review = null ) {
-		$load = ! empty( $review ) ? $review->is_active() : ( ! empty( $this->review ) ? $this->review->is_active() : false );
+		$review = ! empty( $review ) ? $review : $this->review;
+		$load   = ! empty( $review ) ? $review->is_active() : false;
 		if ( ! $load ) {
 			return;
-		}
-
-/*
-		// register all the scripts/styles
-		wp_register_script( $this->plugin_name . '-pie-chart', WPPR_URL . '/assets/js/pie-chart.js', array( 'jquery' ), $this->version, true );
-		wp_register_script( $this->plugin_name . '-lightbox', WPPR_URL . '/assets/js/lightbox.min.js', array( 'jquery' ), $this->version, true );
-		wp_register_style( $this->plugin_name . '-lightbox', WPPR_URL . '/assets/css/lightbox.css', array(), $this->version );
-		wp_register_style( $this->plugin_name . '-jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
-		wp_register_style( $this->plugin_name . 'fontawesome', WPPR_URL . '/assets/css/font-awesome.min.css' );
-		wp_register_style( $this->plugin_name . 'fontawesome', WPPR_URL . '/assets/css/font-awesome.min.css' );
-*/
-
-
-
-
-
-		wp_enqueue_script( $this->plugin_name . '-pie-chart-js', WPPR_URL . '/assets/js/pie-chart.js', array( 'jquery' ), $this->version, true );
-		wp_enqueue_script(
-			$this->plugin_name . '-frontpage-js', WPPR_URL . '/assets/js/main.js', array(
-				'jquery',
-				$this->plugin_name . '-pie-chart-js',
-			), $this->version, true
-		);
-		if ( $review->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
-			wp_enqueue_script( $this->plugin_name . '-lightbox-js', WPPR_URL . '/assets/js/lightbox.min.js', array( 'jquery' ), $this->version, true );
-		}
-
-		if ( $review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
-			wp_enqueue_script( 'jquery-ui-slider' );
-		}
-
-		wp_enqueue_style( $this->plugin_name . '-frontpage-stylesheet', WPPR_URL . '/assets/css/frontpage.css', array(), $this->version );
-		if ( $review->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
-			wp_enqueue_style( $this->plugin_name . '-lightbox-css', WPPR_URL . '/assets/css/lightbox.css', array(), $this->version );
-		}
-		if ( $review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
-
-			wp_enqueue_style( $this->plugin_name . 'jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
 		}
 
 		global $content_width;
@@ -263,10 +226,11 @@ class Wppr_Public {
 			$uni_font = '';
 		}
 
+		$add_font_awesome   = false;
 		if ( ! empty( $uni_font ) ) {
 			if ( $isSetToPro ) {
 				if ( $review->wppr_get_option( 'cwppos_fontawesome' ) === 'no' ) {
-					wp_enqueue_style( 'cwp-pac-fontawesome-stylesheet', WPPR_URL . '/assets/css/font-awesome.min.css' );
+					$add_font_awesome   = true;
 				}
 			}
 		}
@@ -275,8 +239,52 @@ class Wppr_Public {
                     var isSetToPro = '" . $isSetToPro . "';
                     var trackcolor = '" . $track . "';
                 ";
-		wp_add_inline_style( $this->plugin_name . '-frontpage-stylesheet', $style );
-		wp_add_inline_script( $this->plugin_name . '-frontpage-js', $script );
+
+		// register all the scripts/styles
+		wp_register_script( $this->plugin_name . '-pie-chart', WPPR_URL . '/assets/js/pie-chart.js', array( 'jquery' ), $this->version, true );
+		wp_register_script( $this->plugin_name . '-lightbox', WPPR_URL . '/assets/js/lightbox.min.js', array( 'jquery' ), $this->version, true );
+
+		wp_register_style( $this->plugin_name . '-pie-chart', WPPR_URL . '/assets/css/pie-chart.css', array(), $this->version );
+		wp_register_style( $this->plugin_name . '-jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
+		wp_register_style( $this->plugin_name . '-frontpage', WPPR_URL . '/assets/css/frontpage.css', array( $this->plugin_name . '-pie-chart' ), $this->version );
+		wp_register_style( $this->plugin_name . '-lightbox', WPPR_URL . '/assets/css/lightbox.css', array( $this->plugin_name . '-jqueryui' ), $this->version );
+		if ( $add_font_awesome ) {
+			wp_register_style( 'cwp-pac-fontawesome-stylesheet', WPPR_URL . '/assets/css/font-awesome.min.css' );
+		}
+
+		$deps                   = array();
+		$deps['full']           = array(
+			'js'    => array( $this->plugin_name . '-pie-chart' ),
+			'css'   => array( $this->plugin_name . '-frontpage' ),
+		);
+		$deps['yes']            = array(
+			'js'    => array( $this->plugin_name . '-pie-chart' ),
+			'css'   => array( $this->plugin_name . '-pie-chart' ),
+		);
+
+		if ( $review->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
+			$deps['full']['js'][]   = $this->plugin_name . '-lightbox';
+			$deps['full']['css'][]  = $this->plugin_name . '-lightbox';
+		}
+		if ( $review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
+			$deps['full']['js'][]   = 'jquery-ui-slider';
+			$deps['full']['css'][]  = $this->plugin_name . '-jqueryui';
+		}
+		if ( $add_font_awesome ) {
+			$deps['full']['css'][]  = 'cwp-pac-fontawesome-stylesheet';
+			$deps['yes']['css'][]   = 'cwp-pac-fontawesome-stylesheet';
+		}
+
+		foreach ( $deps as $visual => $array ) {
+			wp_register_script( $this->plugin_name . '-front-' . $visual, WPPR_URL . '/assets/js/main.js', $array['js'], $this->version, true );
+			wp_register_style( $this->plugin_name . '-front-' . $visual, WPPR_URL . '/assets/css/main.css', $array['css'], $this->version );
+		}
+
+		wp_add_inline_style( $this->plugin_name . '-front-full', $style );
+		wp_add_inline_script( $this->plugin_name . '-front-full', $script );
+
+		wp_add_inline_style( $this->plugin_name . '-front-yes', $style );
+		wp_add_inline_script( $this->plugin_name . '-front-yes', $script );
 	}
 
 	/**
@@ -297,6 +305,9 @@ class Wppr_Public {
 			$output        = '';
 			$review_object = $this->review;
 			$template      = new WPPR_Template();
+
+			wp_enqueue_style( $this->plugin_name . '-front-full' );
+			wp_enqueue_script( $this->plugin_name . '-front-full' );
 
 			$output .= $template->render(
 				'default', array(
