@@ -252,6 +252,7 @@ class Wppr_Public {
 			wp_register_style( 'cwp-pac-fontawesome-stylesheet', WPPR_URL . '/assets/css/font-awesome.min.css' );
 		}
 
+		// let's arrange the dependencies on the basis of the 'visual' parameter i.e. full, yes or no.
 		$deps                   = array();
 		$deps['full']           = array(
 			'js'    => array( $this->plugin_name . '-pie-chart' ),
