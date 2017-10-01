@@ -20,6 +20,9 @@ function cwppos_show_review( $post_id ) {
 	$review_object = new WPPR_Review_Model( $post_id );
 	$public        = new Wppr_Public( $plugin->get_plugin_name(), $plugin->get_version() );
 	$public->load_review_assets( $review_object );
+	wp_enqueue_style( WPPR_SLUG . '-front-full' );
+	wp_enqueue_script( WPPR_SLUG . '-front-full' );
+
 	$output = '';
 	if ( $review_object->is_active() ) {
 		$template = new WPPR_Template();
