@@ -23,20 +23,12 @@
 }
 
 .cwp-popular-review .cwp-review-chart {
-	top: 56%;
 	width: 40px;
 	height: 40px;
 	margin-top: -22px;
 	border: 0 solid #fff;
-}
-
-/* Review Pie Chart Styles */
-.cwp-review-chart {
-	float: left;
 	position: absolute;
-	top: 0;
-	right: 0;
-	margin: 10px 0 10px 10px;
+	margin: 10px;
 	border: 3px solid #fff;
 	border-radius: 50%;
 }
@@ -48,21 +40,6 @@
 	font-family: "Lato";
 	font-size: 17px;
 	font-weight: 900;
-}
-
-.cwp_easyPieChart {
-	position: relative;
-	text-align: center;
-}
-
-.cwp_easyPieChart canvas {
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-
-.cwp-popular-review .cwp_easyPieChart span {
-	text-align: center;
 }
 
 .cwp-popular-review:before {
