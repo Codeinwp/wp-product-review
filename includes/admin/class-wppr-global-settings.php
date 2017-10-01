@@ -330,9 +330,9 @@ class WPPR_Global_Settings {
 
 	/**
 	 * When Disqus or Jetpack Comments are enabled, the user review doesn't work.
-	*/
+	 */
 	private static function enable_user_comments() {
-		if ( is_plugin_active( 'disqus-comment-system/disqus.php') || ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'comments' ) ) ) {
+		if ( is_plugin_active( 'disqus-comment-system/disqus.php' ) || ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'comments' ) ) ) {
 			return false;
 		}
 		return true;
@@ -340,14 +340,14 @@ class WPPR_Global_Settings {
 
 	/**
 	 * When Disqus or Jetpack Comments are enabled, show this to the user.
-	*/
+	 */
 	private static function disable_user_comments_msg() {
-		$active	= array();
-		if ( is_plugin_active( 'disqus-comment-system/disqus.php') ) {
-			$active[]	= 'Disqus';
+		$active = array();
+		if ( is_plugin_active( 'disqus-comment-system/disqus.php' ) ) {
+			$active[]   = 'Disqus';
 		}
 		if ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'comments' ) ) {
-			$active[]	= 'Jetpack Comments';
+			$active[]   = 'Jetpack Comments';
 		}
 		if ( $active ) {
 			return sprintf( __( 'We see %s active, so user feedback is disabled',  'wp-product-review' ), implode( ',', $active ) );
