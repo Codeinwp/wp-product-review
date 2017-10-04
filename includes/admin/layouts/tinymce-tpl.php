@@ -10,11 +10,11 @@
 <body>
 	<form name="wppr_shortcode_form" id="wppr_shortcode_form">
 <?php
-	if ( $fields ) {
-		foreach ( $fields as $field ) {
-			$this->add_element( $field );
-		}
+if ( $fields ) {
+	foreach ( $fields as $field ) {
+		$this->add_element( $field );
 	}
+}
 ?>
 	</form>
 </body>

@@ -61,7 +61,7 @@ class WPPR_Admin_Render_Controller {
 	 * @access  public
 	 * @param   string                   $name   The name of the layout to be retrieved.
 	 * @param   bool|WPPR_Abstract_Model $model Optional pass a model to use in template.
-	 * @param   bool|array $fields Optional pass an array of fields that will be used in the template.
+	 * @param   bool|array               $fields Optional pass an array of fields that will be used in the template.
 	 */
 	public function retrive_template( $name, $model = false, $fields = false ) {
 		if ( file_exists( WPPR_PATH . '/includes/admin/layouts/css/' . $name . '.css' ) ) {
@@ -100,13 +100,13 @@ class WPPR_Admin_Render_Controller {
 				<div class="explain"><h4>' . $field['title'] . '</h4></div>
 				<div class="controls-content">
         ';
-		$type	= $field['type'];
+		$type   = $field['type'];
 		switch ( $type ) {
 			case 'input_text':
 				$output .= $this->html_helper->text( $field );
 				break;
 			default:
-				$method	= $type;
+				$method = $type;
 				$output .= $this->html_helper->$method( $field );
 				break;
 		}

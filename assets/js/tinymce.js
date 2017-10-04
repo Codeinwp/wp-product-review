@@ -31,7 +31,7 @@
                         height: ($( window ).height() - 36 - 50) * 0.7,
                         inline: 1,
                         id: 'wppr-insert-dialog',
-                        buttons: getButtons( editor ),
+                        buttons: getButtons( editor, j ),
                         }, {
                             editor: editor,
                             jquery: $,
@@ -43,7 +43,7 @@
         return menu;
     }
 
-    function getButtons( editor ) {
+    function getButtons( editor, j ) {
         var buttons = [];
 
         if(editor.getLang( 'wppr_tinymce_plugin.ispro' ) !== true ){

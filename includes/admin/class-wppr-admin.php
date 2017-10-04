@@ -270,14 +270,15 @@ class WPPR_Admin {
 
 		$html_helper = new WPPR_Html_Fields();
 
-		$type		= $_GET['type'];
-		$elements	= array();
+		$type       = $_GET['type'];
+		$elements   = array();
 		switch ( $type ) {
 			case 'review':
-				$elements	= apply_filters( 'wppr_shortcode_ui_' . $type, array(
+				$elements   = apply_filters(
+					'wppr_shortcode_ui_' . $type, array(
 						array(
 							'id'      => 'post_id',
-							'title'	=> __( 'Post', 'wp-product-review' ),
+							'title' => __( 'Post', 'wp-product-review' ),
 							'name'    => 'post_id',
 							'description'    => __( 'The post.', 'wp-product-review' ),
 							'type'    => 'select',
@@ -286,79 +287,82 @@ class WPPR_Admin {
 						),
 						array(
 							'id'      => 'visual',
-							'title'	=> __( 'Display type', 'wp-product-review' ),
+							'title' => __( 'Display type', 'wp-product-review' ),
 							'name'    => 'visual',
 							'description'    => __( 'Display type.', 'wp-product-review' ),
 							'type'    => 'select',
 							'options' => array(
-								'full'	=> __( 'Full', 'wp-product-review' ),
-								'yes'	=> __( 'Pie only', 'wp-product-review' ),
-								'no'	=> __( 'Basic', 'wp-product-review' ),
+								'full'  => __( 'Full', 'wp-product-review' ),
+								'yes'   => __( 'Pie only', 'wp-product-review' ),
+								'no'    => __( 'Basic', 'wp-product-review' ),
 							),
 							'disabled' => ! defined( 'WPPR_PRO_SLUG' ),
 						),
-				));
+					)
+				);
 				break;
 			case 'listing':
 			case 'comparison':
-				$elements	= apply_filters( 'wppr_shortcode_ui_' . $type, array(
+				$elements   = apply_filters(
+					'wppr_shortcode_ui_' . $type, array(
 						array(
 							'id'      => 'cat',
-							'title'	=> __( 'Category.', 'wp-product-review' ),
+							'title' => __( 'Category.', 'wp-product-review' ),
 							'name'    => 'cat',
-							'description'	=> __( 'Category.', 'wp-product-review' ),
+							'description'   => __( 'Category.', 'wp-product-review' ),
 							'type'    => 'select',
 							'options' => $this->get_categories( true ),
 							'disabled' => ! defined( 'WPPR_PRO_SLUG' ),
 						),
 						array(
 							'id'      => 'nr',
-							'title'	=> __( 'Number of reviews to show.', 'wp-product-review' ),
+							'title' => __( 'Number of reviews to show.', 'wp-product-review' ),
 							'name'    => 'nr',
 							'description'    => __( 'Number of reviews to show.', 'wp-product-review' ),
 							'type'    => 'number',
-							'min'	=> 0,
+							'min'   => 0,
 							'default' => 10,
 							'disabled' => ! defined( 'WPPR_PRO_SLUG' ),
 						),
 						array(
 							'id'      => 'img',
-							'title'	=> __( 'Display image?', 'wp-product-review' ),
+							'title' => __( 'Display image?', 'wp-product-review' ),
 							'name'    => 'img',
 							'description'    => __( 'Display image?', 'wp-product-review' ),
 							'type'    => 'select',
 							'options' => array(
-								'no'	=> __( 'No', 'wp-product-review' ),
-								'yes'	=> __( 'Yes', 'wp-product-review' ),
+								'no'    => __( 'No', 'wp-product-review' ),
+								'yes'   => __( 'Yes', 'wp-product-review' ),
 							),
 							'disabled' => ! defined( 'WPPR_PRO_SLUG' ),
 						),
 						array(
 							'id'      => 'orderby',
-							'title'	=> __( 'Sort results by', 'wp-product-review' ),
+							'title' => __( 'Sort results by', 'wp-product-review' ),
 							'name'    => 'orderby',
 							'description'    => __( 'Sort results by', 'wp-product-review' ),
 							'type'    => 'select',
 							'options' => array(
-								'rating'	=> __( 'Rating', 'wp-product-review' ),
-								'price'	=> __( 'Price', 'wp-product-review' ),
-								'date'	=> __( 'Date', 'wp-product-review' ),
+								'rating'    => __( 'Rating', 'wp-product-review' ),
+								'price' => __( 'Price', 'wp-product-review' ),
+								'date'  => __( 'Date', 'wp-product-review' ),
 							),
 							'disabled' => ! defined( 'WPPR_PRO_SLUG' ),
 						),
 						array(
 							'id'      => 'order',
-							'title'	=> __( 'Sorting order', 'wp-product-review' ),
+							'title' => __( 'Sorting order', 'wp-product-review' ),
 							'name'    => 'order',
 							'description'    => __( 'Sorting order', 'wp-product-review' ),
 							'type'    => 'select',
 							'options' => array(
-								'desc'	=> __( 'Descending', 'wp-product-review' ),
-								'asc'	=> __( 'Ascending', 'wp-product-review' ),
+								'desc'  => __( 'Descending', 'wp-product-review' ),
+								'asc'   => __( 'Ascending', 'wp-product-review' ),
 							),
 							'disabled' => ! defined( 'WPPR_PRO_SLUG' ),
 						),
-				));
+					)
+				);
 				break;
 		}
 
@@ -373,17 +377,19 @@ class WPPR_Admin {
 	 * @access  private
 	 */
 	private function get_categories( $default = false ) {
-		$cats	= array();
+		$cats   = array();
 		if ( $default ) {
-			$cats[]	= __( 'Select', 'wp-product-review' );
+			$cats[] = __( 'Select', 'wp-product-review' );
 		}
 
-		$categories	= get_categories( array(
-			'orderby' => 'name',
-			'order'   => 'ASC',
-			'hide_empty'   => false,
-		) );
-		
+		$categories = get_categories(
+			array(
+				'orderby' => 'name',
+				'order'   => 'ASC',
+				'hide_empty'   => false,
+			)
+		);
+
 		foreach ( $categories as $category ) {
 			$cats[ $category->term_id ] = $category->name;
 		}
@@ -395,23 +401,25 @@ class WPPR_Admin {
 	 *
 	 * @access  private
 	 */
-	private function get_reviewable_posts( $default = false) {
-		$posts	= array();
+	private function get_reviewable_posts( $default = false ) {
+		$posts  = array();
 		if ( $default ) {
-			$posts[]	= __( 'Select', 'wp-product-review' );
+			$posts[]    = __( 'Select', 'wp-product-review' );
 		}
 
-		$query	= new WP_Query(array(
-			'post_type'		=> 'any',
-			'post_status'	=> 'publish',
-			'numberposts'	=> 300,
-			'meta_query'	=> array(
-				array(
-					'key'	=> 'cwp_meta_box_check',
-					'value'	=> 'Yes'
-				)
-			),
-		));
+		$query  = new WP_Query(
+			array(
+				'post_type'     => 'any',
+				'post_status'   => 'publish',
+				'numberposts'   => 300,
+				'meta_query'    => array(
+					array(
+						'key'   => 'cwp_meta_box_check',
+						'value' => 'Yes',
+					),
+				),
+			)
+		);
 
 		if ( $query->have_posts() ) {
 			while ( $query->have_posts() ) {

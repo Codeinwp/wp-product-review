@@ -133,12 +133,12 @@ class WPPR_Html_Fields {
 		if ( $args['value'] == null ) {
 			$args['value'] = $args['default'];
 		}
-		$extra	= '';
+		$extra  = '';
 		if ( isset( $args['min'] ) ) {
-			$extra	= 'min=' . $args['min'];
+			$extra  = 'min=' . $args['min'];
 		}
 		if ( isset( $args['max'] ) ) {
-			$extra	= ' max=' . $args['max'];
+			$extra  = ' max=' . $args['max'];
 		}
 		$output = '<input type="number" ' . $disabled . ' name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( $args['id'] ) . '" class="' . $class . '"   value="' . esc_attr( $args['value'] ) . '" placeholder="' . esc_attr( $args['placeholder'] ) . '" ' . $extra . ' />';
 

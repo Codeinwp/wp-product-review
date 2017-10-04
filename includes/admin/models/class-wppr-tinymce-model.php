@@ -52,8 +52,8 @@ class WPPR_Tinymce_Model {
 			'insert_button' => __( 'Insert Shortcode', 'wp-product-review' ),
 			'cancel_button' => __( 'Cancel', 'wp-product-review' ),
 			'pro_button'    => __( 'Get WP Product Review Premium', 'wp-product-review' ),
-			'buttons'		=> json_encode( apply_filters( 'wppr_tinymce_buttons_register', $this->get_shortcodes() ) ),
-			'ispro'			=> defined( 'WPPR_PRO_SLUG' ),
+			'buttons'       => json_encode( apply_filters( 'wppr_tinymce_buttons_register', $this->get_shortcodes() ) ),
+			'ispro'         => defined( 'WPPR_PRO_SLUG' ),
 		);
 	}
 
@@ -65,18 +65,18 @@ class WPPR_Tinymce_Model {
 	private function get_shortcodes() {
 		return array(
 			array(
-				'text'	=> __( 'Review', 'wp-product-review' ),
-				'type'	=> 'review',
+				'text'  => __( 'Review', 'wp-product-review' ),
+				'type'  => 'review',
 				'shortcode' => 'P_REVIEW',
 			),
 			array(
-				'text'	=> __( 'Listing', 'wp-product-review' ),
-				'type'	=> 'listing',
-					'shortcode' => 'wpr_listing',
-		),
+				'text'  => __( 'Listing', 'wp-product-review' ),
+				'type'  => 'listing',
+				'shortcode' => 'wpr_listing',
+			),
 			array(
-				'text'	=> __( 'Comparison Table', 'wp-product-review' ),
-				'type'	=> 'comparison',
+				'text'  => __( 'Comparison Table', 'wp-product-review' ),
+				'type'  => 'comparison',
 				'shortcode' => 'wpr_landing',
 			),
 		);
