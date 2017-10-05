@@ -298,7 +298,7 @@ class Wppr_Public {
 			$template      = new WPPR_Template();
 
 			$output .= $template->render(
-				'default', array(
+				$review_object->get_template(), array(
 					'review_object' => $review_object,
 				), false
 			);

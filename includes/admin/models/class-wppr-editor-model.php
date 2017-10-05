@@ -183,6 +183,7 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 			$name  = isset( $data['wppr-editor-product-name'] ) ? sanitize_text_field( $data['wppr-editor-product-name'] ) : '';
 			$image = isset( $data['wppr-editor-image'] ) ? sanitize_text_field( $data['wppr-editor-image'] ) : '';
 			$click = isset( $data['wppr-editor-link'] ) ? strval( sanitize_text_field( $data['wppr-editor-link'] ) ) : 'image';
+			$template = isset( $data['wppr-review-template'] ) ? strval( sanitize_text_field( $data['wppr-review-template'] ) ) : 'default';
 
 			// TODO Setup links as array.
 			$link           = isset( $data['wppr-editor-button-text'] ) ? strval( sanitize_text_field( $data['wppr-editor-button-text'] ) ) : '';
@@ -215,6 +216,7 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 				$cons = array();
 			}
 			$review->set_name( $name );
+			$review->set_template( $template );
 			$review->set_image( $image );
 			if ( $click === 'image' || $click === 'link' ) {
 				$review->set_click( $click );
