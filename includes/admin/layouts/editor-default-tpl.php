@@ -54,34 +54,34 @@ $check = $review->is_active() ? 'yes' : 'no';
 		<div class="wppr-review-details-fields wppr-review-fieldset">
 			<ul>
 				<?php
-					$templates	= apply_filters( 'wppr_review_templates', array( 'default', 'book', 'movie' ) );
-					if ( $templates ) {
+					$templates  = apply_filters( 'wppr_review_templates', array( 'default', 'book', 'movie' ) );
+				if ( $templates ) {
 				?>
 				<li>
-					<label for="wppr-editor-template"><?php _e( 'Template', 'wp-product-review' ); ?></label>
-					<?php
-						foreach( $templates as $template ) {
-							$template_id	= 'wppr-review-template-' . esc_attr( $template );
-							echo $html_helper->radio(
-								array(
-									'name'    => 'wppr-review-template',
-									'id'      => $template_id,
-									'class'   => 'wppr-review-template',
-									'value'   => $template,
-									'current' => $review->get_template(),
-									'options' => array(
-										'disabled' => ! defined( 'WPPR_PRO_SLUG' ) && 'default' !== $template,
-									),
-								)
-							);
-					?>
-							<label for="<?php echo $template_id; ?>"><img src='<?php echo WPPR_URL . "/assets/img/templates/$template.png"; ?>' class="wppr-review-template"/></label>
-					<?php
-						}
-					?>
+				<label for="wppr-editor-template"><?php _e( 'Template', 'wp-product-review' ); ?></label>
+				<?php
+				foreach ( $templates as $template ) {
+					$template_id    = 'wppr-review-template-' . esc_attr( $template );
+					echo $html_helper->radio(
+						array(
+							'name'    => 'wppr-review-template',
+							'id'      => $template_id,
+							'class'   => 'wppr-review-template',
+							'value'   => $template,
+							'current' => $review->get_template(),
+							'options' => array(
+								'disabled' => ! defined( 'WPPR_PRO_SLUG' ) && 'default' !== $template,
+							),
+						)
+					);
+			?>
+				<label for="<?php echo $template_id; ?>"><img src='<?php echo WPPR_URL . "/assets/img/templates/$template.png"; ?>' class="wppr-review-template"/></label>
+				<?php
+				}
+				?>
 				</li>
 				<?php
-					}
+				}
 				?>
 				<li>
 					<label for="wppr-editor-product-name"><?php _e( 'Product Name', 'wp-product-review' ); ?></label>

@@ -294,9 +294,9 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 * @access  private
 	 */
 	private function setup_template() {
-		$template		= get_post_meta( $this->ID, 'cwp_rev_template', true );
+		$template       = get_post_meta( $this->ID, 'cwp_rev_template', true );
 		if ( empty( $template ) ) {
-			$template	= 'default';
+			$template   = 'default';
 		}
 		$this->template = $template;
 	}
@@ -467,7 +467,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		$data = array(
 			'id'             => $this->get_ID(),
 			'name'           => $this->get_name(),
-			'template'		 => $this->get_template(),
+			'template'       => $this->get_template(),
 			'price'          => $this->get_price(),
 			'price_raw'      => $this->get_price_raw(),
 			'currency'       => $this->get_currency(),
