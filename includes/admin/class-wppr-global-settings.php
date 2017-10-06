@@ -82,12 +82,13 @@ class WPPR_Global_Settings {
 						'cwppos_show_userreview' => array(
 							'id'      => 'show_review',
 							'name'    => __( 'Show review comment', 'wp-product-review' ),
-							'description'    => __( 'Activate comment review user', 'wp-product-review' ),
+							'description'    => self::enable_user_comments() ? __( 'Activate comment review user', 'wp-product-review' ) : self::disable_user_comments_msg(),
 							'type'    => 'select',
 							'options' => array(
 								'yes' => __( 'Yes', 'wp-product-review' ),
 								'no'  => __( 'No', 'wp-product-review' ),
 							),
+							'disabled' => ! self::enable_user_comments(),
 							'default' => 'no',
 						),
 						'cwppos_infl_userreview' => array(
@@ -325,6 +326,33 @@ class WPPR_Global_Settings {
 		}// End if().
 
 		return self::$instance;
+	}
+
+	/**
+	 * When Disqus or Jetpack Comments are enabled, the user review doesn't work.
+	 */
+	private static function enable_user_comments() {
+		if ( is_plugin_active( 'disqus-comment-system/disqus.php' ) || ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'comments' ) ) ) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * When Disqus or Jetpack Comments are enabled, show this to the user.
+	 */
+	private static function disable_user_comments_msg() {
+		$active = array();
+		if ( is_plugin_active( 'disqus-comment-system/disqus.php' ) ) {
+			$active[]   = 'Disqus';
+		}
+		if ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'comments' ) ) {
+			$active[]   = 'Jetpack Comments';
+		}
+		if ( $active ) {
+			return sprintf( __( 'We see %s active, so user feedback is disabled',  'wp-product-review' ), implode( ',', $active ) );
+		}
+		return '';
 	}
 
 	/**
