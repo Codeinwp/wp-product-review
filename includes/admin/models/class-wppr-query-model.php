@@ -169,7 +169,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			return '';
 		}
 		$sub_selection_query = "INNER JOIN {$this->db->term_relationships } wtr ON wtr.object_id = p.ID
-	            INNER JOIN {$this->db->term_taxonomy} wtt on wtt.term_taxonomy_id = wtr.term_taxonomy_id
+	            INNER JOIN {$this->db->term_taxonomy} wtt on wtt.term_taxonomy_id = wtr.term_taxonomy_id AND wtt.taxonomy = 'category'
 	            INNER JOIN {$this->db->terms} wt
 	            ON wt.term_id = wtt.term_id";
 

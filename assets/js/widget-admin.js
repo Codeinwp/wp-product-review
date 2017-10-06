@@ -1,6 +1,10 @@
 /* jshint ignore:start */
 (function ($, w) {
 	$(document).ready(function () {
+        initAll();
+	});
+
+    function initAll() {
 		var widget_selector = $('.widget');
 		if (widget_selector.length > 0) {
 			widget_selector.each(function () {
@@ -15,7 +19,46 @@
 		} else {
 			toggleCustomFields(true, "wpcontent");
 		}
-	});
+
+        $('.wppr-chosen').chosen({
+            width               : '100%',
+            search_contains     : true
+        });
+
+        $('.wppr-post-types').on('change', function(evt, params) {
+            get_categories(params, $(this), $('#' + $(this).attr('data-wppr-cat-combo')));
+        });
+    }
+
+    function get_categories(params, types, categories){
+        if(params.selected){
+            $('.wppr-cat-spinner').css('visibility', 'visible').show();
+            $.ajax({
+                url     : ajaxurl,
+                method  : 'post',
+                data    : {
+                    action  : 'get_categories',
+                    nonce   : w.ajax.nonce,
+                    type    : params.selected
+                },
+                success : function(data){
+                    if(data.data.categories){
+                        var $group = '<optgroup label="' + types.find('option[value="' + params.selected + '"]').text() + '">';
+                        $.each(data.data.categories, function(slug, name){
+                            $group += '<option value="' + slug + '">' + name + '</option>';
+                        });
+                        $group += '</optgroup>';
+                        categories.append($group);
+                        categories.trigger("chosen:updated");
+                    }
+                    $('.wppr-cat-spinner').css('visibility', 'hidden').hide();
+                }
+            });
+        }else{
+            categories.find('optgroup[label="' + types.find('option[value="' + params.deselected + '"]').text() + '"]').remove();
+            categories.trigger("chosen:updated");
+        }
+    }
 
 	function toggleCustomFields(deflt, widgetID) {
 		var val = getWidgetStyle(widgetID);

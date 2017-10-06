@@ -74,6 +74,9 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 		if ( isset( $instance['cwp_tp_category'] ) && trim( $instance['cwp_tp_category'] ) != '' ) {
 			$post['category_name'] = $instance['cwp_tp_category'];
 		}
+		if ( isset( $instance['cwp_tp_post_types'] ) && ! empty( $instance['cwp_tp_post_types'] ) ) {
+			$post['post_type'] = $instance['cwp_tp_post_types'];
+		}
 		$order           = array();
 		$order['rating'] = 'DESC';
 
