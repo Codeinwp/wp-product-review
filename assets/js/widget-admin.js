@@ -20,14 +20,33 @@
 			toggleCustomFields(true, "wpcontent");
 		}
 
-        $('.wppr-chosen').chosen({
-            width               : '100%',
-            search_contains     : true
+        $(document).on('widget-updated widget-added', function (e, widget) {
+            initEvents(widget);
         });
 
-        $('.wppr-post-types').on('change', function(evt, params) {
-            get_categories(params, $(this), $('#' + $(this).attr('data-wppr-cat-combo')));
-        });
+        initEvents(null);
+    }
+
+    function initEvents(widget) {
+        if(widget){
+            widget.find( '.chosen-container' ).remove();
+            widget.find('select.wppr-chosen').chosen({
+                width               : '100%',
+                search_contains     : true
+            });
+            widget.find('.wppr-post-types').on('change', function(evt, params) {
+                get_categories(params, $(this), $('#' + $(this).attr('data-wppr-cat-combo')));
+            });
+        }else{
+            $('select.wppr-chosen').chosen({
+                width               : '100%',
+                search_contains     : true
+            });
+            $('.wppr-post-types').on('change', function(evt, params) {
+                get_categories(params, $(this), $('#' + $(this).attr('data-wppr-cat-combo')));
+            });
+        }
+
     }
 
     function get_categories(params, types, categories){
