@@ -369,10 +369,11 @@ class WPPR_Admin {
 
 		$render = new WPPR_Admin_Render_Controller( $this->plugin_name, $this->version );
 		$render->retrive_template( 'tinymce', false, $elements );
-    wp_die();
-  }
+		wp_die();
+	}
 
-	 * Method called from AJAX request to populate categories of specified post types.
+	/**
+	 * Method called from AJAX request to populate categories of specified post types .
 	 *
 	 * @since   3.0.0
 	 * @access  public
@@ -446,6 +447,7 @@ class WPPR_Admin {
 		return $posts;
 	}
 
+	/**
 	 * Method that returns the categories of specified post types.
 	 *
 	 * @since   3.0.0
