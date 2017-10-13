@@ -215,9 +215,9 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 			$dependencies   = $this->load_admin_assets();
 
 			wp_enqueue_style( WPPR_SLUG . '-widget-admin-css', WPPR_URL . '/assets/css/cwppos-widget-admin.css', isset( $dependencies['css'] ) ? $dependencies['css'] : array(), WPPR_LITE_VERSION );
-      wp_enqueue_style( WPPR_SLUG . '-chosen', WPPR_URL . '/assets/css/chosen.min.css', array(), WPPR_LITE_VERSION );
-      
-      wp_enqueue_script( WPPR_SLUG . '-chosen', WPPR_URL . '/assets/js/chosen.jquery.min.js', array( 'jquery' ), WPPR_LITE_VERSION );
+			wp_enqueue_style( WPPR_SLUG . '-chosen', WPPR_URL . '/assets/css/chosen.min.css', array(), WPPR_LITE_VERSION );
+
+				  wp_enqueue_script( WPPR_SLUG . '-chosen', WPPR_URL . '/assets/js/chosen.jquery.min.js', array( 'jquery' ), WPPR_LITE_VERSION );
 			wp_register_script( WPPR_SLUG . '-widget-script', WPPR_URL . '/assets/js/widget-admin.js', array_merge( array( WPPR_SLUG . '-chosen' ), isset( $dependencies['js'] ) ? $dependencies['js'] : array() ), WPPR_LITE_VERSION );
 
 			wp_localize_script(

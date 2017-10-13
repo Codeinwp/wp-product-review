@@ -84,7 +84,7 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 			} else {
 				$post['post_date_range_weeks']  = array( $min, $max );
 			}
-    }
+		}
 		if ( isset( $instance['cwp_tp_post_types'] ) && ! empty( $instance['cwp_tp_post_types'] ) ) {
 			$post['post_type'] = $instance['cwp_tp_post_types'];
 		}
