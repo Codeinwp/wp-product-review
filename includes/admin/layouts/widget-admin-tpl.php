@@ -20,20 +20,42 @@
 	<input id="<?php echo $this->get_field_id( 'no_items' ); ?>" name="<?php echo $this->get_field_name( 'no_items' ); ?>" size="3" type="text" value="<?php echo esc_attr( $instance['no_items'] ); ?>" />
 </p>
 <p>
-	<?php $cwp_tp_selected_categ = esc_attr( $instance['cwp_tp_category'] ); ?>
-	<label for="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>"><?php _e( 'Category:', 'wp-product-review' ); ?></label>
-	<select id="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_category' ); ?>">
-		<?php echo '<option>All</option>'; ?>
-		<?php foreach ( $instance['cwp_tp_all_categories'] as $categ_slug => $categ_name ) :  ?>
-			<?php if ( $categ_slug == $cwp_tp_selected_categ ) {
-				echo '<option selected>' . $categ_slug . '</option>';
-} elseif ( $categ_slug == '' ) {
-	echo '<option>There are no categs</select>';
-} else {
-	echo '<option>' . $categ_slug . '</option>';
-} ?>
-		<?php endforeach; ?>
+	<label for="<?php echo $this->get_field_id( 'cwp_tp_post_types' ); ?>"><?php _e( 'Post Types:', 'wp-product-review' ); ?></label>
+	<select id="<?php echo $this->get_field_id( 'cwp_tp_post_types' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_post_types' ); ?>[]" class="wppr-chosen wppr-post-types" data-wppr-cat-combo="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>" multiple>
+	<?php
+		foreach( get_post_types( '', 'objects' ) as $post_type ) {
+	?>
+	<option value="<?php echo $post_type->name;?>" <?php echo in_array($post_type->name, $instance['cwp_tp_post_types']) ? 'selected' : '';?>><?php echo $post_type->label;?></option>
+	<?php
+		}
+	?>
 	</select>
+</p>
+
+<p>
+	<?php $all_cats = isset( $instance['cwp_tp_all_categories'] ) ? $instance['cwp_tp_all_categories'] : ''; ?>
+	<label for="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>"><?php _e( 'Category:', 'wp-product-review' ); ?></label>
+	<select id="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_category' ); ?>" class="wppr-chosen wppr-cats">
+		<option>All</option>
+		<?php 
+			if ( $all_cats ) {
+			foreach ( $all_cats as $post_type => $cats ) {
+		?>
+		<optgroup label='<?php echo $post_type;?>'>
+		<?php
+				foreach ( $cats as $k => $v ) {
+		?>
+<option value="<?php echo $k;?>" <?php selected($k, $instance['cwp_tp_category'])?>><?php echo $v;?></option>
+		<?php
+				}
+		?>
+		</optgroup>
+		<?php
+		}
+			}
+		?>
+	</select>
+	<div class="spinner wppr-cat-spinner"></div>
 </p>
 <?php
 	if ( 'cwp_top_products_widget' === $this->id_base ) {
