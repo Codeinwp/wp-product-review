@@ -202,6 +202,7 @@ class WPPR_Html_Fields {
 		foreach ( $args['options'] as $ov => $op ) {
 			$options[ esc_attr( $ov ) ] = esc_html( $op );
 		}
+
 		$output = '<select class="' . $class . '" name="' . esc_attr( $args['name'] ) . '" ' . $disabled . '> ';
 		foreach ( $options as $k => $v ) {
 			$output .= "<option value='" . $k . "' " . ( ( isset( $args['value'] ) && $args['value'] == $k ) ? 'selected' : '') . '>' . $v . '</option>';

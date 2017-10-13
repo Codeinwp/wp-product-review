@@ -206,6 +206,7 @@ class WPPR_Admin {
 	}
 
 	/**
+
 	 * Initialize the hooks and filters for the tinymce button
 	 *
 	 * @access  public
@@ -311,7 +312,7 @@ class WPPR_Admin {
 							'name'    => 'cat',
 							'description'   => __( 'Category.', 'wp-product-review' ),
 							'type'    => 'select',
-							'options' => $this->get_categories( true ),
+							'options' => $this->get_categories_list( true ),
 							'disabled' => ! defined( 'WPPR_PRO_SLUG' ),
 						),
 						array(
@@ -368,6 +369,20 @@ class WPPR_Admin {
 
 		$render = new WPPR_Admin_Render_Controller( $this->plugin_name, $this->version );
 		$render->retrive_template( 'tinymce', false, $elements );
+    wp_die();
+  }
+
+	 * Method called from AJAX request to populate categories of specified post types.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 */
+	public function get_categories() {
+		check_ajax_referer( WPPR_SLUG, 'nonce' );
+
+		if ( isset( $_POST['type'] ) ) {
+			echo wp_send_json_success( array( 'categories' => self::get_category_for_post_type( $_POST['type'] ) ) );
+		}
 		wp_die();
 	}
 
@@ -376,7 +391,7 @@ class WPPR_Admin {
 	 *
 	 * @access  private
 	 */
-	private function get_categories( $default = false ) {
+	private function get_categories_list( $default = false ) {
 		$cats   = array();
 		if ( $default ) {
 			$cats[] = __( 'Select', 'wp-product-review' );
@@ -430,4 +445,34 @@ class WPPR_Admin {
 
 		return $posts;
 	}
+
+	 * Method that returns the categories of specified post types.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 */
+	public static function get_category_for_post_type( $post_type ) {
+		$categories = array();
+		if ( $post_type ) {
+			$taxonomies = get_taxonomies( array( 'object_type' => array( $post_type ), 'hierarchical' => true ), 'objects' );
+			if ( $taxonomies ) {
+				foreach ( $taxonomies as $tax ) {
+					$terms  = get_terms(
+						$tax->name, array(
+							'hide_empty'    => false,
+						)
+					);
+					if ( empty( $terms ) ) {
+						continue;
+					}
+					foreach ( $terms as $term ) {
+						$categories[ $term->slug ] = $term->name;
+					}
+				}
+			}
+		}
+		return $categories;
+	}
+
+
 }

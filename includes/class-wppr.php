@@ -126,6 +126,7 @@ class WPPR {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'wp_ajax_update_options', $plugin_admin, 'update_options' );
 		$this->loader->add_action( 'wp_ajax_wppr_get_tinymce_form', $plugin_admin, 'get_tinymce_form' );
+		$this->loader->add_action( 'wp_ajax_get_categories', $plugin_admin, 'get_categories' );
 
 		$plugin_editor = new WPPR_Editor( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'add_meta_boxes', $plugin_editor, 'set_editor' );
