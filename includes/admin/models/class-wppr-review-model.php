@@ -564,7 +564,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 * @return string
 	 */
 	public function get_currency() {
-		return apply_filters( 'wppr_currency', empty( $this->currency ) ? '$' : $this->currency, $this->ID, $this );
+		return apply_filters( 'wppr_currency_code', apply_filters( 'wppr_currency', empty( $this->currency ) ? '$' : $this->currency, $this->ID, $this ) );
 	}
 
 	/**
