@@ -17,7 +17,7 @@ if ( $sub_title_info != '' ) {
 	$is_disabled = apply_filters( 'wppr_disable_price_richsnippet', false );
 	$currency = preg_replace( '/[0-9.,]/', '', $review['price'] );
 	if ( ! $is_disabled ) {
-		$country_iso	= apply_filters( 'wppr_currency_code', $currency );
+		$country_iso    = apply_filters( 'wppr_currency_code', $currency );
 		$sub_title_info = '<span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                                 <span itemprop="priceCurrency" content="' . $country_iso . '">' . $currency . '</span>
                                 <span itemprop="price">' . $review['price'] . '</span>
