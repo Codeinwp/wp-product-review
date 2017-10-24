@@ -1126,4 +1126,22 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 
 	}
 
+	/**
+	 * Return css class based on the rating.
+	 *
+	 * @return string CSS class for the rating.
+	 */
+	public function get_rating_class( $value = - 1 ) {
+		$element = ( $value < 0 ) ? $this->get_rating() : $value;
+		if ( $element >= 75 ) {
+			return 'wppr-very-good';
+		} elseif ( $element < 75 && $element >= 50 ) {
+			return 'wppr-good';
+		} elseif ( $element < 50 && $element >= 25 ) {
+			return 'wppr-not-bad';
+		} else {
+			return 'wppr-weak';
+		}
+	}
+
 }

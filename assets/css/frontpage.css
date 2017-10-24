@@ -288,7 +288,6 @@
 #review-statistics .review-wrap-up .review-wu-left .rev-wu-image img {
 	width: 100%;
 	height: auto;
-	-webkit-box-shadow: none;
 	box-shadow: none;
 }
 
@@ -296,7 +295,6 @@
 	display: block;
 	float: left;
 	position: relative;
-	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	width: 50%;
 	border: 1px solid #e6e6e6;
@@ -367,7 +365,6 @@
 
 .review-wu-bars,
 .review-wu-right {
-	-webkit-box-sizing: content-box !important;
 	box-sizing: content-box !important;
 	text-align: left;
 }
@@ -460,7 +457,6 @@
 	margin-top: 5px !important;
 	border: none;
 	background: #f3f3f3;
-	-webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
 	box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
 }
 
@@ -475,7 +471,6 @@
 }
 
 #wppr-slider-comment .wppr-comment-form-meta .wppr-comment-meta-slider .ui-slider-handle:hover {
-	-webkit-box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.3);
 	box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.3);
 	cursor: pointer;
 }
@@ -534,7 +529,6 @@
 	height: 5px;
 	border-radius: 32px;
 	background: #ebedef;
-	-webkit-box-shadow: none;
 	box-shadow: none;
 }
 
@@ -565,7 +559,6 @@
 	height: 5px;
 	border-radius: 32px;
 	background: #ebedef;
-	-webkit-box-shadow: none;
 	box-shadow: none;
 }
 

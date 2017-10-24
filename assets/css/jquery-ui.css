@@ -940,7 +940,6 @@ button.ui-button::-moz-focus-inner {
 	z-index: 9999;
 	max-width: 300px;
 	padding: 8px;
-	-webkit-box-shadow: 0 0 5px #aaa;
 	box-shadow: 0 0 5px #aaa;
 }
 
