@@ -60,7 +60,7 @@ jQuery(document).ready(function ($) {
 
 	initPieChart();
 
-	function wuReview() {
+	/*function wuReview() {
 
 		if (!(typeof(cwpCustomBarIcon) === "undefined") && !(cwpCustomBarIcon === "") && isSetToPro) {
 			$(".rev-option").each(function () {
@@ -89,14 +89,14 @@ jQuery(document).ready(function ($) {
 			});
 		}
 
-	}
+	}*/
 
 	$(".comment-meta-option .comment-meta-grade").each(function () {
 		var theBarWidth = (100 * parseFloat($(this).css('width')) / parseFloat($(this).parent().css('width')));
 		$(this).css("background", returnColor(theBarWidth));
 	});
 
-	wuReview();
+	/*wuReview();*/
 
 	$(".wppr-comment-meta-slider").each(function () {
 		var comm_meta_input = $(this).parent(".wppr-comment-form-meta").children("input");

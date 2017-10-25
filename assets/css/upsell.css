@@ -42,7 +42,6 @@
 
 #wppr-admin .slogan a:focus {
 	outline: none;
-	-webkit-box-shadow: none;
 	box-shadow: none;
 }
 
@@ -83,7 +82,6 @@
 	display: block;
 	margin: 10px;
 	background-color: #fff;
-	-webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
 	box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
 }
 
@@ -95,7 +93,6 @@
 }
 
 #wppr-admin .pro-feature .pro-feature-features {
-	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	padding: 30px;
 }
