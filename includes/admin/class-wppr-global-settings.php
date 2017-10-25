@@ -332,6 +332,9 @@ class WPPR_Global_Settings {
 	 * When Disqus or Jetpack Comments are enabled, the user review doesn't work.
 	 */
 	private static function enable_user_comments() {
+		if ( ! is_admin() ) {
+			return true;
+		}
 		if ( is_plugin_active( 'disqus-comment-system/disqus.php' ) || ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'comments' ) ) ) {
 			return false;
 		}
