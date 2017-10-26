@@ -181,14 +181,14 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 
 			$review->activate();
 			$name  = isset( $data['wppr-editor-product-name'] ) ? sanitize_text_field( $data['wppr-editor-product-name'] ) : '';
-			$image = isset( $data['wppr-editor-image'] ) ? sanitize_text_field( $data['wppr-editor-image'] ) : '';
+			$image = isset( $data['wppr-editor-image'] ) ? esc_url( $data['wppr-editor-image'] ) : '';
 			$click = isset( $data['wppr-editor-link'] ) ? strval( sanitize_text_field( $data['wppr-editor-link'] ) ) : 'image';
 
 			// TODO Setup links as array.
 			$link           = isset( $data['wppr-editor-button-text'] ) ? strval( sanitize_text_field( $data['wppr-editor-button-text'] ) ) : '';
-			$text           = isset( $data['wppr-editor-button-link'] ) ? strval( sanitize_text_field( $data['wppr-editor-button-link'] ) ) : '';
+			$text           = isset( $data['wppr-editor-button-link'] ) ? strval( esc_url( $data['wppr-editor-button-link'] ) ) : '';
 			$link2          = isset( $data['wppr-editor-button-text-2'] ) ? strval( sanitize_text_field( $data['wppr-editor-button-text-2'] ) ) : '';
-			$text2          = isset( $data['wppr-editor-button-link-2'] ) ? strval( sanitize_text_field( $data['wppr-editor-button-link-2'] ) ) : '';
+			$text2          = isset( $data['wppr-editor-button-link-2'] ) ? strval( esc_url( $data['wppr-editor-button-link-2'] ) ) : '';
 			$price          = isset( $data['wppr-editor-price'] ) ? sanitize_text_field( $data['wppr-editor-price'] ) : 0;
 			$options_names  = isset( $data['wppr-editor-options-name'] ) ? $data['wppr-editor-options-name'] : array();
 			$options_values = isset( $data['wppr-editor-options-value'] ) ? $data['wppr-editor-options-value'] : array();
