@@ -124,18 +124,6 @@ class Wppr_Public {
 			wp_enqueue_style( $this->plugin_name . 'jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
 		}
 
-		global $content_width;
-		if ( $review->wppr_get_option( 'cwppos_widget_size' ) != '' ) {
-			$width = $review->wppr_get_option( 'cwppos_widget_size' );
-		} else {
-			$width = $content_width;
-		}
-		if ( $width < 200 ) {
-			$width = 600;
-		}
-		$img_size    = min( 180, $width * 0.51 * 0.4 );
-		$height_left = $img_size + 10;
-
 		$conditional_media_styles = '';
 		if ( $review->wppr_get_option( 'cwppos_widget_size' ) != '' ) {
 			$conditional_media_styles = '
@@ -166,63 +154,74 @@ class Wppr_Public {
                 ';
 		}
 
-		$style = '
-                 
-                    @media (min-width: 820px) {
-                        #review-statistics .review-wrap-up .review-wu-left .rev-wu-image, 
-                        #review-statistics .review-wrap-up .review-wu-left .review-wu-grade {
-                            height: ' . $height_left . 'px;
-                        }
-            
-                        #review-statistics .review-wrap-up .review-wu-left .review-wu-grade .c100 {
-                            margin-top: ' . ( $img_size * 0.1 ) . '%;
-                        }
-            
-                        #review-statistics .review-wrap-up .review-wu-left .review-wu-grade .c100 span {
-                            font-size: ' . round( 30 * $img_size / 140 ) . 'px;
-                        }
-                        
-                        ' . $conditional_media_styles . '
-			        }
-                    
-                    #review-statistics .review-wu-grade .c100 {
+		$style = '                   
+                    #review-statistics .review-wu-grade .c100,
+                     .review-grade-widget .c100 {
                         background-color: ' . $review->wppr_get_option( 'cwppos_rating_chart_default' ) . ';
                     }
                     
-                    #review-statistics .review-wu-grade .c100.wppr-weak span {
+                    #review-statistics .review-wu-grade .c100.wppr-weak span,
+                     .review-grade-widget .c100.wppr-weak span {
                         color: ' . $review->wppr_get_option( 'cwppos_rating_weak' ) . ';
                     }
                     
                     #review-statistics .review-wu-grade .c100.wppr-weak .fill,
-                    #review-statistics .review-wu-grade .c100.wppr-weak .bar {
+                    #review-statistics .review-wu-grade .c100.wppr-weak .bar,
+                     .review-grade-widget .c100.wppr-weak .fill,
+                    .review-grade-widget .c100.wppr-weak .bar {
                         border-color: ' . $review->wppr_get_option( 'cwppos_rating_weak' ) . ';
                     }
                     
-                    #review-statistics .review-wu-grade .c100.wppr-not-bad span {
+                    .user-comments-grades .comment-meta-grade-bar.wppr-weak .comment-meta-grade {
+                        background: ' . $review->wppr_get_option( 'cwppos_rating_weak' ) . ';
+                    }
+                    
+                    #review-statistics .review-wu-grade .c100.wppr-not-bad span,
+                     .review-grade-widget .c100.wppr-not-bad span {
                         color: ' . $review->wppr_get_option( 'cwppos_rating_notbad' ) . ';
                     }
                     
                     #review-statistics .review-wu-grade .c100.wppr-not-bad .fill,
-                    #review-statistics .review-wu-grade .c100.wppr-not-bad .bar {
+                    #review-statistics .review-wu-grade .c100.wppr-not-bad .bar,
+                     .review-grade-widget .c100.wppr-not-bad .fill,
+                    .review-grade-widget .c100.wppr-not-bad .bar {
                         border-color: ' . $review->wppr_get_option( 'cwppos_rating_notbad' ) . ';
                     }
                     
-                    #review-statistics .review-wu-grade .c100.wppr-good span {
+                    .user-comments-grades .comment-meta-grade-bar.wppr-not-bad .comment-meta-grade {
+                        background: ' . $review->wppr_get_option( 'cwppos_rating_notbad' ) . ';
+                    }
+                    
+                    #review-statistics .review-wu-grade .c100.wppr-good span,
+                     .review-grade-widget .c100.wppr-good span {
                         color: ' . $review->wppr_get_option( 'cwppos_rating_good' ) . ';
                     }
                     
                     #review-statistics .review-wu-grade .c100.wppr-good .fill,
-                    #review-statistics .review-wu-grade .c100.wppr-good .bar {
+                    #review-statistics .review-wu-grade .c100.wppr-good .bar,
+                     .review-grade-widget .c100.wppr-good .fill,
+                    .review-grade-widget .c100.wppr-good .bar {
                         border-color: ' . $review->wppr_get_option( 'cwppos_rating_good' ) . ';
                     }
                     
-                    #review-statistics .review-wu-grade .c100.wppr-very-good span {
+                    .user-comments-grades .comment-meta-grade-bar.wppr-good .comment-meta-grade {
+                        background: ' . $review->wppr_get_option( 'cwppos_rating_good' ) . ';
+                    }
+                    
+                    #review-statistics .review-wu-grade .c100.wppr-very-good span,
+                     .review-grade-widget .c100.wppr-very-good span {
                         color: ' . $review->wppr_get_option( 'cwppos_rating_very_good' ) . ';
                     }
                     
                     #review-statistics .review-wu-grade .c100.wppr-very-good .fill,
-                    #review-statistics .review-wu-grade .c100.wppr-very-good .bar {
+                    #review-statistics .review-wu-grade .c100.wppr-very-good .bar,
+                     .review-grade-widget .c100.wppr-very-good .fill,
+                    .review-grade-widget .c100.wppr-very-good .bar {
                         border-color: ' . $review->wppr_get_option( 'cwppos_rating_very_good' ) . ';
+                    }
+                    
+                    .user-comments-grades .comment-meta-grade-bar.wppr-very-good .comment-meta-grade {
+                        background: ' . $review->wppr_get_option( 'cwppos_rating_very_good' ) . ';
                     }
                     
                     #review-statistics .review-wu-bars ul.wppr-weak li.colored {
@@ -471,12 +470,13 @@ class Wppr_Public {
 		$return = '';
 		$return .= '<div class="user-comments-grades">';
 		foreach ( $options as $k => $option ) {
+			$intGrade = intval( $option['value'] ) * 10;
 			$return .= '<div class="comment-meta-option">
                             <p class="comment-meta-option-name">' . $option['name'] . '</p>
                             <p class="comment-meta-option-grade">' . $option['value'] . '</p>
                             <div class="cwpr_clearfix"></div>
-                            <div class="comment-meta-grade-bar">
-                                <div class="comment-meta-grade" style="width: ' . intval( $option['value'] ) * 10 . '%"></div>
+                            <div class="comment-meta-grade-bar ' . $this->review->get_rating_class( $intGrade ) . '">
+                                <div class="comment-meta-grade" style="width: ' . $intGrade . '%"></div>
                             </div><!-- end .comment-meta-grade-bar -->
                         </div><!-- end .comment-meta-option -->
 					';
