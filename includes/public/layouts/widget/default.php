@@ -24,40 +24,43 @@ foreach ( $results as $review ) :
 	<li class="cwp-popular-review">
 
 	<?php
-    $wppr_image = false;
-    if ( $instance['show_image'] == true && ! empty( $product_image ) ) { ?>
+	$wppr_image = false;
+	if ( $instance['show_image'] == true && ! empty( $product_image ) ) {
+	?>
 		<div class="cwp_rev_image wppr-col">
-            <img src="<?php echo $product_image; ?>"
+			<img src="<?php echo $product_image; ?>"
 			 alt="<?php echo $review_object->get_name(); ?>">
-        </div>
-    <?php
-	    $wppr_image = true;
-    } ?>
+		</div>
+	<?php
+		$wppr_image = true;
+	}
+	?>
 
-    <div class="wppr-post-title wppr-col<?php echo ( $wppr_image ) ? '' : ' wppr-no-image'; ?>">
-        <a href="<?php echo get_the_permalink( $review['ID'] ); ?>" class="wppr-col" title="<?php echo $review_object->get_name(); ?>">
-		    <?php echo $product_title_display; ?>
-        </a>
-    </div>
+	<div class="wppr-post-title wppr-col<?php echo ( $wppr_image ) ? '' : ' wppr-no-image'; ?>">
+		<a href="<?php echo get_the_permalink( $review['ID'] ); ?>" class="wppr-col" title="<?php echo $review_object->get_name(); ?>">
+			<?php echo $product_title_display; ?>
+		</a>
+	</div>
 
-    <?php
-    $review_score = $review_object->get_rating();
-    $review_class = $review_object->get_rating_class();
-    if ( ! empty( $review_score ) ) { ?>
-        <div class="review-grade-widget wppr-col">
-            <div class="review-wu-grade-content">
-                <div class="c100 p<?php echo esc_attr( round( $review_score ) ) . ' ' . esc_attr( $review_class ); ?>">
-                    <span><?php echo esc_html( round( $review_score, 0 ) / 10 ); ?></span>
-                    <div class="slice">
-                        <div class="bar"></div>
-                        <div class="fill"></div>
-                    </div>
-                    <div class="slice-center"></div>
-                </div>
-            </div>
-        </div>
-    <?php } ?>
-    </li>
+	<?php
+	$review_score = $review_object->get_rating();
+	$review_class = $review_object->get_rating_class();
+	if ( ! empty( $review_score ) ) {
+	?>
+		<div class="review-grade-widget wppr-col">
+			<div class="review-wu-grade-content">
+				<div class="c100 p<?php echo esc_attr( round( $review_score ) ) . ' ' . esc_attr( $review_class ); ?>">
+					<span><?php echo esc_html( round( $review_score, 0 ) / 10 ); ?></span>
+					<div class="slice">
+						<div class="bar"></div>
+						<div class="fill"></div>
+					</div>
+					<div class="slice-center"></div>
+				</div>
+			</div>
+		</div>
+	<?php } ?>
+	</li>
 		<?php
 	endforeach;
 	?>
