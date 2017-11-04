@@ -21,37 +21,46 @@ foreach ( $results as $review ) :
 		$product_title_display = substr( $product_title_display, 0, $title_length ) . '...';
 	}
 	?>
-	<li class="cwp-popular-review cwp_top_posts_widget_
+	<li class="cwp-popular-review">
+
 	<?php
+	$wppr_image = false;
 	if ( $instance['show_image'] == true && ! empty( $product_image ) ) {
-		echo ' wppr-cols-3';
-	} else {
-		echo ' wppr-cols-2';
+	?>
+		<div class="cwp_rev_image wppr-col">
+			<img src="<?php echo $product_image; ?>"
+			 alt="<?php echo $review_object->get_name(); ?>">
+		</div>
+	<?php
+		$wppr_image = true;
 	}
 	?>
-	">
-	<?php
-	if ( $instance['show_image'] == true && ! empty( $product_image ) ) {
-		?>
-		<img class="cwp_rev_image wppr-col" src="<?php echo $product_image; ?>"
-			 alt="<?php echo $review_object->get_name(); ?>">
-			<?php } ?>
-			<a href="<?php echo get_the_permalink( $review['ID'] ); ?>" class="wppr-col"
-		   title="<?php echo $review_object->get_name(); ?>">
+
+	<div class="wppr-post-title wppr-col<?php echo ( $wppr_image ) ? '' : ' wppr-no-image'; ?>">
+		<a href="<?php echo get_the_permalink( $review['ID'] ); ?>" class="wppr-col" title="<?php echo $review_object->get_name(); ?>">
 			<?php echo $product_title_display; ?>
-			</a>
-			<?php
-			$review_score = $review_object->get_rating();
-			if ( ! empty( $review_score ) ) {
-				?>
-				<div class="review-grade-widget wppr-col">
-					<div class="cwp-review-chart absolute">
-						<div class="cwp-review-percentage" data-percent="<?php echo $review_score; ?>"><span></span>
-						</div>
-					</div><!-- end .chart -->
+		</a>
+	</div>
+
+	<?php
+	$review_score = $review_object->get_rating();
+	$review_class = $review_object->get_rating_class();
+	if ( ! empty( $review_score ) ) {
+	?>
+		<div class="review-grade-widget wppr-col">
+			<div class="review-wu-grade-content">
+				<div class="c100 p<?php echo esc_attr( round( $review_score ) ) . ' ' . esc_attr( $review_class ); ?>">
+					<span><?php echo esc_html( round( $review_score, 0 ) / 10 ); ?></span>
+					<div class="slice">
+						<div class="bar"></div>
+						<div class="fill"></div>
+					</div>
+					<div class="slice-center"></div>
 				</div>
-			<?php } ?>
-		</li>
+			</div>
+		</div>
+	<?php } ?>
+	</li>
 		<?php
 	endforeach;
 	?>

@@ -151,8 +151,6 @@
 
 #review-statistics .review-wrap-up {
 	margin-top: 20px;
-	border: 1px solid #e6e6e6;
-	border-top: none;
 }
 
 #review-statistics .review-wu-bars h3,
@@ -178,12 +176,9 @@
 
 #review-statistics .review-wu-bars {
 	float: left;
-	width: 90%;
-	padding: 0 5% 10px 5%;
+	width: 100%;
+	padding: 15px;
 	border-top: 1px solid #e6e6e6;
-	border-right: 1px solid #e6e6e6;
-	border-bottom: none;
-	border-left: none;
 }
 
 #review-statistics .review-wu-bars ul {
@@ -232,7 +227,14 @@
 #review-statistics .review-wrap-up .cwpr-review-top {
 	padding: 20px;
 	border-top: 5px solid #3baeda;
+	border-left: 1px solid #e6e6e6;
+	border-right: 1px solid #e6e6e6;
+}
+
+#review-statistics .review-wrap-up .review-wu-content {
 	border-bottom: 1px solid #e6e6e6;
+	border-top: 1px solid #e6e6e6;
+	border-left: 1px solid #e6e6e6;
 }
 
 #review-statistics .review-wrap-up .cwpr-review-top .cwp-item {
@@ -265,9 +267,15 @@
 }
 
 #review-statistics .review-wrap-up .review-wu-left {
+	border-right: 1px solid #e6e6e6;
+	display: block;
 	float: left;
-	width: 51%;
-	margin-top: 10px;
+	width: 50%;
+}
+
+#review-statistics .review-wrap-up .review-wu-left-top {
+	display: table;
+	width: 100%;
 }
 
 .wppr-review-container.wppr-review-no-pros.wppr-review-no-cons #review-statistics .review-wrap-up .review-wu-left {
@@ -275,33 +283,45 @@
 }
 
 #review-statistics .review-wrap-up .review-wu-left .rev-wu-image {
-	float: left;
+	border-right: 1px solid #e6e6e6;
+	display: table-cell;
 	overflow: hidden;
-	width: 40%;
-	margin-right: 5%;
-	margin-left: 5%;
-	padding: 0;
-	border-top: none;
+	width: auto;
+	padding: 15px;
 	text-align: center;
+	vertical-align: middle;
+}
+
+#review-statistics .review-wrap-up .review-wu-left .rev-wu-image a {
+	display: inline-block;
 }
 
 #review-statistics .review-wrap-up .review-wu-left .rev-wu-image img {
 	width: 100%;
 	height: auto;
 	box-shadow: none;
+	display: inline-block;
 }
 
 #review-statistics .review-wrap-up .review-wu-left .review-wu-grade {
-	display: block;
-	float: left;
-	position: relative;
-	box-sizing: border-box;
-	width: 50%;
-	border: 1px solid #e6e6e6;
-	border-top: none;
-	border-bottom: none;
+	display: table-cell;
+	padding: 15px;
 	text-align: center;
+	min-width: 120px;
+	max-width: 50%;
+	width: auto;
+	vertical-align: middle;
 }
+
+
+#review-statistics .review-wrap-up .review-wu-left .review-wu-grade-content {
+	display: block;
+	margin: 0 auto;
+	position: relative;
+	width: 120px;
+	height: 120px;
+}
+
 
 #review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart {
 	display: inline-block;
@@ -315,10 +335,11 @@
 }
 
 #review-statistics .review-wrap-up .review-wu-right {
+	border-right: 1px solid #e6e6e6;
+	display: block;
 	float: left;
-	width: 44%;
-	padding: 2% 2% 2% 3%;
-	border-top: none;
+	width: 50%;
+	padding: 15px;
 }
 
 #review-statistics .review-wrap-up .review-wu-right h2 {
@@ -361,12 +382,6 @@
 	margin-bottom: 0 !important;
 	margin-left: 0 !important;
 	padding-left: 0 !important;
-}
-
-.review-wu-bars,
-.review-wu-right {
-	box-sizing: content-box !important;
-	text-align: left;
 }
 
 #review-statistics .rev-option {
@@ -599,33 +614,34 @@
 	}
 }
 
-@media (min-width: 440px) and (max-width: 700px) {
-	#review-statistics .review-wrap-up .review-wu-left .rev-wu-image,
+@media (max-width: 480px) {
 	#review-statistics .review-wrap-up .review-wu-left .review-wu-grade {
+		width: 100px;
+	}
+
+	#review-statistics .review-wrap-up .review-wu-left .review-wu-grade-content {
+		width: 100px;
 		height: 100px;
 	}
 
-	#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart .cwp-review-percentage {
-		margin-top: 10%;
+	#review-statistics .review-wu-grade .c100 {
+		font-size: 100px;
 	}
 
-	#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart span {
-		font-size: 30px;
+	#review-statistics .review-wu-grade .c100 span {
+		font-size: 28px;
+		line-height: 100px;
 	}
 }
 
-@media (min-width: 700px) and (max-width: 820px) {
-	#review-statistics .review-wrap-up .review-wu-left .rev-wu-image,
-	#review-statistics .review-wrap-up .review-wu-left .review-wu-grade {
-		height: 130px;
+@media (max-width: 768px) {
+	#review-statistics .review-wrap-up .review-wu-left,
+	#review-statistics .review-wrap-up .review-wu-right {
+		width: 100%;
 	}
 
-	#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart .cwp-review-percentage {
-		margin-top: 10%;
-	}
-
-	#review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart span {
-		font-size: 30px;
+	#review-statistics .review-wrap-up .review-wu-right {
+		border-top: 1px solid #e6e6e6;
 	}
 }
 
