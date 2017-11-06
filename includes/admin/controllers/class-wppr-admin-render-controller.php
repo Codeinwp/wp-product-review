@@ -50,7 +50,7 @@ class WPPR_Admin_Render_Controller {
 	 */
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 		$this->html_helper = new WPPR_Html_Fields();
 	}
 

@@ -36,11 +36,11 @@ class WPPR_Html_Fields {
 	 */
 	private function define_defaults( $specific_defaults ) {
 		$general_defaults = array(
-			'id'        => null,
-			'name'      => null,
-			'value'     => null,
-			'class'     => '',
-			'default'   => '',
+			'id'          => null,
+			'name'        => null,
+			'value'       => null,
+			'class'       => '',
+			'default'     => '',
 			'placeholder' => '',
 			'disabled'    => false,
 		);
@@ -63,7 +63,7 @@ class WPPR_Html_Fields {
 			)
 		);
 		$args     = wp_parse_args( $args, $defaults );
-		$class  = $this->validate_class( $args['class'] );
+		$class    = $this->validate_class( $args['class'] );
 		$disabled = '';
 		if ( ! empty( $args['options']['disabled'] ) ) {
 			$disabled .= ' disabled="disabled"';
@@ -118,7 +118,7 @@ class WPPR_Html_Fields {
 	public function image( $args ) {
 		$defaults = $this->define_defaults(
 			array(
-				'class' => 'wppr-image',
+				'class'  => 'wppr-image',
 				'action' => __( 'Choose image', 'wp-product-review' ),
 			)
 		);
@@ -131,7 +131,7 @@ class WPPR_Html_Fields {
 		if ( is_null( $args['id'] ) ) {
 			$args['id'] = $args['name'];
 		}
-		$output = '<input type="text" ' . $disabled . ' name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( $args['id'] ) . '" class="' . $class . '"   value="' . esc_attr( $args['value'] ) . '" placeholder="' . esc_attr( $args['placeholder'] ) . '"  />';
+		$output  = '<input type="text" ' . $disabled . ' name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( $args['id'] ) . '" class="' . $class . '"   value="' . esc_attr( $args['value'] ) . '" placeholder="' . esc_attr( $args['placeholder'] ) . '"  />';
 		$output .= '<input type="button" id="' . esc_attr( $args['id'] ) . '-button" class="wppr-image-button button"  value="' . esc_attr( $args['action'] ) . '"/>';
 
 		return apply_filters( 'wppr_field', $output, $args );
@@ -156,13 +156,17 @@ class WPPR_Html_Fields {
 		if ( $args['value'] == null ) {
 			$args['value'] = $args['default'];
 		}
+		$disabled = '';
+		if ( ! empty( $args['disabled'] ) ) {
+			$disabled .= ' disabled="disabled"';
+		}
 		$options = array();
 		foreach ( $args['options'] as $ov => $op ) {
 			$options[ esc_attr( $ov ) ] = esc_html( $op );
 		}
-		$output = '<select class="' . $class . '" name="' . esc_attr( $args['name'] ) . '" > ';
+		$output = '<select class="' . $class . '" name="' . esc_attr( $args['name'] ) . '"' . $disabled . ' > ';
 		foreach ( $options as $k => $v ) {
-			$output .= "<option value='" . $k . "' " . ( ( isset( $args['value'] ) && $args['value'] == $k ) ? 'selected' : '') . '>' . $v . '</option>';
+			$output .= "<option value='" . $k . "' " . ( ( isset( $args['value'] ) && $args['value'] == $k ) ? 'selected' : '' ) . '>' . $v . '</option>';
 		}
 		$output .= '</select>';
 
@@ -231,7 +235,7 @@ class WPPR_Html_Fields {
         ';
 
 		if ( ! class_exists( 'WPPR_PRO' ) ) {
-			$output = '<span style="color:red;">' . __( 'You need the PRO <a style="color:red;" href="http://bit.ly/2bhylar" target="_blank" >add-on</a> in order to change the review icons.','wp-product-review' ) . '</span>';
+			$output = '<span style="color:red;">' . __( 'You need the PRO <a style="color:red;" href="http://bit.ly/2bhylar" target="_blank" >add-on</a> in order to change the review icons.', 'wp-product-review' ) . '</span>';
 		}
 
 		return apply_filters( 'wppr_field', $output, $args );

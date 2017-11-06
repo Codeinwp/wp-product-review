@@ -68,34 +68,35 @@ class WPPR_Global_Settings {
 				'wppr_settings_fields', array(
 					'general'    => array(
 						'cwppos_show_reviewbox'  => array(
-							'id'      => 'review_position',
-							'name'    => __( 'Position of the review box', 'wp-product-review' ),
-							'description'    => __( 'You display the review using the shortcode available in the pro version <code> [P_REVIEW post_id=3067 visual=\'full\']</code>', 'wp-product-review' ),
-							'type'    => 'select',
-							'options' => array(
+							'id'          => 'review_position',
+							'name'        => __( 'Position of the review box', 'wp-product-review' ),
+							'description' => __( 'You display the review using the shortcode available in the pro version <code> [P_REVIEW post_id=3067 visual=\'full\']</code>', 'wp-product-review' ),
+							'type'        => 'select',
+							'options'     => array(
 								'yes'    => __( 'After content', 'wp-product-review' ),
 								'no'     => __( 'Before content', 'wp-product-review' ),
 								'manual' => __( 'Manually placed', 'wp-product-review' ),
 							),
-							'default' => 'yes',
+							'default'     => 'yes',
 						),
 						'cwppos_show_userreview' => array(
-							'id'      => 'show_review',
-							'name'    => __( 'Show review comment', 'wp-product-review' ),
-							'description'    => __( 'Activate comment review user', 'wp-product-review' ),
-							'type'    => 'select',
-							'options' => array(
+							'id'          => 'show_review',
+							'name'        => __( 'Show review comment', 'wp-product-review' ),
+							'description' => self::enable_user_comments() ? __( 'Activate comment review user', 'wp-product-review' ) : self::disable_user_comments_msg(),
+							'type'        => 'select',
+							'options'     => array(
 								'yes' => __( 'Yes', 'wp-product-review' ),
 								'no'  => __( 'No', 'wp-product-review' ),
 							),
-							'default' => 'no',
+							'disabled'    => ! self::enable_user_comments(),
+							'default'     => 'no',
 						),
 						'cwppos_infl_userreview' => array(
-							'id'      => 'comment_influence',
-							'name'    => __( 'Visitor Review Influence', 'wp-product-review' ),
-							'description'    => __( 'Select how much visitors rating will affect the main one', 'wp-product-review' ),
-							'type'    => 'select',
-							'options' => array(
+							'id'          => 'comment_influence',
+							'name'        => __( 'Visitor Review Influence', 'wp-product-review' ),
+							'description' => __( 'Select how much visitors rating will affect the main one', 'wp-product-review' ),
+							'type'        => 'select',
+							'options'     => array(
 								'0'   => 'No influence',
 								'10'  => '10%',
 								'20'  => '20%',
@@ -108,14 +109,14 @@ class WPPR_Global_Settings {
 								'90'  => '90%',
 								'100' => '100%',
 							),
-							'default' => '0',
+							'default'     => '0',
 						),
 						'cwppos_option_nr'       => array(
-							'id'      => 'options_no',
-							'name'    => __( 'Number of options/pros/cons', 'wp-product-review' ),
-							'description'    => __( 'You can select the default number of options / pros/ cons (3-10)', 'wp-product-review' ),
-							'type'    => 'select',
-							'options' => array(
+							'id'          => 'options_no',
+							'name'        => __( 'Number of options/pros/cons', 'wp-product-review' ),
+							'description' => __( 'You can select the default number of options / pros/ cons (3-10)', 'wp-product-review' ),
+							'type'        => 'select',
+							'options'     => array(
 								'3'  => '3',
 								'4'  => '4',
 								'5'  => '5',
@@ -125,14 +126,14 @@ class WPPR_Global_Settings {
 								'9'  => '9',
 								'10' => '10',
 							),
-							'default' => '5',
+							'default'     => '5',
 						),
 						'cwppos_widget_size'     => array(
 							'type'        => 'input_text',
 							'name'        => __( 'Content width', 'wp-product-review' ),
 							'description' => __( 'Write your content width in pixels in this format : 600 if you want to limit the review box width.', 'wp-product-review' ),
 							'id'          => 'widget_size',
-							'default' => '',
+							'default'     => '',
 						),
 						'cwppos_lighbox'         => array(
 							'type'        => 'select',
@@ -143,7 +144,7 @@ class WPPR_Global_Settings {
 								'yes' => __( 'Yes', 'wp-product-review' ),
 								'no'  => __( 'No', 'wp-product-review' ),
 							),
-							'default' => 'no',
+							'default'     => 'no',
 						),
 						'cwppos_fontawesome'     => array(
 							'type'        => 'select',
@@ -154,9 +155,9 @@ class WPPR_Global_Settings {
 								'yes' => __( 'Yes', 'wp-product-review' ),
 								'no'  => __( 'No', 'wp-product-review' ),
 							),
-							'default' => 'no',
+							'default'     => 'no',
 						),
-						'wppr_rich_snippet'         => array(
+						'wppr_rich_snippet'      => array(
 							'type'        => 'select',
 							'name'        => __( 'Enable Rich Snippets', 'wp-product-review' ),
 							'description' => __( 'Enable rich snippets on the product page.', 'wp-product-review' ),
@@ -165,7 +166,7 @@ class WPPR_Global_Settings {
 								'yes' => __( 'Yes', 'wp-product-review' ),
 								'no'  => __( 'No', 'wp-product-review' ),
 							),
-							'default' => 'yes',
+							'default'     => 'yes',
 						),
 					),
 					'rating'     => array(
@@ -174,42 +175,42 @@ class WPPR_Global_Settings {
 							'name'        => __( 'Rating options default color', 'wp-product-review' ),
 							'description' => __( 'Select the color to be used by default on rating.', 'wp-product-review' ),
 							'id'          => 'rating_default',
-							'default' => '#E1E2E0',
+							'default'     => '#E1E2E0',
 						),
 						'cwppos_rating_chart_default' => array(
 							'type'        => 'color',
 							'name'        => __( 'Rating chart default color', 'wp-product-review' ),
 							'description' => __( 'Select the color to be used by default on rating chart.', 'wp-product-review' ),
 							'id'          => 'rating_chart_default',
-							'default' => '#ebebeb',
+							'default'     => '#ebebeb',
 						),
 						'cwppos_rating_weak'          => array(
 							'type'        => 'color',
 							'name'        => __( 'Weak rating', 'wp-product-review' ),
 							'description' => __( 'Select the color to be used when the rating is weak. ( < 2.5)', 'wp-product-review' ),
 							'id'          => 'rating_weak',
-							'default' => '#FF7F66',
+							'default'     => '#FF7F66',
 						),
 						'cwppos_rating_notbad'        => array(
 							'type'        => 'color',
 							'name'        => __( 'Not bad rating', 'wp-product-review' ),
 							'description' => __( 'Select the color to be used when the rating is not bad. ( > 2.5 and < 5)', 'wp-product-review' ),
 							'id'          => 'rating_notbad',
-							'default' => '#FFCE55',
+							'default'     => '#FFCE55',
 						),
-						'cwppos_rating_good'     => array(
+						'cwppos_rating_good'          => array(
 							'type'        => 'color',
 							'name'        => __( 'Good rating', 'wp-product-review' ),
 							'description' => __( 'Select the color to be used when the rating is good. ( >5 and <7.5)', 'wp-product-review' ),
 							'id'          => 'rating_good',
-							'default' => '#50C1E9',
+							'default'     => '#50C1E9',
 						),
-						'cwppos_rating_very_good'          => array(
+						'cwppos_rating_very_good'     => array(
 							'type'        => 'color',
 							'name'        => __( 'Very good rating', 'wp-product-review' ),
 							'description' => __( 'Select the color to be used when the rating is very good. ( 7.5 < and <10)', 'wp-product-review' ),
 							'id'          => 'rating_very_good',
-							'default' => '#8DC153',
+							'default'     => '#8DC153',
 						),
 
 					),
@@ -219,35 +220,35 @@ class WPPR_Global_Settings {
 							'name'        => __( 'Font color', 'wp-product-review' ),
 							'description' => __( 'Select the color to be used on the font.', 'wp-product-review' ),
 							'id'          => 'font_color',
-							'default' => '#3D3D3D',
+							'default'     => '#3D3D3D',
 						),
 						'cwppos_pros_color'        => array(
 							'type'        => 'color',
 							'name'        => __( 'Pros text color', 'wp-product-review' ),
 							'description' => __( 'Select the color to be used on the \'Pros\' text.', 'wp-product-review' ),
 							'id'          => 'pros_color',
-							'default' => '#8DC153',
+							'default'     => '#8DC153',
 						),
 						'cwppos_cons_color'        => array(
 							'type'        => 'color',
 							'name'        => __( 'Cons text color', 'wp-product-review' ),
 							'description' => __( 'Select the color to be used on the Cons text.', 'wp-product-review' ),
 							'id'          => 'cons_color',
-							'default' => '#C15353',
+							'default'     => '#C15353',
 						),
 						'cwppos_pros_text'         => array(
 							'type'        => 'text',
 							'name'        => __( 'Pros text', 'wp-product-review' ),
 							'description' => __( 'Specify text for pros heading', 'wp-product-review' ),
 							'id'          => 'pros_text',
-							'default' => 'Pros',
+							'default'     => 'Pros',
 						),
 						'cwppos_cons_text'         => array(
 							'type'        => 'text',
 							'name'        => __( 'Cons text', 'wp-product-review' ),
 							'description' => __( 'Specify text for cons heading', 'wp-product-review' ),
 							'id'          => 'cons_text',
-							'default' => 'Cons',
+							'default'     => 'Cons',
 						),
 						'cwppos_reviewboxbd_color' => array(
 							'type'        => 'color',
@@ -274,49 +275,49 @@ class WPPR_Global_Settings {
 								'yes' => 'Yes',
 								'no'  => 'No',
 							),
-							'default' => 'yes',
+							'default'     => 'yes',
 						),
 						'cwppos_buttonbd_color'   => array(
 							'type'        => 'color',
 							'name'        => __( 'Button border', 'wp-product-review' ),
 							'description' => __( 'Select the border color to be used on the buy button for the default state', 'wp-product-review' ),
 							'id'          => 'buttonbd_color',
-							'default' => '#3BAEDA',
+							'default'     => '#3BAEDA',
 						),
 						'cwppos_buttonbh_color'   => array(
 							'type'        => 'color',
 							'name'        => __( 'Button border hover', 'wp-product-review' ),
 							'description' => __( 'Select the border color to be used on the buy button for the hover state', 'wp-product-review' ),
 							'id'          => 'buttonbh_color',
-							'default' => '#3BAEDA',
+							'default'     => '#3BAEDA',
 						),
 						'cwppos_buttonbkd_color'  => array(
 							'type'        => 'color',
 							'name'        => __( 'Button background', 'wp-product-review' ),
 							'description' => __( 'Select the background color to be used on the buy button for the default state', 'wp-product-review' ),
 							'id'          => 'buttonbkd_color',
-							'default' => '#ffffff',
+							'default'     => '#ffffff',
 						),
 						'cwppos_buttonbkh_color'  => array(
 							'type'        => 'color',
 							'name'        => __( 'Button background hover', 'wp-product-review' ),
 							'description' => __( 'Select the background color to be used on the buy button for the hover  state', 'wp-product-review' ),
 							'id'          => 'buttonbkh_color',
-							'default' => '#3BAEDA',
+							'default'     => '#3BAEDA',
 						),
 						'cwppos_buttontxtd_color' => array(
 							'type'        => 'color',
 							'name'        => __( 'Button text color', 'wp-product-review' ),
 							'description' => __( 'Select the text color to be used on the buy button for the default state', 'wp-product-review' ),
 							'id'          => 'buttontxtd_color',
-							'default' => '#3BAEDA',
+							'default'     => '#3BAEDA',
 						),
 						'cwppos_buttontxth_color' => array(
 							'type'        => 'color',
 							'name'        => __( 'Button text color hover', 'wp-product-review' ),
 							'description' => __( 'Select the text color to be used on the buy button for the hover state', 'wp-product-review' ),
 							'id'          => 'buttontxth_color',
-							'default' => '#FFFFFF',
+							'default'     => '#FFFFFF',
 						),
 					),
 				)
@@ -325,6 +326,38 @@ class WPPR_Global_Settings {
 		}// End if().
 
 		return self::$instance;
+	}
+
+	/**
+	 * When Disqus or Jetpack Comments are enabled, the user review doesn't work.
+	 */
+	private static function enable_user_comments() {
+		if ( ! is_admin() ) {
+			return true;
+		}
+		if ( is_plugin_active( 'disqus-comment-system/disqus.php' ) || ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'comments' ) ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * When Disqus or Jetpack Comments are enabled, show this to the user.
+	 */
+	private static function disable_user_comments_msg() {
+		$active = array();
+		if ( is_plugin_active( 'disqus-comment-system/disqus.php' ) ) {
+			$active[] = 'Disqus';
+		}
+		if ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'comments' ) ) {
+			$active[] = 'Jetpack Comments';
+		}
+		if ( $active ) {
+			return sprintf( __( 'We see %s active, so user feedback is disabled', 'wp-product-review' ), implode( ',', $active ) );
+		}
+
+		return '';
 	}
 
 	/**
@@ -363,6 +396,7 @@ class WPPR_Global_Settings {
 				$fields[ $field_key ] = $field_values;
 			}
 		}
+
 		return $fields;
 	}
 }

@@ -564,7 +564,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 * @return string
 	 */
 	public function get_currency() {
-		return apply_filters( 'wppr_currency', empty( $this->currency ) ? '$' : $this->currency, $this->ID, $this );
+		return apply_filters( 'wppr_currency_code', apply_filters( 'wppr_currency', empty( $this->currency ) ? '$' : $this->currency, $this->ID, $this ) );
 	}
 
 	/**
@@ -649,7 +649,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		global $wpdb;
 		// filter for image size;
 		$size        = apply_filters( 'wppr_review_image_size', 'thumbnail', $this->ID, $this );
-		$attachment  = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid='%s';", $this->image ) );
+		$attachment  = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid=%s", $this->image ) );
 		$image_id    = isset( $attachment[0] ) ? $attachment[0] : '';
 		$image_thumb = '';
 		if ( ! empty( $image_id ) ) {
@@ -1075,24 +1075,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			return '';
 		}
 
-		/**
-		 * Prevent infinite loop by removing the wppr shortcodes from content.
-		 */
-		$wppr_shortcodes = apply_filters(
-			'wppr_shortcodes', array(
-				'P_REVIEW'    => '',
-				'wpr_landing' => '',
-				'wpr_listing' => '',
-			)
-		);
-		global $shortcode_tags;
-		$temp_shortcode_tags = $shortcode_tags;
-		$shortcode_tags      = $wppr_shortcodes;
-		$regex               = '/' . get_shortcode_regex() . '/s';
-		$shortcode_tags      = $temp_shortcode_tags;
-		$content             = preg_replace( $regex, '', $content );
-		$content             = do_shortcode( $content );
-		$content             = wp_strip_all_tags( $content );
+		$content = wp_strip_all_tags( strip_shortcodes( $content ) );
 
 		return apply_filters( 'wppr_content', $content, $this->ID, $this );
 	}
@@ -1126,4 +1109,21 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 
 	}
 
+	/**
+	 * Return css class based on the rating.
+	 *
+	 * @return string CSS class for the rating.
+	 */
+	public function get_rating_class( $value = - 1 ) {
+		$element = ( $value < 0 ) ? $this->get_rating() : $value;
+		if ( $element >= 75 ) {
+			return 'wppr-very-good';
+		} elseif ( $element < 75 && $element >= 50 ) {
+			return 'wppr-good';
+		} elseif ( $element < 50 && $element >= 25 ) {
+			return 'wppr-not-bad';
+		} else {
+			return 'wppr-weak';
+		}
+	}
 }

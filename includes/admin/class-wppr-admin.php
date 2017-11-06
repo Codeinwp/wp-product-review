@@ -185,7 +185,7 @@ class WPPR_Admin {
 		if ( $nonce['name'] != 'wppr_nonce_settings' ) {
 			die( 'invalid nonce name' );
 		}
-		if ( wp_verify_nonce( $nonce['value'],'wppr_save_global_settings' ) != 1 ) {
+		if ( wp_verify_nonce( $nonce['value'], 'wppr_save_global_settings' ) != 1 ) {
 			die( 'invalid nonce value' );
 		}
 
@@ -193,6 +193,55 @@ class WPPR_Admin {
 			$model->wppr_set_option( $option['name'], $option['value'] );
 		}
 		die();
+	}
+
+	/**
+	 * Method called from AJAX request to populate categories of specified post types.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 */
+	public function get_categories() {
+		check_ajax_referer( WPPR_SLUG, 'nonce' );
+
+		if ( isset( $_POST['type'] ) ) {
+			echo wp_send_json_success( array( 'categories' => self::get_category_for_post_type( $_POST['type'] ) ) );
+		}
+		wp_die();
+	}
+
+	/**
+	 * Method that returns the categories of specified post types.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 */
+	public static function get_category_for_post_type( $post_type ) {
+		$categories = array();
+		if ( $post_type ) {
+			$taxonomies = get_taxonomies(
+				array( 'object_type' => array( $post_type ),
+												 'hierarchical' => true,
+				), 'objects'
+			);
+			if ( $taxonomies ) {
+				foreach ( $taxonomies as $tax ) {
+					$terms = get_terms(
+						$tax->name, array(
+							'hide_empty' => false,
+						)
+					);
+					if ( empty( $terms ) ) {
+						continue;
+					}
+					foreach ( $terms as $term ) {
+						$categories[ $term->slug ] = $term->name;
+					}
+				}
+			}
+		}
+
+		return $categories;
 	}
 
 }

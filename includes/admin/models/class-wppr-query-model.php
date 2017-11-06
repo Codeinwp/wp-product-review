@@ -88,9 +88,10 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	 */
 	public function find(
 		$post = array(
-			'category_id'   => false,
-			'category_name' => false,
-			'post_type'     => array( 'post', 'page' ),
+			'category_id'           => false,
+			'category_name'         => false,
+			'post_type'             => array( 'post', 'page' ),
+			'post_date_range_weeks' => false,
 		),
 		$limit = 20,
 		$filter = array(
@@ -129,7 +130,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
             GROUP_CONCAT( DISTINCT IF( `meta_key` = 'cwp_meta_box_check', `meta_value`, '' ) SEPARATOR '' ) AS 'check', 
             GROUP_CONCAT( DISTINCT IF( `meta_key` = 'cwp_rev_product_name', `meta_value`, '' ) SEPARATOR '' ) AS 'name',   
             GROUP_CONCAT( DISTINCT IF( `meta_key` = 'cwp_rev_price', FORMAT( `meta_value`, 2 ), '' ) SEPARATOR '' ) AS 'price', 
-            GROUP_CONCAT( DISTINCT IF( `meta_key` = 'wppr_rating', FORMAT( `meta_value`, 2 ), '' ) SEPARATOR '' ) AS 'rating'
+             GROUP_CONCAT( DISTINCT IF( `meta_key` = 'wppr_rating', IF(FORMAT(`meta_value`, 2) = '100.00','99.99',FORMAT(`meta_value`,2) ),'') SEPARATOR '' ) AS 'rating'
         FROM {$this->db->postmeta} m INNER JOIN {$this->db->posts} p on p.ID = m.post_ID
         
         {$sub_query_posts}
@@ -169,7 +170,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			return '';
 		}
 		$sub_selection_query = "INNER JOIN {$this->db->term_relationships } wtr ON wtr.object_id = p.ID
-	            INNER JOIN {$this->db->term_taxonomy} wtt on wtt.term_taxonomy_id = wtr.term_taxonomy_id
+	            INNER JOIN {$this->db->term_taxonomy} wtt on wtt.term_taxonomy_id = wtr.term_taxonomy_id AND wtt.taxonomy = 'category'
 	            INNER JOIN {$this->db->terms} wt
 	            ON wt.term_id = wtt.term_id";
 
@@ -253,10 +254,16 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		}
 		// TODO Check against available post_types.
 		if ( isset( $post['post_type'] ) && is_array( $post['post_type'] ) ) {
-			$filter_post_type     = array_fill( 0, count( $post['post_type'] ), ' p.post_type = %s ' );
-			$filter_post_type     = implode( ' OR ', $filter_post_type );
-			$filter_post_type     = ' AND ( ' . $filter_post_type . ' ) ';
+			$filter_post_type      = array_fill( 0, count( $post['post_type'] ), ' p.post_type = %s ' );
+			$filter_post_type      = implode( ' OR ', $filter_post_type );
+			$filter_post_type      = ' AND ( ' . $filter_post_type . ' ) ';
 			$sub_query_conditions .= $this->db->prepare( $filter_post_type, $post['post_type'] );
+		}
+
+		if ( isset( $post['post_date_range_weeks'] ) && ! is_bool( $post['post_date_range_weeks'] ) && is_array( $post['post_date_range_weeks'] ) ) {
+			$min                   = reset( $post['post_date_range_weeks'] );
+			$max                   = end( $post['post_date_range_weeks'] );
+			$sub_query_conditions .= $this->db->prepare( ' AND p.post_date >= DATE_ADD(now(), INTERVAL %d WEEK) AND p.post_date <= DATE_ADD(now(), INTERVAL %d WEEK) ', $min, $max );
 		}
 
 		return $sub_query_conditions;

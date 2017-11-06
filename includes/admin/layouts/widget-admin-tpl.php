@@ -20,21 +20,65 @@
 	<input id="<?php echo $this->get_field_id( 'no_items' ); ?>" name="<?php echo $this->get_field_name( 'no_items' ); ?>" size="3" type="text" value="<?php echo esc_attr( $instance['no_items'] ); ?>" />
 </p>
 <p>
-	<?php $cwp_tp_selected_categ = esc_attr( $instance['cwp_tp_category'] ); ?>
-	<label for="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>"><?php _e( 'Category:', 'wp-product-review' ); ?></label>
-	<select id="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_category' ); ?>">
-		<?php echo '<option>All</option>'; ?>
-		<?php foreach ( $instance['cwp_tp_all_categories'] as $categ_slug => $categ_name ) :  ?>
-			<?php if ( $categ_slug == $cwp_tp_selected_categ ) {
-				echo '<option selected>' . $categ_slug . '</option>';
-} elseif ( $categ_slug == '' ) {
-	echo '<option>There are no categs</select>';
-} else {
-	echo '<option>' . $categ_slug . '</option>';
-} ?>
-		<?php endforeach; ?>
+	<label for="<?php echo $this->get_field_id( 'cwp_tp_post_types' ); ?>"><?php _e( 'Post Types:', 'wp-product-review' ); ?></label>
+	<select id="<?php echo $this->get_field_id( 'cwp_tp_post_types' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_post_types' ); ?>[]" class="wppr-chosen wppr-post-types" data-wppr-cat-combo="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>" multiple>
+	<?php
+		foreach( get_post_types( '', 'objects' ) as $post_type ) {
+	?>
+	<option value="<?php echo $post_type->name;?>" <?php echo in_array($post_type->name, $instance['cwp_tp_post_types']) ? 'selected' : '';?>><?php echo $post_type->label;?></option>
+	<?php
+		}
+	?>
 	</select>
 </p>
+
+<p>
+	<?php $all_cats = isset( $instance['cwp_tp_all_categories'] ) ? $instance['cwp_tp_all_categories'] : ''; ?>
+	<label for="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>"><?php _e( 'Category:', 'wp-product-review' ); ?></label>
+	<select id="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_category' ); ?>" class="wppr-chosen wppr-cats">
+		<option>All</option>
+		<?php 
+			if ( $all_cats ) {
+			foreach ( $all_cats as $post_type => $cats ) {
+		?>
+		<optgroup label='<?php echo $post_type;?>'>
+		<?php
+				foreach ( $cats as $k => $v ) {
+		?>
+<option value="<?php echo $k;?>" <?php selected($k, $instance['cwp_tp_category'])?>><?php echo $v;?></option>
+		<?php
+				}
+		?>
+		</optgroup>
+		<?php
+		}
+			}
+		?>
+	</select>
+	<div class="spinner wppr-cat-spinner"></div>
+</p>
+<?php
+	if ( 'cwp_top_products_widget' === $this->id_base ) {
+	$timespan	= $instance['cwp_timespan'];
+	$min		= 0;
+	$max		= 0;
+	if ( ! empty( $timespan ) && false !== $timespan ) {
+		$min_max	= explode( ',', $timespan );
+		$min		= reset( $min_max );
+		$max		= end( $min_max );
+		}
+?>
+<p>
+<label for="<?php echo $this->get_field_id( 'cwp_timespan' ); ?>"><?php _e( 'Timespan (weeks):', 'wp-product-review' ); ?></label>
+<div data-wppr-value="<?php echo $timespan; ?>" data-wppr-min="-52" data-wppr-max="0" class="wppr-timespan wppr-range-slider" data-wppr-desc="<?php echo $this->get_field_id( 'cwp_timespan_desc' ); ?>"></div>
+<div class="wppr-timespan-desc" id="<?php echo $this->get_field_id( 'cwp_timespan_desc' ); ?>">
+<input type="hidden" id="<?php echo $this->get_field_id( 'cwp_timespan' ); ?>" name="<?php echo $this->get_field_name( 'cwp_timespan' ); ?>" value="<?php echo $timespan; ?>">
+<?php echo sprintf(__( 'Posts published between %s%d%s and %s%d%s week(s) ago', 'wp-product-review' ), '<span class="wppr-range-min">', abs($min), '</span>', '<span class="wppr-range-max">', abs($max), '</span>');?>
+</div>
+</p>
+<?php
+	}
+?>
 <p>
 	<?php $cwp_tp_layout = esc_attr( $instance['cwp_tp_layout'] ); ?>
 	<label for="<?php echo $this->get_field_id( 'cwp_tp_layout' ); ?>"><?php _e( 'Layout:', 'wp-product-review' ); ?></label>
