@@ -7,6 +7,10 @@
 	font-family: FontAwesome;
 }
 
+#review-statistics div {
+	box-sizing: border-box;
+}
+
 .cwp-item-price {
 	float: right;
 	font-family: "Lato", Helvetica, sans-serif;
