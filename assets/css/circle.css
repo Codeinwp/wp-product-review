@@ -110,6 +110,7 @@
 .c100.p98 .fill,
 .c100.p99 .fill,
 .c100.p100 .fill {
+	box-sizing: border-box;
 	clip: rect(0em, 0.5em, 1em, 0em);
 	position: absolute;
 	width: 100%;
@@ -273,6 +274,7 @@
 }
 
 .c100 .slice-center {
+	box-sizing: border-box;
 	display: block;
 	height: 100%;
 	padding: 15px;
