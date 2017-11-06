@@ -1,4 +1,11 @@
 
+ ### v3.2.0 - 2017-11-06 
+ **Changes:** 
+ * Adds support for custom post-type  and taxonomies in widgets.
+* Adds control for time-frame in top reviews widget. 
+* Improves responsiveness and removes dependency of pie-chart.js 
+* Improves notifications when Disqus and Jetpack comments are used.
+ 
  ### v3.1.0 - 2017-09-22 
  **Changes:** 
  * Fix for some edge cases when the review box was gone. 
