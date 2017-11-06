@@ -1143,5 +1143,4 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			return 'wppr-weak';
 		}
 	}
-
 }

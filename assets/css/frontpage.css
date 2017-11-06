@@ -211,6 +211,17 @@
 	text-align: center;
 }
 
+#review-statistics .review-wu-bars ul.wppr-custom-icon li {
+	background: transparent !important;
+	display: inline-block;
+	font-family: FontAwesome;
+	font-size: 22px;
+	height: auto;
+	text-align: center;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+}
+
 #review-statistics .rev-option.customBarIcon h3,
 #review-statistics .rev-option.customBarIcon span {
 	padding: 0 4px;
@@ -235,6 +246,8 @@
 	border-bottom: 1px solid #e6e6e6;
 	border-top: 1px solid #e6e6e6;
 	border-left: 1px solid #e6e6e6;
+	display: table;
+	width: 100%;
 }
 
 #review-statistics .review-wrap-up .cwpr-review-top .cwp-item {
@@ -268,8 +281,8 @@
 
 #review-statistics .review-wrap-up .review-wu-left {
 	border-right: 1px solid #e6e6e6;
-	display: block;
-	float: left;
+	display: table-cell;
+	vertical-align: top;
 	width: 50%;
 }
 
@@ -336,10 +349,11 @@
 
 #review-statistics .review-wrap-up .review-wu-right {
 	border-right: 1px solid #e6e6e6;
-	display: block;
-	float: left;
+	display: table-cell;
+	height: 100%;
 	width: 50%;
 	padding: 15px;
+	vertical-align: top;
 }
 
 #review-statistics .review-wrap-up .review-wu-right h2 {
@@ -637,6 +651,8 @@
 @media (max-width: 768px) {
 	#review-statistics .review-wrap-up .review-wu-left,
 	#review-statistics .review-wrap-up .review-wu-right {
+		display: block;
+		float: left;
 		width: 100%;
 	}
 
