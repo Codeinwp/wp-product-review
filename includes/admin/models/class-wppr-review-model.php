@@ -649,7 +649,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		global $wpdb;
 		// filter for image size;
 		$size        = apply_filters( 'wppr_review_image_size', 'thumbnail', $this->ID, $this );
-		$attachment  = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid='%s';", $this->image ) );
+		$attachment  = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid=%s", $this->image ) );
 		$image_id    = isset( $attachment[0] ) ? $attachment[0] : '';
 		$image_thumb = '';
 		if ( ! empty( $image_id ) ) {

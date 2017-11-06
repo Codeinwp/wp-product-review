@@ -71,24 +71,6 @@ class WPPR_Autoloader {
 	protected static $file_iterator = null;
 
 	/**
-	 * Method to check in allowed namespaces.
-	 *
-	 * @since   3.0.0
-	 * @access  protected
-	 * @param   string $class_name the class name to check with the namespaces.
-	 * @return bool
-	 */
-	protected static function check_namespaces( $class_name ) {
-		$found = false;
-		foreach ( static::$namespaces as $namespace ) {
-			if ( substr( $class_name, 0, strlen( $namespace ) ) == $namespace ) {
-				$found = true;
-			}
-		}
-		return $found;
-	}
-
-	/**
 	 * Autoload function for registration with spl_autoload_register
 	 *
 	 * Looks recursively through project directory and loads class files based on
@@ -96,7 +78,9 @@ class WPPR_Autoloader {
 	 *
 	 * @since   3.0.0
 	 * @access  public
+	 *
 	 * @param   string $class_name The class name requested.
+	 *
 	 * @return mixed
 	 */
 	public static function loader( $class_name ) {
@@ -111,8 +95,8 @@ class WPPR_Autoloader {
 		$directory = new RecursiveDirectoryIterator( static::$path_top . DIRECTORY_SEPARATOR . 'includes', RecursiveDirectoryIterator::SKIP_DOTS );
 
 		if ( is_null( static::$file_iterator ) ) {
-			$Iterator = new RecursiveIteratorIterator( $directory );
-			$Regex = new RegexIterator( $Iterator, '/^.+\.php$/i', RecursiveRegexIterator::MATCH );
+			$Iterator              = new RecursiveIteratorIterator( $directory );
+			$Regex                 = new RegexIterator( $Iterator, '/^.+\.php$/i', RecursiveRegexIterator::MATCH );
 			static::$file_iterator = iterator_to_array( $Regex, false );
 		}
 
@@ -120,9 +104,31 @@ class WPPR_Autoloader {
 		foreach ( static::$file_iterator as $file ) {
 			if ( strtolower( $file->getFileName() ) === strtolower( $filename ) && is_readable( $file->getPathName() ) ) {
 				require( $file->getPathName() );
+
 				return true;
 			}
 		}
+	}
+
+	/**
+	 * Method to check in allowed namespaces.
+	 *
+	 * @since   3.0.0
+	 * @access  protected
+	 *
+	 * @param   string $class_name the class name to check with the namespaces.
+	 *
+	 * @return bool
+	 */
+	protected static function check_namespaces( $class_name ) {
+		$found = false;
+		foreach ( static::$namespaces as $namespace ) {
+			if ( substr( $class_name, 0, strlen( $namespace ) ) == $namespace ) {
+				$found = true;
+			}
+		}
+
+		return $found;
 	}
 
 	/**
@@ -130,6 +136,7 @@ class WPPR_Autoloader {
 	 *
 	 * @since   3.0.0
 	 * @access  public
+	 *
 	 * @param   string $file_ext The file extension used for class files.  Default is "php".
 	 */
 	public static function set_file_ext( $file_ext ) {
@@ -141,6 +148,7 @@ class WPPR_Autoloader {
 	 *
 	 * @since   3.0.0
 	 * @access  public
+	 *
 	 * @param   string $path The path representing the top level where recursion should
 	 *                       begin for plugins. Defaults to empty ( does not look in plugins ).
 	 */
@@ -153,6 +161,7 @@ class WPPR_Autoloader {
 	 *
 	 * @since   3.0.0
 	 * @access  public
+	 *
 	 * @param   string $path The path representing the top level where recursion should
 	 *                       begin. Defaults to the current directory.
 	 */
@@ -165,6 +174,7 @@ class WPPR_Autoloader {
 	 *
 	 * @since   3.0.0
 	 * @access  public
+	 *
 	 * @param   string $file_name The file name to exclude from autoload.
 	 */
 	public static function exclude_file( $file_name ) {
@@ -176,6 +186,7 @@ class WPPR_Autoloader {
 	 *
 	 * @since   3.0.0
 	 * @access  public
+	 *
 	 * @param   array $namespaces The namespaces to use.
 	 */
 	public static function define_namespaces( $namespaces = array() ) {

@@ -96,19 +96,21 @@ class Wppr_Public {
 			return;
 		}
 
-		wp_enqueue_script( $this->plugin_name . '-pie-chart-js', WPPR_URL . '/assets/js/pie-chart2.js', array( 'jquery' ), $this->version, true );
-		wp_enqueue_script(
-			$this->plugin_name . '-frontpage-js', WPPR_URL . '/assets/js/main.js', array(
-			'jquery',
-			$this->plugin_name . '-pie-chart-js',
-		), $this->version, true
-		);
 		if ( $review->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
 			wp_enqueue_script( $this->plugin_name . '-lightbox-js', WPPR_URL . '/assets/js/lightbox.min.js', array( 'jquery' ), $this->version, true );
+			wp_enqueue_style( $this->plugin_name . '-lightbox-css', WPPR_URL . '/assets/css/lightbox.css', array(), $this->version );
 		}
 
 		if ( $review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
 			wp_enqueue_script( 'jquery-ui-slider' );
+			wp_enqueue_script(
+				$this->plugin_name . '-frontpage-js', WPPR_URL . '/assets/js/main.js', array(
+					'jquery',
+				), $this->version, true
+			);
+			if ( $review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
+				wp_enqueue_style( $this->plugin_name . 'jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
+			}
 		}
 
 		wp_enqueue_style( $this->plugin_name . '-frontpage-stylesheet', WPPR_URL . '/assets/css/frontpage.css', array(), $this->version );
@@ -116,22 +118,6 @@ class Wppr_Public {
 			$this->plugin_name . '-percentage-circle', WPPR_URL . '/assets/css/circle.css', array(),
 			$this->version
 		);
-		if ( $review->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
-			wp_enqueue_style( $this->plugin_name . '-lightbox-css', WPPR_URL . '/assets/css/lightbox.css', array(), $this->version );
-		}
-		if ( $review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
-
-			wp_enqueue_style( $this->plugin_name . 'jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
-		}
-
-		$conditional_media_styles = '';
-		if ( $review->wppr_get_option( 'cwppos_widget_size' ) != '' ) {
-			$conditional_media_styles = '
-                #review-statistics {
-                    width: ' . $review->wppr_get_option( 'cwppos_widget_size' ) . 'px;
-                }
-                ';
-		}
 
 		$conditional_styles = '';
 		if ( $review->wppr_get_option( 'cwppos_show_icon' ) == 'yes' ) {
@@ -300,34 +286,6 @@ class Wppr_Public {
                     ' . $conditional_styles . '
               
             ';
-
-		if ( class_exists( 'WPPR_Pro' ) ) {
-			$isSetToPro = true;
-		} else {
-			$isSetToPro = false;
-		}
-
-		if ( $isSetToPro ) {
-			$uni_font = $review->wppr_get_option( 'cwppos_change_bar_icon' );
-		} else {
-			$uni_font = '';
-		}
-		$track = $review->wppr_get_option( 'cwppos_rating_chart_default' );
-		if ( is_array( $uni_font ) ) {
-			$uni_font = $uni_font[0];
-		} elseif ( substr( $uni_font, 0, 1 ) == '#' ) {
-			$uni_font = $uni_font;
-		} else {
-			$uni_font = '';
-		}
-
-		if ( ! empty( $uni_font ) ) {
-			if ( $isSetToPro ) {
-				if ( $review->wppr_get_option( 'cwppos_fontawesome' ) === 'no' ) {
-					wp_enqueue_style( 'cwp-pac-fontawesome-stylesheet', WPPR_URL . '/assets/css/font-awesome.min.css' );
-				}
-			}
-		}
 		$style = apply_filters( 'wppr_global_style', $style );
 		wp_add_inline_style( $this->plugin_name . '-frontpage-stylesheet', $style );
 	}
@@ -353,14 +311,14 @@ class Wppr_Public {
 
 			$output .= $template->render(
 				'default', array(
-				'review_object' => $review_object,
-			), false
+					'review_object' => $review_object,
+				), false
 			);
 
 			$output .= $template->render(
 				'rich-json-ld', array(
-				'review_object' => $review_object,
-			), false
+					'review_object' => $review_object,
+				), false
 			);
 
 			$review_position_before_content = $this->review->wppr_get_option( 'cwppos_show_reviewbox' );
@@ -472,11 +430,11 @@ class Wppr_Public {
 		if ( empty( $options ) ) {
 			return $text;
 		}
-		$return = '';
+		$return  = '';
 		$return .= '<div class="user-comments-grades">';
 		foreach ( $options as $k => $option ) {
 			$intGrade = intval( $option['value'] * 10 );
-			$return .= '<div class="comment-meta-option">
+			$return  .= '<div class="comment-meta-option">
                             <p class="comment-meta-option-name">' . $option['name'] . '</p>
                             <p class="comment-meta-option-grade">' . $option['value'] . '</p>
                             <div class="cwpr_clearfix"></div>

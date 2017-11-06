@@ -13,9 +13,9 @@
 <ul>
 <?php
 foreach ( $results as $review ) :
-	$review_object = new WPPR_Review_Model( $review['ID'] );
+	$review_object         = new WPPR_Review_Model( $review['ID'] );
 	$product_title_display = ( $instance['post_type'] == true ) ? $review_object->get_name() : get_the_title( $review['ID'] );
-	$product_image = $review_object->get_small_thumbnail();
+	$product_image         = $review_object->get_small_thumbnail();
 
 	if ( strlen( $product_title_display ) > $title_length ) {
 		$product_title_display = substr( $product_title_display, 0, $title_length ) . '...';

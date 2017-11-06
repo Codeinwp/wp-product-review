@@ -1,5 +1,5 @@
 /*
-	Version: 3.1.0
+	Version: 3.2.0
 */
 #review-statistics {
 	width: 100%;
@@ -216,14 +216,14 @@
 }
 
 #review-statistics .review-wu-bars ul.wppr-custom-icon li {
-	background: transparent !important;
 	display: inline-block;
+	height: auto;
+	background: transparent !important;
 	font-family: FontAwesome;
 	font-size: 22px;
-	height: auto;
+	-webkit-font-smoothing: antialiased;
 	text-align: center;
 	text-rendering: auto;
-	-webkit-font-smoothing: antialiased;
 }
 
 #review-statistics .rev-option.customBarIcon h3,
@@ -242,16 +242,16 @@
 #review-statistics .review-wrap-up .cwpr-review-top {
 	padding: 20px;
 	border-top: 5px solid #3baeda;
-	border-left: 1px solid #e6e6e6;
 	border-right: 1px solid #e6e6e6;
+	border-left: 1px solid #e6e6e6;
 }
 
 #review-statistics .review-wrap-up .review-wu-content {
-	border-bottom: 1px solid #e6e6e6;
-	border-top: 1px solid #e6e6e6;
-	border-left: 1px solid #e6e6e6;
 	display: table;
 	width: 100%;
+	border-top: 1px solid #e6e6e6;
+	border-bottom: 1px solid #e6e6e6;
+	border-left: 1px solid #e6e6e6;
 }
 
 #review-statistics .review-wrap-up .cwpr-review-top .cwp-item {
@@ -284,10 +284,10 @@
 }
 
 #review-statistics .review-wrap-up .review-wu-left {
-	border-right: 1px solid #e6e6e6;
 	display: table-cell;
-	vertical-align: top;
 	width: 50%;
+	border-right: 1px solid #e6e6e6;
+	vertical-align: top;
 }
 
 #review-statistics .review-wrap-up .review-wu-left-top {
@@ -300,11 +300,11 @@
 }
 
 #review-statistics .review-wrap-up .review-wu-left .rev-wu-image {
-	border-right: 1px solid #e6e6e6;
 	display: table-cell;
 	overflow: hidden;
 	width: auto;
 	padding: 15px;
+	border-right: 1px solid #e6e6e6;
 	text-align: center;
 	vertical-align: middle;
 }
@@ -314,31 +314,29 @@
 }
 
 #review-statistics .review-wrap-up .review-wu-left .rev-wu-image img {
+	display: inline-block;
 	width: 100%;
 	height: auto;
 	box-shadow: none;
-	display: inline-block;
 }
 
 #review-statistics .review-wrap-up .review-wu-left .review-wu-grade {
 	display: table-cell;
-	padding: 15px;
-	text-align: center;
+	width: auto;
 	min-width: 120px;
 	max-width: 50%;
-	width: auto;
+	padding: 15px;
+	text-align: center;
 	vertical-align: middle;
 }
 
-
 #review-statistics .review-wrap-up .review-wu-left .review-wu-grade-content {
 	display: block;
-	margin: 0 auto;
 	position: relative;
 	width: 120px;
 	height: 120px;
+	margin: 0 auto;
 }
-
 
 #review-statistics .review-wrap-up .review-wu-left .review-wu-grade .cwp-review-chart {
 	display: inline-block;
@@ -352,11 +350,11 @@
 }
 
 #review-statistics .review-wrap-up .review-wu-right {
-	border-right: 1px solid #e6e6e6;
 	display: table-cell;
-	height: 100%;
 	width: 50%;
+	height: 100%;
 	padding: 15px;
+	border-right: 1px solid #e6e6e6;
 	vertical-align: top;
 }
 

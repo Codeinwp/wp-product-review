@@ -76,13 +76,13 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 		}
 
 		if ( isset( $instance['cwp_timespan'] ) && trim( $instance['cwp_timespan'] ) != '' ) {
-			$min_max    = explode( ',', $instance['cwp_timespan'] );
-			$min        = intval( reset( $min_max ) );
-			$max        = intval( end( $min_max ) );
+			$min_max = explode( ',', $instance['cwp_timespan'] );
+			$min     = intval( reset( $min_max ) );
+			$max     = intval( end( $min_max ) );
 			if ( 0 === $min && 0 === $max ) {
-				$post['post_date_range_weeks']  = false;
+				$post['post_date_range_weeks'] = false;
 			} else {
-				$post['post_date_range_weeks']  = array( $min, $max );
+				$post['post_date_range_weeks'] = array( $min, $max );
 			}
 		}
 		if ( isset( $instance['cwp_tp_post_types'] ) && ! empty( $instance['cwp_tp_post_types'] ) ) {
@@ -161,9 +161,9 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 		wp_enqueue_script( 'jquery-ui-slider' );
 		wp_enqueue_style( WPPR_SLUG . '-jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), WPPR_LITE_VERSION );
 
-		$deps           = array();
-		$deps['js']     = array( 'jquery-ui-slider' );
-		$deps['css']    = array( WPPR_SLUG . '-jqueryui' );
+		$deps        = array();
+		$deps['js']  = array( 'jquery-ui-slider' );
+		$deps['css'] = array( WPPR_SLUG . '-jqueryui' );
 		return $deps;
 	}
 
@@ -179,7 +179,7 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 	 * @return array
 	 */
 	public function update( $new_instance, $old_instance ) {
-		$instance   = parent::update( $new_instance, $old_instance );
+		$instance = parent::update( $new_instance, $old_instance );
 
 		$instance['cwp_timespan'] = ( ! empty( $new_instance['cwp_timespan'] ) ) ? strip_tags( $new_instance['cwp_timespan'] ) : '';
 		return $instance;
