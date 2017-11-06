@@ -9,7 +9,7 @@
  * @since       3.0.0
  * @deprecated
  */
-
+_deprecated_file( __FILE__, '3.1.0', 'Bundle version', ' The shortcode is no longer supported using this version. You need to update to the latest premium and lite in order to use this feature.' );
 $review         = $review_object->get_review_data();
 $sub_title_info = '';
 $sub_title_info = $review['price'];
@@ -37,7 +37,7 @@ foreach ( $review['links'] as $title => $link ) {
 		if ( $review['click'] != 'image' ) {
 			$image_link_url = $link;
 		}
-		$display_links_count++;
+		$display_links_count ++;
 	}
 }
 if ( $display_links_count > 1 ) {
