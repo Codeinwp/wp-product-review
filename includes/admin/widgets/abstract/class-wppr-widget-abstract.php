@@ -12,8 +12,24 @@
 /**
  * Class WPPR_Widget_Abstract
  */
-class WPPR_Widget_Abstract extends WP_Widget {
+abstract class WPPR_Widget_Abstract extends WP_Widget {
 	const RESTRICT_TITLE_CHARS = 100;
+
+	/**
+	 * Load public assets specific to this widget.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 */
+	public abstract function load_assets();
+
+	/**
+	 * Load admin assets specific to this widget.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 */
+	public abstract function load_admin_assets();
 
 	/**
 	 * Method to load assets required for front end display.
@@ -22,9 +38,12 @@ class WPPR_Widget_Abstract extends WP_Widget {
 	 * @access  public
 	 */
 	public function assets( $review_object ) {
-		wp_enqueue_style( WPPR_SLUG . '-pac-widget-stylesheet', WPPR_URL . '/assets/css/cwppos-widget.css', array(), WPPR_LITE_VERSION );
-		wp_enqueue_style( WPPR_SLUG . '-widget-stylesheet-one', WPPR_URL . '/assets/css/cwppos-widget-style1.css', array(), WPPR_LITE_VERSION );
-		wp_enqueue_style( WPPR_SLUG . '-widget-rating', WPPR_URL . '/assets/css/cwppos-widget-rating.css', array(), WPPR_LITE_VERSION );
+
+		$dependencies   = $this->load_assets();
+
+		wp_enqueue_style( WPPR_SLUG . '-pac-widget-stylesheet', WPPR_URL . '/assets/css/cwppos-widget.css', isset( $dependencies['css'] ) ? $dependencies['css'] : array(), WPPR_LITE_VERSION );
+		wp_enqueue_style( WPPR_SLUG . '-widget-stylesheet-one', WPPR_URL . '/assets/css/cwppos-widget-style1.css', array(WPPR_SLUG . '-pac-widget-stylesheet'), WPPR_LITE_VERSION );
+		wp_enqueue_style( WPPR_SLUG . '-widget-rating', WPPR_URL . '/assets/css/cwppos-widget-rating.css', array(WPPR_SLUG . '-pac-widget-stylesheet'), WPPR_LITE_VERSION );
 
 		$plugin = new WPPR();
 		$public = new Wppr_Public( $plugin->get_plugin_name(), $plugin->get_version() );
@@ -192,12 +211,15 @@ class WPPR_Widget_Abstract extends WP_Widget {
 	 */
 	public function adminAssets() {
 		if ( is_admin() ) {
-			wp_enqueue_style( WPPR_SLUG . '-widget-admin-css', WPPR_URL . '/assets/css/cwppos-widget-admin.css', array(), WPPR_LITE_VERSION );
+
+			$dependencies   = $this->load_admin_assets();
+
+			wp_enqueue_style( WPPR_SLUG . '-widget-admin-css', WPPR_URL . '/assets/css/cwppos-widget-admin.css', isset( $dependencies['css'] ) ? $dependencies['css'] : array(), WPPR_LITE_VERSION );
 			wp_enqueue_style( WPPR_SLUG . '-chosen', WPPR_URL . '/assets/css/chosen.min.css', array(), WPPR_LITE_VERSION );
 
-			wp_enqueue_script( WPPR_SLUG . '-chosen', WPPR_URL . '/assets/js/chosen.jquery.min.js', array( 'jquery' ), WPPR_LITE_VERSION );
+				  wp_enqueue_script( WPPR_SLUG . '-chosen', WPPR_URL . '/assets/js/chosen.jquery.min.js', array( 'jquery' ), WPPR_LITE_VERSION );
+			wp_register_script( WPPR_SLUG . '-widget-script', WPPR_URL . '/assets/js/widget-admin.js', array_merge( array( WPPR_SLUG . '-chosen' ), isset( $dependencies['js'] ) ? $dependencies['js'] : array() ), WPPR_LITE_VERSION );
 
-			wp_register_script( WPPR_SLUG . '-widget-script', WPPR_URL . '/assets/js/widget-admin.js', array( WPPR_SLUG . '-chosen' ), WPPR_LITE_VERSION );
 			wp_localize_script(
 				WPPR_SLUG . '-widget-script', 'wppr_widget', array(
 					'names' => array( 'cwp_top_products_widget', 'cwp_latest_products_widget' ),
@@ -207,6 +229,7 @@ class WPPR_Widget_Abstract extends WP_Widget {
 				)
 			);
 			wp_enqueue_script( WPPR_SLUG . '-widget-script' );
+
 		}
 	}
 }

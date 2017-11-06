@@ -91,6 +91,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			'category_id'   => false,
 			'category_name' => false,
 			'post_type'     => array( 'post', 'page' ),
+			'post_date_range_weeks' => false,
 		),
 		$limit = 20,
 		$filter = array(
@@ -257,6 +258,12 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			$filter_post_type     = implode( ' OR ', $filter_post_type );
 			$filter_post_type     = ' AND ( ' . $filter_post_type . ' ) ';
 			$sub_query_conditions .= $this->db->prepare( $filter_post_type, $post['post_type'] );
+		}
+
+		if ( isset( $post['post_date_range_weeks'] ) && ! is_bool( $post['post_date_range_weeks'] ) && is_array( $post['post_date_range_weeks'] ) ) {
+			$min        = reset( $post['post_date_range_weeks'] );
+			$max        = end( $post['post_date_range_weeks'] );
+			$sub_query_conditions .= $this->db->prepare( ' AND p.post_date >= DATE_ADD(now(), INTERVAL %d WEEK) AND p.post_date <= DATE_ADD(now(), INTERVAL %d WEEK) ', $min, $max );
 		}
 
 		return $sub_query_conditions;

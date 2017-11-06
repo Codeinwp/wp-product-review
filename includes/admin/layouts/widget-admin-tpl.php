@@ -57,6 +57,28 @@
 	</select>
 	<div class="spinner wppr-cat-spinner"></div>
 </p>
+<?php
+	if ( 'cwp_top_products_widget' === $this->id_base ) {
+	$timespan	= $instance['cwp_timespan'];
+	$min		= 0;
+	$max		= 0;
+	if ( ! empty( $timespan ) && false !== $timespan ) {
+		$min_max	= explode( ',', $timespan );
+		$min		= reset( $min_max );
+		$max		= end( $min_max );
+		}
+?>
+<p>
+<label for="<?php echo $this->get_field_id( 'cwp_timespan' ); ?>"><?php _e( 'Timespan (weeks):', 'wp-product-review' ); ?></label>
+<div data-wppr-value="<?php echo $timespan; ?>" data-wppr-min="-52" data-wppr-max="0" class="wppr-timespan wppr-range-slider" data-wppr-desc="<?php echo $this->get_field_id( 'cwp_timespan_desc' ); ?>"></div>
+<div class="wppr-timespan-desc" id="<?php echo $this->get_field_id( 'cwp_timespan_desc' ); ?>">
+<input type="hidden" id="<?php echo $this->get_field_id( 'cwp_timespan' ); ?>" name="<?php echo $this->get_field_name( 'cwp_timespan' ); ?>" value="<?php echo $timespan; ?>">
+<?php echo sprintf(__( 'Posts published between %s%d%s and %s%d%s week(s) ago', 'wp-product-review' ), '<span class="wppr-range-min">', abs($min), '</span>', '<span class="wppr-range-max">', abs($max), '</span>');?>
+</div>
+</p>
+<?php
+	}
+?>
 <p>
 	<?php $cwp_tp_layout = esc_attr( $instance['cwp_tp_layout'] ); ?>
 	<label for="<?php echo $this->get_field_id( 'cwp_tp_layout' ); ?>"><?php _e( 'Layout:', 'wp-product-review' ); ?></label>
