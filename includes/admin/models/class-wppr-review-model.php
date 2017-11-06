@@ -1075,24 +1075,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			return '';
 		}
 
-		/**
-		 * Prevent infinite loop by removing the wppr shortcodes from content.
-		 */
-		$wppr_shortcodes = apply_filters(
-			'wppr_shortcodes', array(
-				'P_REVIEW'    => '',
-				'wpr_landing' => '',
-				'wpr_listing' => '',
-			)
-		);
-		global $shortcode_tags;
-		$temp_shortcode_tags = $shortcode_tags;
-		$shortcode_tags      = $wppr_shortcodes;
-		$regex               = '/' . get_shortcode_regex() . '/s';
-		$shortcode_tags      = $temp_shortcode_tags;
-		$content             = preg_replace( $regex, '', $content );
-		$content             = do_shortcode( $content );
-		$content             = wp_strip_all_tags( $content );
+		$content = wp_strip_all_tags( strip_shortcodes( $content ) );
 
 		return apply_filters( 'wppr_content', $content, $this->ID, $this );
 	}
