@@ -4,7 +4,6 @@
 
 #wppr_top_tabs a:focus {
 	outline: none;
-	-webkit-box-shadow: none;
 	box-shadow: none;
 }
 
@@ -159,6 +158,5 @@
 	display: block;
 	padding: 10px;
 	background: #cae9ff;
-	line-height: 7px;
 	text-align: center;
 }

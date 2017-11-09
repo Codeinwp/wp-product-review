@@ -29,6 +29,7 @@ if ( $review_object->get_click() == 'image' ) {
 $pros = $review_object->get_pros();
 $cons = $review_object->get_cons();
 
+
 ?>
 <div id="wppr-review-<?php echo $review_object->get_ID(); ?>"
 	 class="wppr-review-container <?php echo( empty( $pros ) ? 'wppr-review-no-pros' : '' ); ?> <?php echo( empty( $cons ) ? 'wppr-review-no-cons' : '' ); ?>">
@@ -37,100 +38,108 @@ $cons = $review_object->get_cons();
 			<div class="cwpr-review-top cwpr_clearfix">
 				<span><h2 class="cwp-item"><?php echo esc_html( $review_object->get_name() ); ?></h2></span>
 				<span class="cwp-item-price cwp-item"><span>
-								<span><?php echo esc_html( empty( $price_raw ) ? '' : $price_raw ); ?></span>
-						   </span></span>
+				<span><?php echo esc_html( empty( $price_raw ) ? '' : $price_raw ); ?></span>
 			</div><!-- end .cwpr-review-top -->
-			<div class="review-wu-left">
-				<div class="rev-wu-image">
-					<a href="<?php echo esc_url( $image_link ); ?>" <?php echo $lightbox; ?> rel="nofollow"
-					   target="_blank"><img
-								src="<?php echo esc_attr( $review_object->get_small_thumbnail() ); ?>"
-								alt="<?php echo esc_attr( $review_object->get_name() ); ?>"
-								class="photo photo-wrapup wppr-product-image"/></a>
-				</div><!-- end .rev-wu-image -->
-				<div class="review-wu-grade">
-					<div class="cwp-review-chart ">
-					<span>
-						<div class="cwp-review-percentage"
-							 data-percent="<?php echo esc_attr( $review_object->get_rating() ); ?>">
-							<span class="cwp-review-rating"><?php echo esc_html( $review_object->get_rating() ); ?></span>
-						</div>
-					</span>
-					</div><!-- end .chart -->
-				</div><!-- end .review-wu-grade -->
-				<div class="review-wu-bars">
-					<?php
-					foreach ( $review_object->get_options() as $option ) {
-						?>
-						<div class="rev-option" data-value="<?php echo $option['value']; ?>">
-							<div class="cwpr_clearfix">
-								<h3><?php echo esc_html( apply_filters( 'wppr_option_name_html', $option['name'] ) ); ?></h3>
-								<span><?php echo esc_html( round( $option['value'] / 10 ) ); ?>/10 </span>
+			<div class="review-wu-content cwpr_clearfix">
+				<div class="review-wu-left">
+					<div class="review-wu-left-top">
+						<div class="rev-wu-image">
+							<a href="<?php echo esc_url( $image_link ); ?>" <?php echo $lightbox; ?> rel="nofollow"
+							   target="_blank"><img src="<?php echo esc_attr( $review_object->get_small_thumbnail() ); ?>" alt="<?php echo esc_attr( $review_object->get_name() ); ?>" class="photo photo-wrapup wppr-product-image"/></a>
+						</div><!-- end .rev-wu-image -->
+
+						<div class="review-wu-grade">
+							<div class="review-wu-grade-content">
+								<div class="c100 p<?php echo esc_attr( round( $review_object->get_rating() ) ) . ' ' . $review_object->get_rating_class(); ?>">
+									<span><?php echo esc_html( round( $review_object->get_rating(), 0 ) / 10 ); ?></span>
+									<div class="slice">
+										<div class="bar"></div>
+										<div class="fill"></div>
+									</div>
+									<div class="slice-center"></div>
+								</div>
 							</div>
-							<ul class="cwpr_clearfix"></ul>
-						</div>
-						<?php
-					}
-					?>
-				</div><!-- end .review-wu-bars -->
-			</div><!-- end .review-wu-left -->
-			<?php
-			if ( ! empty( $pros ) || ! empty( $cons ) ) :
-				?>
-				<div class="review-wu-right">
-					<?php if ( ! empty( $pros ) ) : ?>
-						<div class="pros">
-							<h2>
-								<?php
-								echo esc_html(
-									apply_filters(
-										'wppr_review_pros_text', $review_object->wppr_get_option(
-											'cwppos_pros_text'
-										)
-									)
-								);
-								?>
-							</h2>
-							<ul>
-								<?php
-								foreach ( $pros as $pro ) {
-									?>
-									<li><?php echo esc_html( $pro ); ?></li>
+						</div><!-- end .review-wu-grade -->
+					</div><!-- end .review-wu-left-top -->
+
+					<div class="review-wu-bars">
+						<?php foreach ( $review_object->get_options() as $option ) { ?>
+							<div class="rev-option" data-value="
+							<?php echo $option['value']; ?>">
+								<div class="cwpr_clearfix">
+									<h3><?php echo esc_html( apply_filters( 'wppr_option_name_html', $option['name'] ) ); ?></h3>
+									<span><?php echo esc_html( round( $option['value'] / 10 ) ); ?>/10 </span>
+								</div>
+								<ul class="cwpr_clearfix <?php echo $review_object->get_rating_class( $option['value'] ) . apply_filters( 'wppr_option_custom_icon', '' ); ?>">
+									<?php for ( $i = 1; $i <= 10; $i++ ) { ?>
+										<li
+										<?php
+										echo $i <= round( $option['value'] / 10 ) ? ' class="colored"' : '';
+										?>
+										></li>
+									<?php } ?>
+								</ul>
+							</div>
+							<?php } ?>
+					</div><!-- end .review-wu-bars -->
+				</div><!-- end .review-wu-left -->
+
+				<?php if ( ! empty( $pros ) || ! empty( $cons ) ) : ?>
+					<div class="review-wu-right">
+						<?php if ( ! empty( $pros ) ) : ?>
+							<div class="pros">
+								<h2>
 									<?php
-								}
-								?>
-							</ul>
-						</div><!-- end .pros -->
-					<?php
-					endif;
-if ( ! empty( $cons ) ) :
-					?>
-						<div class="cons">
-							<h2>
-								<?php
-								echo esc_html(
-									apply_filters(
-										'wppr_review_cons_text', $review_object->wppr_get_option(
-											'cwppos_cons_text'
+									echo esc_html(
+										apply_filters(
+											'wppr_review_pros_text', $review_object->wppr_get_option(
+												'cwppos_pros_text'
+											)
 										)
-									)
-								);
-			?>
-		</h2>
-		<ul>
-			<?php
-			foreach ( $cons as $con ) {
+									);
+									?>
+								</h2>
+								<ul>
+									<?php
+									foreach ( $pros as $pro ) {
+										?>
+										<li><?php echo esc_html( $pro ); ?></li>
+										<?php
+									}
+									?>
+								</ul>
+							</div><!-- end .pros -->
+						<?php
+						endif;
+if ( ! empty( $cons ) ) :
 				?>
+					<div class="cons">
+						<h2>
+							<?php
+							echo esc_html(
+								apply_filters(
+									'wppr_review_cons_text', $review_object->wppr_get_option(
+										'cwppos_cons_text'
+									)
+								)
+							);
+				?>
+			</h2>
+			<ul>
+				<?php
+				foreach ( $cons as $con ) {
+					?>
 
-				<li><?php echo esc_html( $con ); ?></li>
+					<li><?php echo esc_html( $con ); ?></li>
 
-								<?php } ?>
-		</ul>
-	</div>
+									<?php } ?>
+			</ul>
+		</div>
 
-<?php endif; ?>
-				</div><!-- end .review-wu-right -->
-			<?php endif; ?>
+	<?php endif; ?>
+					</div><!-- end .review-wu-right -->
+				<?php endif; ?>
+			</div><!-- end .review-wu-content -->
 		</div><!-- end .review-wrap-up -->
 	</section>
 	<?php
