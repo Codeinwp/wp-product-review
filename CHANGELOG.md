@@ -1,4 +1,8 @@
 
+ ### v3.2.1 - 2017-11-16 
+ **Changes:** 
+ * Adds compatibility with WordPress 4.9
+ 
  ### v3.2.0 - 2017-11-06 
  **Changes:** 
  * Adds support for custom post-type  and taxonomies in widgets.

@@ -1,16 +1,16 @@
-=== WP Product Review Lite ===
-Contributors: codeinwp,marius2012,marius_codeinwp,hardeepasrani,themeisle,Madalin_ThemeIsle
-Tags:  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin,  google rating, product review, rating, review, star rating, user rating, wp rating, wp review,  google, hreview,rich snippets,seo,snippet
-Author URI: http://themeisle.com
-Requires at least: 3.5
-Tested up to: 4.9
-Stable tag: trunk
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+# WP Product Review Lite #
+**Contributors:** [codeinwp](https://profiles.wordpress.org/codeinwp), [marius2012](https://profiles.wordpress.org/marius2012), [marius_codeinwp](https://profiles.wordpress.org/marius_codeinwp), [hardeepasrani](https://profiles.wordpress.org/hardeepasrani), [themeisle](https://profiles.wordpress.org/themeisle), [Madalin_ThemeIsle](https://profiles.wordpress.org/Madalin_ThemeIsle)  
+**Tags:**  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin,  google rating, product review, rating, review, star rating, user rating, wp rating, wp review,  google, hreview,rich snippets,seo,snippet  
+**Author URI:** http://themeisle.com  
+**Requires at least:** 3.5  
+**Tested up to:** 4.9  
+**Stable tag:** trunk  
+**License:** GPLv2 or later  
+**License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
 
 Easily turn your basic posts into in-depth reviews with ratings, pros and cons, affiliate links, rich snippets and user reviews.
-== Description ==
+## Description ##
 
 ### User Review Enabled
 
@@ -61,18 +61,18 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 - Add specific user review options to wordpress comments
 - Add rich snippet ( schema ) to your posts
 
-= Translations =
+### Translations ###
 
 * sk_SK translation by Patrik Žec (PATWIST) of http://patwist.com
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
-== Changelog ==
-= 3.2.1 - 2017-11-16  = 
+## Changelog ##
+### 3.2.1 - 2017-11-16  ###
 
 * Adds compatibility with WordPress 4.9
 
 
-= 3.2.0 - 2017-11-06  = 
+### 3.2.0 - 2017-11-06  ###
 
 * Adds support for custom post-type  and taxonomies in widgets.
 * Adds control for time-frame in top reviews widget. 
@@ -80,7 +80,7 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * Improves notifications when Disqus and Jetpack comments are used.
 
 
-= 3.1.0 - 2017-09-22  = 
+### 3.1.0 - 2017-09-22  ###
 
 * Fix for some edge cases when the review box was gone. 
 * Improvements assets loading, removed redundant files.
@@ -88,24 +88,24 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * Various bug fixes reported by clients.
 
 
-= 3.0.12 - 2017-09-17  = 
+### 3.0.12 - 2017-09-17  ###
 
 * Fix for review box issues.
 
 
-= 3.0.11 - 2017-09-15  = 
+### 3.0.11 - 2017-09-15  ###
 
 * Fix for issue of hidden review box and widget area.
 
 
-= 3.0.10 - 2017-09-12  = 
+### 3.0.10 - 2017-09-12  ###
 
 * Fix for decimal separator in rich snippet.
 * Improvements for template engine, allowing overwriting in child themes also.
 * Added review content and excerpt proprieties.
 
 
-= 3.0.9 - 2017-09-07  = 
+### 3.0.9 - 2017-09-07  ###
 
 * Improved JSON-LD scheme.
 * Fix for image lightbox link.
@@ -114,7 +114,7 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * Improvements compatibility with various themes.
 
 
-= 3.0.8 - 2017-09-01  = 
+### 3.0.8 - 2017-09-01  ###
 
 * Fix for out of memory errors.
 * Fix for options saving when there is no value for each option.
@@ -122,25 +122,25 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * Fix for rich snippet reviewer author.
 
 
-= 3.0.7 - 2017-08-29  = 
+### 3.0.7 - 2017-08-29  ###
 
 * Fixed empty links for reviews.
 * Fixed widget and reviews query.
 
 
-= 3.0.6 - 2017-08-29  = 
+### 3.0.6 - 2017-08-29  ###
 
 * Fix for category name matching when filtering reviews.
 * Fix for is_active error on null object.
 
 
-= 3.0.5 - 2017-08-26  = 
+### 3.0.5 - 2017-08-26  ###
 
 * Fix for review links opening issue.
 * Fix for comments legacy import.
 
 
-= 3.0.4 - 2017-08-25  = 
+### 3.0.4 - 2017-08-25  ###
 
 * Fix for rich snippets schema.
 * Fix post update white screen of death.
@@ -153,25 +153,25 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * Improved security.
 
 
-= 3.0.3 - 2017-08-24  = 
+### 3.0.3 - 2017-08-24  ###
 
 * Fixed widget assets loading error.
 
 
-= 3.0.2 - 2017-08-24  = 
+### 3.0.2 - 2017-08-24  ###
 
 * Fixed fatal error with is_active method.
 * Fixed query reviews class.
 * Fixed widget assets loading when there is no review on the page.
 
 
-= 3.0.1 - 2017-08-23  = 
+### 3.0.1 - 2017-08-23  ###
 
 * Fixed backwards compatibility when using cwppos_show_review.
 * Fixed undefined index error in widgets.
 
 
-= 3.0.0 - 2017-08-23  = 
+### 3.0.0 - 2017-08-23  ###
 
 * Major code refactor ( Please test before update ) 
 * Added JSON-LD support
@@ -400,7 +400,7 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 - Added custom icons
 - Added price attribute
 
-== Installation ==
+## Installation ##
 
 Following are the steps to install the WP Product Review
 
@@ -422,49 +422,49 @@ Alternatively you can also follow the following steps to install the WP Product 
 5. Check your Administration Panels or WordPress blog to see if the Plugin is working.
 6. You can change the plugin options from WP Product Review under settings menu.
 
-== Frequently Asked Questions ==
+## Frequently Asked Questions ##
 
 
-= How to activate user reviews =
+### How to activate user reviews ###
 
 By default user reviews are disabled since not all the themes are compatible with this option due to different designs for the comment box. You can easily activate them from General Settings
 
 If you have any questions please get in touch with us at,
 https://themeisle.com/contact
 
-= How to change the html format of the review name =
+### How to change the html format of the review name ###
 [http://docs.themeisle.com/article/130-how-to-change-the-html-format-of-the-review-name](http://docs.themeisle.com/article/130-how-to-change-the-html-format-of-the-review-name)
 
-= How to change dynamically the image size for review =
+### How to change dynamically the image size for review ###
 [http://docs.themeisle.com/article/135-how-to-change-dynamically-the-image-size-for-review](http://docs.themeisle.com/article/135-how-to-change-dynamically-the-image-size-for-review)
 
-= How to change dynamically the pros/cons heading text =
+### How to change dynamically the pros/cons heading text ###
 [http://docs.themeisle.com/article/133-how-to-change-dynamically-the-pros-cons-heading-text](http://docs.themeisle.com/article/133-how-to-change-dynamically-the-pros-cons-heading-text)
 
-= How to change dynamically the name of the review =
+### How to change dynamically the name of the review ###
 [http://docs.themeisle.com/article/131-how-to-change-dynamically-the-name-of-the-review](http://docs.themeisle.com/article/131-how-to-change-dynamically-the-name-of-the-review)
 
-= How to change dynamically the option name format =
+### How to change dynamically the option name format ###
 [http://docs.themeisle.com/article/132-how-to-change-dynamically-the-option-name-format](http://docs.themeisle.com/article/132-how-to-change-dynamically-the-option-name-format)
 
-= How to make Comment Review option work in any theme =
+### How to make Comment Review option work in any theme ###
 [http://docs.themeisle.com/article/54-why-comment-review-option-is-not-working-with-my-theme](http://docs.themeisle.com/article/54-why-comment-review-option-is-not-working-with-my-theme)
 
-= How to fix the review boxes issue =
+### How to fix the review boxes issue ###
 [http://docs.themeisle.com/article/210-how-to-fix-the-review-boxes-issue](http://docs.themeisle.com/article/210-how-to-fix-the-review-boxes-issue)
 
-= Price in WP Product Review is messed up =
+### Price in WP Product Review is messed up ###
 [http://docs.themeisle.com/article/216-price-in-wp-product-review-is-messed-up](http://docs.themeisle.com/article/216-price-in-wp-product-review-is-messed-up)
 
-= Prevent users from posting multiple review on a single post in WP Product Review =
+### Prevent users from posting multiple review on a single post in WP Product Review ###
 [http://docs.themeisle.com/article/578-prevent-users-from-posting-multiple-review-on-a-single-post-in-wp-product-review](http://docs.themeisle.com/article/578-prevent-users-from-posting-multiple-review-on-a-single-post-in-wp-product-review)
 
-== Upgrade Notice ==
+## Upgrade Notice ##
 
-= 3.0 =
+### 3.0 ###
 3.0 is a major update. It is important that you make backups and ensure themes are 3.0 compatible before upgrading.
 
-== Screenshots ==
+## Screenshots ##
 
 1. Screenshot 1 Wrap-up review widget that is added at the end of the posts
 2. Screenshot 2 User Review Options added to wp comments
