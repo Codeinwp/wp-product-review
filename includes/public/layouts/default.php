@@ -68,7 +68,7 @@ $cons = $review_object->get_cons();
 							<?php echo $option['value']; ?>">
 								<div class="cwpr_clearfix">
 									<h3><?php echo esc_html( apply_filters( 'wppr_option_name_html', $option['name'] ) ); ?></h3>
-									<span><?php echo esc_html( round( $option['value'] / 10 ) ); ?>/10 </span>
+									<span><?php echo esc_html( number_format( ( $option['value'] / 10 ) ), 1 ); ?>/10 </span>
 								</div>
 								<ul class="cwpr_clearfix <?php echo $review_object->get_rating_class( $option['value'] ) . apply_filters( 'wppr_option_custom_icon', '' ); ?>">
 									<?php for ( $i = 1; $i <= 10; $i++ ) { ?>
