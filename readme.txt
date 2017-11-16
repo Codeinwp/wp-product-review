@@ -3,7 +3,7 @@ Contributors: codeinwp,marius2012,marius_codeinwp,hardeepasrani,themeisle,Madali
 Tags:  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin,  google rating, product review, rating, review, star rating, user rating, wp rating, wp review,  google, hreview,rich snippets,seo,snippet
 Author URI: http://themeisle.com
 Requires at least: 3.5
-Tested up to: 4.8
+Tested up to: 4.9
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -67,6 +67,19 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+= 3.2.1 - 2017-11-16  = 
+
+* Adds compatibility with WordPress 4.9
+
+
+= 3.2.0 - 2017-11-06  = 
+
+* Adds support for custom post-type  and taxonomies in widgets.
+* Adds control for time-frame in top reviews widget. 
+* Improves responsiveness and removes dependency of pie-chart.js 
+* Improves notifications when Disqus and Jetpack comments are used.
+
+
 = 3.1.0 - 2017-09-22  = 
 
 * Fix for some edge cases when the review box was gone. 
