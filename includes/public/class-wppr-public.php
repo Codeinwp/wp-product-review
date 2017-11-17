@@ -438,8 +438,8 @@ class Wppr_Public {
 			'comment-ratings-tpl', array(
 				'review_object'      => $this->review,
 				'options'   => $options,
-				'text'		=> $text,
-				'review'	=> $this->review,
+				'text'      => $text,
+				'review'    => $this->review,
 			),
 			false
 		);

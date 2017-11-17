@@ -65,7 +65,7 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 		$order         = array();
 		$order['date'] = 'DESC';
 
-		$review	= null;
+		$review = null;
 		$results = $reviews->find( $post, $instance['no_items'], array(), $order );
 		if ( ! empty( $results ) ) {
 			$first  = reset( $results );
@@ -81,7 +81,7 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 		$template = new WPPR_Template();
 		$template->render(
 			'widget/' . $instance['cwp_tp_layout'], array(
-				'review_object'	=> $review,
+				'review_object' => $review,
 				'results'      => $results,
 				'title_length' => self::RESTRICT_TITLE_CHARS,
 				'instance'     => $instance,

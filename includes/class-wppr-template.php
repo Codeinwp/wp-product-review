@@ -86,8 +86,8 @@ class WPPR_Template {
 	/**
 	 * Loads the assets.
 	 *
-	 * @param string  $template  Name of the template.
-	 * @param object  $review The review object.
+	 * @param string $template  Name of the template.
+	 * @param object $review The review object.
 	 */
 	private function load_assets( $template, $review ) {
 		if ( 0 === strpos( $template, 'widget/' ) ) {
