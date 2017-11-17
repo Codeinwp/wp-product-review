@@ -16,15 +16,10 @@ class WPPR_Template {
 	 */
 	private $dirs = array();
 
-	private $plugin_name;
-	private $version;
-
 	/**
 	 * WPPR_Template constructor.
 	 */
-	public function __construct( $plugin_name, $version ) {
-		$this->plugin_name	= $plugin_name;
-		$this->version		= $version;
+	public function __construct() {
 		$this->setup_locations();
 	}
 
@@ -97,35 +92,37 @@ class WPPR_Template {
 	private function load_assets( $template, $review ) {
 		if ( 0 === strpos( $template, 'widget/' ) ) {
 			// widget template.
+			wp_enqueue_style( WPPR_SLUG . '-widget', WPPR_URL . '/assets/css/cwppos-widget.css', array(), WPPR_LITE_VERSION );
+			wp_enqueue_style( WPPR_SLUG . '-widget-rating', WPPR_URL . '/assets/css/cwppos-widget-rating.css', array( WPPR_SLUG . '-widget' ), WPPR_LITE_VERSION );
 		}
 
 		switch ( $template ) {
 			case 'default':
 				if ( $review->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
-					wp_enqueue_script( $this->plugin_name . '-lightbox', WPPR_URL . '/assets/js/lightbox.min.js', array( 'jquery' ), $this->version, true );
-					wp_enqueue_style( $this->plugin_name . '-lightbox', WPPR_URL . '/assets/css/lightbox.css', array(), $this->version );
+					wp_enqueue_script( WPPR_SLUG . '-lightbox', WPPR_URL . '/assets/js/lightbox.min.js', array( 'jquery' ), WPPR_LITE_VERSION, true );
+					wp_enqueue_style( WPPR_SLUG . '-lightbox', WPPR_URL . '/assets/css/lightbox.css', array(), WPPR_LITE_VERSION );
 				}
 
 				if ( $review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
 					wp_enqueue_script( 'jquery-ui-slider' );
 					wp_enqueue_script(
-						$this->plugin_name . '-frontpage', WPPR_URL . '/assets/js/main.js', array(
+						WPPR_SLUG . '-frontpage', WPPR_URL . '/assets/js/main.js', array(
 							'jquery',
-						), $this->version, true
+						), WPPR_LITE_VERSION, true
 					);
 					if ( $review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
-						wp_enqueue_style( $this->plugin_name . 'jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
+						wp_enqueue_style( WPPR_SLUG . 'jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), WPPR_LITE_VERSION );
 					}
 				}
 				$icon = $review->wppr_get_option( 'cwppos_change_bar_icon' );
 
 				if ( ! empty( $icon ) && $review->wppr_get_option( 'cwppos_fontawesome' ) == 'no' ) {
-					wp_enqueue_style( $this->plugin_name . 'font-awesome', WPPR_URL . '/assets/css/font-awesome.min.css', array(), $this->version );
+					wp_enqueue_style( WPPR_SLUG . 'font-awesome', WPPR_URL . '/assets/css/font-awesome.min.css', array(), WPPR_LITE_VERSION );
 				}
-				wp_enqueue_style( $this->plugin_name . '-frontpage', WPPR_URL . '/assets/css/frontpage.css', array(), $this->version );
+				wp_enqueue_style( WPPR_SLUG . '-frontpage', WPPR_URL . '/assets/css/frontpage.css', array(), WPPR_LITE_VERSION );
 				wp_enqueue_style(
-					$this->plugin_name . '-percentage-circle', WPPR_URL . '/assets/css/circle.css', array(),
-					$this->version
+					WPPR_SLUG . '-percentage-circle', WPPR_URL . '/assets/css/circle.css', array(),
+					WPPR_LITE_VERSION
 				);
 
 				$conditional_styles = '';
@@ -296,24 +293,27 @@ class WPPR_Template {
 					  
 				';
 				$style = apply_filters( 'wppr_global_style', $style );
-				wp_add_inline_style( $this->plugin_name . '-frontpage', $style );
+				wp_add_inline_style( WPPR_SLUG . '-frontpage', $style );
 				break;
 
 			case 'rich-json-ld':
+				// empty.
 				break;
 
 			case 'comment-fields-tpl':
-				wp_enqueue_style( $this->plugin_name . '-comments', WPPR_URL . '/assets/css/comments.css', array(), $this->version );
+				wp_enqueue_style( WPPR_SLUG . '-comments', WPPR_URL . '/assets/css/comments.css', array(), WPPR_LITE_VERSION );
 				break;
 
 			case 'comment-ratings-tpl':
-				wp_enqueue_style( $this->plugin_name . '-comment-ratings', WPPR_URL . '/assets/css/comment-ratings.css', array(), $this->version );
+				wp_enqueue_style( WPPR_SLUG . '-comment-ratings', WPPR_URL . '/assets/css/comment-ratings.css', array(), WPPR_LITE_VERSION );
 				break;
 
 			case 'widget/style 1.php':
+				wp_enqueue_style( WPPR_SLUG . '-widget-one', WPPR_URL . '/assets/css/cwppos-widget-style1.css', array( WPPR_SLUG . '-widget' ), WPPR_LITE_VERSION );
 				break;
 
 			case 'widget/default.php':
+				// empty.
 				break;
 
 		}

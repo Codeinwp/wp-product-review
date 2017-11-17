@@ -311,7 +311,7 @@ class Wppr_Public {
 		if ( $this->review->is_active() && is_singular() ) {
 			$output        = '';
 			$review_object = $this->review;
-			$template      = new WPPR_Template( $this->plugin_name, $this->version );
+			$template      = new WPPR_Template();
 
 			$output .= $template->render(
 				'default', array(
@@ -354,7 +354,7 @@ class Wppr_Public {
 		$options      = $this->review->get_options();
 		$option_names = wp_list_pluck( $options, 'name' );
 
-		$template = new WPPR_Template( $this->plugin_name, $this->version );
+		$template = new WPPR_Template();
 		$template->render(
 			'comment-fields-tpl', array(
 				'review_object'      => $this->review,
@@ -433,7 +433,7 @@ class Wppr_Public {
 			return $text;
 		}
 
-		$template = new WPPR_Template( $this->plugin_name, $this->version );
+		$template = new WPPR_Template();
 		return $template->render(
 			'comment-ratings-tpl', array(
 				'review_object'      => $this->review,
