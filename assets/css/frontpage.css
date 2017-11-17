@@ -1,5 +1,5 @@
 /*
-	Version: 3.2.0
+	Version: 3.2.1
 */
 #review-statistics {
 	width: 100%;
@@ -320,7 +320,7 @@
 	box-shadow: none;
 }
 
-.review-wu-grade {
+#review-statistics .review-wrap-up .review-wu-left .review-wu-grade {
 	display: table-cell;
 	width: auto;
 	min-width: 120px;
@@ -330,7 +330,7 @@
 	vertical-align: middle;
 }
 
-.review-wu-grade-content {
+#review-statistics .review-wrap-up .review-wu-left .review-wu-grade-content {
 	display: block;
 	position: relative;
 	width: 120px;
@@ -640,11 +640,11 @@
 		height: 100px;
 	}
 
-	#review-statistics .review-wu-grade .c100 {
+	#review-statistics .review-wu-grade .wppr-c100 {
 		font-size: 100px;
 	}
 
-	#review-statistics .review-wu-grade .c100 span {
+	#review-statistics .review-wu-grade .wppr-c100 span {
 		font-size: 28px;
 		line-height: 100px;
 	}

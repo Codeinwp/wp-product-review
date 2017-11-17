@@ -6,39 +6,41 @@
 	height: 40px;
 }
 
-.review-grade-widget .review-wu-grade-content .c100 {
+.review-grade-widget .review-wu-grade-content .wppr-c100 {
 	position: relative;
-	max-width: 40px;
-	max-height: 40px;
-	min-width: 40px;
-	min-height: 40px;
-	font-size: 40px;
-	transform: none;
-	left: 0;
 	top: 0;
+	left: 0;
+	min-width: 40px;
+	max-width: 40px;
+	min-height: 40px;
+	max-height: 40px;
+	font-size: 40px;
+	-webkit-transform: none;
+	-ms-transform: none;
+	transform: none;
 }
 
-.review-grade-widget .review-wu-grade-content .c100 > span {
+.review-grade-widget .review-wu-grade-content .wppr-c100 > span {
 	font-size: 14px;
 	line-height: 40px;
 }
 
-.review-grade-widget .review-wu-grade-content .c100 .bar,
-.review-grade-widget .review-wu-grade-content .c100 .fill {
+.review-grade-widget .review-wu-grade-content .wppr-c100 .wppr-bar,
+.review-grade-widget .review-wu-grade-content .wppr-c100 .wppr-fill {
 	border-width: 4px;
 }
 
-.review-grade-widget .review-wu-grade-content .c100 .slice-center {
+.review-grade-widget .review-wu-grade-content .wppr-c100 .wppr-slice-center {
 	padding: 4px;
 }
 
 .cwp-popular-review {
 	display: table;
+	width: 100%;
 	margin: 0;
 	padding: 15px 0 !important;
 	border-bottom: 1px solid #ddd;
 	list-style: none;
-	width: 100%;
 }
 
 .widget_cwp_top_products_widget ul,
@@ -66,8 +68,8 @@
 
 .cwp-popular-review .wppr-col {
 	display: table-cell;
-	vertical-align: middle;
 	width: auto;
+	vertical-align: middle;
 }
 
 .cwp-popular-review .wppr-post-title {

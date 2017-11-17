@@ -185,7 +185,7 @@ class WPPR_Admin {
 		if ( $nonce['name'] != 'wppr_nonce_settings' ) {
 			die( 'invalid nonce name' );
 		}
-		if ( wp_verify_nonce( $nonce['value'],'wppr_save_global_settings' ) != 1 ) {
+		if ( wp_verify_nonce( $nonce['value'], 'wppr_save_global_settings' ) != 1 ) {
 			die( 'invalid nonce value' );
 		}
 
@@ -219,12 +219,16 @@ class WPPR_Admin {
 	public static function get_category_for_post_type( $post_type ) {
 		$categories = array();
 		if ( $post_type ) {
-			$taxonomies = get_taxonomies( array( 'object_type' => array( $post_type ), 'hierarchical' => true ), 'objects' );
+			$taxonomies = get_taxonomies(
+				array( 'object_type' => array( $post_type ),
+												 'hierarchical' => true,
+				), 'objects'
+			);
 			if ( $taxonomies ) {
 				foreach ( $taxonomies as $tax ) {
-					$terms  = get_terms(
+					$terms = get_terms(
 						$tax->name, array(
-							'hide_empty'    => false,
+							'hide_empty' => false,
 						)
 					);
 					if ( empty( $terms ) ) {
@@ -236,6 +240,7 @@ class WPPR_Admin {
 				}
 			}
 		}
+
 		return $categories;
 	}
 

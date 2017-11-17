@@ -13,9 +13,9 @@
 <ul>
 <?php
 foreach ( $results as $review ) :
-	$review_object = new WPPR_Review_Model( $review['ID'] );
+	$review_object         = new WPPR_Review_Model( $review['ID'] );
 	$product_title_display = ( $instance['post_type'] == true ) ? $review_object->get_name() : get_the_title( $review['ID'] );
-	$product_image = $review_object->get_small_thumbnail();
+	$product_image         = $review_object->get_small_thumbnail();
 
 	if ( strlen( $product_title_display ) > $title_length ) {
 		$product_title_display = substr( $product_title_display, 0, $title_length ) . '...';
@@ -49,13 +49,14 @@ foreach ( $results as $review ) :
 	?>
 		<div class="review-grade-widget wppr-col">
 			<div class="review-wu-grade-content">
-				<div class="c100 p<?php echo esc_attr( round( $review_score ) ) . ' ' . esc_attr( $review_class ); ?>">
+				<div class="wppr-c100 wppr-p<?php echo esc_attr( round( $review_score ) ) . ' ' . esc_attr( $review_class );
+				?>">
 					<span><?php echo esc_html( round( $review_score, 0 ) / 10 ); ?></span>
-					<div class="slice">
-						<div class="bar"></div>
-						<div class="fill"></div>
+					<div class="wppr-slice">
+						<div class="wppr-bar"></div>
+						<div class="wppr-fill"></div>
 					</div>
-					<div class="slice-center"></div>
+					<div class="wppr-slice-center"></div>
 				</div>
 			</div>
 		</div>

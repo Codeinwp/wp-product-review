@@ -50,13 +50,13 @@ $cons = $review_object->get_cons();
 
 						<div class="review-wu-grade">
 							<div class="review-wu-grade-content">
-								<div class="c100 p<?php echo esc_attr( round( $review_object->get_rating() ) ) . ' ' . $review_object->get_rating_class(); ?>">
+								<div class="wppr-c100 wppr-p<?php echo esc_attr( round( $review_object->get_rating() ) ) . ' ' . $review_object->get_rating_class(); ?>">
 									<span><?php echo esc_html( round( $review_object->get_rating(), 0 ) / 10 ); ?></span>
-									<div class="slice">
-										<div class="bar"></div>
-										<div class="fill"></div>
+									<div class="wppr-slice">
+										<div class="wppr-bar"></div>
+										<div class="wppr-fill"></div>
 									</div>
-									<div class="slice-center"></div>
+									<div class="wppr-slice-center"></div>
 								</div>
 							</div>
 						</div><!-- end .review-wu-grade -->
@@ -68,7 +68,7 @@ $cons = $review_object->get_cons();
 							<?php echo $option['value']; ?>">
 								<div class="cwpr_clearfix">
 									<h3><?php echo esc_html( apply_filters( 'wppr_option_name_html', $option['name'] ) ); ?></h3>
-									<span><?php echo esc_html( round( $option['value'] / 10 ) ); ?>/10 </span>
+									<span><?php echo esc_html( number_format( ( $option['value'] / 10 ) ), 1 ); ?>/10 </span>
 								</div>
 								<ul class="cwpr_clearfix <?php echo $review_object->get_rating_class( $option['value'] ) . apply_filters( 'wppr_option_custom_icon', '' ); ?>">
 									<?php for ( $i = 1; $i <= 10; $i++ ) { ?>
