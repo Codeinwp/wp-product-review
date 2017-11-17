@@ -1,0 +1,55 @@
+/* User Comment Grades Styles */
+
+.user-comments-grades {
+	float: right;
+	width: 200px;
+	margin-top: 25px;
+	margin-left: 15px;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+
+.user-comments-grades * {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.user-comments-grades .comment-meta-option-name {
+	float: left;
+	margin-bottom: 3px !important;
+	color: #7d7d7d;
+	font-size: 10px;
+	text-transform: uppercase;
+}
+
+.user-comments-grades .comment-meta-option-grade {
+	float: right;
+	clear: none !important;
+	font-size: 10px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.user-comments-grades .comment-meta-option {
+	margin-bottom: 10px !important;
+}
+
+.user-comments-grades .comment-meta-option:last-of-type {
+	margin-bottom: 0 !important;
+}
+
+/* Comment Form Meta Options - GRADE BAR */
+
+.comment-meta-option .comment-meta-grade-bar {
+	overflow: hidden;
+	width: 100%;
+	height: 5px;
+	border-radius: 32px;
+	background: #ebedef;
+	box-shadow: none;
+}
+
+.comment-meta-grade {
+	height: 100%;
+}

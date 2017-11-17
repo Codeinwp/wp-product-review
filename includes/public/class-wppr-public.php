@@ -311,7 +311,7 @@ class Wppr_Public {
 		if ( $this->review->is_active() && is_singular() ) {
 			$output        = '';
 			$review_object = $this->review;
-			$template      = new WPPR_Template();
+			$template      = new WPPR_Template( $this->plugin_name, $this->version );
 
 			$output .= $template->render(
 				'default', array(
@@ -319,11 +319,13 @@ class Wppr_Public {
 				), false
 			);
 
-			$output .= $template->render(
-				'rich-json-ld', array(
-					'review_object' => $review_object,
-				), false
-			);
+			if ( $review_object->wppr_get_option( 'wppr_rich_snippet' ) == 'yes' ) {
+				$output .= $template->render(
+					'rich-json-ld', array(
+						'review_object' => $review_object,
+					), false
+				);
+			}
 
 			$review_position_before_content = $this->review->wppr_get_option( 'cwppos_show_reviewbox' );
 			if ( $review_position_before_content == 'yes' ) {
@@ -352,9 +354,10 @@ class Wppr_Public {
 		$options      = $this->review->get_options();
 		$option_names = wp_list_pluck( $options, 'name' );
 
-		$template = new WPPR_Template();
+		$template = new WPPR_Template( $this->plugin_name, $this->version );
 		$template->render(
 			'comment-fields-tpl', array(
+				'review_object'      => $this->review,
 				'option_names'      => $option_names,
 			)
 		);
@@ -430,9 +433,10 @@ class Wppr_Public {
 			return $text;
 		}
 
-		$template = new WPPR_Template();
+		$template = new WPPR_Template( $this->plugin_name, $this->version );
 		return $template->render(
 			'comment-ratings-tpl', array(
+				'review_object'      => $this->review,
 				'options'   => $options,
 				'text'		=> $text,
 				'review'	=> $this->review,

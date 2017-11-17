@@ -78,7 +78,8 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 		if ( ! empty( $instance['title'] ) ) {
 			echo $args['before_title'] . $instance['title'] . $args['after_title'];
 		}
-		$template = new WPPR_Template();
+		$plugin = new WPPR();
+		$template = new WPPR_Template( $plugin->get_plugin_name(), $plugin->get_version() );
 		$template->render(
 			'widget/' . $instance['cwp_tp_layout'], array(
 				'results'      => $results,
