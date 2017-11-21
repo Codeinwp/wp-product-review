@@ -171,6 +171,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 					$this->alter_options();
 				}
 
+				$this->backward_compatibility();
+
 				return true;
 			} else {
 				$this->logger->warning( 'Review is not active for this ID: ' . $review_id );
@@ -184,38 +186,50 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		return false;
 	}
 
+	private function backward_compatibility() {
+		// backward compatibility so that when a review is viewed, its meta data can be updated.
+		$comment_ratings	= get_post_meta( $this->ID, 'wppr_comment_rating', true );
+		if ( empty( $comment_ratings ) ) {
+			update_post_meta( $this->ID, 'wppr_comment_rating', $this->get_comments_rating() );
+		}
+	}
+
 	private function alter_options() {
 		$comment_influence = intval( $this->wppr_get_option( 'cwppos_infl_userreview' ) );
 
-		if ( $comment_influence > 0 ) {
-			$comments = $this->get_comments_options( 'id' );
-			if ( $comments ) {
-				$combined = array();
-				foreach ( $comments as $comment ) {
-					$array	= wp_list_pluck( $comment['options'], 'value', 'name' );
-					foreach ( $array as $k => $v ) {
-						if ( ! isset( $combined[ $k ] ) ) {
-							$combined[ $k ] = floatval( $v );
-						} else {
-							$combined[ $k ] += floatval( $v );
-						}
-					}
-				}
-				$new_options	= array();
-				foreach ( $this->options as $option ) {
-					$k					= $option['name'];
-					$rating				= $option['value'];
-					$v					= floatval( $combined [ 'id' . $k ] ) / count( $comments );
-					$weighted			= $v * 10 * ( $comment_influence / 100 ) + floatval( $rating ) * ( ( 100 - $comment_influence ) / 100 );
-					$new_options[]		= array(
-						'name'	=> $k,
-						'value'	=> $weighted,
-					);
-				}
+		if ( 0 === $comment_influence ) {
+			return;
+		}
 
-				$this->options = $new_options;
+		$comments = $this->get_comments_options();
+		if ( ! $comments ) {
+			return;
+		}
+
+		$combined = array();
+		foreach ( $comments as $comment ) {
+			$array	= wp_list_pluck( $comment['options'], 'value', 'name' );
+			foreach ( $array as $k => $v ) {
+				if ( ! isset( $combined[ $k ] ) ) {
+					$combined[ $k ] = floatval( $v );
+				} else {
+					$combined[ $k ] += floatval( $v );
+				}
 			}
 		}
+		$new_options	= array();
+		foreach ( $this->options as $option ) {
+			$k					= $option['name'];
+			$rating				= $option['value'];
+			$v					= floatval( $combined [ $k ] ) / count( $comments );
+			$weighted			= $v * 10 * ( $comment_influence / 100 ) + floatval( $rating ) * ( ( 100 - $comment_influence ) / 100 );
+			$new_options[]		= array(
+				'name'	=> $k,
+				'value'	=> $weighted,
+			);
+		}
+
+		$this->options = $new_options;
 	}
 
 	/**
@@ -751,11 +765,9 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Get all comments associated with the review.
 	 *
-	 * @param   string $prefix The string to use to prefix the name of the option.
-	 *
 	 * @return array|int The list of comments..
 	 */
-	public function get_comments_options( $prefix = '' ) {
+	public function get_comments_options() {
 		if ( $this->ID === 0 ) {
 			$this->logger->error( 'Can not get comments rating, id is not set' );
 
@@ -771,7 +783,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		);
 		$valid          = array();
 		foreach ( $comments as $comment ) {
-			$options = $this->get_comment_options( $comment, $prefix );
+			$options = $this->get_comment_options( $comment );
 			if ( ! empty( $options ) ) {
 				$valid[ $comment ] = array(
 					'options' => $options,
@@ -793,11 +805,10 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 * @access  public
 	 *
 	 * @param   int $comment_id The comment id.
-	 * @param   string $prefix The string to use to prefix the name of the option.
 	 *
 	 * @return array
 	 */
-	public function get_comment_options( $comment_id, $prefix = '' ) {
+	public function get_comment_options( $comment_id ) {
 		$options = array();
 		if ( $this->wppr_get_option( 'cwppos_show_userreview' ) === 'yes' ) {
 			$options_names   = wp_list_pluck( $this->options, 'name' );
@@ -807,7 +818,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 				$value = get_comment_meta( $comment_id, 'meta_option_' . $k, true );
 
 				$comment_options[] = array(
-					'name'  => $prefix . $name,
+					'name'  => $name,
 					'value' => number_format( (float) $value, 2 ),
 				);
 				if ( is_numeric( $value ) ) {
