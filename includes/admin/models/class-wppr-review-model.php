@@ -186,14 +186,23 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		return false;
 	}
 
+	/**
+	 * Add backward compatibility so that when a review is viewed, its meta data can be updated.
+	 *
+	 * @access  private
+	 */
 	private function backward_compatibility() {
-		// backward compatibility so that when a review is viewed, its meta data can be updated.
-		$comment_ratings	= get_post_meta( $this->ID, 'wppr_comment_rating', true );
+		$comment_ratings    = get_post_meta( $this->ID, 'wppr_comment_rating', true );
 		if ( empty( $comment_ratings ) ) {
 			update_post_meta( $this->ID, 'wppr_comment_rating', $this->get_comments_rating() );
 		}
 	}
 
+	/**
+	 * Alter options based on user influence.
+	 *
+	 * @access  private
+	 */
 	private function alter_options() {
 		$comment_influence = intval( $this->wppr_get_option( 'cwppos_infl_userreview' ) );
 
@@ -208,7 +217,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 
 		$combined = array();
 		foreach ( $comments as $comment ) {
-			$array	= wp_list_pluck( $comment['options'], 'value', 'name' );
+			$array  = wp_list_pluck( $comment['options'], 'value', 'name' );
 			foreach ( $array as $k => $v ) {
 				if ( ! isset( $combined[ $k ] ) ) {
 					$combined[ $k ] = floatval( $v );
@@ -217,15 +226,15 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 				}
 			}
 		}
-		$new_options	= array();
+		$new_options    = array();
 		foreach ( $this->options as $option ) {
-			$k					= $option['name'];
-			$rating				= $option['value'];
-			$v					= floatval( $combined [ $k ] ) / count( $comments );
-			$weighted			= $v * 10 * ( $comment_influence / 100 ) + floatval( $rating ) * ( ( 100 - $comment_influence ) / 100 );
-			$new_options[]		= array(
-				'name'	=> $k,
-				'value'	=> $weighted,
+			$k                  = $option['name'];
+			$rating             = $option['value'];
+			$v                  = floatval( $combined [ $k ] ) / count( $comments );
+			$weighted           = $v * 10 * ( $comment_influence / 100 ) + floatval( $rating ) * ( ( 100 - $comment_influence ) / 100 );
+			$new_options[]      = array(
+				'name'  => $k,
+				'value' => $weighted,
 			);
 		}
 

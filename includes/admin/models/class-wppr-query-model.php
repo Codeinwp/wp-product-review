@@ -124,13 +124,13 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			$conditions_having = $conditions['having'];
 		}
 
-		$final_rating		= "`rating`";
+		$final_rating       = '`rating`';
 		$comment_influence = intval( $this->wppr_get_option( 'cwppos_infl_userreview' ) );
 		if ( $comment_influence > 0 ) {
-			$final_rating	= "IF(`comment_rating` = 0, `rating`, (`comment_rating` * 10 * ( $comment_influence / 100 ) + `rating` * ( ( 100 - $comment_influence ) / 100 ) ) )";
+			$final_rating   = "IF(`comment_rating` = 0, `rating`, (`comment_rating` * 10 * ( $comment_influence / 100 ) + `rating` * ( ( 100 - $comment_influence ) / 100 ) ) )";
 		}
 
-		$final_order		= isset( $order['rating'] ) && in_array( $order['rating'], array( 'ASC', 'DESC' ) ) ? " ORDER BY `final_rating` {$order['rating']}" : "";
+		$final_order        = isset( $order['rating'] ) && in_array( $order['rating'], array( 'ASC', 'DESC' ) ) ? " ORDER BY `final_rating` {$order['rating']}" : '';
 
 		$query   = " 
 		SELECT ID, post_date, post_title, `check`, `name`, `price`, `rating`, `comment_rating`, $final_rating as 'final_rating' FROM
