@@ -49,8 +49,11 @@ foreach ( $results as $review ) :
 	?>
 		<div class="review-grade-widget wppr-col">
 			<div class="review-wu-grade-content">
-				<div class="wppr-c100 wppr-p<?php echo esc_attr( round( $review_score ) ) . ' ' . esc_attr( $review_class );
-				?>">
+				<div class="wppr-c100 wppr-p
+				<?php
+				echo esc_attr( round( $review_score ) ) . ' ' . esc_attr( $review_class );
+				?>
+				">
 					<span><?php echo esc_html( round( $review_score, 0 ) / 10 ); ?></span>
 					<div class="wppr-slice">
 						<div class="wppr-bar"></div>

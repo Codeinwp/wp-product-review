@@ -2,9 +2,9 @@
 # This file is distributed under the no.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Product Review Lite 3.2.0\n"
+"Project-Id-Version: WP Product Review Lite 3.2.1\n"
 "Report-Msgid-Bugs-To: https://github.com/Codeinwp/wp-product-review/issues\n"
-"POT-Creation-Date: 2017-11-06 14:40:53+00:00\n"
+"POT-Creation-Date: 2017-11-24 12:52:01+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
-#: includes/admin/widgets/abstract/class-wppr-widget-abstract.php:101
+#: includes/admin/widgets/abstract/class-wppr-widget-abstract.php:112
 msgid "10"
 msgstr ""
 
@@ -487,23 +487,31 @@ msgstr ""
 msgid "Category:"
 msgstr ""
 
-#: includes/admin/layouts/widget-admin-tpl.php:62
+#: includes/admin/layouts/widget-admin-tpl.php:72
+msgid "Timespan (weeks):"
+msgstr ""
+
+#: includes/admin/layouts/widget-admin-tpl.php:76
+msgid "Posts published between %s%d%s and %s%d%s week(s) ago"
+msgstr ""
+
+#: includes/admin/layouts/widget-admin-tpl.php:84
 msgid "Layout:"
 msgstr ""
 
-#: includes/admin/layouts/widget-admin-tpl.php:86
+#: includes/admin/layouts/widget-admin-tpl.php:108
 msgid "Buy Now text:"
 msgstr ""
 
-#: includes/admin/layouts/widget-admin-tpl.php:91
+#: includes/admin/layouts/widget-admin-tpl.php:113
 msgid "Read Review text:"
 msgstr ""
 
-#: includes/admin/layouts/widget-admin-tpl.php:95
+#: includes/admin/layouts/widget-admin-tpl.php:117
 msgid "Display Product Titles :"
 msgstr ""
 
-#: includes/admin/layouts/widget-admin-tpl.php:99
+#: includes/admin/layouts/widget-admin-tpl.php:121
 msgid "Display Product Image :"
 msgstr ""
 
@@ -515,17 +523,17 @@ msgstr ""
 msgid "Attach the image"
 msgstr ""
 
-#: includes/admin/widgets/abstract/class-wppr-widget-abstract.php:71
-#: includes/admin/widgets/abstract/class-wppr-widget-abstract.php:117
+#: includes/admin/widgets/abstract/class-wppr-widget-abstract.php:82
+#: includes/admin/widgets/abstract/class-wppr-widget-abstract.php:128
 msgid "Buy Now"
 msgstr ""
 
-#: includes/admin/widgets/abstract/class-wppr-widget-abstract.php:74
-#: includes/admin/widgets/abstract/class-wppr-widget-abstract.php:121
+#: includes/admin/widgets/abstract/class-wppr-widget-abstract.php:85
+#: includes/admin/widgets/abstract/class-wppr-widget-abstract.php:132
 msgid "Read Review"
 msgstr ""
 
-#: includes/admin/widgets/abstract/class-wppr-widget-abstract.php:105
+#: includes/admin/widgets/abstract/class-wppr-widget-abstract.php:116
 msgid "Select Category"
 msgstr ""
 
@@ -549,7 +557,7 @@ msgstr ""
 msgid "This widget displays the top products based on their rating."
 msgstr ""
 
-#: includes/admin/widgets/class-wppr-top-products-widget.php:121
+#: includes/admin/widgets/class-wppr-top-products-widget.php:132
 msgid "Top Products"
 msgstr ""
 
