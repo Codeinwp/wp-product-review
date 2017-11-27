@@ -145,20 +145,20 @@ class Wppr_Public {
 		}
 
 		$style = '                   
-                    #review-statistics .review-wu-grade .c100,
-                     .review-grade-widget .c100 {
+                    .review-wu-grade .wppr-c100,
+                     .review-grade-widget .wppr-c100 {
                         background-color: ' . $review->wppr_get_option( 'cwppos_rating_chart_default' ) . ';
                     }
                     
-                    #review-statistics .review-wu-grade .c100.wppr-weak span,
-                     .review-grade-widget .c100.wppr-weak span {
+                    .review-wu-grade .wppr-c100.wppr-weak span,
+                     .review-grade-widget .wppr-c100.wppr-weak span {
                         color: ' . $review->wppr_get_option( 'cwppos_rating_weak' ) . ';
                     }
                     
-                    #review-statistics .review-wu-grade .c100.wppr-weak .fill,
-                    #review-statistics .review-wu-grade .c100.wppr-weak .bar,
-                     .review-grade-widget .c100.wppr-weak .fill,
-                    .review-grade-widget .c100.wppr-weak .bar {
+                    .review-wu-grade .wppr-c100.wppr-weak .wppr-fill,
+                    .review-wu-grade .wppr-c100.wppr-weak .wppr-bar,
+                     .review-grade-widget .wppr-c100.wppr-weak .wppr-fill,
+                    .review-grade-widget .wppr-c100.wppr-weak .wppr-bar {
                         border-color: ' . $review->wppr_get_option( 'cwppos_rating_weak' ) . ';
                     }
                     
@@ -166,15 +166,15 @@ class Wppr_Public {
                         background: ' . $review->wppr_get_option( 'cwppos_rating_weak' ) . ';
                     }
                     
-                    #review-statistics .review-wu-grade .c100.wppr-not-bad span,
-                     .review-grade-widget .c100.wppr-not-bad span {
+                    #review-statistics .review-wu-grade .wppr-c100.wppr-not-bad span,
+                     .review-grade-widget .wppr-c100.wppr-not-bad span {
                         color: ' . $review->wppr_get_option( 'cwppos_rating_notbad' ) . ';
                     }
                     
-                    #review-statistics .review-wu-grade .c100.wppr-not-bad .fill,
-                    #review-statistics .review-wu-grade .c100.wppr-not-bad .bar,
-                     .review-grade-widget .c100.wppr-not-bad .fill,
-                    .review-grade-widget .c100.wppr-not-bad .bar {
+                    .review-wu-grade .wppr-c100.wppr-not-bad .wppr-fill,
+                    .review-wu-grade .wppr-c100.wppr-not-bad .wppr-bar,
+                     .review-grade-widget .wppr-c100.wppr-not-bad .wppr-fill,
+                    .review-grade-widget .wppr-c100.wppr-not-bad .wppr-bar {
                         border-color: ' . $review->wppr_get_option( 'cwppos_rating_notbad' ) . ';
                     }
                     
@@ -182,15 +182,15 @@ class Wppr_Public {
                         background: ' . $review->wppr_get_option( 'cwppos_rating_notbad' ) . ';
                     }
                     
-                    #review-statistics .review-wu-grade .c100.wppr-good span,
-                     .review-grade-widget .c100.wppr-good span {
+                    .review-wu-grade .wppr-c100.wppr-good span,
+                     .review-grade-widget .wppr-c100.wppr-good span {
                         color: ' . $review->wppr_get_option( 'cwppos_rating_good' ) . ';
                     }
                     
-                    #review-statistics .review-wu-grade .c100.wppr-good .fill,
-                    #review-statistics .review-wu-grade .c100.wppr-good .bar,
-                     .review-grade-widget .c100.wppr-good .fill,
-                    .review-grade-widget .c100.wppr-good .bar {
+                    .review-wu-grade .wppr-c100.wppr-good .wppr-fill,
+                    .review-wu-grade .wppr-c100.wppr-good .wppr-bar,
+                     .review-grade-widget .wppr-c100.wppr-good .wppr-fill,
+                    .review-grade-widget .wppr-c100.wppr-good .wppr-bar {
                         border-color: ' . $review->wppr_get_option( 'cwppos_rating_good' ) . ';
                     }
                     
@@ -198,15 +198,15 @@ class Wppr_Public {
                         background: ' . $review->wppr_get_option( 'cwppos_rating_good' ) . ';
                     }
                     
-                    #review-statistics .review-wu-grade .c100.wppr-very-good span,
-                     .review-grade-widget .c100.wppr-very-good span {
+                    .review-wu-grade .wppr-c100.wppr-very-good span,
+                     .review-grade-widget .wppr-c100.wppr-very-good span {
                         color: ' . $review->wppr_get_option( 'cwppos_rating_very_good' ) . ';
                     }
                     
-                    #review-statistics .review-wu-grade .c100.wppr-very-good .fill,
-                    #review-statistics .review-wu-grade .c100.wppr-very-good .bar,
-                     .review-grade-widget .c100.wppr-very-good .fill,
-                    .review-grade-widget .c100.wppr-very-good .bar {
+                    .review-wu-grade .wppr-c100.wppr-very-good .wppr-fill,
+                    .review-wu-grade .wppr-c100.wppr-very-good .wppr-bar,
+                     .review-grade-widget .wppr-c100.wppr-very-good .wppr-fill,
+                    .review-grade-widget .wppr-c100.wppr-very-good .wppr-bar {
                         border-color: ' . $review->wppr_get_option( 'cwppos_rating_very_good' ) . ';
                     }
                     
@@ -407,6 +407,7 @@ class Wppr_Public {
 
 			}
 		}
+		$review->update_comments_rating();
 	}
 
 	/**
