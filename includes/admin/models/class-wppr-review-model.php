@@ -167,6 +167,11 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 				$this->setup_pros_cons();
 				$this->setup_options();
 				$this->count_rating();
+				if ( ! is_admin() ) {
+					$this->alter_options();
+				}
+
+				$this->backward_compatibility();
 
 				return true;
 			} else {
@@ -179,6 +184,61 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Add backward compatibility so that when a review is viewed, its meta data can be updated.
+	 *
+	 * @access  private
+	 */
+	private function backward_compatibility() {
+		$comment_ratings    = get_post_meta( $this->ID, 'wppr_comment_rating', true );
+		if ( empty( $comment_ratings ) ) {
+			update_post_meta( $this->ID, 'wppr_comment_rating', $this->get_comments_rating() );
+		}
+	}
+
+	/**
+	 * Alter options based on user influence.
+	 *
+	 * @access  private
+	 */
+	private function alter_options() {
+		$comment_influence = intval( $this->wppr_get_option( 'cwppos_infl_userreview' ) );
+
+		if ( 0 === $comment_influence ) {
+			return;
+		}
+
+		$comments = $this->get_comments_options();
+		if ( ! $comments ) {
+			return;
+		}
+
+		$combined = array();
+		foreach ( $comments as $comment ) {
+			$array  = wp_list_pluck( $comment['options'], 'value', 'name' );
+			foreach ( $array as $k => $v ) {
+				if ( ! isset( $combined[ $k ] ) ) {
+					$combined[ $k ] = floatval( $v );
+				} else {
+					$combined[ $k ] += floatval( $v );
+				}
+			}
+		}
+		$new_options    = array();
+		foreach ( $this->options as $option ) {
+			$k                  = $option['name'];
+			$rating             = $option['value'];
+			$v                  = floatval( $combined [ $k ] ) / count( $comments );
+			$weighted           = $v * 10 * ( $comment_influence / 100 ) + floatval( $rating ) * ( ( 100 - $comment_influence ) / 100 );
+			$new_options[]      = array(
+				'name'  => $k,
+				'value' => $weighted,
+			);
+		}
+
+		$this->options = $new_options;
 	}
 
 	/**

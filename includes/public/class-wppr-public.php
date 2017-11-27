@@ -407,6 +407,8 @@ class Wppr_Public {
 
 			}
 		}
+
+		update_post_meta( $comment->comment_post_ID, 'wppr_comment_rating', $review->get_comments_rating() );
 	}
 
 	/**

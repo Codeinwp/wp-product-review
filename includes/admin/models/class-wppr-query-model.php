@@ -123,14 +123,27 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		if ( isset( $conditions['having'] ) ) {
 			$conditions_having = $conditions['having'];
 		}
+
+		$final_rating       = '`rating`';
+		$comment_influence = intval( $this->wppr_get_option( 'cwppos_infl_userreview' ) );
+		if ( $comment_influence > 0 ) {
+			$final_rating   = "IF(`comment_rating` = 0, `rating`, (`comment_rating` * 10 * ( $comment_influence / 100 ) + `rating` * ( ( 100 - $comment_influence ) / 100 ) ) )";
+		}
+
+		$final_order        = isset( $order['rating'] ) && in_array( $order['rating'], array( 'ASC', 'DESC' ) ) ? " ORDER BY `final_rating` {$order['rating']}" : '';
+
 		$query   = " 
+		SELECT ID, post_date, post_title, `check`, `name`, `price`, `rating`, `comment_rating`, $final_rating as 'final_rating' FROM
+		(
         SELECT 
-           ID,
-           post_date,
+			ID,
+			post_date,
+			post_title,
             GROUP_CONCAT( DISTINCT IF( `meta_key` = 'cwp_meta_box_check', `meta_value`, '' ) SEPARATOR '' ) AS 'check', 
             GROUP_CONCAT( DISTINCT IF( `meta_key` = 'cwp_rev_product_name', `meta_value`, '' ) SEPARATOR '' ) AS 'name',   
             GROUP_CONCAT( DISTINCT IF( `meta_key` = 'cwp_rev_price', FORMAT( `meta_value`, 2 ), '' ) SEPARATOR '' ) AS 'price', 
-             GROUP_CONCAT( DISTINCT IF( `meta_key` = 'wppr_rating', IF(FORMAT(`meta_value`, 2) = '100.00','99.99',FORMAT(`meta_value`,2) ),'') SEPARATOR '' ) AS 'rating'
+			GROUP_CONCAT( DISTINCT IF( `meta_key` = 'wppr_rating', IF(FORMAT(`meta_value`, 2) = '100.00','99.99', FORMAT(`meta_value`, 2) ), '') SEPARATOR '' ) AS 'rating',
+            GROUP_CONCAT( DISTINCT IF( `meta_key` = 'wppr_comment_rating', `meta_value`, '') SEPARATOR '' ) AS 'comment_rating'
         FROM {$this->db->postmeta} m INNER JOIN {$this->db->posts} p on p.ID = m.post_ID
         
         {$sub_query_posts}
@@ -143,16 +156,20 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
         {$order_by}
         `name` ASC
         LIMIT {$limit}
+		) T1 $final_order
         ";
 		$key     = hash( 'sha256', $query );
 		$results = wp_cache_get( $key, 'wppr' );
 		if ( ! is_array( $results ) ) {
 			$results = $this->db->get_results( $query, ARRAY_A );
-			wp_cache_set( $key, $results, 'wppr', ( 60 * 60 ) );
+			if ( ! WPPR_CACHE_DISABLED ) {
+				wp_cache_set( $key, $results, 'wppr', ( 60 * 60 ) );
+			}
 		}// End if().
 
 		return $results;
 	}
+
 
 	/**
 	 * Build the sub query.

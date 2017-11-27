@@ -72,6 +72,7 @@ function run_wppr() {
 	define( 'WPPR_SLUG', 'wppr' );
 	define( 'WPPR_UPSELL_LINK', 'https://themeisle.com/plugins/wp-product-review/' );
 	define( 'WPPR_URL', untrailingslashit( plugins_url( '/', __FILE__ ) ) );
+	define( 'WPPR_CACHE_DISABLED', false );
 
 	$plugin = new WPPR();
 	$plugin->run();
