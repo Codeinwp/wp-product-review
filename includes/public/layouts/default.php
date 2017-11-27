@@ -63,12 +63,15 @@ $cons = $review_object->get_cons();
 					</div><!-- end .review-wu-left-top -->
 
 					<div class="review-wu-bars">
-						<?php foreach ( $review_object->get_options() as $option ) { ?>
+						<?php
+						foreach ( $review_object->get_options() as $option ) {
+
+							?>
 							<div class="rev-option" data-value="
 							<?php echo $option['value']; ?>">
 								<div class="cwpr_clearfix">
 									<h3><?php echo esc_html( apply_filters( 'wppr_option_name_html', $option['name'] ) ); ?></h3>
-									<span><?php echo esc_html( number_format( ( $option['value'] / 10 ) ), 1 ); ?>/10 </span>
+									<span><?php echo esc_html( number_format( ( $option['value'] / 10 ), 1 ) ); ?>/10 </span>
 								</div>
 								<ul class="cwpr_clearfix <?php echo $review_object->get_rating_class( $option['value'] ) . apply_filters( 'wppr_option_custom_icon', '' ); ?>">
 									<?php for ( $i = 1; $i <= 10; $i++ ) { ?>
