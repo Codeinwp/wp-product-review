@@ -187,61 +187,6 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	}
 
 	/**
-	 * Add backward compatibility so that when a review is viewed, its meta data can be updated.
-	 *
-	 * @access  private
-	 */
-	private function backward_compatibility() {
-		$comment_ratings    = get_post_meta( $this->ID, 'wppr_comment_rating', true );
-		if ( empty( $comment_ratings ) ) {
-			update_post_meta( $this->ID, 'wppr_comment_rating', $this->get_comments_rating() );
-		}
-	}
-
-	/**
-	 * Alter options based on user influence.
-	 *
-	 * @access  private
-	 */
-	private function alter_options() {
-		$comment_influence = intval( $this->wppr_get_option( 'cwppos_infl_userreview' ) );
-
-		if ( 0 === $comment_influence ) {
-			return;
-		}
-
-		$comments = $this->get_comments_options();
-		if ( ! $comments ) {
-			return;
-		}
-
-		$combined = array();
-		foreach ( $comments as $comment ) {
-			$array  = wp_list_pluck( $comment['options'], 'value', 'name' );
-			foreach ( $array as $k => $v ) {
-				if ( ! isset( $combined[ $k ] ) ) {
-					$combined[ $k ] = floatval( $v );
-				} else {
-					$combined[ $k ] += floatval( $v );
-				}
-			}
-		}
-		$new_options    = array();
-		foreach ( $this->options as $option ) {
-			$k                  = $option['name'];
-			$rating             = $option['value'];
-			$v                  = floatval( $combined [ $k ] ) / count( $comments );
-			$weighted           = $v * 10 * ( $comment_influence / 100 ) + floatval( $rating ) * ( ( 100 - $comment_influence ) / 100 );
-			$new_options[]      = array(
-				'name'  => $k,
-				'value' => $weighted,
-			);
-		}
-
-		$this->options = $new_options;
-	}
-
-	/**
 	 * Check if post record exists with that id.
 	 *
 	 * @since   3.0.0
@@ -460,6 +405,192 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	}
 
 	/**
+	 * Alter options based on user influence.
+	 *
+	 * @access  private
+	 */
+	private function alter_options() {
+		$comment_influence = intval( $this->wppr_get_option( 'cwppos_infl_userreview' ) );
+
+		if ( 0 === $comment_influence ) {
+			return;
+		}
+
+		$comments = $this->get_comments_options();
+		if ( ! $comments ) {
+			return;
+		}
+
+		$combined = array();
+		foreach ( $comments as $comment ) {
+			$array = wp_list_pluck( $comment['options'], 'value', 'name' );
+			foreach ( $array as $k => $v ) {
+				if ( ! isset( $combined[ $k ] ) ) {
+					$combined[ $k ] = floatval( $v );
+				} else {
+					$combined[ $k ] += floatval( $v );
+				}
+			}
+		}
+		$new_options = array();
+		foreach ( $this->options as $option ) {
+			$k             = $option['name'];
+			$rating        = $option['value'];
+			$v             = floatval( $combined [ $k ] ) / count( $comments );
+			$weighted      = $v * 10 * ( $comment_influence / 100 ) + floatval( $rating ) * ( ( 100 - $comment_influence ) / 100 );
+			$new_options[] = array(
+				'name'  => $k,
+				'value' => $weighted,
+			);
+		}
+
+		$this->options = $new_options;
+	}
+
+	/**
+	 * Get all comments associated with the review.
+	 *
+	 * @return array|int The list of comments..
+	 */
+	public function get_comments_options() {
+		if ( $this->ID === 0 ) {
+			$this->logger->error( 'Can not get comments rating, id is not set' );
+
+			return array();
+		}
+		$comments_query = new WP_Comment_Query;
+		$comments       = $comments_query->query(
+			array(
+				'fields'  => 'ids',
+				'status'  => 'approve',
+				'post_id' => $this->ID,
+			)
+		);
+		$valid          = array();
+		foreach ( $comments as $comment ) {
+			$options = $this->get_comment_options( $comment );
+			if ( ! empty( $options ) ) {
+				$valid[ $comment ] = array(
+					'options' => $options,
+					'date'    => get_comment_date( '', $comment ),
+					'author'  => get_comment_author( $comment ),
+					'title'   => wp_strip_all_tags( get_comment_excerpt( $comment ) ),
+					'content' => get_comment_text( $comment ),
+				);
+			}
+		}
+
+		return $valid;
+	}
+
+	/**
+	 * Return the options values and names associated with the comment.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 *
+	 * @param   int $comment_id The comment id.
+	 *
+	 * @return array
+	 */
+	public function get_comment_options( $comment_id ) {
+		$options = array();
+		if ( $this->wppr_get_option( 'cwppos_show_userreview' ) === 'yes' ) {
+			$options_names   = wp_list_pluck( $this->options, 'name' );
+			$comment_options = array();
+			$valid_comment   = false;
+			foreach ( $options_names as $k => $name ) {
+				$value = get_comment_meta( $comment_id, 'meta_option_' . $k, true );
+
+				$comment_options[] = array(
+					'name'  => $name,
+					'value' => number_format( (float) $value, 2 ),
+				);
+				if ( is_numeric( $value ) ) {
+					$valid_comment = true;
+				}
+			}
+			if ( ! $valid_comment ) {
+				return array();
+			}
+
+			$options = $comment_options;
+		}
+
+		return $options;
+
+	}
+
+	/**
+	 * Add backward compatibility so that when a review is viewed, its meta data can be updated.
+	 *
+	 * @access  private
+	 */
+	private function backward_compatibility() {
+		$comment_influence = intval( $this->wppr_get_option( 'cwppos_infl_userreview' ) );
+
+		if ( 0 === $comment_influence ) {
+			return;
+		}
+		$comment_ratings = get_post_meta( $this->ID, 'wppr_comment_rating', true );
+		if ( empty( $comment_ratings ) ) {
+			update_post_meta( $this->ID, 'wppr_comment_rating', $this->get_comments_rating() );
+		}
+	}
+
+	/**
+	 * Get comments rating.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @return float|int
+	 */
+	public function get_comments_rating() {
+		$comments = $this->get_comments_options();
+		if ( $comments ) {
+			$options = array();
+			foreach ( $comments as $comment ) {
+				$options = array_merge( $options, $comment['options'] );
+			}
+
+			if ( count( $options ) != 0 ) {
+				return ( array_sum( wp_list_pluck( $options, 'value' ) ) / count( $options ) );
+			} else {
+				return 0;
+			}
+		} else {
+			return 0;
+		}
+
+	}
+
+	/**
+	 * Update comments rating.
+	 *
+	 * @access public
+	 */
+	public function update_comments_rating() {
+		$comment_influence = intval( $this->wppr_get_option( 'cwppos_infl_userreview' ) );
+
+		if ( 0 === $comment_influence ) {
+			return;
+		}
+
+		update_post_meta( $this->get_ID(), 'wppr_comment_rating', $this->get_comments_rating() );
+	}
+
+	/**
+	 * Return the review id.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @return int
+	 */
+	public function get_ID() {
+		return $this->ID;
+	}
+
+	/**
 	 * Deactivate the review.
 	 *
 	 * @since   3.0.0
@@ -522,17 +653,6 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		);
 
 		return $data;
-	}
-
-	/**
-	 * Return the review id.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @return int
-	 */
-	public function get_ID() {
-		return $this->ID;
 	}
 
 	/**
@@ -743,106 +863,6 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		}
 
 		return apply_filters( 'wppr_rating', $rating, $this->ID, $this );
-	}
-
-	/**
-	 * Get comments rating.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @return float|int
-	 */
-	public function get_comments_rating() {
-		$comments = $this->get_comments_options();
-		if ( $comments ) {
-			$options = array();
-			foreach ( $comments as $comment ) {
-				$options = array_merge( $options, $comment['options'] );
-			}
-
-			if ( count( $options ) != 0 ) {
-				return ( array_sum( wp_list_pluck( $options, 'value' ) ) / count( $options ) );
-			} else {
-				return 0;
-			}
-		} else {
-			return 0;
-		}
-
-	}
-
-	/**
-	 * Get all comments associated with the review.
-	 *
-	 * @return array|int The list of comments..
-	 */
-	public function get_comments_options() {
-		if ( $this->ID === 0 ) {
-			$this->logger->error( 'Can not get comments rating, id is not set' );
-
-			return array();
-		}
-		$comments_query = new WP_Comment_Query;
-		$comments       = $comments_query->query(
-			array(
-				'fields'  => 'ids',
-				'status'  => 'approve',
-				'post_id' => $this->ID,
-			)
-		);
-		$valid          = array();
-		foreach ( $comments as $comment ) {
-			$options = $this->get_comment_options( $comment );
-			if ( ! empty( $options ) ) {
-				$valid[ $comment ] = array(
-					'options' => $options,
-					'date'    => get_comment_date( '', $comment ),
-					'author'  => get_comment_author( $comment ),
-					'title'   => wp_strip_all_tags( get_comment_excerpt( $comment ) ),
-					'content' => get_comment_text( $comment ),
-				);
-			}
-		}
-
-		return $valid;
-	}
-
-	/**
-	 * Return the options values and names associated with the comment.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 *
-	 * @param   int $comment_id The comment id.
-	 *
-	 * @return array
-	 */
-	public function get_comment_options( $comment_id ) {
-		$options = array();
-		if ( $this->wppr_get_option( 'cwppos_show_userreview' ) === 'yes' ) {
-			$options_names   = wp_list_pluck( $this->options, 'name' );
-			$comment_options = array();
-			$valid_comment   = false;
-			foreach ( $options_names as $k => $name ) {
-				$value = get_comment_meta( $comment_id, 'meta_option_' . $k, true );
-
-				$comment_options[] = array(
-					'name'  => $name,
-					'value' => number_format( (float) $value, 2 ),
-				);
-				if ( is_numeric( $value ) ) {
-					$valid_comment = true;
-				}
-			}
-			if ( ! $valid_comment ) {
-				return array();
-			}
-
-			$options = $comment_options;
-		}
-
-		return $options;
-
 	}
 
 	/**
