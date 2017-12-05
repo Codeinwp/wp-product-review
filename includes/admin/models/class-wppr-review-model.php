@@ -138,6 +138,14 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	private $options = array();
 
 	/**
+	 * The review template.
+	 *
+	 * @access  private
+	 * @var string $name The review template.
+	 */
+	private $template = 'default';
+
+	/**
 	 * WPPR_Review constructor.
 	 *
 	 * @since   3.0.0
@@ -161,6 +169,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 				$this->logger->notice( 'Setting up review for ID: ' . $review_id );
 				$this->setup_price();
 				$this->setup_name();
+				$this->setup_template();
 				$this->setup_click();
 				$this->setup_image();
 				$this->setup_links();
@@ -282,6 +291,19 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	private function setup_name() {
 		$name       = get_post_meta( $this->ID, 'cwp_rev_product_name', true );
 		$this->name = $name;
+	}
+
+	/**
+	 * Setup the template of the review.
+	 *
+	 * @access  private
+	 */
+	private function setup_template() {
+		$template       = get_post_meta( $this->ID, 'cwp_rev_template', true );
+		if ( empty( $template ) ) {
+			$template   = 'default';
+		}
+		$this->template = $template;
 	}
 
 	/**
@@ -636,6 +658,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		$data = array(
 			'id'             => $this->get_ID(),
 			'name'           => $this->get_name(),
+			'template'       => $this->get_template(),
 			'price'          => $this->get_price(),
 			'price_raw'      => $this->get_price_raw(),
 			'currency'       => $this->get_currency(),
@@ -667,6 +690,16 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	}
 
 	/**
+	 * Return the review template.
+	 *
+	 * @access  public
+	 * @return string
+	 */
+	public function get_template() {
+		return apply_filters( 'wppr_template', $this->template, $this->ID, $this );
+	}
+
+	/**
 	 * Setter method for saving the review name.
 	 *
 	 * @since   3.0.0
@@ -682,6 +715,25 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			$this->name = $name;
 
 			return update_post_meta( $this->ID, 'cwp_rev_product_name', $name );
+		}
+
+		return false;
+	}
+
+	/**
+	 * Setter method for saving the review template.
+	 *
+	 * @access  public
+	 *
+	 * @param   string $template The new review template.
+	 *
+	 * @return bool
+	 */
+	public function set_template( $template ) {
+		if ( $template !== $this->template ) {
+			$this->template = $template;
+
+			return update_post_meta( $this->ID, 'cwp_rev_template', $template );
 		}
 
 		return false;
