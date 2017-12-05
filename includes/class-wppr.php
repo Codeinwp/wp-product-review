@@ -118,11 +118,14 @@ class WPPR {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new WPPR_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new WPPR_Admin( $this->get_plugin_name(), $this->get_version(), $this->loader );
+		$this->loader->add_filter( 'mce_external_languages', $plugin_admin, 'add_tinymce_lang', 10, 1 );
+		$this->loader->add_action( 'init', $plugin_admin, 'register_init' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'menu_pages' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'wp_ajax_update_options', $plugin_admin, 'update_options' );
+		$this->loader->add_action( 'wp_ajax_wppr_get_tinymce_form', $plugin_admin, 'get_tinymce_form' );
 		$this->loader->add_action( 'wp_ajax_get_categories', $plugin_admin, 'get_categories' );
 
 		$plugin_editor = new WPPR_Editor( $this->get_plugin_name(), $this->get_version() );

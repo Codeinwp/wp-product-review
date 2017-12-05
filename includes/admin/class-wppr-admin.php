@@ -40,6 +40,15 @@ class WPPR_Admin {
 	private $version;
 
 	/**
+	 * The loader class.
+	 *
+	 * @since    3.0.0
+	 * @access   private
+	 * @var      WPPR_Loader    $loader    The loader class of the plugin.
+	 */
+	private $loader;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    3.0.0
@@ -47,10 +56,11 @@ class WPPR_Admin {
 	 * @param      string $plugin_name The name of this plugin.
 	 * @param      string $version The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct( $plugin_name, $version, WPPR_Loader $loader ) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
+		$this->loader     = $loader;
 
 	}
 
@@ -196,7 +206,174 @@ class WPPR_Admin {
 	}
 
 	/**
-	 * Method called from AJAX request to populate categories of specified post types.
+
+	 * Initialize the hooks and filters for the tinymce button
+	 *
+	 * @access  public
+	 */
+	public function register_init() {
+		if ( current_user_can( 'edit_posts' ) && current_user_can( 'edit_pages' ) ) {
+			if ( 'true' == get_user_option( 'rich_editing' ) ) {
+				$this->loader->add_filter( 'mce_external_plugins', $this, 'tinymce_plugin', 10, 1 );
+				$this->loader->add_filter( 'mce_buttons', $this, 'register_mce_button', 10, 1 );
+				$this->loader->add_action( 'admin_enqueue_scripts', $this, 'enqueue_scripts', 10 );
+				$this->loader->run();
+			}
+		}
+	}
+
+	/**
+	 * Load custom js options - TinyMCE API
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @param   array $plugin_array  The tinymce plugin array.
+	 * @return  array
+	 */
+	public function tinymce_plugin( $plugin_array ) {
+		$plugin_array['wppr_mce_button'] = WPPR_URL . '/assets/js/tinymce.js';
+		return $plugin_array;
+	}
+
+	/**
+	 * Register new button in the editor
+	 *
+	 * @access  public
+	 * @param   array $buttons  The tinymce buttons array.
+	 * @return  array
+	 */
+	public function register_mce_button( $buttons ) {
+		$buttons[] = 'wppr_mce_button';
+		return $buttons;
+	}
+
+	/**
+	 * Load plugin translation for - TinyMCE API
+	 *
+	 * @access  public
+	 * @param   array $arr  The tinymce_lang array.
+	 * @return  array
+	 */
+	public function add_tinymce_lang( $arr ) {
+		$arr[] = apply_filters( 'wppr_ui_lang_filter', WPPR_PATH . '/includes/admin/models/class-wppr-tinymce-model.php' );
+		return $arr;
+	}
+
+	/**
+	 * Render the form template for tinyMCE popup.
+	 * Called via ajax.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 */
+	public function get_tinymce_form() {
+		check_ajax_referer( WPPR_SLUG, 'nonce' );
+
+		$html_helper = new WPPR_Html_Fields();
+
+		$type       = $_GET['type'];
+		$elements   = array();
+		switch ( $type ) {
+			case 'review':
+				$elements   = apply_filters(
+					'wppr_shortcode_ui_' . $type, array(
+						array(
+							'id'      => 'post_id',
+							'title' => __( 'Post', 'wp-product-review' ),
+							'name'    => 'post_id',
+							'description'    => __( 'The post.', 'wp-product-review' ),
+							'type'    => 'select',
+							'options' => $this->get_reviewable_posts( true ),
+							'disabled' => ! defined( 'WPPR_PRO_SLUG' ),
+						),
+						array(
+							'id'      => 'visual',
+							'title' => __( 'Display type', 'wp-product-review' ),
+							'name'    => 'visual',
+							'description'    => __( 'Display type.', 'wp-product-review' ),
+							'type'    => 'select',
+							'options' => array(
+								'full'  => __( 'Full', 'wp-product-review' ),
+								'yes'   => __( 'Pie only', 'wp-product-review' ),
+								'no'    => __( 'Basic', 'wp-product-review' ),
+							),
+							'disabled' => ! defined( 'WPPR_PRO_SLUG' ),
+						),
+					)
+				);
+				break;
+			case 'listing':
+			case 'comparison':
+				$elements   = apply_filters(
+					'wppr_shortcode_ui_' . $type, array(
+						array(
+							'id'      => 'cat',
+							'title' => __( 'Category.', 'wp-product-review' ),
+							'name'    => 'cat',
+							'description'   => __( 'Category.', 'wp-product-review' ),
+							'type'    => 'select',
+							'options' => $this->get_categories_list( true ),
+							'disabled' => ! defined( 'WPPR_PRO_SLUG' ),
+						),
+						array(
+							'id'      => 'nr',
+							'title' => __( 'Number of reviews to show.', 'wp-product-review' ),
+							'name'    => 'nr',
+							'description'    => __( 'Number of reviews to show.', 'wp-product-review' ),
+							'type'    => 'number',
+							'min'   => 0,
+							'default' => 10,
+							'disabled' => ! defined( 'WPPR_PRO_SLUG' ),
+						),
+						array(
+							'id'      => 'img',
+							'title' => __( 'Display image?', 'wp-product-review' ),
+							'name'    => 'img',
+							'description'    => __( 'Display image?', 'wp-product-review' ),
+							'type'    => 'select',
+							'options' => array(
+								'no'    => __( 'No', 'wp-product-review' ),
+								'yes'   => __( 'Yes', 'wp-product-review' ),
+							),
+							'disabled' => ! defined( 'WPPR_PRO_SLUG' ),
+						),
+						array(
+							'id'      => 'orderby',
+							'title' => __( 'Sort results by', 'wp-product-review' ),
+							'name'    => 'orderby',
+							'description'    => __( 'Sort results by', 'wp-product-review' ),
+							'type'    => 'select',
+							'options' => array(
+								'rating'    => __( 'Rating', 'wp-product-review' ),
+								'price' => __( 'Price', 'wp-product-review' ),
+								'date'  => __( 'Date', 'wp-product-review' ),
+							),
+							'disabled' => ! defined( 'WPPR_PRO_SLUG' ),
+						),
+						array(
+							'id'      => 'order',
+							'title' => __( 'Sorting order', 'wp-product-review' ),
+							'name'    => 'order',
+							'description'    => __( 'Sorting order', 'wp-product-review' ),
+							'type'    => 'select',
+							'options' => array(
+								'desc'  => __( 'Descending', 'wp-product-review' ),
+								'asc'   => __( 'Ascending', 'wp-product-review' ),
+							),
+							'disabled' => ! defined( 'WPPR_PRO_SLUG' ),
+						),
+					)
+				);
+				break;
+		}
+
+		$render = new WPPR_Admin_Render_Controller( $this->plugin_name, $this->version );
+		$render->retrive_template( 'tinymce', false, $elements );
+		wp_die();
+	}
+
+	/**
+	 * Method called from AJAX request to populate categories of specified post types .
 	 *
 	 * @since   3.0.0
 	 * @access  public
@@ -208,6 +385,66 @@ class WPPR_Admin {
 			echo wp_send_json_success( array( 'categories' => self::get_category_for_post_type( $_POST['type'] ) ) );
 		}
 		wp_die();
+	}
+
+	/**
+	 * Get the categories for the shortcode.
+	 *
+	 * @access  private
+	 */
+	private function get_categories_list( $default = false ) {
+		$cats   = array();
+		if ( $default ) {
+			$cats[] = __( 'Select', 'wp-product-review' );
+		}
+
+		$categories = get_categories(
+			array(
+				'orderby' => 'name',
+				'order'   => 'ASC',
+				'hide_empty'   => false,
+			)
+		);
+
+		foreach ( $categories as $category ) {
+			$cats[ $category->term_id ] = $category->name;
+		}
+		return $cats;
+	}
+
+	/**
+	 * Get the posts for the shortcode.
+	 *
+	 * @access  private
+	 */
+	private function get_reviewable_posts( $default = false ) {
+		$posts  = array();
+		if ( $default ) {
+			$posts[]    = __( 'Select', 'wp-product-review' );
+		}
+
+		$query  = new WP_Query(
+			array(
+				'post_type'     => 'any',
+				'post_status'   => 'publish',
+				'numberposts'   => 300,
+				'meta_query'    => array(
+					array(
+						'key'   => 'cwp_meta_box_check',
+						'value' => 'Yes',
+					),
+				),
+			)
+		);
+
+		if ( $query->have_posts() ) {
+			while ( $query->have_posts() ) {
+				$query->the_post();
+				$posts[ get_the_ID() ] = get_the_title();
+			}
+		}
+
+		return $posts;
 	}
 
 	/**
@@ -243,5 +480,6 @@ class WPPR_Admin {
 
 		return $categories;
 	}
+
 
 }

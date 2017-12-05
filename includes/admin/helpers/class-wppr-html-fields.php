@@ -108,6 +108,43 @@ class WPPR_Html_Fields {
 	}
 
 	/**
+	 * Render a number input string.
+	 *
+	 * @since   3.0.0
+	 * @access  public
+	 * @param   array $args The settings of the input.
+	 * @return string
+	 */
+	public function number( $args ) {
+		$defaults = $this->define_defaults(
+			array(
+				'class' => 'wppr-text',
+			)
+		);
+		$args     = wp_parse_args( $args, $defaults );
+		$class    = $this->validate_class( $args['class'] );
+		$disabled = '';
+		if ( $args['disabled'] ) {
+			$disabled = ' disabled="disabled"';
+		}
+		if ( is_null( $args['id'] ) ) {
+			$args['id'] = $args['name'];
+		}
+		if ( $args['value'] == null ) {
+			$args['value'] = $args['default'];
+		}
+		$extra  = '';
+		if ( isset( $args['min'] ) ) {
+			$extra  = 'min=' . $args['min'];
+		}
+		if ( isset( $args['max'] ) ) {
+			$extra  = ' max=' . $args['max'];
+		}
+		$output = '<input type="number" ' . $disabled . ' name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( $args['id'] ) . '" class="' . $class . '"   value="' . esc_attr( $args['value'] ) . '" placeholder="' . esc_attr( $args['placeholder'] ) . '" ' . $extra . ' />';
+
+		return apply_filters( 'wppr_field', $output, $args );
+	}
+	/**
 	 * Render a image field.
 	 *
 	 * @since   3.0.0
@@ -157,14 +194,16 @@ class WPPR_Html_Fields {
 			$args['value'] = $args['default'];
 		}
 		$disabled = '';
-		if ( ! empty( $args['disabled'] ) ) {
-			$disabled .= ' disabled="disabled"';
+		if ( $args['disabled'] ) {
+			$disabled = ' disabled="disabled"';
 		}
+
 		$options = array();
 		foreach ( $args['options'] as $ov => $op ) {
 			$options[ esc_attr( $ov ) ] = esc_html( $op );
 		}
-		$output = '<select class="' . $class . '" name="' . esc_attr( $args['name'] ) . '"' . $disabled . ' > ';
+
+		$output = '<select class="' . $class . '" name="' . esc_attr( $args['name'] ) . '" ' . $disabled . '> ';
 		foreach ( $options as $k => $v ) {
 			$output .= "<option value='" . $k . "' " . ( ( isset( $args['value'] ) && $args['value'] == $k ) ? 'selected' : '' ) . '>' . $v . '</option>';
 		}
