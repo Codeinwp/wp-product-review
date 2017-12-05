@@ -22,26 +22,8 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 	 * @access  public
 	 */
 	public function assets( $review_object ) {
-
-		$dependencies = $this->load_assets();
-
-		wp_enqueue_style( WPPR_SLUG . '-pac-widget-stylesheet', WPPR_URL . '/assets/css/cwppos-widget.css', isset( $dependencies['css'] ) ? $dependencies['css'] : array(), WPPR_LITE_VERSION );
-		wp_enqueue_style( WPPR_SLUG . '-widget-stylesheet-one', WPPR_URL . '/assets/css/cwppos-widget-style1.css', array( WPPR_SLUG . '-pac-widget-stylesheet' ), WPPR_LITE_VERSION );
-		wp_enqueue_style( WPPR_SLUG . '-widget-rating', WPPR_URL . '/assets/css/cwppos-widget-rating.css', array( WPPR_SLUG . '-pac-widget-stylesheet' ), WPPR_LITE_VERSION );
-
-		$plugin = new WPPR();
-		$public = new Wppr_Public( $plugin->get_plugin_name(), $plugin->get_version() );
-
-		$public->load_review_assets( $review_object );
+		// empty.
 	}
-
-	/**
-	 * Load public assets specific to this widget.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
-	public abstract function load_assets();
 
 	/**
 	 * Method for displaying the widget on the front end.
