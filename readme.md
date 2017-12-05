@@ -67,6 +67,13 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 ## Changelog ##
+### 3.3.0 - 2017-11-27  ###
+
+* Fix individual rating influenced by comments.
+* Fix compatibility with various themes.
+* Fix top product widgets sorting when comments influence is on.
+
+
 ### 3.2.1 - 2017-11-16  ###
 
 * Adds compatibility with WordPress 4.9

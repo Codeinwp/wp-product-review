@@ -1,4 +1,10 @@
 
+ ### v3.3.0 - 2017-11-27 
+ **Changes:** 
+ * Fix individual rating influenced by comments.
+* Fix compatibility with various themes.
+* Fix top product widgets sorting when comments influence is on.
+ 
  ### v3.2.1 - 2017-11-16 
  **Changes:** 
  * Adds compatibility with WordPress 4.9

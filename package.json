@@ -22,7 +22,9 @@
     "lasttranslator": "Themeisle Translate Team <friends@themeisle.com>"
   },
   "devDependencies": {
+    "grunt": "^1.0.1",
     "grunt-helpscout-faq": "~0.1.0",
+    "request": "^2.83.0",
     "grunt-plugin-fleet": "codeinwp/grunt-plugin-fleet",
     "load-project-config": "~0.2.0"
   },
