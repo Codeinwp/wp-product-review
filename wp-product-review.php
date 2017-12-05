@@ -90,7 +90,6 @@ function run_wppr() {
  * Registers with the parrot plugin
  *
  * @param array $plugins Array of plugins.
- *
  */
 function wppr_lite_register_parrot( $plugins ) {
 	$plugins[] = WPPR_SLUG;
