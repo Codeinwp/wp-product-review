@@ -2,11 +2,11 @@
 /**
  * Helper class for HTML fields.
  *
- * @package     WPPR
- * @subpackage  Helpers
- * @copyright   Copyright (c) 2017, Marius Cristea
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       3.0.0
+ * @package    WPPR
+ * @subpackage Helpers
+ * @copyright  Copyright (c) 2017, Marius Cristea
+ * @license    http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since      3.0.0
  */
 
 /**
@@ -14,12 +14,13 @@
  */
 class WPPR_Html_Fields {
 
+
 	/**
 	 * Validate a class string.
 	 *
-	 * @since   3.0.0
-	 * @access  private
-	 * @param   string $class  Class name string to validate.
+	 * @since  3.0.0
+	 * @access private
+	 * @param  string $class Class name string to validate.
 	 * @return string
 	 */
 	private function validate_class( $class ) {
@@ -29,9 +30,9 @@ class WPPR_Html_Fields {
 	/**
 	 * Merges specific defaults with general ones.
 	 *
-	 * @since   3.0.0
-	 * @access  private
-	 * @param   array $specific_defaults  The specific defaults array.
+	 * @since  3.0.0
+	 * @access private
+	 * @param  array $specific_defaults The specific defaults array.
 	 * @return array
 	 */
 	private function define_defaults( $specific_defaults ) {
@@ -51,9 +52,9 @@ class WPPR_Html_Fields {
 	/**
 	 * Render a radio html element.
 	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @param   array $args The field settings.
+	 * @since  3.0.0
+	 * @access public
+	 * @param  array $args The field settings.
 	 * @return string
 	 */
 	public function radio( $args ) {
@@ -79,9 +80,9 @@ class WPPR_Html_Fields {
 	/**
 	 * Render a text input string.
 	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @param   array $args The settings of the input.
+	 * @since  3.0.0
+	 * @access public
+	 * @param  array $args The settings of the input.
 	 * @return string
 	 */
 	public function text( $args ) {
@@ -110,9 +111,9 @@ class WPPR_Html_Fields {
 	/**
 	 * Render a image field.
 	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @param   array $args The settings of the input.
+	 * @since  3.0.0
+	 * @access public
+	 * @param  array $args The settings of the input.
 	 * @return string
 	 */
 	public function image( $args ) {
@@ -140,9 +141,9 @@ class WPPR_Html_Fields {
 	/**
 	 * Render a select input.
 	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @param   array $args The settings of the input.
+	 * @since  3.0.0
+	 * @access public
+	 * @param  array $args The settings of the input.
 	 * @return mixed
 	 */
 	public function select( $args ) {
@@ -176,9 +177,9 @@ class WPPR_Html_Fields {
 	/**
 	 * Render a color picker.
 	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @param   array $args The settings of the input.
+	 * @since  3.0.0
+	 * @access public
+	 * @param  array $args The settings of the input.
 	 * @return mixed
 	 */
 	public function color( $args ) {
@@ -201,9 +202,9 @@ class WPPR_Html_Fields {
 	/**
 	 * Render a Icon font picker.
 	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @param   array $args The settings of the input.
+	 * @since  3.0.0
+	 * @access public
+	 * @param  array $args The settings of the input.
 	 * @return mixed
 	 */
 	public function icon_font( $args ) {

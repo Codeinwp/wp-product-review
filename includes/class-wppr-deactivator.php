@@ -2,8 +2,8 @@
 /**
  * Fired during plugin deactivation
  *
- * @link       https://themeisle.com/
- * @since      3.0.0
+ * @link  https://themeisle.com/
+ * @since 3.0.0
  *
  * @package    WPPR
  * @subpackage WPPR/includes
@@ -21,12 +21,13 @@
  */
 class WPPR_Deactivator {
 
+
 	/**
 	 * Short Description. (use period)
 	 *
 	 * Long Description.
 	 *
-	 * @since    3.0.0
+	 * @since 3.0.0
 	 */
 	public static function deactivate() {
 

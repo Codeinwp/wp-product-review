@@ -1,6 +1,5 @@
 <?php
 /**
- *
  * Legacy files used for backwards compatibility.
  *
  * @package WPPR

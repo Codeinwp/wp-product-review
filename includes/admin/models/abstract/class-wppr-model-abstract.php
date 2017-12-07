@@ -3,11 +3,11 @@
  * Abstract class for Models.
  * Defines inheritable utility methods.
  *
- * @package     WPPR
- * @subpackage  Models
- * @copyright   Copyright (c) 2017, Bogdan Preda
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       3.0.0
+ * @package    WPPR
+ * @subpackage Models
+ * @copyright  Copyright (c) 2017, Bogdan Preda
+ * @license    http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since      3.0.0
  */
 
 /**
@@ -15,36 +15,37 @@
  */
 class WPPR_Model_Abstract {
 
+
 	/**
 	 * The logger class.
 	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @var WPPR_Logger $logger The logger utility class.
+	 * @since  3.0.0
+	 * @access public
+	 * @var    WPPR_Logger $logger The logger utility class.
 	 */
 	public $logger;
 	/**
 	 * The main options array.
 	 *
-	 * @since   3.0.0
-	 * @access  private
-	 * @var array $options The options array.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    array $options The options array.
 	 */
 	private $options;
 	/**
 	 * The option namespace.
 	 *
-	 * @since   3.0.0
-	 * @access  private
-	 * @var string $namespace The options namespace.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    string $namespace The options namespace.
 	 */
 	private $namespace = 'cwppos_options';
 
 	/**
 	 * WPPR_Model_Abstract constructor.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 */
 	public function __construct() {
 		$this->options = get_option( $this->namespace, array() );
@@ -54,10 +55,10 @@ class WPPR_Model_Abstract {
 	/**
 	 * Get the global wppr option.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   string $key The option key.
+	 * @param string $key The option key.
 	 *
 	 * @return mixed
 	 */
@@ -68,10 +69,10 @@ class WPPR_Model_Abstract {
 	/**
 	 * Get the key option value from DB.
 	 *
-	 * @since   3.0.0
-	 * @access  protected
+	 * @since  3.0.0
+	 * @access protected
 	 *
-	 * @param   string $key The key name of the option.
+	 * @param string $key The key name of the option.
 	 *
 	 * @return bool|mixed
 	 */
@@ -120,11 +121,11 @@ class WPPR_Model_Abstract {
 	/**
 	 * Update a global wppr option.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   string $key The option key.
-	 * @param   string $value The option value.
+	 * @param string $key   The option key.
+	 * @param string $value The option value.
 	 *
 	 * @return mixed
 	 */
@@ -135,11 +136,11 @@ class WPPR_Model_Abstract {
 	/**
 	 * Setter method for updating the options array.
 	 *
-	 * @since   3.0.0
-	 * @access  protected
+	 * @since  3.0.0
+	 * @access protected
 	 *
-	 * @param   string $key The name of option.
-	 * @param   string $value The value of the option.
+	 * @param string $key   The name of option.
+	 * @param string $value The value of the option.
 	 *
 	 * @return bool|mixed
 	 */

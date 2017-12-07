@@ -2,8 +2,8 @@
 /**
  * The public-facing functionality of the plugin.
  *
- * @link       https://themeisle.com/
- * @since      3.0.0
+ * @link  https://themeisle.com/
+ * @since 3.0.0
  *
  * @package    Wppr
  * @subpackage Wppr/public
@@ -21,41 +21,42 @@
  */
 class Wppr_Public {
 
+
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    3.0.0
-	 * @access   private
-	 * @var      string $plugin_name The ID of this plugin.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    3.0.0
-	 * @access   private
-	 * @var      string $version The current version of this plugin.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    string $version The current version of this plugin.
 	 */
 	private $version;
 
 	/**
 	 * Stores a WPPR_Review_Model object.
 	 *
-	 * @since   3.0.0
-	 * @access  private
-	 * @var WPPR_Review_Model $review The review model.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    WPPR_Review_Model $review The review model.
 	 */
 	private $review;
 
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   string $plugin_name The name of the plugin.
-	 * @param   string $version The version of this plugin.
+	 * @param string $plugin_name The name of the plugin.
+	 * @param string $version     The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
@@ -72,7 +73,6 @@ class Wppr_Public {
 	}
 
 	/**
-	 *
 	 * Load the review assets based on the context.
 	 *
 	 * @param WPPR_Review_Model $review Review model.
@@ -297,10 +297,10 @@ class Wppr_Public {
 	/**
 	 * Temporary methods
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   mixed $content The page content.
+	 * @param mixed $content The page content.
 	 *
 	 * @return mixed
 	 */
@@ -354,7 +354,7 @@ class Wppr_Public {
 		$sliders      = array();
 		foreach ( $option_names as $k => $value ) {
 			$sliders[] =
-				'<div class="wppr-comment-form-meta">
+			'<div class="wppr-comment-form-meta">
             <label for="wppr-slider-option-' . $k . '">' . $value . '</label>
             <input type="text" id="wppr-slider-option-' . $k . '" class="meta_option_input" value="" name="wppr-slider-option-' . $k . '" readonly="readonly">
             <div class="wppr-comment-meta-slider"></div>

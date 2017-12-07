@@ -2,8 +2,8 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       https://themeisle.com/
- * @since      3.0.0
+ * @link  https://themeisle.com/
+ * @since 3.0.0
  *
  * @package    WPPR
  * @subpackage WPPR/admin
@@ -21,31 +21,32 @@
  */
 class WPPR_Admin {
 
+
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    3.0.0
-	 * @access   private
-	 * @var      string $plugin_name The ID of this plugin.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    3.0.0
-	 * @access   private
-	 * @var      string $version The current version of this plugin.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    string $version The current version of this plugin.
 	 */
 	private $version;
 
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    3.0.0
+	 * @since 3.0.0
 	 *
-	 * @param      string $plugin_name The name of this plugin.
-	 * @param      string $version The version of this plugin.
+	 * @param string $plugin_name The name of this plugin.
+	 * @param string $version     The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
@@ -57,10 +58,10 @@ class WPPR_Admin {
 	/**
 	 * Register the stylesheets for the admin area.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   string $hook The hook used filter loaded styles.
+	 * @param string $hook The hook used filter loaded styles.
 	 */
 	public function enqueue_styles( $hook ) {
 
@@ -89,10 +90,10 @@ class WPPR_Admin {
 	/**
 	 * Register the JavaScript for the admin area.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   string $hook The hook used filter loaded scripts.
+	 * @param string $hook The hook used filter loaded scripts.
 	 */
 	public function enqueue_scripts( $hook ) {
 
@@ -123,8 +124,8 @@ class WPPR_Admin {
 	/**
 	 * Add admin menu items.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 */
 	public function menu_pages() {
 		add_menu_page(
@@ -148,8 +149,8 @@ class WPPR_Admin {
 	/**
 	 * Method to render settings page.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 */
 	public function page_settings() {
 		$model  = new WPPR_Options_Model();
@@ -160,8 +161,8 @@ class WPPR_Admin {
 	/**
 	 * Method to render up-sell page.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 */
 	public function page_upsell() {
 		$render = new WPPR_Admin_Render_Controller( $this->plugin_name, $this->version );
@@ -171,8 +172,8 @@ class WPPR_Admin {
 	/**
 	 * Method called from AJAX request to update options.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 */
 	public function update_options() {
 		$model = new WPPR_Options_Model();
@@ -198,8 +199,8 @@ class WPPR_Admin {
 	/**
 	 * Method called from AJAX request to populate categories of specified post types.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 */
 	public function get_categories() {
 		check_ajax_referer( WPPR_SLUG, 'nonce' );
@@ -213,8 +214,8 @@ class WPPR_Admin {
 	/**
 	 * Method that returns the categories of specified post types.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 */
 	public static function get_category_for_post_type( $post_type ) {
 		$categories = array();

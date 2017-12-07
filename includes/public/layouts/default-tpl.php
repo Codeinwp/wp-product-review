@@ -3,10 +3,10 @@
  * Legacy file used for assuring backwards compatibility with old pro version.
  *
  * @deprecated
- * @package WPPR
+ * @package    WPPR
  */
 ob_start();
-include_once WPPR_PATH . '/includes/public/layouts/default.php';
+require_once WPPR_PATH . '/includes/public/layouts/default.php';
 if ( ! isset( $output ) ) {
 	$output = '';
 }

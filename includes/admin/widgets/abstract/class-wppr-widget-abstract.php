@@ -2,24 +2,25 @@
 /**
  * The WPPR Widget Abstract Class.
  *
- * @package WPPR
+ * @package    WPPR
  * @subpackage Widget
- * @copyright   Copyright (c) 2017, Bogdan Preda
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since 3.0.0
+ * @copyright  Copyright (c) 2017, Bogdan Preda
+ * @license    http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since      3.0.0
  */
 
 /**
  * Class WPPR_Widget_Abstract
  */
 abstract class WPPR_Widget_Abstract extends WP_Widget {
+
 	const RESTRICT_TITLE_CHARS = 100;
 
 	/**
 	 * Method to load assets required for front end display.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 */
 	public function assets( $review_object ) {
 
@@ -38,19 +39,19 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 	/**
 	 * Load public assets specific to this widget.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 */
 	public abstract function load_assets();
 
 	/**
 	 * Method for displaying the widget on the front end.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   array $args Arguments for this method.
-	 * @param   array $instance Instance array for the widget.
+	 * @param array $args     Arguments for this method.
+	 * @param array $instance Instance array for the widget.
 	 *
 	 * @return array
 	 */
@@ -74,24 +75,24 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 		} else {
 			$instance['show_image'] = false;
 		}
-		// @codingStandardsIgnoreStart
-		if ( $instance['cwp_tp_category'] == 'All' ) {
-			$instance['cwp_tp_category'] = '';
-		}
-		if ( ! isset( $instance['cwp_tp_buynow'] ) ) {
-			$instance['cwp_tp_buynow'] = __( 'Buy Now', 'wp-product-review' );
-		}
-		if ( ! isset( $instance['cwp_tp_readreview'] ) ) {
-			$instance['cwp_tp_readreview'] = __( 'Read Review', 'wp-product-review' );
-		}
-		if ( ! isset( $instance['cwp_tp_layout'] ) ) {
-			$instance['cwp_tp_layout'] = 'default.php';
-		}
-		if ( ! isset( $instance['cwp_tp_rating_type'] ) ) {
-			$instance['cwp_tp_rating_type'] = 'round';
-		}
+     // @codingStandardsIgnoreStart
+     if ( $instance['cwp_tp_category'] == 'All' ) {
+            $instance['cwp_tp_category'] = '';
+     }
+     if ( ! isset( $instance['cwp_tp_buynow'] ) ) {
+            $instance['cwp_tp_buynow'] = __( 'Buy Now', 'wp-product-review' );
+     }
+     if ( ! isset( $instance['cwp_tp_readreview'] ) ) {
+            $instance['cwp_tp_readreview'] = __( 'Read Review', 'wp-product-review' );
+     }
+     if ( ! isset( $instance['cwp_tp_layout'] ) ) {
+            $instance['cwp_tp_layout'] = 'default.php';
+     }
+     if ( ! isset( $instance['cwp_tp_rating_type'] ) ) {
+            $instance['cwp_tp_rating_type'] = 'round';
+     }
 
-		// @codingStandardsIgnoreEnd
+     // @codingStandardsIgnoreEnd
 
 		return $instance;
 	}
@@ -99,10 +100,10 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 	/**
 	 * The admin widget form method.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   array $instance The instance array for this widget.
+	 * @param array $instance The instance array for this widget.
 	 *
 	 * @return array
 	 */
@@ -165,11 +166,11 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 	/**
 	 * Method to update widget data.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   array $new_instance The new instance array for the widget.
-	 * @param   array $old_instance The old instance array of the widget.
+	 * @param array $new_instance The new instance array for the widget.
+	 * @param array $old_instance The old instance array of the widget.
 	 *
 	 * @return array
 	 */
@@ -198,8 +199,8 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 	/**
 	 * Method for loading admin widget assets.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 */
 	public function adminAssets() {
 		if ( is_admin() ) {
@@ -228,8 +229,8 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 	/**
 	 * Load admin assets specific to this widget.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 */
 	public abstract function load_admin_assets();
 }
