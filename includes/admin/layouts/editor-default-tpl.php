@@ -76,8 +76,12 @@ $check = $review->is_active() ? 'yes' : 'no';
 						)
 					)
 					?>
+					<small class="size-text">
+						*<?php _e( 'The optimum size of the product image must be 600 x 600 px', 'wp-product-review' ); ?>
+					</small>
 					<small>
-						*<?php _e( 'If no image is provided, featured image is used', 'wp-product-review' ); ?></small>
+						*<?php _e( 'If no image is provided, featured image is used', 'wp-product-review' ); ?>
+					</small>
 				</li>
 				<li>
 							<span><?php _e( 'Product Image Click', 'wp-product-review' ); ?>

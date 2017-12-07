@@ -49,6 +49,10 @@ h4 {
 	padding-left: 144px;
 }
 
+.wppr-review-section .size-text {
+	padding-bottom: 0px;
+}
+
 #wppr-editor-new-link {
 	font-size: 20px;
 	font-weight: bold;
