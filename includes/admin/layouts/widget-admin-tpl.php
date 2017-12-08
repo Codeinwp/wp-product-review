@@ -2,11 +2,11 @@
 /**
  *  Widget layout for the admin dashboard.
  *
- * @package     WPPR
- * @subpackage  Layouts
- * @copyright   Copyright (c) 2017, Bogdan Preda
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       3.0.0
+ * @package    WPPR
+ * @subpackage Layouts
+ * @copyright  Copyright (c) 2017, Bogdan Preda
+ * @license    http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since      3.0.0
  */
 
 // @codingStandardsIgnoreStart
@@ -24,9 +24,9 @@
 	<select id="<?php echo $this->get_field_id( 'cwp_tp_post_types' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_post_types' ); ?>[]" class="wppr-chosen wppr-post-types" data-wppr-cat-combo="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>" multiple>
 	<?php
 		foreach( get_post_types( '', 'objects' ) as $post_type ) {
-	?>
-	<option value="<?php echo $post_type->name;?>" <?php echo in_array($post_type->name, $instance['cwp_tp_post_types']) ? 'selected' : '';?>><?php echo $post_type->label;?></option>
-	<?php
+         ?>
+             <option value="<?php echo $post_type->name;?>" <?php echo in_array($post_type->name, $instance['cwp_tp_post_types']) ? 'selected' : '';?>><?php echo $post_type->label;?></option>
+             <?php
 		}
 	?>
 	</select>
@@ -39,19 +39,19 @@
 		<option>All</option>
 		<?php 
 			if ( $all_cats ) {
-			foreach ( $all_cats as $post_type => $cats ) {
-		?>
-		<optgroup label='<?php echo $post_type;?>'>
-		<?php
-				foreach ( $cats as $k => $v ) {
-		?>
-<option value="<?php echo $k;?>" <?php selected($k, $instance['cwp_tp_category'])?>><?php echo $v;?></option>
-		<?php
-				}
-		?>
-		</optgroup>
-		<?php
-		}
+        foreach ( $all_cats as $post_type => $cats ) {
+              ?>
+                <optgroup label='<?php echo $post_type;?>'>
+                <?php
+              foreach ( $cats as $k => $v ) {
+                    ?>
+                    <option value="<?php echo $k;?>" <?php selected($k, $instance['cwp_tp_category'])?>><?php echo $v;?></option>
+                    <?php
+          }
+                ?>
+                </optgroup>
+                <?php
+                }
 			}
 		?>
 	</select>
@@ -63,9 +63,9 @@
 	$min		= 0;
 	$max		= 0;
 	if ( ! empty( $timespan ) && false !== $timespan ) {
-		$min_max	= explode( ',', $timespan );
-		$min		= reset( $min_max );
-		$max		= end( $min_max );
+        $min_max	= explode( ',', $timespan );
+        $min		= reset( $min_max );
+        $max		= end( $min_max );
 		}
 ?>
 <p>
@@ -86,20 +86,20 @@
 	$layouts            = array();
 	$customLayoutFiles  = glob( WPPR_PATH . '/includes/public/layouts/widget/*.php' );
 	foreach ( $customLayoutFiles as $file ) {
-		$layouts[ basename( $file ) ] = ucwords( basename( $file, '.php' ) );
+        $layouts[ basename( $file ) ] = ucwords( basename( $file, '.php' ) );
 	}
 	foreach ( $layouts as $key => $val ) :
-		$extra      = '';
-		if ( $key == $cwp_tp_layout ) { $extra = 'checked'; }
-		$styleName  = strtolower( str_replace( ' ', '', $val ) );
-		$id         = $this->get_field_id( $styleName );
-		?>
-		<br>
-		<input type="radio" name="<?php echo $this->get_field_name( 'cwp_tp_layout' ); ?>" value="<?php echo $key;?>" id="<?php echo $id . 'style'?>" <?php echo $extra;?> class="wppr-stylestyle"><label for="<?php echo $id . 'style';?>" class="wppr-stylestyle"><?php echo $val;?></label>
-		<span class="wppr-styleimg" id="<?php echo $id . 'style'?>img">
-			<img src="<?php echo WPPR_URL . '/assets/img/' . $styleName . '.png';?>">
-		</span>
-		<?php
+        $extra      = '';
+        if ( $key == $cwp_tp_layout ) { $extra = 'checked'; }
+        $styleName  = strtolower( str_replace( ' ', '', $val ) );
+        $id         = $this->get_field_id( $styleName );
+        ?>
+        <br>
+        <input type="radio" name="<?php echo $this->get_field_name( 'cwp_tp_layout' ); ?>" value="<?php echo $key;?>" id="<?php echo $id . 'style'?>" <?php echo $extra;?> class="wppr-stylestyle"><label for="<?php echo $id . 'style';?>" class="wppr-stylestyle"><?php echo $val;?></label>
+        <span class="wppr-styleimg" id="<?php echo $id . 'style'?>img">
+         <img src="<?php echo WPPR_URL . '/assets/img/' . $styleName . '.png';?>">
+        </span>
+        <?php
 	endforeach;
 	?>
 </p>

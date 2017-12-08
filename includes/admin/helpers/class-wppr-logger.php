@@ -2,11 +2,11 @@
 /**
  * WPPR Logger Controller
  *
- * @package     WPPR
- * @subpackage  Helpers
- * @copyright   Copyright (c) 2017, Bogdan Preda
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       3.0.0
+ * @package    WPPR
+ * @subpackage Helpers
+ * @copyright  Copyright (c) 2017, Bogdan Preda
+ * @license    http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since      3.0.0
  */
 
 /**
@@ -14,13 +14,14 @@
  */
 class WPPR_Logger {
 
+
 	/**
 	 * Report a message as warning.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   string $msg The message to report.
+	 * @param string $msg The message to report.
 	 */
 	public function warning( $msg = '' ) {
 		$this->message( $msg, 'warning' );
@@ -29,11 +30,11 @@ class WPPR_Logger {
 	/**
 	 * Report a message as error|warning|notice.
 	 *
-	 * @since   3.0.0
-	 * @access  private
+	 * @since  3.0.0
+	 * @access private
 	 *
-	 * @param   string $msg The message.
-	 * @param   string $type The type of the message.
+	 * @param string $msg  The message.
+	 * @param string $type The type of the message.
 	 */
 	private function message( $msg, $type ) {
 
@@ -58,10 +59,10 @@ class WPPR_Logger {
 	/**
 	 * The error msg to report.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   string $msg The error msg.
+	 * @param string $msg The error msg.
 	 */
 	public function error( $msg = '' ) {
 		$this->message( $msg, 'error' );
@@ -70,10 +71,10 @@ class WPPR_Logger {
 	/**
 	 * Report a message as notice.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   string $msg The message to report as notice.
+	 * @param string $msg The message to report as notice.
 	 */
 	public function notice( $msg = '' ) {
 		$this->message( $msg, 'notice' );

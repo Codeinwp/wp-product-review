@@ -2,8 +2,8 @@
 /**
  * Fired during plugin activation
  *
- * @link       https://themeisle.com/
- * @since      3.0.0
+ * @link  https://themeisle.com/
+ * @since 3.0.0
  *
  * @package    WPPR
  * @subpackage WPPR/includes
@@ -21,12 +21,13 @@
  */
 class WPPR_Activator {
 
+
 	/**
 	 * Short Description. (use period)
 	 *
 	 * Long Description.
 	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
 	 */
 	public static function activate() {
 

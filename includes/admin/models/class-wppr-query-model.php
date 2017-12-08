@@ -3,8 +3,8 @@
  * The file that defines a model class for easier access to DB
  * functionality, an abstract layer for core and addons to use.
  *
- * @link       https://themeisle.com
- * @since      2.0.0
+ * @link  https://themeisle.com
+ * @since 2.0.0
  *
  * @package    WPPR_Pro
  * @subpackage WPPR_Pro/includes/models
@@ -15,35 +15,36 @@
  *
  * A model class for abstracting DB actions.
  *
- * @since       2.0.0
- * @package     WPPR_Pro
- * @subpackage  WPPR_Pro/includes/model
+ * @since      2.0.0
+ * @package    WPPR_Pro
+ * @subpackage WPPR_Pro/includes/model
  */
 class WPPR_Query_Model extends WPPR_Model_Abstract {
+
 
 	/**
 	 * Holds an instance of WPPR_Review_Model
 	 *
-	 * @since   2.0.0
-	 * @access  protected
-	 * @var     WPPR_Review_Model $review Holds an instance of WPPR_Review_Model.
+	 * @since  2.0.0
+	 * @access protected
+	 * @var    WPPR_Review_Model $review Holds an instance of WPPR_Review_Model.
 	 */
 	protected $review;
 
 	/**
 	 * Holds an instance of the WP DB Object
 	 *
-	 * @since   2.0.0
-	 * @access  private
-	 * @var     WPDB $db Holds an instance of the WP DB Object.
+	 * @since  2.0.0
+	 * @access private
+	 * @var    WPDB $db Holds an instance of the WP DB Object.
 	 */
 	private $db;
 
 	/**
 	 * WPPR_Pro_Model constructor.
 	 *
-	 * @since   2.0.0
-	 * @access  public
+	 * @since  2.0.0
+	 * @access public
 	 */
 	public function __construct() {
 		parent::__construct();
@@ -55,13 +56,13 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	/**
 	 * Utility method to return products by category ID.
 	 *
-	 * @since   2.0.0
-	 * @access  public
+	 * @since  2.0.0
+	 * @access public
 	 *
-	 * @param   int         $cat_id The category ID.
-	 * @param   int         $limit Optional. The results limit.
-	 * @param   array|false $filter Optional. The filter array.
-	 * @param   array|false $order Optional. The order array.
+	 * @param int         $cat_id The category ID.
+	 * @param int         $limit  Optional. The results limit.
+	 * @param array|false $filter Optional. The filter array.
+	 * @param array|false $order  Optional. The order array.
 	 *
 	 * @return array
 	 */
@@ -76,13 +77,13 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	/**
 	 * Mai utility method to retrive an array of products.
 	 *
-	 * @since   2.0.0
-	 * @access  public
+	 * @since  2.0.0
+	 * @access public
 	 *
-	 * @param   array|false $post The post data to filter by.
-	 * @param   int         $limit The limit for the returned results.
-	 * @param   array|false $filter The fields to filter data by.
-	 * @param   array|false $order The fields to order by and the order.
+	 * @param array|false $post   The post data to filter by.
+	 * @param int         $limit  The limit for the returned results.
+	 * @param array|false $filter The fields to filter data by.
+	 * @param array|false $order  The fields to order by and the order.
 	 *
 	 * @return array
 	 */
@@ -174,10 +175,10 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	/**
 	 * Build the sub query.
 	 *
-	 * @since   2.0.0
-	 * @access  private
+	 * @since  2.0.0
+	 * @access private
 	 *
-	 * @param   array|false $post The post data to filter by.
+	 * @param array|false $post The post data to filter by.
 	 *
 	 * @return string
 	 */
@@ -197,10 +198,10 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	/**
 	 * Build the order by query part.
 	 *
-	 * @since   2.0.0
-	 * @access  private
+	 * @since  2.0.0
+	 * @access private
 	 *
-	 * @param   array|false $order The fields to order by and the order.
+	 * @param array|false $order The fields to order by and the order.
 	 *
 	 * @return string
 	 */
@@ -223,11 +224,11 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	/**
 	 * Build the query conditions.
 	 *
-	 * @since   2.0.0
-	 * @access  private
+	 * @since  2.0.0
+	 * @access private
 	 *
-	 * @param   array|false $post The fields to filter data by.
-	 * @param   array|false $filter The post details to filter data by.
+	 * @param array|false $post   The fields to filter data by.
+	 * @param array|false $filter The post details to filter data by.
 	 *
 	 * @return array
 	 */
@@ -253,10 +254,10 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	/**
 	 * Build the sub query conditions.
 	 *
-	 * @since   2.0.0
-	 * @access  private
+	 * @since  2.0.0
+	 * @access private
 	 *
-	 * @param   array|false $post The post data to filter by.
+	 * @param array|false $post The post data to filter by.
 	 *
 	 * @return string
 	 */
@@ -289,13 +290,13 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	/**
 	 * Utility method to return products by category name.
 	 *
-	 * @since   2.0.0
-	 * @access  public
+	 * @since  2.0.0
+	 * @access public
 	 *
-	 * @param   string      $category The category name.
-	 * @param   int         $limit Optional. The results limit.
-	 * @param   array|false $filter Optional. The filter array.
-	 * @param   array|false $order Optional. The order array.
+	 * @param string      $category The category name.
+	 * @param int         $limit    Optional. The results limit.
+	 * @param array|false $filter   Optional. The filter array.
+	 * @param array|false $order    Optional. The order array.
 	 *
 	 * @return array
 	 */
@@ -310,11 +311,11 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	/**
 	 * Utility method to find a product or more by name.
 	 *
-	 * @since   2.0.0
-	 * @access  public
+	 * @since  2.0.0
+	 * @access public
 	 *
-	 * @param   string $name The name to look for.
-	 * @param   int    $limit Optional. The results limit.
+	 * @param string $name  The name to look for.
+	 * @param int    $limit Optional. The results limit.
 	 *
 	 * @return array
 	 */
@@ -329,11 +330,11 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	/**
 	 * Utility method to find a product or more by price.
 	 *
-	 * @since   2.0.0
-	 * @access  public
+	 * @since  2.0.0
+	 * @access public
 	 *
-	 * @param   float|int $price The price to look for.
-	 * @param   int       $limit Optional. The results limit.
+	 * @param float|int $price The price to look for.
+	 * @param int       $limit Optional. The results limit.
 	 *
 	 * @return array
 	 */
@@ -348,11 +349,11 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	/**
 	 * Utility method to find a product or more by price.
 	 *
-	 * @since   2.0.0
-	 * @access  public
+	 * @since  2.0.0
+	 * @access public
 	 *
-	 * @param   float|int $rating The rating to look for.
-	 * @param   int       $limit Optional. The results limit.
+	 * @param float|int $rating The rating to look for.
+	 * @param int       $limit  Optional. The results limit.
 	 *
 	 * @return array
 	 */

@@ -2,11 +2,11 @@
 /**
  * Model responsible for the reviews in WPPR.
  *
- * @package     WPPR
- * @subpackage  Models
- * @copyright   Copyright (c) 2017, Marius Cristea
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       3.0.0
+ * @package    WPPR
+ * @subpackage Models
+ * @copyright  Copyright (c) 2017, Marius Cristea
+ * @license    http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since      3.0.0
  */
 
 // Exit if accessed directly
@@ -21,127 +21,128 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class WPPR_Review_Model extends WPPR_Model_Abstract {
 
+
 	/**
 	 * The review ID.
 	 *
-	 * @since   3.0.0
-	 * @access  private
-	 * @var int $ID The review id.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    int $ID The review id.
 	 */
 	private $ID = 0;
 
 	/**
 	 * The overall score of the review.
 	 *
-	 * @since   3.0.0
-	 * @access  private
-	 * @var float $score The overall score of the review.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    float $score The overall score of the review.
 	 */
 	private $score = 0;
 
 	/**
 	 * If the review is active or not.
 	 *
-	 * @since   3.0.0
-	 * @access  private
-	 * @var bool $is_active If the review is active or not.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    bool $is_active If the review is active or not.
 	 */
 	private $is_active = false;
 
 	/**
 	 * Array containg the list of pros for the review.
 	 *
-	 * @since   3.0.0
-	 * @access  private
-	 * @var array $pros The list of pros.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    array $pros The list of pros.
 	 */
 	private $pros = array();
 
 	/**
 	 * The array containg the list of cons for the review.
 	 *
-	 * @since   3.0.0
-	 * @access  private
-	 * @var array $cons The list of cons.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    array $cons The list of cons.
 	 */
 	private $cons = array();
 
 	/**
 	 * The review title.
 	 *
-	 * @since   3.0.0
-	 * @access  private
-	 * @var string $name The review title.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    string $name The review title.
 	 */
 	private $name = '';
 
 	/**
 	 * The url of the image used in the review.
 	 *
-	 * @since   3.0.0
-	 * @access  private
-	 * @var array $image The urls of the images used.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    array $image The urls of the images used.
 	 */
 	private $image = '';
 
 	/**
 	 * The click behaviour.
 	 *
-	 * @since   3.0.0
-	 * @access  private
-	 * @var string $click The click behaviour.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    string $click The click behaviour.
 	 */
 	private $click = '';
 
 	/**
 	 * The list of links as url=>link_title
 	 *
-	 * @since   3.0.0
-	 * @access  private
-	 * @var array $links The list of links from the review
+	 * @since  3.0.0
+	 * @access private
+	 * @var    array $links The list of links from the review
 	 */
 	private $links = array();
 
 	/**
 	 * The price of the product reviewed.
 	 *
-	 * @since   3.0.0
-	 * @access  private
-	 * @var string $price The price of the product reviewed.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    string $price The price of the product reviewed.
 	 */
 	private $price = '0.00';
 	/**
 	 * The price raw of the product reviewed.
 	 *
-	 * @since   3.0.0
-	 * @access  private
-	 * @var string $price The price raw of the product reviewed containg currency and value.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    string $price The price raw of the product reviewed containg currency and value.
 	 */
 	private $price_raw = '0.00';
 
 	/**
 	 * The price currency of the product reviewed.
 	 *
-	 * @since   3.0.0
-	 * @access  private
-	 * @var string $price The currency of the product reviewed.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    string $price The currency of the product reviewed.
 	 */
 	private $currency = '$';
 
 	/**
 	 * An array keeping the list of options for the product reviewed.
 	 *
-	 * @since   3.0.0
-	 * @access  private
-	 * @var array $options The options of the product reviewed.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    array $options The options of the product reviewed.
 	 */
 	private $options = array();
 
 	/**
 	 * WPPR_Review constructor.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
 	 * @param mixed $review_id The review id.
 	 */
@@ -189,8 +190,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Check if post record exists with that id.
 	 *
-	 * @since   3.0.0
-	 * @access  private
+	 * @since  3.0.0
+	 * @access private
 	 *
 	 * @param string $review_id The review id to check.
 	 *
@@ -203,8 +204,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Setup the review status.
 	 *
-	 * @since   3.0.0
-	 * @access  private
+	 * @since  3.0.0
+	 * @access private
 	 */
 	private function setup_status() {
 		$status = get_post_meta( $this->ID, 'cwp_meta_box_check', true );
@@ -218,8 +219,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Check if review is active or not.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return bool
 	 */
 	public function is_active() {
@@ -229,8 +230,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Setup the price of the review.
 	 *
-	 * @since   3.0.0
-	 * @access  private
+	 * @since  3.0.0
+	 * @access private
 	 */
 	private function setup_price() {
 		$price           = get_post_meta( $this->ID, 'cwp_rev_price', true );
@@ -244,8 +245,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Format a string to a currency format.
 	 *
-	 * @since   3.0.0
-	 * @access  private
+	 * @since  3.0.0
+	 * @access private
 	 *
 	 * @param string $string The currency for the price.
 	 *
@@ -260,8 +261,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Format a string to a price format.
 	 *
-	 * @since   3.0.0
-	 * @access  private
+	 * @since  3.0.0
+	 * @access private
 	 *
 	 * @param string $string The string for the price.
 	 *
@@ -276,8 +277,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Setup the name of the review.
 	 *
-	 * @since   3.0.0
-	 * @access  private
+	 * @since  3.0.0
+	 * @access private
 	 */
 	private function setup_name() {
 		$name       = get_post_meta( $this->ID, 'cwp_rev_product_name', true );
@@ -287,8 +288,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Setup the link behaviour
 	 *
-	 * @since   3.0.0
-	 * @access  private
+	 * @since  3.0.0
+	 * @access private
 	 */
 	private function setup_click() {
 		$click = get_post_meta( $this->ID, 'cwp_image_link', true );
@@ -300,8 +301,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Setup the image url.
 	 *
-	 * @since   3.0.0
-	 * @access  private
+	 * @since  3.0.0
+	 * @access private
 	 */
 	private function setup_image() {
 		$image = get_post_meta( $this->ID, 'cwp_rev_product_image', true );
@@ -314,8 +315,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Setup the links array.
 	 *
-	 * @since   3.0.0
-	 * @access  private
+	 * @since  3.0.0
+	 * @access private
 	 */
 	private function setup_links() {
 		$link_text                 = get_post_meta( $this->ID, 'cwp_product_affiliate_text', true );
@@ -333,8 +334,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Setup the pros and cons array.
 	 *
-	 * @since   3.0.0
-	 * @access  private
+	 * @since  3.0.0
+	 * @access private
 	 */
 	private function setup_pros_cons() {
 		$options_nr = $this->wppr_get_option( 'cwppos_option_nr' );
@@ -368,8 +369,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Setup the options array.
 	 *
-	 * @since   3.0.0
-	 * @access  private
+	 * @since  3.0.0
+	 * @access private
 	 */
 	private function setup_options() {
 		$options    = array();
@@ -394,8 +395,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Calculate the review rating.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 */
 	public function count_rating() {
 		$values      = wp_list_pluck( $this->options, 'value' );
@@ -407,7 +408,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Alter options based on user influence.
 	 *
-	 * @access  private
+	 * @access private
 	 */
 	private function alter_options() {
 		$comment_influence = intval( $this->wppr_get_option( 'cwppos_infl_userreview' ) );
@@ -486,10 +487,10 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Return the options values and names associated with the comment.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   int $comment_id The comment id.
+	 * @param int $comment_id The comment id.
 	 *
 	 * @return array
 	 */
@@ -524,7 +525,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Add backward compatibility so that when a review is viewed, its meta data can be updated.
 	 *
-	 * @access  private
+	 * @access private
 	 */
 	private function backward_compatibility() {
 		$comment_influence = intval( $this->wppr_get_option( 'cwppos_infl_userreview' ) );
@@ -541,8 +542,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Get comments rating.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return float|int
 	 */
 	public function get_comments_rating() {
@@ -582,8 +583,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Return the review id.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return int
 	 */
 	public function get_ID() {
@@ -593,8 +594,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Deactivate the review.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 */
 	public function deactivate() {
 		if ( $this->is_active === false ) {
@@ -611,8 +612,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Activate the review.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 */
 	public function activate() {
 		if ( $this->is_active === true ) {
@@ -628,8 +629,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Method to retrieve the review model data as an array.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return array
 	 */
 	public function get_review_data() {
@@ -658,8 +659,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Return the review name.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return string
 	 */
 	public function get_name() {
@@ -669,10 +670,10 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Setter method for saving the review name.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   string $name The new review name.
+	 * @param string $name The new review name.
 	 *
 	 * @return bool
 	 */
@@ -690,8 +691,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Returns the review price.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return string
 	 */
 	public function get_price() {
@@ -701,10 +702,10 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Setup the new price.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   string $price The new price.
+	 * @param string $price The new price.
 	 *
 	 * @return bool
 	 */
@@ -728,8 +729,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Returns the raw price.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return string
 	 */
 	public function get_price_raw() {
@@ -739,8 +740,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Returns the currency price.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return string
 	 */
 	public function get_currency() {
@@ -750,8 +751,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Return the click behaviour.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return string
 	 */
 	public function get_click() {
@@ -761,8 +762,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Setter for click behaviour.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
 	 * @param string $click The new click behaviour.
 	 *
@@ -787,8 +788,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Get the list of images for the review.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return array
 	 */
 	public function get_image() {
@@ -798,10 +799,10 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Set the new image url.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   string $image The new image url.
+	 * @param string $image The new image url.
 	 *
 	 * @return bool
 	 */
@@ -821,8 +822,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Return the url of the thumbnail.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return string
 	 */
 	public function get_small_thumbnail() {
@@ -847,8 +848,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Return the rating of the review.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return float
 	 */
 	public function get_rating() {
@@ -868,8 +869,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Getter for the pros array.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return array
 	 */
 	public function get_pros() {
@@ -879,10 +880,10 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Update the pros array.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   array|string $pros The pros array or string to add.
+	 * @param array|string $pros The pros array or string to add.
 	 *
 	 * @return bool
 	 */
@@ -906,8 +907,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Getter for the cons array.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return array
 	 */
 	public function get_cons() {
@@ -917,10 +918,10 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Update the cons array.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   array|string $cons The cons array or string to add.
+	 * @param array|string $cons The cons array or string to add.
 	 *
 	 * @return bool
 	 */
@@ -945,8 +946,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Return the options array of the review.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return array
 	 */
 	public function get_options() {
@@ -973,10 +974,10 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 *      )
 	 *  )
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   array $options The options array.
+	 * @param array $options The options array.
 	 *
 	 * @return bool
 	 */
@@ -1015,8 +1016,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Return the list of links in url=>text format.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return array
 	 */
 	public function get_links() {
@@ -1027,10 +1028,10 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	/**
 	 * Save the links array ( url=>title ) to the postmeta.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   array $links The new links array.
+	 * @param array $links The new links array.
 	 *
 	 * @return bool Either was saved or not.
 	 */

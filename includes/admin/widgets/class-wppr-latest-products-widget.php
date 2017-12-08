@@ -2,11 +2,11 @@
 /**
  * The WPPR Latest Widget Class.
  *
- * @package WPPR
+ * @package    WPPR
  * @subpackage Widget
- * @copyright   Copyright (c) 2017, Bogdan Preda
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since 3.0.0
+ * @copyright  Copyright (c) 2017, Bogdan Preda
+ * @license    http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since      3.0.0
  */
 
 /**
@@ -14,11 +14,12 @@
  */
 class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 
+
 	/**
 	 * WPPR_Latest_Products_Widget constructor.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 */
 	public function __construct() {
 		parent::__construct(
@@ -33,8 +34,8 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 	/**
 	 * Method to register the widget.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 */
 	public function register() {
 		register_widget( 'WPPR_Latest_Products_Widget' );
@@ -43,11 +44,11 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 	/**
 	 * Method for displaying the widget on the front end.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   array $args Arguments for this method.
-	 * @param   array $instance Instance array for the widget.
+	 * @param array $args     Arguments for this method.
+	 * @param array $instance Instance array for the widget.
 	 *
 	 * @return mixed
 	 */
@@ -93,10 +94,10 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 	/**
 	 * The admin widget form method.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   array $instance The instance array for this widget.
+	 * @param array $instance The instance array for this widget.
 	 *
 	 * @return mixed
 	 */
@@ -108,14 +109,14 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 
 		$instance = parent::form( $instance );
 
-		include( WPPR_PATH . '/includes/admin/layouts/widget-admin-tpl.php' );
+		include WPPR_PATH . '/includes/admin/layouts/widget-admin-tpl.php';
 	}
 
 	/**
 	 * Load public assets specific to this widget.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 */
 	public function load_assets() {
 		// empty.
@@ -124,8 +125,8 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 	/**
 	 * Load admin assets specific to this widget.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 */
 	public function load_admin_assets() {
 		// empty.

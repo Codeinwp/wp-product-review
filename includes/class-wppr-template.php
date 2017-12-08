@@ -3,12 +3,13 @@
 /**
  * Implements templating behaviour in WPPR.
  *
- * @package     WPPR
- * @copyright   Copyright (c) 2017, Marius Cristea
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       3.0.10
+ * @package   WPPR
+ * @copyright Copyright (c) 2017, Marius Cristea
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     3.0.10
  */
 class WPPR_Template {
+
 	/**
 	 * Directories where to search in.
 	 *
@@ -41,8 +42,8 @@ class WPPR_Template {
 	 * Render the template file.
 	 *
 	 * @param string $template Template name.
-	 * @param array  $args Args of variable to load.
-	 * @param bool   $echo Either to echo or return content.
+	 * @param array  $args     Args of variable to load.
+	 * @param bool   $echo     Either to echo or return content.
 	 *
 	 * @return string Return template content.
 	 */
@@ -64,7 +65,7 @@ class WPPR_Template {
 		$content   = wp_cache_get( $cache_key, 'wppr' );
 		if ( empty( $content ) ) {
 			ob_start();
-			require( $location );
+			include $location;
 			$content = ob_get_contents();
 			ob_end_clean();
 

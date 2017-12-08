@@ -2,11 +2,11 @@
 /**
  * The main loader file for wppr.
  *
- * @package WPPR
+ * @package    WPPR
  * @subpackage Settings
- * @copyright   Copyright (c) 2017, Marius Cristea
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since 3.0.0
+ * @copyright  Copyright (c) 2017, Marius Cristea
+ * @license    http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since      3.0.0
  */
 
 // Exit if accessed directly.
@@ -18,30 +18,31 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class WPPR_Global_Settings for handling global options.
  */
 class WPPR_Global_Settings {
+
 	/**
 	 * The main instance var.
 	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @var WPPR_Global_Settings The one WPPR_Global_Settings istance.
+	 * @since  3.0.0
+	 * @access public
+	 * @var    WPPR_Global_Settings The one WPPR_Global_Settings istance.
 	 */
 	public static $instance;
 
 	/**
 	 * Stores the default fields data.
 	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @var array|mixed|void $fields Options fields.
+	 * @since  3.0.0
+	 * @access public
+	 * @var    array|mixed|void $fields Options fields.
 	 */
 	public $fields = array();
 
 	/**
 	 * Stores the sections for the settings page.
 	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @var array|mixed|void $sections Sections of the admin page.
+	 * @since  3.0.0
+	 * @access public
+	 * @var    array|mixed|void $sections Sections of the admin page.
 	 */
 	public $sections = array();
 
@@ -49,8 +50,8 @@ class WPPR_Global_Settings {
 	 * The instance method for the static class.
 	 * Defines and returns the instance of the static class.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return WPPR_Global_Settings
 	 */
 	public static function instance() {
@@ -363,8 +364,8 @@ class WPPR_Global_Settings {
 	/**
 	 * Return the section array.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return array
 	 */
 	public function get_sections() {
@@ -374,8 +375,8 @@ class WPPR_Global_Settings {
 	/**
 	 * Return the fields array.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return array
 	 */
 	public function get_fields() {
@@ -385,8 +386,8 @@ class WPPR_Global_Settings {
 	/**
 	 * Return a filterd array based on sections value.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return array
 	 */
 	public function get_filtered_fields() {

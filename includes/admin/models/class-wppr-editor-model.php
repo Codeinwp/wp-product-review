@@ -4,11 +4,11 @@
  *
  * Long desc
  *
- * @package     WPPR
- * @subpackage  WPPR_Editor
- * @copyright   Copyright (c) 2017, Marius Cristea
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       3.0.0
+ * @package    WPPR
+ * @subpackage WPPR_Editor
+ * @copyright  Copyright (c) 2017, Marius Cristea
+ * @license    http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since      3.0.0
  */
 
 /**
@@ -18,49 +18,50 @@
  */
 class WPPR_Editor_Model extends WPPR_Model_Abstract {
 
+
 	/**
 	 * The WP_Post object.
 	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @var WP_Post $post The WordPress post object.
+	 * @since  3.0.0
+	 * @access public
+	 * @var    WP_Post $post The WordPress post object.
 	 */
 	public $post;
 
 	/**
 	 * The WPPR_Review object.
 	 *
-	 * @since   3.0.0
-	 * @access  public
-	 * @var WPPR_Review $review The Review Model class.
+	 * @since  3.0.0
+	 * @access public
+	 * @var    WPPR_Review $review The Review Model class.
 	 */
 	public $review;
 
 	/**
 	 * The last review id saved.
 	 *
-	 * @since   3.0.0
-	 * @access  private
-	 * @var int $previous The previous review id.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    int $previous The previous review id.
 	 */
 	private $previous;
 
 	/**
 	 * The template to use for this editor.
 	 *
-	 * @since   3.0.0
-	 * @access  private
-	 * @var string $template_to_use The template name or path for this editor.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    string $template_to_use The template name or path for this editor.
 	 */
 	private $template_to_use = 'editor-default';
 
 	/**
 	 * WPPR_Default_Editor constructor.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   WP_Post $post The post object.
+	 * @param WP_Post $post The post object.
 	 */
 	public function __construct( $post ) {
 		parent::__construct();
@@ -80,8 +81,8 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 	/**
 	 * Method to get the template needed for this editor.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return string
 	 */
 	public function get_template() {
@@ -91,10 +92,10 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 	/**
 	 * Retrive the smart values based on the last saved review.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   string $key The field name.
+	 * @param string $key The field name.
 	 *
 	 * @return string
 	 */
@@ -129,7 +130,7 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 				}
 
 				return '';
-				break;
+			break;
 			case ( strpos( $key, 'wppr-option-name-' ) !== false ):
 			case ( strpos( $key, 'wppr-option-value-' ) !== false ):
 				$options = array();
@@ -147,7 +148,7 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 				$type      = $parts[ count( $parts ) - 2 ];
 
 				return isset( $options[ $index ] ) ? $options[ $index ][ $type ] : '';
-				break;
+			break;
 			case ( $key === 'wppr-editor-link' ):
 				if ( $this->review->is_active() ) {
 					return $this->review->get_click();
@@ -158,7 +159,7 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 				}
 
 				return 'image';
-				break;
+			break;
 			default:
 				return '';
 		}// End switch().
@@ -167,8 +168,8 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 	/**
 	 * Save the editor data.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 */
 	public function save() {
 		$data = $_POST;
@@ -242,8 +243,8 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 	/**
 	 * Method to retrieve editor model assets.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 * @return array
 	 */
 	public function get_assets() {

@@ -2,12 +2,12 @@
 /**
  *  WPPR front page layout.
  *
- * @package     WPPR
- * @subpackage  Layouts
- * @global      WPPR_Review_Model $review_object The inherited review object.
- * @copyright   Copyright (c) 2017, Bogdan Preda
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       3.0.0
+ * @package    WPPR
+ * @subpackage Layouts
+ * @global     WPPR_Review_Model $review_object The inherited review object.
+ * @copyright  Copyright (c) 2017, Bogdan Preda
+ * @license    http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since      3.0.0
  */
 
 $price_raw = $review_object->get_price_raw();
@@ -63,83 +63,83 @@ $cons = $review_object->get_cons();
 					</div><!-- end .review-wu-left-top -->
 
 					<div class="review-wu-bars">
-						<?php
-						foreach ( $review_object->get_options() as $option ) {
+		<?php
+		foreach ( $review_object->get_options() as $option ) {
 
-							?>
-							<div class="rev-option" data-value="
-							<?php echo $option['value']; ?>">
+			?>
+		 <div class="rev-option" data-value="
+			<?php echo $option['value']; ?>">
 								<div class="cwpr_clearfix">
 									<h3><?php echo esc_html( apply_filters( 'wppr_option_name_html', $option['name'] ) ); ?></h3>
 									<span><?php echo esc_html( number_format( ( $option['value'] / 10 ), 1 ) ); ?>/10 </span>
 								</div>
 								<ul class="cwpr_clearfix <?php echo $review_object->get_rating_class( $option['value'] ) . apply_filters( 'wppr_option_custom_icon', '' ); ?>">
-									<?php for ( $i = 1; $i <= 10; $i++ ) { ?>
+			<?php for ( $i = 1; $i <= 10; $i++ ) { ?>
 										<li
-										<?php
-										echo $i <= round( $option['value'] / 10 ) ? ' class="colored"' : '';
-										?>
+			<?php
+			echo $i <= round( $option['value'] / 10 ) ? ' class="colored"' : '';
+			?>
 										></li>
-									<?php } ?>
-								</ul>
-							</div>
-							<?php } ?>
+			<?php } ?>
+		  </ul>
+		 </div>
+		<?php } ?>
 					</div><!-- end .review-wu-bars -->
 				</div><!-- end .review-wu-left -->
 
 				<?php if ( ! empty( $pros ) || ! empty( $cons ) ) : ?>
 					<div class="review-wu-right">
-						<?php if ( ! empty( $pros ) ) : ?>
+		<?php if ( ! empty( $pros ) ) : ?>
 							<div class="pros">
 								<h2>
-									<?php
-									echo esc_html(
-										apply_filters(
-											'wppr_review_pros_text', $review_object->wppr_get_option(
-												'cwppos_pros_text'
-											)
-										)
-									);
-									?>
+			<?php
+			echo esc_html(
+				apply_filters(
+					'wppr_review_pros_text', $review_object->wppr_get_option(
+						'cwppos_pros_text'
+					)
+				)
+			);
+			?>
 								</h2>
 								<ul>
-									<?php
-									foreach ( $pros as $pro ) {
-										?>
-										<li><?php echo esc_html( $pro ); ?></li>
-										<?php
-									}
-									?>
+			<?php
+			foreach ( $pros as $pro ) {
+				?>
+			 <li><?php echo esc_html( $pro ); ?></li>
+				<?php
+			}
+			?>
 								</ul>
 							</div><!-- end .pros -->
-						<?php
-						endif;
+		<?php
+		endif;
 if ( ! empty( $cons ) ) :
 				?>
 					<div class="cons">
 						<h2>
-							<?php
-							echo esc_html(
-								apply_filters(
-									'wppr_review_cons_text', $review_object->wppr_get_option(
-										'cwppos_cons_text'
-									)
-								)
-							);
+		<?php
+		echo esc_html(
+			apply_filters(
+				'wppr_review_cons_text', $review_object->wppr_get_option(
+					'cwppos_cons_text'
+				)
+			)
+		);
 				?>
 			</h2>
 			<ul>
 				<?php
 				foreach ( $cons as $con ) {
-					?>
+		?>
 
 					<li><?php echo esc_html( $con ); ?></li>
 
-									<?php } ?>
+				<?php } ?>
 			</ul>
 		</div>
 
-	<?php endif; ?>
+<?php endif; ?>
 					</div><!-- end .review-wu-right -->
 				<?php endif; ?>
 			</div><!-- end .review-wu-content -->
@@ -149,10 +149,10 @@ if ( ! empty( $cons ) ) :
 	foreach ( $links as $title => $link ) {
 		if ( ! empty( $title ) && ! empty( $link ) ) {
 			?>
-			<div class="<?php echo esc_attr( $multiple_affiliates_class ); ?>">
+		 <div class="<?php echo esc_attr( $multiple_affiliates_class ); ?>">
 				<a href="<?php echo esc_url( $link ); ?>" rel="nofollow"
 				   target="_blank"><span><?php echo esc_html( $title ); ?></span> </a>
-			</div><!-- end .affiliate-button -->
+		 </div><!-- end .affiliate-button -->
 			<?php
 		}
 	}

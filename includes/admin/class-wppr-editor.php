@@ -2,11 +2,11 @@
 /**
  *  Up-sell layout in the admin dashboard.
  *
- * @package     WPPR
- * @subpackage  Admin
- * @copyright   Copyright (c) 2017, Marius Cristea
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       3.0.0
+ * @package    WPPR
+ * @subpackage Admin
+ * @copyright  Copyright (c) 2017, Marius Cristea
+ * @license    http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since      3.0.0
  */
 
 /**
@@ -14,31 +14,32 @@
  */
 class WPPR_Editor {
 
+
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    3.0.0
-	 * @access   private
-	 * @var      string $plugin_name The ID of this plugin.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    3.0.0
-	 * @access   private
-	 * @var      string $version The current version of this plugin.
+	 * @since  3.0.0
+	 * @access private
+	 * @var    string $version The current version of this plugin.
 	 */
 	private $version;
 
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    3.0.0
+	 * @since 3.0.0
 	 *
-	 * @param      string $plugin_name The name of this plugin.
-	 * @param      string $version The version of this plugin.
+	 * @param string $plugin_name The name of this plugin.
+	 * @param string $version     The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
@@ -50,8 +51,8 @@ class WPPR_Editor {
 	/**
 	 * Method to add editor meta box.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 */
 	public function set_editor() {
 		add_meta_box(
@@ -65,10 +66,10 @@ class WPPR_Editor {
 	/**
 	 * Method to render editor.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   WP_Post $post The post object.
+	 * @param WP_Post $post The post object.
 	 */
 	public function render_metabox( $post ) {
 		$editor = $this->get_editor_name( $post );
@@ -80,17 +81,17 @@ class WPPR_Editor {
 	/**
 	 * Method to return editor object.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   WP_Post $post The post object.
+	 * @param WP_Post $post The post object.
 	 *
 	 * @return WPPR_Editor_Abstract
 	 */
 	private function get_editor_name( $post ) {
 		$editor_name = 'WPPR_' . str_replace( '-', '_', ucfirst( $post->post_type ) . '_Editor' );
 		if ( class_exists( $editor_name ) ) {
-			$editor = new $editor_name ( $post );
+			$editor = new $editor_name( $post );
 		} else {
 			$editor = new WPPR_Editor_Model( $post );
 		}
@@ -101,10 +102,10 @@ class WPPR_Editor {
 	/**
 	 * Method to load required assets.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   WP_Post $post The post object.
+	 * @param WP_Post $post The post object.
 	 */
 	public function load_assets( $post ) {
 		global $post;
@@ -137,10 +138,10 @@ class WPPR_Editor {
 	/**
 	 * Method to save options.
 	 *
-	 * @since   3.0.0
-	 * @access  public
+	 * @since  3.0.0
+	 * @access public
 	 *
-	 * @param   int $post_id The post ID.
+	 * @param int $post_id The post ID.
 	 */
 	public function editor_save( $post_id ) {
 		$editor = $this->get_editor_name( get_post( $post_id ) );
