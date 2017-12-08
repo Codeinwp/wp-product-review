@@ -256,13 +256,13 @@ class WPPR_Admin {
 		add_filter( 'parse_query', array( $this, 'show_only_review_posts' ), 10 );
 
 		// add columns to post listing.
-		$post_types		= apply_filters( 'wppr_post_types_custom_columns', array() );
+		$post_types     = apply_filters( 'wppr_post_types_custom_columns', array() );
 		if ( ! $post_types ) {
 			return;
 		}
 
 		foreach ( $post_types as $post_type ) {
-			$type	= in_array( $post_type, array( 'post', 'page' ) ) ? "{$post_type}s" : "{$post_type}_posts";
+			$type   = in_array( $post_type, array( 'post', 'page' ) ) ? "{$post_type}s" : "{$post_type}_posts";
 			add_filter( "manage_{$type}_columns", array( $this, 'manage_posts_columns' ), 10, 1 );
 			add_action( "manage_{$type}_custom_column", array( $this, 'manage_posts_custom_column' ), 10, 2 );
 		}
@@ -274,14 +274,14 @@ class WPPR_Admin {
 	 * @access  public
 	 */
 	public function restrict_manage_posts( $post_type, $which ) {
-		$post_types		= apply_filters( 'wppr_post_types_custom_filter', array( 'post', 'page' ) );
+		$post_types     = apply_filters( 'wppr_post_types_custom_filter', array( 'post', 'page' ) );
 		if ( ! $post_types || ! in_array( $post_type, $post_types ) ) {
 			return;
 		}
 
 		echo "<select name='wppr_filter' id='wppr_filter' class='postform'>";
 		echo "<option value=''>" . __( 'Show All', 'wp-product-review' ) . '</option>';
-		$selected	= isset( $_REQUEST[ 'wppr_filter' ] ) && 'only-wppr' === $_REQUEST[ 'wppr_filter' ] ? 'selected' : '';
+		$selected   = isset( $_REQUEST['wppr_filter'] ) && 'only-wppr' === $_REQUEST['wppr_filter'] ? 'selected' : '';
 		echo "<option value='only-wppr' $selected>" . __( 'Show only Reviews', 'wp-product-review' ) . '</option>';
 		echo '</select>';
 	}
@@ -292,26 +292,26 @@ class WPPR_Admin {
 	 * @access  public
 	 */
 	public function show_only_review_posts( $query ) {
-		if( ! ( is_admin() && $query->is_main_query() ) ){ 
+		if ( ! ( is_admin() && $query->is_main_query() ) ) {
 			return $query;
 		}
 
-		if ( ! isset( $_REQUEST[ 'wppr_filter' ] ) || 'only-wppr' !== $_REQUEST[ 'wppr_filter' ] ) {
+		if ( ! isset( $_REQUEST['wppr_filter'] ) || 'only-wppr' !== $_REQUEST['wppr_filter'] ) {
 			return $query;
 		}
 
-		$post_types		= apply_filters( 'wppr_post_types_custom_filter', array( 'post', 'page' ) );
+		$post_types     = apply_filters( 'wppr_post_types_custom_filter', array( 'post', 'page' ) );
 		if ( ! in_array( $query->query['post_type'], $post_types ) ) {
 			return $query;
 		}
 
 		$query->query_vars['meta_query'] = array(
 			array(
-				'field'		=> 'cwp_meta_box_check',
-				'value'		=> 'Yes',
-				'compare'	=> '=',
-				'type'		=> 'CHAR'
-			)
+				'field'     => 'cwp_meta_box_check',
+				'value'     => 'Yes',
+				'compare'   => '=',
+				'type'      => 'CHAR',
+			),
 		);
 
 		return $query;
@@ -323,7 +323,7 @@ class WPPR_Admin {
 	 * @access  public
 	 */
 	public function manage_posts_columns( $columns ) {
-		$columns[ 'wppr_review']	= __( 'Review', 'wp-product-review' );
+		$columns['wppr_review']    = __( 'Review', 'wp-product-review' );
 		return $columns;
 	}
 
