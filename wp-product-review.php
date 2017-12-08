@@ -82,7 +82,18 @@ function run_wppr() {
 	if ( is_readable( $vendor_file ) ) {
 		require_once $vendor_file;
 	}
+	add_filter( 'pirate_parrot_log', 'wppr_lite_register_parrot', 10, 1 );
 	add_filter( 'themeisle_sdk_products', 'wppr_lite_register_sdk' );
+}
+
+/**
+ * Registers with the parrot plugin
+ *
+ * @param array $plugins Array of plugins.
+ */
+function wppr_lite_register_parrot( $plugins ) {
+	$plugins[] = WPPR_SLUG;
+	return $plugins;
 }
 
 /**

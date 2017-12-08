@@ -433,12 +433,12 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			}
 		}
 		$new_options = array();
-		foreach ( $this->options as $option ) {
+		foreach ( $this->options as $index => $option ) {
 			$k             = $option['name'];
 			$rating        = $option['value'];
 			$v             = floatval( $combined [ $k ] ) / count( $comments );
 			$weighted      = $v * 10 * ( $comment_influence / 100 ) + floatval( $rating ) * ( ( 100 - $comment_influence ) / 100 );
-			$new_options[] = array(
+			$new_options[ $index ] = array(
 				'name'  => $k,
 				'value' => $weighted,
 			);
