@@ -90,7 +90,7 @@ class WPPR_Editor {
 	private function get_editor_name( $post ) {
 		$editor_name = 'WPPR_' . str_replace( '-', '_', ucfirst( $post->post_type ) . '_Editor' );
 		if ( class_exists( $editor_name ) ) {
-			$editor = new $editor_name ( $post );
+			$editor = new $editor_name( $post );
 		} else {
 			$editor = new WPPR_Editor_Model( $post );
 		}
