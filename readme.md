@@ -67,6 +67,12 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 ## Changelog ##
+### 3.3.1 - 2017-12-11  ###
+
+* Fix for comments rating if not all the options are provided.
+* Improved review image description
+
+
 ### 3.3.0 - 2017-11-27  ###
 
 * Fix individual rating influenced by comments.
@@ -432,6 +438,7 @@ Alternatively you can also follow the following steps to install the WP Product 
 ## Frequently Asked Questions ##
 
 
+
 ### How to activate user reviews ###
 
 By default user reviews are disabled since not all the themes are compatible with this option due to different designs for the comment box. You can easily activate them from General Settings
@@ -466,7 +473,49 @@ https://themeisle.com/contact
 ### Prevent users from posting multiple review on a single post in WP Product Review ###
 [http://docs.themeisle.com/article/578-prevent-users-from-posting-multiple-review-on-a-single-post-in-wp-product-review](http://docs.themeisle.com/article/578-prevent-users-from-posting-multiple-review-on-a-single-post-in-wp-product-review)
 
-## Upgrade Notice ##
+### WP Product Review Documentation ###
+ [http://docs.themeisle.com/article/173-wp-product-review-documentation](http://docs.themeisle.com/article/173-wp-product-review-documentation) 
+
+ = WP Product Review Shortcode Documentation = 
+ [http://docs.themeisle.com/article/449-wp-product-review-shortcode-documentation](http://docs.themeisle.com/article/449-wp-product-review-shortcode-documentation) 
+
+ = WP Product Review Comparison Table Documentation = 
+ [http://docs.themeisle.com/article/424-wp-product-review-comparison-table-documentation](http://docs.themeisle.com/article/424-wp-product-review-comparison-table-documentation) 
+
+ = Enable user reviews in WP Product Review = 
+ [http://docs.themeisle.com/article/759-enable-user-reviews-in-wp-product-revie](http://docs.themeisle.com/article/759-enable-user-reviews-in-wp-product-revie) 
+
+ = How to create a listing grid of reviews in WP Product Review = 
+ [http://docs.themeisle.com/article/764-how-to-create-a-listing-grid-of-reviews-in-wp-product-review](http://docs.themeisle.com/article/764-how-to-create-a-listing-grid-of-reviews-in-wp-product-review) 
+
+ = Rich Snippets not showing in search results = 
+ [http://docs.themeisle.com/article/756-rich-snippets-not-showing-in-search-results](http://docs.themeisle.com/article/756-rich-snippets-not-showing-in-search-results) 
+
+ = How to add a top products widget in WP Product Review = 
+ [http://docs.themeisle.com/article/763-how-to-add-a-top-products-widget-in-wp-product-review](http://docs.themeisle.com/article/763-how-to-add-a-top-products-widget-in-wp-product-review) 
+
+ = How to remove rich snippets in WP Product Review = 
+ [http://docs.themeisle.com/article/755-how-to-remove-rich-snippets-in-wp-product-review](http://docs.themeisle.com/article/755-how-to-remove-rich-snippets-in-wp-product-review) 
+
+ = How to remove Pros/Cons list in WP Product Review = 
+ [http://docs.themeisle.com/article/762-how-to-remove-pros-cons-list-in-wp-product-review](http://docs.themeisle.com/article/762-how-to-remove-pros-cons-list-in-wp-product-review) 
+
+ = How to change the default rating icon in WP Product Review = 
+ [http://docs.themeisle.com/article/757-how-to-change-the-default-rating-icon-in-wp-product-review](http://docs.themeisle.com/article/757-how-to-change-the-default-rating-icon-in-wp-product-review) 
+
+ = How the visitors rating are influencing the review rating in WP Product Review = 
+ [http://docs.themeisle.com/article/760-how-the-visitors-rating-are-influencing-the-review-rating-in-wp-product-review](http://docs.themeisle.com/article/760-how-the-visitors-rating-are-influencing-the-review-rating-in-wp-product-review) 
+
+ = How to change the rating colours in WP Product Review = 
+ [http://docs.themeisle.com/article/761-how-to-change-the-rating-colours-in-wp-product-review](http://docs.themeisle.com/article/761-how-to-change-the-rating-colours-in-wp-product-review) 
+
+ = How to increase number of review options, pros or cons in WP Product Review = 
+ [http://docs.themeisle.com/article/758-how-to-increase-number-of-review-options-pros-or-cons-in-wp-product-review](http://docs.themeisle.com/article/758-how-to-increase-number-of-review-options-pros-or-cons-in-wp-product-review) 
+
+ = What actions and filters are available in WP Product Review = 
+ [http://docs.themeisle.com/article/770-what-actions-and-filters-are-available-in-wp-product-review](http://docs.themeisle.com/article/770-what-actions-and-filters-are-available-in-wp-product-review) 
+
+ == Upgrade Notice ==
 
 ### 3.0 ###
 3.0 is a major update. It is important that you make backups and ensure themes are 3.0 compatible before upgrading.

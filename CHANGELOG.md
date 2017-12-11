@@ -1,4 +1,9 @@
 
+ ### v3.3.1 - 2017-12-11 
+ **Changes:** 
+ * Fix for comments rating if not all the options are provided.
+* Improved review image description
+ 
  ### v3.3.0 - 2017-11-27 
  **Changes:** 
  * Fix individual rating influenced by comments.
