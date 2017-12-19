@@ -46,8 +46,11 @@ function cwppos_show_review( $post_id ) {
  *
  * @return mixed Array of global options.
  */
-function cwppos() {
+function cwppos( $option = null ) {
 	$options = new WPPR_Options_Model();
 
-	return $options->get_all();
+	if ( is_null( $option ) ) {
+		return $options->get_all();
+	}
+	return $options->wppr_get_option( $option );
 }
