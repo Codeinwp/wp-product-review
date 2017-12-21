@@ -290,7 +290,6 @@ class Wppr_Public {
                     ' . $conditional_styles . '
               
             ';
-
 		$style = apply_filters( 'wppr_global_style', $style );
 		wp_add_inline_style( $this->plugin_name . '-frontpage-stylesheet', $style );
 	}
