@@ -293,7 +293,6 @@ class Wppr_Public {
 
 		$style = apply_filters( 'wppr_global_style', $style );
 		wp_add_inline_style( $this->plugin_name . '-frontpage-stylesheet', $style );
-		$amp_style = $style;
 	}
 
 	/**
