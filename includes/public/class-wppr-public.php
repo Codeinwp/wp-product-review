@@ -621,7 +621,7 @@ function wppr_amp_support() {
 	echo $output;
 }
 
-include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 if ( is_plugin_active( 'accelerated-mobile-pages/accelerated-moblie-pages.php' ) || is_plugin_active( 'amp/amp.php' ) ) {
 	add_action( 'amp_post_template_css', 'wppr_amp_support' );
