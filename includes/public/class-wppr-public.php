@@ -458,19 +458,14 @@ class Wppr_Public {
 
 }
 
-/** 
- *
+/**
  * AMP support for WPPR
- *
  */
-
 function wppr_amp_support() {
 	$review = new WPPR_Review_Model();
-
 	$output = '';
 	$output .= wp_remote_retrieve_body( wp_remote_get( WPPR_URL . '/assets/css/frontpage.css' ) );
 	$output .= wp_remote_retrieve_body( wp_remote_get( WPPR_URL . '/assets/css/circle.css' ) );
-	
 	if ( $review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
 		$conditional_styles .= '
 			.commentlist .comment-body p {
@@ -478,7 +473,6 @@ function wppr_amp_support() {
 			}
 			';
 	}
-	
 	$output .= '                   
 				.review-wu-grade .wppr-c100,
 				.review-grade-widget .wppr-c100 {
