@@ -618,7 +618,7 @@ function wppr_amp_support() {
 
 			';
 
-	echo $output;
+			echo apply_filters('wppr_add_amp_css', $output);
 }
 
 require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
