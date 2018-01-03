@@ -9,7 +9,7 @@ jQuery(document).ready(function ($) {
 		$(this).slider({
 			min: 0,
 			max: 100,
-			value: 4,
+			value: 0,
 			slide: function (event, ui) {
 				$(comm_meta_input).val(ui.value / 10);
 			}
