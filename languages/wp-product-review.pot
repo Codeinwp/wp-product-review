@@ -1,14 +1,14 @@
-# Copyright (C) 2017 ThemeIsle
+# Copyright (C) 2018 ThemeIsle
 # This file is distributed under the no.
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Product Review Lite 3.3.0\n"
 "Report-Msgid-Bugs-To: https://github.com/Codeinwp/wp-product-review/issues\n"
-"POT-Creation-Date: 2017-11-27 12:40:32+00:00\n"
+"POT-Creation-Date: 2018-01-05 10:31:15+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Themeisle Translate Team <friends@themeisle.com>\n"
 "Language-Team: Themeisle Translate <friends@themeisle.com>\n"
 "X-Generator: grunt-wp-i18n 0.5.4\n"
@@ -377,93 +377,97 @@ msgid "Choose or Upload an Image"
 msgstr ""
 
 #: includes/admin/layouts/editor-default-tpl.php:80
-msgid "If no image is provided, featured image is used"
+msgid "The optimum size of the product image must be 600 x 600 px"
 msgstr ""
 
 #: includes/admin/layouts/editor-default-tpl.php:83
+msgid "If no image is provided, featured image is used"
+msgstr ""
+
+#: includes/admin/layouts/editor-default-tpl.php:87
 msgid "Product Image Click"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:96
+#: includes/admin/layouts/editor-default-tpl.php:100
 msgid "Show Whole Image"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:108
+#: includes/admin/layouts/editor-default-tpl.php:112
 msgid "Open Affiliate link"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:115
-#: includes/admin/layouts/editor-default-tpl.php:121
-#: includes/admin/layouts/editor-default-tpl.php:145
-#: includes/admin/layouts/editor-default-tpl.php:151
-#: includes/admin/layouts/editor-default-tpl.php:179
-#: includes/admin/layouts/editor-default-tpl.php:185
+#: includes/admin/layouts/editor-default-tpl.php:119
+#: includes/admin/layouts/editor-default-tpl.php:125
+#: includes/admin/layouts/editor-default-tpl.php:149
+#: includes/admin/layouts/editor-default-tpl.php:155
+#: includes/admin/layouts/editor-default-tpl.php:183
+#: includes/admin/layouts/editor-default-tpl.php:189
 msgid "Affiliate Button Text"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:127
-#: includes/admin/layouts/editor-default-tpl.php:133
-#: includes/admin/layouts/editor-default-tpl.php:157
-#: includes/admin/layouts/editor-default-tpl.php:163
-#: includes/admin/layouts/editor-default-tpl.php:191
-#: includes/admin/layouts/editor-default-tpl.php:197
+#: includes/admin/layouts/editor-default-tpl.php:131
+#: includes/admin/layouts/editor-default-tpl.php:137
+#: includes/admin/layouts/editor-default-tpl.php:161
+#: includes/admin/layouts/editor-default-tpl.php:167
+#: includes/admin/layouts/editor-default-tpl.php:195
+#: includes/admin/layouts/editor-default-tpl.php:201
 msgid "Affiliate Link"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:139
+#: includes/admin/layouts/editor-default-tpl.php:143
 msgid "Add new link"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:211
-#: includes/admin/layouts/editor-default-tpl.php:217
+#: includes/admin/layouts/editor-default-tpl.php:215
+#: includes/admin/layouts/editor-default-tpl.php:221
 msgid "Product Price"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:228
+#: includes/admin/layouts/editor-default-tpl.php:232
 msgid "Product Options"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:229
+#: includes/admin/layouts/editor-default-tpl.php:233
 msgid "Insert your options and their grades. Grading must be done from 0 to 100."
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:234
+#: includes/admin/layouts/editor-default-tpl.php:238
 msgid "Preload Info"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:237
+#: includes/admin/layouts/editor-default-tpl.php:241
 msgid ""
 " In order to be able to automatically load your options from another posts, "
 "you need the "
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:237
+#: includes/admin/layouts/editor-default-tpl.php:241
 msgid "PRO add-on"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:257
-#: includes/admin/layouts/editor-default-tpl.php:299
-#: includes/admin/layouts/editor-default-tpl.php:330
+#: includes/admin/layouts/editor-default-tpl.php:261
+#: includes/admin/layouts/editor-default-tpl.php:303
+#: includes/admin/layouts/editor-default-tpl.php:334
 msgid "Option"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:266
+#: includes/admin/layouts/editor-default-tpl.php:270
 msgid "Grade"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:280
+#: includes/admin/layouts/editor-default-tpl.php:284
 msgid "Pro Features"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:281
+#: includes/admin/layouts/editor-default-tpl.php:285
 msgid "Insert product's pro features below."
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:312
+#: includes/admin/layouts/editor-default-tpl.php:316
 msgid "Cons Features"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:313
+#: includes/admin/layouts/editor-default-tpl.php:317
 msgid "Insert product's cons features below."
 msgstr ""
 
