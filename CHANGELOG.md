@@ -1,4 +1,10 @@
 
+ ### v3.3.2 - 2018-01-05 
+ **Changes:** 
+ * Adds filtering option for posts/page admin listing page.
+* Fix compatibility with Bookrev theme.
+* Fix issue with comments slides when scrolled back.
+ 
  ### v3.3.1 - 2017-12-11 
  **Changes:** 
  * Fix for comments rating if not all the options are provided.
