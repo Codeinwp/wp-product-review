@@ -71,6 +71,9 @@ class Wppr_Public {
 		$this->review = new WPPR_Review_Model( ! empty( $post ) ? $post->ID : 0 );
 	}
 
+	/**
+	 * Function to generate styles on the basis of Ratings.
+	 */
 	public function generate_styles() {
 
 		$review = new WPPR_Review_Model();
@@ -295,10 +298,7 @@ class Wppr_Public {
 			$this->plugin_name . '-percentage-circle', WPPR_URL . '/assets/css/circle.css', array(),
 			$this->version
 		);
-
 		$style = Wppr_Public::generate_styles();
-
-		
 		$style = apply_filters( 'wppr_global_style', $style );
 		wp_add_inline_style( $this->plugin_name . '-frontpage-stylesheet', $style );
 	}
@@ -469,14 +469,12 @@ class Wppr_Public {
  * AMP support for WPPR
  */
 function wppr_amp_support() {
-	
 	$output = '';
 	$output .= wp_remote_retrieve_body( wp_remote_get( WPPR_URL . '/assets/css/frontpage.css' ) );
 	$output .= wp_remote_retrieve_body( wp_remote_get( WPPR_URL . '/assets/css/circle.css' ) );
 	$style = Wppr_Public::generate_styles();
 	$output .= $style;
-
-			echo apply_filters('wppr_add_amp_css', $output);
+			echo apply_filters( 'wppr_add_amp_css', $output );
 }
 
 require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
