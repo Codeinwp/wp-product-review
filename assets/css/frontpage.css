@@ -841,6 +841,19 @@ Template 1
 		text-align: center;
 		width: 100%;
 	}
+
+	.wppr-template-1 .wppr-review-stars .wppr-review-stars-grade li {
+		font-size: 28px;
+		margin-right: -2px;
+	}
+
+	.wppr-template-1 .wppr-review-grade-number {
+		font-size: 48px;
+	}
+
+	.wppr-template-1 .wppr-review-grade-option-header span {
+		text-align: left;
+	}
 }
 
 @keyframes animFiller {
