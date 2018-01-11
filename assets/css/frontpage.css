@@ -685,7 +685,7 @@ Template 1
 .wppr-template-1 .wppr-review-grade-number,
 .wppr-template-1 .wppr-review-grade-option-header span,
 .wppr-template-1 .wppr-review-pros-cons h3 {
-	color: #2d3e4f;
+	color: inherit;
 }
 
 .wppr-template-1 .wppr-review-grade {
@@ -702,58 +702,60 @@ Template 1
 	width: 100%;
 }
 
-.wppr-template-1 .wppr-review-stars-grade,
-.wppr-template-1 .wppr-review-stars-author {
+.wppr-template-1 .wppr-review-stars-grade {
 	display: table-cell;
-	vertical-align: middle;
-	width: 100%;
+	float: left;
+	position: relative;
+	font-family: FontAwesome;
 }
 
-.wppr-template-1 .wppr-review-stars .wppr-review-stars-grade {
-	float: left;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	width: 200px;
-}
-
-.wppr-template-1 .wppr-review-stars .wppr-review-stars-grade li {
-	color: #e74b3d;
-	display: inline-block;
-	float: left;
+.wppr-template-1 .wppr-review-stars-grade,
+.wppr-template-1 .wppr-review-stars-grade .wppr-review-full-stars {
 	font-family: FontAwesome;
 	font-size: 38px;
-	line-height: 1;
-	margin-right: 2px;
 	-webkit-font-smoothing: antialiased;
+	line-height: 1;
 }
 
-.wppr-template-1 .wppr-review-stars .wppr-review-stars-grade li:before {
-	content: "\f006";
+.wppr-template-1 .wppr-review-stars-grade .wppr-review-full-stars {
+	display: inline-block;
+	overflow: hidden;
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	white-space: nowrap;
 }
 
-.wppr-template-1 .wppr-review-stars .wppr-review-stars-grade li.wppr-star:before {
-	content: "\f005";
+.wppr-template-1 .wppr-review-stars-grade:before {
+	content: "\f006\f006\f006\f006\f006";
 }
 
-.wppr-template-1 .wppr-review-stars .wppr-review-stars-grade li.wppr-star-half:before {
-	content: "\f123";
+.wppr-template-1 .wppr-review-stars-grade .wppr-review-full-stars:before {
+	content: "\f005\f005\f005\f005\f005";
+}
+
+.wppr-template-1 .wppr-review-stars-author {
+	display: table-cell;
+	width: 100%;
+	padding-left: 15px;
+	vertical-align: middle;
 }
 
 .wppr-template-1 .wppr-review-grade-number,
 .wppr-template-1 .wppr-review-grade-options {
 	display: table-cell;
-	vertical-align: top;
 	width: 100%;
+	vertical-align: top;
 }
 
 .wppr-template-1 .wppr-review-grade-number {
 	float: left;
+	width: 100px;
 	font-size: 60px;
 	font-weight: 700;
-	letter-spacing: -0.085em;
 	line-height: 1;
-	width: 100px;
+	letter-spacing: -0.085em;
 }
 
 .wppr-template-1 .wppr-review-grade-option-header span {
@@ -766,24 +768,23 @@ Template 1
 }
 
 .wppr-template-1 .wppr-review-grade-option-rating {
-	background: #ecf0f1;
-	border-radius: 10px;
 	display: block;
 	float: left;
-	height: 10px;
-	margin-bottom: 10px;
 	overflow: hidden;
 	position: relative;
 	width: 100%;
+	height: 10px;
+	margin-bottom: 10px;
+	border-radius: 10px;
 }
 
 .wppr-template-1 .wppr-review-grade-option-rating span {
-	background: #7e8c8d;
-	height: 100%;
-	left: 0;
 	position: absolute;
 	top: 0;
+	left: 0;
 	width: 0;
+	height: 100%;
+	-webkit-animation: animFiller 2s ease-in-out;
 	animation: animFiller 2s ease-in-out;
 }
 
@@ -794,8 +795,8 @@ Template 1
 
 .wppr-template-1 .wppr-review-pros-cons > div {
 	display: table-cell;
-	vertical-align: top;
 	width: 50%;
+	vertical-align: top;
 }
 
 .wppr-template-1 .wppr-review-one-column > div {
@@ -803,34 +804,41 @@ Template 1
 }
 
 .wppr-template-1 .wppr-review-pros-cons h3 {
+	margin: 0 !important;
 	font-size: 18px;
 	font-weight: 700;
-	margin: 0 !important;
 	text-transform: uppercase;
 }
 
 .wppr-template-1 .wppr-review-pros-cons ul {
-	color: #7e8c8d;
+	padding-left: 20px;
+	color: inherit;
 	font-size: 16px;
 	list-style-type: square;
-	padding-left: 20px;
 }
 
 @media (max-width: 768px) {
-	.wppr-template-1 .wppr-review-stars .wppr-review-stars-grade,
-	.wppr-template-1 .wppr-review-stars-author,
-	.wppr-template-1 .wppr-review-pros-cons > div {
-		display: block;
+	.wppr-template-1 .wppr-review-stars {
 		width: 100%;
+		text-align: center;
 	}
 
-	.wppr-template-1 .wppr-review-stars .wppr-review-stars-grade,
+	.wppr-template-1 .wppr-review-stars .wppr-review-stars-grade {
+		display: inline-block;
+		float: none;
+	}
+
 	.wppr-template-1 .wppr-review-stars-author {
-		text-align: center;
+		display: block;
 	}
 
 	.wppr-template-1 .wppr-review-stars .wppr-review-stars-grade li {
 		float: none;
+	}
+
+	.wppr-template-1 .wppr-review-pros-cons > div {
+		display: block;
+		width: 100%;
 	}
 }
 
@@ -838,13 +846,13 @@ Template 1
 	.wppr-template-1 .wppr-review-grade-options,
 	.wppr-template-1 .wppr-review-grade-number {
 		display: block;
-		text-align: center;
 		width: 100%;
+		text-align: center;
 	}
 
-	.wppr-template-1 .wppr-review-stars .wppr-review-stars-grade li {
+	.wppr-template-1 .wppr-review-stars .wppr-review-stars-grade,
+	.wppr-template-1 .wppr-review-stars .wppr-review-full-stars {
 		font-size: 28px;
-		margin-right: -2px;
 	}
 
 	.wppr-template-1 .wppr-review-grade-number {
@@ -853,6 +861,12 @@ Template 1
 
 	.wppr-template-1 .wppr-review-grade-option-header span {
 		text-align: left;
+	}
+}
+
+@-webkit-keyframes animFiller {
+	0% {
+		width: 0;
 	}
 }
 
