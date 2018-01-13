@@ -298,8 +298,7 @@ class Wppr_Public {
 			$this->plugin_name . '-percentage-circle', WPPR_URL . '/assets/css/circle.css', array(),
 			$this->version
 		);
-		$Wppr_public = new Wppr_Public( $this->plugin_name, $this->version );
-		$style = $Wppr_public->generate_styles();
+		$style = $this->generate_styles();
 		$style = apply_filters( 'wppr_global_style', $style );
 		wp_add_inline_style( $this->plugin_name . '-frontpage-stylesheet', $style );
 	}
