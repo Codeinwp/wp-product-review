@@ -681,6 +681,7 @@
 /*
 Template 1
  */
+
 .wppr-template-1 .wppr-review-stars-author,
 .wppr-template-1 .wppr-review-grade-number,
 .wppr-template-1 .wppr-review-grade-option-header span,
@@ -688,10 +689,7 @@ Template 1
 	color: inherit;
 }
 
-.wppr-template-1 .wppr-review-grade {
-	margin-top: 15px;
-}
-
+.wppr-template-1 .wppr-review-grade,
 .wppr-template-1 .wppr-review-pros-cons {
 	margin-top: 30px;
 }
@@ -739,6 +737,7 @@ Template 1
 	display: table-cell;
 	width: 100%;
 	padding-left: 15px;
+	font-weight: 700;
 	vertical-align: middle;
 }
 
@@ -751,7 +750,6 @@ Template 1
 
 .wppr-template-1 .wppr-review-grade-number {
 	float: left;
-	width: 100px;
 	font-size: 60px;
 	font-weight: 700;
 	line-height: 1;
@@ -763,7 +761,12 @@ Template 1
 	width: 50%;
 }
 
+.wppr-template-1 .wppr-review-grade-options {
+	padding-left: 45px;
+}
+
 .wppr-template-1 .wppr-review-grade-option-header span:last-of-type {
+	font-weight: 700;
 	text-align: right;
 }
 
@@ -773,8 +776,8 @@ Template 1
 	overflow: hidden;
 	position: relative;
 	width: 100%;
-	height: 10px;
-	margin-bottom: 10px;
+	height: 8px;
+	margin-bottom: 15px;
 	border-radius: 10px;
 }
 
@@ -892,8 +895,37 @@ Template 2
 	vertical-align: top;
 }
 
+.wppr-template-2 .wppr-review-head:not(.wppr-review-with-pros-cons) .wppr-review-rating {
+	float: left;
+}
+
+.wppr-template-2 .wppr-review-head.wppr-review-with-pros-cons:not(.wppr-review-with-image) .wppr-review-rating-grade,
+.wppr-template-2 .wppr-review-head.wppr-review-with-pros-cons:not(.wppr-review-with-image) .wppr-review-rating-users {
+	float: none;
+	width: 100%;
+}
+
+.wppr-template-2 .wppr-review-head.wppr-review-with-image .wppr-review-rating {
+	float: left;
+	box-sizing: content-box;
+	width: 240px;
+}
+
+.wppr-template-2 .wppr-review-head:not(.wppr-review-with-image) .wppr-review-rating {
+	float: left;
+}
+
+.wppr-template-2 .wppr-review-head:not(.wppr-review-with-image):not(.wppr-review-with-pros-cons) .wppr-review-rating {
+	float: left;
+}
+
 .wppr-template-2 .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating {
 	padding-right: 30px;
+}
+
+.wppr-template-2 .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating-grade,
+.wppr-template-2 .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating-image {
+	float: left;
 }
 
 .wppr-template-2 .wppr-review-pros,
@@ -902,18 +934,64 @@ Template 2
 	padding-left: 30px;
 }
 
-.wppr-template-2 .wppr-review-rating span {
+.wppr-template-2 .wppr-review-rating-grade {
 	display: inline-block;
 	float: left;
-	width: 120px;
+	min-width: 120px;
 	height: 120px;
-	padding: 0;
+	padding: 0 15px;
 	color: #fff;
 	font-size: 60px;
 	font-weight: 700;
 	line-height: 120px;
 	text-align: center;
 	letter-spacing: -0.05em;
+}
+
+.wppr-template-2 .wppr-review-head:not(.wppr-review-with-image) .wppr-review-rating-grade {
+	width: 100%;
+}
+
+.wppr-template-2 .wppr-review-product-image {
+	display: inline-block;
+	float: left;
+	overflow: hidden;
+	position: relative;
+	width: 120px;
+	height: 120px;
+}
+
+.wppr-template-2 .wppr-review-product-image img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100%;
+	-webkit-transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);
+}
+
+.wppr-template-2 .wppr-review-product-image.wppr-review-product-image-full img {
+	width: auto;
+	max-width: none;
+	height: 100%;
+}
+
+.wppr-template-2 .wppr-review-rating-users {
+	display: block;
+	float: left;
+	width: 100%;
+	padding: 8px;
+	color: #fff;
+	font-size: 14px;
+	line-height: 1;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.wppr-template-2 .wppr-review-rating-users strong {
+	font-size: 16px;
+	font-weight: 700;
 }
 
 .wppr-template-2 .wppr-review-pros h3,
@@ -936,44 +1014,37 @@ Template 2
 .wppr-template-2 .wppr-review-options {
 	float: left;
 	width: 100%;
-	margin-top: 30px;
+	margin-top: 45px;
 }
 
 .wppr-template-2 .wppr-review-option {
-	float: left;
+	display: table;
 	width: 100%;
 	margin-bottom: 10px;
 }
 
 .wppr-template-2 .wppr-review-option-header {
-	display: table;
-	width: 100%;
-}
-
-.wppr-template-2 .wppr-review-option-header span {
 	display: table-cell;
-	width: 50%;
-}
-
-.wppr-template-2 .wppr-review-option-header span:last-of-type {
-	text-align: right;
+	width: 150px;
+	vertical-align: middle;
 }
 
 .wppr-template-2 .wppr-review-option-rating {
+	display: table-cell;
 	margin: 0;
 	padding: 0;
+	vertical-align: middle;
 	list-style: none;
 }
 
 .wppr-template-2 .wppr-review-option-rating li {
 	display: inline-block;
 	float: left;
-	width: 10%;
+	margin-right: 10px;
 	font-family: FontAwesome;
 	font-size: 25px;
 	-webkit-font-smoothing: antialiased;
 	line-height: 1;
-	text-align: center;
 }
 
 .wppr-template-2 .wppr-review-option-rating li:first-child {
@@ -989,12 +1060,16 @@ Template 2
 }
 
 @media (max-width: 768px) {
-	.wppr-template-2 .wppr-review-rating,
 	.wppr-template-2 .wppr-review-pros,
 	.wppr-template-2 .wppr-review-cons {
 		display: block;
 		float: left;
 		width: 100%;
+	}
+
+	.wppr-template-2 .wppr-review-head {
+		display: block;
+		float: left;
 	}
 
 	.wppr-template-2 .wppr-review-pros,
@@ -1007,11 +1082,51 @@ Template 2
 		text-align: center;
 	}
 
-	.wppr-template-2 .wppr-review-rating span {
-		float: none;
-	}
-
 	.wppr-template-2 .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating {
 		padding: 0;
 	}
+}
+
+@media (max-width: 480px) {
+	.wppr-template-2 .wppr-review-option-header,
+	.wppr-template-2 .wppr-review-option-rating {
+		display: block;
+		float: left;
+		width: 100%;
+	}
+
+	.wppr-template-2 .wppr-review-option-rating li {
+		margin-right: 0;
+	}
+
+	.wppr-template-2 .wppr-review-rating-users {
+		white-space: normal;
+	}
+
+	.wppr-template-2 .wppr-review-head .wppr-review-rating-grade,
+	.wppr-template-2 .wppr-review-product-image,
+	.wppr-template-2 .wppr-review-head.wppr-review-with-image .wppr-review-rating {
+		width: 100%;
+	}
+}
+
+.clearfix:after {
+	display: block;
+	visibility: hidden;
+	clear: both;
+	height: 0;
+	font-size: 0;
+	content: " ";
+}
+
+.clearfix {
+	display: inline-block;
+}
+
+* html .clearfix {
+	height: 1%;
+}
+
+.clearfix {
+	display: block;
 }

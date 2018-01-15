@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Product Review Lite 3.3.0\n"
 "Report-Msgid-Bugs-To: https://github.com/Codeinwp/wp-product-review/issues\n"
-"POT-Creation-Date: 2018-01-11 14:40:41+00:00\n"
+"POT-Creation-Date: 2018-01-15 13:19:39+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -563,6 +563,14 @@ msgstr ""
 
 #: includes/admin/widgets/class-wppr-top-products-widget.php:132
 msgid "Top Products"
+msgstr ""
+
+#: includes/public/layouts/book.php:46
+msgid "Users score:"
+msgstr ""
+
+#: includes/public/layouts/book.php:48
+msgid "votes"
 msgstr ""
 
 #: includes/public/layouts/movie.php:27

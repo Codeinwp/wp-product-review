@@ -16,4 +16,13 @@ jQuery(document).ready(function ($) {
 		});
 	});
 
+	// Check if review image width is bigger than height.
+    if ( $( '.wppr-template-2' ).length > 0 ) {
+    	var reviewImage = $( '.wppr-review-product-image' );
+    	if ( reviewImage.length > 0 ) {
+    		if ( reviewImage.find('img').width() > reviewImage.find('img').height() ) {
+                reviewImage.addClass('wppr-review-product-image-full');
+			}
+		}
+    }
 });
