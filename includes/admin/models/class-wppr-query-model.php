@@ -217,6 +217,8 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			$order_by .= "`post_date` {$order['date']}, ";
 		}
 
+		$order_by		.= apply_filters( 'wppr_order_by_clause', '', $order );
+
 		return $order_by;
 	}
 
@@ -246,6 +248,8 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		if ( isset( $filter['rating'] ) && $filter['rating'] != false && is_numeric( $filter['rating'] ) ) {
 			$conditions['having'] .= $this->db->prepare( ' AND `rating`  > %f ', $filter['rating'] );
 		}
+
+		$conditions		.= apply_filters( 'wppr_where_clause', '', $post, $filter );
 
 		return $conditions;
 	}
@@ -282,6 +286,8 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			$max                   = end( $post['post_date_range_weeks'] );
 			$sub_query_conditions .= $this->db->prepare( ' AND p.post_date >= DATE_ADD(now(), INTERVAL %d WEEK) AND p.post_date <= DATE_ADD(now(), INTERVAL %d WEEK) ', $min, $max );
 		}
+
+		$sub_query_conditions		.= apply_filters( 'wppr_where_sub_clause', '', $post );
 
 		return $sub_query_conditions;
 	}
