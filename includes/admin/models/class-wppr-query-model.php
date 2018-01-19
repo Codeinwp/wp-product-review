@@ -217,7 +217,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			$order_by .= "`post_date` {$order['date']}, ";
 		}
 
-		$order_by		.= apply_filters( 'wppr_order_by_clause', '', $order );
+		$order_by       .= apply_filters( 'wppr_order_by_clause', '', $order );
 
 		return $order_by;
 	}
@@ -249,7 +249,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			$conditions['having'] .= $this->db->prepare( ' AND `rating`  > %f ', $filter['rating'] );
 		}
 
-		$conditions		.= apply_filters( 'wppr_where_clause', '', $post, $filter );
+		$conditions     .= apply_filters( 'wppr_where_clause', '', $post, $filter );
 
 		return $conditions;
 	}
@@ -287,7 +287,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			$sub_query_conditions .= $this->db->prepare( ' AND p.post_date >= DATE_ADD(now(), INTERVAL %d WEEK) AND p.post_date <= DATE_ADD(now(), INTERVAL %d WEEK) ', $min, $max );
 		}
 
-		$sub_query_conditions		.= apply_filters( 'wppr_where_sub_clause', '', $post );
+		$sub_query_conditions       .= apply_filters( 'wppr_where_sub_clause', '', $post );
 
 		return $sub_query_conditions;
 	}
