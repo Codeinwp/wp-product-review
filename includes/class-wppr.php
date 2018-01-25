@@ -180,7 +180,6 @@ class WPPR {
 		$this->loader->add_action( 'comment_form_after_fields', $plugin_public, 'add_comment_fields' );
 		$this->loader->add_filter( 'comment_text', $plugin_public, 'show_comment_ratings' );
 
-		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		if ( is_plugin_active( 'accelerated-mobile-pages/accelerated-moblie-pages.php' ) || is_plugin_active( 'amp/amp.php' ) ) {
 			$this->loader->add_action( 'amp_post_template_css', $plugin_public, 'wppr_amp_support' );
 		}
