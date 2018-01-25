@@ -298,6 +298,7 @@ class Wppr_Public {
 			$this->plugin_name . '-percentage-circle', WPPR_URL . '/assets/css/circle.css', array(),
 			$this->version
 		);
+		
 		$style = $this->generate_styles();
 		$style = apply_filters( 'wppr_global_style', $style );
 		wp_add_inline_style( $this->plugin_name . '-frontpage-stylesheet', $style );
@@ -461,23 +462,16 @@ class Wppr_Public {
 		$return .= '</div>';
 		return $return . $text . '<div class="cwpr_clearfix"></div>';
 	}
-}
 
-/**
- * AMP support for WPPR
- */
-function wppr_amp_support() {
-	$output = '';
-	$output .= wp_remote_retrieve_body( wp_remote_get( WPPR_URL . '/assets/css/frontpage.css' ) );
-	$output .= wp_remote_retrieve_body( wp_remote_get( WPPR_URL . '/assets/css/circle.css' ) );
-	$Wppr_public = new Wppr_Public( $plugin_name, $version );
-	$style = $Wppr_public->generate_styles();
-	$output .= $style;
-	echo apply_filters( 'wppr_add_amp_css', $output );
-}
-
-require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-
-if ( is_plugin_active( 'accelerated-mobile-pages/accelerated-moblie-pages.php' ) || is_plugin_active( 'amp/amp.php' ) ) {
-	add_action( 'amp_post_template_css', 'wppr_amp_support' );
+	/**
+	 * AMP support for WPPR
+	 */
+	public function wppr_amp_support() {
+		$output = '';
+		$output .= wp_remote_retrieve_body( wp_remote_get( WPPR_URL . '/assets/css/frontpage.css' ) );
+		$output .= wp_remote_retrieve_body( wp_remote_get( WPPR_URL . '/assets/css/circle.css' ) );
+		$style = $this->generate_styles();
+		$output .= $style;
+		echo apply_filters( 'wppr_add_amp_css', $output );
+	}
 }
