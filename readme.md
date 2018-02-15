@@ -67,6 +67,13 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 ## Changelog ##
+### 3.3.2 - 2018-01-05  ###
+
+* Adds filtering option for posts/page admin listing page.
+* Fix compatibility with Bookrev theme.
+* Fix issue with comments slides when scrolled back.
+
+
 ### 3.3.1 - 2017-12-11  ###
 
 * Fix for comments rating if not all the options are provided.
@@ -439,6 +446,7 @@ Alternatively you can also follow the following steps to install the WP Product 
 
 
 
+
 ### How to activate user reviews ###
 
 By default user reviews are disabled since not all the themes are compatible with this option due to different designs for the comment box. You can easily activate them from General Settings
@@ -514,6 +522,9 @@ https://themeisle.com/contact
 
  = What actions and filters are available in WP Product Review = 
  [http://docs.themeisle.com/article/770-what-actions-and-filters-are-available-in-wp-product-review](http://docs.themeisle.com/article/770-what-actions-and-filters-are-available-in-wp-product-review) 
+
+ = Install and use the pro version of WP Product Review = 
+ [http://docs.themeisle.com/article/785-install-and-use-the-pro-version-of-wp-product-review](http://docs.themeisle.com/article/785-install-and-use-the-pro-version-of-wp-product-review) 
 
  == Upgrade Notice ==
 

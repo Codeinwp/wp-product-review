@@ -67,6 +67,13 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+= 3.3.2 - 2018-01-05  = 
+
+* Adds filtering option for posts/page admin listing page.
+* Fix compatibility with Bookrev theme.
+* Fix issue with comments slides when scrolled back.
+
+
 = 3.3.1 - 2017-12-11  = 
 
 * Fix for comments rating if not all the options are provided.
