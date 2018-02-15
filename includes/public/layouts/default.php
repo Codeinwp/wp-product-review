@@ -29,7 +29,6 @@ if ( $review_object->get_click() == 'image' ) {
 $pros = $review_object->get_pros();
 $cons = $review_object->get_cons();
 
-
 ?>
 <div id="wppr-review-<?php echo $review_object->get_ID(); ?>"
 	 class="wppr-review-container <?php echo( empty( $pros ) ? 'wppr-review-no-pros' : '' ); ?> <?php echo( empty( $cons ) ? 'wppr-review-no-cons' : '' ); ?>">
@@ -45,7 +44,10 @@ $cons = $review_object->get_cons();
 					<div class="review-wu-left-top">
 						<div class="rev-wu-image">
 							<a href="<?php echo esc_url( $image_link ); ?>" <?php echo $lightbox; ?> rel="nofollow"
-							   target="_blank"><img src="<?php echo esc_attr( $review_object->get_small_thumbnail() ); ?>" alt="<?php echo esc_attr( $review_object->get_name() ); ?>" class="photo photo-wrapup wppr-product-image"/></a>
+							   target="_blank"><img
+										src="<?php echo esc_attr( $review_object->get_small_thumbnail() ); ?>"
+										alt="<?php echo esc_attr( $review_object->get_name() ); ?>"
+										class="photo photo-wrapup wppr-product-image"/></a>
 						</div><!-- end .rev-wu-image -->
 
 						<div class="review-wu-grade">
@@ -71,19 +73,20 @@ $cons = $review_object->get_cons();
 							<?php echo $option['value']; ?>">
 								<div class="cwpr_clearfix">
 									<h3><?php echo esc_html( apply_filters( 'wppr_option_name_html', $option['name'] ) ); ?></h3>
-									<span><?php echo esc_html( number_format( ( $option['value'] / 10 ), 1 ) ); ?>/10 </span>
+									<span><?php echo esc_html( number_format( ( $option['value'] / 10 ), 1 ) ); ?>
+										/10 </span>
 								</div>
 								<ul class="cwpr_clearfix <?php echo $review_object->get_rating_class( $option['value'] ) . apply_filters( 'wppr_option_custom_icon', '' ); ?>">
-									<?php for ( $i = 1; $i <= 10; $i++ ) { ?>
+									<?php for ( $i = 1; $i <= 10; $i ++ ) { ?>
 										<li
-										<?php
-										echo $i <= round( $option['value'] / 10 ) ? ' class="colored"' : '';
-										?>
+											<?php
+											echo $i <= round( $option['value'] / 10 ) ? ' class="colored"' : '';
+											?>
 										></li>
 									<?php } ?>
 								</ul>
 							</div>
-							<?php } ?>
+						<?php } ?>
 					</div><!-- end .review-wu-bars -->
 				</div><!-- end .review-wu-left -->
 
@@ -115,31 +118,31 @@ $cons = $review_object->get_cons();
 						<?php
 						endif;
 if ( ! empty( $cons ) ) :
-				?>
-					<div class="cons">
-						<h2>
-							<?php
-							echo esc_html(
-								apply_filters(
-									'wppr_review_cons_text', $review_object->wppr_get_option(
-										'cwppos_cons_text'
-									)
-								)
-							);
-				?>
-			</h2>
-			<ul>
-				<?php
-				foreach ( $cons as $con ) {
-					?>
+	?>
+	<div class="cons">
+<h2>
+<?php
+echo esc_html(
+	apply_filters(
+		'wppr_review_cons_text', $review_object->wppr_get_option(
+			'cwppos_cons_text'
+		)
+	)
+);
+?>
+</h2>
+<ul>
+<?php
+foreach ( $cons as $con ) {
+?>
 
-					<li><?php echo esc_html( $con ); ?></li>
+<li><?php echo esc_html( $con ); ?></li>
 
-									<?php } ?>
-			</ul>
-		</div>
+			<?php } ?>
+		</ul>
+	</div>
 
-	<?php endif; ?>
+<?php endif; ?>
 					</div><!-- end .review-wu-right -->
 				<?php endif; ?>
 			</div><!-- end .review-wu-content -->

@@ -299,9 +299,9 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 * @access  private
 	 */
 	private function setup_template() {
-		$template       = get_post_meta( $this->ID, 'cwp_rev_template', true );
+		$template = get_post_meta( $this->ID, '_wppr_review_template', true );
 		if ( empty( $template ) ) {
-			$template   = 'default';
+			$template = 'default';
 		}
 		$this->template = $template;
 	}
@@ -730,13 +730,10 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 * @return bool
 	 */
 	public function set_template( $template ) {
-		if ( $template !== $this->template ) {
-			$this->template = $template;
+		$this->template = $template;
 
-			return update_post_meta( $this->ID, 'cwp_rev_template', $template );
-		}
+		return update_post_meta( $this->ID, '_wppr_review_template', $template );
 
-		return false;
 	}
 
 	/**

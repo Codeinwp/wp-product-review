@@ -952,6 +952,7 @@ Template 2
 	width: 100%;
 }
 
+.wppr-template-1 .wppr-review-product-image,
 .wppr-template-2 .wppr-review-product-image {
 	display: inline-block;
 	float: left;
@@ -961,6 +962,13 @@ Template 2
 	height: 120px;
 }
 
+.wppr-template-1 .wppr-review-product-image {
+	width: 70px;
+	height: 70px;
+	margin-top: 5px;
+}
+
+.wppr-template-1 .wppr-review-product-image img,
 .wppr-template-2 .wppr-review-product-image img {
 	position: absolute;
 	top: 50%;
@@ -971,6 +979,7 @@ Template 2
 	transform: translate(-50%,-50%);
 }
 
+.wppr-template-1 .wppr-review-product-image.wppr-review-product-image-full img,
 .wppr-template-2 .wppr-review-product-image.wppr-review-product-image-full img {
 	width: auto;
 	max-width: none;
