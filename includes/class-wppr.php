@@ -67,7 +67,7 @@ class WPPR {
 	 */
 	public function __construct() {
 		$this->plugin_name = 'wppr';
-		$this->version     = '3.3.0';
+		$this->version     = '3.3.2';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -123,7 +123,7 @@ class WPPR {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'wp_ajax_update_options', $plugin_admin, 'update_options' );
-		$this->loader->add_action( 'wp_ajax_get_categories', $plugin_admin, 'get_categories' );
+		$this->loader->add_action( 'load-edit.php', $plugin_admin, 'get_additional_fields' );
 
 		$plugin_editor = new WPPR_Editor( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'add_meta_boxes', $plugin_editor, 'set_editor' );
@@ -179,6 +179,10 @@ class WPPR {
 		$this->loader->add_action( 'comment_form_logged_in_after', $plugin_public, 'add_comment_fields' );
 		$this->loader->add_action( 'comment_form_after_fields', $plugin_public, 'add_comment_fields' );
 		$this->loader->add_filter( 'comment_text', $plugin_public, 'show_comment_ratings' );
+
+		if ( function_exists( 'ampforwp_is_amp_endpoint' ) || function_exists( 'is_amp_endpoint' ) ) {
+			$this->loader->add_action( 'amp_post_template_css', $plugin_public, 'wppr_amp_support' );
+		}
 
 		$currentTheme = wp_get_theme();
 		if ( $currentTheme->get( 'Name' ) !== 'Bookrev' && $currentTheme->get( 'Name' ) !== 'Book Rev Lite' ) {
