@@ -319,11 +319,13 @@ class Wppr_Public {
 				), false
 			);
 
-			$output .= $template->render(
-				'rich-json-ld', array(
-					'review_object' => $review_object,
-				), false
-			);
+			if ( $review_object->wppr_get_option( 'wppr_rich_snippet' ) == 'yes' ) {
+				$output .= $template->render(
+					'rich-json-ld', array(
+						'review_object' => $review_object,
+					), false
+				);
+			}
 
 			$review_position_before_content = $this->review->wppr_get_option( 'cwppos_show_reviewbox' );
 			if ( $review_position_before_content == 'yes' ) {
@@ -351,18 +353,14 @@ class Wppr_Public {
 		}
 		$options      = $this->review->get_options();
 		$option_names = wp_list_pluck( $options, 'name' );
-		$sliders      = array();
-		foreach ( $option_names as $k => $value ) {
-			$sliders[] =
-				'<div class="wppr-comment-form-meta">
-            <label for="wppr-slider-option-' . $k . '">' . $value . '</label>
-            <input type="text" id="wppr-slider-option-' . $k . '" class="meta_option_input" value="" name="wppr-slider-option-' . $k . '" readonly="readonly">
-            <div class="wppr-comment-meta-slider"></div>
-            <div class="cwpr_clearfix"></div>
-		</div>';
-		}
-		echo '<div id="wppr-slider-comment">' . implode( '', $sliders ) . '<div class="cwpr_clearfix"></div></div>';
 
+		$template = new WPPR_Template();
+		$template->render(
+			'comment-fields-tpl', array(
+				'review_object'      => $this->review,
+				'option_names'      => $option_names,
+			)
+		);
 	}
 
 	/**
@@ -435,23 +433,17 @@ class Wppr_Public {
 		if ( empty( $options ) ) {
 			return $text;
 		}
-		$return  = '';
-		$return .= '<div class="user-comments-grades">';
-		foreach ( $options as $k => $option ) {
-			$intGrade = intval( $option['value'] * 10 );
-			$return  .= '<div class="comment-meta-option">
-                            <p class="comment-meta-option-name">' . $option['name'] . '</p>
-                            <p class="comment-meta-option-grade">' . $option['value'] . '</p>
-                            <div class="cwpr_clearfix"></div>
-                            <div class="comment-meta-grade-bar ' . $this->review->get_rating_class( $intGrade ) . '">
-                                <div class="comment-meta-grade" style="width: ' . $intGrade . '%"></div>
-                            </div><!-- end .comment-meta-grade-bar -->
-                        </div><!-- end .comment-meta-option -->
-					';
-		}
-		$return .= '</div>';
 
-		return $return . $text . '<div class="cwpr_clearfix"></div>';
+		$template = new WPPR_Template();
+		return $template->render(
+			'comment-ratings-tpl', array(
+				'review_object'      => $this->review,
+				'options'   => $options,
+				'text'      => $text,
+				'review'    => $this->review,
+			),
+			false
+		);
 	}
 
 }

@@ -65,12 +65,12 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 		$order         = array();
 		$order['date'] = 'DESC';
 
+		$review = null;
 		$results = $reviews->find( $post, $instance['no_items'], array(), $order );
 		if ( ! empty( $results ) ) {
 			$first  = reset( $results );
 			$first  = isset( $first['ID'] ) ? $first['ID'] : 0;
 			$review = new WPPR_Review_Model( $first );
-			$this->assets( $review );
 		}
 		// before and after widget arguments are defined by themes
 		echo $args['before_widget'];
@@ -81,6 +81,7 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 		$template = new WPPR_Template();
 		$template->render(
 			'widget/' . $instance['cwp_tp_layout'], array(
+				'review_object' => $review,
 				'results'      => $results,
 				'title_length' => self::RESTRICT_TITLE_CHARS,
 				'instance'     => $instance,
@@ -109,16 +110,6 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 		$instance = parent::form( $instance );
 
 		include( WPPR_PATH . '/includes/admin/layouts/widget-admin-tpl.php' );
-	}
-
-	/**
-	 * Load public assets specific to this widget.
-	 *
-	 * @since   3.0.0
-	 * @access  public
-	 */
-	public function load_assets() {
-		// empty.
 	}
 
 	/**

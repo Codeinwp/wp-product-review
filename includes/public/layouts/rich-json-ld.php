@@ -9,9 +9,6 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       3.0.0
  */
+?>
 
-if ( $review_object->wppr_get_option( 'wppr_rich_snippet' ) == 'yes' ) {
-	?>
-	<script type="application/ld+json"><?php echo json_encode( $review_object->get_json_ld() ); ?></script>
-	<?php
-}
+<script type="application/ld+json"><?php echo json_encode( $review_object->get_json_ld() ); ?></script>
