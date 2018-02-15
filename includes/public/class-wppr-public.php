@@ -311,8 +311,8 @@ class Wppr_Public {
 			.wppr-template h3.wppr-review-pros-name{
 					color: ' . $review->wppr_get_option( 'cwppos_pros_color' ) . ';
 			} 
-		';  
-			return $style;
+		';
+		return $style;
 	}
 
 	/**
@@ -368,6 +368,7 @@ class Wppr_Public {
 		);
 		$style = $this->generate_styles(); 
 		$style = apply_filters( 'wppr_global_style', $style );
+
 		wp_add_inline_style( $this->plugin_name . '-frontpage-stylesheet', $style );
 	}
 
