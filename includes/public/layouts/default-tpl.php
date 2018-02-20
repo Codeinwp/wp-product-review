@@ -5,8 +5,9 @@
  * @deprecated
  * @package WPPR
  */
+
 ob_start();
-include_once WPPR_PATH . '/includes/public/layouts/default.php';
+include_once WPPR_PATH . '/includes/public/layouts/' . $review_object->get_template() . '.php';
 if ( ! isset( $output ) ) {
 	$output = '';
 }
