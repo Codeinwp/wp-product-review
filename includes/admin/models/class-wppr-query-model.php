@@ -249,7 +249,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			$conditions['having'] .= $this->db->prepare( ' AND `rating`  > %f ', $filter['rating'] );
 		}
 
-		$conditions     .= apply_filters( 'wppr_where_clause', '', $post, $filter );
+		$conditions     = apply_filters( 'wppr_where_clause', $conditions, $post, $filter );
 
 		return $conditions;
 	}
