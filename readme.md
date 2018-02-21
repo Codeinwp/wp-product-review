@@ -67,6 +67,11 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 ## Changelog ##
+### 3.4.1 - 2018-02-21  ###
+
+* Fix issue with category filtering when querying reviews.
+
+
 ### 3.4.0 - 2018-02-20  ###
 
 * Adds AMP support for the review box.
