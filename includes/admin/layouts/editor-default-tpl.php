@@ -53,6 +53,44 @@ $check = $review->is_active() ? 'yes' : 'no';
 		<?php do_action( 'wppr_editor_details_before', $model->post ); ?>
 		<div class="wppr-review-details-fields wppr-review-fieldset">
 			<ul>
+				<?php
+				$templates = apply_filters( 'wppr_review_templates', array( 'default', 'style1', 'style2' ) );
+				if ( $templates ) {
+					?>
+					<li>
+						<label for="wppr-editor-template"><?php _e( 'Template', 'wp-product-review' ); ?></label>
+						<?php
+						foreach ( $templates as $template ) {
+							$template_id = 'wppr-review-template-' . esc_attr( $template );
+							echo $html_helper->radio(
+								array(
+									'name'    => 'wppr-review-template',
+									'id'      => $template_id,
+									'class'   => 'wppr-review-template',
+									'value'   => $template,
+									'current' => $review->get_template(),
+									'options' => array(
+										'disabled' => ! defined( 'WPPR_PRO_SLUG' ) && 'default' !== $template,
+									),
+								)
+							);
+							?>
+							<label for="<?php echo $template_id; ?>"><img
+										src='<?php echo WPPR_URL . "/assets/img/templates/$template.png"; ?>'
+										class="wppr-review-template"/></label>
+							<?php
+						}
+						?>
+					</li>
+					<?php
+				}
+				if ( ! defined( 'WPPR_PRO_SLUG' ) ) {
+					?>
+					<label class="wppr-upsell-label"><?php echo sprintf( esc_html__( 'You will need the %1$spremium%2$s version to use the extra review templates. You can checkout this %3$sdemo%4$s to see how they are looking.', 'wp-product-review' ), '<a href="' . WPPR_UPSELL_LINK . '">', '</a>', '<a href="https://demo.themeisle.com/wp-product-review/multiple-review-templates/">', '</a>' ); ?></label>
+					<br/>
+					<?php
+				}
+				?>
 				<li>
 					<label for="wppr-editor-product-name"><?php _e( 'Product Name', 'wp-product-review' ); ?></label>
 					<?php

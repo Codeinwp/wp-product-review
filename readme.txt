@@ -67,6 +67,13 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+= 3.4.0 - 2018-02-20  = 
+
+* Adds AMP support for the review box.
+* Adds compatibility with 2 more review templates.
+* Improves extensibility by adding more hooks.
+
+
 = 3.3.2 - 2018-01-05  = 
 
 * Adds filtering option for posts/page admin listing page.

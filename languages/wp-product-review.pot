@@ -2,9 +2,9 @@
 # This file is distributed under the no.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Product Review Lite 3.3.0\n"
+"Project-Id-Version: WP Product Review Lite 3.4.0\n"
 "Report-Msgid-Bugs-To: https://github.com/Codeinwp/wp-product-review/issues\n"
-"POT-Creation-Date: 2018-01-05 10:31:15+00:00\n"
+"POT-Creation-Date: 2018-02-15 17:46:19+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -42,6 +42,18 @@ msgstr ""
 
 #: includes/admin/class-wppr-admin.php:138
 msgid "More Features "
+msgstr ""
+
+#: includes/admin/class-wppr-admin.php:283
+msgid "Show All"
+msgstr ""
+
+#: includes/admin/class-wppr-admin.php:285
+msgid "Show only Reviews"
+msgstr ""
+
+#: includes/admin/class-wppr-admin.php:326
+msgid "Review"
 msgstr ""
 
 #: includes/admin/class-wppr-editor.php:58
@@ -360,114 +372,124 @@ msgstr ""
 msgid "Specify the general details for the reviewed product."
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:57
+#: includes/admin/layouts/editor-default-tpl.php:61
+msgid "Template"
+msgstr ""
+
+#: includes/admin/layouts/editor-default-tpl.php:89
+msgid ""
+"You will need the %1$spremium%2$s version to use the extra review "
+"templates. You can checkout this %3$sdemo%4$s to see how they are looking."
+msgstr ""
+
+#: includes/admin/layouts/editor-default-tpl.php:95
 msgid "Product Name"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:63
+#: includes/admin/layouts/editor-default-tpl.php:101
 msgid "Product name"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:69
+#: includes/admin/layouts/editor-default-tpl.php:107
 msgid "Product Image"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:75
+#: includes/admin/layouts/editor-default-tpl.php:113
 msgid "Choose or Upload an Image"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:80
+#: includes/admin/layouts/editor-default-tpl.php:118
 msgid "The optimum size of the product image must be 600 x 600 px"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:83
+#: includes/admin/layouts/editor-default-tpl.php:121
 msgid "If no image is provided, featured image is used"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:87
+#: includes/admin/layouts/editor-default-tpl.php:125
 msgid "Product Image Click"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:100
+#: includes/admin/layouts/editor-default-tpl.php:138
 msgid "Show Whole Image"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:112
+#: includes/admin/layouts/editor-default-tpl.php:150
 msgid "Open Affiliate link"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:119
-#: includes/admin/layouts/editor-default-tpl.php:125
-#: includes/admin/layouts/editor-default-tpl.php:149
-#: includes/admin/layouts/editor-default-tpl.php:155
-#: includes/admin/layouts/editor-default-tpl.php:183
-#: includes/admin/layouts/editor-default-tpl.php:189
+#: includes/admin/layouts/editor-default-tpl.php:157
+#: includes/admin/layouts/editor-default-tpl.php:163
+#: includes/admin/layouts/editor-default-tpl.php:187
+#: includes/admin/layouts/editor-default-tpl.php:193
+#: includes/admin/layouts/editor-default-tpl.php:221
+#: includes/admin/layouts/editor-default-tpl.php:227
 msgid "Affiliate Button Text"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:131
-#: includes/admin/layouts/editor-default-tpl.php:137
-#: includes/admin/layouts/editor-default-tpl.php:161
-#: includes/admin/layouts/editor-default-tpl.php:167
-#: includes/admin/layouts/editor-default-tpl.php:195
-#: includes/admin/layouts/editor-default-tpl.php:201
+#: includes/admin/layouts/editor-default-tpl.php:169
+#: includes/admin/layouts/editor-default-tpl.php:175
+#: includes/admin/layouts/editor-default-tpl.php:199
+#: includes/admin/layouts/editor-default-tpl.php:205
+#: includes/admin/layouts/editor-default-tpl.php:233
+#: includes/admin/layouts/editor-default-tpl.php:239
 msgid "Affiliate Link"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:143
+#: includes/admin/layouts/editor-default-tpl.php:181
 msgid "Add new link"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:215
-#: includes/admin/layouts/editor-default-tpl.php:221
+#: includes/admin/layouts/editor-default-tpl.php:253
+#: includes/admin/layouts/editor-default-tpl.php:259
 msgid "Product Price"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:232
+#: includes/admin/layouts/editor-default-tpl.php:270
 msgid "Product Options"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:233
+#: includes/admin/layouts/editor-default-tpl.php:271
 msgid "Insert your options and their grades. Grading must be done from 0 to 100."
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:238
+#: includes/admin/layouts/editor-default-tpl.php:276
 msgid "Preload Info"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:241
+#: includes/admin/layouts/editor-default-tpl.php:279
 msgid ""
 " In order to be able to automatically load your options from another posts, "
 "you need the "
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:241
+#: includes/admin/layouts/editor-default-tpl.php:279
 msgid "PRO add-on"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:261
-#: includes/admin/layouts/editor-default-tpl.php:303
-#: includes/admin/layouts/editor-default-tpl.php:334
+#: includes/admin/layouts/editor-default-tpl.php:299
+#: includes/admin/layouts/editor-default-tpl.php:341
+#: includes/admin/layouts/editor-default-tpl.php:372
 msgid "Option"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:270
+#: includes/admin/layouts/editor-default-tpl.php:308
 msgid "Grade"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:284
+#: includes/admin/layouts/editor-default-tpl.php:322
 msgid "Pro Features"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:285
+#: includes/admin/layouts/editor-default-tpl.php:323
 msgid "Insert product's pro features below."
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:316
+#: includes/admin/layouts/editor-default-tpl.php:354
 msgid "Cons Features"
 msgstr ""
 
-#: includes/admin/layouts/editor-default-tpl.php:317
+#: includes/admin/layouts/editor-default-tpl.php:355
 msgid "Insert product's cons features below."
 msgstr ""
 
@@ -519,11 +541,11 @@ msgstr ""
 msgid "Display Product Image :"
 msgstr ""
 
-#: includes/admin/models/class-wppr-editor-model.php:266
+#: includes/admin/models/class-wppr-editor-model.php:268
 msgid "Add a product image to the review"
 msgstr ""
 
-#: includes/admin/models/class-wppr-editor-model.php:267
+#: includes/admin/models/class-wppr-editor-model.php:269
 msgid "Attach the image"
 msgstr ""
 
@@ -563,6 +585,18 @@ msgstr ""
 
 #: includes/admin/widgets/class-wppr-top-products-widget.php:132
 msgid "Top Products"
+msgstr ""
+
+#: includes/public/layouts/style1.php:44
+msgid "'s rating"
+msgstr ""
+
+#: includes/public/layouts/style2.php:61
+msgid "Users score:"
+msgstr ""
+
+#: includes/public/layouts/style2.php:63
+msgid "votes"
 msgstr ""
 
 #. Plugin Name of the plugin/theme

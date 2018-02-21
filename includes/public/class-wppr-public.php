@@ -72,57 +72,11 @@ class Wppr_Public {
 	}
 
 	/**
-	 *
-	 * Load the review assets based on the context.
-	 *
-	 * @param WPPR_Review_Model $review Review model.
+	 * Function to generate styles on the basis of Ratings.
 	 */
-	public function load_review_assets( $review = null ) {
-		$load = false;
-		if ( ! empty( $review ) ) {
-			if ( $review->is_active() ) {
-				$load = true;
-			}
-		} else {
-			$review = $this->review;
-			if ( empty( $review ) ) {
-				$load = false;
-			} elseif ( $review->is_active() ) {
-				$load = true;
-			}
-		}
+	public function generate_styles() {
 
-		if ( ! $load ) {
-			return;
-		}
-
-		if ( $review->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
-			wp_enqueue_script( $this->plugin_name . '-lightbox-js', WPPR_URL . '/assets/js/lightbox.min.js', array( 'jquery' ), $this->version, true );
-			wp_enqueue_style( $this->plugin_name . '-lightbox-css', WPPR_URL . '/assets/css/lightbox.css', array(), $this->version );
-		}
-
-		if ( $review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
-			wp_enqueue_script( 'jquery-ui-slider' );
-			wp_enqueue_script(
-				$this->plugin_name . '-frontpage-js', WPPR_URL . '/assets/js/main.js', array(
-					'jquery',
-				), $this->version, true
-			);
-			if ( $review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
-				wp_enqueue_style( $this->plugin_name . 'jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
-			}
-		}
-		$icon = $review->wppr_get_option( 'cwppos_change_bar_icon' );
-
-		if ( ! empty( $icon ) && $review->wppr_get_option( 'cwppos_fontawesome' ) == 'no' ) {
-			wp_enqueue_style( $this->plugin_name . 'font-awesome', WPPR_URL . '/assets/css/font-awesome.min.css', array(), $this->version );
-		}
-		wp_enqueue_style( $this->plugin_name . '-frontpage-stylesheet', WPPR_URL . '/assets/css/frontpage.css', array(), $this->version );
-		wp_enqueue_style(
-			$this->plugin_name . '-percentage-circle', WPPR_URL . '/assets/css/circle.css', array(),
-			$this->version
-		);
-
+		$review = new WPPR_Review_Model();
 		$conditional_styles = '';
 		if ( $review->wppr_get_option( 'cwppos_show_icon' ) == 'yes' ) {
 			$conditional_styles .= '
@@ -288,9 +242,133 @@ class Wppr_Public {
                     }
                     
                     ' . $conditional_styles . '
-              
+               
             ';
+
+		/**
+		 * Template specific styles.
+		 */
+		$style .= ' 
+			.wppr-template-1    .wppr-review-grade-option .wppr-very-good,
+			.wppr-template-2    .wppr-review-rating .wppr-very-good{
+					background: ' . $review->wppr_get_option( 'cwppos_rating_very_good' ) . ';
+			} 
+			.wppr-template-1    .wppr-review-grade-option .wppr-good,
+			.wppr-template-2     .wppr-review-rating  .wppr-good{
+					background: ' . $review->wppr_get_option( 'cwppos_rating_good' ) . ';
+			} 
+			.wppr-template-1    .wppr-review-grade-option .wppr-not-bad,
+			.wppr-template-2    .wppr-review-rating .wppr-not-bad{
+					background: ' . $review->wppr_get_option( 'cwppos_rating_notbad' ) . ';
+			}
+			 
+			.wppr-template-1    .wppr-review-grade-option .wppr-weak,
+			.wppr-template-2    .wppr-review-rating  .wppr-weak{
+					background: ' . $review->wppr_get_option( 'cwppos_rating_weak' ) . ';
+			}  
+			.wppr-template-1    .wppr-review-grade-option .wppr-default,
+			.wppr-template-2   .wppr-review-rating  .wppr-default{
+					background: ' . $review->wppr_get_option( 'cwppos_rating_default' ) . ';
+			} 
+			
+			
+			
+			.wppr-template-1    .wppr-review-grade-number .wppr-very-good,
+			.wppr-template-1    .wppr-review-stars .wppr-very-good,
+			.wppr-template-2    .wppr-review-option-rating .wppr-very-good{
+					color: ' . $review->wppr_get_option( 'cwppos_rating_very_good' ) . ';
+			}
+			.wppr-template-1    .wppr-review-grade-number .wppr-good,
+			.wppr-template-1    .wppr-review-stars .wppr-good,
+			.wppr-template-2    .wppr-review-option-rating  .wppr-good{
+					color: ' . $review->wppr_get_option( 'cwppos_rating_good' ) . ';
+			}
+			
+			.wppr-template-1    .wppr-review-grade-number .wppr-not-bad,
+			.wppr-template-1    .wppr-review-stars .wppr-not-bad,
+			.wppr-template-2  .wppr-review-option-rating .wppr-not-bad{
+					color: ' . $review->wppr_get_option( 'cwppos_rating_notbad' ) . ';
+					color: ' . $review->wppr_get_option( 'cwppos_rating_notbad' ) . ';
+			}
+			.wppr-template-1    .wppr-review-grade-number .wppr-weak,
+			.wppr-template-1    .wppr-review-stars .wppr-weak,
+			.wppr-template-2  .wppr-review-option-rating  .wppr-weak{
+					color: ' . $review->wppr_get_option( 'cwppos_rating_weak' ) . ';
+			} 
+			.wppr-template-1    .wppr-review-grade-number .wppr-default,
+			.wppr-template-1    .wppr-review-stars .wppr-default,
+			.wppr-review-option-rating  .wppr-default{
+					color: ' . $review->wppr_get_option( 'cwppos_rating_default' ) . ';
+			} 
+			
+			
+			.wppr-template .wppr-review-name{
+					color: ' . $review->wppr_get_option( 'cwppos_font_color' ) . ';
+			} 
+			.wppr-template h3.wppr-review-cons-name{
+					color: ' . $review->wppr_get_option( 'cwppos_cons_color' ) . ';
+			} 
+			.wppr-template h3.wppr-review-pros-name{
+					color: ' . $review->wppr_get_option( 'cwppos_pros_color' ) . ';
+			} 
+		';
+		return $style;
+	}
+
+	/**
+	 *
+	 * Load the review assets based on the context.
+	 *
+	 * @param WPPR_Review_Model $review Review model.
+	 */
+	public function load_review_assets( $review = null ) {
+		$load = false;
+		if ( ! empty( $review ) ) {
+			if ( $review->is_active() ) {
+				$load = true;
+			}
+		} else {
+			$review = $this->review;
+			if ( empty( $review ) ) {
+				$load = false;
+			} elseif ( $review->is_active() ) {
+				$load = true;
+			}
+		}
+
+		if ( ! $load ) {
+			return;
+		}
+
+		if ( $review->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
+			wp_enqueue_script( $this->plugin_name . '-lightbox-js', WPPR_URL . '/assets/js/lightbox.min.js', array( 'jquery' ), $this->version, true );
+			wp_enqueue_style( $this->plugin_name . '-lightbox-css', WPPR_URL . '/assets/css/lightbox.css', array(), $this->version );
+		}
+
+		if ( $review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
+			wp_enqueue_script( 'jquery-ui-slider' );
+			wp_enqueue_script(
+				$this->plugin_name . '-frontpage-js', WPPR_URL . '/assets/js/main.js', array(
+					'jquery',
+				), $this->version, true
+			);
+			if ( $review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
+				wp_enqueue_style( $this->plugin_name . 'jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
+			}
+		}
+		$icon = $review->wppr_get_option( 'cwppos_change_bar_icon' );
+
+		if ( ! empty( $icon ) && $review->wppr_get_option( 'cwppos_fontawesome' ) == 'no' ) {
+			wp_enqueue_style( $this->plugin_name . 'font-awesome', WPPR_URL . '/assets/css/font-awesome.min.css', array(), $this->version );
+		}
+		wp_enqueue_style( $this->plugin_name . '-frontpage-stylesheet', WPPR_URL . '/assets/css/frontpage.css', array(), $this->version );
+		wp_enqueue_style(
+			$this->plugin_name . '-percentage-circle', WPPR_URL . '/assets/css/circle.css', array(),
+			$this->version
+		);
+		$style = $this->generate_styles();
 		$style = apply_filters( 'wppr_global_style', $style );
+
 		wp_add_inline_style( $this->plugin_name . '-frontpage-stylesheet', $style );
 	}
 
@@ -312,9 +390,8 @@ class Wppr_Public {
 			$output        = '';
 			$review_object = $this->review;
 			$template      = new WPPR_Template();
-
-			$output .= $template->render(
-				'default', array(
+			$output        .= $template->render(
+				$review_object->get_template(), array(
 					'review_object' => $review_object,
 				), false
 			);
@@ -435,11 +512,11 @@ class Wppr_Public {
 		if ( empty( $options ) ) {
 			return $text;
 		}
-		$return  = '';
+		$return = '';
 		$return .= '<div class="user-comments-grades">';
 		foreach ( $options as $k => $option ) {
 			$intGrade = intval( $option['value'] * 10 );
-			$return  .= '<div class="comment-meta-option">
+			$return   .= '<div class="comment-meta-option">
                             <p class="comment-meta-option-name">' . $option['name'] . '</p>
                             <p class="comment-meta-option-grade">' . $option['value'] . '</p>
                             <div class="cwpr_clearfix"></div>
@@ -450,8 +527,18 @@ class Wppr_Public {
 					';
 		}
 		$return .= '</div>';
-
 		return $return . $text . '<div class="cwpr_clearfix"></div>';
 	}
 
+	/**
+	 * AMP support for WPPR
+	 */
+	public function wppr_amp_support() {
+		$output = '';
+		$output .= wp_remote_retrieve_body( wp_remote_get( WPPR_URL . '/assets/css/frontpage.css' ) );
+		$output .= wp_remote_retrieve_body( wp_remote_get( WPPR_URL . '/assets/css/circle.css' ) );
+		$style = $this->generate_styles();
+		$output .= $style;
+		echo apply_filters( 'wppr_add_amp_css', $output );
+	}
 }

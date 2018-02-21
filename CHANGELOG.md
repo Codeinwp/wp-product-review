@@ -1,4 +1,10 @@
 
+ ### v3.4.0 - 2018-02-20 
+ **Changes:** 
+ * Adds AMP support for the review box.
+* Adds compatibility with 2 more review templates.
+* Improves extensibility by adding more hooks.
+ 
  ### v3.3.2 - 2018-01-05 
  **Changes:** 
  * Adds filtering option for posts/page admin listing page.
