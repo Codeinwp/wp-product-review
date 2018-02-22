@@ -540,7 +540,13 @@ class Wppr_Public {
 	 * AMP support for WPPR
 	 */
 	public function wppr_amp_support() {
+		$amp_cache_key = '_wppr_amp_css';
+		$cached_css    = get_transient( $amp_cache_key );
+		if ( ! empty( $cached_css ) ) {
+			echo $cached_css;
 
+			return;
+		}
 		require_once( ABSPATH . 'wp-admin/includes/file.php' );
 		WP_Filesystem();
 		global $wp_filesystem;
@@ -551,6 +557,8 @@ class Wppr_Public {
 		$style  = $this->generate_styles();
 		$output .= $style;
 		$output = $this->amp_css( $output );
+		set_transient( $amp_cache_key, $output, 5 * MINUTE_IN_SECONDS );
+
 		echo apply_filters( 'wppr_add_amp_css', $output );
 	}
 
