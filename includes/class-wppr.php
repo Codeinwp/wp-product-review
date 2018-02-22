@@ -181,6 +181,7 @@ class WPPR {
 		$this->loader->add_filter( 'comment_text', $plugin_public, 'show_comment_ratings' );
 
 		if ( function_exists( 'ampforwp_is_amp_endpoint' ) || function_exists( 'is_amp_endpoint' ) ) {
+
 			$this->loader->add_action( 'amp_post_template_css', $plugin_public, 'wppr_amp_support' );
 		}
 
