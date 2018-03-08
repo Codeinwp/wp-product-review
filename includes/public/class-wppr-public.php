@@ -118,6 +118,8 @@ class Wppr_Public {
 			wp_enqueue_style( $this->plugin_name . 'font-awesome', WPPR_URL . '/assets/css/font-awesome.min.css', array(), $this->version );
 		}
 		wp_enqueue_style( $this->plugin_name . '-frontpage-stylesheet', WPPR_URL . '/assets/css/frontpage.css', array(), $this->version );
+		wp_enqueue_style( $this->plugin_name . '-template1-stylesheet', WPPR_URL . '/assets/css/template1.css', array(), $this->version );
+		wp_enqueue_style( $this->plugin_name . '-template2-stylesheet', WPPR_URL . '/assets/css/template2.css', array(), $this->version );
 		wp_enqueue_style(
 			$this->plugin_name . '-percentage-circle', WPPR_URL . '/assets/css/circle.css', array(),
 			$this->version
@@ -540,26 +542,44 @@ class Wppr_Public {
 	 * AMP support for WPPR
 	 */
 	public function wppr_amp_support() {
-		$amp_cache_key = '_wppr_amp_css';
-		$cached_css    = get_transient( $amp_cache_key );
-		if ( ! empty( $cached_css ) ) {
-			echo $cached_css;
+		/*
+			$amp_cache_key = '_wppr_amp_css';
+			$cached_css    = get_transient( $amp_cache_key );
+			if ( ! empty( $cached_css ) ) {
+				echo $cached_css;
 
-			return;
-		}
+				return;
+			}
+		*/
+		$current_template = $this->review->get_template();
 		require_once( ABSPATH . 'wp-admin/includes/file.php' );
 		WP_Filesystem();
 		global $wp_filesystem;
 		$output = '';
 		$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/frontpage.css' );
-		$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/circle.css' );
-		$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/rating-amp.css' );
+		if( $current_template ==  'style1' ){
+			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/template1.css' );
+		}
+		else if( $current_template == 'style2' ) {
+			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/template2.css' );
+		}
+		else if( $current_template == 'default' ) {
+			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/circle.css' );
+			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/rating-amp.css' );
+		}
 		$style  = $this->generate_styles();
 		$output .= $style;
 		$output = $this->amp_css( $output );
-		set_transient( $amp_cache_key, $output, 5 * MINUTE_IN_SECONDS );
+		/*set_transient( $amp_cache_key, $output, 5 * MINUTE_IN_SECONDS );*/
 
 		echo apply_filters( 'wppr_add_amp_css', $output );
+	}
+
+	/**
+	 * Adding Font Awesome at the header for AMP.
+	 */
+	public function wppr_amp_add_fa() {
+		echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">';
 	}
 
 	/**

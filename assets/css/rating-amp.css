@@ -129,3 +129,13 @@
     -ms-transform: rotate(36deg);
     transform: rotate(36deg);
 }
+
+.wppr-inline-pie-chart {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.default-img {
+    width: 150px;
+}

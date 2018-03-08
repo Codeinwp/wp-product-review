@@ -75,7 +75,15 @@
 						</div>
 						<div class="wppr-review-grade-option-rating wppr-default">
 							<span class="<?php echo $review_object->get_rating_class( $review_option_rating ); ?>"
-								  style="width:<?php echo esc_attr( $review_option_rating ); ?>%;"></span>
+							<?php 
+								if ( function_exists( 'ampforwp_is_amp_endpoint' ) && ampforwp_is_amp_endpoint() || function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() ) {
+									echo 'style="min-width:'; //AMP style sanitizer coverts inline style's 'width' to 'max-width' which won't work.
+								}
+								else {
+									echo 'style="width:';
+								} 
+							?>
+							<?php echo esc_attr( $review_option_rating ); ?>%;"></span>
 						</div>
 					</div><!-- end .wppr-review-grade-option -->
 				<?php } ?>
