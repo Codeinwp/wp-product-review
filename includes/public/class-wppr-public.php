@@ -79,7 +79,7 @@ class Wppr_Public {
 	 * If this is a CPT, use the post title as the product name.
 	 */
 	public function get_name_for_cpt( $name, $id ) {
-		$post	= get_post( $id );
+		$post   = get_post( $id );
 		return $post->post_title;
 	}
 

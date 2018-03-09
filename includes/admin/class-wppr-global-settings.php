@@ -346,7 +346,7 @@ class WPPR_Global_Settings {
 		if ( ! is_admin() ) {
 			return true;
 		}
-		if ( function_exists('is_plugin_active') && is_plugin_active( 'disqus-comment-system/disqus.php' ) || ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'comments' ) ) ) {
+		if ( function_exists( 'is_plugin_active' ) && is_plugin_active( 'disqus-comment-system/disqus.php' ) || ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'comments' ) ) ) {
 			return false;
 		}
 

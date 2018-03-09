@@ -259,36 +259,37 @@ class WPPR {
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'supports'           => array( 'title', 'editor', 'thumbnail' ),
-			'taxonomies'	=> array( 'wppr_category' ),
-			'can_export'	=> true,
+			'taxonomies'    => array( 'wppr_category' ),
+			'can_export'    => true,
 			'capability_type'    => 'post',
 		);
 		register_post_type( 'wppr_review', $args );
 
-		register_taxonomy( 'wppr_category', 'wppr_review',
-            array(
-                'hierarchical'          => true,
-                'labels'                => array(
-                  'name'                => __( 'Review Category', 'wp-product-review' ),
-                  'singular_name'       => __( 'Review Category', 'wp-product-review' ),
-                  'search_items'        =>  __( 'Search Review Categories', 'wp-product-review' ),
-                  'all_items'           => __( 'All Review Categories', 'wp-product-review' ),
-                  'parent_item'         => __( 'Parent Review Category', 'wp-product-review' ),
-                  'parent_item_colon'   => __( 'Parent Review Category', 'wp-product-review' ). ":",
-                  'edit_item'           => __( 'Edit Review Category', 'wp-product-review' ),
-                  'update_item'         => __( 'Update Review Category', 'wp-product-review' ),
-                  'add_new_item'        => __( 'Add New Review Category', 'wp-product-review' ),
-                  'new_item_name'       => __( 'New Review Category', 'wp-product-review' ),
-                  'menu_name'           => __( 'Review Categories', 'wp-product-review' ),
-                ),
-                'show_admin_column'     => true,
-                'public'                => true,
-                'show_in_menu'          => 'wppr',
-                'rewrite'               => array( 'slug' => 'wpprcategory', 'with_front' => true ),
-            )
+		register_taxonomy(
+			'wppr_category', 'wppr_review',
+			array(
+				'hierarchical'          => true,
+				'labels'                => array(
+					'name'                => __( 'Review Category', 'wp-product-review' ),
+					'singular_name'       => __( 'Review Category', 'wp-product-review' ),
+					'search_items'        => __( 'Search Review Categories', 'wp-product-review' ),
+					'all_items'           => __( 'All Review Categories', 'wp-product-review' ),
+					'parent_item'         => __( 'Parent Review Category', 'wp-product-review' ),
+					'parent_item_colon'   => __( 'Parent Review Category', 'wp-product-review' ) . ':',
+					'edit_item'           => __( 'Edit Review Category', 'wp-product-review' ),
+					'update_item'         => __( 'Update Review Category', 'wp-product-review' ),
+					'add_new_item'        => __( 'Add New Review Category', 'wp-product-review' ),
+					'new_item_name'       => __( 'New Review Category', 'wp-product-review' ),
+					'menu_name'           => __( 'Review Categories', 'wp-product-review' ),
+				),
+				'show_admin_column'     => true,
+				'public'                => true,
+				'show_in_menu'          => 'wppr',
+				'rewrite'               => array( 'slug' => 'wpprcategory', 'with_front' => true ),
+			)
 		);
 
-        flush_rewrite_rules();
+		flush_rewrite_rules();
 
 	}
 }

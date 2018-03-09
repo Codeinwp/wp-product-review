@@ -364,11 +364,13 @@ class WPPR_Admin {
 			$this->version
 		);
 
-		wp_localize_script( $this->plugin_name . '-cpt-js', 'wppr', array(
-			'i10n' => array(
-				'title_placeholder' => __( 'Enter Review Title', 'wp-product-review' ),
-			),
-		) );
+		wp_localize_script(
+			$this->plugin_name . '-cpt-js', 'wppr', array(
+				'i10n' => array(
+					'title_placeholder' => __( 'Enter Review Title', 'wp-product-review' ),
+				),
+			)
+		);
 	}
 
 	/**
@@ -380,8 +382,8 @@ class WPPR_Admin {
 			return;
 		}
 
-		add_filter( "manage_wppr_review_posts_columns", array( $this, 'manage_cpt_columns' ), 10, 1 );
-		add_action( "manage_wppr_review_posts_custom_column", array( $this, 'manage_cpt_custom_column' ), 10, 2 );
+		add_filter( 'manage_wppr_review_posts_columns', array( $this, 'manage_cpt_columns' ), 10, 1 );
+		add_action( 'manage_wppr_review_posts_custom_column', array( $this, 'manage_cpt_custom_column' ), 10, 2 );
 	}
 
 	/**
@@ -390,7 +392,7 @@ class WPPR_Admin {
 	 * @access  public
 	 */
 	public function manage_cpt_columns( $columns ) {
-		$custom		= array(
+		$custom     = array(
 			'wppr_price' => __( 'Product Price', 'wp-product-review' ),
 			'wppr_rating' => __( 'Rating', 'wp-product-review' ),
 		);
