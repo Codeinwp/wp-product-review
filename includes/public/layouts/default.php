@@ -76,12 +76,15 @@ $cons = $review_object->get_cons();
 									<span><?php echo esc_html( number_format( ( $option['value'] / 10 ), 1 ) ); ?>
 										/10 </span>
 								</div>
-								<ul class="cwpr_clearfix <?php 
+								<ul class="cwpr_clearfix
+								<?php
 								if ( function_exists( 'ampforwp_is_amp_endpoint' ) && ampforwp_is_amp_endpoint() || function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() ) {
-								echo $review_object->get_rating_class( $option['value'] ); // AMP isn't accepting custom icons.
+									echo ' ' . $review_object->get_rating_class( $option['value'] ); // AMP isn't accepting custom icons.
 								} else {
-								echo $review_object->get_rating_class( $option['value'] ) . apply_filters( 'wppr_option_custom_icon', '' );
-								}?>">
+									echo ' ' . $review_object->get_rating_class( $option['value'] ) . apply_filters( 'wppr_option_custom_icon', '' );
+								}
+								?>
+								">
 									<?php for ( $i = 1; $i <= 10; $i ++ ) { ?>
 										<li
 											<?php
