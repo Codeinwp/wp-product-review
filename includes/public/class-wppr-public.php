@@ -542,26 +542,38 @@ class Wppr_Public {
 	 * AMP support for WPPR
 	 */
 	public function wppr_amp_support() {
-		$amp_cache_key = '_wppr_amp_css';
-		$cached_css    = get_transient( $amp_cache_key );
-		if ( ! empty( $cached_css ) ) {
-			echo $cached_css;
-
-			return;
-		}
 		$current_template = $this->review->get_template();
 		require_once( ABSPATH . 'wp-admin/includes/file.php' );
 		WP_Filesystem();
 		global $wp_filesystem;
 		$output = '';
 		$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/frontpage.css' );
-		if( $current_template ==  'style1' ){
+		if ( $current_template == 'style1' ) {
+			$amp_cache_key = '_wppr_amp_css_style1';
+			$cached_css    = get_transient( $amp_cache_key );
+			if ( ! empty( $cached_css ) ) {
+				echo $cached_css;
+
+				return;
+			}
 			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/template1.css' );
-		}
-		else if( $current_template == 'style2' ) {
+		} elseif ( $current_template == 'style2' ) {
+			$amp_cache_key = '_wppr_amp_css_style2';
+			$cached_css    = get_transient( $amp_cache_key );
+			if ( ! empty( $cached_css ) ) {
+				echo $cached_css;
+
+				return;
+			}
 			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/template2.css' );
-		}
-		else if( $current_template == 'default' ) {
+		} elseif ( $current_template == 'default' ) {
+			$amp_cache_key = '_wppr_amp_css_default';
+			$cached_css    = get_transient( $amp_cache_key );
+			if ( ! empty( $cached_css ) ) {
+				echo $cached_css;
+
+				return;
+			}
 			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/circle.css' );
 			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/rating-amp.css' );
 		}
