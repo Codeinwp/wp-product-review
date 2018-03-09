@@ -71,6 +71,7 @@ class WPPR {
 
 		$this->load_dependencies();
 		$this->set_locale();
+		$this->define_common_hooks();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 	}
@@ -107,6 +108,15 @@ class WPPR {
 	private function set_locale() {
 		$plugin_i18n = new WPPR_I18n();
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+	}
+
+	/**
+	 * Register common hooks here.
+	 *
+	 * @access   private
+	 */
+	private function define_common_hooks() {
+		$this->loader->add_action( 'init', $this, 'register_cpt', 11 );
 	}
 
 	/**
@@ -211,4 +221,74 @@ class WPPR {
 		return $this->loader;
 	}
 
+	/**
+	 * Registers the custom post attributes, if enabled.
+	 */
+	public function register_cpt() {
+		$model = new WPPR_Query_Model();
+		if ( 'yes' !== $model->wppr_get_option( 'wppr_cpt' ) ) {
+			return;
+		}
+
+		$labels = array(
+			'name'               => _x( 'Reviews', 'post type general name', 'wp-product-review' ),
+			'singular_name'      => _x( 'Review', 'post type singular name', 'wp-product-review' ),
+			'menu_name'          => _x( 'Reviews', 'admin menu', 'wp-product-review' ),
+			'name_admin_bar'     => _x( 'Review', 'add new on admin bar', 'wp-product-review' ),
+			'add_new'            => _x( 'Add New', 'review', 'wp-product-review' ),
+			'add_new_item'       => __( 'Add New Review', 'wp-product-review' ),
+			'new_item'           => __( 'New Review', 'wp-product-review' ),
+			'edit_item'          => __( 'Edit Review', 'wp-product-review' ),
+			'view_item'          => __( 'View Review', 'wp-product-review' ),
+			'all_items'          => __( 'All Reviews', 'wp-product-review' ),
+			'search_items'       => __( 'Search Reviews', 'wp-product-review' ),
+			'parent_item_colon'  => __( 'Parent Review:', 'wp-product-review' ),
+			'not_found'          => __( 'No review found.', 'wp-product-review' ),
+			'not_found_in_trash' => __( 'No reviews found in Trash.', 'wp-product-review' ),
+		);
+		$args   = array(
+			'labels'             => $labels,
+			'description'        => __( 'Reviews from WP Product Review', 'wp-product-review' ),
+			'public'             => true,
+			'publicly_queryable' => true,
+			'exclude_from_search' => true,
+			'show_in_nav_menus' => true,
+			'show_ui'            => true,
+			'show_in_menu'       => 'wppr',
+			'query_var'          => true,
+			'has_archive'        => true,
+			'hierarchical'       => false,
+			'supports'           => array( 'title', 'editor', 'thumbnail' ),
+			'taxonomies'	=> array( 'wppr_category' ),
+			'can_export'	=> true,
+			'capability_type'    => 'post',
+		);
+		register_post_type( 'wppr_review', $args );
+
+		register_taxonomy( 'wppr_category', 'wppr_review',
+            array(
+                'hierarchical'          => true,
+                'labels'                => array(
+                  'name'                => __( 'Review Category', 'wp-product-review' ),
+                  'singular_name'       => __( 'Review Category', 'wp-product-review' ),
+                  'search_items'        =>  __( 'Search Review Categories', 'wp-product-review' ),
+                  'all_items'           => __( 'All Review Categories', 'wp-product-review' ),
+                  'parent_item'         => __( 'Parent Review Category', 'wp-product-review' ),
+                  'parent_item_colon'   => __( 'Parent Review Category', 'wp-product-review' ). ":",
+                  'edit_item'           => __( 'Edit Review Category', 'wp-product-review' ),
+                  'update_item'         => __( 'Update Review Category', 'wp-product-review' ),
+                  'add_new_item'        => __( 'Add New Review Category', 'wp-product-review' ),
+                  'new_item_name'       => __( 'New Review Category', 'wp-product-review' ),
+                  'menu_name'           => __( 'Review Categories', 'wp-product-review' ),
+                ),
+                'show_admin_column'     => true,
+                'public'                => true,
+                'show_in_menu'          => 'wppr',
+                'rewrite'               => array( 'slug' => 'wpprcategory', 'with_front' => true ),
+            )
+		);
+
+        flush_rewrite_rules();
+
+	}
 }

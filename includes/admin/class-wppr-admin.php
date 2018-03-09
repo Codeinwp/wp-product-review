@@ -118,6 +118,8 @@ class WPPR_Admin {
 				$this->version
 			);
 		}
+
+		$this->load_review_cpt();
 	}
 
 	/**
@@ -257,15 +259,15 @@ class WPPR_Admin {
 
 		// add columns to post listing.
 		$post_types     = apply_filters( 'wppr_post_types_custom_columns', array() );
-		if ( ! $post_types ) {
-			return;
+		if ( $post_types ) {
+			foreach ( $post_types as $post_type ) {
+				$type   = in_array( $post_type, array( 'post', 'page' ) ) ? "{$post_type}s" : "{$post_type}_posts";
+				add_filter( "manage_{$type}_columns", array( $this, 'manage_posts_columns' ), 10, 1 );
+				add_action( "manage_{$type}_custom_column", array( $this, 'manage_posts_custom_column' ), 10, 2 );
+			}
 		}
 
-		foreach ( $post_types as $post_type ) {
-			$type   = in_array( $post_type, array( 'post', 'page' ) ) ? "{$post_type}s" : "{$post_type}_posts";
-			add_filter( "manage_{$type}_columns", array( $this, 'manage_posts_columns' ), 10, 1 );
-			add_action( "manage_{$type}_custom_column", array( $this, 'manage_posts_custom_column' ), 10, 2 );
-		}
+		$this->get_additional_fields_for_cpt();
 	}
 
 	/**
@@ -335,6 +337,80 @@ class WPPR_Admin {
 	public function manage_posts_custom_column( $column, $id ) {
 		switch ( $column ) {
 			case 'wppr_review':
+				$model = new WPPR_Review_Model( $id );
+				echo $model->get_rating();
+				break;
+		}
+	}
+
+	/**
+	 * Loads the assets for the CPT.
+	 */
+	public function load_review_cpt() {
+		$current_screen = get_current_screen();
+
+		if ( ! isset( $current_screen->id ) ) {
+			return;
+		}
+		if ( $current_screen->id != 'wppr_review' ) {
+			return;
+		}
+
+		wp_enqueue_script(
+			$this->plugin_name . '-cpt-js', WPPR_URL . '/assets/js/cpt.js',
+			array(
+				'jquery',
+			),
+			$this->version
+		);
+
+		wp_localize_script( $this->plugin_name . '-cpt-js', 'wppr', array(
+			'i10n' => array(
+				'title_placeholder' => __( 'Enter Review Title', 'wp-product-review' ),
+			),
+		) );
+	}
+
+	/**
+	 * Loads the additional fields for the CPT.
+	 */
+	private function get_additional_fields_for_cpt() {
+		$model = new WPPR_Query_Model();
+		if ( 'yes' !== $model->wppr_get_option( 'wppr_cpt' ) ) {
+			return;
+		}
+
+		add_filter( "manage_wppr_review_posts_columns", array( $this, 'manage_cpt_columns' ), 10, 1 );
+		add_action( "manage_wppr_review_posts_custom_column", array( $this, 'manage_cpt_custom_column' ), 10, 2 );
+	}
+
+	/**
+	 * Define the additional columns for the CPT.
+	 *
+	 * @access  public
+	 */
+	public function manage_cpt_columns( $columns ) {
+		$custom		= array(
+			'wppr_price' => __( 'Product Price', 'wp-product-review' ),
+			'wppr_rating' => __( 'Rating', 'wp-product-review' ),
+		);
+
+		// add before the date column.
+		return array_slice( $columns, 0, -1, true ) + $custom + array_slice( $columns, -1, null, true );
+	}
+
+	/**
+	 * Manage the additional columns for the CPT.
+	 *
+	 * @access  public
+	 */
+	public function manage_cpt_custom_column( $column, $id ) {
+		switch ( $column ) {
+			case 'wppr_price':
+				$model = new WPPR_Review_Model( $id );
+				echo $model->get_price();
+				break;
+			case 'wppr_rating':
 				$model = new WPPR_Review_Model( $id );
 				echo $model->get_rating();
 				break;

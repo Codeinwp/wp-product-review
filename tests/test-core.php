@@ -15,11 +15,25 @@
 class Test_WPPR extends WP_UnitTestCase {
 
 	/**
-	 * A single example test.
+	 * Create post of a particular post_type and see if it behaves like a review.
+	 *
+	 * @dataProvider postTypeDataProvider
 	 */
-	function test_core() {
+	function test_post_review( $post_type ) {
+		$is_cpt = 'wppr_review' === $post_type;
+		$title	= 'Test Post' . rand();
+
+		if ( $is_cpt ) {
+			// enable the CPT feature.
+			$model = new WPPR_Query_Model();
+			$model->wppr_set_option( 'wppr_cpt', 'yes' );
+		}
+
+		do_action( 'init' );
+
 		$p = $this->factory->post->create( array(
-			'post_title' => 'Test Post',
+			'post_title' => $title,
+			'post_type'	=> $post_type,
 		) );
 
 		$review = new WPPR_Review_Model( $p );
@@ -58,10 +72,13 @@ class Test_WPPR extends WP_UnitTestCase {
 		$this->assertEquals( 78, $review->get_rating() );
 
 		$review_data = $review->get_review_data();
-		$review_data['name'] = 'Test param change';
+
+		if ( ! $is_cpt ) {
+			$review_data['name'] = 'Test param change';
+			$review->set_name( $review_data['name'] );
+		}
 		$review_data['price'] = floatval( '10.00' );
 		$review_data['price_raw'] = floatval( '10.00' );
-		$review->set_name( $review_data['name'] );
 		$review->set_price( $review_data['price'] );
 		// Check Param save
 		$this->assertEquals( $review_data, $review->get_review_data() );
@@ -86,13 +103,20 @@ class Test_WPPR extends WP_UnitTestCase {
 		$review->wppr_set_option( 'cwppos_infl_userreview', '30' );
 		$this->assertEquals( '63.72', number_format( $review->get_rating(), 2 ) );
 
-		// var_dump( $review );
+		if ( $is_cpt ) {
+			// let's navigate to the review page and then see what is the name of the review.
+			$this->go_to( get_permalink( $p ) );
+			$this->assertEquals( $title, $review->get_name() );
+		}
 	}
 
 	/**
-	 * A check whether SDK exists or not.
+	 * Provide the different post_types to test with.
 	 */
-	public function test_sdk_exists() {
-		$this->assertTrue( class_exists( 'ThemeIsle_SDK_Loader' ) );
+	public function postTypeDataProvider() {
+		return array(
+			array( 'post' ),
+			array( 'wppr_review' ),
+		);
 	}
 }
