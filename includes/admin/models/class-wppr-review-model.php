@@ -209,8 +209,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 * If this is a CPT, use the post title as the product name.
 	 */
 	public function get_name_for_cpt( $name, $id ) {
-		$post   = get_post( $id );
-		return $post->post_title;
+		return get_the_title( $id );
 	}
 
 	/**
