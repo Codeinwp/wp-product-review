@@ -551,10 +551,10 @@ class Wppr_Public {
 
 	/**
 	 * Default icons to be used in AMP for default template.
-	 * 
+	 *
 	 * @return string The icons to be used.
 	 */
-	function clear_amp_custom_icons(){
+	function clear_amp_custom_icons() {
 		if ( function_exists( 'ampforwp_is_amp_endpoint' ) && ampforwp_is_amp_endpoint() || function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() ) {
 			return '';
 		}
@@ -568,7 +568,6 @@ class Wppr_Public {
 		require_once( ABSPATH . 'wp-admin/includes/file.php' );
 		WP_Filesystem();
 		global $wp_filesystem;
-		
 		$current_template = $this->review->get_template();
 		if ( $shortcode_template == 'style1' || $shortcode_template == 'style2' ) {
 			$current_template = $shortcode_template;
@@ -585,7 +584,6 @@ class Wppr_Public {
 		$output .= $amp_style;
 		$output .= $style;
 		$output = $this->amp_css( $output );
-		
 		$amp_cache_key = '_wppr_amp_css_' . $current_template;
 		$cached_css    = get_transient( $amp_cache_key );
 		if ( ! empty( $cached_css ) ) {

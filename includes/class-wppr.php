@@ -183,8 +183,8 @@ class WPPR {
 		$this->loader->add_filter( 'wppr_check_default_icon', $plugin_public, 'clear_amp_custom_icons' );
 
 		if ( function_exists( 'ampforwp_is_amp_endpoint' ) || function_exists( 'is_amp_endpoint' ) ) {
-			if( ! function_exists( 'wppr_shortcode_amp' ) ) {
-				$this->loader->add_action( 'amp_post_template_css', $plugin_public, 'wppr_amp_support' ); 
+			if ( ! function_exists( 'wppr_shortcode_amp' ) ) {
+				$this->loader->add_action( 'amp_post_template_css', $plugin_public, 'wppr_amp_support' );
 			}
 			$this->loader->add_action( 'amp_post_template_head', $plugin_public, 'wppr_amp_add_fa' );
 		}
