@@ -118,8 +118,8 @@ class Wppr_Public {
 			wp_enqueue_style( $this->plugin_name . 'font-awesome', WPPR_URL . '/assets/css/font-awesome.min.css', array(), $this->version );
 		}
 		wp_enqueue_style( $this->plugin_name . '-frontpage-stylesheet', WPPR_URL . '/assets/css/frontpage.css', array(), $this->version );
-		wp_enqueue_style( $this->plugin_name . '-template1-stylesheet', WPPR_URL . '/assets/css/template1.css', array(), $this->version );
-		wp_enqueue_style( $this->plugin_name . '-template2-stylesheet', WPPR_URL . '/assets/css/template2.css', array(), $this->version );
+		wp_enqueue_style( $this->plugin_name . '-template1-stylesheet', WPPR_URL . '/assets/css/style1.css', array(), $this->version );
+		wp_enqueue_style( $this->plugin_name . '-template2-stylesheet', WPPR_URL . '/assets/css/style2.css', array(), $this->version );
 		wp_enqueue_style(
 			$this->plugin_name . '-percentage-circle', WPPR_URL . '/assets/css/circle.css', array(),
 			$this->version
@@ -539,48 +539,60 @@ class Wppr_Public {
 	}
 
 	/**
+	 * Check if AMP or not for inline styles.
+	 */
+	public function wppr_check_amp() {
+		if ( function_exists( 'ampforwp_is_amp_endpoint' ) && ampforwp_is_amp_endpoint() || function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() ) {
+			echo 'style="min-width:'; // AMP style sanitizer coverts inline style's 'width' to 'max-width' which won't work.
+		} else {
+				echo 'style="width:';
+		}
+	}
+
+	/**
+	 * Default icons to be used in AMP for default template.
+	 * 
+	 * @return string The icons to be used.
+	 */
+	function clear_amp_custom_icons(){
+		if ( function_exists( 'ampforwp_is_amp_endpoint' ) && ampforwp_is_amp_endpoint() || function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() ) {
+			return '';
+		}
+		return apply_filters( 'wppr_option_custom_icon', '' );
+	}
+
+	/**
 	 * AMP support for WPPR
 	 */
-	public function wppr_amp_support() {
-		$current_template = $this->review->get_template();
+	public function wppr_amp_support( $shortcode_template ) {
 		require_once( ABSPATH . 'wp-admin/includes/file.php' );
 		WP_Filesystem();
 		global $wp_filesystem;
+		
+		$current_template = $this->review->get_template();
+		if ( $shortcode_template == 'style1' || $shortcode_template == 'style2' ) {
+			$current_template = $shortcode_template;
+		}
+
 		$output = '';
 		$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/frontpage.css' );
-		if ( $current_template == 'style1' ) {
-			$amp_cache_key = '_wppr_amp_css_style1';
-			$cached_css    = get_transient( $amp_cache_key );
-			if ( ! empty( $cached_css ) ) {
-				echo $cached_css;
-
-				return;
-			}
-			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/template1.css' );
-		} elseif ( $current_template == 'style2' ) {
-			$amp_cache_key = '_wppr_amp_css_style2';
-			$cached_css    = get_transient( $amp_cache_key );
-			if ( ! empty( $cached_css ) ) {
-				echo $cached_css;
-
-				return;
-			}
-			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/template2.css' );
-		} elseif ( $current_template == 'default' ) {
-			$amp_cache_key = '_wppr_amp_css_default';
-			$cached_css    = get_transient( $amp_cache_key );
-			if ( ! empty( $cached_css ) ) {
-				echo $cached_css;
-
-				return;
-			}
+		if ( $current_template == 'default' ) {
 			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/circle.css' );
 			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/rating-amp.css' );
 		}
+		$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/' . $current_template . '.css' );
 		$style  = $this->generate_styles();
+		$output .= $amp_style;
 		$output .= $style;
 		$output = $this->amp_css( $output );
-		set_transient( $amp_cache_key, $output, 5 * MINUTE_IN_SECONDS );
+		
+		/*$amp_cache_key = '_wppr_amp_css_' . $current_template;
+		$cached_css    = get_transient( $amp_cache_key );
+		if ( ! empty( $cached_css ) ) {
+			echo $cached_css;
+			return;
+		}
+		set_transient( $amp_cache_key, $output, 5 * MINUTE_IN_SECONDS );*/
 
 		echo apply_filters( 'wppr_add_amp_css', $output );
 	}

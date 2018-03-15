@@ -179,9 +179,13 @@ class WPPR {
 		$this->loader->add_action( 'comment_form_logged_in_after', $plugin_public, 'add_comment_fields' );
 		$this->loader->add_action( 'comment_form_after_fields', $plugin_public, 'add_comment_fields' );
 		$this->loader->add_filter( 'comment_text', $plugin_public, 'show_comment_ratings' );
+		$this->loader->add_filter( 'wppr_inline_property', $plugin_public, 'wppr_check_amp' );
+		$this->loader->add_filter( 'wppr_check_default_icon', $plugin_public, 'clear_amp_custom_icons' );
 
 		if ( function_exists( 'ampforwp_is_amp_endpoint' ) || function_exists( 'is_amp_endpoint' ) ) {
-			$this->loader->add_action( 'amp_post_template_css', $plugin_public, 'wppr_amp_support' );
+			if( ! function_exists( 'wppr_shortcode_amp' ) ) {
+				$this->loader->add_action( 'amp_post_template_css', $plugin_public, 'wppr_amp_support' ); 
+			}
 			$this->loader->add_action( 'amp_post_template_head', $plugin_public, 'wppr_amp_add_fa' );
 		}
 
