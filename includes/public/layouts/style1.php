@@ -77,9 +77,9 @@
 							<span class="<?php echo $review_object->get_rating_class( $review_option_rating ); ?>"
 							<?php
 							$inline = apply_filters( 'wppr_inline_property', '' );
-							echo esc_attr( $review_option_rating );
+							echo esc_attr( $review_option_rating ) . '%;';
 							?>
-							%;"></span>
+							"></span>
 						</div>
 					</div><!-- end .wppr-review-grade-option -->
 				<?php } ?>
