@@ -586,13 +586,13 @@ class Wppr_Public {
 		$output .= $style;
 		$output = $this->amp_css( $output );
 		
-		/*$amp_cache_key = '_wppr_amp_css_' . $current_template;
+		$amp_cache_key = '_wppr_amp_css_' . $current_template;
 		$cached_css    = get_transient( $amp_cache_key );
 		if ( ! empty( $cached_css ) ) {
 			echo $cached_css;
 			return;
 		}
-		set_transient( $amp_cache_key, $output, 5 * MINUTE_IN_SECONDS );*/
+		set_transient( $amp_cache_key, $output, 5 * MINUTE_IN_SECONDS );
 
 		echo apply_filters( 'wppr_add_amp_css', $output );
 	}
