@@ -181,6 +181,7 @@ class WPPR {
 		$this->loader->add_filter( 'comment_text', $plugin_public, 'show_comment_ratings' );
 		$this->loader->add_filter( 'wppr_inline_property', $plugin_public, 'wppr_check_amp' );
 		$this->loader->add_filter( 'wppr_check_default_icon', $plugin_public, 'clear_amp_custom_icons' );
+		$this->loader->add_filter( 'wppr_add_amp_shortcode', $plugin_public, 'wppr_amp_support' );
 
 		if ( function_exists( 'ampforwp_is_amp_endpoint' ) || function_exists( 'is_amp_endpoint' ) ) {
 			if ( ! function_exists( 'wppr_shortcode_amp' ) ) {
