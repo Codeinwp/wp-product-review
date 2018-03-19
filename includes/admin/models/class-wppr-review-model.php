@@ -167,6 +167,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			$this->setup_status();
 			if ( $this->is_active() ) {
 				$this->logger->notice( 'Setting up review for ID: ' . $review_id );
+				$this->setup_cpt();
 				$this->setup_price();
 				$this->setup_name();
 				$this->setup_template();
@@ -193,6 +194,22 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Setup hooks if this review is a CPT.
+	 */
+	private function setup_cpt() {
+		if ( 'wppr_review' === get_post_type( $this->ID ) ) {
+			add_filter( 'wppr_name', array( $this, 'get_name_for_cpt' ), 10, 2 );
+		}
+	}
+
+	/**
+	 * If this is a CPT, use the post title as the product name.
+	 */
+	public function get_name_for_cpt( $name, $id ) {
+		return get_the_title( $id );
 	}
 
 	/**
