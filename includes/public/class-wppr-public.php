@@ -72,26 +72,6 @@ class Wppr_Public {
 	}
 
 	/**
-	 * Load AMP logic.
-	 */
-	public function amp_support() {
-		if ( ! function_exists( 'ampforwp_is_amp_endpoint' ) || ! function_exists( 'is_amp_endpoint' ) ) {
-			return;
-		}
-		if ( ! ampforwp_is_amp_endpoint() || ! is_amp_endpoint() ) {
-			return;
-		}
-		/**
-		 * Remove any custom icon.
-		 */
-		add_filter( 'wppr_option_custom_icon', '__return_empty_string', 99 );
-		add_filter( 'wppr_review_option_rating_css', array( $this, 'amp_width_support' ), 99, 2 );
-		add_action( 'amp_post_template_css', array( $this, 'amp_styles' ), 999 );
-		add_action( 'amp_post_template_head', array( $this, 'wppr_amp_add_fa' ), 999 );
-
-	}
-
-	/**
 	 *
 	 * Load the review assets based on the context.
 	 *
@@ -157,6 +137,26 @@ class Wppr_Public {
 		$style = apply_filters( 'wppr_global_style', $style );
 
 		wp_add_inline_style( $this->plugin_name . '-common', $style );
+	}
+
+	/**
+	 * Load AMP logic.
+	 */
+	public function amp_support() {
+		if ( ! function_exists( 'ampforwp_is_amp_endpoint' ) || ! function_exists( 'is_amp_endpoint' ) ) {
+			return;
+		}
+		if ( ! ampforwp_is_amp_endpoint() || ! is_amp_endpoint() ) {
+			return;
+		}
+		/**
+		 * Remove any custom icon.
+		 */
+		add_filter( 'wppr_option_custom_icon', '__return_empty_string', 99 );
+		add_filter( 'wppr_review_option_rating_css', array( $this, 'amp_width_support' ), 99, 2 );
+		add_action( 'amp_post_template_css', array( $this, 'amp_styles' ), 999 );
+		add_action( 'amp_post_template_head', array( $this, 'wppr_amp_add_fa' ), 999 );
+
 	}
 
 	/**
@@ -578,9 +578,12 @@ class Wppr_Public {
 	 */
 	public function amp_styles() {
 
+		if ( empty( $this->review ) ) {
+			return;
+		}
 		$template_style = $this->review->get_template();
-		$amp_cache_key = '_wppr_amp_css_' . str_replace( '.', '_', $this->version ) . '_' . $template_style;
-		$output        = get_transient( $amp_cache_key );
+		$amp_cache_key  = '_wppr_amp_css_' . str_replace( '.', '_', $this->version ) . '_' . $template_style;
+		$output         = get_transient( $amp_cache_key );
 		if ( empty( $output ) ) {
 
 			require_once( ABSPATH . 'wp-admin/includes/file.php' );
@@ -591,9 +594,9 @@ class Wppr_Public {
 			 * @global \WP_Filesystem_Direct $wp_filesystem
 			 */
 			global $wp_filesystem;
-			$output         = '';
-			$output         .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/common.css' );
-			$output         .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/circle.css' );
+			$output = '';
+			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/common.css' );
+			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/circle.css' );
 			if ( $wp_filesystem->is_readable( WPPR_PATH . '/assets/css/' . $template_style . '.css' ) ) {
 				$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/' . $template_style . '.css' );
 			}
