@@ -207,15 +207,15 @@ class WPPR {
 	public function get_loader() {
 		return $this->loader;
 	}
-
+	/**
 	 * Run the loader to execute all of the hooks with WordPress.
 	 *
 	 * @since    3.0.0
 	 */
 	public function run() {
 		$this->loader->run();
-	} 
-  /**
+	}
+	/**
 	 * Registers the custom post attributes, if enabled.
 	 */
 	public function register_cpt() {
