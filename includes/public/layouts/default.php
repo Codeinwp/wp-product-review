@@ -43,7 +43,7 @@ $cons = $review_object->get_cons();
 				<div class="review-wu-left">
 					<div class="review-wu-left-top">
 						<div class="rev-wu-image">
-							<a href="<?php echo esc_url( $image_link ); ?>" <?php echo $lightbox; ?> rel="nofollow"
+							<a class="wppr-default-img" href="<?php echo esc_url( $image_link ); ?>" <?php echo $lightbox; ?> rel="nofollow"
 							   target="_blank"><img
 										src="<?php echo esc_attr( $review_object->get_small_thumbnail() ); ?>"
 										alt="<?php echo esc_attr( $review_object->get_name() ); ?>"
@@ -76,7 +76,9 @@ $cons = $review_object->get_cons();
 									<span><?php echo esc_html( number_format( ( $option['value'] / 10 ), 1 ) ); ?>
 										/10 </span>
 								</div>
-								<ul class="cwpr_clearfix <?php echo $review_object->get_rating_class( $option['value'] ) . apply_filters( 'wppr_option_custom_icon', '' ); ?>">
+								<ul class="cwpr_clearfix
+								<?php echo ' ' . $review_object->get_rating_class( $option['value'] ) . apply_filters( 'wppr_option_custom_icon', '' ); ?>
+								">
 									<?php for ( $i = 1; $i <= 10; $i ++ ) { ?>
 										<li
 											<?php

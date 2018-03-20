@@ -4,8 +4,6 @@
  * Author: Andre Firchow
  *
 *****************************************************************/
-
-
 .rect-auto,
 .wppr-c100.wppr-good .wppr-slice,
 .wppr-c100.wppr-very-good .wppr-slice {
@@ -15,7 +13,7 @@
 .wppr-pie,
 .wppr-c100 .wppr-bar,
 .wppr-c100.wppr-good .wppr-fill,
-.wppr-c100.wppr-very-good .wppr-fill{
+.wppr-c100.wppr-very-good .wppr-fill {
 	clip: rect(0em, 0.5em, 1em, 0em);
 	position: absolute;
 	box-sizing: border-box;
