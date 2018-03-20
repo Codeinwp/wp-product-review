@@ -67,6 +67,13 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 ## Changelog ##
+### 3.4.3 - 2018-03-20  ###
+
+* Fix FontAwesome icon issue in custom templates.
+* Improve AMP compatibility, removes redundant CSS on AMP endpoints.
+* Adds review custom post_type and review categories.
+
+
 ### 3.4.2 - 2018-02-22  ###
 
 * Fix AMP issue which was causing an issue with Google AMP validation.

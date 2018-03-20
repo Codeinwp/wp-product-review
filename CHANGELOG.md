@@ -1,4 +1,10 @@
 
+ ### v3.4.3 - 2018-03-20 
+ **Changes:** 
+ * Fix FontAwesome icon issue in custom templates.
+* Improve AMP compatibility, removes redundant CSS on AMP endpoints.
+* Adds review custom post_type and review categories.
+ 
  ### v3.4.2 - 2018-02-22 
  **Changes:** 
  * Fix AMP issue which was causing an issue with Google AMP validation.

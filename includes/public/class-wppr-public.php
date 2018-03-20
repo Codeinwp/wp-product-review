@@ -574,7 +574,7 @@ class Wppr_Public {
 	}
 
 	/**
-	 * AMP styles for WPPR amp page.
+	 * AMP styles for WPPR review amp page.
 	 */
 	public function amp_styles() {
 
