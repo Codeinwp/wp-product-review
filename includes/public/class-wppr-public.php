@@ -578,7 +578,8 @@ class Wppr_Public {
 	 */
 	public function amp_styles() {
 
-		$amp_cache_key = '_wppr_amp_css_' . str_replace( '.', '_', $this->version );
+		$template_style = $this->review->get_template();
+		$amp_cache_key = '_wppr_amp_css_' . str_replace( '.', '_', $this->version ) . '_' . $template_style;
 		$output        = get_transient( $amp_cache_key );
 		if ( empty( $output ) ) {
 
@@ -593,7 +594,6 @@ class Wppr_Public {
 			$output         = '';
 			$output         .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/common.css' );
 			$output         .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/circle.css' );
-			$template_style = $this->review->get_template();
 			if ( $wp_filesystem->is_readable( WPPR_PATH . '/assets/css/' . $template_style . '.css' ) ) {
 				$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/' . $template_style . '.css' );
 			}
