@@ -153,9 +153,10 @@ class Wppr_Public {
 			$this->version
 		);
 		$style = $this->generate_styles();
+
 		$style = apply_filters( 'wppr_global_style', $style );
 
-		wp_add_inline_style( $this->plugin_name . '-frontpage-stylesheet', $style );
+		wp_add_inline_style( $this->plugin_name . '-common', $style );
 	}
 
 	/**
