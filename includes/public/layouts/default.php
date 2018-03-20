@@ -77,7 +77,7 @@ $cons = $review_object->get_cons();
 										/10 </span>
 								</div>
 								<ul class="cwpr_clearfix
-								<?php echo ' ' . $review_object->get_rating_class( $option['value'] ) . apply_filters( 'wppr_check_default_icon', '', 99 ); ?>
+								<?php echo ' ' . $review_object->get_rating_class( $option['value'] ) . apply_filters( 'wppr_option_custom_icon', '' ); ?>
 								">
 									<?php for ( $i = 1; $i <= 10; $i ++ ) { ?>
 										<li

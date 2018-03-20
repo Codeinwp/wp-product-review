@@ -58,9 +58,9 @@
 				?>
 			<div class="wppr-review-product-image">
 				<a href="<?php echo esc_url( $review_image_link ); ?>" <?php echo $lightbox; ?>
-					 rel="nofollow" target="_blank"><img
+					 rel="nofollow" target="_blank" class="wppr-default-img"><img
 							src="<?php echo esc_attr( $review_image ); ?>"
-							alt="<?php echo esc_attr( $review_object->get_name() ); ?>" class="photo photo-wrapup"/></a>
+							alt="<?php echo esc_attr( $review_object->get_name() ); ?>" class="wppr-product-image"/></a>
 			</div>
 			<?php } ?>
 			<div class="wppr-review-grade-options">
@@ -74,10 +74,13 @@
 							<span><?php echo esc_html( number_format( ( $review_option_rating / 10 ), 1 ) ); ?></span>
 						</div>
 						<div class="wppr-review-grade-option-rating wppr-default">
-							<span class="<?php echo $review_object->get_rating_class( $review_option_rating ); ?>"
+							<span class="<?php echo $review_object->get_rating_class( $review_option_rating ); ?>" style="
 							<?php
-							$inline = apply_filters( 'wppr_inline_property', '' );
-							echo esc_attr( $review_option_rating ) . '%;';
+							/**
+							 * Adds min-width for amp support.
+							 */
+							 echo 'width:' . esc_attr( $review_option_rating ) . '%; ';
+							 echo esc_attr( apply_filters( 'wppr_review_option_rating_css', '', $review_option_rating ) );
 							?>
 							"></span>
 						</div>

@@ -47,9 +47,9 @@
 				if ( ! empty( $review_image ) ) {
 					?>
 					<a href="<?php echo esc_url( $review_image_link ); ?>" <?php echo $lightbox; ?>
-					   class="wppr-review-product-image" rel="nofollow" target="_blank"><img
+					   class="wppr-review-product-image wppr-default-img" rel="nofollow" target="_blank"><img
 								src="<?php echo esc_attr( $review_image ); ?>"
-								alt="<?php echo esc_attr( $review_object->get_name() ); ?>" class="photo photo-wrapup"/></a>
+								alt="<?php echo esc_attr( $review_object->get_name() ); ?>" class="wppr-product-image"/></a>
 				<?php } ?>
 				<div class="clearfix"></div>
 				<?php

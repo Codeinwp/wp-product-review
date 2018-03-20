@@ -175,35 +175,17 @@ class WPPR {
 			return;
 		}
 		$this->loader->add_action( 'wp', $plugin_public, 'setup_post' );
+		$this->loader->add_action( 'wp', $plugin_public, 'amp_support' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'load_review_assets' );
 		$this->loader->add_action( 'comment_form_logged_in_after', $plugin_public, 'add_comment_fields' );
 		$this->loader->add_action( 'comment_form_after_fields', $plugin_public, 'add_comment_fields' );
 		$this->loader->add_filter( 'comment_text', $plugin_public, 'show_comment_ratings' );
-		$this->loader->add_filter( 'wppr_inline_property', $plugin_public, 'wppr_check_amp' );
-		$this->loader->add_filter( 'wppr_check_default_icon', $plugin_public, 'clear_amp_custom_icons' );
-		$this->loader->add_filter( 'wppr_add_amp_shortcode', $plugin_public, 'wppr_amp_support' );
-
-		if ( function_exists( 'ampforwp_is_amp_endpoint' ) || function_exists( 'is_amp_endpoint' ) ) {
-			if ( ! function_exists( 'wppr_shortcode_amp' ) ) {
-				$this->loader->add_action( 'amp_post_template_css', $plugin_public, 'wppr_amp_support' );
-			}
-			$this->loader->add_action( 'amp_post_template_head', $plugin_public, 'wppr_amp_add_fa' );
-		}
-
 		$currentTheme = wp_get_theme();
 		if ( $currentTheme->get( 'Name' ) !== 'Bookrev' && $currentTheme->get( 'Name' ) !== 'Book Rev Lite' ) {
+
 			$this->loader->add_filter( 'the_content', $plugin_public, 'display_on_front' );
 		}
 
-	}
-
-	/**
-	 * Run the loader to execute all of the hooks with WordPress.
-	 *
-	 * @since    3.0.0
-	 */
-	public function run() {
-		$this->loader->run();
 	}
 
 	/**
@@ -214,6 +196,15 @@ class WPPR {
 	 */
 	public function get_loader() {
 		return $this->loader;
+	}
+
+	/**
+	 * Run the loader to execute all of the hooks with WordPress.
+	 *
+	 * @since    3.0.0
+	 */
+	public function run() {
+		$this->loader->run();
 	}
 
 }

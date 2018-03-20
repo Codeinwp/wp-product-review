@@ -1,8 +1,7 @@
-
 .wppr-c100.wppr-p100 .wppr-bar {
-    -webkit-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    transform: rotate(360deg);
+	-webkit-transform: rotate(360deg);
+	-ms-transform: rotate(360deg);
+	transform: rotate(360deg);
 }
 
 .wppr-c100.wppr-p80 .wppr-bar,
@@ -24,11 +23,12 @@
 .wppr-c100.wppr-p96 .wppr-bar,
 .wppr-c100.wppr-p97 .wppr-bar,
 .wppr-c100.wppr-p98 .wppr-bar,
-.wppr-c100.wppr-p99 .wppr-bar{
-    -webkit-transform: rotate(324deg);
-    -ms-transform: rotate(324deg);
-    transform: rotate(324deg);
+.wppr-c100.wppr-p99 .wppr-bar {
+	-webkit-transform: rotate(324deg);
+	-ms-transform: rotate(324deg);
+	transform: rotate(324deg);
 }
+
 .wppr-c100.wppr-p60 .wppr-bar,
 .wppr-c100.wppr-p62 .wppr-bar,
 .wppr-c100.wppr-p61 .wppr-bar,
@@ -48,11 +48,12 @@
 .wppr-c100.wppr-p76 .wppr-bar,
 .wppr-c100.wppr-p77 .wppr-bar,
 .wppr-c100.wppr-p78 .wppr-bar,
-.wppr-c100.wppr-p79 .wppr-bar{
-    -webkit-transform: rotate(252deg);
-    -ms-transform: rotate(252deg);
-    transform: rotate(252deg);
+.wppr-c100.wppr-p79 .wppr-bar {
+	-webkit-transform: rotate(252deg);
+	-ms-transform: rotate(252deg);
+	transform: rotate(252deg);
 }
+
 .wppr-c100.wppr-p40 .wppr-bar,
 .wppr-c100.wppr-p41 .wppr-bar,
 .wppr-c100.wppr-p42 .wppr-bar,
@@ -72,12 +73,12 @@
 .wppr-c100.wppr-p56 .wppr-bar,
 .wppr-c100.wppr-p57 .wppr-bar,
 .wppr-c100.wppr-p58 .wppr-bar,
-.wppr-c100.wppr-p59 .wppr-bar
-{
-    -webkit-transform: rotate(180deg);
-    -ms-transform: rotate(180deg);
-    transform: rotate(180deg);
+.wppr-c100.wppr-p59 .wppr-bar {
+	-webkit-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	transform: rotate(180deg);
 }
+
 .wppr-c100.wppr-p20 .wppr-bar,
 .wppr-c100.wppr-p21 .wppr-bar,
 .wppr-c100.wppr-p22 .wppr-bar,
@@ -97,12 +98,12 @@
 .wppr-c100.wppr-p36 .wppr-bar,
 .wppr-c100.wppr-p37 .wppr-bar,
 .wppr-c100.wppr-p38 .wppr-bar,
-.wppr-c100.wppr-p39 .wppr-bar
-{
-    -webkit-transform: rotate(108deg);
-    -ms-transform: rotate(108deg);
-    transform: rotate(108deg);
+.wppr-c100.wppr-p39 .wppr-bar {
+	-webkit-transform: rotate(108deg);
+	-ms-transform: rotate(108deg);
+	transform: rotate(108deg);
 }
+
 .wppr-c100.wppr-p1 .wppr-bar,
 .wppr-c100.wppr-p2 .wppr-bar,
 .wppr-c100.wppr-p3 .wppr-bar,
@@ -123,19 +124,24 @@
 .wppr-c100.wppr-p16 .wppr-bar,
 .wppr-c100.wppr-p17 .wppr-bar,
 .wppr-c100.wppr-p18 .wppr-bar,
-.wppr-c100.wppr-p19 .wppr-bar
-{
-    -webkit-transform: rotate(36deg);
-    -ms-transform: rotate(36deg);
-    transform: rotate(36deg);
+.wppr-c100.wppr-p19 .wppr-bar {
+	-webkit-transform: rotate(36deg);
+	-ms-transform: rotate(36deg);
+	transform: rotate(36deg);
 }
 
 .wppr-inline-pie-chart {
-    position: relative;
-    width: 120px;
-    height: 120px;
+	position: relative;
+	width: 120px;
+	height: 120px;
 }
 
 .wppr-default-img {
-    width: 150px;
+	width: 150px;
+	height: 150px;
+}
+
+.wppr-product-image {
+	width: 150px;
+	height: 150px;
 }

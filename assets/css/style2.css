@@ -71,21 +71,28 @@ Template 2
 	width: 100%;
 }
 
+.wppr-template-2 .wppr-review-product-image,
+.wppr-template-2 .wppr-review-product-image img {
+	width: 120px;
+	height: 120px;
+	margin: 0;
+
+	object-fit: fill;
+}
+
 .wppr-template-2 .wppr-review-product-image {
 	display: inline-block;
 	float: left;
 	overflow: hidden;
 	position: relative;
-	width: 120px;
-	height: 120px;
 }
 
 .wppr-template-2 .wppr-review-product-image img {
 	position: absolute;
 	top: 50%;
+	bottom: -60px;
 	left: 50%;
 	width: 100%;
-	bottom: -60px;
 	-webkit-transform: translate(-50%,-50%);
 	-ms-transform: translate(-50%,-50%);
 	transform: translate(-50%,-50%);
@@ -229,4 +236,3 @@ Template 2
 		width: 100%;
 	}
 }
-
