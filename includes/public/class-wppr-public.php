@@ -55,7 +55,7 @@ class Wppr_Public {
 	 * @access  public
 	 *
 	 * @param   string $plugin_name The name of the plugin.
-	 * @param   string $version The version of this plugin.
+	 * @param   string $version     The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
@@ -72,6 +72,26 @@ class Wppr_Public {
 	}
 
 	/**
+	 * Load AMP logic.
+	 */
+	public function amp_support() {
+		if ( ! function_exists( 'ampforwp_is_amp_endpoint' ) || ! function_exists( 'is_amp_endpoint' ) ) {
+			return;
+		}
+		if ( ! ampforwp_is_amp_endpoint() || ! is_amp_endpoint() ) {
+			return;
+		}
+		/**
+		 * Remove any custom icon.
+		 */
+		add_filter( 'wppr_option_custom_icon', '__return_empty_string', 99 );
+		add_filter( 'wppr_review_option_rating_css', array( $this, 'amp_width_support' ), 99, 2 );
+		add_action( 'amp_post_template_css', array( $this, 'amp_styles' ), 999 );
+		add_action( 'amp_post_template_head', array( $this, 'wppr_amp_add_fa' ), 999 );
+
+	}
+
+	/**
 	 *
 	 * Load the review assets based on the context.
 	 *
@@ -81,6 +101,9 @@ class Wppr_Public {
 		$load = false;
 		if ( ! empty( $review ) ) {
 			if ( $review->is_active() ) {
+
+				$this->review = $review;
+				$this->amp_support();
 				$load = true;
 			}
 		} else {
@@ -108,9 +131,8 @@ class Wppr_Public {
 					'jquery',
 				), $this->version, true
 			);
-			if ( $review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
-				wp_enqueue_style( $this->plugin_name . 'jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
-			}
+			wp_enqueue_style( $this->plugin_name . 'jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
+			wp_enqueue_style( $this->plugin_name . 'comments', WPPR_URL . '/assets/css/comments.css', array(), $this->version );
 		}
 		$icon = $review->wppr_get_option( 'cwppos_change_bar_icon' );
 
@@ -118,12 +140,17 @@ class Wppr_Public {
 			wp_enqueue_style( $this->plugin_name . 'font-awesome', WPPR_URL . '/assets/css/font-awesome.min.css', array(), $this->version );
 		}
 		wp_enqueue_style( $this->plugin_name . '-frontpage-stylesheet', WPPR_URL . '/assets/css/frontpage.css', array(), $this->version );
+		wp_enqueue_style( $this->plugin_name . '-' . $review->get_template() . '-stylesheet', WPPR_URL . '/assets/css/' . $review->get_template() . '.css', array(), $this->version );
 		wp_enqueue_style(
 			$this->plugin_name . '-percentage-circle', WPPR_URL . '/assets/css/circle.css', array(),
 			$this->version
 		);
 		wp_enqueue_style(
 			$this->plugin_name . '-percentage-circle-rating', WPPR_URL . '/assets/css/rating.css', array(),
+			$this->version
+		);
+		wp_enqueue_style(
+			$this->plugin_name . '-common', WPPR_URL . '/assets/css/common.css', array(),
 			$this->version
 		);
 		$style = $this->generate_styles();
@@ -258,10 +285,7 @@ class Wppr_Public {
                         background: ' . $review->wppr_get_option( 'cwppos_rating_default' ) . ';
                         color: ' . $review->wppr_get_option( 'cwppos_rating_default' ) . ';
                     }
-            
-                    #review-statistics .rev-option.customBarIcon ul li {
-                        color: ' . $review->wppr_get_option( 'cwppos_rating_default' ) . ';
-                    }
+           
             
                     #review-statistics .review-wrap-up .review-wu-right ul li, 
                     #review-statistics .review-wu-bars h3, 
@@ -391,6 +415,7 @@ class Wppr_Public {
 		if ( empty( $this->review ) ) {
 			return $content;
 		}
+
 		if ( $this->review->is_active() && is_singular() ) {
 			$output        = '';
 			$review_object = $this->review;
@@ -537,28 +562,47 @@ class Wppr_Public {
 	}
 
 	/**
-	 * AMP support for WPPR
+	 * Adds min-width for amp support.
+	 *
+	 * @param string $value Old value.
+	 * @param string $width Width value.
+	 *
+	 * @return string New css rule.
 	 */
-	public function wppr_amp_support() {
-		$amp_cache_key = '_wppr_amp_css';
-		$cached_css    = get_transient( $amp_cache_key );
-		if ( ! empty( $cached_css ) ) {
-			echo $cached_css;
+	public function amp_width_support( $value, $width ) {
+		return 'min-width:' . esc_attr( $width ) . '%';
+	}
 
-			return;
+	/**
+	 * AMP styles for WPPR amp page.
+	 */
+	public function amp_styles() {
+
+		$amp_cache_key = '_wppr_amp_css_' . str_replace( '.', '_', $this->version );
+		$output        = get_transient( $amp_cache_key );
+		if ( empty( $output ) ) {
+
+			require_once( ABSPATH . 'wp-admin/includes/file.php' );
+			WP_Filesystem();
+			/**
+			 * Filesystem variable.
+			 *
+			 * @global \WP_Filesystem_Direct $wp_filesystem
+			 */
+			global $wp_filesystem;
+			$output         = '';
+			$output         .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/common.css' );
+			$output         .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/circle.css' );
+			$template_style = $this->review->get_template();
+			if ( $wp_filesystem->is_readable( WPPR_PATH . '/assets/css/' . $template_style . '.css' ) ) {
+				$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/' . $template_style . '.css' );
+			}
+			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/rating-amp.css' );
+			$output .= $this->generate_styles();
+			$output = $this->minify_amp_css( $output );
+
+			set_transient( $amp_cache_key, $output, HOUR_IN_SECONDS );
 		}
-		require_once( ABSPATH . 'wp-admin/includes/file.php' );
-		WP_Filesystem();
-		global $wp_filesystem;
-		$output = '';
-		$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/frontpage.css' );
-		$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/circle.css' );
-		$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/rating-amp.css' );
-		$style  = $this->generate_styles();
-		$output .= $style;
-		$output = $this->amp_css( $output );
-		set_transient( $amp_cache_key, $output, 5 * MINUTE_IN_SECONDS );
-
 		echo apply_filters( 'wppr_add_amp_css', $output );
 	}
 
@@ -569,7 +613,7 @@ class Wppr_Public {
 	 *
 	 * @return string The minified css.
 	 */
-	function amp_css( $css ) {
+	function minify_amp_css( $css ) {
 		// some of the following functions to minimize the css-output are directly taken
 		// from the awesome CSS JS Booster: https://github.com/Schepp/CSS-JS-Booster
 		// all credits to Christian Schaefer: http://twitter.com/derSchepp
@@ -605,5 +649,12 @@ class Wppr_Public {
 		}
 
 		return $css;
+	}
+
+	/**
+	 * Adding Font Awesome at the header for AMP.
+	 */
+	public function wppr_amp_add_fa() {
+		echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">';
 	}
 }

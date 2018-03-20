@@ -185,30 +185,17 @@ class WPPR {
 			return;
 		}
 		$this->loader->add_action( 'wp', $plugin_public, 'setup_post' );
+		$this->loader->add_action( 'wp', $plugin_public, 'amp_support' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'load_review_assets' );
 		$this->loader->add_action( 'comment_form_logged_in_after', $plugin_public, 'add_comment_fields' );
 		$this->loader->add_action( 'comment_form_after_fields', $plugin_public, 'add_comment_fields' );
 		$this->loader->add_filter( 'comment_text', $plugin_public, 'show_comment_ratings' );
-
-		if ( function_exists( 'ampforwp_is_amp_endpoint' ) || function_exists( 'is_amp_endpoint' ) ) {
-
-			$this->loader->add_action( 'amp_post_template_css', $plugin_public, 'wppr_amp_support' );
-		}
-
 		$currentTheme = wp_get_theme();
 		if ( $currentTheme->get( 'Name' ) !== 'Bookrev' && $currentTheme->get( 'Name' ) !== 'Book Rev Lite' ) {
+
 			$this->loader->add_filter( 'the_content', $plugin_public, 'display_on_front' );
 		}
 
-	}
-
-	/**
-	 * Run the loader to execute all of the hooks with WordPress.
-	 *
-	 * @since    3.0.0
-	 */
-	public function run() {
-		$this->loader->run();
 	}
 
 	/**
@@ -221,6 +208,14 @@ class WPPR {
 		return $this->loader;
 	}
 
+	/**
+	 * Run the loader to execute all of the hooks with WordPress.
+	 *
+	 * @since    3.0.0
+	 */
+	public function run() {
+		$this->loader->run();
+	}
 	/**
 	 * Registers the custom post attributes, if enabled.
 	 */
