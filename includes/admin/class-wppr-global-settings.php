@@ -168,6 +168,17 @@ class WPPR_Global_Settings {
 							),
 							'default'     => 'yes',
 						),
+						'wppr_cpt'      => array(
+							'type'        => 'select',
+							'name'        => __( 'Enable review post type', 'wp-product-review' ),
+							'description' => __( 'Enabling this will create a new post type where you can manage your reviews.', 'wp-product-review' ),
+							'id'          => 'use_cpt',
+							'options'     => array(
+								'yes' => __( 'Yes', 'wp-product-review' ),
+								'no'  => __( 'No', 'wp-product-review' ),
+							),
+							'default'     => 'no',
+						),
 					),
 					'rating'     => array(
 						'cwppos_rating_default'       => array(
@@ -335,7 +346,7 @@ class WPPR_Global_Settings {
 		if ( ! is_admin() ) {
 			return true;
 		}
-		if ( is_plugin_active( 'disqus-comment-system/disqus.php' ) || ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'comments' ) ) ) {
+		if ( function_exists( 'is_plugin_active' ) && is_plugin_active( 'disqus-comment-system/disqus.php' ) || ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'comments' ) ) ) {
 			return false;
 		}
 

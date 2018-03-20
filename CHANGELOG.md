@@ -1,4 +1,12 @@
 
+ ### v3.4.2 - 2018-02-22 
+ **Changes:** 
+ * Fix AMP issue which was causing an issue with Google AMP validation.
+ 
+ ### v3.4.1 - 2018-02-21 
+ **Changes:** 
+ * Fix issue with category filtering when querying reviews.
+ 
  ### v3.4.0 - 2018-02-20 
  **Changes:** 
  * Adds AMP support for the review box.
