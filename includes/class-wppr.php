@@ -207,6 +207,7 @@ class WPPR {
 	public function get_loader() {
 		return $this->loader;
 	}
+
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
 	 *
