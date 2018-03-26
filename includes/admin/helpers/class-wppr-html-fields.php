@@ -252,8 +252,8 @@ class WPPR_Html_Fields {
 		$defaults = $this->define_defaults( array( 'subtype' => 'h2' ) );
 		$args     = wp_parse_args( $args, $defaults );
 		$class    = $this->validate_class( $args['class'] );
-		$type	  = $args['subtype'];
-		$output	= '<' . $type . ' class="' . $class . '">' . $args['placeholder'] . '</' . $type . '>';
+		$type     = $args['subtype'];
+		$output = '<' . $type . ' class="' . $class . '">' . $args['placeholder'] . '</' . $type . '>';
 		return apply_filters( 'wppr_field', $output, $args );
 	}
 }
