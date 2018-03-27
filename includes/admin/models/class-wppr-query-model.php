@@ -158,6 +158,9 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
         LIMIT {$limit}
 		) T1 $final_order
         ";
+
+		//error_log($query);
+		
 		$key     = hash( 'sha256', $query );
 		$results = wp_cache_get( $key, 'wppr' );
 		if ( ! is_array( $results ) ) {
@@ -182,14 +185,21 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	 * @return string
 	 */
 	private function get_sub_query_posts( $post ) {
-		// TODO Build validation methods for category name and id and reuse them here and in get_sub_query_conditions method.
-		if ( ! isset( $post['category_name'] ) && ! isset( $post['category_id'] ) ) {
-			return '';
+		$sub_selection_query = '';
+		if ( isset( $post['category_name'] ) || isset( $post['category_id'] ) ) {
+			$taxonomy	= isset( $post['taxonomy_category'] ) ? $post['taxonomy_category'] : 'category';
+			$sub_selection_query .= " INNER JOIN {$this->db->term_relationships } wtr1 ON wtr1.object_id = p.ID
+					INNER JOIN {$this->db->term_taxonomy} wtt1 on wtt1.term_taxonomy_id = wtr1.term_taxonomy_id AND wtt1.taxonomy = '$taxonomy'
+					INNER JOIN {$this->db->terms} wt1
+					ON wt1.term_id = wtt1.term_id";
 		}
-		$sub_selection_query = "INNER JOIN {$this->db->term_relationships } wtr ON wtr.object_id = p.ID
-	            INNER JOIN {$this->db->term_taxonomy} wtt on wtt.term_taxonomy_id = wtr.term_taxonomy_id AND wtt.taxonomy = 'category'
-	            INNER JOIN {$this->db->terms} wt
-	            ON wt.term_id = wtt.term_id";
+		if ( isset( $post['tags'] ) && $post['tags'] != false ) {
+			$taxonomy	= isset( $post['taxonomy_tag'] ) ? $post['taxonomy_tag'] : 'post_tag';
+			$sub_selection_query .= " INNER JOIN {$this->db->term_relationships } wtr2 ON wtr2.object_id = p.ID
+					INNER JOIN {$this->db->term_taxonomy} wtt2 on wtt2.term_taxonomy_id = wtr2.term_taxonomy_id AND wtt2.taxonomy = '$taxonomy'
+					INNER JOIN {$this->db->terms} wt2
+					ON wt2.term_id = wtt2.term_id";
+		}
 
 		return $sub_selection_query;
 	}
@@ -240,11 +250,9 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			$conditions['having'] .= $this->db->prepare( ' AND `name` LIKE %s ', '%' . $filter['name'] . '%' );
 		}
 
-		// TODO comparision arguments for price filter.
 		if ( isset( $filter['price'] ) && $filter['price'] != false && is_numeric( $filter['price'] ) ) {
 			$conditions['having'] .= $this->db->prepare( ' AND `price` > FORMAT( %d, 2 ) ', $filter['price'] );
 		}
-		// TODO comparision arguments for rating filter.
 		if ( isset( $filter['rating'] ) && $filter['rating'] != false && is_numeric( $filter['rating'] ) ) {
 			$conditions['having'] .= $this->db->prepare( ' AND `rating`  > %f ', $filter['rating'] );
 		}
@@ -267,13 +275,18 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	private function get_sub_query_conditions( $post ) {
 		$sub_query_conditions = '';
 		if ( isset( $post['category_id'] ) && $post['category_id'] != false && is_numeric( $post['category_id'] ) && $post['category_id'] > 0 ) {
-			$sub_query_conditions .= $this->db->prepare( " AND wt.term_id = '%d' ", $post['category_id'] );
+			$sub_query_conditions .= $this->db->prepare( " AND wt1.term_id = '%d' ", $post['category_id'] );
+		} elseif ( isset( $post['category_name'] ) && $post['category_name'] != false ) {
+			$sub_query_conditions .= $this->db->prepare( ' AND wt1.slug = %s ', $post['category_name'] );
+		}
+		if ( isset( $post['tags'] ) && $post['tags'] != false ) {
+			if ( ! is_array( $post['tags'] ) ) {
+				$post['tags'] = explode( ',', $post['tags'] );
+			}
+			$tags	= implode( ',', array_fill( 0, count( $post['tags'] ), '%s' ) );
+			$sub_query_conditions .= $this->db->prepare( " AND wt2.slug IN ( $tags ) ", $post['tags'] );
 		}
 
-		if ( isset( $post['category_name'] ) && $post['category_name'] != false ) {
-			$sub_query_conditions .= $this->db->prepare( ' AND wt.slug = %s ', $post['category_name'] );
-		}
-		// TODO Check against available post_types.
 		if ( isset( $post['post_type'] ) && is_array( $post['post_type'] ) ) {
 			$filter_post_type      = array_fill( 0, count( $post['post_type'] ), ' p.post_type = %s ' );
 			$filter_post_type      = implode( ' OR ', $filter_post_type );
