@@ -92,6 +92,9 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			'category_name'         => false,
 			'post_type'             => array( 'post', 'page' ),
 			'post_date_range_weeks' => false,
+			'tags'                  => false,
+			'taxonomy_category'     => 'category',
+			'taxonomy_tag'          => 'post_tag',
 		),
 		$limit = 20,
 		$filter = array(
