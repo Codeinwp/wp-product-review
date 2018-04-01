@@ -119,6 +119,11 @@ class Wppr_Public {
 		if ( 'default' !== $review->get_template() || ( ! empty( $icon ) && $review->wppr_get_option( 'cwppos_fontawesome' ) == 'no' ) ) {
 			wp_enqueue_style( $this->plugin_name . 'font-awesome', WPPR_URL . '/assets/css/font-awesome.min.css', array(), $this->version );
 		}
+
+		if ( $review->wppr_get_option( 'cwppos_show_icon' ) == 'yes' ) {
+			wp_enqueue_style( 'dashicons' );
+		}
+
 		wp_enqueue_style( $this->plugin_name . '-' . $review->get_template() . '-stylesheet', WPPR_URL . '/assets/css/' . $review->get_template() . '.css', array(), $this->version );
 		wp_enqueue_style(
 			$this->plugin_name . '-percentage-circle', WPPR_URL . '/assets/css/circle.css', array(),
@@ -168,13 +173,10 @@ class Wppr_Public {
 		$conditional_styles = '';
 		if ( $review->wppr_get_option( 'cwppos_show_icon' ) == 'yes' ) {
 			$conditional_styles .= '
-                div.affiliate-button a span {
-                    background: url("' . WPPR_URL . '/assets/img/cart-icon.png") no-repeat left center;
+                div.affiliate-button a span:before, div.affiliate-button a:hover span:before {
+					font-family: "dashicons";
+                    content: "\f174";
                 } 
-        
-                div.affiliate-button a:hover span {
-                    background: url("' . WPPR_URL . '/assets/img/cart-icon-hover.png") no-repeat left center;
-                }
                 ';
 		}
 
