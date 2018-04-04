@@ -1,6 +1,4 @@
 <?php
-// @codingStandardsIgnoreStart
-
 /**
  * The file that defines a model class for easier access to DB
  * functionality, an abstract layer for core and addons to use.
@@ -89,16 +87,15 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	 * @return array
 	 */
 	public function find(
-		// If any value is updated here, add to supports() method also.
-		$post = array(
+		/* If any value is updated here, add to supports() method also. */ $post = array(
 			'category_id'           => false,
 			'category_name'         => false,
 			'post_type'             => array( 'post', 'page' ),
 			'post_date_range_weeks' => false,
 			'tags'                  => false,
-			'taxonomy'				=> false,
-			'term_ids'				=> array(),
-			'exclude'				=> array(),
+			'taxonomy'              => false,
+			'term_ids'              => array(),
+			'exclude'               => array(),
 		),
 		$limit = 20,
 		$filter = array(
@@ -120,7 +117,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		}
 
 		if ( isset( $post['category_id'] ) || isset( $post['category_name'] ) ) {
-			$post['taxonomy']	= 'category';
+			$post['taxonomy']   = 'category';
 		}
 
 		$sub_query_posts = $this->get_sub_query_posts( $post );
@@ -171,7 +168,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		) T1 $final_order
         ";
 
-		//error_log(print_r($post,true) . " == " . $query);
+		// error_log(print_r($post,true) . " == " . $query);
 		$key     = hash( 'sha256', $query );
 		$results = wp_cache_get( $key, 'wppr' );
 		if ( ! is_array( $results ) ) {
@@ -264,7 +261,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			if ( ! is_array( $post['exclude'] ) ) {
 				$post['exclude'] = explode( ',', $post['exclude'] );
 			}
-			$ids	= implode( ',', array_fill( 0, count( $post['exclude'] ), '%d' ) );
+			$ids    = implode( ',', array_fill( 0, count( $post['exclude'] ), '%d' ) );
 			$conditions['where'] .= $this->db->prepare( " AND p.ID NOT IN ( $ids ) ", $post['exclude'] );
 		}
 
@@ -289,11 +286,11 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		if ( isset( $post['category_id'] ) || isset( $post['category_name'] ) ) {
 			// Backward compatibility.
 			if ( isset( $post['category_id'] ) && $post['category_id'] != false && is_numeric( $post['category_id'] ) && $post['category_id'] > 0 ) {
-				$post['term_ids']	= array( $post['category_id'] );
+				$post['term_ids']   = array( $post['category_id'] );
 			} elseif ( isset( $post['category_name'] ) && $post['category_name'] != false ) {
-				$category	= get_term_by( 'name', $post['category_name'], 'category' );
+				$category   = get_term_by( 'name', $post['category_name'], 'category' );
 				if ( $category ) {
-					$post['term_ids']	= array( $category->term_id );
+					$post['term_ids']   = array( $category->term_id );
 				}
 			}
 		}
@@ -302,7 +299,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			if ( ! is_array( $post['term_ids'] ) ) {
 				$post['term_ids'] = explode( ',', $post['term_ids'] );
 			}
-			$ids	= implode( ',', array_fill( 0, count( $post['term_ids'] ), '%d' ) );
+			$ids    = implode( ',', array_fill( 0, count( $post['term_ids'] ), '%d' ) );
 			$sub_query_conditions .= $this->db->prepare( " AND wt.term_id IN ( $ids ) ", $post['term_ids'] );
 		}
 
@@ -407,22 +404,22 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	 *
 	 * @access  public
 	 *
-	 * @param   string	$key	The key that it needs to look at.
-	 * @param   string	$value	The value of the key.
+	 * @param   string $key    The key that it needs to look at.
+	 * @param   string $value  The value of the key.
 	 *
 	 * @return bool
 	 */
 	public function supports( $key, $value ) {
-		$supports	= array(
+		$supports   = array(
 			'post' => array(
 				'category_id'           => false,
 				'category_name'         => false,
 				'post_type'             => array( 'post', 'page' ),
 				'post_date_range_weeks' => false,
 				'tags'                  => false,
-				'taxonomy'				=> false,
-				'term_ids'				=> array(),
-				'exclude'				=> array(),
+				'taxonomy'              => false,
+				'term_ids'              => array(),
+				'exclude'               => array(),
 			),
 			'filter' => array(
 				'name'   => false,
@@ -433,11 +430,9 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 				'rating' => false,
 				'price'  => false,
 				'date'   => false,
-			)
+			),
 		);
 
 		return array_key_exists( $value, $supports[ $key ] );
 	}
 }
-
-// @codingStandardsIgnoreEnd
