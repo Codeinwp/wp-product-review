@@ -74,7 +74,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	}
 
 	/**
-	 * Mai utility method to retrive an array of products.
+	 * Main utility method to retrive an array of products.
 	 *
 	 * @since   2.0.0
 	 * @access  public
@@ -87,14 +87,16 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	 * @return array
 	 */
 	public function find(
+		// If any value is updated here, add to supports() method also.
 		$post = array(
 			'category_id'           => false,
 			'category_name'         => false,
 			'post_type'             => array( 'post', 'page' ),
 			'post_date_range_weeks' => false,
 			'tags'                  => false,
-			'taxonomy_category'     => 'category',
-			'taxonomy_tag'          => 'post_tag',
+			'taxonomy'				=> false,
+			'term_ids'				=> array(),
+			'exclude'				=> array(),
 		),
 		$limit = 20,
 		$filter = array(
@@ -114,6 +116,11 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		if ( ! isset( $post['post_type'] ) ) {
 			$post['post_type'] = array( 'post', 'page' );
 		}
+
+		if ( isset( $post['category_id'] ) || isset( $post['category_name'] ) ) {
+			$post['taxonomy']	= 'category';
+		}
+
 		$sub_query_posts = $this->get_sub_query_posts( $post );
 
 		$order_by         = $this->get_order_by( $order );
@@ -162,7 +169,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		) T1 $final_order
         ";
 
-		// error_log($query);
+		//error_log(print_r($post,true) . " == " . $query);
 		$key     = hash( 'sha256', $query );
 		$results = wp_cache_get( $key, 'wppr' );
 		if ( ! is_array( $results ) ) {
@@ -188,19 +195,12 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	 */
 	private function get_sub_query_posts( $post ) {
 		$sub_selection_query = '';
-		if ( isset( $post['category_name'] ) || isset( $post['category_id'] ) ) {
-			$taxonomy   = isset( $post['taxonomy_category'] ) ? $post['taxonomy_category'] : 'category';
-			$sub_selection_query .= " INNER JOIN {$this->db->term_relationships } wtr1 ON wtr1.object_id = p.ID
-					INNER JOIN {$this->db->term_taxonomy} wtt1 on wtt1.term_taxonomy_id = wtr1.term_taxonomy_id AND wtt1.taxonomy = '$taxonomy'
-					INNER JOIN {$this->db->terms} wt1
-					ON wt1.term_id = wtt1.term_id";
-		}
-		if ( isset( $post['tags'] ) && $post['tags'] != false ) {
-			$taxonomy   = isset( $post['taxonomy_tag'] ) ? $post['taxonomy_tag'] : 'post_tag';
-			$sub_selection_query .= " INNER JOIN {$this->db->term_relationships } wtr2 ON wtr2.object_id = p.ID
-					INNER JOIN {$this->db->term_taxonomy} wtt2 on wtt2.term_taxonomy_id = wtr2.term_taxonomy_id AND wtt2.taxonomy = '$taxonomy'
-					INNER JOIN {$this->db->terms} wt2
-					ON wt2.term_id = wtt2.term_id";
+		if ( isset( $post['taxonomy'] ) && ! empty( $post['taxonomy'] ) ) {
+			$taxonomy   = $post['taxonomy'];
+			$sub_selection_query .= " INNER JOIN {$this->db->term_relationships } wtr ON wtr.object_id = p.ID
+					INNER JOIN {$this->db->term_taxonomy} wtt on wtt.term_taxonomy_id = wtr.term_taxonomy_id AND wtt.taxonomy = '$taxonomy'
+					INNER JOIN {$this->db->terms} wt
+					ON wt.term_id = wtt.term_id";
 		}
 
 		return $sub_selection_query;
@@ -258,6 +258,13 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		if ( isset( $filter['rating'] ) && $filter['rating'] != false && is_numeric( $filter['rating'] ) ) {
 			$conditions['having'] .= $this->db->prepare( ' AND `rating`  > %f ', $filter['rating'] );
 		}
+		if ( isset( $post['exclude'] ) && ! empty( $post['exclude'] ) ) {
+			if ( ! is_array( $post['exclude'] ) ) {
+				$post['exclude'] = explode( ',', $post['exclude'] );
+			}
+			$ids	= implode( ',', array_fill( 0, count( $post['exclude'] ), '%d' ) );
+			$conditions['where'] .= $this->db->prepare( " AND p.ID NOT IN ( $ids ) ", $post['exclude'] );
+		}
 
 		$conditions     = apply_filters( 'wppr_where_clause', $conditions, $post, $filter );
 
@@ -276,17 +283,25 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	 */
 	private function get_sub_query_conditions( $post ) {
 		$sub_query_conditions = '';
-		if ( isset( $post['category_id'] ) && $post['category_id'] != false && is_numeric( $post['category_id'] ) && $post['category_id'] > 0 ) {
-			$sub_query_conditions .= $this->db->prepare( " AND wt1.term_id = '%d' ", $post['category_id'] );
-		} elseif ( isset( $post['category_name'] ) && $post['category_name'] != false ) {
-			$sub_query_conditions .= $this->db->prepare( ' AND wt1.slug = %s ', $post['category_name'] );
-		}
-		if ( isset( $post['tags'] ) && $post['tags'] != false ) {
-			if ( ! is_array( $post['tags'] ) ) {
-				$post['tags'] = explode( ',', $post['tags'] );
+
+		if ( isset( $post['category_id'] ) || isset( $post['category_name'] ) ) {
+			// Backward compatibility.
+			if ( isset( $post['category_id'] ) && $post['category_id'] != false && is_numeric( $post['category_id'] ) && $post['category_id'] > 0 ) {
+				$post['term_ids']	= array( $post['category_id'] );
+			} elseif ( isset( $post['category_name'] ) && $post['category_name'] != false ) {
+				$category	= get_term_by( 'name', $post['category_name'], 'category' );
+				if ( $category ) {
+					$post['term_ids']	= array( $category->term_id );
+				}
 			}
-			$tags   = implode( ',', array_fill( 0, count( $post['tags'] ), '%s' ) );
-			$sub_query_conditions .= $this->db->prepare( " AND wt2.slug IN ( $tags ) ", $post['tags'] );
+		}
+
+		if ( isset( $post['term_ids'] ) && ! empty( $post['term_ids'] ) ) {
+			if ( ! is_array( $post['term_ids'] ) ) {
+				$post['term_ids'] = explode( ',', $post['term_ids'] );
+			}
+			$ids	= implode( ',', array_fill( 0, count( $post['term_ids'] ), '%d' ) );
+			$sub_query_conditions .= $this->db->prepare( " AND wt.term_id IN ( $ids ) ", $post['term_ids'] );
 		}
 
 		if ( isset( $post['post_type'] ) && is_array( $post['post_type'] ) ) {
@@ -383,5 +398,42 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 				'rating' => $rating,
 			)
 		);
+	}
+
+	/**
+	 * Utility method to find if a particular condition is supported by the model.
+	 *
+	 * @access  public
+	 *
+	 * @param   string	$key	The key that it needs to look at.
+	 * @param   string	$value	The value of the key.
+	 *
+	 * @return bool
+	 */
+	public function supports( $key, $value ) {
+		$supports	= array(
+			'post' => array(
+				'category_id'           => false,
+				'category_name'         => false,
+				'post_type'             => array( 'post', 'page' ),
+				'post_date_range_weeks' => false,
+				'tags'                  => false,
+				'taxonomy'				=> false,
+				'term_ids'				=> array(),
+				'exclude'				=> array(),
+			),
+			'filter' => array(
+				'name'   => false,
+				'price'  => false,
+				'rating' => false,
+			),
+			'order' => array(
+				'rating' => false,
+				'price'  => false,
+				'date'   => false,
+			)
+		);
+
+		return array_key_exists( $value, $supports[ $key ] );
 	}
 }
