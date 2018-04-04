@@ -1,4 +1,6 @@
 <?php
+// @codingStandardsIgnoreStart
+
 /**
  * The file that defines a model class for easier access to DB
  * functionality, an abstract layer for core and addons to use.
@@ -142,27 +144,27 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 
 		$final_order        = isset( $order['rating'] ) && in_array( $order['rating'], array( 'ASC', 'DESC' ) ) ? " ORDER BY `final_rating` {$order['rating']}" : '';
 
-		$query   = " 
+		$query   = "
 		SELECT ID, post_date, post_title, `check`, `name`, `price`, `rating`, `comment_rating`, $final_rating as 'final_rating' FROM
 		(
-        SELECT 
+        SELECT
 			ID,
 			post_date,
 			post_title,
-            GROUP_CONCAT( DISTINCT IF( `meta_key` = 'cwp_meta_box_check', `meta_value`, '' ) SEPARATOR '' ) AS 'check', 
-            GROUP_CONCAT( DISTINCT IF( `meta_key` = 'cwp_rev_product_name', `meta_value`, '' ) SEPARATOR '' ) AS 'name',   
-            GROUP_CONCAT( DISTINCT IF( `meta_key` = 'cwp_rev_price', FORMAT( `meta_value`, 2 ), '' ) SEPARATOR '' ) AS 'price', 
+            GROUP_CONCAT( DISTINCT IF( `meta_key` = 'cwp_meta_box_check', `meta_value`, '' ) SEPARATOR '' ) AS 'check',
+            GROUP_CONCAT( DISTINCT IF( `meta_key` = 'cwp_rev_product_name', `meta_value`, '' ) SEPARATOR '' ) AS 'name',
+            GROUP_CONCAT( DISTINCT IF( `meta_key` = 'cwp_rev_price', FORMAT( `meta_value`, 2 ), '' ) SEPARATOR '' ) AS 'price',
 			GROUP_CONCAT( DISTINCT IF( `meta_key` = 'wppr_rating', IF(FORMAT(`meta_value`, 2) = '100.00','99.99', FORMAT(`meta_value`, 2) ), '') SEPARATOR '' ) AS 'rating',
             GROUP_CONCAT( DISTINCT IF( `meta_key` = 'wppr_comment_rating', `meta_value`, '') SEPARATOR '' ) AS 'comment_rating'
         FROM {$this->db->postmeta} m INNER JOIN {$this->db->posts} p on p.ID = m.post_ID
-        
+
         {$sub_query_posts}
-        where p.post_status = 'publish' 
+        where p.post_status = 'publish'
          {$conditions_where}
-        GROUP BY `ID` 
-        HAVING `check` = 'Yes' 
+        GROUP BY `ID`
+        HAVING `check` = 'Yes'
         {$conditions_having}
-        ORDER BY 
+        ORDER BY
         {$order_by}
         `name` ASC
         LIMIT {$limit}
@@ -437,3 +439,5 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		return array_key_exists( $value, $supports[ $key ] );
 	}
 }
+
+// @codingStandardsIgnoreEnd
