@@ -106,9 +106,10 @@ class Wppr_Public {
 
 		if ( $review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
 			wp_enqueue_script( 'jquery-ui-slider' );
+			wp_enqueue_script( 'jquery-touch-punch' );
 			wp_enqueue_script(
 				$this->plugin_name . '-frontpage-js', WPPR_URL . '/assets/js/main.js', array(
-					'jquery',
+					'jquery-ui-slider',
 				), $this->version, true
 			);
 			wp_enqueue_style( $this->plugin_name . 'jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
