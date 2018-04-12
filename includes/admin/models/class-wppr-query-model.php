@@ -301,8 +301,8 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			}
 
 			// let's check if these terms are numeric or strings.
-			$is_num	= is_numeric( $post['term_ids'][0] );
-			$format	= $is_num ? '%d' : '%s';
+			$is_num = is_numeric( $post['term_ids'][0] );
+			$format = $is_num ? '%d' : '%s';
 
 			$ids    = implode( ',', array_fill( 0, count( $post['term_ids'] ), $format ) );
 			if ( $is_num ) {
