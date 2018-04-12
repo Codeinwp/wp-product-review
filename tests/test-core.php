@@ -15,6 +15,202 @@
 class Test_WPPR extends WP_UnitTestCase {
 
 	/**
+	 * Create posts of different post types and associate with different taxonomy and test whether the query model is able to fetch them correctly.
+	 */
+	function test_review_query_model( /* even number */ $number = 20 ) {
+		$options = array(
+			array(
+				'name' => 'Excellent',
+				'value' => '100',
+			),
+			array(
+				'name' => 'Great',
+				'value' => '90',
+			),
+			array(
+				'name' => 'Good',
+				'value' => '80',
+			),
+			array(
+				'name' => 'Average',
+				'value' => '70',
+			),
+			array(
+				'name' => 'Bad',
+				'value' => '50',
+			),
+		);
+
+		$reviews	= array();
+		$post_ids	= array();
+		$index		= 0;
+		// ensure that the number of tags/cats below is not a factor of $number i.e. $number should not be completely divisible by the count of below.
+		$tags		= array( 'tag1', 'tag2', 'tag3' );
+		$cats		= array( 'cat1', 'cat2', 'cat3' );
+		$cat_ids	= array();
+		foreach ( $cats as $cat ) {
+			$term	= wp_insert_term( $cat, 'category' );
+			$cat_ids[]	= $term['term_id'];
+		}
+
+		$posts		= $this->factory->post->create_many( $number, array( 'post_type' => 'post' ) );
+		foreach ( $posts as $p ) {
+			$post_ids[]	= $p;
+			$tag		= $tags[ $index%count($tags) ];
+			$cat		= $cats[ $index%count($cats) ];
+			wp_set_post_tags( $p, $tag );
+			wp_set_object_terms( $p, $cat, 'category' );
+			$index++;
+
+			$review = new WPPR_Review_Model( $p );
+			$review->activate();
+			$this->assertTrue( $review->is_active() );
+			$review->set_options( $options );
+			$review->set_price( $index * $number );
+			if ( 0 === $index%2 ) {
+				$review->set_name('custom' . rand());
+			}
+
+			$reviews[]	= $review;
+		}
+
+		$cpt_ids	= array();
+		$index		= 0;
+		register_post_type( 'wppr_test' );
+		register_taxonomy( 'wppr_test_cat', 'wppr_test', array('hierarchical' => true ) );
+		register_taxonomy( 'wppr_test_tag', 'wppr_test', array('hierarchical' => false ) );
+		$custom_cat_ids	= array();
+		foreach ( $cats as $cat ) {
+			$term	= wp_insert_term( $cat, 'wppr_test_cat' );
+			$custom_cat_ids[]	= $term['term_id'];
+		}
+		$posts_test		= $this->factory->post->create_many( $number, array( 'post_type' => 'wppr_test' ) );
+		foreach ( $posts_test as $p ) {
+			$cpt_ids[]	= $p;
+			$tag		= $tags[ $index%count($tags) ];
+			$cat		= $cats[ $index%count($cats) ];
+			wp_set_object_terms( $p, $tag, 'wppr_test_tag'  );
+			wp_set_object_terms( $p, $cat, 'wppr_test_cat' );
+			$index++;
+
+			$review = new WPPR_Review_Model( $p );
+			$review->activate();
+			$this->assertTrue( $review->is_active() );
+			$review->set_options( $options );
+			$review->set_price( $index * $number );
+
+			$reviews[]	= $review;
+		}
+
+		$model		= new WPPR_Query_Model();
+
+		// basic.
+		$results	= $model->find();
+		$this->assertEquals( $number, count($results));
+
+		// date.
+		$results	= $model->find(
+			array(
+				'post_date_range_weeks'	=> array( 1, 4 ),
+			)
+		);
+		$this->assertEquals( 0, count($results));
+
+		// backward compatibility with name.
+		$results	= $model->find(
+			array(
+				'category_name'	=> 'cat1',
+				'post_type'		=> 'post',
+			)
+		);
+		$this->assertEquals( intval(floor($number/count($cats))) + 1, count($results));
+
+		// backward compatibility with id.
+		$results	= $model->find(
+			array(
+				'category_id'	=> $cat_ids[0],
+				'post_type'		=> 'post',
+			)
+		);
+		$this->assertEquals( intval(floor($number/count($cats))) + 1, count($results));
+
+		// category, with id.
+		$results	= $model->find(
+			array(
+				'taxonomy'		=> 'category',
+				'term_ids'		=> $cat_ids[0],
+				'post_type'		=> 'post',
+			)
+		);
+		$this->assertEquals( intval(floor($number/count($cats))) + 1, count($results));
+
+		// custom taxonomy, with id.
+		$results	= $model->find(
+			array(
+				'taxonomy'		=> 'wppr_test_cat',
+				'term_ids'		=> $custom_cat_ids[0],
+				'post_type'		=> 'post',
+			)
+		);
+		$this->assertEquals( intval(floor($number/count($cats))) + 1, count($results));
+
+		// custom taxonomy, with id and exclude.
+		$results	= $model->find(
+			array(
+				'taxonomy'		=> 'wppr_test_cat',
+				'term_ids'		=> $custom_cat_ids[0],
+				'post_type'		=> 'wppr_test',
+				'exclude'		=> $cpt_ids[0],
+			)
+		);
+		$this->assertEquals( intval(floor($number/count($cats))), count($results));
+
+		// custom taxonomy, with slug,
+		$results	= $model->find(
+			array(
+				'taxonomy'		=> 'wppr_test_tag',
+				'term_ids'		=> $tags[0],
+				'post_type'		=> 'wppr_test',
+			)
+		);
+		$this->assertEquals( intval(floor($number/count($cats))) + 1, count($results));
+
+		// custom taxonomy, with slug,
+		$results	= $model->find(
+			array(
+				'taxonomy'		=> 'wppr_test_tag',
+				'term_ids'		=> $tags,
+				'post_type'		=> 'wppr_test',
+			)
+		);
+		$this->assertEquals( $number, count($results));
+
+		/* does not work
+
+		// find by price.
+		$results	= $model->find(
+			array(),
+			200,
+			array(
+				'price' => $number,
+			)
+		);
+		$this->assertEquals( $number - 1, count($results));
+		*/
+
+		// find by name.
+		$results	= $model->find(
+			array(),
+			200,
+			array(
+				'name' => 'cust',
+			)
+		);
+		$this->assertEquals( $number/2, count($results));
+
+	}
+
+	/**
 	 * Create post of a particular post_type and see if it behaves like a review.
 	 *
 	 * @dataProvider postTypeDataProvider
