@@ -299,8 +299,17 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			if ( ! is_array( $post['term_ids'] ) ) {
 				$post['term_ids'] = explode( ',', $post['term_ids'] );
 			}
-			$ids    = implode( ',', array_fill( 0, count( $post['term_ids'] ), '%d' ) );
-			$sub_query_conditions .= $this->db->prepare( " AND wt.term_id IN ( $ids ) ", $post['term_ids'] );
+
+			// let's check if these terms are numeric or strings.
+			$is_num	= is_numeric( $post['term_ids'][0] );
+			$format	= $is_num ? '%d' : '%s';
+
+			$ids    = implode( ',', array_fill( 0, count( $post['term_ids'] ), $format ) );
+			if ( $is_num ) {
+				$sub_query_conditions .= $this->db->prepare( " AND wt.term_id IN ( $ids ) ", $post['term_ids'] );
+			} else {
+				$sub_query_conditions .= $this->db->prepare( " AND wt.slug IN ( $ids ) ", $post['term_ids'] );
+			}
 		}
 
 		if ( isset( $post['post_type'] ) && is_array( $post['post_type'] ) ) {
