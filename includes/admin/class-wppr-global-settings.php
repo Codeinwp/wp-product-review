@@ -357,8 +357,11 @@ class WPPR_Global_Settings {
 	 * When Disqus or Jetpack Comments are enabled, show this to the user.
 	 */
 	private static function disable_user_comments_msg() {
+		if ( ! is_admin() ) {
+			return true;
+		}
 		$active = array();
-		if ( is_plugin_active( 'disqus-comment-system/disqus.php' ) ) {
+		if ( function_exists( 'is_plugin_active' ) && is_plugin_active( 'disqus-comment-system/disqus.php' ) ) {
 			$active[] = 'Disqus';
 		}
 		if ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'comments' ) ) {
