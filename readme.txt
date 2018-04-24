@@ -490,19 +490,13 @@ https://themeisle.com/contact
 [http://docs.themeisle.com/article/133-how-to-change-dynamically-the-pros-cons-heading-text](http://docs.themeisle.com/article/133-how-to-change-dynamically-the-pros-cons-heading-text)
 
 = How to change dynamically the name of the review =
-[http://docs.themeisle.com/article/131-how-to-change-dynamically-the-name-of-the-review](http://docs.themeisle.com/article/131-how-to-change-dynamically-the-name-of-the-review)
+[https://docs.themeisle.com/article/874-how-to-change-dynamically-the-name-of-the-review](https://docs.themeisle.com/article/874-how-to-change-dynamically-the-name-of-the-review)
 
 = How to change dynamically the option name format =
 [http://docs.themeisle.com/article/132-how-to-change-dynamically-the-option-name-format](http://docs.themeisle.com/article/132-how-to-change-dynamically-the-option-name-format)
 
 = How to make Comment Review option work in any theme =
 [http://docs.themeisle.com/article/54-why-comment-review-option-is-not-working-with-my-theme](http://docs.themeisle.com/article/54-why-comment-review-option-is-not-working-with-my-theme)
-
-= How to fix the review boxes issue =
-[http://docs.themeisle.com/article/210-how-to-fix-the-review-boxes-issue](http://docs.themeisle.com/article/210-how-to-fix-the-review-boxes-issue)
-
-= Price in WP Product Review is messed up =
-[http://docs.themeisle.com/article/216-price-in-wp-product-review-is-messed-up](http://docs.themeisle.com/article/216-price-in-wp-product-review-is-messed-up)
 
 = Prevent users from posting multiple review on a single post in WP Product Review =
 [http://docs.themeisle.com/article/578-prevent-users-from-posting-multiple-review-on-a-single-post-in-wp-product-review](http://docs.themeisle.com/article/578-prevent-users-from-posting-multiple-review-on-a-single-post-in-wp-product-review)
