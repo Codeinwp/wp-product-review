@@ -109,7 +109,11 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			$limit = 20;
 		}
 		if ( ! isset( $post['post_type'] ) ) {
-			$post['post_type'] = array( 'post', 'page' );
+			$types          = array( 'post', 'page' );
+			if ( 'yes' === $this->wppr_get_option( 'wppr_cpt' ) ) {
+				$types[]    = 'wppr_review';
+			}
+			$post['post_type'] = $types;
 		}
 		$sub_query_posts = $this->get_sub_query_posts( $post );
 
