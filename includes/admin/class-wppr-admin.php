@@ -426,7 +426,7 @@ class WPPR_Admin {
 	 */
 	public function settings_section_upsell( $section ) {
 		if ( 'general' === $section ) {
-			echo '<label class="wppr-upsell-label"> You display the review using the <b>[P_REVIEW]</b> shortcode. You can read more about it <a href="https://docs.themeisle.com/article/449-wp-product-review-shortcode-documentation" target="_blank">here</a></label>.';
+			echo '<label class="wppr-upsell-label"> You can display the review using the <b>[P_REVIEW]</b> shortcode. You can read more about it <a href="https://docs.themeisle.com/article/449-wp-product-review-shortcode-documentation" target="_blank">here</a></label>.';
 		}
 	}
 
