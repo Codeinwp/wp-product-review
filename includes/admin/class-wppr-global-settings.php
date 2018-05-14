@@ -179,6 +179,17 @@ class WPPR_Global_Settings {
 							),
 							'default'     => 'no',
 						),
+						'wppr_amp'      => array(
+							'type'        => 'select',
+							'name'        => __( 'Enable AMP CSS.', 'wp-product-review' ),
+							'description' => __( 'Enabling this will result in including custom CSS for AMP.', 'wp-product-review' ),
+							'id'          => 'wppr_amp',
+							'options'     => array(
+								'yes' => __( 'Yes', 'wp-product-review' ),
+								'no'  => __( 'No', 'wp-product-review' ),
+							),
+							'default'     => 'yes',
+						),
 					),
 					'rating'     => array(
 						'cwppos_rating_default'       => array(

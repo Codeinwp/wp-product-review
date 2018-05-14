@@ -155,14 +155,18 @@ class Wppr_Public {
 		if ( ! ampforwp_is_amp_endpoint() || ! is_amp_endpoint() ) {
 			return;
 		}
+
 		/**
 		 * Remove any custom icon.
 		 */
 		add_filter( 'wppr_option_custom_icon', '__return_empty_string', 99 );
-		add_filter( 'wppr_review_option_rating_css', array( $this, 'amp_width_support' ), 99, 2 );
-		add_action( 'amp_post_template_css', array( $this, 'amp_styles' ), 999 );
 		add_action( 'amp_post_template_head', array( $this, 'wppr_amp_add_fa' ), 999 );
 
+		$model = new WPPR_Query_Model();
+		if ( 'yes' === $model->wppr_get_option( 'wppr_amp' ) ) {
+			add_filter( 'wppr_review_option_rating_css', array( $this, 'amp_width_support' ), 99, 2 );
+			add_action( 'amp_post_template_css', array( $this, 'amp_styles' ), 999 );
+		}
 	}
 
 	/**
