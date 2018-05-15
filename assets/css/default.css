@@ -13,7 +13,6 @@
 
 .cwp-item-price {
 	float: right;
-	font-family: "Lato", Helvetica, sans-serif;
 	font-size: 1.75em;
 }
 
@@ -26,7 +25,6 @@
 	margin: 0;
 	padding: 0;
 	border: none;
-	font-family: "Lato", Helvetica, sans-serif;
 	font-weight: normal;
 }
 
@@ -54,7 +52,6 @@
 	padding-left: 20px;
 	border-right: 4px solid #d8d8d8;
 	border-left: 4px solid #d8d8d8;
-	font-family: "Open Sans", Helvetica, Arial, sans-serif;
 	font-size: 1.643em;
 	font-weight: normal;
 	font-style: italic;
@@ -133,7 +130,6 @@
 	display: block;
 	border-radius: 50%;
 	background: #fff;
-	font-family: "Lato";
 	font-size: 17px;
 	font-weight: 900;
 }
@@ -150,7 +146,6 @@
 .review-wu-bars span {
 	margin: 0;
 	padding: 0;
-	font-family: "Open Sans";
 	font-size: 13px !important;
 	font-style: italic;
 	line-height: 2;
@@ -344,7 +339,6 @@
 
 #review-statistics .review-wrap-up .review-wu-right h2 {
 	margin-bottom: 0;
-	font-family: "Lato";
 	font-size: 15px;
 	font-weight: 800;
 	text-transform: uppercase;
@@ -353,7 +347,6 @@
 #review-statistics .review-wrap-up .review-wu-right ul li {
 	margin: 0 0 2%;
 	padding-left: 0;
-	font-family: "Lato";
 	font-size: 16px;
 	line-height: 1;
 }
