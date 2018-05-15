@@ -143,6 +143,9 @@ class Wppr_Public {
 	 * Load AMP logic.
 	 */
 	public function amp_support() {
+		if ( ! $this->review->is_active() ) {
+			return;
+		}
 		if ( ! function_exists( 'ampforwp_is_amp_endpoint' ) || ! function_exists( 'is_amp_endpoint' ) ) {
 			return;
 		}
