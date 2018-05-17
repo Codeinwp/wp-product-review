@@ -4,7 +4,6 @@
 #review-statistics {
 	width: 100%;
 	margin: auto;
-	font-family: FontAwesome;
 }
 
 #review-statistics div {
@@ -34,10 +33,6 @@
 
 #review-statistics .photo-wrapup {
 	width: 100%;
-}
-
-#review-statistics {
-	font-family: FontAwesome;
 }
 
 #review-statistics .sec-top {
@@ -203,7 +198,6 @@
 	display: inline-block;
 	height: auto;
 	background: transparent !important;
-	font-family: FontAwesome;
 	font-size: 22px;
 	-webkit-font-smoothing: antialiased;
 	text-align: center;
@@ -381,12 +375,15 @@
 	margin-top: 10px;
 }
 
+#review-statistics .rev-option ul > li {
+	font-family: FontAwesome;
+}
+
 #review-statistics .review-wrap-up .review-wu-right ul {
 	margin-top: 10px !important;
 	margin-left: 0;
 	padding-left: 0 !important;
 	list-style: none;
-	;
 }
 
 .review-wu-right ul li {
