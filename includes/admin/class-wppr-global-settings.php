@@ -171,7 +171,7 @@ class WPPR_Global_Settings {
 						'wppr_cpt'      => array(
 							'type'        => 'select',
 							'name'        => __( 'Enable review post type', 'wp-product-review' ),
-							'description' => __( 'Enabling this will create a new post type where you can manage your reviews.', 'wp-product-review' ),
+							'description' => __( 'Enabling this will create a new post type where you can manage your reviews. Refresh the page on saving changes to see the "Reviews" menu on the left.', 'wp-product-review' ),
 							'id'          => 'use_cpt',
 							'options'     => array(
 								'yes' => __( 'Yes', 'wp-product-review' ),
