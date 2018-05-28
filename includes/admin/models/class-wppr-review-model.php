@@ -707,15 +707,15 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	}
 
 	/**
-	 * filter to display review product name in comparison table
+	 * Filter to display review product name in comparison table
 	 *
 	 * @since   3.4.3
 	 * @access  public
 	 * @return bool
 	 */
-	 public function wppr_hide_name(){
-		 return apply_filters( 'wppr_hide_product_name', true );
-	 }
+	public function wppr_hide_name() {
+		return apply_filters( 'wppr_hide_product_name', true );
+	}
 	/**
 	 * Return the review template.
 	 *
