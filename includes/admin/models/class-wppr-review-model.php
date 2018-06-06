@@ -941,6 +941,9 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 */
 	public function get_wppr_image_alt() {
 		$alt = get_post_meta( $this->get_wppr_image_id(), '_wp_attachment_image_alt', true );
+		if ( empty( $alt ) ) {
+			return $this->get_name();
+		}
 		return $alt;
 	}
 
