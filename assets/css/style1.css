@@ -29,7 +29,6 @@ Template 1
 
 .wppr-template-1 .wppr-review-stars-grade,
 .wppr-template-1 .wppr-review-stars-grade .wppr-review-full-stars {
-	font-family: FontAwesome;
 	font-size: 38px;
 	-webkit-font-smoothing: antialiased;
 	line-height: 1;
@@ -201,6 +200,24 @@ Template 1
 	width: auto;
 	max-width: none;
 	height: 100%;
+}
+
+.wppr-template-1 ul.wppr-custom-icon {
+	width: 100% !important;
+	margin: 0;
+	margin-left: 0 !important;
+	padding-left: 0 !important;
+}
+
+.wppr-template-1 ul.wppr-custom-icon li {
+	display: inline-block;
+	height: auto;
+	background: transparent !important;
+	font-family: FontAwesome;
+	font-size: 22px;
+	-webkit-font-smoothing: antialiased;
+	text-align: center;
+	text-rendering: auto;
 }
 
 @media (max-width: 480px) {

@@ -1202,9 +1202,9 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		$content = $this->get_content();
 		$content = strip_shortcodes( $content );
 
-		$excerpt_length = apply_filters( 'excerpt_length', 55 );
+		$excerpt_length = apply_filters( 'wppr_excerpt_length', 55 );
 
-		return wp_trim_words( $content, $excerpt_length, '' );
+		return wp_trim_words( $content, $excerpt_length, '...' );
 	}
 
 	/**

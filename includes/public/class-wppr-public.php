@@ -106,9 +106,10 @@ class Wppr_Public {
 
 		if ( $review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
 			wp_enqueue_script( 'jquery-ui-slider' );
+			wp_enqueue_script( 'jquery-touch-punch' );
 			wp_enqueue_script(
 				$this->plugin_name . '-frontpage-js', WPPR_URL . '/assets/js/main.js', array(
-					'jquery',
+					'jquery-ui-slider',
 				), $this->version, true
 			);
 			wp_enqueue_style( $this->plugin_name . 'jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
@@ -119,6 +120,11 @@ class Wppr_Public {
 		if ( 'default' !== $review->get_template() || ( ! empty( $icon ) && $review->wppr_get_option( 'cwppos_fontawesome' ) == 'no' ) ) {
 			wp_enqueue_style( $this->plugin_name . 'font-awesome', WPPR_URL . '/assets/css/font-awesome.min.css', array(), $this->version );
 		}
+
+		if ( $review->wppr_get_option( 'cwppos_show_icon' ) == 'yes' ) {
+			wp_enqueue_style( 'dashicons' );
+		}
+
 		wp_enqueue_style( $this->plugin_name . '-' . $review->get_template() . '-stylesheet', WPPR_URL . '/assets/css/' . $review->get_template() . '.css', array(), $this->version );
 		wp_enqueue_style(
 			$this->plugin_name . '-percentage-circle', WPPR_URL . '/assets/css/circle.css', array(),
@@ -143,20 +149,27 @@ class Wppr_Public {
 	 * Load AMP logic.
 	 */
 	public function amp_support() {
+		if ( ! $this->review->is_active() ) {
+			return;
+		}
 		if ( ! function_exists( 'ampforwp_is_amp_endpoint' ) || ! function_exists( 'is_amp_endpoint' ) ) {
 			return;
 		}
 		if ( ! ampforwp_is_amp_endpoint() || ! is_amp_endpoint() ) {
 			return;
 		}
+
 		/**
 		 * Remove any custom icon.
 		 */
 		add_filter( 'wppr_option_custom_icon', '__return_empty_string', 99 );
-		add_filter( 'wppr_review_option_rating_css', array( $this, 'amp_width_support' ), 99, 2 );
-		add_action( 'amp_post_template_css', array( $this, 'amp_styles' ), 999 );
 		add_action( 'amp_post_template_head', array( $this, 'wppr_amp_add_fa' ), 999 );
 
+		$model = new WPPR_Query_Model();
+		if ( 'yes' === $model->wppr_get_option( 'wppr_amp' ) ) {
+			add_filter( 'wppr_review_option_rating_css', array( $this, 'amp_width_support' ), 99, 2 );
+			add_action( 'amp_post_template_css', array( $this, 'amp_styles' ), 999 );
+		}
 	}
 
 	/**
@@ -168,13 +181,10 @@ class Wppr_Public {
 		$conditional_styles = '';
 		if ( $review->wppr_get_option( 'cwppos_show_icon' ) == 'yes' ) {
 			$conditional_styles .= '
-                div.affiliate-button a span {
-                    background: url("' . WPPR_URL . '/assets/img/cart-icon.png") no-repeat left center;
+                div.affiliate-button a span:before, div.affiliate-button a:hover span:before {
+					font-family: "dashicons";
+                    content: "\f174";
                 } 
-        
-                div.affiliate-button a:hover span {
-                    background: url("' . WPPR_URL . '/assets/img/cart-icon-hover.png") no-repeat left center;
-                }
                 ';
 		}
 
