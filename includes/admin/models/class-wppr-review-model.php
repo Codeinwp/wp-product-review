@@ -713,8 +713,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 * @access  public
 	 * @return bool
 	 */
-	public function wppr_hide_name() {
-		return apply_filters( 'wppr_hide_product_name', true );
+	public function hide_name() {
+		return apply_filters( 'wppr_hide_product_name', $this->name, $this->ID, $this );
 	}
 	/**
 	 * Return the review template.
@@ -901,7 +901,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 * @access  public
 	 * @return int
 	 */
-	public function get_wppr_image_id() {
+	public function get_image_id() {
 		global $wpdb;
 		$attachment  = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid=%s", $this->image ) );
 		$image_id    = isset( $attachment[0] ) ? $attachment[0] : '';
@@ -919,7 +919,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		// filter for image size;
 		$size        = apply_filters( 'wppr_review_image_size', 'thumbnail', $this->ID, $this );
 		$image_thumb = '';
-		$image_id = $this->get_wppr_image_id();
+		$image_id = $this->get_image_id();
 		if ( ! empty( $image_id ) ) {
 			$image_thumb = wp_get_attachment_image_src( $image_id, $size );
 			if ( $size !== 'thumbnail' ) {
@@ -939,8 +939,12 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 * @access  public
 	 * @return string
 	 */
-	public function get_wppr_image_alt() {
-		$alt = get_post_meta( $this->get_wppr_image_id(), '_wp_attachment_image_alt', true );
+	public function get_image_alt() {
+		if( empty( $this->get_image_id() ) ){
+			return $this->get_name();
+		}
+
+		$alt = get_post_meta( $this->get_image_id(), '_wp_attachment_image_alt', true );
 		if ( empty( $alt ) ) {
 			return $this->get_name();
 		}
