@@ -67,7 +67,7 @@ class WPPR {
 	 */
 	public function __construct() {
 		$this->plugin_name = 'wppr';
-		$this->version     = '3.4.3';
+		$this->version     = '3.4.4';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -134,6 +134,7 @@ class WPPR {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'wp_ajax_update_options', $plugin_admin, 'update_options' );
 		$this->loader->add_action( 'load-edit.php', $plugin_admin, 'get_additional_fields' );
+		$this->loader->add_action( 'wppr_settings_section_upsell', $plugin_admin, 'settings_section_upsell', 10, 1 );
 
 		$plugin_editor = new WPPR_Editor( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'add_meta_boxes', $plugin_editor, 'set_editor' );
@@ -185,7 +186,7 @@ class WPPR {
 			return;
 		}
 		$this->loader->add_action( 'wp', $plugin_public, 'setup_post' );
-		$this->loader->add_action( 'wp', $plugin_public, 'amp_support' );
+		$this->loader->add_action( 'wp', $plugin_public, 'amp_support', 11 );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'load_review_assets' );
 		$this->loader->add_action( 'comment_form_logged_in_after', $plugin_public, 'add_comment_fields' );
 		$this->loader->add_action( 'comment_form_after_fields', $plugin_public, 'add_comment_fields' );

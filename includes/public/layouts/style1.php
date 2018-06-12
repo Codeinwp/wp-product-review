@@ -37,13 +37,39 @@
 	<div id="wppr-review-<?php echo $review_id; ?>" class="wppr-review-container">
 
 		<h2 class="wppr-review-name"><?php echo esc_html( $review_object->get_name() ); ?></h2>
-		<div class="wppr-review-stars" style="direction: ltr">
-			<div class="wppr-review-stars-grade <?php echo $review_object->get_rating_class(); ?> <?php echo is_rtl() ? 'rtl' : ''; ?>">
-				<span class="wppr-review-full-stars <?php echo $review_object->get_rating_class(); ?> <?php echo is_rtl() ? 'rtl' : ''; ?>"
-					  style=" width:<?php echo esc_html( intval( $review_rating ) ); ?>%;"></span>
-			</div>
-			<span class="wppr-review-stars-author"><?php echo get_the_author() . __( '\'s rating', 'wp-product-review' ); ?></span>
-		</div><!-- end .wppr-review-stars -->
+
+	<?php
+		$icon = apply_filters( 'wppr_option_custom_icon', '' );
+	if ( empty( $icon ) ) {
+	?>
+	<div class="wppr-review-stars" style="direction: ltr">
+	<div class="wppr-review-stars-grade <?php echo $review_object->get_rating_class(); ?> <?php echo is_rtl() ? 'rtl' : ''; ?>">
+		<span class="wppr-review-full-stars <?php echo $review_object->get_rating_class(); ?> <?php echo is_rtl() ? 'rtl' : ''; ?>"
+			  style=" width:<?php echo esc_html( intval( $review_rating ) ); ?>%;"></span>
+	</div>
+	<span class="wppr-review-stars-author"><?php echo get_the_author() . __( '\'s rating', 'wp-product-review' ); ?></span>
+	</div>
+	<?php
+	} else {
+	?>
+	<div id="review-statistics"><div class="review-wu-bars">
+	<ul class="cwpr_clearfix
+	<?php echo ' ' . $review_object->get_rating_class( $review_rating ) . apply_filters( 'wppr_option_custom_icon', '' ); ?>
+	">
+		<?php for ( $i = 1; $i <= 5; $i ++ ) { ?>
+					<li
+						<?php
+						echo $i <= round( $review_rating / 20 ) ? ' class="colored"' : '';
+						?>
+					></li>
+				<?php } ?>
+			</ul>
+		</div></div>
+	<?php
+	}
+	?>
+
+
 		<div class="wppr-review-grade">
 			<div class="wppr-review-grade-number">
 				<span class=" <?php echo $review_object->get_rating_class(); ?> ">

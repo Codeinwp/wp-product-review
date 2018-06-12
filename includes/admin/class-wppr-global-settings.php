@@ -70,7 +70,7 @@ class WPPR_Global_Settings {
 						'cwppos_show_reviewbox'  => array(
 							'id'          => 'review_position',
 							'name'        => __( 'Position of the review box', 'wp-product-review' ),
-							'description' => __( 'You display the review using the shortcode available in the pro version <code> [P_REVIEW post_id=3067 visual=\'full\']</code>', 'wp-product-review' ),
+							'description' => '',
 							'type'        => 'select',
 							'options'     => array(
 								'yes'    => __( 'After content', 'wp-product-review' ),
@@ -178,6 +178,17 @@ class WPPR_Global_Settings {
 								'no'  => __( 'No', 'wp-product-review' ),
 							),
 							'default'     => 'no',
+						),
+						'wppr_amp'      => array(
+							'type'        => 'select',
+							'name'        => __( 'Enable AMP CSS.', 'wp-product-review' ),
+							'description' => __( 'Enabling this will result in including custom CSS for AMP.', 'wp-product-review' ),
+							'id'          => 'wppr_amp',
+							'options'     => array(
+								'yes' => __( 'Yes', 'wp-product-review' ),
+								'no'  => __( 'No', 'wp-product-review' ),
+							),
+							'default'     => 'yes',
 						),
 					),
 					'rating'     => array(
@@ -357,8 +368,11 @@ class WPPR_Global_Settings {
 	 * When Disqus or Jetpack Comments are enabled, show this to the user.
 	 */
 	private static function disable_user_comments_msg() {
+		if ( ! is_admin() ) {
+			return true;
+		}
 		$active = array();
-		if ( is_plugin_active( 'disqus-comment-system/disqus.php' ) ) {
+		if ( function_exists( 'is_plugin_active' ) && is_plugin_active( 'disqus-comment-system/disqus.php' ) ) {
 			$active[] = 'Disqus';
 		}
 		if ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'comments' ) ) {
