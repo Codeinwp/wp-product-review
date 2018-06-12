@@ -196,6 +196,8 @@ class WPPR {
 			$this->loader->add_filter( 'the_content', $plugin_public, 'display_on_front' );
 		}
 
+		$this->loader->add_filter( 'wppr_rating_circle_bar_styles', $plugin_public, 'rating_circle_bar_styles', 10, 2 );
+		$this->loader->add_filter( 'wppr_rating_circle_fill_styles', $plugin_public, 'rating_circle_fill_styles', 10, 2 );
 	}
 
 	/**

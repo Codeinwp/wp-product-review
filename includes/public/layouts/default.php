@@ -28,6 +28,8 @@ if ( $review_object->get_click() == 'image' ) {
 
 $pros = $review_object->get_pros();
 $cons = $review_object->get_cons();
+$rating = round( $review_object->get_rating() );
+$rating_10  = round( $review_object->get_rating(), 0 ) / 10;
 
 ?>
 <div id="wppr-review-<?php echo $review_object->get_ID(); ?>"
@@ -52,11 +54,11 @@ $cons = $review_object->get_cons();
 
 						<div class="review-wu-grade">
 							<div class="review-wu-grade-content">
-								<div class="wppr-c100 wppr-p<?php echo esc_attr( round( $review_object->get_rating() ) ) . ' ' . $review_object->get_rating_class(); ?>">
-									<span><?php echo esc_html( round( $review_object->get_rating(), 0 ) / 10 ); ?></span>
+								<div class="wppr-c100 wppr-p<?php echo esc_attr( $rating ) . ' ' . $review_object->get_rating_class(); ?>">
+									<span><?php echo esc_html( $rating_10 ); ?></span>
 									<div class="wppr-slice">
-										<div class="wppr-bar"></div>
-										<div class="wppr-fill"></div>
+										<div class="wppr-bar" style="<?php echo apply_filters( 'wppr_rating_circle_bar_styles', '', $rating ); ?>"></div>
+										<div class="wppr-fill" style="<?php echo apply_filters( 'wppr_rating_circle_fill_styles', '', $rating ); ?>"></div>
 									</div>
 									<div class="wppr-slice-center"></div>
 								</div>
@@ -79,10 +81,15 @@ $cons = $review_object->get_cons();
 								<ul class="cwpr_clearfix
 								<?php echo ' ' . $review_object->get_rating_class( $option['value'] ) . apply_filters( 'wppr_option_custom_icon', '' ); ?>
 								">
-									<?php for ( $i = 1; $i <= 10; $i ++ ) { ?>
+									<?php
+										$rating     = round( $option['value'] / 10 );
+										$start_from = is_rtl() ? ( 11 - $rating ) : 1;
+										$stop_at    = is_rtl() ? 10 : $rating;
+									for ( $i = 1; $i <= 10; $i ++ ) {
+										?>
 										<li
 											<?php
-											echo $i <= round( $option['value'] / 10 ) ? ' class="colored"' : '';
+											echo $i >= $start_from && $i <= $stop_at ? ' class="colored"' : '';
 											?>
 										></li>
 									<?php } ?>

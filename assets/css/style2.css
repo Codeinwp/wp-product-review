@@ -42,6 +42,11 @@ Template 2
 	padding-right: 30px;
 }
 
+.wppr-template-2 .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating.rtl {
+	padding-left: 30px;
+	padding-right: 0px;
+}
+
 .wppr-template-2 .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating-grade,
 .wppr-template-2 .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating-image {
 	float: left;

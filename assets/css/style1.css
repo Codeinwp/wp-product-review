@@ -85,6 +85,12 @@ Template 1
 	padding-left: 45px;
 }
 
+.wppr-template-1 .wppr-review-grade-options.rtl {
+	padding-right: 45px;
+	padding-left: 0px;
+}
+
+
 .wppr-template-1 .wppr-review-grade-option-header span:last-of-type {
 	font-weight: 700;
 	text-align: right;
