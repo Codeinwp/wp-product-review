@@ -58,7 +58,7 @@
 						<?php
 					} else {
 						?>
-						<div class="wppr-rating">
+						<div class="wppr-rating" style="direction: ltr">
 							<div style="width:<?php echo $review_score; ?>%;"> <?php echo $review_score; ?></div>
 						</div>
 						<?php
