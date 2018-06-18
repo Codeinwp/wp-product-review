@@ -26,6 +26,10 @@
 	line-height: 18px;
 }
 
+.wppr-prodlist .wppr-prodrow .wppr-prodrowright .wppr-rating div {
+	min-width: 20%;
+}
+
 .clear {
 	clear: both;
 }
