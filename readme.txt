@@ -67,6 +67,11 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+= 3.4.5 - 2018-06-18  = 
+
+* Fixed problem with product price alignment on the first template
+
+
 = 3.4.4 - 2018-06-11  = 
 
 * Fixed issue with HTML tag not being closed
