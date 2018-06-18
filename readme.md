@@ -67,6 +67,17 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 ## Changelog ##
+### 3.4.4 - 2018-06-11  ###
+
+* Fixed issue with HTML tag not being closed
+* Fixed issue with button icon not changing color
+* Fixed issue with review comments form not responsive
+* Fixed white screen when Jetpack is active
+* Update docs
+* New option to disable the AMP CSS output
+* Changed the way fonts are loaded to inherit them from the theme
+
+
 ### 3.4.3 - 2018-03-20  ###
 
 * Fix FontAwesome icon issue in custom templates.
@@ -472,6 +483,7 @@ Alternatively you can also follow the following steps to install the WP Product 
 
 
 
+
 ### How to activate user reviews ###
 
 By default user reviews are disabled since not all the themes are compatible with this option due to different designs for the comment box. You can easily activate them from General Settings
@@ -604,6 +616,15 @@ https://themeisle.com/contact
 
  = How the visitors rating are influencing the review rating in WP Product Review = 
  [https://docs.themeisle.com/article/760-how-the-visitors-rating-are-influencing-the-review-rating-in-wp-product-review](https://docs.themeisle.com/article/760-how-the-visitors-rating-are-influencing-the-review-rating-in-wp-product-review) 
+
+ = WP Product Review how to change dynamically the image size for review = 
+ [https://docs.themeisle.com/article/135-wp-product-review-how-to-change-dynamically-the-image-size-for-review](https://docs.themeisle.com/article/135-wp-product-review-how-to-change-dynamically-the-image-size-for-review) 
+
+ = WP Product Review how to change dynamically the option name format = 
+ [https://docs.themeisle.com/article/132-wp-product-review-how-to-change-dynamically-the-option-name-format](https://docs.themeisle.com/article/132-wp-product-review-how-to-change-dynamically-the-option-name-format) 
+
+ = How to have a whole number ratings in WP Product Review = 
+ [https://docs.themeisle.com/article/849-how-to-have-a-whole-number-ratings-in-wp-product-review](https://docs.themeisle.com/article/849-how-to-have-a-whole-number-ratings-in-wp-product-review) 
 
  == Upgrade Notice ==
 

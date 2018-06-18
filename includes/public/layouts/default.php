@@ -36,8 +36,9 @@ $cons = $review_object->get_cons();
 		<div class="review-wrap-up  cwpr_clearfix">
 			<div class="cwpr-review-top cwpr_clearfix">
 				<span><h2 class="cwp-item"><?php echo esc_html( $review_object->get_name() ); ?></h2></span>
-				<span class="cwp-item-price cwp-item"></span>
-				<span><?php echo esc_html( empty( $price_raw ) ? '' : $price_raw ); ?></span>
+				<span class="cwp-item-price cwp-item">
+					<span><?php echo esc_html( empty( $price_raw ) ? '' : $price_raw ); ?></span>
+				</span>
 			</div><!-- end .cwpr-review-top -->
 			<div class="review-wu-content cwpr_clearfix">
 				<div class="review-wu-left">
