@@ -57,11 +57,7 @@
 						<div class="clear"></div>
 						<?php
 					} else {
-						?>
-						<div class="wppr-rating" style="direction: ltr">
-							<div style="width:<?php echo $review_score; ?>%;"> <?php echo $review_score; ?></div>
-						</div>
-						<?php
+						wppr_display_rating_stars( 'style1-widget', $review_object, false );
 					}
 				}
 				?>

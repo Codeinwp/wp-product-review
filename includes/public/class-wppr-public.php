@@ -176,10 +176,10 @@ class Wppr_Public {
 		$review             = new WPPR_Review_Model();
 		$conditional_styles = '';
 		if ( $review->wppr_get_option( 'cwppos_show_icon' ) == 'yes' ) {
-			$adverb			= is_rtl() ? 'after' : 'before';
-			$direction		= is_rtl() ? 'left' : 'right';
+			$adverb         = is_rtl() ? 'after' : 'before';
+			$direction      = is_rtl() ? 'left' : 'right';
 			$conditional_styles .= '
-                div.affiliate-button a span:'. $adverb . ', div.affiliate-button a:hover span:' . $adverb . ' {
+                div.affiliate-button a span:' . $adverb . ', div.affiliate-button a:hover span:' . $adverb . ' {
 					font-family: "dashicons";
                     content: "\f174";
 					padding-' . $direction . ': 5px
