@@ -43,8 +43,7 @@ h4 {
 }
 
 .wppr-review-section small {
-	display: inline-block;
-	width: 100%;
+	display: block;
 	padding-bottom: 10px;
 	padding-left: 144px;
 }
