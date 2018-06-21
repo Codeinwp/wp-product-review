@@ -47,7 +47,7 @@ $cons = $review_object->get_cons();
 							<a class="wppr-default-img" href="<?php echo esc_url( $image_link ); ?>" <?php echo $lightbox; ?> rel="nofollow"
 							   target="_blank"><img
 										src="<?php echo esc_attr( $review_object->get_small_thumbnail() ); ?>"
-										alt="<?php echo esc_attr( $review_object->get_name() ); ?>"
+										alt="<?php echo esc_attr( $review_object->get_image_alt() ); ?>"
 										class="photo photo-wrapup wppr-product-image"/></a>
 						</div><!-- end .rev-wu-image -->
 
