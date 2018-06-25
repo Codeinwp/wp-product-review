@@ -93,7 +93,24 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 
 		// @codingStandardsIgnoreEnd
 
+		add_filter( 'wppr_review_image_size', array( $this, 'image_size' ), 10, 3 );
+
 		return $instance;
+	}
+
+	/**
+	 * Change size to 50x50.
+	 *
+	 * @access  public
+	 *
+	 * @param   string            $size The size of the image.
+	 * @param   int               $id The id of the review.
+	 * @param   WPPR_Review_Model $model The review model.
+	 *
+	 * @return array
+	 */
+	public function image_size( $size, $id, $model ) {
+		return array( 50, 50 );
 	}
 
 	/**
