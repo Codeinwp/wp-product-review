@@ -10,7 +10,7 @@
  * @global      WPPR_Review_Model $review_object
  */
 ?>
-<div class="wppr-template wppr-template-2">
+<div class="wppr-template wppr-template-2 <?php echo is_rtl() ? 'rtl' : ''; ?>">
 	<?php
 	// Review info.
 	$links             = $review_object->get_links();

@@ -12,18 +12,11 @@
 
 $price_raw = $review_object->get_price_raw();
 
-$lightbox = '';
-
 $links                     = $review_object->get_links();
 $multiple_affiliates_class = 'affiliate-button';
 $links                     = array_filter( $links );
-$image_link                = reset( $links );
 if ( count( $links ) > 1 ) {
 	$multiple_affiliates_class = 'affiliate-button2 affiliate-button';
-}
-if ( $review_object->get_click() == 'image' ) {
-	$lightbox   = 'data-lightbox="' . esc_url( $review_object->get_small_thumbnail() ) . '"';
-	$image_link = $review_object->get_image();
 }
 
 $pros = $review_object->get_pros();
@@ -33,37 +26,28 @@ $rating_10  = round( $review_object->get_rating(), 0 ) / 10;
 
 ?>
 <div id="wppr-review-<?php echo $review_object->get_ID(); ?>"
-	 class="wppr-review-container <?php echo( empty( $pros ) ? 'wppr-review-no-pros' : '' ); ?> <?php echo( empty( $cons ) ? 'wppr-review-no-cons' : '' ); ?>">
+	 class="wppr-template wppr-template-default <?php echo is_rtl() ? 'rtl' : ''; ?> wppr-review-container <?php echo( empty( $pros ) ? 'wppr-review-no-pros' : '' ); ?> <?php echo( empty( $cons ) ? 'wppr-review-no-cons' : '' ); ?>">
 	<section id="review-statistics" class="article-section">
 		<div class="review-wrap-up  cwpr_clearfix">
 			<div class="cwpr-review-top cwpr_clearfix">
-				<span><h2 class="cwp-item"><?php echo esc_html( $review_object->get_name() ); ?></h2></span>
+				<span>
+					<h2 class="cwp-item"><?php echo esc_html( $review_object->get_name() ); ?></h2>
+				</span>
 				<span class="cwp-item-price cwp-item"></span>
 				<span><?php echo esc_html( empty( $price_raw ) ? '' : $price_raw ); ?></span>
 			</div><!-- end .cwpr-review-top -->
 			<div class="review-wu-content cwpr_clearfix">
 				<div class="review-wu-left">
 					<div class="review-wu-left-top">
-						<div class="rev-wu-image">
-							<a class="wppr-default-img" href="<?php echo esc_url( $image_link ); ?>" <?php echo $lightbox; ?> rel="nofollow"
-							   target="_blank"><img
-										src="<?php echo esc_attr( $review_object->get_small_thumbnail() ); ?>"
-										alt="<?php echo esc_attr( $review_object->get_name() ); ?>"
-										class="photo photo-wrapup wppr-product-image"/></a>
-						</div><!-- end .rev-wu-image -->
-
-						<div class="review-wu-grade">
-							<div class="review-wu-grade-content">
-								<div class="wppr-c100 wppr-p<?php echo esc_attr( $rating ) . ' ' . $review_object->get_rating_class(); ?>">
-									<span><?php echo esc_html( $rating_10 ); ?></span>
-									<div class="wppr-slice">
-										<div class="wppr-bar" style="<?php echo apply_filters( 'wppr_rating_circle_bar_styles', '', $rating ); ?>"></div>
-										<div class="wppr-fill" style="<?php echo apply_filters( 'wppr_rating_circle_fill_styles', '', $rating ); ?>"></div>
-									</div>
-									<div class="wppr-slice-center"></div>
-								</div>
-							</div>
-						</div><!-- end .review-wu-grade -->
+					<?php
+					if ( is_rtl() ) {
+						wppr_default_get_rating( $review_object );
+						wppr_default_get_image( $review_object );
+					} else {
+						wppr_default_get_image( $review_object );
+						wppr_default_get_rating( $review_object );
+					}
+					?>
 					</div><!-- end .review-wu-left-top -->
 
 					<div class="review-wu-bars">
@@ -74,9 +58,10 @@ $rating_10  = round( $review_object->get_rating(), 0 ) / 10;
 							<div class="rev-option" data-value="
 							<?php echo $option['value']; ?>">
 								<div class="cwpr_clearfix">
-									<h3><?php echo esc_html( apply_filters( 'wppr_option_name_html', $option['name'] ) ); ?></h3>
-									<span><?php echo esc_html( number_format( ( $option['value'] / 10 ), 1 ) ); ?>
-										/10 </span>
+									<span>
+										<h3><?php echo esc_html( apply_filters( 'wppr_option_name_html', $option['name'] ) ); ?></h3>
+									</span>
+									<span><?php echo esc_html( number_format( ( $option['value'] / 10 ), 1 ) ); ?>/10</span>
 								</div>
 								<ul class="cwpr_clearfix
 								<?php echo ' ' . $review_object->get_rating_class( $option['value'] ) . apply_filters( 'wppr_option_custom_icon', '' ); ?>

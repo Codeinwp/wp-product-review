@@ -52,6 +52,12 @@ Template 2
 	float: left;
 }
 
+.wppr-template-2.rtl .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating-grade,
+.wppr-template-2.rtl .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating-image {
+	float: right;
+}
+
+
 .wppr-template-2 .wppr-review-pros,
 .wppr-template-2 .wppr-review-cons {
 	width: 50%;
@@ -140,6 +146,11 @@ Template 2
 	color: inherit;
 	font-size: 16px;
 	list-style-type: square;
+}
+
+.wppr-template-2.rtl .wppr-review-pros ul,
+.wppr-template-2.rtl .wppr-review-cons ul {
+	list-style-position: inside;
 }
 
 .wppr-template-2 .wppr-review-options {

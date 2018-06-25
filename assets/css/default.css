@@ -390,6 +390,23 @@
 	list-style: none !important;
 }
 
+.wppr-template-default.rtl #review-statistics .review-wrap-up .cwpr-review-top span:first-of-type {
+	float: right;
+}
+
+.wppr-template-default.rtl #review-statistics .review-wrap-up .cwpr-review-top span:last-of-type {
+	float: left;
+}
+
+.wppr-template-default.rtl #review-statistics .review-wrap-up .review-wu-content .review-wu-left .review-wu-bars .rev-option span:first-of-type {
+	float: right;
+}
+
+.wppr-template-default.rtl #review-statistics .review-wrap-up .review-wu-content .review-wu-left .review-wu-bars .rev-option span:last-of-type {
+	float: left;
+}
+
+
 @media (max-width: 440px) {
 	#review-statistics .review-wrap-up .review-wu-left {
 		width: 100%;

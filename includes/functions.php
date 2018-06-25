@@ -102,3 +102,55 @@ if ( ! function_exists( 'wppr_display_rating_custom_icon' ) ) {
 	}
 }
 
+
+if ( ! function_exists( 'wppr_default_get_image' ) ) {
+
+	/**
+	 * Display the imaage for the default template.
+	 */
+	function wppr_default_get_image( $review_object ) {
+		$links                     = $review_object->get_links();
+		$links                     = array_filter( $links );
+		$image_link                = reset( $links );
+		$lightbox                   = '';
+		if ( $review_object->get_click() == 'image' ) {
+			$lightbox   = 'data-lightbox="' . esc_url( $review_object->get_small_thumbnail() ) . '"';
+			$image_link = $review_object->get_image();
+		}
+	?>
+		<div class="rev-wu-image">
+			<a class="wppr-default-img" href="<?php echo esc_url( $image_link ); ?>" <?php echo $lightbox; ?> rel="nofollow" target="_blank">
+				<img
+					src="<?php echo esc_attr( $review_object->get_small_thumbnail() ); ?>"
+					alt="<?php echo esc_attr( $review_object->get_name() ); ?>"
+					class="photo photo-wrapup wppr-product-image"/>
+			</a>
+		</div><!-- end .rev-wu-image -->
+	<?php
+	}
+}
+
+if ( ! function_exists( 'wppr_default_get_rating' ) ) {
+
+	/**
+	 * Display the rating for the default template.
+	 */
+	function wppr_default_get_rating( $review_object ) {
+		$rating     = round( $review_object->get_rating() );
+		$rating_10  = round( $review_object->get_rating(), 0 ) / 10;
+	?>
+		<div class="review-wu-grade">
+			<div class="review-wu-grade-content">
+				<div class="wppr-c100 wppr-p<?php echo esc_attr( $rating ) . ' ' . $review_object->get_rating_class(); ?>">
+					<span><?php echo esc_html( $rating_10 ); ?></span>
+					<div class="wppr-slice">
+						<div class="wppr-bar" style="<?php echo apply_filters( 'wppr_rating_circle_bar_styles', '', $rating ); ?>"></div>
+						<div class="wppr-fill" style="<?php echo apply_filters( 'wppr_rating_circle_fill_styles', '', $rating ); ?>"></div>
+					</div>
+					<div class="wppr-slice-center"></div>
+				</div>
+			</div>
+		</div><!-- end .review-wu-grade -->
+	<?php
+	}
+}
