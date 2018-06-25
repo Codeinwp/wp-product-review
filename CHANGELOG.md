@@ -1,4 +1,14 @@
 
+ ### v3.4.4 - 2018-06-11 
+ **Changes:** 
+ * Fixed issue with HTML tag not being closed
+* Fixed issue with button icon not changing color
+* Fixed issue with review comments form not responsive
+* Fixed white screen when Jetpack is active
+* Update docs
+* New option to disable the AMP CSS output
+* Changed the way fonts are loaded to inherit them from the theme
+ 
  ### v3.4.3 - 2018-03-20 
  **Changes:** 
  * Fix FontAwesome icon issue in custom templates.
