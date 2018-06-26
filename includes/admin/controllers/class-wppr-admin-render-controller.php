@@ -63,6 +63,23 @@ class WPPR_Admin_Render_Controller {
 	 * @param   bool|WPPR_Abstract_Model $model Optional pass a model to use in template.
 	 */
 	public function retrive_template( $name, $model = false ) {
+		/*
+			Let's check for user templates inside the wppr folder in the theme.
+            We expect the following files
+				/wppr/<name>.php
+				/wppr/<name>.css
+				/wppr/<name>.png
+		*/
+		if ( file_exists( get_stylesheet_directory() . '/wppr' ) ) {
+			if ( file_exists( get_stylesheet_directory() . '/wppr/' . $name . '.css' ) ) {
+				wp_enqueue_style( $this->plugin_name . '-' . $name . '-custom', get_stylesheet_directory_uri() . '/wppr/' . $name . '.css', array(), $this->version );
+			}
+			if ( file_exists( get_stylesheet_directory() . '/wppr/' . $name . '.php' ) ) {
+				include_once( get_stylesheet_directory() . '/wppr/' . $name . '.php' );
+				return;
+			}
+		}
+
 		if ( file_exists( WPPR_PATH . '/includes/admin/layouts/css/' . $name . '.css' ) ) {
 			wp_enqueue_style( $this->plugin_name . '-' . $name . '-css', WPPR_URL . '/includes/admin/layouts/css/' . $name . '.css', array(), $this->version );
 		}
