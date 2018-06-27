@@ -152,7 +152,6 @@
 }
 
 #review-statistics .review-wu-bars span {
-	float: right;
 	line-height: 2;
 	text-align: right;
 }
@@ -388,6 +387,14 @@
 
 .review-wu-right ul li {
 	list-style: none !important;
+}
+
+.wppr-template-default #review-statistics .review-wrap-up .review-wu-content .review-wu-left .review-wu-bars .rev-option span:first-of-type {
+	float: left;
+}
+
+.wppr-template-default #review-statistics .review-wrap-up .review-wu-content .review-wu-left .review-wu-bars .rev-option span:last-of-type {
+	float: right;
 }
 
 .wppr-template-default.rtl #review-statistics .review-wrap-up .cwpr-review-top span:first-of-type {
