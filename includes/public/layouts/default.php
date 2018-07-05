@@ -40,13 +40,8 @@ $rating_10  = round( $review_object->get_rating(), 0 ) / 10;
 				<div class="review-wu-left">
 					<div class="review-wu-left-top">
 					<?php
-					if ( is_rtl() ) {
-						wppr_default_get_rating( $review_object );
-						wppr_default_get_image( $review_object );
-					} else {
 						wppr_default_get_image( $review_object );
 						wppr_default_get_rating( $review_object );
-					}
 					?>
 					</div><!-- end .review-wu-left-top -->
 
