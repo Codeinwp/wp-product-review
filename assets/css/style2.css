@@ -42,10 +42,21 @@ Template 2
 	padding-right: 30px;
 }
 
+.wppr-template-2 .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating.rtl {
+	padding-left: 30px;
+	padding-right: 0px;
+}
+
 .wppr-template-2 .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating-grade,
 .wppr-template-2 .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating-image {
 	float: left;
 }
+
+.wppr-template-2.rtl .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating-grade,
+.wppr-template-2.rtl .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating-image {
+	float: right;
+}
+
 
 .wppr-template-2 .wppr-review-pros,
 .wppr-template-2 .wppr-review-cons {
@@ -137,6 +148,11 @@ Template 2
 	list-style-type: square;
 }
 
+.wppr-template-2.rtl .wppr-review-pros ul,
+.wppr-template-2.rtl .wppr-review-cons ul {
+	list-style-position: inside;
+}
+
 .wppr-template-2 .wppr-review-options {
 	float: left;
 	width: 100%;
@@ -183,6 +199,17 @@ Template 2
 
 .wppr-template-2 .wppr-review-option-rating li:before {
 	content: "\f005";
+}
+
+.wppr-template-2.rtl .affiliate-button a span {
+	margin-right: -10px;
+	padding-right: 20px;
+	margin-left: auto;
+	padding-left: auto;
+}
+
+.wppr-template-2.rtl .wppr-review-option-rating {
+	float: right;
 }
 
 @media (max-width: 768px) {

@@ -78,6 +78,7 @@ function run_wppr() {
 	$plugin->run();
 
 	require( 'includes/legacy.php' );
+	require( 'includes/functions.php' );
 	$vendor_file = WPPR_PATH . '/vendor/autoload_52.php';
 	if ( is_readable( $vendor_file ) ) {
 		require_once $vendor_file;

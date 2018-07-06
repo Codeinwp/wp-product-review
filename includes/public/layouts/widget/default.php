@@ -44,6 +44,9 @@ foreach ( $results as $review ) :
 
 	<?php
 	$review_score = $review_object->get_rating();
+	$rating = round( $review_score );
+	$rating_10  = round( $review_score, 0 ) / 10;
+
 	$review_class = $review_object->get_rating_class();
 	if ( ! empty( $review_score ) ) {
 	?>
@@ -51,13 +54,13 @@ foreach ( $results as $review ) :
 			<div class="review-wu-grade-content">
 				<div class="wppr-c100
 				<?php
-				echo esc_attr( ' wppr-p' . round( $review_score ) ) . ' ' . esc_attr( $review_class );
+				echo esc_attr( ' wppr-p' . $rating ) . ' ' . esc_attr( $review_class );
 				?>
 				">
-					<span><?php echo esc_html( round( $review_score, 0 ) / 10 ); ?></span>
+					<span><?php echo esc_html( $rating_10 ); ?></span>
 					<div class="wppr-slice">
-						<div class="wppr-bar"></div>
-						<div class="wppr-fill"></div>
+						<div class="wppr-bar" style="<?php echo apply_filters( 'wppr_rating_circle_bar_styles', '', $rating ); ?>"></div>
+						<div class="wppr-fill" style="<?php echo apply_filters( 'wppr_rating_circle_fill_styles', '', $rating ); ?>"></div>
 					</div>
 					<div class="wppr-slice-center"></div>
 				</div>
