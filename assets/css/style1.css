@@ -98,9 +98,11 @@ Template 1
 
 .wppr-template-1 .wppr-review-grade-option-header span:first-of-type {
 	font-weight: 700;
+	text-align: left;
+}
+.wppr-template-1.rtl .wppr-review-grade-option-header span:first-of-type {
 	text-align: right;
 }
-
 
 .wppr-template-1 .wppr-review-grade-option-rating {
 	display: block;
@@ -154,6 +156,13 @@ Template 1
 
 .wppr-template-1.rtl .wppr-review-pros-cons ul {
 	list-style-position: inside;
+}
+
+.wppr-template-1.rtl .affiliate-button a span {
+	margin-right: -10px;
+	padding-right: 20px;
+	margin-left: auto;
+	padding-left: auto;
 }
 
 @media (max-width: 768px) {

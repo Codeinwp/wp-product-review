@@ -413,6 +413,13 @@
 	float: left;
 }
 
+.wppr-template-default.rtl .affiliate-button a span {
+	margin-right: -10px;
+	padding-right: 20px;
+	margin-left: auto;
+	padding-left: auto;
+}
+
 
 @media (max-width: 440px) {
 	#review-statistics .review-wrap-up .review-wu-left {

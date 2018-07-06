@@ -21,7 +21,7 @@ class Test_WPPR extends WP_UnitTestCase {
 	 */
 	function test_post_review( $post_type ) {
 		$is_cpt = 'wppr_review' === $post_type;
-		$title	= 'Test Post' . rand();
+		$title  = 'Test Post' . rand();
 
 		if ( $is_cpt ) {
 			// enable the CPT feature.
@@ -31,10 +31,12 @@ class Test_WPPR extends WP_UnitTestCase {
 
 		do_action( 'init' );
 
-		$p = $this->factory->post->create( array(
-			'post_title' => $title,
-			'post_type'	=> $post_type,
-		) );
+		$p = $this->factory->post->create(
+			array(
+				'post_title' => $title,
+				'post_type' => $post_type,
+			)
+		);
 
 		$review = new WPPR_Review_Model( $p );
 
@@ -89,11 +91,13 @@ class Test_WPPR extends WP_UnitTestCase {
 		$this->assertEquals( 5, $settings->wppr_get_option( 'cwppos_option_nr' ) );
 		$this->assertEquals( 'yes', $review->wppr_get_option( 'cwppos_show_userreview' ) );
 
-		$c = $this->factory->comment->create( array(
-			'comment_post_ID' => $p,
-			'comment_content' => 'Test Comment',
-			'status' => 'approve',
-		) );
+		$c = $this->factory->comment->create(
+			array(
+				'comment_post_ID' => $p,
+				'comment_content' => 'Test Comment',
+				'status' => 'approve',
+			)
+		);
 		add_comment_meta( $c, 'meta_option_1', 5.4 );
 		add_comment_meta( $c, 'meta_option_2', 4.3 );
 		add_comment_meta( $c, 'meta_option_3', 3.2 );
