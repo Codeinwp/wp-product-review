@@ -75,9 +75,21 @@ $check = $review->is_active() ? 'yes' : 'no';
 								)
 							);
 							?>
-							<label for="<?php echo $template_id; ?>"><img
-										src='<?php echo WPPR_URL . "/assets/img/templates/$template.png"; ?>'
-										class="wppr-review-template"/></label>
+							<label for="<?php echo $template_id; ?>">
+							<?php
+								$image  = null;
+							if ( file_exists( WPPR_PATH . "/assets/img/templates/$template.png" ) ) {
+								$image  = WPPR_URL . "/assets/img/templates/$template.png";
+							} elseif ( file_exists( get_stylesheet_directory() . "/wppr/$template.png" ) ) {
+								$image  = get_stylesheet_directory_uri() . "/wppr/$template.png";
+							}
+							if ( $image ) {
+							?>
+							<img src='<?php echo $image; ?>' class="wppr-review-template"/>
+							<?php
+							}
+							?>
+							</label>
 							<?php
 						}
 						?>

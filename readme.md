@@ -67,6 +67,11 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 ## Changelog ##
+### 3.4.5 - 2018-06-18  ###
+
+* Fixed problem with product price alignment on the first template
+
+
 ### 3.4.4 - 2018-06-11  ###
 
 * Fixed issue with HTML tag not being closed
@@ -484,6 +489,7 @@ Alternatively you can also follow the following steps to install the WP Product 
 
 
 
+
 ### How to activate user reviews ###
 
 By default user reviews are disabled since not all the themes are compatible with this option due to different designs for the comment box. You can easily activate them from General Settings
@@ -625,6 +631,33 @@ https://themeisle.com/contact
 
  = How to have a whole number ratings in WP Product Review = 
  [https://docs.themeisle.com/article/849-how-to-have-a-whole-number-ratings-in-wp-product-review](https://docs.themeisle.com/article/849-how-to-have-a-whole-number-ratings-in-wp-product-review) 
+
+ = How to enable review post types = 
+ [https://docs.themeisle.com/article/858-how-to-enable-review-post-types](https://docs.themeisle.com/article/858-how-to-enable-review-post-types) 
+
+ = How users can leave review comments without rating = 
+ [https://docs.themeisle.com/article/862-how-users-can-leave-review-comments-without-rating](https://docs.themeisle.com/article/862-how-users-can-leave-review-comments-without-rating) 
+
+ = How to force description into comparision table = 
+ [https://docs.themeisle.com/article/859-how-to-force-description-into-comparision-table](https://docs.themeisle.com/article/859-how-to-force-description-into-comparision-table) 
+
+ = How the before/after/manual review box placement works = 
+ [https://docs.themeisle.com/article/865-how-the-beforeaftermanual-review-box-placement-works](https://docs.themeisle.com/article/865-how-the-beforeaftermanual-review-box-placement-works) 
+
+ = How to dynamically change the name of the review = 
+ [https://docs.themeisle.com/article/874-how-to-dynamically-change-the-name-of-the-review](https://docs.themeisle.com/article/874-how-to-dynamically-change-the-name-of-the-review) 
+
+ = How to change the status of the review = 
+ [https://docs.themeisle.com/article/905-how-to-change-the-status-of-the-review](https://docs.themeisle.com/article/905-how-to-change-the-status-of-the-review) 
+
+ = How to disable the review for particular posts = 
+ [https://docs.themeisle.com/article/904-how-to-disable-the-review-for-particular-posts](https://docs.themeisle.com/article/904-how-to-disable-the-review-for-particular-posts) 
+
+ = How to manually change the rating of a review = 
+ [https://docs.themeisle.com/article/903-how-to-manually-change-the-rating-of-a-review](https://docs.themeisle.com/article/903-how-to-manually-change-the-rating-of-a-review) 
+
+ = How to dynamically change the price of the review for particular posts = 
+ [https://docs.themeisle.com/article/906-how-to-dynamically-change-the-price-of-the-review-for-particular-posts](https://docs.themeisle.com/article/906-how-to-dynamically-change-the-price-of-the-review-for-particular-posts) 
 
  == Upgrade Notice ==
 

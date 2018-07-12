@@ -1,4 +1,8 @@
 
+ ### v3.4.5 - 2018-06-18 
+ **Changes:** 
+ * Fixed problem with product price alignment on the first template
+ 
  ### v3.4.4 - 2018-06-11 
  **Changes:** 
  * Fixed issue with HTML tag not being closed
