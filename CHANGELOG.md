@@ -1,4 +1,11 @@
 
+ ### v3.4.6 - 2018-07-12 
+ **Changes:** 
+ * Added RTL compatibility
+* Allow overriding the Products Templates from the theme with a custom /wppr/ folder
+* Fixed problem with missing alt texts
+* Fixed problem with product image notice overlapping the featured image control
+ 
  ### v3.4.5 - 2018-06-18 
  **Changes:** 
  * Fixed problem with product price alignment on the first template

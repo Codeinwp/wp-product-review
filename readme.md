@@ -67,6 +67,14 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 ## Changelog ##
+### 3.4.6 - 2018-07-12  ###
+
+* Added RTL compatibility
+* Allow overriding the Products Templates from the theme with a custom /wppr/ folder
+* Fixed problem with missing alt texts
+* Fixed problem with product image notice overlapping the featured image control
+
+
 ### 3.4.5 - 2018-06-18  ###
 
 * Fixed problem with product price alignment on the first template
