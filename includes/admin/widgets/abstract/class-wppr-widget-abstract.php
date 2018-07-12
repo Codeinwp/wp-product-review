@@ -99,7 +99,7 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 	}
 
 	/**
-	 * Change size to 50x50.
+	 * Change size to wppr-widget.
 	 *
 	 * @access  public
 	 *
@@ -107,10 +107,10 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 	 * @param   int               $id The id of the review.
 	 * @param   WPPR_Review_Model $model The review model.
 	 *
-	 * @return array
+	 * @return string
 	 */
 	public function image_size( $size, $id, $model ) {
-		return array( 50, 50 );
+		return 'wppr-widget';
 	}
 
 	/**
