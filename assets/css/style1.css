@@ -14,7 +14,6 @@ Template 1
 	margin-top: 30px;
 }
 
-.wppr-template-1 .wppr-review-stars,
 .wppr-template-1 .wppr-review-grade {
 	display: table;
 	width: 100%;
@@ -25,32 +24,19 @@ Template 1
 	float: left;
 	position: relative;
 	font-family: FontAwesome;
-}
-
-.wppr-template-1 .wppr-review-stars-grade,
-.wppr-template-1 .wppr-review-stars-grade .wppr-review-full-stars {
 	font-size: 38px;
 	-webkit-font-smoothing: antialiased;
 	line-height: 1;
 }
 
-.wppr-template-1 .wppr-review-stars-grade .wppr-review-full-stars {
-	display: inline-block;
-	overflow: hidden;
-	position: absolute;
-	z-index: 1;
-	top: 0;
-	left: 0;
-	white-space: nowrap;
+.wppr-template-1.rtl .wppr-review-stars-grade {
+	float: right;
 }
 
-.wppr-template-1 .wppr-review-stars-grade:before {
-	content: "\f006\f006\f006\f006\f006";
+.wppr-template-1 .wppr-review-stars.rtl .wppr-review-stars-grade i.fa-star-half-o {
+	transform: rotateY(180deg);
 }
 
-.wppr-template-1 .wppr-review-stars-grade .wppr-review-full-stars:before {
-	content: "\f005\f005\f005\f005\f005";
-}
 
 .wppr-template-1 .wppr-review-stars-author {
 	display: table-cell;
@@ -58,6 +44,11 @@ Template 1
 	padding-left: 15px;
 	font-weight: 700;
 	vertical-align: middle;
+}
+
+.wppr-template-1.rtl .wppr-review-stars-author {
+	padding-left: 0px;
+	padding-right: 15px;
 }
 
 .wppr-template-1 .wppr-review-grade-number,
@@ -80,12 +71,36 @@ Template 1
 	width: 50%;
 }
 
+.wppr-template-1.rtl .wppr-review-grade-option-header span {
+	float: right;
+	width: 50%;
+}
+
 .wppr-template-1 .wppr-review-grade-options {
 	padding-left: 45px;
 }
 
+.wppr-template-1 .wppr-review-grade-options.rtl {
+	padding-right: 45px;
+	padding-left: 0px;
+}
+
+
 .wppr-template-1 .wppr-review-grade-option-header span:last-of-type {
 	font-weight: 700;
+	text-align: right;
+}
+
+.wppr-template-1.rtl .wppr-review-grade-option-header span:last-of-type {
+	font-weight: 700;
+	text-align: left;
+}
+
+.wppr-template-1 .wppr-review-grade-option-header span:first-of-type {
+	font-weight: 700;
+	text-align: left;
+}
+.wppr-template-1.rtl .wppr-review-grade-option-header span:first-of-type {
 	text-align: right;
 }
 
@@ -137,6 +152,17 @@ Template 1
 	color: inherit;
 	font-size: 16px;
 	list-style-type: square;
+}
+
+.wppr-template-1.rtl .wppr-review-pros-cons ul {
+	list-style-position: inside;
+}
+
+.wppr-template-1.rtl .affiliate-button a span {
+	margin-right: -10px;
+	padding-right: 20px;
+	margin-left: auto;
+	padding-left: auto;
 }
 
 @media (max-width: 768px) {
@@ -226,6 +252,7 @@ Template 1
 		display: block;
 		width: 100%;
 		text-align: center;
+		padding: 0;
 	}
 
 	.wppr-template-1 .wppr-review-stars .wppr-review-stars-grade,
@@ -240,6 +267,13 @@ Template 1
 	.wppr-template-1 .wppr-review-grade-option-header span {
 		text-align: left;
 	}
+
+	.wppr-template-1 .wppr-review-product-image {
+		float: none;
+		margin: auto;
+		display: block;
+	}
+
 }
 
 @-webkit-keyframes animFiller {

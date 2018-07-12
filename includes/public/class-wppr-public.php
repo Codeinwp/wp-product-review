@@ -131,10 +131,6 @@ class Wppr_Public {
 			$this->version
 		);
 		wp_enqueue_style(
-			$this->plugin_name . '-percentage-circle-rating', WPPR_URL . '/assets/css/rating.css', array(),
-			$this->version
-		);
-		wp_enqueue_style(
 			$this->plugin_name . '-common', WPPR_URL . '/assets/css/common.css', array(),
 			$this->version
 		);
@@ -180,10 +176,13 @@ class Wppr_Public {
 		$review             = new WPPR_Review_Model();
 		$conditional_styles = '';
 		if ( $review->wppr_get_option( 'cwppos_show_icon' ) == 'yes' ) {
+			$adverb         = is_rtl() ? 'after' : 'before';
+			$direction      = is_rtl() ? 'left' : 'right';
 			$conditional_styles .= '
-                div.affiliate-button a span:before, div.affiliate-button a:hover span:before {
+                div.affiliate-button a span:' . $adverb . ', div.affiliate-button a:hover span:' . $adverb . ' {
 					font-family: "dashicons";
                     content: "\f174";
+					padding-' . $direction . ': 5px
                 } 
                 ';
 		}
@@ -344,21 +343,46 @@ class Wppr_Public {
 		 * Template specific styles.
 		 */
 		$style .= ' 
-			.wppr-template-1    .wppr-review-grade-option .wppr-very-good,
-			.wppr-template-2    .wppr-review-rating .wppr-very-good{
+			.wppr-template-1 .wppr-review-grade-option-rating.wppr-very-good.rtl,
+			.wppr-template-2 .wppr-review-grade-option-rating.wppr-very-good.rtl {
+					background: ' . $review->wppr_get_option( 'cwppos_rating_very_good' ) . ';
+			}
+			.wppr-template-1 .wppr-review-grade-option-rating.wppr-good.rtl,
+			.wppr-template-2 .wppr-review-grade-option-rating.wppr-good.rtl {
+					background: ' . $review->wppr_get_option( 'cwppos_rating_good' ) . ';
+			}
+			.wppr-template-1 .wppr-review-grade-option-rating.wppr-not-bad.rtl,
+			.wppr-template-2 .wppr-review-grade-option-rating.wppr-not-bad.rtl {
+					background: ' . $review->wppr_get_option( 'cwppos_rating_notbad' ) . ';
+			}
+			.wppr-template-1 .wppr-review-grade-option-rating.wppr-weak.rtl,
+			.wppr-template-2 .wppr-review-grade-option-rating.wppr-weak.rtl {
+					background: ' . $review->wppr_get_option( 'cwppos_rating_weak' ) . ';
+			}
+
+			.wppr-template-1    .wppr-review-grade-option .wppr-very-good {
+					background: ' . ( is_rtl() ? $review->wppr_get_option( 'cwppos_rating_default' ) : $review->wppr_get_option( 'cwppos_rating_very_good' ) ) . ';
+			}
+			.wppr-template-2    .wppr-review-rating .wppr-very-good {
 					background: ' . $review->wppr_get_option( 'cwppos_rating_very_good' ) . ';
 			} 
-			.wppr-template-1    .wppr-review-grade-option .wppr-good,
-			.wppr-template-2     .wppr-review-rating  .wppr-good{
+			.wppr-template-1    .wppr-review-grade-option .wppr-good {
+					background: ' . ( is_rtl() ? $review->wppr_get_option( 'cwppos_rating_default' ) : $review->wppr_get_option( 'cwppos_rating_good' ) ) . ';
+			}
+			.wppr-template-2     .wppr-review-rating  .wppr-good {
 					background: ' . $review->wppr_get_option( 'cwppos_rating_good' ) . ';
 			} 
-			.wppr-template-1    .wppr-review-grade-option .wppr-not-bad,
-			.wppr-template-2    .wppr-review-rating .wppr-not-bad{
+			.wppr-template-1    .wppr-review-grade-option .wppr-not-bad {
+					background: ' . ( is_rtl() ? $review->wppr_get_option( 'cwppos_rating_default' ) : $review->wppr_get_option( 'cwppos_rating_notbad' ) ) . ';
+			}
+			.wppr-template-2    .wppr-review-rating .wppr-not-bad {
 					background: ' . $review->wppr_get_option( 'cwppos_rating_notbad' ) . ';
 			}
 			 
-			.wppr-template-1    .wppr-review-grade-option .wppr-weak,
-			.wppr-template-2    .wppr-review-rating  .wppr-weak{
+			.wppr-template-1    .wppr-review-grade-option .wppr-weak {
+					background: ' . ( is_rtl() ? $review->wppr_get_option( 'cwppos_rating_default' ) : $review->wppr_get_option( 'cwppos_rating_weak' ) ) . ';
+			}
+			.wppr-template-2    .wppr-review-rating  .wppr-weak {
 					background: ' . $review->wppr_get_option( 'cwppos_rating_weak' ) . ';
 			}  
 			.wppr-template-1    .wppr-review-grade-option .wppr-default,
@@ -670,4 +694,31 @@ class Wppr_Public {
 	public function wppr_amp_add_fa() {
 		echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">';
 	}
+
+	/**
+	 * Handle RTL for rating circle colored part.
+	 */
+	public function rating_circle_bar_styles( $styles, $rating ) {
+		$degress    = ( is_rtl() ? ( $rating - 100 ) : $rating ) * 3.6;
+		return "
+		-webkit-transform: rotate({$degress}deg);
+		-ms-transform: rotate({$degress}deg);
+		transform: rotate({$degress}deg);
+		";
+	}
+
+	/**
+	 * Handle RTL for rating circle empty part.
+	 */
+	public function rating_circle_fill_styles( $styles, $rating ) {
+		if ( is_rtl() ) {
+			return '
+            -webkit-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            transform: rotate(0deg);
+            ';
+		}
+		return $styles;
+	}
+
 }

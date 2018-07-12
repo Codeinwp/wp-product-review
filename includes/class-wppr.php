@@ -67,7 +67,7 @@ class WPPR {
 	 */
 	public function __construct() {
 		$this->plugin_name = 'wppr';
-		$this->version     = '3.4.5';
+		$this->version     = '3.4.6';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -197,6 +197,8 @@ class WPPR {
 			$this->loader->add_filter( 'the_content', $plugin_public, 'display_on_front' );
 		}
 
+		$this->loader->add_filter( 'wppr_rating_circle_bar_styles', $plugin_public, 'rating_circle_bar_styles', 10, 2 );
+		$this->loader->add_filter( 'wppr_rating_circle_fill_styles', $plugin_public, 'rating_circle_fill_styles', 10, 2 );
 	}
 
 	/**

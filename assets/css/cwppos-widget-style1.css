@@ -26,6 +26,10 @@
 	line-height: 18px;
 }
 
+.wppr-prodlist .wppr-prodrow .wppr-prodrowright .wppr-rating div {
+	min-width: 20%;
+}
+
 .clear {
 	clear: both;
 }
@@ -67,3 +71,12 @@
 .wppr-prodlist .wppr-prodrow .wppr-prodrowright .bttn:hover {
 	opacity: 0.8;
 }
+
+.wppr-prodlist .wppr-prodrow .wppr-prodrowright .wppr-review-stars.rtl .wppr-review-stars-grade i.fa-star-half-o {
+	transform: rotateY(180deg);
+}
+
+.wppr-prodlist .wppr-prodrow .wppr-prodrowright .wppr-review-stars .wppr-review-stars-grade {
+	color: #ff7e00;
+}
+

@@ -10,7 +10,7 @@
  * @global      WPPR_Review_Model $review_object
  */
 ?>
-<div class="wppr-template wppr-template-2">
+<div class="wppr-template wppr-template-2 <?php echo is_rtl() ? 'rtl' : ''; ?>">
 	<?php
 	// Review info.
 	$links             = $review_object->get_links();
@@ -20,6 +20,8 @@
 	$review_rating     = $review_object->get_rating();
 	$review_image      = $review_object->get_small_thumbnail();
 	$review_image_link = reset( $links );
+
+	$rating_10      = round( $review_rating, 0 ) / 10;
 
 	$multiple_affiliates_class = 'affiliate-button';
 
@@ -35,11 +37,11 @@
 	<div id="wppr-review-<?php echo $review_id; ?>" class="wppr-review-container">
 		<h2 class="wppr-review-name"><?php echo esc_html( $review_object->get_name() ); ?></h2>
 		<div class="wppr-review-head<?php echo ( $review_pros && $review_cons ) ? ' wppr-review-with-pros-cons' : ''; ?><?php echo ( $review_image ) ? ' wppr-review-with-image' : ''; ?>">
-			<div class="wppr-review-rating">
-				<span class="wppr-review-rating-grade wppr-p<?php echo esc_attr( round( $review_object->get_rating() ) ) . ' ' . $review_object->get_rating_class(); ?>">
+			<div class="wppr-review-rating <?php echo is_rtl() ? 'rtl' : ''; ?>">
+				<span class="wppr-review-rating-grade wppr-p<?php echo esc_attr( round( $review_rating ) ) . ' ' . $review_object->get_rating_class(); ?>">
 					<?php
 					// Display rating number.
-					echo esc_html( round( $review_object->get_rating(), 0 ) / 10 );
+					echo esc_html( $rating_10 );
 					?>
 				</span>
 				<?php
@@ -49,7 +51,7 @@
 					<a href="<?php echo esc_url( $review_image_link ); ?>" <?php echo $lightbox; ?>
 					   class="wppr-review-product-image wppr-default-img" rel="nofollow" target="_blank"><img
 								src="<?php echo esc_attr( $review_image ); ?>"
-								alt="<?php echo esc_attr( $review_object->get_name() ); ?>" class="wppr-product-image"/></a>
+								alt="<?php echo esc_attr( $review_object->get_image_alt() ); ?>" class="wppr-product-image"/></a>
 				<?php } ?>
 				<div class="clearfix"></div>
 				<?php
@@ -110,14 +112,19 @@
 						<span><?php echo esc_html( apply_filters( 'wppr_option_name_html', $option['name'] ) ); ?></span>
 					</div>
 					<ul class="wppr-review-option-rating <?php echo apply_filters( 'wppr_option_custom_icon', '' ); ?>">
-						<?php for ( $i = 1; $i <= 10; $i ++ ) { ?>
-							<li class="
-							<?php
-							echo $i <= round( $option['value'] / 10 ) ? $review_object->get_rating_class( $option['value'] ) : ' wppr-default';
-							?>
-							">
+						<?php
+							$rating     = round( $option['value'] / 10 );
+							$start_from = is_rtl() ? ( 11 - $rating ) : 1;
+							$stop_at    = is_rtl() ? 10 : $rating;
+						for ( $i = 1; $i <= 10; $i ++ ) {
+						?>
+						<li class="
+						<?php
+						echo $i >= $start_from && $i <= $stop_at ? $review_object->get_rating_class( $option['value'] ) : ' wppr-default';
+						?>
+						">
 
-							</li>
+						</li>
 						<?php } ?>
 					</ul>
 				</div><!-- end .wppr-review-option -->

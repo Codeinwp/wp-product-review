@@ -15,7 +15,7 @@
  * Plugin Name:       WP Product Review Lite
  * Plugin URI:        https://themeisle.com/plugins/wp-product-review/
  * Description:       The highest rated and most complete review plugin, now with rich snippets support. Easily turn your basic posts into in-depth reviews.
- * Version:           3.4.5
+ * Version:           3.4.6
  * Author:            ThemeIsle
  * Author URI:        https://themeisle.com/
  * Requires at least: 3.5
@@ -67,7 +67,7 @@ register_deactivation_hook( __FILE__, 'deactivate_wppr' );
  */
 function run_wppr() {
 
-	define( 'WPPR_LITE_VERSION', '3.4.5' );
+	define( 'WPPR_LITE_VERSION', '3.4.6' );
 	define( 'WPPR_PATH', dirname( __FILE__ ) );
 	define( 'WPPR_SLUG', 'wppr' );
 	define( 'WPPR_UPSELL_LINK', 'https://themeisle.com/plugins/wp-product-review/' );
@@ -78,6 +78,7 @@ function run_wppr() {
 	$plugin->run();
 
 	require( 'includes/legacy.php' );
+	require( 'includes/functions.php' );
 	$vendor_file = WPPR_PATH . '/vendor/autoload_52.php';
 	if ( is_readable( $vendor_file ) ) {
 		require_once $vendor_file;

@@ -707,6 +707,16 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	}
 
 	/**
+	 * Filter to display review product name in comparison table
+	 *
+	 * @since   3.4.3
+	 * @access  public
+	 * @return bool
+	 */
+	public function hide_name() {
+		return apply_filters( 'wppr_hide_product_name', $this->name, $this->ID, $this );
+	}
+	/**
 	 * Return the review template.
 	 *
 	 * @access  public
@@ -885,6 +895,20 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	}
 
 	/**
+	 * Return the review image ID.
+	 *
+	 * @since   3.4.3
+	 * @access  public
+	 * @return int
+	 */
+	public function get_image_id() {
+		global $wpdb;
+		$attachment  = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid=%s", $this->image ) );
+		$image_id    = isset( $attachment[0] ) ? $attachment[0] : '';
+		return $image_id;
+	}
+
+	/**
 	 * Return the url of the thumbnail.
 	 *
 	 * @since   3.0.0
@@ -892,12 +916,10 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 * @return string
 	 */
 	public function get_small_thumbnail() {
-		global $wpdb;
 		// filter for image size;
 		$size        = apply_filters( 'wppr_review_image_size', 'thumbnail', $this->ID, $this );
-		$attachment  = $wpdb->get_col( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid=%s", $this->image ) );
-		$image_id    = isset( $attachment[0] ) ? $attachment[0] : '';
 		$image_thumb = '';
+		$image_id = $this->get_image_id();
 		if ( ! empty( $image_id ) ) {
 			$image_thumb = wp_get_attachment_image_src( $image_id, $size );
 			if ( $size !== 'thumbnail' ) {
@@ -908,6 +930,25 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		}
 
 		return apply_filters( 'wppr_thumb', isset( $image_thumb[0] ) ? $image_thumb[0] : $this->image, $this->ID, $this );
+	}
+
+	/**
+	 * Return the review image's alt text.
+	 *
+	 * @since   3.4.3
+	 * @access  public
+	 * @return string
+	 */
+	public function get_image_alt() {
+		$image_id = $this->get_image_id();
+		if ( empty( $image_id ) ) {
+			return $this->get_name();
+		}
+		$alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
+		if ( empty( $alt ) ) {
+			return $this->get_name();
+		}
+		return $alt;
 	}
 
 	/**
