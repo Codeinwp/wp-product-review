@@ -30,11 +30,8 @@ $rating_10  = round( $review_object->get_rating(), 0 ) / 10;
 	<section id="review-statistics" class="article-section">
 		<div class="review-wrap-up  cwpr_clearfix">
 			<div class="cwpr-review-top cwpr_clearfix">
-				<span>
-					<h2 class="cwp-item"><?php echo esc_html( $review_object->get_name() ); ?></h2>
-				</span>
-				<span class="cwp-item-price cwp-item"></span>
-				<span><?php echo esc_html( empty( $price_raw ) ? '' : $price_raw ); ?></span>
+				<h2 class="cwp-item"><?php echo esc_html( $review_object->get_name() ); ?></h2>
+				<span class="cwp-item-price cwp-item"><?php echo esc_html( empty( $price_raw ) ? '' : $price_raw ); ?></span>
 			</div><!-- end .cwpr-review-top -->
 			<div class="review-wu-content cwpr_clearfix">
 				<div class="review-wu-left">
