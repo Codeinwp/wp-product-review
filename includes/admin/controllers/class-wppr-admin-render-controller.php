@@ -65,7 +65,7 @@ class WPPR_Admin_Render_Controller {
 	public function retrive_template( $name, $model = false ) {
 		/*
 			Let's check for user templates inside the wppr folder in the theme.
-            We expect the following files
+			We expect the following files
 				/wppr/<name>.php
 				/wppr/<name>.css
 				/wppr/<name>.png
