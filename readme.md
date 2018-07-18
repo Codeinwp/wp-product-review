@@ -67,6 +67,11 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 ## Changelog ##
+### 3.4.7 - 2018-07-18  ###
+
+* Fixed alignment issue with the price on the first template
+
+
 ### 3.4.6 - 2018-07-12  ###
 
 * Added RTL compatibility

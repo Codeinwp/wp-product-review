@@ -1,4 +1,8 @@
 
+ ### v3.4.7 - 2018-07-18 
+ **Changes:** 
+ * Fixed alignment issue with the price on the first template
+ 
  ### v3.4.6 - 2018-07-12 
  **Changes:** 
  * Added RTL compatibility
