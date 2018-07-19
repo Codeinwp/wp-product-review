@@ -159,7 +159,7 @@ class WPPR_Gutenberg {
 			'wppr_options',
 		);
 		foreach ( $options as $option ) {
-			if ( ! empty( get_post_meta( $post_id, $option ) ) ) {
+			if ( get_post_meta( $post_id, $option ) ) {
 				$object = get_post_meta( $post_id, $option );
 				$object = $object[0];
 				$data[ $option ] = $object;
