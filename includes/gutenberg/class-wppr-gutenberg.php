@@ -98,7 +98,7 @@ class WPPR_Gutenberg {
 				$image      = isset( $data['cwp_rev_product_image'] ) ? esc_url( $data['cwp_rev_product_image'] ) : '';
 				$click      = isset( $data['cwp_image_link'] ) ? strval( sanitize_text_field( $data['cwp_image_link'] ) ) : 'image';
 				$template   = isset( $data['_wppr_review_template'] ) ? strval( sanitize_text_field( $data['_wppr_review_template'] ) ) : 'default';
-				$affiliates = isset( $data['wppr_links'] ) ? $data['wppr_links'] : [ '' => '' ];
+				$affiliates = isset( $data['wppr_links'] ) ? $data['wppr_links'] : array( '' => '' );
 				$price      = isset( $data['cwp_rev_price'] ) ? sanitize_text_field( $data['cwp_rev_price'] ) : 0;
 				$options    = isset( $data['wppr_options'] ) ? $data['wppr_options'] : array();
 				$pros       = isset( $data['wppr_pros'] ) ? $data['wppr_pros'] : array();
