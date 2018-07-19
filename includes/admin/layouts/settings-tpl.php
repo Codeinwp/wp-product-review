@@ -38,13 +38,13 @@ $fields          = $global_settings->get_fields();
 			<div id="wppr-tab-<?php echo $section_key; ?>" class="wppr-tab-content">
 				<?php
 				if ( ! shortcode_exists( 'P_REVIEW' ) ) {
-				?>
+					?>
 				<label class="wppr-upsell-label"> You can use the shortcode <b>[P_REVIEW]</b> to show a review you
 				already made or
 				<b>[wpr_landing]</b> to display a comparison table of them. The shortcodes are available on the
 				<a
 						target="_blank" href="<?php echo WPPR_UPSELL_LINK; ?>">Pro Bundle</a><br/><br/></label>
-				<?php
+					<?php
 				} else {
 					do_action( 'wppr_settings_section_upsell', $section_key );
 				}

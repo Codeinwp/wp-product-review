@@ -101,26 +101,26 @@ $rating_10  = round( $review_object->get_rating(), 0 ) / 10;
 									?>
 								</ul>
 							</div><!-- end .pros -->
-						<?php
+							<?php
 						endif;
 if ( ! empty( $cons ) ) :
 	?>
 	<div class="cons">
 <h2>
-<?php
-echo esc_html(
-	apply_filters(
-		'wppr_review_cons_text', $review_object->wppr_get_option(
-			'cwppos_cons_text'
+	<?php
+	echo esc_html(
+		apply_filters(
+			'wppr_review_cons_text', $review_object->wppr_get_option(
+				'cwppos_cons_text'
+			)
 		)
-	)
-);
-?>
+	);
+	?>
 </h2>
 <ul>
-<?php
-foreach ( $cons as $con ) {
-?>
+	<?php
+	foreach ( $cons as $con ) {
+		?>
 
 <li><?php echo esc_html( $con ); ?></li>
 
