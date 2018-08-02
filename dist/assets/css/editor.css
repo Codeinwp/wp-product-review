@@ -1,0 +1,131 @@
+#wppr-review-yes,
+#wppr-review-no {
+	margin-left: 10px;
+}
+
+#wppr-meta-yes {
+	display: block;
+}
+
+#wppr-meta-no {
+	display: none;
+}
+
+.wppr-review-section p,
+h4 {
+	margin: 0;
+}
+
+.wppr-review-section label[for="wppr-editor-link-show"],
+.wppr-review-section label[for="wppr-editor-link-open"] {
+	font-weight: normal;
+}
+
+.wppr-review-section span {
+	padding-bottom: 10px;
+	font-weight: bold;
+}
+
+#wppr-editor-link-show {
+	margin-left: 11px;
+}
+
+.wppr-review-section input[type="text"] {
+	width: 200px;
+}
+
+.wppr-review-section li {
+	margin-bottom: 12px;
+}
+
+#wppr-editor-image-button {
+	margin-left: 5px;
+}
+
+.wppr-review-section small {
+	display: block;
+	padding-bottom: 10px;
+	padding-left: 144px;
+}
+
+.wppr-review-section .size-text {
+	padding-bottom: 0;
+}
+
+#wppr-editor-new-link {
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.wppr-review-section h4,
+.wppr-review-section p,
+.wppr-review-section .wppr-review-fieldset {
+	padding: 3px 10px;
+}
+
+.wppr-review-fieldset {
+	border-top: 1px solid #ddd;
+}
+
+.wppr-review-section {
+	margin-bottom: 10px;
+	border: 1px solid #ddd;
+	border-radius: 3px 3px 0 0;
+}
+
+.wppr-review-section label {
+	display: inline-block;
+	width: 140px;
+	font-weight: bold;
+}
+
+.wppr-review-options-list input {
+	margin: 0;
+}
+
+.wppr-review-options-list label,
+input {
+	height: 30px;
+}
+
+.wppr-review-section .wppr-review-options-list .wppr-option-number {
+	width: 60px;
+}
+
+.wppr-review-options-list label {
+	width: 30px;
+	height: 30px;
+	margin-right: -4px;
+	border-radius: 3px 0 0 3px;
+	background: #ddd;
+	line-height: 30px;
+	text-align: center;
+	vertical-align: top;
+}
+
+.wppr-review-pros,
+.wppr-review-cons {
+	width: 49%;
+}
+
+.wppr-review-pros {
+	float: left;
+}
+
+.wppr-review-cons {
+	float: right;
+}
+
+label.wppr-upsell-label {
+	display: block;
+	width: 98%;
+	padding: 1%;
+	background: #cae9ff;
+	text-align: center;
+}
+
+.wppr-review-options a.preload_info {
+	margin-top: -42px;
+	margin-right: 10px;
+}

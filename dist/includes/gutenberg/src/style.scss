@@ -1,0 +1,117 @@
+.wp-product-review-product-details {
+
+	.wp-product-review-sidebar-base-control {
+		padding-bottom: 10px;
+	
+		label {
+			padding-bottom: 10px;
+		}
+	
+		.wppr_image_upload {
+			display: block;
+			margin-bottom: 10px;
+		}
+	}
+	
+	.wppr-review-links-list {
+		button {
+			margin-bottom: 10px;
+		}
+	}
+
+}
+
+.wp-product-review-product-options {
+
+	.wppr-review-options-list {
+
+		label {
+			width: 15%;
+			margin-right: -4px;
+			border-radius: 3px 0 0 3px;
+			background: #ddd;
+			line-height: 30px;
+			text-align: center;
+			vertical-align: top;
+			display: inline-block;
+		}
+	
+		.wppr-text {
+			width: 60%;
+			display: inline-block;
+	
+			input {
+				height: 30px;
+			}
+		}
+	
+		.wppr-option-number {
+			width: 25%;
+			display: inline-block;
+	
+			input {
+				height: 30px;
+			}
+		}
+	
+	}
+
+}
+
+.wp-product-review-product-pros {
+
+	.wppr-review-pro-list {
+	
+		label {
+			width: 15%;
+			margin-right: -4px;
+			border-radius: 3px 0 0 3px;
+			background: #ddd;
+			line-height: 30px;
+			text-align: center;
+			vertical-align: top;
+			display: inline-block;
+		}
+	
+		.wppr-text {
+			width: 85%;
+			display: inline-block;
+	
+			input {
+				height: 30px;
+				margin-top: 0
+			}
+		}
+	
+	}
+
+}
+
+.wp-product-review-product-cons {
+
+	.wppr-review-con-list {
+	
+		label {
+			width: 15%;
+			margin-right: -4px;
+			border-radius: 3px 0 0 3px;
+			background: #ddd;
+			line-height: 30px;
+			text-align: center;
+			vertical-align: top;
+			display: inline-block;
+		}
+	
+		.wppr-text {
+			width: 85%;
+			display: inline-block;
+	
+			input {
+				height: 30px;
+				margin-top: 0
+			}
+		}
+	
+	}
+
+}
