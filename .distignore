@@ -13,7 +13,6 @@ bin
 tests
 phpunit.xml
 npm-debug.log
-dist
 artifact
 composer.json
 composer.lock

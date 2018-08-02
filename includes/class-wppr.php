@@ -67,7 +67,7 @@ class WPPR {
 	 */
 	public function __construct() {
 		$this->plugin_name = 'wppr';
-		$this->version     = '3.4.7';
+		$this->version     = '3.4.8';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -135,6 +135,7 @@ class WPPR {
 		$this->loader->add_action( 'wp_ajax_update_options', $plugin_admin, 'update_options' );
 		$this->loader->add_action( 'load-edit.php', $plugin_admin, 'get_additional_fields' );
 		$this->loader->add_action( 'wppr_settings_section_upsell', $plugin_admin, 'settings_section_upsell', 10, 1 );
+		$this->loader->add_action( 'after_setup_theme', $plugin_admin, 'add_image_size' );
 
 		$plugin_editor = new WPPR_Editor( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'add_meta_boxes', $plugin_editor, 'set_editor' );
@@ -260,6 +261,9 @@ class WPPR {
 			'taxonomies'    => array( 'wppr_category' ),
 			'can_export'    => true,
 			'capability_type'    => 'post',
+			'show_in_rest'          => true,
+			'rest_base'             => 'wppr_review',
+			'rest_controller_class' => 'WP_REST_Posts_Controller',
 		);
 		register_post_type( 'wppr_review', $args );
 

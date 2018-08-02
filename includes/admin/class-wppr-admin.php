@@ -430,4 +430,11 @@ class WPPR_Admin {
 		}
 	}
 
+	/**
+	 * Add a custom image size for widgets.
+	 */
+	public function add_image_size() {
+		add_image_size( 'wppr-widget', 50, 50 );
+	}
+
 }
