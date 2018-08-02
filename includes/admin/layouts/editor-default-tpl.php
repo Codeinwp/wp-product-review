@@ -84,9 +84,9 @@ $check = $review->is_active() ? 'yes' : 'no';
 								$image  = get_stylesheet_directory_uri() . "/wppr/$template.png";
 							}
 							if ( $image ) {
-							?>
+								?>
 							<img src='<?php echo $image; ?>' class="wppr-review-template"/>
-							<?php
+								<?php
 							}
 							?>
 							</label>
@@ -221,7 +221,7 @@ $check = $review->is_active() ? 'yes' : 'no';
 					</li>
 					<?php
 }
-				?>
+?>
 				<?php
 				if ( ! empty( $links ) ) {
 					if ( count( $links ) > 1 ) {

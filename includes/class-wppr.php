@@ -260,6 +260,9 @@ class WPPR {
 			'taxonomies'    => array( 'wppr_category' ),
 			'can_export'    => true,
 			'capability_type'    => 'post',
+			'show_in_rest'          => true,
+			'rest_base'             => 'wppr_review',
+			'rest_controller_class' => 'WP_REST_Posts_Controller',
 		);
 		register_post_type( 'wppr_review', $args );
 

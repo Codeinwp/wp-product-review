@@ -33,48 +33,48 @@ if ( ! function_exists( 'wppr_display_rating_stars' ) ) {
 		$review_rating = $review_object->get_rating();
 		$rating_10      = round( $review_rating, 0 ) / 10;
 		$rating_5       = round( $review_rating / 20, PHP_ROUND_HALF_UP );
-	?>
+		?>
 		<div class="wppr-review-stars <?php echo is_rtl() ? 'rtl' : ''; ?>" style="direction: <?php echo is_rtl() ? 'rtl' : ''; ?>">
 			<div class="wppr-review-stars-grade <?php echo $review_object->get_rating_class(); ?>">
-	<?php
+		<?php
 		$stars          = array( 'full' => intval( $rating_5 ), 'half' => $rating_5 > intval( $rating_5 ), 'empty' => 4 - intval( $rating_5 ) );
 
-	foreach ( $stars as $key => $value ) {
-		switch ( $key ) {
-			case 'full':
-				for ( $i = 0; $i < intval( $rating_5 ); $i++ ) {
-		?>
+		foreach ( $stars as $key => $value ) {
+			switch ( $key ) {
+				case 'full':
+					for ( $i = 0; $i < intval( $rating_5 ); $i++ ) {
+						?>
 			<i class="fa fa-star"></i>
-		<?php
-				}
-				break;
-			case 'half':
-				if ( $rating_5 > intval( $rating_5 ) ) {
-		?>
+						<?php
+					}
+					break;
+				case 'half':
+					if ( $rating_5 > intval( $rating_5 ) ) {
+						?>
 			<i class="fa fa-star-half-o"></i>
-		<?php
-				}
-				break;
-			case 'empty':
-				for ( $i = 0; $i < 4 - intval( $rating_5 ); $i++ ) {
-		?>
+						<?php
+					}
+					break;
+				case 'empty':
+					for ( $i = 0; $i < 4 - intval( $rating_5 ); $i++ ) {
+						?>
 			<i class="fa fa-star-o"></i>
-		<?php
-				}
-				break;
+						<?php
+					}
+					break;
+			}
 		}
-	}
 		?>
 		</div>
-	<?php
-	if ( $include_author ) {
-	?>
+		<?php
+		if ( $include_author ) {
+			?>
 	<span class="wppr-review-stars-author"><?php echo get_the_author() . __( '\'s rating', 'wp-product-review' ); ?></span>
-	<?php
-	}
-	?>
+			<?php
+		}
+		?>
 	</div>
-	<?php
+		<?php
 	}
 }
 
@@ -84,21 +84,21 @@ if ( ! function_exists( 'wppr_display_rating_custom_icon' ) ) {
 	 * Display the custom icon rating.
 	 */
 	function wppr_display_rating_custom_icon( $template, $review_object ) {
-	?>
+		?>
 		<div id="review-statistics">
 			<div class="review-wu-bars">
 				<ul class="cwpr_clearfix <?php echo ' ' . $review_object->get_rating_class( $review_rating ) . apply_filters( 'wppr_option_custom_icon', '' ); ?>">
-	<?php
-	for ( $i = 1; $i <= 5; $i ++ ) {
-	?>
+		<?php
+		for ( $i = 1; $i <= 5; $i ++ ) {
+			?>
 			<li <?php echo $i <= round( $review_rating / 20 ) ? ' class="colored"' : ''; ?>></li>
-	<?php
-	}
-	?>
+			<?php
+		}
+		?>
 				</ul>
 			</div>
 		</div>
-	<?php
+		<?php
 	}
 }
 
@@ -117,7 +117,7 @@ if ( ! function_exists( 'wppr_default_get_image' ) ) {
 			$lightbox   = 'data-lightbox="' . esc_url( $review_object->get_small_thumbnail() ) . '"';
 			$image_link = $review_object->get_image();
 		}
-	?>
+		?>
 		<div class="rev-wu-image">
 			<a class="wppr-default-img" href="<?php echo esc_url( $image_link ); ?>" <?php echo $lightbox; ?> rel="nofollow" target="_blank">
 				<img
@@ -126,7 +126,7 @@ if ( ! function_exists( 'wppr_default_get_image' ) ) {
 					class="photo photo-wrapup wppr-product-image"/>
 			</a>
 		</div><!-- end .rev-wu-image -->
-	<?php
+		<?php
 	}
 }
 
@@ -138,7 +138,7 @@ if ( ! function_exists( 'wppr_default_get_rating' ) ) {
 	function wppr_default_get_rating( $review_object ) {
 		$rating     = round( $review_object->get_rating() );
 		$rating_10  = round( $review_object->get_rating(), 0 ) / 10;
-	?>
+		?>
 		<div class="review-wu-grade">
 			<div class="review-wu-grade-content">
 				<div class="wppr-c100 wppr-p<?php echo esc_attr( $rating ) . ' ' . $review_object->get_rating_class(); ?>">
@@ -151,6 +151,10 @@ if ( ! function_exists( 'wppr_default_get_rating' ) ) {
 				</div>
 			</div>
 		</div><!-- end .review-wu-grade -->
-	<?php
+		<?php
 	}
+}
+
+if ( function_exists( 'register_block_type' ) ) {
+	WPPR_Gutenberg::get_instance();
 }

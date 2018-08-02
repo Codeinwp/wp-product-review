@@ -117,11 +117,11 @@
 							$start_from = is_rtl() ? ( 11 - $rating ) : 1;
 							$stop_at    = is_rtl() ? 10 : $rating;
 						for ( $i = 1; $i <= 10; $i ++ ) {
-						?>
+							?>
 						<li class="
-						<?php
-						echo $i >= $start_from && $i <= $stop_at ? $review_object->get_rating_class( $option['value'] ) : ' wppr-default';
-						?>
+							<?php
+							echo $i >= $start_from && $i <= $stop_at ? $review_object->get_rating_class( $option['value'] ) : ' wppr-default';
+							?>
 						">
 
 						</li>
