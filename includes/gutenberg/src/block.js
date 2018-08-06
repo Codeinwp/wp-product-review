@@ -29,8 +29,9 @@ const {
 const {
 	Component,
 	Fragment,
-	compose,
 } = wp.element;
+
+const { compose } = wp.compose;
 
 const {
 	PanelBody,
