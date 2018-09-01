@@ -54,14 +54,20 @@ class WPPR_Editor {
 	 * @access  public
 	 */
 	public function set_editor() {
-		add_meta_box(
-			'wppr_editor_metabox', __( 'Product Review Extra Settings', 'wp-product-review' ), array(
-				$this,
-				'render_metabox'
-			),
-			array(
+		$back_compat_meta_box = '';
+		if ( function_exists( 'register_block_type' ) ) {
+			$back_compat_meta_box = array(
 				'__back_compat_meta_box' => true,
-			)
+			);
+		}
+		add_meta_box(
+			'wppr_editor_metabox',
+			__( 'Product Review Extra Settings', 'wp-product-review' ),
+			array(
+				$this,
+				'render_metabox',
+			),
+			$back_compat_meta_box
 		);
 	}
 

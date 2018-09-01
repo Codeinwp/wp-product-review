@@ -268,7 +268,8 @@ class WPPR {
 		register_post_type( 'wppr_review', $args );
 
 		register_taxonomy(
-			'wppr_category', 'wppr_review',
+			'wppr_category',
+			'wppr_review',
 			array(
 				'hierarchical'          => true,
 				'labels'                => array(
