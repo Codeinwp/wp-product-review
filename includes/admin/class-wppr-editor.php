@@ -57,7 +57,10 @@ class WPPR_Editor {
 		add_meta_box(
 			'wppr_editor_metabox', __( 'Product Review Extra Settings', 'wp-product-review' ), array(
 				$this,
-				'render_metabox',
+				'render_metabox'
+			),
+			array(
+				'__back_compat_meta_box' => true,
 			)
 		);
 	}

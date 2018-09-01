@@ -39,7 +39,6 @@ const {
 	FormToggle,
 	Button,
 	SelectControl,
-	withAPIData,
 } = wp.components;
 
 class WP_Product_Review extends Component {
@@ -85,15 +84,24 @@ class WP_Product_Review extends Component {
 				0: '',
 			}
 		};
+
+		wp.apiFetch( { path: `/wp/v2/${ ( this.props.postType === 'wppr_review' ? this.props.postType : 'posts' ) }/${this.props.postId}`, method: 'GET' } ).then(
+			( data ) => {
+				if( data.wppr_data.length !== 0 ) {
+					this.setState( { 
+						...data.wppr_data
+					} );
+				}
+				return data;
+			},
+			( err ) => {
+				return err;
+			}
+		);
 	}
 
 	componentWillReceiveProps( nextProps ) {
-		if ( this.props.review !== nextProps.review ) {
-			if ( nextProps.review.isLoading !== true ) {
-				this.setState( { ...nextProps.review.data.wppr_data } );
-			}
-		}
-		if ( nextProps.isPublishing || nextProps.isSaving ) {
+		if ( ( nextProps.isPublishing || nextProps.isSaving ) && !nextProps.isAutoSaving ) {
 			wp.apiRequest( { path: `/wp-product-review/update-review?id=${nextProps.postId}&postType=${nextProps.postType}`, method: 'POST', data: this.state } ).then(
 				( data ) => {
 					return data;
@@ -445,12 +453,14 @@ const WPPR = compose( [
 			getCurrentPostId,
 			isSavingPost,
 			isPublishingPost,
+			isAutosavingPost,
 			getCurrentPostType,
 		} = select( 'core/editor' );
 		return {
 			postId: getCurrentPostId(),
 			postType: getCurrentPostType(),
 			isSaving: forceIsSaving || isSavingPost(),
+			isAutoSaving: isAutosavingPost(),
 			isPublishing: isPublishingPost(),
 		};
 	} ),
@@ -459,12 +469,6 @@ const WPPR = compose( [
 		openReviewSidebar: () => dispatch( 'core/edit-post' ).openGeneralSidebar( 'wp-product-review/wp-product-review' ),
 		editPostStatus: dispatch( 'core/editor' ).editPost,
 	} ) ),
-
-	withAPIData( ( props ) => {
-		return {
-			review: `/wp/v2/${ ( props.postType === 'wppr_review' ? props.postType : 'posts' ) }/${props.postId}`,
-		};
-	} ),
 ] )( WP_Product_Review );
 
 registerPlugin( 'wp-product-review', {
