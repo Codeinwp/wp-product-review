@@ -230,7 +230,9 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 			wp_register_script( WPPR_SLUG . '-widget-script', WPPR_URL . '/assets/js/widget-admin.js', array_merge( array( WPPR_SLUG . '-chosen' ), isset( $dependencies['js'] ) ? $dependencies['js'] : array() ), WPPR_LITE_VERSION );
 
 			wp_localize_script(
-				WPPR_SLUG . '-widget-script', 'wppr_widget', array(
+				WPPR_SLUG . '-widget-script',
+				'wppr_widget',
+				array(
 					'names' => array( 'cwp_top_products_widget', 'cwp_latest_products_widget' ),
 					'ajax'  => array(
 						'nonce' => wp_create_nonce( WPPR_SLUG ),
