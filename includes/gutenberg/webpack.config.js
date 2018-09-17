@@ -5,7 +5,7 @@ const ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
 
 // Set different CSS extraction for editor only and common block styles
 const blockCSSPlugin = new ExtractTextPlugin( {
-  filename: './dist/block.css',
+  filename: './dist/sidebar.css',
 } );
 
 // Configuration for the ExtractTextPlugin.
@@ -30,7 +30,7 @@ const extractConfig = {
 
 module.exports = {
   entry: {
-    './dist/block' : './src/block.js',
+    './dist/sidebar' : './src/sidebar.js',
   },
   output: {
     path: path.resolve( __dirname ),
