@@ -72,11 +72,15 @@ class WPPR_Gutenberg {
 		// Enqueue the bundled block JS file
 		wp_enqueue_script( 'wppr-gutenberg-block-js', WPPR_URL . '/includes/gutenberg/dist/sidebar.js', array( 'wp-i18n', 'wp-edit-post', 'wp-element', 'wp-editor', 'wp-components', 'wp-compose', 'wp-data', 'wp-plugins', 'wp-edit-post', 'wp-api' ), $version );
 
-		wp_localize_script( 'wppr-gutenberg-block-js', 'wpprguten', array(
-			'isPro' => $isPro,
-			'path'  => WPPR_URL,
-			'length' => $length
-		) );
+		wp_localize_script(
+			'wppr-gutenberg-block-js',
+			'wpprguten',
+			array(
+				'isPro' => $isPro,
+				'path'  => WPPR_URL,
+				'length' => $length,
+			)
+		);
 
 		// Enqueue editor block styles
 		wp_enqueue_style( 'wppr-gutenberg-block-css', WPPR_URL . '/includes/gutenberg/dist/sidebar.css', '', $version );
@@ -190,7 +194,10 @@ class WPPR_Gutenberg {
 		return $data;
 	}
 
-	public  function post_meta_request_params( $args, $request ) {
+	/**
+	 * Allow querying posts by meta in REST API
+	 */
+	public function post_meta_request_params( $args, $request ) {
 		$args += array(
 			'meta_key'   => $request['meta_key'],
 			'meta_value' => $request['meta_value'],
