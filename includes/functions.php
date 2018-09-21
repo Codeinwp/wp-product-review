@@ -84,6 +84,7 @@ if ( ! function_exists( 'wppr_display_rating_custom_icon' ) ) {
 	 * Display the custom icon rating.
 	 */
 	function wppr_display_rating_custom_icon( $template, $review_object ) {
+		$review_rating = $review_object->get_rating();
 		?>
 		<div id="review-statistics">
 			<div class="review-wu-bars">
