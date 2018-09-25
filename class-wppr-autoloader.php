@@ -58,7 +58,7 @@ class WPPR_Autoloader {
 	 * @access  protected
 	 * @var     array $excluded_files The excluded files list.
 	 */
-	protected static $excluded_files = array( "node_modules" );
+	protected static $excluded_files = array( 'node_modules' );
 
 	/**
 	 * A placeholder to hold the file iterator so that directory traversal is only
@@ -96,13 +96,15 @@ class WPPR_Autoloader {
 		require_once 'class-wppr-recursive-filter.php';
 
 		if ( is_null( static::$file_iterator ) ) {
-			$Iterator              = new RecursiveIteratorIterator( new Wppr_Recursive_Filter(
-				$directory,
-				array(
-					'WPPR_Autoloader',
-					'filter_excluded_files',
+			$Iterator              = new RecursiveIteratorIterator(
+				new Wppr_Recursive_Filter(
+					$directory,
+					array(
+						'WPPR_Autoloader',
+						'filter_excluded_files',
+					)
 				)
-			) );
+			);
 			$Regex                 = new RegexIterator( $Iterator, '/^.+\.php$/i', RecursiveRegexIterator::MATCH );
 			static::$file_iterator = iterator_to_array( $Regex, false );
 		}

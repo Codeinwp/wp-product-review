@@ -4,7 +4,7 @@ services:
   mysql:
     image: mysql:5.7
     volumes:
-      - ~/themeisle-companion/db_data:/var/lib/mysql
+      - ~/wp-product-review/db_data:/var/lib/mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: wordpress
@@ -19,6 +19,7 @@ services:
     ports:
       - 8888:80
     volumes:
+       - ~/wp-product-review/wordpress:/var/www/html/
        - .:/var/www/html/wp-content/plugins/wp-product-review/
     restart: always
     environment:
