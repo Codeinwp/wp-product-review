@@ -61,7 +61,7 @@
 					?>
 					<span class="wppr-review-rating-users wppr-p<?php echo esc_attr( round( $comments_rating ) ) . ' ' . $review_object->get_rating_class( $comments_rating ); ?>">
 					<span dir="<?php echo is_rtl() ? 'rtl' : ''; ?>">
-						<?php echo sprintf( __( 'Users score: %d with %d votes', 'wp-product-review' ), $comments_rating, $number_comments ); ?>
+						<?php echo sprintf( __( 'Users score: %1$d with %2$d votes', 'wp-product-review' ), $comments_rating, $number_comments ); ?>
 					</span>
 				</span>
 				<?php } ?>
