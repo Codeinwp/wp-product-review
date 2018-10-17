@@ -84,7 +84,8 @@ $rating_10  = round( $review_object->get_rating(), 0 ) / 10;
 									<?php
 									echo esc_html(
 										apply_filters(
-											'wppr_review_pros_text', $review_object->wppr_get_option(
+											'wppr_review_pros_text',
+											$review_object->wppr_get_option(
 												'cwppos_pros_text'
 											)
 										)
@@ -110,7 +111,8 @@ if ( ! empty( $cons ) ) :
 	<?php
 	echo esc_html(
 		apply_filters(
-			'wppr_review_cons_text', $review_object->wppr_get_option(
+			'wppr_review_cons_text',
+			$review_object->wppr_get_option(
 				'cwppos_cons_text'
 			)
 		)

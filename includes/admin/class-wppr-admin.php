@@ -110,7 +110,8 @@ class WPPR_Admin {
 
 		if ( $hook == 'toplevel_page_wppr' ) {
 			wp_enqueue_script(
-				$this->plugin_name . '-admin-js', WPPR_URL . '/assets/js/admin.js',
+				$this->plugin_name . '-admin-js',
+				WPPR_URL . '/assets/js/admin.js',
 				array(
 					'jquery',
 					'wp-color-picker',
@@ -130,15 +131,25 @@ class WPPR_Admin {
 	 */
 	public function menu_pages() {
 		add_menu_page(
-			__( 'WP Product Review', 'wp-product-review' ), __( 'Product Review', 'wp-product-review' ), 'manage_options', 'wppr', array(
+			__( 'WP Product Review', 'wp-product-review' ),
+			__( 'Product Review', 'wp-product-review' ),
+			'manage_options',
+			'wppr',
+			array(
 				$this,
 				'page_settings',
-			), 'dashicons-star-half', '99.87414'
+			),
+			'dashicons-star-half',
+			'99.87414'
 		);
 		if ( ! defined( 'WPPR_PRO_VERSION' ) ) {
 			add_submenu_page(
-				'wppr', __( 'More Features', 'wp-product-review' ), __( 'More Features ', 'wp-product-review' ) . '<span class="dashicons
-		dashicons-star-filled" style="vertical-align:-5px; padding-left:2px; color:#FFCA54;"></span>', 'manage_options', 'wppr_pro_upsell',
+				'wppr',
+				__( 'More Features', 'wp-product-review' ),
+				__( 'More Features ', 'wp-product-review' ) . '<span class="dashicons
+		dashicons-star-filled" style="vertical-align:-5px; padding-left:2px; color:#FFCA54;"></span>',
+				'manage_options',
+				'wppr_pro_upsell',
 				array(
 					$this,
 					'page_upsell',
@@ -224,12 +235,14 @@ class WPPR_Admin {
 			$taxonomies = get_taxonomies(
 				array( 'object_type' => array( $post_type ),
 												 'hierarchical' => true,
-				), 'objects'
+				),
+				'objects'
 			);
 			if ( $taxonomies ) {
 				foreach ( $taxonomies as $tax ) {
 					$terms = get_terms(
-						$tax->name, array(
+						$tax->name,
+						array(
 							'hide_empty' => false,
 						)
 					);
@@ -357,7 +370,8 @@ class WPPR_Admin {
 		}
 
 		wp_enqueue_script(
-			$this->plugin_name . '-cpt-js', WPPR_URL . '/assets/js/cpt.js',
+			$this->plugin_name . '-cpt-js',
+			WPPR_URL . '/assets/js/cpt.js',
 			array(
 				'jquery',
 			),
@@ -365,7 +379,9 @@ class WPPR_Admin {
 		);
 
 		wp_localize_script(
-			$this->plugin_name . '-cpt-js', 'wppr', array(
+			$this->plugin_name . '-cpt-js',
+			'wppr',
+			array(
 				'i10n' => array(
 					'title_placeholder' => __( 'Enter Review Title', 'wp-product-review' ),
 				),

@@ -108,9 +108,13 @@ class Wppr_Public {
 			wp_enqueue_script( 'jquery-ui-slider' );
 			wp_enqueue_script( 'jquery-touch-punch' );
 			wp_enqueue_script(
-				$this->plugin_name . '-frontpage-js', WPPR_URL . '/assets/js/main.js', array(
+				$this->plugin_name . '-frontpage-js',
+				WPPR_URL . '/assets/js/main.js',
+				array(
 					'jquery-ui-slider',
-				), $this->version, true
+				),
+				$this->version,
+				true
 			);
 			wp_enqueue_style( $this->plugin_name . 'jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
 			wp_enqueue_style( $this->plugin_name . 'comments', WPPR_URL . '/assets/css/comments.css', array(), $this->version );
@@ -127,11 +131,15 @@ class Wppr_Public {
 
 		wp_enqueue_style( $this->plugin_name . '-' . $review->get_template() . '-stylesheet', WPPR_URL . '/assets/css/' . $review->get_template() . '.css', array(), $this->version );
 		wp_enqueue_style(
-			$this->plugin_name . '-percentage-circle', WPPR_URL . '/assets/css/circle.css', array(),
+			$this->plugin_name . '-percentage-circle',
+			WPPR_URL . '/assets/css/circle.css',
+			array(),
 			$this->version
 		);
 		wp_enqueue_style(
-			$this->plugin_name . '-common', WPPR_URL . '/assets/css/common.css', array(),
+			$this->plugin_name . '-common',
+			WPPR_URL . '/assets/css/common.css',
+			array(),
 			$this->version
 		);
 		$style = $this->generate_styles();
@@ -455,15 +463,19 @@ class Wppr_Public {
 			$review_object = $this->review;
 			$template      = new WPPR_Template();
 			$output        .= $template->render(
-				$review_object->get_template(), array(
+				$review_object->get_template(),
+				array(
 					'review_object' => $review_object,
-				), false
+				),
+				false
 			);
 
 			$output .= $template->render(
-				'rich-json-ld', array(
+				'rich-json-ld',
+				array(
 					'review_object' => $review_object,
-				), false
+				),
+				false
 			);
 
 			$review_position_before_content = $this->review->wppr_get_option( 'cwppos_show_reviewbox' );
