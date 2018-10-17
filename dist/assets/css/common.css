@@ -1,0 +1,36 @@
+.affiliate-button {
+	clear: both;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.affiliate-button2 {
+	float: left;
+	clear: none !important;
+	width: 50% !important;
+	margin-bottom: 20px;
+}
+
+.affiliate-button a {
+	display: table;
+	margin: 20px auto 0;
+	padding: 10px 35px;
+	border: none;
+	border-radius: 5px;
+	text-decoration: none !important;
+}
+
+.affiliate-button a:hover span {
+	text-decoration: none;
+	;
+}
+
+.affiliate-button a span {
+	margin-left: -10px;
+	padding-left: 20px;
+	font-size: 14px;
+	font-weight: normal;
+	font-style: italic;
+	text-decoration: none;
+	text-transform: uppercase;
+}

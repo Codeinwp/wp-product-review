@@ -67,7 +67,7 @@ class WPPR {
 	 */
 	public function __construct() {
 		$this->plugin_name = 'wppr';
-		$this->version     = '3.4.9';
+		$this->version     = '3.4.8';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -250,6 +250,7 @@ class WPPR {
 			'description'        => __( 'Reviews from WP Product Review', 'wp-product-review' ),
 			'public'             => true,
 			'publicly_queryable' => true,
+			'exclude_from_search' => true,
 			'show_in_nav_menus' => true,
 			'show_ui'            => true,
 			'show_in_menu'       => true,
