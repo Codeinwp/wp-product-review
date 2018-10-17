@@ -250,7 +250,6 @@ class WPPR {
 			'description'        => __( 'Reviews from WP Product Review', 'wp-product-review' ),
 			'public'             => true,
 			'publicly_queryable' => true,
-			'exclude_from_search' => true,
 			'show_in_nav_menus' => true,
 			'show_ui'            => true,
 			'show_in_menu'       => true,
