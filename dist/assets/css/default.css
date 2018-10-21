@@ -281,8 +281,14 @@
 	vertical-align: middle;
 }
 
+#review-statistics .review-wrap-up .review-wu-left .rev-wu-image:hover {
+	background: rgb(238, 238, 238);
+	transition: all, 0.3s
+}
+
 #review-statistics .review-wrap-up .review-wu-left .rev-wu-image a {
 	display: inline-block;
+	box-shadow: none !important; 
 }
 
 #review-statistics .review-wrap-up .review-wu-left .rev-wu-image img {
