@@ -39,7 +39,7 @@
 		<h2 class="wppr-review-name"><?php echo esc_html( $review_object->get_name() ); ?></h2>
 
 	<?php
-		wppr_display_rating( 'style1', $review_object );
+		wppr_display_rating_stars( 'style1', $review_object, false );
 	?>
 
 		<div class="wppr-review-grade">

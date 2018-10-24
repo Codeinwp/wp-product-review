@@ -67,6 +67,12 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 ## Changelog ##
+### 3.4.9 - 2018-10-24  ###
+
+* Add support for review post type in preloader, shortcode and category archive page
+* Fixed issue with certain templates not showing star rating properly
+
+
 ### 3.4.8 - 2018-08-02  ###
 
 * Added a new custom image of 50x50 for the custom WPPR widgets
