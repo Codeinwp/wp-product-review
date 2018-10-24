@@ -24,15 +24,19 @@ function cwppos_show_review( $post_id ) {
 	if ( $review_object->is_active() ) {
 		$template = new WPPR_Template();
 		$output  .= $template->render(
-			'default', array(
+			'default',
+			array(
 				'review_object' => $review_object,
-			), false
+			),
+			false
 		);
 
 		$output .= $template->render(
-			'rich-json-ld', array(
+			'rich-json-ld',
+			array(
 				'review_object' => $review_object,
-			), false
+			),
+			false
 		);
 	}
 

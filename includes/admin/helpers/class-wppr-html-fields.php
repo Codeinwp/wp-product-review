@@ -240,4 +240,20 @@ class WPPR_Html_Fields {
 
 		return apply_filters( 'wppr_field', $output, $args );
 	}
+
+	/**
+	 * Render a heading.
+	 *
+	 * @access  public
+	 * @param   array $args The settings of the heading.
+	 * @return mixed
+	 */
+	public function heading( $args ) {
+		$defaults = $this->define_defaults( array( 'subtype' => 'h2' ) );
+		$args     = wp_parse_args( $args, $defaults );
+		$class    = $this->validate_class( $args['class'] );
+		$type     = $args['subtype'];
+		$output = '<' . $type . ' class="' . $class . '">' . $args['placeholder'] . '</' . $type . '>';
+		return apply_filters( 'wppr_field', $output, $args );
+	}
 }

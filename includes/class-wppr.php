@@ -67,7 +67,7 @@ class WPPR {
 	 */
 	public function __construct() {
 		$this->plugin_name = 'wppr';
-		$this->version     = '3.4.8';
+		$this->version     = '3.4.9';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -139,7 +139,7 @@ class WPPR {
 
 		$plugin_editor = new WPPR_Editor( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'add_meta_boxes', $plugin_editor, 'set_editor' );
-		$this->loader->add_action( 'save_post', $plugin_editor, 'editor_save' );
+		add_action( 'save_post', array( $plugin_editor, 'editor_save' ) );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_editor, 'load_assets' );
 
 		$plugin_widget_latest = new WPPR_Latest_Products_Widget();
@@ -250,7 +250,6 @@ class WPPR {
 			'description'        => __( 'Reviews from WP Product Review', 'wp-product-review' ),
 			'public'             => true,
 			'publicly_queryable' => true,
-			'exclude_from_search' => true,
 			'show_in_nav_menus' => true,
 			'show_ui'            => true,
 			'show_in_menu'       => true,
@@ -268,7 +267,8 @@ class WPPR {
 		register_post_type( 'wppr_review', $args );
 
 		register_taxonomy(
-			'wppr_category', 'wppr_review',
+			'wppr_category',
+			'wppr_review',
 			array(
 				'hierarchical'          => true,
 				'labels'                => array(
