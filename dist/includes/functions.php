@@ -37,26 +37,25 @@ if ( ! function_exists( 'wppr_display_rating_stars' ) ) {
 		<div class="wppr-review-stars <?php echo is_rtl() ? 'rtl' : ''; ?>" style="direction: <?php echo is_rtl() ? 'rtl' : ''; ?>">
 			<div class="wppr-review-stars-grade <?php echo $review_object->get_rating_class(); ?>">
 		<?php
-		$stars          = array( 'full' => intval( $rating_5 ), 'half' => $rating_5 > intval( $rating_5 ), 'empty' => 4 - intval( $rating_5 ) );
-
+		$stars          = array( 'full' => intval( $rating_5 ), 'half' => $rating_5 > intval( $rating_5 ), 'empty' => ( $rating_5 > intval( $rating_5 ) ? 4 : 5 ) - intval( $rating_5 ) );
 		foreach ( $stars as $key => $value ) {
 			switch ( $key ) {
 				case 'full':
-					for ( $i = 0; $i < intval( $rating_5 ); $i++ ) {
+					for ( $i = 0; $i < $value; $i++ ) {
 						?>
 			<i class="fa fa-star"></i>
 						<?php
 					}
 					break;
 				case 'half':
-					if ( $rating_5 > intval( $rating_5 ) ) {
+					if ( $value ) {
 						?>
 			<i class="fa fa-star-half-o"></i>
 						<?php
 					}
 					break;
 				case 'empty':
-					for ( $i = 0; $i < 4 - intval( $rating_5 ); $i++ ) {
+					for ( $i = 0; $i < $value; $i++ ) {
 						?>
 			<i class="fa fa-star-o"></i>
 						<?php
@@ -84,6 +83,7 @@ if ( ! function_exists( 'wppr_display_rating_custom_icon' ) ) {
 	 * Display the custom icon rating.
 	 */
 	function wppr_display_rating_custom_icon( $template, $review_object ) {
+		$review_rating = $review_object->get_rating();
 		?>
 		<div id="review-statistics">
 			<div class="review-wu-bars">

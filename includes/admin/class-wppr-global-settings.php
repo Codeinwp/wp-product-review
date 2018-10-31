@@ -57,7 +57,8 @@ class WPPR_Global_Settings {
 		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof WPPR_Global_Settings ) ) {
 			self::$instance           = new WPPR_Global_Settings;
 			self::$instance->sections = apply_filters(
-				'wppr_settings_sections', array(
+				'wppr_settings_sections',
+				array(
 					'general'    => __( 'General settings', 'wp-product-review' ),
 					'rating'     => __( 'Rating colors', 'wp-product-review' ),
 					'typography' => __( 'Typography', 'wp-product-review' ),
@@ -65,7 +66,8 @@ class WPPR_Global_Settings {
 				)
 			);
 			self::$instance->fields   = apply_filters(
-				'wppr_settings_fields', array(
+				'wppr_settings_fields',
+				array(
 					'general'    => array(
 						'cwppos_show_reviewbox'  => array(
 							'id'          => 'review_position',
@@ -171,7 +173,7 @@ class WPPR_Global_Settings {
 						'wppr_cpt'      => array(
 							'type'        => 'select',
 							'name'        => __( 'Enable review post type', 'wp-product-review' ),
-							'description' => __( 'Enabling this will create a new post type where you can manage your reviews.', 'wp-product-review' ),
+							'description' => __( 'Enabling this will create a new post type where you can manage your reviews. Refresh the page on saving changes to see the "Reviews" menu on the left.', 'wp-product-review' ),
 							'id'          => 'use_cpt',
 							'options'     => array(
 								'yes' => __( 'Yes', 'wp-product-review' ),

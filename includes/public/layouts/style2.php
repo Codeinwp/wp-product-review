@@ -60,9 +60,9 @@
 					$number_comments = count( $review_object->get_comments_options() );
 					?>
 					<span class="wppr-review-rating-users wppr-p<?php echo esc_attr( round( $comments_rating ) ) . ' ' . $review_object->get_rating_class( $comments_rating ); ?>">
-					<?php echo __( 'Users score:', 'wp-product-review' ); ?>
-						<strong><?php echo $comments_rating; ?></strong>
-					(<?php echo $number_comments; ?> <?php echo __( 'votes', 'wp-product-review' ); ?>)
+					<span dir="<?php echo is_rtl() ? 'rtl' : ''; ?>">
+						<?php echo sprintf( __( 'Users score: %1$d with %2$d votes', 'wp-product-review' ), $comments_rating, $number_comments ); ?>
+					</span>
 				</span>
 				<?php } ?>
 			</div>

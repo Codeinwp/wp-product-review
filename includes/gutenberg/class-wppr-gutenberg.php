@@ -69,7 +69,9 @@ class WPPR_Gutenberg {
 	 */
 	public function update_posts_endpoints() {
 		register_rest_route(
-			'wp-product-review', '/update-review', array(
+			'wp-product-review',
+			'/update-review',
+			array(
 				'methods'  => 'POST',
 				'callback' => array( $this, 'update_review_callback' ),
 				'args'     => array(
@@ -131,7 +133,8 @@ class WPPR_Gutenberg {
 	public function register_endpoints() {
 		register_rest_field(
 			array( 'post', 'wppr_review' ),
-			'wppr_data', array(
+			'wppr_data',
+			array(
 				'get_callback'    => array( $this, 'get_post_meta' ),
 				'schema'          => null,
 			)

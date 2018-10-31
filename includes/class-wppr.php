@@ -139,7 +139,7 @@ class WPPR {
 
 		$plugin_editor = new WPPR_Editor( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'add_meta_boxes', $plugin_editor, 'set_editor' );
-		$this->loader->add_action( 'save_post', $plugin_editor, 'editor_save' );
+		add_action( 'save_post', array( $plugin_editor, 'editor_save' ) );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_editor, 'load_assets' );
 
 		$plugin_widget_latest = new WPPR_Latest_Products_Widget();
@@ -267,7 +267,8 @@ class WPPR {
 		register_post_type( 'wppr_review', $args );
 
 		register_taxonomy(
-			'wppr_category', 'wppr_review',
+			'wppr_category',
+			'wppr_review',
 			array(
 				'hierarchical'          => true,
 				'labels'                => array(

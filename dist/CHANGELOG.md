@@ -1,4 +1,9 @@
 
+ ### v3.4.9 - 2018-10-24 
+ **Changes:** 
+ * Add support for review post type in preloader, shortcode and category archive page
+* Fixed issue with certain templates not showing star rating properly
+ 
  ### v3.4.8 - 2018-08-02 
  **Changes:** 
  * Added a new custom image of 50x50 for the custom WPPR widgets

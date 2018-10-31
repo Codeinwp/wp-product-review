@@ -1,0 +1,231 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Wp Product Review\n"
+"POT-Creation-Date: 2014-07-28 20:58+0100\n"
+"PO-Revision-Date: 2014-08-28 18:00+0100\n"
+"Last-Translator: Jacques Soulé <jsoule2010@gmail.com>\n"
+"Language-Team: ThemeIsle <friends@themeisle.com>\n"
+"Language: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;__\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: inc\n"
+
+#: admin/inc/render.php:224
+msgid "Normal"
+msgstr "Normal"
+
+#: admin/inc/render.php:225
+msgid "Italic"
+msgstr "Italique"
+
+#: admin/inc/render.php:226
+msgid "Bold"
+msgstr "Gras"
+
+#: admin/inc/render.php:227
+msgid "Bold Italic"
+msgstr "Italique gras"
+
+#: admin/inc/render.php:279
+msgid "No Repeat"
+msgstr "Ne pas répéter"
+
+#: admin/inc/render.php:280
+msgid "Repeat Horizontally"
+msgstr "Répéter horizontalement"
+
+#: admin/inc/render.php:281
+msgid "Repeat Vertically"
+msgstr "Répéter verticalement"
+
+#: admin/inc/render.php:282
+msgid "Repeat All"
+msgstr "Tour répéter"
+
+#: admin/inc/render.php:287
+msgid "Top Left"
+msgstr "En haut à gauche"
+
+#: admin/inc/render.php:288
+msgid "Top Center"
+msgstr "En haut au centre"
+
+#: admin/inc/render.php:289
+msgid "Top Right"
+msgstr "En haut à droite"
+
+#: admin/inc/render.php:290
+msgid "Middle Left"
+msgstr "Au milieu à gauche"
+
+#: admin/inc/render.php:291
+msgid "Middle Center"
+msgstr "Au milieu au centre"
+
+#: admin/inc/render.php:292
+msgid "Middle Right"
+msgstr "Au milieu à droite"
+
+#: admin/inc/render.php:293
+msgid "Bottom Left"
+msgstr "En bas à gauche"
+
+#: admin/inc/render.php:294
+msgid "Bottom Center"
+msgstr "En bas au centre"
+
+#: admin/inc/render.php:295
+msgid "Bottom Right"
+msgstr "En bas à droite"
+
+#: admin/inc/render.php:300
+msgid "Scroll Normally"
+msgstr "Faire défiler normalement"
+
+#: admin/inc/render.php:301
+msgid "Fixed in Place"
+msgstr "Laisser en place"
+
+#: admin/layout/main_page.php:12
+msgid "Buy the PRO version"
+msgstr "Acheter la version PRO"
+
+#: admin/layout/main_page.php:14
+msgid "Recommended Review Themes"
+msgstr "Les Thèmes Review recommandés"
+
+#: admin/layout/main_page.php:16
+msgid "Contact us"
+msgstr "Nous contacter"
+
+#: admin/layout/main_page.php:30 admin/layout/main_page.php:70
+msgid "Save All Changes"
+msgstr "Sauvegarder tous les changements"
+
+#: admin/layout/main_page.php:33 admin/layout/main_page.php:73
+msgid "Options Reset"
+msgstr "Options de réinitialisation"
+
+#: inc/class-remote-notification-client.php:260
+msgid "Dismiss notification"
+msgstr "Notification de rejet"
+
+#: inc/class-remote-notification-client.php:262
+msgid "Dismiss"
+msgstr "Rejeter"
+
+#: inc/cwp_frontpage.php:1
+msgid "No image added."
+msgstr "Aucune image ajoutée."
+
+#: inc/cwp_frontpage.php:1
+msgid "Default Feature "
+msgstr "Fonctionnalité par défaut"
+
+#: inc/cwp_metabox.php:59
+msgid "Product Details"
+msgstr "Détails du produit"
+
+#: inc/cwp_metabox.php:61
+msgid "Specify the general details for the reviewed product."
+msgstr "Spécifiez les détails généraux du produit concerné."
+
+#: inc/cwp_metabox.php:75
+msgid "Product Name"
+msgstr "Nom du produit"
+
+#: inc/cwp_metabox.php:85
+msgid "Product Image"
+msgstr "Image du produit"
+
+#: inc/cwp_metabox.php:87
+msgid "Choose or Upload an Image"
+msgstr "Choisir ou télécharger une Image"
+
+#: inc/cwp_metabox.php:98
+msgid "Affiliate Button Text"
+msgstr "Texte du bouton d'affiliation"
+
+#: inc/cwp_metabox.php:108
+msgid "Affiliate Link"
+msgstr "Lien d'affiliation"
+
+#: inc/cwp_metabox.php:125
+msgid "Product Options Setting"
+msgstr "Réglage des Options du produit"
+
+#: inc/cwp_metabox.php:126
+msgid ""
+"Insert your options and their grades. Grading must be done <b><i>from 0 to "
+"100</i></b>. In order to be able to automatically preload your settings from "
+"another posts, you need to <a href='https://themeisle.com/plugins/wp-product-review-pro-add-on/' target='_blank'>Upgrade to PRO</a>."
+msgstr ""
+"Insérer vos options et leurs notes. Le classement doit être fait <b><i>entre "
+"0 et 100</i></b>. Pour pouvoir pré-charger automatiquement vos paramètres "
+"depuis un autre article, vous devez <a href='https://themeisle.com/plugins/wp-product-review-pro-add-on/' target='_blank'> mettre à niveau vers PRO</a>."
+
+#: inc/cwp_metabox.php:128 inc/cwp_metabox.php:133
+msgid "Preload Info"
+msgstr "Pré-charger Info"
+
+#: inc/cwp_metabox.php:205
+msgid "Pro Features"
+msgstr "Fonctionnalités Pro"
+
+#: inc/cwp_metabox.php:207
+msgid "Insert product's pro features below."
+msgstr "Insérer les fonctionnalités pro de produit ci-dessous."
+
+#: inc/cwp_metabox.php:279
+msgid "Cons Features"
+msgstr "Fonctionnalités Contre"
+
+#: inc/cwp_metabox.php:281
+msgid "Insert product's cons features below."
+msgstr "Insérer ci-dessous les fonctionnalités contre ce produit."
+
+#: inc/cwp_top_products_widget.php:21
+msgid "WP Product Review Top Products Widget"
+msgstr "Widget des Top Produits de WP Product Review "
+
+#: inc/cwp_top_products_widget.php:27
+msgid "This widget displays the top products based on their rating."
+msgstr ""
+"Ce widget affiche les meilleurs produits en fonction de leur classement."
+
+#: inc/cwp_top_products_widget.php:176
+msgid "Top Products"
+msgstr "Top Produits"
+
+#: inc/cwp_top_products_widget.php:178
+msgid "10"
+msgstr "10"
+
+#: inc/cwp_top_products_widget.php:202
+msgid "Title:"
+msgstr "Titre:"
+
+#: inc/cwp_top_products_widget.php:212
+msgid "Number of posts to show:"
+msgstr "Nombre d'articles à afficher:"
+
+#: inc/cwp_top_products_widget.php:224
+msgid "Category:"
+msgstr "Catégorie:"
+
+#: inc/review-preloader.php:42
+msgid "Options"
+msgstr "Options"
+
+#: inc/review-preloader.php:56
+msgid "Pros"
+msgstr "Pour"
+
+#: inc/review-preloader.php:70
+msgid "Cons"
+msgstr "Contre"

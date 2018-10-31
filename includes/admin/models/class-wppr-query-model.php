@@ -69,7 +69,10 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		return $this->find(
 			array(
 				'category_id' => $cat_id,
-			), $limit, $filter, $order
+			),
+			$limit,
+			$filter,
+			$order
 		);
 	}
 
@@ -190,8 +193,10 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		if ( ! isset( $post['category_name'] ) && ! isset( $post['category_id'] ) ) {
 			return '';
 		}
+
+		$category   = 'yes' === $this->wppr_get_option( 'wppr_cpt' ) ? 'wppr_category' : 'category';
 		$sub_selection_query = "INNER JOIN {$this->db->term_relationships } wtr ON wtr.object_id = p.ID
-	            INNER JOIN {$this->db->term_taxonomy} wtt on wtt.term_taxonomy_id = wtr.term_taxonomy_id AND wtt.taxonomy = 'category'
+	            INNER JOIN {$this->db->term_taxonomy} wtt on wtt.term_taxonomy_id = wtr.term_taxonomy_id AND wtt.taxonomy = '$category'
 	            INNER JOIN {$this->db->terms} wt
 	            ON wt.term_id = wtt.term_id";
 
@@ -313,7 +318,10 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		return $this->find(
 			array(
 				'category_name' => $category,
-			), $limit, $filter, $order
+			),
+			$limit,
+			$filter,
+			$order
 		);
 	}
 
@@ -330,7 +338,9 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	 */
 	public function find_by_name( $name, $limit = 20 ) {
 		return $this->find(
-			false, $limit, array(
+			false,
+			$limit,
+			array(
 				'name' => $name,
 			)
 		);
@@ -349,7 +359,9 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	 */
 	public function find_by_price( $price, $limit = 20 ) {
 		return $this->find(
-			false, $limit, array(
+			false,
+			$limit,
+			array(
 				'price' => $price,
 			)
 		);
@@ -368,7 +380,9 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	 */
 	public function find_by_rating( $rating, $limit = 20 ) {
 		return $this->find(
-			false, $limit, array(
+			false,
+			$limit,
+			array(
 				'rating' => $rating,
 			)
 		);
