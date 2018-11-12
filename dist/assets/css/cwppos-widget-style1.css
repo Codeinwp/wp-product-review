@@ -64,7 +64,6 @@
 	white-space: nowrap;
 	text-decoration: none;
 	text-transform: uppercase;
-	-webkit-transition: all 0.5s ease;
 	transition: all 0.5s ease;
 }
 
@@ -73,10 +72,10 @@
 }
 
 .wppr-prodlist .wppr-prodrow .wppr-prodrowright .wppr-review-stars.rtl .wppr-review-stars-grade i.fa-star-half-o {
+	-webkit-transform: rotateY(180deg);
 	transform: rotateY(180deg);
 }
 
 .wppr-prodlist .wppr-prodrow .wppr-prodrowright .wppr-review-stars .wppr-review-stars-grade {
 	color: #ff7e00;
 }
-
