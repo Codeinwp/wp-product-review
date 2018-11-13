@@ -32,6 +32,7 @@
 	font-weight: 600;
 	font-style: italic;
 	text-decoration: none;
+	-webkit-transition: all 0.250s ease-in-out;
 	transition: all 0.250s ease-in-out;
 }
 
@@ -64,6 +65,7 @@
 	font-weight: bold;
 	text-decoration: none;
 	text-transform: uppercase;
+	-webkit-transition: all 0.250s ease-in-out;
 	transition: all 0.250s ease-in-out;
 }
 
