@@ -166,6 +166,8 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		) T1 $final_order
         ";
 
+		do_action( 'themeisle_log_event', WPPR_SLUG, sprintf( 'post = %s, limit = %s, filter = %s, order = %s and query = %s', print_r( $post, true ), $limit, print_r( $filter, true ), print_r( $order, true ), $query ), 'debug', __FILE__, __LINE__ );
+
 		$key     = hash( 'sha256', $query );
 		$results = wp_cache_get( $key, 'wppr' );
 		if ( ! is_array( $results ) ) {
