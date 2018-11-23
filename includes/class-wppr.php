@@ -136,6 +136,7 @@ class WPPR {
 		$this->loader->add_action( 'load-edit.php', $plugin_admin, 'get_additional_fields' );
 		$this->loader->add_action( 'wppr_settings_section_upsell', $plugin_admin, 'settings_section_upsell', 10, 1 );
 		$this->loader->add_action( 'after_setup_theme', $plugin_admin, 'add_image_size' );
+		$this->loader->add_action( 'wp_ajax_get_categories', $plugin_admin, 'get_categories' );
 
 		$plugin_editor = new WPPR_Editor( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'add_meta_boxes', $plugin_editor, 'set_editor' );
