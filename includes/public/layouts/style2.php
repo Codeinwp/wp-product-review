@@ -19,7 +19,6 @@
 	$review_cons       = $review_object->get_cons();
 	$review_rating     = $review_object->get_rating();
 	$review_image      = $review_object->get_small_thumbnail();
-	$review_image_link = reset( $links );
 
 	$rating_10      = round( $review_rating, 0 ) / 10;
 
@@ -27,10 +26,6 @@
 
 	if ( count( $links ) > 1 ) {
 		$multiple_affiliates_class = 'affiliate-button2 affiliate-button';
-	}
-	if ( $review_object->get_click() == 'image' ) {
-		$lightbox          = 'data-lightbox="' . esc_url( $review_object->get_small_thumbnail() ) . '"';
-		$review_image_link = $review_object->get_image();
 	}
 	?>
 
@@ -44,15 +39,7 @@
 					echo esc_html( $rating_10 );
 					?>
 				</span>
-				<?php
-				// Review image.
-				if ( ! empty( $review_image ) ) {
-					?>
-					<a href="<?php echo esc_url( $review_image_link ); ?>" <?php echo $lightbox; ?>
-					   class="wppr-review-product-image wppr-default-img" rel="nofollow" target="_blank"><img
-								src="<?php echo esc_attr( $review_image ); ?>"
-								alt="<?php echo esc_attr( $review_object->get_image_alt() ); ?>" class="wppr-product-image"/></a>
-				<?php } ?>
+				<?php wppr_show_image( $review_object, 'style2' ); ?>
 				<div class="clearfix"></div>
 				<?php
 				if ( $review_object->wppr_get_option( 'cwppos_show_userreview' ) === 'yes' ) {

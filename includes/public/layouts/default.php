@@ -37,7 +37,7 @@ $rating_10  = round( $review_object->get_rating(), 0 ) / 10;
 				<div class="review-wu-left">
 					<div class="review-wu-left-top">
 					<?php
-						wppr_default_get_image( $review_object );
+						wppr_show_image( $review_object, 'default' );
 						wppr_default_get_rating( $review_object );
 					?>
 					</div><!-- end .review-wu-left-top -->

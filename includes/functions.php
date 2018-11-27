@@ -103,30 +103,64 @@ if ( ! function_exists( 'wppr_display_rating_custom_icon' ) ) {
 }
 
 
-if ( ! function_exists( 'wppr_default_get_image' ) ) {
+if ( ! function_exists( 'wppr_show_image' ) ) {
 
 	/**
-	 * Display the imaage for the default template.
+	 * Display the image for the given template.
 	 */
-	function wppr_default_get_image( $review_object ) {
+	function wppr_show_image( $review_object, $template ) {
+		$src                        = $review_object->get_small_thumbnail();
+		if ( empty( $src ) ) {
+			return;
+		}
+
 		$links                     = $review_object->get_links();
 		$links                     = array_filter( $links );
 		$image_link                = reset( $links );
 		$lightbox                   = '';
 		if ( $review_object->get_click() == 'image' ) {
-			$lightbox   = 'data-lightbox="' . esc_url( $review_object->get_small_thumbnail() ) . '"';
+			$lightbox   = 'data-lightbox="' . esc_url( $src ) . '"';
 			$image_link = $review_object->get_image();
 		}
+
+		switch ( $template ) {
+			case 'default':
 		?>
 		<div class="rev-wu-image">
 			<a class="wppr-default-img" href="<?php echo esc_url( $image_link ); ?>" <?php echo $lightbox; ?> rel="nofollow" target="_blank">
 				<img
-					src="<?php echo esc_attr( $review_object->get_small_thumbnail() ); ?>"
+					src="<?php echo esc_attr( $src ); ?>"
 					alt="<?php echo esc_attr( $review_object->get_name() ); ?>"
 					class="photo photo-wrapup wppr-product-image"/>
 			</a>
-		</div><!-- end .rev-wu-image -->
+		</div>
 		<?php
+				break;
+
+			case 'style1':
+		?>
+		<div class="wppr-review-product-image">
+			<a class="wppr-default-img" href="<?php echo esc_url( $image_link ); ?>" <?php echo $lightbox; ?> rel="nofollow" target="_blank">
+				<img
+					src="<?php echo esc_attr( $src ); ?>"
+					alt="<?php echo esc_attr( $review_object->get_name() ); ?>"
+					class="wppr-product-image"/>
+			</a>
+		</div>
+		<?php
+				break;
+
+			case 'style2':
+		?>
+		<a class="wppr-review-product-image wppr-default-img" href="<?php echo esc_url( $image_link ); ?>" <?php echo $lightbox; ?> rel="nofollow" target="_blank">
+			<img
+				src="<?php echo esc_attr( $src ); ?>"
+				alt="<?php echo esc_attr( $review_object->get_image_alt() ); ?>"
+				class="wppr-product-image"/>
+		</a>
+		<?php
+				break;
+		}
 	}
 }
 

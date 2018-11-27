@@ -25,13 +25,6 @@
 	if ( count( $links ) > 1 ) {
 		$multiple_affiliates_class = 'affiliate-button2 affiliate-button';
 	}
-	$review_image      = $review_object->get_small_thumbnail();
-	$review_image_link = reset( $links );
-
-	if ( $review_object->get_click() == 'image' ) {
-		$lightbox          = 'data-lightbox="' . esc_url( $review_object->get_small_thumbnail() ) . '"';
-		$review_image_link = $review_object->get_image();
-	}
 	?>
 
 	<div id="wppr-review-<?php echo $review_id; ?>" class="wppr-review-container">
@@ -51,17 +44,7 @@
 				?>
 					</span>
 			</div>
-			<?php
-			// Review image.
-			if ( ! empty( $review_image ) ) {
-				?>
-			<div class="wppr-review-product-image">
-				<a href="<?php echo esc_url( $review_image_link ); ?>" <?php echo $lightbox; ?>
-					 rel="nofollow" target="_blank" class="wppr-default-img"><img
-							src="<?php echo esc_attr( $review_image ); ?>"
-							alt="<?php echo esc_attr( $review_object->get_image_alt() ); ?>" class="wppr-product-image"/></a>
-			</div>
-			<?php } ?>
+			<?php wppr_show_image( $review_object, 'style1' ); ?>
 			<div class="wppr-review-grade-options <?php echo is_rtl() ? 'rtl' : ''; ?>">
 				<?php
 				foreach ( $review_object->get_options() as $option ) {
