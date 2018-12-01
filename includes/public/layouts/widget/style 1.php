@@ -42,25 +42,7 @@
 			?>
 			<div class="wppr-prodrowright <?php echo $showingImg ? 'wppr-prodrowrightadjust' : '' ?>">
 				<p><strong><?php echo $product_title_display; ?></strong></p>
-				<?php
-				$review_score = $review_object->get_rating();
-
-				if ( ! empty( $review_score ) ) {
-					if ( $instance['cwp_tp_rating_type'] == 'round' ) {
-						?>
-						<div class="review-grade-widget wppr-col">
-							<div class="cwp-review-chart relative">
-								<div class="cwp-review-percentage" data-percent="<?php echo $review_score; ?>">
-									<span></span></div>
-							</div><!-- end .chart -->
-						</div>
-						<div class="clear"></div>
-						<?php
-					} else {
-						wppr_display_rating_stars( 'style1-widget', $review_object, false );
-					}
-				}
-				?>
+				<?php wppr_layout_get_rating( $review_object, 'stars', 'style1-widget' ); ?>
 				<p class="wppr-style1-buttons">
 					<?php
 					$link = "<a href='{$affiliate_link}' rel='nofollow' target='_blank' class='wppr-bttn'>" . __( $instance['cwp_tp_buynow'], 'wp-product-review' ) . '</a>';

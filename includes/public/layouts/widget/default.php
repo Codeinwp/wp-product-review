@@ -50,22 +50,8 @@ foreach ( $results as $review ) :
 	$review_class = $review_object->get_rating_class();
 	if ( ! empty( $review_score ) ) {
 		?>
-		<div class="review-grade-widget wppr-col">
-			<div class="review-wu-grade-content">
-				<div class="wppr-c100
-				<?php
-				echo esc_attr( ' wppr-p' . $rating ) . ' ' . esc_attr( $review_class );
-				?>
-				">
-					<span><?php echo esc_html( $rating_10 ); ?></span>
-					<div class="wppr-slice">
-						<div class="wppr-bar" style="<?php echo apply_filters( 'wppr_rating_circle_bar_styles', '', $rating ); ?>"></div>
-						<div class="wppr-fill" style="<?php echo apply_filters( 'wppr_rating_circle_fill_styles', '', $rating ); ?>"></div>
-					</div>
-					<div class="wppr-slice-center"></div>
-				</div>
-			</div>
-		</div>
+		<?php wppr_layout_get_rating( $review_object, 'donut', 'style1-widget', 'review-grade-widget wppr-col' ); ?>
+
 	<?php } ?>
 	</li>
 		<?php
