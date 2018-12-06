@@ -1230,7 +1230,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			'reviewCount' => count( $ld['review'] ),
 		);
 
-		return $ld;
+		return apply_filters( 'wppr_schema', $ld, $this );
 	}
 
 	/**
