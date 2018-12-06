@@ -23,9 +23,9 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 	public function __construct() {
 		parent::__construct(
 			'cwp_top_products_widget',
-			__( 'Top Products Widget', 'wp-product-review' ),
+			__( 'Top Products Widget (Deprecated)', 'wp-product-review' ),
 			array(
-				'description' => __( 'This widget displays the top products based on their rating.', 'wp-product-review' ),
+				'description' => __( 'This widget displays the top products based on their rating. This widget is deprecated and will be removed in a future release.', 'wp-product-review' ),
 			)
 		);
 	}
