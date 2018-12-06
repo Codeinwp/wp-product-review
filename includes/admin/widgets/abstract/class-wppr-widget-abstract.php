@@ -161,7 +161,11 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 
 		if ( ! isset( $instance['cwp_tp_post_types'] ) || empty( $instance['cwp_tp_post_types'] ) ) {
 			// backward compatibility with previous versions where you could not select post types
-			$instance['cwp_tp_post_types'] = array( 'post', 'page' );
+			$types	= array( 'post', 'page' );
+			if ( 'wppr_top_reviews_widget' === $this->id_base ) {
+				$types = array( 'post' );
+			}
+			$instance['cwp_tp_post_types'] = $types;
 		}
 
 		if ( isset( $instance['cwp_tp_post_types'] ) && ! empty( $instance['cwp_tp_post_types'] ) ) {

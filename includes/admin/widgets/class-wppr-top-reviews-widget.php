@@ -130,7 +130,7 @@ class WPPR_Top_Reviews_Widget extends WPPR_Widget_Abstract {
 	public function form( $instance ) {
 		$this->adminAssets();
 		if ( ! isset( $instance['title'] ) ) {
-			$instance['title'] = __( 'Top Products', 'wp-product-review' );
+			$instance['title'] = __( 'Top Reviews', 'wp-product-review' );
 		}
 
 		if ( ! isset( $instance['cwp_timespan'] ) || empty( $instance['cwp_timespan'] ) ) {
