@@ -140,7 +140,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		$final_order        = isset( $order['rating'] ) && in_array( $order['rating'], array( 'ASC', 'DESC' ) ) ? " ORDER BY `final_rating` {$order['rating']}" : '';
 
 		$query   = " 
-		SELECT ID, post_date, post_title, `check`, `name`, `price`, `rating`, `comment_rating`, $final_rating as 'final_rating' FROM
+		SELECT ID, post_date, post_title, `check`, `name`, `price`, `rating`, `comment_rating`, FORMAT($final_rating, 2) as 'final_rating' FROM
 		(
         SELECT 
 			ID,
@@ -165,6 +165,9 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
         LIMIT {$limit}
 		) T1 $final_order
         ";
+
+		do_action( 'themeisle_log_event', WPPR_SLUG, sprintf( 'post = %s, limit = %s, filter = %s, order = %s and query = %s', print_r( $post, true ), $limit, print_r( $filter, true ), print_r( $order, true ), $query ), 'debug', __FILE__, __LINE__ );
+
 		$key     = hash( 'sha256', $query );
 		$results = wp_cache_get( $key, 'wppr' );
 		if ( ! is_array( $results ) ) {
