@@ -245,18 +245,17 @@ class WPPR_Admin {
 	 * @access  public
 	 */
 	public static function get_taxonomy_and_terms_for_post_type( $post_type ) {
-		$categories = array();
+		$tax_terms = array();
 		if ( $post_type ) {
 			$categories = get_taxonomies(
-				array( 'object_type' => array( $post_type ), 'hierarchical' => true, ),
+				array( 'object_type' => array( $post_type ), 'hierarchical' => true ),
 				'objects'
 			);
 			$tags = get_taxonomies(
-				array( 'object_type' => array( $post_type ), 'hierarchical' => false, ),
+				array( 'object_type' => array( $post_type ), 'hierarchical' => false ),
 				'objects'
 			);
 			$taxonomies = array_merge( $categories, $tags );
-			error_log(print_r($tags,true));
 			if ( $taxonomies ) {
 				foreach ( $taxonomies as $tax ) {
 					$terms = get_terms(
@@ -268,14 +267,17 @@ class WPPR_Admin {
 					if ( empty( $terms ) ) {
 						continue;
 					}
+					$categories = array();
 					foreach ( $terms as $term ) {
-						$categories[ $term->slug ] = $term->name;
+						// we will prefix the slug with the name of the taxonomy so that we can use it in the query.
+						$categories[ $term->taxonomy . ':' . $term->slug ] = $term->name;
 					}
+					$tax_terms[ $tax->label ] = $categories;
 				}
 			}
 		}
 
-		return $categories;
+		return $tax_terms;
 	}
 
 	/**

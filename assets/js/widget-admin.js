@@ -70,6 +70,15 @@
             });
         }
 
+        $('.wppr-datepicker').each(function(){
+            $(this).datepicker({
+                dateFormat: "yy-mm-dd",
+                changeYear: true,
+                changeMonth: true
+            });
+        });
+
+
     }
 
     function get_taxonomies(params, types, categories){
@@ -85,20 +94,21 @@
                 },
                 success : function(data){
                     if(data.data.categories){
-                        var $group = '<optgroup label="' + types.find('option[value="' + params.selected + '"]').text() + '">';
-                        $.each(data.data.categories, function(slug, name){
-                            $group += '<option value="' + slug + '">' + name + '</option>';
+                        var $all = '';
+                        $.each(data.data.categories, function(tax, arr){
+                            var $group = '<optgroup label="' + tax + '">';
+                            $.each(arr, function(slug, name){
+                                $group += '<option value="' + slug + '">' + name + '</option>';
+                            });
+                            $group += '</optgroup>';
+                            $all += $group;
                         });
-                        $group += '</optgroup>';
-                        categories.append($group);
+                        categories.empty().append($all);
                         categories.trigger("chosen:updated");
                     }
                     $('.wppr-cat-spinner').css('visibility', 'hidden').hide();
                 }
             });
-        }else{
-            categories.find('optgroup[label="' + types.find('option[value="' + params.deselected + '"]').text() + '"]').remove();
-            categories.trigger("chosen:updated");
         }
     }
 

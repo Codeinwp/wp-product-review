@@ -297,6 +297,31 @@ class WPPR {
 			)
 		);
 
+		register_taxonomy(
+			'wppr_tag',
+			'wppr_review',
+			array(
+				'hierarchical'          => false,
+				'labels'                => array(
+					'name'                => __( 'Review Tag', 'wp-product-review' ),
+					'singular_name'       => __( 'Review Tag', 'wp-product-review' ),
+					'search_items'        => __( 'Search Review Tags', 'wp-product-review' ),
+					'all_items'           => __( 'All Review Tags', 'wp-product-review' ),
+					'parent_item'         => __( 'Parent Review Tag', 'wp-product-review' ),
+					'parent_item_colon'   => __( 'Parent Review Tag', 'wp-product-review' ) . ':',
+					'edit_item'           => __( 'Edit Review Tag', 'wp-product-review' ),
+					'update_item'         => __( 'Update Review Tag', 'wp-product-review' ),
+					'add_new_item'        => __( 'Add New Review Tag', 'wp-product-review' ),
+					'new_item_name'       => __( 'New Review Tag', 'wp-product-review' ),
+					'menu_name'           => __( 'Review Tags', 'wp-product-review' ),
+				),
+				'show_admin_column'     => true,
+				'public'                => true,
+				'show_in_menu'          => true,
+				'rewrite'               => array( 'slug' => 'wpprtag', 'with_front' => true ),
+			)
+		);
+
 		flush_rewrite_rules();
 
 	}

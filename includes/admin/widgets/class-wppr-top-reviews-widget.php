@@ -72,19 +72,20 @@ class WPPR_Top_Reviews_Widget extends WPPR_Widget_Abstract {
 		$reviews = new WPPR_Query_Model();
 		$post    = array();
 		if ( isset( $instance['cwp_tp_category'] ) && trim( $instance['cwp_tp_category'] ) != '' ) {
-			$post['category_name'] = $instance['cwp_tp_category'];
+			$array = explode( ':', $instance['cwp_tp_category'] );
+			$post['category_name'] = $array[1];
+			$post['taxonomy_name'] = $array[0];
 		}
 
-		if ( isset( $instance['cwp_timespan'] ) && trim( $instance['cwp_timespan'] ) != '' ) {
-			$min_max = explode( ',', $instance['cwp_timespan'] );
-			$min     = intval( reset( $min_max ) );
-			$max     = intval( end( $min_max ) );
-			if ( 0 === $min && 0 === $max ) {
-				$post['post_date_range_weeks'] = false;
-			} else {
-				$post['post_date_range_weeks'] = array( $min, $max );
-			}
+		$dates  = array('', '');
+		if ( isset( $instance['cwp_timespan_from'] ) && ! empty( $instance['cwp_timespan_from'] ) ) {
+			$dates[0] = $instance['cwp_timespan_from'];
 		}
+		if ( isset( $instance['cwp_timespan_to'] ) && ! empty( $instance['cwp_timespan_to'] ) ) {
+			$dates[1] = $instance['cwp_timespan_to'];
+		}
+		$post['post_date_range'] = $dates;
+
 		if ( isset( $instance['cwp_tp_post_types'] ) && ! empty( $instance['cwp_tp_post_types'] ) ) {
 			$post['post_type'] = $instance['cwp_tp_post_types'];
 		}
@@ -133,8 +134,12 @@ class WPPR_Top_Reviews_Widget extends WPPR_Widget_Abstract {
 			$instance['title'] = __( 'Top Reviews', 'wp-product-review' );
 		}
 
-		if ( ! isset( $instance['cwp_timespan'] ) || empty( $instance['cwp_timespan'] ) ) {
-			$instance['cwp_timespan'] = '0,0';
+		if ( ! isset( $instance['cwp_timespan_from'] ) || empty( $instance['cwp_timespan_from'] ) ) {
+			$instance['cwp_timespan_from'] = '';
+		}
+
+		if ( ! isset( $instance['cwp_timespan_to'] ) || empty( $instance['cwp_timespan_to'] ) ) {
+			$instance['cwp_timespan_to'] = '';
 		}
 
 		$instance = parent::form( $instance );
@@ -160,10 +165,11 @@ class WPPR_Top_Reviews_Widget extends WPPR_Widget_Abstract {
 	 */
 	public function load_admin_assets() {
 		wp_enqueue_script( 'jquery-ui-slider' );
+		wp_enqueue_script( 'jquery-ui-datepicker' );
 		wp_enqueue_style( WPPR_SLUG . '-jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), WPPR_LITE_VERSION );
 
 		$deps        = array();
-		$deps['js']  = array( 'jquery-ui-slider' );
+		$deps['js']  = array( 'jquery-ui-slider', 'jquery-ui-datepicker' );
 		$deps['css'] = array( WPPR_SLUG . '-jqueryui' );
 		return $deps;
 	}
@@ -182,7 +188,8 @@ class WPPR_Top_Reviews_Widget extends WPPR_Widget_Abstract {
 	public function update( $new_instance, $old_instance ) {
 		$instance = parent::update( $new_instance, $old_instance );
 
-		$instance['cwp_timespan'] = ( ! empty( $new_instance['cwp_timespan'] ) ) ? strip_tags( $new_instance['cwp_timespan'] ) : '';
+		$instance['cwp_timespan_from'] = ( ! empty( $new_instance['cwp_timespan_from'] ) ) ? strip_tags( $new_instance['cwp_timespan_from'] ) : '';
+		$instance['cwp_timespan_to'] = ( ! empty( $new_instance['cwp_timespan_to'] ) ) ? strip_tags( $new_instance['cwp_timespan_to'] ) : '';
 		return $instance;
 	}
 
