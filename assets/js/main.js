@@ -5,13 +5,19 @@
 jQuery(document).ready(function ($) {
 
 	$(".wppr-comment-meta-slider").each(function () {
+        var min = 0;
+        var max = 100;
+        if($(this).parent(".wppr-comment-form-meta").hasClass('rtl')){
+            min = -100;
+            max = 0;
+        }
 		var comm_meta_input = $(this).parent(".wppr-comment-form-meta").children("input");
 		$(this).slider({
-			min: 0,
-			max: 100,
+			min: min,
+			max: max,
 			value: 0,
 			slide: function (event, ui) {
-				$(comm_meta_input).val(ui.value / 10);
+				$(comm_meta_input).val(Math.abs(ui.value) / 10);
 			}
 		});
 	});
