@@ -152,21 +152,21 @@ if ( ! function_exists( 'wppr_layout_get_image' ) ) {
 	 * Display the image for the review.
 	 */
 	function wppr_layout_get_image( $review_object, $class_a = '', $class_img = '' ) {
-		$src				= $review_object->get_small_thumbnail();
+		$src                = $review_object->get_small_thumbnail();
 		if ( empty( $src ) ) {
 			return;
 		}
 
-		$links				= $review_object->get_links();
+		$links              = $review_object->get_links();
 		$links              = array_filter( $links );
 		$image_link         = reset( $links );
 		$lightbox           = '';
 		if ( $review_object->get_click() == 'image' ) {
-			$lightbox		= 'data-lightbox="' . esc_url( $src ) . '"';
-			$image_link		= $review_object->get_image();
+			$lightbox       = 'data-lightbox="' . esc_url( $src ) . '"';
+			$image_link     = $review_object->get_image();
 		}
 		?>
-		<a title="<?php echo $review_object->get_name();?>" class="<?php echo $class_a; ?>" href="<?php echo esc_url( $image_link ); ?>" <?php echo $lightbox; ?> rel="nofollow" target="_blank">
+		<a title="<?php echo $review_object->get_name(); ?>" class="<?php echo $class_a; ?>" href="<?php echo esc_url( $image_link ); ?>" <?php echo $lightbox; ?> rel="nofollow" target="_blank">
 			<img
 				src="<?php echo esc_attr( $src ); ?>"
 				alt="<?php echo esc_attr( $review_object->get_image_alt() ); ?>"
@@ -206,9 +206,9 @@ if ( ! function_exists( 'wppr_layout_get_proscons' ) ) {
 		}
 	?>
 		<div class="<?php echo $class_div; ?> <?php echo $type; ?>s">
-			<<?php echo $heading_type;?> class="<?php echo $class_heading; ?>">
+			<<?php echo $heading_type; ?> class="<?php echo $class_heading; ?>">
 				<?php echo esc_html( apply_filters( "wppr_review_{$type}s_text", $review_object->wppr_get_option( "cwppos_{$type}s_text" ) ) ); ?>
-			</<?php echo $heading_type;?>>
+			</<?php echo $heading_type; ?>>
 			<ul>
 				<?php
 				foreach ( $pro_cons as $text ) {
@@ -253,31 +253,31 @@ if ( ! function_exists( 'wppr_layout_get_options_ratings' ) ) {
 	?>
 		<div class="review-wu-bars">
 			<?php
-				foreach ( $review_object->get_options() as $option ) {
-					$class_ul	= $review_object->get_rating_class( $option['value'] ) . apply_filters( 'wppr_option_custom_icon', '' );
+			foreach ( $review_object->get_options() as $option ) {
+				$class_ul   = $review_object->get_rating_class( $option['value'] ) . apply_filters( 'wppr_option_custom_icon', '' );
 			?>
-				<div class="rev-option" data-value="<?php echo $option['value']; ?>">
-					<div class="cwpr_clearfix">
-						<span>
-							<h3><?php echo esc_html( apply_filters( 'wppr_option_name_html', $option['name'] ) ); ?></h3>
-						</span>
-						<span><?php echo esc_html( number_format( ( $option['value'] / 10 ), 1 ) ); ?>/10</span>
-					</div>
-					<ul class="cwpr_clearfix <?php echo $class_ul; ?>">
-						<?php
-							$rating     = round( $option['value'] / 10 );
-							$start_from = is_rtl() ? ( 11 - $rating ) : 1;
-							$stop_at    = is_rtl() ? 10 : $rating;
-							for ( $i = 1; $i <= 10; $i ++ ) {
-						?>
-							<li <?php echo $i >= $start_from && $i <= $stop_at ? ' class="colored"' : ''; ?>></li>
-						<?php
-							}
-						?>
+			<div class="rev-option" data-value="<?php echo $option['value']; ?>">
+			<div class="cwpr_clearfix">
+				<span>
+					<h3><?php echo esc_html( apply_filters( 'wppr_option_name_html', $option['name'] ) ); ?></h3>
+				</span>
+				<span><?php echo esc_html( number_format( ( $option['value'] / 10 ), 1 ) ); ?>/10</span>
+			</div>
+			<ul class="cwpr_clearfix <?php echo $class_ul; ?>">
+				<?php
+					$rating     = round( $option['value'] / 10 );
+					$start_from = is_rtl() ? ( 11 - $rating ) : 1;
+					$stop_at    = is_rtl() ? 10 : $rating;
+				for ( $i = 1; $i <= 10; $i ++ ) {
+					?>
+					<li <?php echo $i >= $start_from && $i <= $stop_at ? ' class="colored"' : ''; ?>></li>
+					<?php
+				}
+					?>
 					</ul>
 				</div>
 			<?php
-				}
+			}
 			?>
 		</div>
 	<?php
@@ -286,28 +286,28 @@ if ( ! function_exists( 'wppr_layout_get_options_ratings' ) ) {
 	?>
 				<div class="wppr-review-grade-options <?php echo is_rtl() ? 'rtl' : ''; ?>">
 	<?php
-				foreach ( $review_object->get_options() as $option ) {
-					$review_option_rating = $option['value'];
+	foreach ( $review_object->get_options() as $option ) {
+		$review_option_rating = $option['value'];
 	?>
-					<div class="wppr-review-grade-option">
-						<div class="wppr-review-grade-option-header">
-							<span><?php echo esc_html( apply_filters( 'wppr_option_name_html', $option['name'] ) ); ?></span>
-							<span><?php echo esc_html( number_format( ( $review_option_rating / 10 ), 1 ) ); ?></span>
-						</div>
-						<div class="wppr-review-grade-option-rating wppr-default <?php echo $review_object->get_rating_class( $review_option_rating ); ?> <?php echo is_rtl() ? 'rtl' : ''; ?>">
-							<span class="<?php echo $review_object->get_rating_class( $review_option_rating ); ?>" style="
-							<?php
-							/**
-							 * Adds min-width for amp support.
-							 */
-							 echo 'width:' . esc_attr( is_rtl() ? ( 100 - $review_option_rating ) : $review_option_rating ) . '%; ';
-							 echo esc_attr( apply_filters( 'wppr_review_option_rating_css', '', $review_option_rating ) );
-							?>
-							"></span>
-						</div>
-					</div><!-- end .wppr-review-grade-option -->
+<div class="wppr-review-grade-option">
+<div class="wppr-review-grade-option-header">
+	<span><?php echo esc_html( apply_filters( 'wppr_option_name_html', $option['name'] ) ); ?></span>
+	<span><?php echo esc_html( number_format( ( $review_option_rating / 10 ), 1 ) ); ?></span>
+</div>
+<div class="wppr-review-grade-option-rating wppr-default <?php echo $review_object->get_rating_class( $review_option_rating ); ?> <?php echo is_rtl() ? 'rtl' : ''; ?>">
+	<span class="<?php echo $review_object->get_rating_class( $review_option_rating ); ?>" style="
 	<?php
-				}
+	/**
+	 * Adds min-width for amp support.
+	 */
+	 echo 'width:' . esc_attr( is_rtl() ? ( 100 - $review_option_rating ) : $review_option_rating ) . '%; ';
+	 echo esc_attr( apply_filters( 'wppr_review_option_rating_css', '', $review_option_rating ) );
+	?>
+	"></span>
+</div>
+</div><!-- end .wppr-review-grade-option -->
+	<?php
+	}
 	?>
 			</div><!-- end .wppr-review-grade-options -->
 	<?php
@@ -316,28 +316,28 @@ if ( ! function_exists( 'wppr_layout_get_options_ratings' ) ) {
 	?>
 			<div class="wppr-review-options">
 	<?php
-				foreach ( $review_object->get_options() as $option ) {
-					$review_option_rating = $option['value'];
+	foreach ( $review_object->get_options() as $option ) {
+		$review_option_rating = $option['value'];
 	?>
-					<div class="wppr-review-option">
-						<div class="wppr-review-option-header">
-							<span><?php echo esc_html( apply_filters( 'wppr_option_name_html', $option['name'] ) ); ?></span>
-						</div>
-						<ul class="wppr-review-option-rating <?php echo apply_filters( 'wppr_option_custom_icon', '' ); ?>">
-							<?php
-								$rating     = round( $option['value'] / 10 );
-								$start_from = is_rtl() ? ( 11 - $rating ) : 1;
-								$stop_at    = is_rtl() ? 10 : $rating;
-								for ( $i = 1; $i <= 10; $i ++ ) {
-							?>
-							<li class="<?php echo $i >= $start_from && $i <= $stop_at ? $review_object->get_rating_class( $option['value'] ) : ' wppr-default';?>"></li>
-							<?php
-								}
-							?>
-						</ul>
-					</div><!-- end .wppr-review-option -->
-				<?php
-				}
+<div class="wppr-review-option">
+<div class="wppr-review-option-header">
+	<span><?php echo esc_html( apply_filters( 'wppr_option_name_html', $option['name'] ) ); ?></span>
+</div>
+<ul class="wppr-review-option-rating <?php echo apply_filters( 'wppr_option_custom_icon', '' ); ?>">
+	<?php
+		$rating     = round( $option['value'] / 10 );
+		$start_from = is_rtl() ? ( 11 - $rating ) : 1;
+		$stop_at    = is_rtl() ? 10 : $rating;
+	for ( $i = 1; $i <= 10; $i ++ ) {
+?>
+<li class="<?php echo $i >= $start_from && $i <= $stop_at ? $review_object->get_rating_class( $option['value'] ) : ' wppr-default'; ?>"></li>
+			<?php
+	}
+	?>
+</ul>
+</div><!-- end .wppr-review-option -->
+	<?php
+	}
 				?>
 			</div><!-- end .wppr-review-options -->
 	<?php
@@ -351,8 +351,8 @@ if ( ! function_exists( 'wppr_layout_get_affiliate_buttons' ) ) {
 	 * Display the affiliate buttons.
 	 */
 	function wppr_layout_get_affiliate_buttons( $review_object ) {
-		$links	= $review_object->get_links();
-		$links	= array_filter( $links );	
+		$links  = $review_object->get_links();
+		$links  = array_filter( $links );
 
 		$multiple_affiliates_class = 'affiliate-button';
 
