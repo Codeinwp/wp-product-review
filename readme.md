@@ -1,9 +1,9 @@
 # WP Product Review Lite #
-**Contributors:** [codeinwp](https://profiles.wordpress.org/codeinwp), [marius2012](https://profiles.wordpress.org/marius2012), [marius_codeinwp](https://profiles.wordpress.org/marius_codeinwp), [hardeepasrani](https://profiles.wordpress.org/hardeepasrani), [themeisle](https://profiles.wordpress.org/themeisle), [Madalin_ThemeIsle](https://profiles.wordpress.org/Madalin_ThemeIsle)  
+**Contributors:** [codeinwp](https://profiles.wordpress.org/codeinwp), [marius2012](https://profiles.wordpress.org/marius2012), [marius_codeinwp](https://profiles.wordpress.org/marius_codeinwp), [hardeepasrani](https://profiles.wordpress.org/hardeepasrani), [themeisle](https://profiles.wordpress.org/themeisle), [Madalin_ThemeIsle](https://profiles.wordpress.org/Madalin_ThemeIsle), [contactashish13](https://profiles.wordpress.org/rozroz)  
 **Tags:**  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin,  google rating, product review, rating, review, star rating, user rating, wp rating, wp review,  google, hreview,rich snippets,seo,snippet  
 **Author URI:** http://themeisle.com  
 **Requires at least:** 3.5  
-**Tested up to:** 4.9  
+**Tested up to:** 5.0  
 **Stable tag:** trunk  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -67,6 +67,31 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 ## Changelog ##
+### 3.4.9 - 2018-10-24  ###
+
+* Add support for review post type in preloader, shortcode and category archive page
+* Fixed issue with certain templates not showing star rating properly
+
+
+### 3.4.8 - 2018-08-02  ###
+
+* Added a new custom image of 50x50 for the custom WPPR widgets
+* New Gutenberg block for WPPR
+
+
+### 3.4.7 - 2018-07-18  ###
+
+* Fixed alignment issue with the price on the first template
+
+
+### 3.4.6 - 2018-07-12  ###
+
+* Added RTL compatibility
+* Allow overriding the Products Templates from the theme with a custom /wppr/ folder
+* Fixed problem with missing alt texts
+* Fixed problem with product image notice overlapping the featured image control
+
+
 ### 3.4.5 - 2018-06-18  ###
 
 * Fixed problem with product price alignment on the first template

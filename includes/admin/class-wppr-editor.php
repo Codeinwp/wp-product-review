@@ -162,6 +162,15 @@ class WPPR_Editor {
 		if ( $is_autosave || $is_revision || ! $is_valid_nonce ) {
 			return;
 		}
+
+		// check if this is a review post type. If it is, then make comment_status as 'open' (but override with a filter) so that
+		// comments can be addeded to this. If this is not done, then review comment feature will not show the ability to add rating in the comment section.
+		if ( 'wppr_review' === get_post_type( $post_id ) ) {
+			remove_action( 'save_post', array( $this, 'editor_save' ) );
+			wp_update_post( array( 'ID' => $post_id, 'comment_status' => apply_filters( 'wppr_cpt_comment_status', 'open' ) ) );
+			add_action( 'save_post', array( $this, 'editor_save' ) );
+		}
+
 		$editor->save();
 	}
 }

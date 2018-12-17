@@ -67,7 +67,7 @@ class WPPR {
 	 */
 	public function __construct() {
 		$this->plugin_name = 'wppr';
-		$this->version     = '3.4.9';
+		$this->version     = '3.4.10';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -136,10 +136,11 @@ class WPPR {
 		$this->loader->add_action( 'load-edit.php', $plugin_admin, 'get_additional_fields' );
 		$this->loader->add_action( 'wppr_settings_section_upsell', $plugin_admin, 'settings_section_upsell', 10, 1 );
 		$this->loader->add_action( 'after_setup_theme', $plugin_admin, 'add_image_size' );
+		$this->loader->add_action( 'wp_ajax_get_categories', $plugin_admin, 'get_categories' );
 
 		$plugin_editor = new WPPR_Editor( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'add_meta_boxes', $plugin_editor, 'set_editor' );
-		$this->loader->add_action( 'save_post', $plugin_editor, 'editor_save' );
+		add_action( 'save_post', array( $plugin_editor, 'editor_save' ) );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_editor, 'load_assets' );
 
 		$plugin_widget_latest = new WPPR_Latest_Products_Widget();
@@ -250,7 +251,6 @@ class WPPR {
 			'description'        => __( 'Reviews from WP Product Review', 'wp-product-review' ),
 			'public'             => true,
 			'publicly_queryable' => true,
-			'exclude_from_search' => true,
 			'show_in_nav_menus' => true,
 			'show_ui'            => true,
 			'show_in_menu'       => true,

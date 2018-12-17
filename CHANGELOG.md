@@ -1,4 +1,25 @@
 
+ ### v3.4.9 - 2018-10-24 
+ **Changes:** 
+ * Add support for review post type in preloader, shortcode and category archive page
+* Fixed issue with certain templates not showing star rating properly
+ 
+ ### v3.4.8 - 2018-08-02 
+ **Changes:** 
+ * Added a new custom image of 50x50 for the custom WPPR widgets
+* New Gutenberg block for WPPR
+ 
+ ### v3.4.7 - 2018-07-18 
+ **Changes:** 
+ * Fixed alignment issue with the price on the first template
+ 
+ ### v3.4.6 - 2018-07-12 
+ **Changes:** 
+ * Added RTL compatibility
+* Allow overriding the Products Templates from the theme with a custom /wppr/ folder
+* Fixed problem with missing alt texts
+* Fixed problem with product image notice overlapping the featured image control
+ 
  ### v3.4.5 - 2018-06-18 
  **Changes:** 
  * Fixed problem with product price alignment on the first template
