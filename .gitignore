@@ -6,3 +6,4 @@ vendor
 bin
 composer.lock
 package-lock.json
+dist
