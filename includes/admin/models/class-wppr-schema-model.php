@@ -116,7 +116,8 @@ class WPPR_Schema_Model extends WPPR_Model_Abstract {
 		ksort( $types );
 
 		$this->types    = $types;
-		set_transient( 'wppr_schema_types_' . implode( '|', $things ), $types, YEAR_IN_SECONDS );
+
+		set_transient( 'wppr_schema_types_' . implode( '|', array_keys( $things ) ), $types, YEAR_IN_SECONDS );
 
 	}
 
