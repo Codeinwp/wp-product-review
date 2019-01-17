@@ -241,8 +241,8 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 			} else {
 				$custom = array();
 			}
-			
-			$custom_fields	= array();
+
+			$custom_fields  = array();
 			if ( $custom ) {
 				foreach ( $custom as $field_name ) {
 					$custom_fields[ $field_name ] = sanitize_text_field( $data[ $field_name ] );

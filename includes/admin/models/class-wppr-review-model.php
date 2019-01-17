@@ -151,7 +151,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 * @access  private
 	 * @var string $type The schema type.
 	 */
-	private $type	= 'Product';
+	private $type   = 'Product';
 
 	/**
 	 * The schema type custom fields.
@@ -1394,7 +1394,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 * Get a particular custom field value to display in the template.
 	 */
 	public function get_custom_field( $key ) {
-		$fields	= $this->custom_fields;
+		$fields = $this->custom_fields;
 		if ( $fields && isset( $fields[ $key ] ) ) {
 			return $fields[ $key ];
 		}
@@ -1405,7 +1405,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 * Populate the JSON LD schema for the schema type.
 	 */
 	private function populate_json_for_schema( $ld ) {
-		$fields	= $this->get_custom_fields();
+		$fields = $this->get_custom_fields();
 		if ( $fields ) {
 			foreach ( $fields as $key => $value ) {
 				// we do not want to overwrite anything that is already set and we don't want to set empty values.

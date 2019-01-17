@@ -95,9 +95,9 @@ class WPPR_Autoloader {
 		$directory = new RecursiveDirectoryIterator( static::$path_top . DIRECTORY_SEPARATOR . 'includes', RecursiveDirectoryIterator::SKIP_DOTS );
 
 		if ( is_null( static::$file_iterator ) ) {
-			$Iterator              = new RecursiveIteratorIterator( $directory );
-			$Regex                 = new RegexIterator( $Iterator, '/^.+\.php$/i', RecursiveRegexIterator::MATCH );
-			static::$file_iterator = iterator_to_array( $Regex, false );
+			$iterator              = new RecursiveIteratorIterator( $directory );
+			$regex                 = new RegexIterator( $iterator, '/^.+\.php$/i', RecursiveRegexIterator::MATCH );
+			static::$file_iterator = iterator_to_array( $regex, false );
 		}
 
 		$filename = 'class-' . str_replace( '_', '-', strtolower( $class_name ) ) . static::$file_ext;

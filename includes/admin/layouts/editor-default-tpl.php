@@ -10,7 +10,7 @@
  * @since       3.0.0
  */
 
-$schema	= new WPPR_Schema_Model( array( 'CreativeWork' => array( 'Movie', 'Book', 'Course', 'Diet', 'Game', 'Painting' ), 'Thing' => array( 'Product' ) ) );
+$schema = new WPPR_Schema_Model( array( 'CreativeWork' => array( 'Movie', 'Book', 'Course', 'Diet', 'Game', 'Painting' ), 'Thing' => array( 'Product' ) ) );
 
 $review = $model->review;
 if ( empty( $review ) ) {
@@ -63,15 +63,15 @@ $check = $review->is_active() ? 'yes' : 'no';
 						array(
 							'name'        => 'wppr-editor-review-type',
 							'id'        => 'wppr-editor-review-type',
-							'value'		=> $review->get_type(),
-							'options'	=> array_combine(
+							'value'     => $review->get_type(),
+							'options'   => array_combine(
 								array_keys( $schema_types ),
 								array_keys( $schema_types )
 							),
 						)
 					);
 					?>
-					<span class="wppr-review-type-fields-toggle"><a href="#"><?php _e( 'schema.org fields', 'wp-product-review' );?> <span>+</span></a></span>
+					<span class="wppr-review-type-fields-toggle"><a href="#"><?php _e( 'schema.org fields', 'wp-product-review' ); ?> <span>+</span></a></span>
 				</li>
 
 				<div class="wppr-review-type-fields hide"></div>
@@ -243,8 +243,8 @@ $check = $review->is_active() ? 'yes' : 'no';
 						?>
 					</li>
 					<?php
-}
-?>
+				}
+				?>
 				<?php
 				if ( ! empty( $links ) ) {
 					if ( count( $links ) > 1 ) {
@@ -430,7 +430,7 @@ $check = $review->is_active() ? 'yes' : 'no';
 </div>
 
 <script id="wppr-review-type-fields-template" type="text/template" 
-	data-json='<?php echo str_replace( "'", '\"', json_encode( $schema_types ) );?>'
+	data-json='<?php echo str_replace( "'", '\"', json_encode( $schema_types ) ); ?>'
 	data-type='<?php echo $review->get_type(); ?>'
 	data-custom-fields='<?php echo json_encode( $review->get_custom_fields() ); ?>'
 >

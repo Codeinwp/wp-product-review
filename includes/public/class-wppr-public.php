@@ -591,13 +591,13 @@ class Wppr_Public {
 		$return = '';
 		$return .= '<div class="user-comments-grades">';
 		foreach ( $options as $k => $option ) {
-			$intGrade = intval( $option['value'] * 10 );
+			$int_grade = intval( $option['value'] * 10 );
 			$return   .= '<div class="comment-meta-option">
                             <p class="comment-meta-option-name">' . $option['name'] . '</p>
                             <p class="comment-meta-option-grade">' . $option['value'] . '</p>
                             <div class="cwpr_clearfix"></div>
-                            <div class="comment-meta-grade-bar ' . $this->review->get_rating_class( $intGrade ) . '">
-                                <div class="comment-meta-grade" style="width: ' . $intGrade . '%"></div>
+                            <div class="comment-meta-grade-bar ' . $this->review->get_rating_class( $int_grade ) . '">
+                                <div class="comment-meta-grade" style="width: ' . $int_grade . '%"></div>
                             </div><!-- end .comment-meta-grade-bar -->
                         </div><!-- end .comment-meta-option -->
 					';
