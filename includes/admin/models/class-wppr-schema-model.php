@@ -185,7 +185,8 @@ class WPPR_Schema_Model extends WPPR_Model_Abstract {
 			if ( count( $data_types ) > 1 ) {
 				$data_types     = array_values( wp_list_pluck( $data_types, '@id' ) );
 			}
-			if ( empty( $common = array_intersect( $this->data_types_allowed, $data_types ) ) ) {
+			$common = array_intersect( $this->data_types_allowed, $data_types );
+			if ( empty( $common ) ) {
 				$extracted = null;
 			}
 		}
