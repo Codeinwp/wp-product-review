@@ -101,7 +101,7 @@ class WPPR_Schema_Model extends WPPR_Model_Abstract {
 					continue;
 				}
 
-				$fields = [];
+				$fields = array();
 				foreach ( $attributes as $attribute ) {
 					$fields[ str_replace( 'schema:', '', $attribute['@id'] ) ]  = array(
 						'desc'      => $attribute['rdfs:comment'],
