@@ -1416,7 +1416,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 				}
 			}
 		}
-		return apply_filters( 'wppr_schema', $ld, $this )
+		return apply_filters( 'wppr_schema', $ld, $this );
 	}
 
 }
