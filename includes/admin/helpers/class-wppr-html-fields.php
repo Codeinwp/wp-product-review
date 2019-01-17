@@ -104,6 +104,10 @@ class WPPR_Html_Fields {
 		}
 		$output = '<input type="text" ' . $disabled . ' name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( $args['id'] ) . '" class="' . $class . '"   value="' . esc_attr( $args['value'] ) . '" placeholder="' . esc_attr( $args['placeholder'] ) . '"  />';
 
+		if ( isset( $args['desc'] ) ) {
+			$output .= '<p class="desc">' . $args['desc'] . '</p>';
+		}
+
 		return apply_filters( 'wppr_field', $output, $args );
 	}
 
@@ -164,7 +168,7 @@ class WPPR_Html_Fields {
 		foreach ( $args['options'] as $ov => $op ) {
 			$options[ esc_attr( $ov ) ] = esc_html( $op );
 		}
-		$output = '<select class="' . $class . '" name="' . esc_attr( $args['name'] ) . '"' . $disabled . ' > ';
+		$output = '<select class="' . $class . '" id="' . esc_attr( $args['name'] ) . '" name="' . esc_attr( $args['name'] ) . '"' . $disabled . ' > ';
 		foreach ( $options as $k => $v ) {
 			$output .= "<option value='" . $k . "' " . ( ( isset( $args['value'] ) && $args['value'] == $k ) ? 'selected' : '' ) . '>' . $v . '</option>';
 		}

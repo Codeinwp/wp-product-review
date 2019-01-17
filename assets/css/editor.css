@@ -129,3 +129,23 @@ label.wppr-upsell-label {
 	margin-top: -42px;
 	margin-right: 10px;
 }
+
+
+.wppr-review-type-fields {
+	display: block;
+}
+
+.wppr-review-type-fields.hide {
+	display: none;
+}
+
+.wppr-review-type-fields-toggle {
+	cursor: pointer;
+}
+
+.wppr-review-type-fields-toggle a,
+.wppr-review-type-fields-toggle a:visited
+.wppr-review-type-fields-toggle a:hover {
+	text-decoration: none;
+	outline: none;
+}

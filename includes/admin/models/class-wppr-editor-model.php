@@ -234,6 +234,24 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 			$review->set_pros( $pros );
 			$review->set_cons( $cons );
 			$review->set_options( $options );
+
+			$custom           = isset( $data['wppr-editor-review-type-field'] ) ? $data['wppr-editor-review-type-field'] : array();
+			if ( is_array( $custom ) ) {
+				$custom = array_map( 'sanitize_text_field', $custom );
+			} else {
+				$custom = array();
+			}
+			
+			$custom_fields	= array();
+			if ( $custom ) {
+				foreach ( $custom as $field_name ) {
+					$custom_fields[ $field_name ] = sanitize_text_field( $data[ $field_name ] );
+				}
+			}
+
+			$review->set_type( $data['wppr-editor-review-type'] );
+			$review->set_custom_fields( $custom_fields );
+
 			$this->wppr_set_option( 'last_review', $review->get_ID() );
 		} else {
 			$review->deactivate();

@@ -10,6 +10,8 @@
  * @since       3.0.0
  */
 
+$schema	= new WPPR_Schema_Model( array( 'CreativeWork' => array( 'Movie', 'Book', 'Course', 'Diet', 'Game', 'Painting' ), 'Thing' => array( 'Product' ) ) );
+
 $review = $model->review;
 if ( empty( $review ) ) {
 	return;
@@ -53,6 +55,27 @@ $check = $review->is_active() ? 'yes' : 'no';
 		<?php do_action( 'wppr_editor_details_before', $model->post ); ?>
 		<div class="wppr-review-details-fields wppr-review-fieldset">
 			<ul>
+				<li>
+					<label for="wppr-editor-review-type"><?php _e( 'Review Type', 'wp-product-review' ); ?></label>
+					<?php
+					$schema_types = $schema->get_types();
+					echo $html_helper->select(
+						array(
+							'name'        => 'wppr-editor-review-type',
+							'id'        => 'wppr-editor-review-type',
+							'value'		=> $review->get_type(),
+							'options'	=> array_combine(
+								array_keys( $schema_types ),
+								array_keys( $schema_types )
+							),
+						)
+					);
+					?>
+					<span class="wppr-review-type-fields-toggle"><a href="#"><?php _e( 'schema.org fields', 'wp-product-review' );?> <span>+</span></a></span>
+				</li>
+
+				<div class="wppr-review-type-fields hide"></div>
+
 				<?php
 				$templates = apply_filters( 'wppr_review_templates', array( 'default', 'style1', 'style2' ) );
 				if ( $templates ) {
@@ -405,3 +428,16 @@ $check = $review->is_active() ? 'yes' : 'no';
 
 	<?php do_action( 'wppr_editor_after', $model->post ); ?>
 </div>
+
+<script id="wppr-review-type-fields-template" type="text/template" 
+	data-json='<?php echo str_replace( "'", '\"', json_encode( $schema_types ) );?>'
+	data-type='<?php echo $review->get_type(); ?>'
+	data-custom-fields='<?php echo json_encode( $review->get_custom_fields() ); ?>'
+>
+	<li class="wppr-review-type-field">
+		<label for="wppr-editor-review-type-field">#name#</label>
+		<input type="text" name="#name#" value="#value#">
+		<input type="hidden" name="wppr-editor-review-type-field[]" value="#name#">
+		<p class="desc">#desc#</p>
+	</li>
+</script>
