@@ -45,6 +45,9 @@ class WPPR_Gutenberg {
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_gutenberg_scripts' ) );
 		add_action( 'init', array( $this, 'register_endpoints' ) );
 		add_action( 'rest_api_init', array( $this, 'update_posts_endpoints' ) );
+		add_filter( 'rest_post_query', array( $this, 'post_meta_request_params' ), 99, 2 );
+		add_filter( 'rest_page_query', array( $this, 'post_meta_request_params' ), 99, 2 );
+		add_filter( 'rest_wppr_review_query', array( $this, 'post_meta_request_params' ), 99, 2 );
 	}
 
 	/**
@@ -52,16 +55,35 @@ class WPPR_Gutenberg {
 	 */
 	public function enqueue_gutenberg_scripts() {
 		if ( WPPR_CACHE_DISABLED ) {
-			$version = filemtime( WPPR_URL . '/includes/gutenberg/dist/block.js' );
+			$version = filemtime( WPPR_URL . '/includes/gutenberg/dist/sidebar.js' );
 		} else {
 			$version = $this->version;
 		}
 
+		if ( defined( 'WPPR_PRO_VERSION' ) ) {
+			$isPro = true;
+		} else {
+			$isPro = false;
+		}
+
+		$model = new WPPR_Query_Model();
+		$length = $model->wppr_get_option( 'cwppos_option_nr' );
+
 		// Enqueue the bundled block JS file
-		wp_enqueue_script( 'wppr-gutenberg-block-js', WPPR_URL . '/includes/gutenberg/dist/block.js', array( 'wp-i18n', 'wp-edit-post', 'wp-element', 'wp-editor', 'wp-components', 'wp-data', 'wp-plugins', 'wp-edit-post', 'wp-api' ), $version );
+		wp_enqueue_script( 'wppr-gutenberg-block-js', WPPR_URL . '/includes/gutenberg/dist/sidebar.js', array( 'wp-i18n', 'wp-edit-post', 'wp-element', 'wp-editor', 'wp-components', 'wp-compose', 'wp-data', 'wp-plugins', 'wp-edit-post', 'wp-api' ), $version );
+
+		wp_localize_script(
+			'wppr-gutenberg-block-js',
+			'wpprguten',
+			array(
+				'isPro' => $isPro,
+				'path'  => WPPR_URL,
+				'length' => $length,
+			)
+		);
 
 		// Enqueue editor block styles
-		wp_enqueue_style( 'wppr-gutenberg-block-css', WPPR_URL . '/includes/gutenberg/dist/block.css', '', $version );
+		wp_enqueue_style( 'wppr-gutenberg-block-css', WPPR_URL . '/includes/gutenberg/dist/sidebar.css', '', $version );
 	}
 
 	/**
@@ -170,6 +192,18 @@ class WPPR_Gutenberg {
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Allow querying posts by meta in REST API
+	 */
+	public function post_meta_request_params( $args, $request ) {
+		$args += array(
+			'meta_key'   => $request['meta_key'],
+			'meta_value' => $request['meta_value'],
+			'meta_query' => $request['meta_query'],
+		);
+		return $args;
 	}
 
 }
