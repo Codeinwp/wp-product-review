@@ -23,7 +23,6 @@
 		<div class="wppr-review-head<?php echo ( $review_pros && $review_cons ) ? ' wppr-review-with-pros-cons' : ''; ?><?php echo ( $review_image ) ? ' wppr-review-with-image' : ''; ?>">
 			<div class="wppr-review-rating <?php echo is_rtl() ? 'rtl' : ''; ?>">
 				<?php wppr_layout_get_rating( $review_object, 'number', 'style2' ); ?>
-				
 				<?php wppr_layout_get_image( $review_object, 'wppr-review-product-image wppr-default-img', 'wppr-product-image' ); ?>
 
 				<div class="clearfix"></div>
