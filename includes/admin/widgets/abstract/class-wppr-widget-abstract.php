@@ -59,7 +59,11 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 		$instance['no_items'] = apply_filters( 'widget_content', $instance['no_items'] );
 
 		if ( ! isset( $instance['cwp_tp_post_types'] ) || empty( $instance['cwp_tp_post_types'] ) ) {
-			$instance['cwp_tp_post_types'] = array( 'post', 'page' );
+			$types  = array( 'post', 'page' );
+			if ( 'wppr_top_reviews_widget' === $this->id_base ) {
+				$types = array( 'post' );
+			}
+			$instance['cwp_tp_post_types'] = $types;
 		}
 
 		$instance['cwp_tp_post_types'] = apply_filters( 'widget_content', $instance['cwp_tp_post_types'] );
@@ -161,16 +165,24 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 
 		if ( ! isset( $instance['cwp_tp_post_types'] ) || empty( $instance['cwp_tp_post_types'] ) ) {
 			// backward compatibility with previous versions where you could not select post types
-			$instance['cwp_tp_post_types'] = array( 'post', 'page' );
+			$types  = array( 'post', 'page' );
+			if ( 'wppr_top_reviews_widget' === $this->id_base ) {
+				$types = array( 'post' );
+			}
+			$instance['cwp_tp_post_types'] = $types;
 		}
 
 		if ( isset( $instance['cwp_tp_post_types'] ) && ! empty( $instance['cwp_tp_post_types'] ) ) {
 			$categories = array();
 			foreach ( $instance['cwp_tp_post_types'] as $type ) {
-				$post_type = get_post_type_object( $type );
-				$cats      = WPPR_Admin::get_category_for_post_type( $type );
-				if ( $cats ) {
-					$categories[ $post_type->label ] = $cats;
+				if ( 'wppr_top_reviews_widget' === $this->id_base ) {
+					$categories = WPPR_Admin::get_taxonomy_and_terms_for_post_type( $type );
+				} else {
+					$post_type = get_post_type_object( $type );
+					$cats      = WPPR_Admin::get_category_for_post_type( $type );
+					if ( $cats ) {
+						$categories[ $post_type->label ] = $cats;
+					}
 				}
 			}
 			$instance['cwp_tp_all_categories'] = $categories;
@@ -233,7 +245,7 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 				WPPR_SLUG . '-widget-script',
 				'wppr_widget',
 				array(
-					'names' => array( 'cwp_top_products_widget', 'cwp_latest_products_widget' ),
+					'names' => array( 'cwp_top_products_widget', 'cwp_latest_products_widget', 'wppr_top_reviews_widget' ),
 					'ajax'  => array(
 						'nonce' => wp_create_nonce( WPPR_SLUG ),
 					),
