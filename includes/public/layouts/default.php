@@ -104,25 +104,25 @@ $rating_10  = round( $review_object->get_rating(), 0 ) / 10;
 							</div><!-- end .pros -->
 							<?php
 						endif;
-if ( ! empty( $cons ) ) :
-	?>
+						if ( ! empty( $cons ) ) :
+							?>
 	<div class="cons">
 <h2>
-	<?php
-	echo esc_html(
-		apply_filters(
-			'wppr_review_cons_text',
-			$review_object->wppr_get_option(
-				'cwppos_cons_text'
-			)
-		)
-	);
-	?>
+							<?php
+							echo esc_html(
+								apply_filters(
+									'wppr_review_cons_text',
+									$review_object->wppr_get_option(
+										'cwppos_cons_text'
+									)
+								)
+							);
+							?>
 </h2>
 <ul>
-	<?php
-	foreach ( $cons as $con ) {
-		?>
+							<?php
+							foreach ( $cons as $con ) {
+								?>
 
 <li><?php echo esc_html( $con ); ?></li>
 
@@ -130,7 +130,7 @@ if ( ! empty( $cons ) ) :
 		</ul>
 	</div>
 
-<?php endif; ?>
+						<?php endif; ?>
 					</div><!-- end .review-wu-right -->
 				<?php endif; ?>
 			</div><!-- end .review-wu-content -->
