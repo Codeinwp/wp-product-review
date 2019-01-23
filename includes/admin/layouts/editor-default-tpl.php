@@ -220,8 +220,8 @@ $check = $review->is_active() ? 'yes' : 'no';
 						?>
 					</li>
 					<?php
-}
-?>
+				}
+				?>
 				<?php
 				if ( ! empty( $links ) ) {
 					if ( count( $links ) > 1 ) {

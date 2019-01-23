@@ -30,7 +30,7 @@ const extractConfig = {
 
 module.exports = {
   entry: {
-    './dist/block' : './src/block.js',
+    './dist/sidebar' : './src/sidebar.js',
   },
   output: {
     path: path.resolve( __dirname ),

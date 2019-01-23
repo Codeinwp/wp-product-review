@@ -43,8 +43,8 @@ Template 2
 }
 
 .wppr-template-2 .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating.rtl {
+	padding-right: 0;
 	padding-left: 30px;
-	padding-right: 0px;
 }
 
 .wppr-template-2 .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating-grade,
@@ -56,7 +56,6 @@ Template 2
 .wppr-template-2.rtl .wppr-review-head.wppr-review-with-pros-cons .wppr-review-rating-image {
 	float: right;
 }
-
 
 .wppr-template-2 .wppr-review-pros,
 .wppr-template-2 .wppr-review-cons {
@@ -203,8 +202,8 @@ Template 2
 
 .wppr-template-2.rtl .affiliate-button a span {
 	margin-right: -10px;
-	padding-right: 20px;
 	margin-left: auto;
+	padding-right: 20px;
 	padding-left: auto;
 }
 
