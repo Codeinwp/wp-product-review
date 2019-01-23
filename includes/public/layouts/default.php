@@ -141,8 +141,7 @@ if ( ! empty( $cons ) ) :
 		if ( ! empty( $title ) && ! empty( $link ) ) {
 			?>
 			<div class="<?php echo esc_attr( $multiple_affiliates_class ); ?>">
-				<a href="<?php echo esc_url( $link ); ?>" rel="nofollow"
-				   target="_blank"><span><?php echo esc_html( $title ); ?></span> </a>
+				<a href="<?php echo esc_url( $link ); ?>" rel="nofollow noopener" target="_blank"><span><?php echo esc_html( $title ); ?></span> </a>
 			</div><!-- end .affiliate-button -->
 			<?php
 		}

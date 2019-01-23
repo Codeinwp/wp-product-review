@@ -49,7 +49,7 @@
 				if ( ! empty( $review_image ) ) {
 					?>
 					<a href="<?php echo esc_url( $review_image_link ); ?>" <?php echo $lightbox; ?>
-					   class="wppr-review-product-image wppr-default-img" rel="nofollow" target="_blank"><img
+					   class="wppr-review-product-image wppr-default-img" rel="nofollow noopener" target="_blank"><img
 								src="<?php echo esc_attr( $review_image ); ?>"
 								alt="<?php echo esc_attr( $review_object->get_image_alt() ); ?>" class="wppr-product-image"/></a>
 				<?php } ?>
@@ -137,7 +137,7 @@
 		if ( ! empty( $title ) && ! empty( $link ) ) {
 			?>
 			<div class="<?php echo esc_attr( $multiple_affiliates_class ); ?>">
-				<a href="<?php echo esc_url( $link ); ?>" rel="nofollow"
+				<a href="<?php echo esc_url( $link ); ?>" rel="nofollow noopener"
 				   target="_blank"><span><?php echo esc_html( $title ); ?></span> </a>
 			</div><!-- end .affiliate-button -->
 			<?php
