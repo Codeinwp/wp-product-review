@@ -58,7 +58,7 @@ class WPPR_Autoloader {
 	 * @access  protected
 	 * @var     array $excluded_files The excluded files list.
 	 */
-	protected static $excluded_files = array();
+	protected static $excluded_files = array( 'node_modules' );
 
 	/**
 	 * A placeholder to hold the file iterator so that directory traversal is only
@@ -93,15 +93,25 @@ class WPPR_Autoloader {
 		}
 
 		$directory = new RecursiveDirectoryIterator( static::$path_top . DIRECTORY_SEPARATOR . 'includes', RecursiveDirectoryIterator::SKIP_DOTS );
+		require_once 'class-wppr-recursive-filter.php';
 
 		if ( is_null( static::$file_iterator ) ) {
-			$Iterator              = new RecursiveIteratorIterator( $directory );
+			$Iterator              = new RecursiveIteratorIterator(
+				new Wppr_Recursive_Filter(
+					$directory,
+					array(
+						'WPPR_Autoloader',
+						'filter_excluded_files',
+					)
+				)
+			);
 			$Regex                 = new RegexIterator( $Iterator, '/^.+\.php$/i', RecursiveRegexIterator::MATCH );
 			static::$file_iterator = iterator_to_array( $Regex, false );
 		}
 
 		$filename = 'class-' . str_replace( '_', '-', strtolower( $class_name ) ) . static::$file_ext;
 		foreach ( static::$file_iterator as $file ) {
+
 			if ( strtolower( $file->getFileName() ) === strtolower( $filename ) && is_readable( $file->getPathName() ) ) {
 				require( $file->getPathName() );
 
@@ -191,5 +201,22 @@ class WPPR_Autoloader {
 	 */
 	public static function define_namespaces( $namespaces = array() ) {
 		static::$namespaces = $namespaces;
+	}
+
+	/**
+	 * Utility to filter out the excluded directories.
+	 *
+	 * @param \SplFileInfo                $file The file info array.
+	 * @param string                      $key File key.
+	 * @param \RecursiveDirectoryIterator $iterator The recursive directory iterator.
+	 *
+	 * @return bool
+	 */
+	public static function filter_excluded_files( \SplFileInfo $file, $key, \RecursiveDirectoryIterator $iterator ) {
+		if ( ! in_array( $file->getFilename(), static::$excluded_files ) ) {
+			return true;
+		}
+
+		return false;
 	}
 }
