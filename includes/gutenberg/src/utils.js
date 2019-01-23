@@ -10,3 +10,16 @@ export const reverseObject = ( object ) => {
 	}
 	return newObject;
 }
+
+export const renameKey = ( obj, oldName, newName ) => {
+	if ( typeof obj === 'string' ) {
+		newName = oldName;
+		oldName = obj;
+		obj = this;
+	}
+	if ( obj.hasOwnProperty( oldName ) ) {
+		obj[newName] = obj[oldName];
+		delete obj[oldName];
+	}
+	return obj;
+};
