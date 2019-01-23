@@ -64,8 +64,7 @@
 .user-comments-grades {
 	float: right;
 	width: 200px;
-	margin-top: 25px;
-	margin-left: 15px;
+	margin: 0 0 20px 15px;
 	padding: 10px;
 	border: 1px solid #ddd;
 	border-radius: 5px;
@@ -139,4 +138,13 @@
 	border-radius: 32px;
 	background: #ebedef;
 	box-shadow: none;
+}
+
+/*Responsiveness in comments area*/
+@media (max-width: 767px) {
+	.user-comments-grades {
+		float: none;
+		width: 100%;
+		margin: 0 0 20px 0;
+	}
 }

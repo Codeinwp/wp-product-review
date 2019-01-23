@@ -140,7 +140,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		$final_order        = isset( $order['rating'] ) && in_array( $order['rating'], array( 'ASC', 'DESC' ) ) ? " ORDER BY `final_rating` {$order['rating']}" : '';
 
 		$query   = " 
-		SELECT ID, post_date, post_title, `check`, `name`, `price`, `rating`, `comment_rating`, $final_rating as 'final_rating' FROM
+		SELECT ID, post_date, post_title, `check`, `name`, `price`, `rating`, `comment_rating`, FORMAT($final_rating, 2) as 'final_rating' FROM
 		(
         SELECT 
 			ID,
@@ -165,6 +165,9 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
         LIMIT {$limit}
 		) T1 $final_order
         ";
+
+		do_action( 'themeisle_log_event', WPPR_SLUG, sprintf( 'post = %s, limit = %s, filter = %s, order = %s and query = %s', print_r( $post, true ), $limit, print_r( $filter, true ), print_r( $order, true ), $query ), 'debug', __FILE__, __LINE__ );
+
 		$key     = hash( 'sha256', $query );
 		$results = wp_cache_get( $key, 'wppr' );
 		if ( ! is_array( $results ) ) {
@@ -195,6 +198,9 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		}
 
 		$category   = 'yes' === $this->wppr_get_option( 'wppr_cpt' ) ? 'wppr_category' : 'category';
+		if ( isset( $post['taxonomy_name'] ) ) {
+			$category = $post['taxonomy_name'];
+		}
 		$sub_selection_query = "INNER JOIN {$this->db->term_relationships } wtr ON wtr.object_id = p.ID
 	            INNER JOIN {$this->db->term_taxonomy} wtt on wtt.term_taxonomy_id = wtr.term_taxonomy_id AND wtt.taxonomy = '$category'
 	            INNER JOIN {$this->db->terms} wt
@@ -296,6 +302,17 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			$sub_query_conditions .= $this->db->prepare( ' AND p.post_date >= DATE_ADD(now(), INTERVAL %d WEEK) AND p.post_date <= DATE_ADD(now(), INTERVAL %d WEEK) ', $min, $max );
 		}
 
+		if ( isset( $post['post_date_range'] ) && ! is_bool( $post['post_date_range'] ) && is_array( $post['post_date_range'] ) ) {
+			$min                   = reset( $post['post_date_range'] );
+			$max                   = end( $post['post_date_range'] );
+			if ( ! empty( $min ) ) {
+				$sub_query_conditions .= $this->db->prepare( ' AND p.post_date >= %s ', $min );
+			}
+			if ( ! empty( $max ) ) {
+				$sub_query_conditions .= $this->db->prepare( ' AND p.post_date <= %s ', $max );
+			}
+		}
+
 		$sub_query_conditions       .= apply_filters( 'wppr_where_sub_clause', '', $post );
 
 		return $sub_query_conditions;
@@ -386,5 +403,44 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 				'rating' => $rating,
 			)
 		);
+	}
+
+	/**
+	 * Utility method to find all reviews.
+	 *
+	 * @since   ?
+	 * @access  public
+	 *
+	 * @return array
+	 */
+	public function find_all_reviews() {
+		$type   = apply_filters( 'wppr_find_all_reviews_post_types', ( 'yes' === $this->wppr_get_option( 'wppr_cpt' ) ? array( 'wppr_review' ) : array( 'post', 'page' ) ) );
+		$query  = new WP_Query(
+			apply_filters(
+				'wppr_find_all_reviews', array(
+					'post_type'     => $type,
+					'post_status'   => 'publish',
+					'fields'        => 'ids',
+					'nopaging'      => true,
+					'posts_per_page'   => 300,
+					'meta_query'    => array(
+						array(
+							'key'   => 'cwp_meta_box_check',
+							'value' => 'Yes',
+						),
+					),
+				)
+			)
+		);
+
+		$reviews    = array();
+		if ( $query->have_posts() ) {
+			while ( $query->have_posts() ) {
+				$query->the_post();
+				$reviews[]  = $query->post;
+			}
+			wp_reset_postdata();
+		}
+		return $reviews;
 	}
 }

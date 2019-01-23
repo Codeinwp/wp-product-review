@@ -1,31 +1,31 @@
 <?php
 /**
- * The WPPR Top Widget Class.
+ * The WPPR Top Reviews Widget Class.
  *
  * @package WPPR
  * @subpackage Widget
  * @copyright   Copyright (c) 2017, Bogdan Preda
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since 3.0.0
+ * @since 3.1.1
  */
 
 /**
- * Class WPPR_Top_Products_Widget
+ * Class WPPR_Top_Reviews_Widget
  */
-class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
+class WPPR_Top_Reviews_Widget extends WPPR_Widget_Abstract {
 
 	/**
-	 * WPPR_Top_Products_Widget constructor.
+	 * WPPR_Top_Reviews_Widget constructor.
 	 *
 	 * @since   3.0.0
 	 * @access  public
 	 */
 	public function __construct() {
 		parent::__construct(
-			'cwp_top_products_widget',
-			__( 'Top Products Widget (Deprecated)', 'wp-product-review' ),
+			'wppr_top_reviews_widget',
+			__( 'Top Review Widget', 'wp-product-review' ),
 			array(
-				'description' => __( 'This widget displays the top products based on their rating. This widget is deprecated and will be removed in a future release.', 'wp-product-review' ),
+				'description' => __( 'This widget displays the top reviews based on the rating.', 'wp-product-review' ),
 			)
 		);
 	}
@@ -37,7 +37,7 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 	 * @access  public
 	 */
 	public function register() {
-		register_widget( 'WPPR_Top_Products_Widget' );
+		register_widget( 'WPPR_Top_Reviews_Widget' );
 	}
 
 	/**
@@ -72,19 +72,20 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 		$reviews = new WPPR_Query_Model();
 		$post    = array();
 		if ( isset( $instance['cwp_tp_category'] ) && trim( $instance['cwp_tp_category'] ) != '' ) {
-			$post['category_name'] = $instance['cwp_tp_category'];
+			$array = explode( ':', $instance['cwp_tp_category'] );
+			$post['category_name'] = $array[1];
+			$post['taxonomy_name'] = $array[0];
 		}
 
-		if ( isset( $instance['cwp_timespan'] ) && trim( $instance['cwp_timespan'] ) != '' ) {
-			$min_max = explode( ',', $instance['cwp_timespan'] );
-			$min     = intval( reset( $min_max ) );
-			$max     = intval( end( $min_max ) );
-			if ( 0 === $min && 0 === $max ) {
-				$post['post_date_range_weeks'] = false;
-			} else {
-				$post['post_date_range_weeks'] = array( $min, $max );
-			}
+		$dates  = array('', '');
+		if ( isset( $instance['cwp_timespan_from'] ) && ! empty( $instance['cwp_timespan_from'] ) ) {
+			$dates[0] = $instance['cwp_timespan_from'];
 		}
+		if ( isset( $instance['cwp_timespan_to'] ) && ! empty( $instance['cwp_timespan_to'] ) ) {
+			$dates[1] = $instance['cwp_timespan_to'];
+		}
+		$post['post_date_range'] = $dates;
+
 		if ( isset( $instance['cwp_tp_post_types'] ) && ! empty( $instance['cwp_tp_post_types'] ) ) {
 			$post['post_type'] = $instance['cwp_tp_post_types'];
 		}
@@ -130,11 +131,15 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 	public function form( $instance ) {
 		$this->adminAssets();
 		if ( ! isset( $instance['title'] ) ) {
-			$instance['title'] = __( 'Top Products', 'wp-product-review' );
+			$instance['title'] = __( 'Top Reviews', 'wp-product-review' );
 		}
 
-		if ( ! isset( $instance['cwp_timespan'] ) || empty( $instance['cwp_timespan'] ) ) {
-			$instance['cwp_timespan'] = '0,0';
+		if ( ! isset( $instance['cwp_timespan_from'] ) || empty( $instance['cwp_timespan_from'] ) ) {
+			$instance['cwp_timespan_from'] = '';
+		}
+
+		if ( ! isset( $instance['cwp_timespan_to'] ) || empty( $instance['cwp_timespan_to'] ) ) {
+			$instance['cwp_timespan_to'] = '';
 		}
 
 		$instance = parent::form( $instance );
@@ -160,10 +165,11 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 	 */
 	public function load_admin_assets() {
 		wp_enqueue_script( 'jquery-ui-slider' );
+		wp_enqueue_script( 'jquery-ui-datepicker' );
 		wp_enqueue_style( WPPR_SLUG . '-jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), WPPR_LITE_VERSION );
 
 		$deps        = array();
-		$deps['js']  = array( 'jquery-ui-slider' );
+		$deps['js']  = array( 'jquery-ui-slider', 'jquery-ui-datepicker' );
 		$deps['css'] = array( WPPR_SLUG . '-jqueryui' );
 		return $deps;
 	}
@@ -182,7 +188,8 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 	public function update( $new_instance, $old_instance ) {
 		$instance = parent::update( $new_instance, $old_instance );
 
-		$instance['cwp_timespan'] = ( ! empty( $new_instance['cwp_timespan'] ) ) ? strip_tags( $new_instance['cwp_timespan'] ) : '';
+		$instance['cwp_timespan_from'] = ( ! empty( $new_instance['cwp_timespan_from'] ) ) ? strip_tags( $new_instance['cwp_timespan_from'] ) : '';
+		$instance['cwp_timespan_to'] = ( ! empty( $new_instance['cwp_timespan_to'] ) ) ? strip_tags( $new_instance['cwp_timespan_to'] ) : '';
 		return $instance;
 	}
 

@@ -74,11 +74,8 @@
 	line-height: 120px;
 	text-align: center;
 	white-space: nowrap;
-	-webkit-transition-timing-function: ease-out;
 	transition-timing-function: ease-out;
-	-webkit-transition-duration: 0.2s;
 	transition-duration: 0.2s;
-	-webkit-transition-property: all;
 	transition-property: all;
 }
 

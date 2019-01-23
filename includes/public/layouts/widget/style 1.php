@@ -32,7 +32,7 @@
 		<div class="wppr-prodrow">
 			<?php if ( $showingImg ) { ?>
 				<div class="wppr-prodrowleft">
-					<a href="<?php echo $review_link; ?>" class="wppr-col" title="<?php echo $product_title; ?>">
+					<a href="<?php echo $review_link; ?>" class="wppr-col" title="<?php echo $product_title; ?>" rel="noopener">
 						<img class="cwp_rev_image wppr-col" src="<?php echo $product_image; ?>"
 						     alt="<?php echo $product_title; ?>"/>
 					</a>
