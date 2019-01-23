@@ -246,6 +246,21 @@ class WPPR_Admin {
 	}
 
 	/**
+	 * Method called from AJAX request to populate taxonoy and terms of the specified post type.
+	 *
+	 * @since   ?
+	 * @access  public
+	 */
+	public function get_taxonomies() {
+		check_ajax_referer( WPPR_SLUG, 'nonce' );
+
+		if ( isset( $_POST['type'] ) ) {
+			echo wp_send_json_success( array( 'categories' => self::get_taxonomy_and_terms_for_post_type( $_POST['type'] ) ) );
+		}
+		wp_die();
+	}
+
+	/**
 	 * Method called from AJAX request to populate categories of specified post types.
 	 *
 	 * @since   3.0.0
@@ -258,6 +273,48 @@ class WPPR_Admin {
 			echo wp_send_json_success( array( 'categories' => self::get_category_for_post_type( $_POST['type'] ) ) );
 		}
 		wp_die();
+	}
+
+	/**
+	 * Method that returns the taxonomy and terms of specified post type.
+	 *
+	 * @since   ?
+	 * @access  public
+	 */
+	public static function get_taxonomy_and_terms_for_post_type( $post_type ) {
+		$tax_terms = array();
+		if ( $post_type ) {
+			$categories = get_taxonomies(
+				array( 'object_type' => array( $post_type ), 'hierarchical' => true ),
+				'objects'
+			);
+			$tags = get_taxonomies(
+				array( 'object_type' => array( $post_type ), 'hierarchical' => false ),
+				'objects'
+			);
+			$taxonomies = array_merge( $categories, $tags );
+			if ( $taxonomies ) {
+				foreach ( $taxonomies as $tax ) {
+					$terms = get_terms(
+						$tax->name,
+						array(
+							'hide_empty' => false,
+						)
+					);
+					if ( empty( $terms ) ) {
+						continue;
+					}
+					$categories = array();
+					foreach ( $terms as $term ) {
+						// we will prefix the slug with the name of the taxonomy so that we can use it in the query.
+						$categories[ $term->taxonomy . ':' . $term->slug ] = $term->name;
+					}
+					$tax_terms[ $tax->label ] = $categories;
+				}
+			}
+		}
+
+		return $tax_terms;
 	}
 
 	/**

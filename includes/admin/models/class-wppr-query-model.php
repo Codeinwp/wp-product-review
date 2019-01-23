@@ -198,6 +198,9 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 		}
 
 		$category   = 'yes' === $this->wppr_get_option( 'wppr_cpt' ) ? 'wppr_category' : 'category';
+		if ( isset( $post['taxonomy_name'] ) ) {
+			$category = $post['taxonomy_name'];
+		}
 		$sub_selection_query = "INNER JOIN {$this->db->term_relationships } wtr ON wtr.object_id = p.ID
 	            INNER JOIN {$this->db->term_taxonomy} wtt on wtt.term_taxonomy_id = wtr.term_taxonomy_id AND wtt.taxonomy = '$category'
 	            INNER JOIN {$this->db->terms} wt
@@ -297,6 +300,17 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			$min                   = reset( $post['post_date_range_weeks'] );
 			$max                   = end( $post['post_date_range_weeks'] );
 			$sub_query_conditions .= $this->db->prepare( ' AND p.post_date >= DATE_ADD(now(), INTERVAL %d WEEK) AND p.post_date <= DATE_ADD(now(), INTERVAL %d WEEK) ', $min, $max );
+		}
+
+		if ( isset( $post['post_date_range'] ) && ! is_bool( $post['post_date_range'] ) && is_array( $post['post_date_range'] ) ) {
+			$min                   = reset( $post['post_date_range'] );
+			$max                   = end( $post['post_date_range'] );
+			if ( ! empty( $min ) ) {
+				$sub_query_conditions .= $this->db->prepare( ' AND p.post_date >= %s ', $min );
+			}
+			if ( ! empty( $max ) ) {
+				$sub_query_conditions .= $this->db->prepare( ' AND p.post_date <= %s ', $max );
+			}
 		}
 
 		$sub_query_conditions       .= apply_filters( 'wppr_where_sub_clause', '', $post );
