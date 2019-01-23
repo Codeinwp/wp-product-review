@@ -41,7 +41,6 @@
 		</div><!-- end .wppr-review-pros-cons -->
 
 	</div><!-- end .wppr-review-container -->
-
 	<?php wppr_layout_get_affiliate_buttons( $review_object ); ?>
 
 </div>

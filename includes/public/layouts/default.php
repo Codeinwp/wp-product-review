@@ -47,4 +47,5 @@ $cons = $review_object->get_cons();
 	</section>
 
 	<?php wppr_layout_get_affiliate_buttons( $review_object ); ?>
+
 </div>

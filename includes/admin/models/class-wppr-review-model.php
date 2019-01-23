@@ -969,6 +969,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			}
 		}
 
+		do_action( 'themeisle_log_event', WPPR_SLUG, sprintf( 'rating %d becomes %d with user influence of %d', $this->score, $rating, $comment_influence ), 'debug', __FILE__, __LINE__ );
+
 		return apply_filters( 'wppr_rating', $rating, $this->ID, $this );
 	}
 
@@ -1228,7 +1230,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			'reviewCount' => count( $ld['review'] ),
 		);
 
-		return $ld;
+		return apply_filters( 'wppr_schema', $ld, $this );
 	}
 
 	/**
