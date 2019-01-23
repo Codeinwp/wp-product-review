@@ -390,4 +390,43 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			)
 		);
 	}
+
+	/**
+	 * Utility method to find all reviews.
+	 *
+	 * @since   ?
+	 * @access  public
+	 *
+	 * @return array
+	 */
+	public function find_all_reviews() {
+		$type   = apply_filters( 'wppr_find_all_reviews_post_types', ( 'yes' === $this->wppr_get_option( 'wppr_cpt' ) ? array( 'wppr_review' ) : array( 'post', 'page' ) ) );
+		$query  = new WP_Query(
+			apply_filters(
+				'wppr_find_all_reviews', array(
+					'post_type'     => $type,
+					'post_status'   => 'publish',
+					'fields'        => 'ids',
+					'nopaging'      => true,
+					'posts_per_page'   => 300,
+					'meta_query'    => array(
+						array(
+							'key'   => 'cwp_meta_box_check',
+							'value' => 'Yes',
+						),
+					),
+				)
+			)
+		);
+
+		$reviews    = array();
+		if ( $query->have_posts() ) {
+			while ( $query->have_posts() ) {
+				$query->the_post();
+				$reviews[]  = $query->post;
+			}
+			wp_reset_postdata();
+		}
+		return $reviews;
+	}
 }

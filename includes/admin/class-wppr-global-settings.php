@@ -63,6 +63,7 @@ class WPPR_Global_Settings {
 					'rating'     => __( 'Rating colors', 'wp-product-review' ),
 					'typography' => __( 'Typography', 'wp-product-review' ),
 					'buy'        => __( 'Buy button', 'wp-product-review' ),
+					'reset'        => __( 'Reset Statistics', 'wp-product-review' ),
 				)
 			);
 			self::$instance->fields   = apply_filters(
@@ -342,6 +343,16 @@ class WPPR_Global_Settings {
 							'description' => __( 'Select the text color to be used on the buy button for the hover state', 'wp-product-review' ),
 							'id'          => 'buttontxth_color',
 							'default'     => '#FFFFFF',
+						),
+					),
+					'reset'        => array(
+						'cwppos_reset_comment_ratings'        => array(
+							'type'        => 'button',
+							'placeholder' => __( 'Recalculate', 'wp-product-review' ),
+							'class'       => 'wppr_reset_comment_ratings',
+							'name'        => __( 'Recalculate comment ratings', 'wp-product-review' ),
+							'description' => __( 'Use this if the comment rating influence is being incorrectly determined and it needs to be recalculated. Use this only if \'Visitor Review Influence\' is enabled.', 'wp-product-review' ),
+							'id'          => 'reset_comment_ratings',
 						),
 					),
 				)

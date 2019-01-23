@@ -182,6 +182,43 @@ class WPPR_Admin {
 	}
 
 	/**
+	 * Method called from AJAX request to reset comment ratings.
+	 *
+	 * @since   ?
+	 * @access  public
+	 */
+	public function reset_comment_ratings() {
+		$data  = $_POST['cwppos_options'];
+
+		$nonce = $data[ count( $data ) - 1 ];
+		if ( ! isset( $nonce['name'] ) ) {
+			die( 'invalid nonce field' );
+		}
+		if ( $nonce['name'] != 'wppr_nonce_settings' ) {
+			die( 'invalid nonce name' );
+		}
+		if ( wp_verify_nonce( $nonce['value'], 'wppr_save_global_settings' ) != 1 ) {
+			die( 'invalid nonce value' );
+		}
+
+		$model = new WPPR_Query_Model();
+
+		$comment_influence = intval( $model->wppr_get_option( 'cwppos_infl_userreview' ) );
+
+		if ( 0 === $comment_influence ) {
+			die();
+		}
+
+		$ids    = $model->find_all_reviews();
+		foreach ( $ids as $id ) {
+			$review = new WPPR_Review_Model( $id );
+			$review->update_comments_rating();
+		}
+
+		die();
+	}
+
+	/**
 	 * Method called from AJAX request to update options.
 	 *
 	 * @since   3.0.0

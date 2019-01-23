@@ -132,6 +132,9 @@ class WPPR_Admin_Render_Controller {
 			case 'icon_font':
 				$output .= $this->html_helper->icon_font( $field );
 				break;
+			case 'button':
+				$output .= $this->html_helper->button( $field );
+				break;
 		}
 
 		$output .= '<p class="field_description">' . $field['description'] . '</p></div></div><hr/>';
