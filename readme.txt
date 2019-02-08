@@ -67,6 +67,14 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+= 3.4.10 - 2018-12-06  = 
+
+* Add filter to change schema information
+* Limit decimal points when user influence is on
+* Fix bug with widget
+* Tested with WP 5.0
+
+
 = 3.4.9 - 2018-10-24  = 
 
 * Add support for review post type in preloader, shortcode and category archive page
@@ -515,6 +523,7 @@ Alternatively you can also follow the following steps to install the WP Product 
 
 
 
+
 = How to activate user reviews =
 
 By default user reviews are disabled since not all the themes are compatible with this option due to different designs for the comment box. You can easily activate them from General Settings
@@ -683,6 +692,9 @@ https://themeisle.com/contact
 
  = How to dynamically change the price of the review for particular posts = 
  [https://docs.themeisle.com/article/906-how-to-dynamically-change-the-price-of-the-review-for-particular-posts](https://docs.themeisle.com/article/906-how-to-dynamically-change-the-price-of-the-review-for-particular-posts) 
+
+ = Amazon Integration Documentation = 
+ [https://docs.themeisle.com/article/448-amazon-integration-documentation](https://docs.themeisle.com/article/448-amazon-integration-documentation) 
 
  == Upgrade Notice ==
 
