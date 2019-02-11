@@ -67,6 +67,17 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+= 3.5.0 - 2019-02-11  = 
+
+* Fix issue with Gutenberg
+* Outgoing Links should have “noopener”
+* Fix RTL support for review comments slider
+* Fix default template showing empty image tag
+* Add ability to recalculate comment ratings
+* Add widget for Top rated products by tag or custom taxonomy
+* Fix user rating in comment for small screens
+
+
 = 3.4.10 - 2018-12-06  = 
 
 * Add filter to change schema information
@@ -524,6 +535,7 @@ Alternatively you can also follow the following steps to install the WP Product 
 
 
 
+
 = How to activate user reviews =
 
 By default user reviews are disabled since not all the themes are compatible with this option due to different designs for the comment box. You can easily activate them from General Settings
@@ -695,6 +707,12 @@ https://themeisle.com/contact
 
  = Amazon Integration Documentation = 
  [https://docs.themeisle.com/article/448-amazon-integration-documentation](https://docs.themeisle.com/article/448-amazon-integration-documentation) 
+
+ = In WPPR, how do I,. = 
+ [https://docs.themeisle.com/article/969-in-wppr-how-do-i](https://docs.themeisle.com/article/969-in-wppr-how-do-i) 
+
+ = How to display product title and image both in review comparison table = 
+ [https://docs.themeisle.com/article/981-how-to-display-product-title-and-image-both-in-review-comparison-table](https://docs.themeisle.com/article/981-how-to-display-product-title-and-image-both-in-review-comparison-table) 
 
  == Upgrade Notice ==
 
