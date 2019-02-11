@@ -107,7 +107,6 @@ body:after {
 	width: 34%;
 	opacity: 0;
 	background: url(../img/prev.png) left 48% no-repeat;
-	-webkit-transition: opacity 0.6s;
 	transition: opacity 0.6s;
 
 	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
@@ -125,7 +124,6 @@ body:after {
 	width: 64%;
 	opacity: 0;
 	background: url(../img/next.png) right 48% no-repeat;
-	-webkit-transition: opacity 0.6s;
 	transition: opacity 0.6s;
 
 	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
@@ -188,7 +186,6 @@ body:after {
 	opacity: 0.7;
 	background: url(../img/close.png) top right no-repeat;
 	text-align: right;
-	-webkit-transition: opacity 0.2s;
 	transition: opacity 0.2s;
 
 	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);

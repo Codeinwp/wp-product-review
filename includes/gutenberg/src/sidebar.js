@@ -2,16 +2,17 @@
  * Internal dependencies
  */
 import './style.scss';
-import renameKey from 'rename-key';
-import { reverseObject } from './utils';
+import { reverseObject, renameKey } from './utils';
+import RadioImageControl from './radio-image-control/';
 
 /**
  * WordPress dependencies
  */
 const { __ } = wp.i18n;
 
-const { registerPlugin } = wp.plugins;
+const  { isUndefined, pickBy } = lodash;
 
+const { registerPlugin } = wp.plugins;
 
 const { MediaUpload } = wp.editor;
 
@@ -29,16 +30,20 @@ const {
 const {
 	Component,
 	Fragment,
-	compose,
 } = wp.element;
 
 const {
-	PanelBody,
-	TextControl,
-	FormToggle,
+	withState,
+	compose,
+ } = wp.compose;
+
+const {
 	Button,
+	FormToggle,
+	Modal,
+	PanelBody,
 	SelectControl,
-	withAPIData,
+	TextControl,
 } = wp.components;
 
 class WP_Product_Review extends Component {
@@ -46,6 +51,7 @@ class WP_Product_Review extends Component {
 		super( ...arguments );
 
 		this.toggleReviewStatus = this.toggleReviewStatus.bind( this );
+		this.onChangeTemplate = this.onChangeTemplate.bind( this );
 		this.onChangeReviewTitle = this.onChangeReviewTitle.bind( this );
 		this.onChangeReviewImage = this.onChangeReviewImage.bind( this );
 		this.onChangeImageLink = this.onChangeImageLink.bind( this );
@@ -60,6 +66,7 @@ class WP_Product_Review extends Component {
 		this.addPro = this.addPro.bind( this );
 		this.onChangeConText = this.onChangeConText.bind( this );
 		this.addCon = this.addCon.bind( this );
+		this.importReview = this.importReview.bind( this );
 
 		this.state = {
 			cwp_meta_box_check: 'No',
@@ -86,14 +93,9 @@ class WP_Product_Review extends Component {
 		};
 	}
 
-	componentWillReceiveProps( nextProps ) {
-		if ( this.props.review !== nextProps.review ) {
-			if ( nextProps.review.isLoading !== true ) {
-				this.setState( { ...nextProps.review.data.wppr_data } );
-			}
-		}
-		if ( nextProps.isPublishing || nextProps.isSaving ) {
-			wp.apiRequest( { path: `/wp-product-review/update-review?id=${nextProps.postId}&postType=${nextProps.postType}`, method: 'POST', data: this.state } ).then(
+	static getDerivedStateFromProps( nextProps, state ) {
+		if ( ( nextProps.isPublishing || nextProps.isSaving ) && !nextProps.isAutoSaving ) {
+			wp.apiRequest( { path: `/wp-product-review/update-review?id=${nextProps.postId}&postType=${nextProps.postType}`, method: 'POST', data: state } ).then(
 				( data ) => {
 					return data;
 				},
@@ -104,7 +106,13 @@ class WP_Product_Review extends Component {
 		}
 	}
 
-	componentDidUpdate( prevState ) {
+	componentDidUpdate( prevProps, prevState ) {
+		if ( undefined !== this.props.post ) {
+			if ( prevProps.post.wppr_data !== this.props.post.wppr_data ) {
+				this.setState( { ...this.props.post.wppr_data } );
+			}
+		}
+
 		if ( this.state.cwp_meta_box_check !== prevState.cwp_meta_box_check && this.state.cwp_meta_box_check === 'Yes' ) {
 			this.props.openReviewSidebar();
 		}
@@ -112,6 +120,11 @@ class WP_Product_Review extends Component {
 
 	toggleReviewStatus() {
 		this.setState( { cwp_meta_box_check: this.state.cwp_meta_box_check === 'Yes' ? 'No' : 'Yes' } );
+		this.props.editPostStatus( { edited: true } );
+	}
+
+	onChangeTemplate( value ) {
+		this.setState( { _wppr_review_template: value } );
 		this.props.editPostStatus( { edited: true } );
 	}
 
@@ -222,6 +235,16 @@ class WP_Product_Review extends Component {
 		this.setState( { wppr_cons } );
 	};
 
+	importReview( key ) {
+		this.setState( {
+			wppr_options: this.props.posts[key].wppr_data.wppr_options,
+			wppr_pros: this.props.posts[key].wppr_data.wppr_pros,
+			wppr_cons: this.props.posts[key].wppr_data.wppr_cons
+		} );
+		this.props.editPostStatus( { edited: true } );
+		this.props.setState( { isOpen: false } );
+	};
+
 	render() {
 		return (
 			<Fragment>
@@ -247,7 +270,31 @@ class WP_Product_Review extends Component {
 							title={ __( 'Product Details' ) }
 							className="wp-product-review-product-details"
 							initialOpen={ true }
-						>
+							>
+							{ ( wpprguten.isPro ) && (
+								<RadioImageControl
+									label={ __( 'Review Template' ) }
+									selected={ this.state._wppr_review_template }
+									options={ [
+										{
+											label: __( 'Default' ),
+											src: wpprguten.path + '/assets/img/templates/default.png',
+											value: 'default',
+										},
+										{
+											label: __( 'Style 1' ),
+											src: wpprguten.path + '/assets/img/templates/style1.png',
+											value: 'style1',
+										},
+										{
+											label: __( 'Style 2' ),
+											src: wpprguten.path + '/assets/img/templates/style2.png',
+											value: 'style2',
+										},
+									] }
+									onChange={ this.onChangeTemplate }
+								/>
+							) }
 							{ ( this.props.postType !== 'wppr_review' ) && [
 								<TextControl
 									label={ __( 'Product Name' ) }
@@ -363,7 +410,7 @@ class WP_Product_Review extends Component {
 									/>
 								</div>
 								) ) }
-								{ ( Object.keys( this.state.wppr_options ).length < 5 ) && (
+								{ ( Object.keys( this.state.wppr_options ).length < wpprguten.length ) && (
 									<Button
 										isLarge
 										onClick={ this.addOption }
@@ -392,7 +439,7 @@ class WP_Product_Review extends Component {
 									/>
 								</div>
 								) ) }
-								{ ( Object.keys( this.state.wppr_pros ).length < 5 ) && (
+								{ ( Object.keys( this.state.wppr_pros ).length < wpprguten.length ) && (
 									<Button
 										isLarge
 										onClick={ this.addPro }
@@ -408,20 +455,20 @@ class WP_Product_Review extends Component {
 							initialOpen={ false }
 						>
 							<div className="wppr-review-con-list">
-							{ Object.keys( this.state.wppr_cons ).map( ( key ) => (
-								<div className="wppr-review-con-item">
-									<label for={`wppr-con-item-${key}`}>{ parseInt( key ) + 1 }</label>
-									<TextControl
-										type="text"
-										id={`wppr-con-item-${key}`}
-										className="wppr-text"
-										placeholder={ __( 'Option' ) }
-										value={ this.state.wppr_cons[key] }
-										onChange={ ( e ) => this.onChangeConText( e, key ) }
-									/>
-								</div>
+								{ Object.keys( this.state.wppr_cons ).map( ( key ) => (
+									<div className="wppr-review-con-item">
+										<label for={`wppr-con-item-${key}`}>{ parseInt( key ) + 1 }</label>
+										<TextControl
+											type="text"
+											id={`wppr-con-item-${key}`}
+											className="wppr-text"
+											placeholder={ __( 'Option' ) }
+											value={ this.state.wppr_cons[key] }
+											onChange={ ( e ) => this.onChangeConText( e, key ) }
+										/>
+									</div>
 								) ) }
-								{ ( Object.keys( this.state.wppr_cons ).length < 5 ) && (
+								{ ( Object.keys( this.state.wppr_cons ).length < wpprguten.length ) && (
 									<Button
 										isLarge
 										onClick={ this.addCon }
@@ -431,6 +478,61 @@ class WP_Product_Review extends Component {
 								) }
 							</div>
 						</PanelBody>
+						{ ( wpprguten.isPro ) && (
+							<div className="wppr-review-import-review-button">
+								<Button
+									isLarge
+									isPrimary
+									onClick={ () => this.props.setState( { isOpen: true } ) }
+								>
+									{ __( 'Import Review' )  }
+								</Button>
+								{ this.props.isOpen ?
+									<Modal
+										title={ __( 'Import Review' ) }
+										className="wppr-review-import-modal"
+										onRequestClose={ () => this.props.setState( { isOpen: false } ) }>
+										{ ( this.props.posts ) && 
+											 Object.keys( this.props.posts ).map( ( key ) => (
+												<PanelBody
+													title={ this.props.posts[key].title.raw }
+													initialOpen={ false }
+												>
+													<div className="cwp_pitem_info">
+														<ul class="cwp_pitem_options_content">
+															<h4>{ __( 'Options' ) }</h4>
+															{ Object.keys( this.props.posts[key].wppr_data.wppr_options ).map( ( i ) => (
+																<li>{ this.props.posts[key].wppr_data.wppr_options[i].name }</li>
+															) ) }
+														</ul>
+
+														<ul class="cwp_pitem_options_pros">
+															<h4>{ __( 'Pros' ) }</h4>
+															{ Object.keys( this.props.posts[key].wppr_data.wppr_pros ).map( ( i ) => (
+																<li>{ this.props.posts[key].wppr_data.wppr_pros[i] }</li>
+															) ) }
+														</ul>
+
+														<ul class="cwp_pitem_options_cons">
+															<h4>{ __( 'Cons' ) }</h4>
+															{ Object.keys( this.props.posts[key].wppr_data.wppr_cons ).map( ( i ) => (
+																<li>{ this.props.posts[key].wppr_data.wppr_cons[i] }</li>
+															) ) }
+														</ul>
+														<Button
+															isLarge
+															onClick={ () => this.importReview( key ) }
+														>
+															{ __( 'Import Review' ) }
+														</Button>
+													</div>
+												</PanelBody>
+											 ) )
+										}
+									</Modal> 
+								: null }
+							</div>
+						) }
 					</PluginSidebar>
 				] }
 			</Fragment>
@@ -444,26 +546,33 @@ const WPPR = compose( [
 			getCurrentPostId,
 			isSavingPost,
 			isPublishingPost,
+			isAutosavingPost,
 			getCurrentPostType,
 		} = select( 'core/editor' );
+		const latestPostsQuery = pickBy( {
+			per_page: 100,
+			meta_key: 'cwp_meta_box_check',
+			meta_value: 'Yes'
+		}, ( value ) => ! isUndefined( value ) );
 		return {
 			postId: getCurrentPostId(),
 			postType: getCurrentPostType(),
+			posts: select( 'core' ).getEntityRecords( 'postType', 'post', latestPostsQuery ),
+			post: select( 'core' ).getEntityRecord( 'postType', getCurrentPostType(), getCurrentPostId() ),
 			isSaving: forceIsSaving || isSavingPost(),
+			isAutoSaving: isAutosavingPost(),
 			isPublishing: isPublishingPost(),
 		};
+	} ),
+
+	withState( {
+		isOpen: false,
 	} ),
 
 	withDispatch( ( dispatch ) => ( {
 		openReviewSidebar: () => dispatch( 'core/edit-post' ).openGeneralSidebar( 'wp-product-review/wp-product-review' ),
 		editPostStatus: dispatch( 'core/editor' ).editPost,
 	} ) ),
-
-	withAPIData( ( props ) => {
-		return {
-			review: `/wp/v2/${ ( props.postType === 'wppr_review' ? props.postType : 'posts' ) }/${props.postId}`,
-		};
-	} ),
 ] )( WP_Product_Review );
 
 registerPlugin( 'wp-product-review', {

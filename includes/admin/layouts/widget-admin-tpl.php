@@ -19,24 +19,56 @@
 	<label for="<?php echo $this->get_field_id( 'no_items' ); ?>"><?php _e( 'Number of posts to show:', 'wp-product-review' ); ?></label>
 	<input id="<?php echo $this->get_field_id( 'no_items' ); ?>" name="<?php echo $this->get_field_name( 'no_items' ); ?>" size="3" type="text" value="<?php echo esc_attr( $instance['no_items'] ); ?>" />
 </p>
+
+<?php
+	if ( 'wppr_top_reviews_widget' === $this->id_base ) {
+?>
 <p>
-	<label for="<?php echo $this->get_field_id( 'cwp_tp_post_types' ); ?>"><?php _e( 'Post Types:', 'wp-product-review' ); ?></label>
-	<select id="<?php echo $this->get_field_id( 'cwp_tp_post_types' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_post_types' ); ?>[]" class="wppr-chosen wppr-post-types" data-wppr-cat-combo="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>" multiple>
-	<?php
-		foreach( get_post_types( '', 'objects' ) as $post_type ) {
+<label for="<?php echo $this->get_field_id( 'cwp_tp_post_types' ); ?>"><?php _e( 'Post Type:', 'wp-product-review' ); ?></label>
+<select id="<?php echo $this->get_field_id( 'cwp_tp_post_types' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_post_types' ); ?>[]" class="wppr-chosen wppr-post-type" data-wppr-cat-combo="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>" >
+<?php
+foreach( get_post_types( '', 'objects' ) as $post_type ) {
 	?>
 	<option value="<?php echo $post_type->name;?>" <?php echo in_array($post_type->name, $instance['cwp_tp_post_types']) ? 'selected' : '';?>><?php echo $post_type->label;?></option>
 	<?php
-		}
-	?>
-	</select>
+	}
+?>
+</select>
 </p>
+<?php
+	} else {
+?>
+<p>
+<label for="<?php echo $this->get_field_id( 'cwp_tp_post_types' ); ?>"><?php _e( 'Post Types:', 'wp-product-review' ); ?></label>
+<select id="<?php echo $this->get_field_id( 'cwp_tp_post_types' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_post_types' ); ?>[]" class="wppr-chosen wppr-post-types" data-wppr-cat-combo="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>" multiple>
+<?php
+foreach( get_post_types( '', 'objects' ) as $post_type ) {
+	?>
+	<option value="<?php echo $post_type->name;?>" <?php echo in_array($post_type->name, $instance['cwp_tp_post_types']) ? 'selected' : '';?>><?php echo $post_type->label;?></option>
+	<?php
+	}
+?>
+</select>
+</p>
+<?php
+	}
+?>
+
+<?php
+	$category_heading = 'wppr_top_reviews_widget' === $this->id_base ? __( 'Taxonomy:', 'wp-product-review' ) : __( 'Category:', 'wp-product-review' ) ;
+?>
 
 <p>
 	<?php $all_cats = isset( $instance['cwp_tp_all_categories'] ) ? $instance['cwp_tp_all_categories'] : ''; ?>
-	<label for="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>"><?php _e( 'Category:', 'wp-product-review' ); ?></label>
+	<label for="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>"><?php echo $category_heading; ?></label>
 	<select id="<?php echo $this->get_field_id( 'cwp_tp_category' ); ?>" name="<?php echo $this->get_field_name( 'cwp_tp_category' ); ?>" class="wppr-chosen wppr-cats">
-		<option>All</option>
+<?php
+	if ( 'wppr_top_reviews_widget' !== $this->id_base ) {
+?>
+<option>All</option>
+<?php
+	}
+?>
 		<?php 
 			if ( $all_cats ) {
 			foreach ( $all_cats as $post_type => $cats ) {
@@ -57,6 +89,23 @@
 	</select>
 	<div class="spinner wppr-cat-spinner"></div>
 </p>
+
+<?php
+	if ( 'wppr_top_reviews_widget' === $this->id_base ) {
+	$from	= $instance['cwp_timespan_from'];
+	$to		= $instance['cwp_timespan_to'];
+?>
+<p>
+<label for="<?php echo $this->get_field_id( 'cwp_timespan_from' ); ?>"><?php _e( 'Posts published between:', 'wp-product-review' ); ?></label>
+<br/>
+<input type="text" id="<?php echo $this->get_field_id( 'cwp_timespan_from' ); ?>" class="wppr-datepicker" name="<?php echo $this->get_field_name( 'cwp_timespan_from' ); ?>" value="<?php echo $from; ?>" size="10">
+<input type="text" id="<?php echo $this->get_field_id( 'cwp_timespan_to' ); ?>" class="wppr-datepicker" name="<?php echo $this->get_field_name( 'cwp_timespan_to' ); ?>" value="<?php echo $to; ?>" size="10">
+<br/>
+</p>
+<?php
+	}
+?>
+
 <?php
 	if ( 'cwp_top_products_widget' === $this->id_base ) {
 	$timespan	= $instance['cwp_timespan'];

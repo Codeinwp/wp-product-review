@@ -256,4 +256,26 @@ class WPPR_Html_Fields {
 		$output = '<' . $type . ' class="' . $class . '">' . $args['placeholder'] . '</' . $type . '>';
 		return apply_filters( 'wppr_field', $output, $args );
 	}
+
+	/**
+	 * Render a button.
+	 *
+	 * @since   ?
+	 * @access  public
+	 * @param   array $args The settings of the input.
+	 * @return mixed
+	 */
+	public function button( $args ) {
+		$defaults = $this->define_defaults(
+			array(
+				'class' => 'cwp_button',
+				'type' => 'input',
+				'subtype' => 'submit',
+			)
+		);
+		$args     = wp_parse_args( $args, $defaults );
+		$class    = $this->validate_class( $args['class'] );
+		$output     = '<' . $args['type'] . ' type="' . esc_attr( $args['subtype'] ) . '" class="' . $class . '" name="' . esc_attr( $args['name'] ) . '" value="' . esc_attr( $args['placeholder'] ) . '">' . $args['placeholder'] . '</' . $args['type'] . '>';
+		return apply_filters( 'wppr_field', $output, $args );
+	}
 }

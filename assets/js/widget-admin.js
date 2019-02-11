@@ -54,6 +54,9 @@
             widget.find('.wppr-post-types').on('change', function(evt, params) {
                 get_categories(params, $(this), $('#' + $(this).attr('data-wppr-cat-combo')));
             });
+            widget.find('.wppr-post-type').on('change', function(evt, params) {
+                get_taxonomies(params, $(this), $('#' + $(this).attr('data-wppr-cat-combo')));
+            });
         }else{
             $('select.wppr-chosen').chosen({
                 width               : '100%',
@@ -62,8 +65,51 @@
             $('.wppr-post-types').on('change', function(evt, params) {
                 get_categories(params, $(this), $('#' + $(this).attr('data-wppr-cat-combo')));
             });
+            $('.wppr-post-type').on('change', function(evt, params) {
+                get_taxonomies(params, $(this), $('#' + $(this).attr('data-wppr-cat-combo')));
+            });
         }
 
+        $('.wppr-datepicker').each(function(){
+            $(this).datepicker({
+                dateFormat: "yy-mm-dd",
+                changeYear: true,
+                changeMonth: true
+            });
+        });
+
+
+    }
+
+    function get_taxonomies(params, types, categories){
+        if(params.selected){
+            $('.wppr-cat-spinner').css('visibility', 'visible').show();
+            $.ajax({
+                url     : ajaxurl,
+                method  : 'post',
+                data    : {
+                    action  : 'get_taxonomies',
+                    nonce   : w.ajax.nonce,
+                    type    : params.selected
+                },
+                success : function(data){
+                    if(data.data.categories){
+                        var $all = '';
+                        $.each(data.data.categories, function(tax, arr){
+                            var $group = '<optgroup label="' + tax + '">';
+                            $.each(arr, function(slug, name){
+                                $group += '<option value="' + slug + '">' + name + '</option>';
+                            });
+                            $group += '</optgroup>';
+                            $all += $group;
+                        });
+                        categories.empty().append($all);
+                        categories.trigger("chosen:updated");
+                    }
+                    $('.wppr-cat-spinner').css('visibility', 'hidden').hide();
+                }
+            });
+        }
     }
 
     function get_categories(params, types, categories){
