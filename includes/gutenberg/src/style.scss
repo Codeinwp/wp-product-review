@@ -25,32 +25,35 @@
 
 	.wppr-review-options-list {
 
-		label {
-			width: 15%;
-			margin-right: -4px;
-			border-radius: 3px 0 0 3px;
-			background: #ddd;
-			line-height: 30px;
-			text-align: center;
-			vertical-align: top;
-			display: inline-block;
-		}
-	
-		.wppr-text {
-			width: 60%;
-			display: inline-block;
-	
-			input {
-				height: 30px;
+		.wppr-review-options-item {
+
+			label {
+				width: 15%;
+				margin-right: -4px;
+				border-radius: 3px 0 0 3px;
+				background: #ddd;
+				line-height: 30px;
+				text-align: center;
+				vertical-align: top;
+				display: inline-block;
 			}
-		}
-	
-		.wppr-option-number {
-			width: 25%;
-			display: inline-block;
-	
-			input {
-				height: 30px;
+		
+			.wppr-text {
+				width: 60%;
+				display: inline-block;
+		
+				input {
+					height: 30px;
+				}
+			}
+		
+			.wppr-option-number {
+				width: 25%;
+				display: inline-block;
+		
+				input {
+					height: 30px;
+				}
 			}
 		}
 	
