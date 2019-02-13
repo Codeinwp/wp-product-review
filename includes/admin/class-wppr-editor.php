@@ -56,10 +56,19 @@ class WPPR_Editor {
 	public function set_editor() {
 		$back_compat_meta_box = '';
 		if ( function_exists( 'register_block_type' ) ) {
+			$current_screen = get_current_screen();
+
 			$back_compat_meta_box = array(
-				'__back_compat_meta_box' => true,
+				'__back_compat_meta_box' => false,
 			);
+
+			if ( ! class_exists( 'Classic_Editor' ) || $current_screen->is_block_editor() ) {
+				$back_compat_meta_box = array(
+					'__back_compat_meta_box' => true,
+				);
+			}
 		}
+
 		add_meta_box(
 			'wppr_editor_metabox',
 			__( 'Product Review Extra Settings', 'wp-product-review' ),
