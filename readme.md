@@ -1,5 +1,5 @@
 # WP Product Review Lite #
-**Contributors:** [codeinwp](https://profiles.wordpress.org/codeinwp), [marius2012](https://profiles.wordpress.org/marius2012), [marius_codeinwp](https://profiles.wordpress.org/marius_codeinwp), [hardeepasrani](https://profiles.wordpress.org/hardeepasrani), [themeisle](https://profiles.wordpress.org/themeisle), [Madalin_ThemeIsle](https://profiles.wordpress.org/Madalin_ThemeIsle), [contactashish13](https://profiles.wordpress.org/rozroz)  
+**Contributors:** [codeinwp](https://profiles.wordpress.org/codeinwp), [marius2012](https://profiles.wordpress.org/marius2012), [marius_codeinwp](https://profiles.wordpress.org/marius_codeinwp), [hardeepasrani](https://profiles.wordpress.org/hardeepasrani), [themeisle](https://profiles.wordpress.org/themeisle), [Madalin_ThemeIsle](https://profiles.wordpress.org/Madalin_ThemeIsle), [contactashish13](https://profiles.wordpress.org/contactashish13)  
 **Tags:**  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin,  google rating, product review, rating, review, star rating, user rating, wp rating, wp review,  google, hreview,rich snippets,seo,snippet  
 **Author URI:** http://themeisle.com  
 **Requires at least:** 3.5  
@@ -67,6 +67,14 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 ## Changelog ##
+### 3.4.10 - 2018-12-06  ###
+
+* Add filter to change schema information
+* Limit decimal points when user influence is on
+* Fix bug with widget
+* Tested with WP 5.0
+
+
 ### 3.4.9 - 2018-10-24  ###
 
 * Add support for review post type in preloader, shortcode and category archive page

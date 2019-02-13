@@ -1,4 +1,11 @@
 
+ ### v3.4.10 - 2018-12-06 
+ **Changes:** 
+ * Add filter to change schema information
+* Limit decimal points when user influence is on
+* Fix bug with widget
+* Tested with WP 5.0
+ 
  ### v3.4.9 - 2018-10-24 
  **Changes:** 
  * Add support for review post type in preloader, shortcode and category archive page
