@@ -59,12 +59,12 @@ class WPPR_Editor {
 			$current_screen = get_current_screen();
 
 			$back_compat_meta_box = array(
-				'__back_compat_meta_box' => false,
+				'__back_compat_meta_box' => true,
 			);
 
-			if ( ! class_exists( 'Classic_Editor' ) || $current_screen->is_block_editor() ) {
+			if ( ( class_exists( 'Classic_Editor' ) && ! $current_screen->is_block_editor() ) || ! $current_screen->is_block_editor() ) {
 				$back_compat_meta_box = array(
-					'__back_compat_meta_box' => true,
+					'__back_compat_meta_box' => false,
 				);
 			}
 		}

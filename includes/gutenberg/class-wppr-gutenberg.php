@@ -55,7 +55,7 @@ class WPPR_Gutenberg {
 	 */
 	public function enqueue_gutenberg_scripts() {
 		if ( WPPR_CACHE_DISABLED ) {
-			$version = filemtime( WPPR_URL . '/includes/gutenberg/dist/sidebar.js' );
+			$version = filemtime( WPPR_URL . '/includes/gutenberg/build/sidebar.js' );
 		} else {
 			$version = $this->version;
 		}
@@ -70,7 +70,7 @@ class WPPR_Gutenberg {
 		$length = $model->wppr_get_option( 'cwppos_option_nr' );
 
 		// Enqueue the bundled block JS file
-		wp_enqueue_script( 'wppr-gutenberg-block-js', WPPR_URL . '/includes/gutenberg/dist/sidebar.js', array( 'wp-i18n', 'wp-edit-post', 'wp-element', 'wp-editor', 'wp-components', 'wp-compose', 'wp-data', 'wp-plugins', 'wp-edit-post', 'wp-api' ), $version );
+		wp_enqueue_script( 'wppr-gutenberg-block-js', WPPR_URL . '/includes/gutenberg/build/sidebar.js', array( 'wp-i18n', 'wp-edit-post', 'wp-element', 'wp-editor', 'wp-components', 'wp-compose', 'wp-data', 'wp-plugins', 'wp-edit-post', 'wp-api' ), $version );
 
 		wp_localize_script(
 			'wppr-gutenberg-block-js',
@@ -83,7 +83,7 @@ class WPPR_Gutenberg {
 		);
 
 		// Enqueue editor block styles
-		wp_enqueue_style( 'wppr-gutenberg-block-css', WPPR_URL . '/includes/gutenberg/dist/sidebar.css', '', $version );
+		wp_enqueue_style( 'wppr-gutenberg-block-css', WPPR_URL . '/includes/gutenberg/build/sidebar.css', '', $version );
 	}
 
 	/**
