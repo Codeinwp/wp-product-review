@@ -154,12 +154,12 @@ class WPPR_Gutenberg {
 	 */
 	public function register_endpoints() {
 		$args = array(
-			'public'   => true
+			'public'   => true,
 		);
-		
+
 		$output = 'names';
 		$operator = 'and';
-		
+
 		$post_types = get_post_types( $args, $output, $operator );
 
 		register_rest_field(
