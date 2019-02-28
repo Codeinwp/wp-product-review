@@ -43,7 +43,7 @@ class WPPR_Gutenberg {
 		$this->version = $plugin->get_version();
 		// Add a filter to load functions when all plugins have been loaded
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_gutenberg_scripts' ) );
-		add_action( 'init', array( $this, 'register_endpoints' ) );
+		add_action( 'wp_loaded', array( $this, 'register_endpoints' ) );
 		add_action( 'rest_api_init', array( $this, 'update_posts_endpoints' ) );
 		add_filter( 'rest_post_query', array( $this, 'post_meta_request_params' ), 99, 2 );
 		add_filter( 'rest_page_query', array( $this, 'post_meta_request_params' ), 99, 2 );
@@ -55,7 +55,7 @@ class WPPR_Gutenberg {
 	 */
 	public function enqueue_gutenberg_scripts() {
 		if ( WPPR_CACHE_DISABLED ) {
-			$version = filemtime( WPPR_URL . '/includes/gutenberg/dist/sidebar.js' );
+			$version = filemtime( WPPR_PATH . '/includes/gutenberg/build/sidebar.js' );
 		} else {
 			$version = $this->version;
 		}
@@ -70,7 +70,7 @@ class WPPR_Gutenberg {
 		$length = $model->wppr_get_option( 'cwppos_option_nr' );
 
 		// Enqueue the bundled block JS file
-		wp_enqueue_script( 'wppr-gutenberg-block-js', WPPR_URL . '/includes/gutenberg/dist/sidebar.js', array( 'wp-i18n', 'wp-edit-post', 'wp-element', 'wp-editor', 'wp-components', 'wp-compose', 'wp-data', 'wp-plugins', 'wp-edit-post', 'wp-api' ), $version );
+		wp_enqueue_script( 'wppr-gutenberg-block-js', WPPR_URL . '/includes/gutenberg/build/sidebar.js', array( 'wp-i18n', 'wp-edit-post', 'wp-element', 'wp-editor', 'wp-components', 'wp-compose', 'wp-data', 'wp-plugins', 'wp-edit-post', 'wp-api' ), $version );
 
 		wp_localize_script(
 			'wppr-gutenberg-block-js',
@@ -83,7 +83,7 @@ class WPPR_Gutenberg {
 		);
 
 		// Enqueue editor block styles
-		wp_enqueue_style( 'wppr-gutenberg-block-css', WPPR_URL . '/includes/gutenberg/dist/sidebar.css', '', $version );
+		wp_enqueue_style( 'wppr-gutenberg-block-css', WPPR_URL . '/includes/gutenberg/build/sidebar.css', '', $version );
 	}
 
 	/**
@@ -153,8 +153,17 @@ class WPPR_Gutenberg {
 	 * Register Rest Field
 	 */
 	public function register_endpoints() {
+		$args = array(
+			'public'   => true,
+		);
+
+		$output = 'names';
+		$operator = 'and';
+
+		$post_types = get_post_types( $args, $output, $operator );
+
 		register_rest_field(
-			array( 'post', 'wppr_review' ),
+			$post_types,
 			'wppr_data',
 			array(
 				'get_callback'    => array( $this, 'get_post_meta' ),
