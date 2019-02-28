@@ -17,6 +17,7 @@ const { registerPlugin } = wp.plugins;
 const { MediaUpload } = wp.editor;
 
 const {
+	select,
 	withSelect,
 	withDispatch,
 } = wp.data;
@@ -93,6 +94,19 @@ class WP_Product_Review extends Component {
 		};
 	}
 
+	async componentDidMount() {
+		const {
+			getCurrentPostId,
+			getCurrentPostType,
+		} = select( 'core/editor' );
+
+		const post = await select( 'core' ).getEntityRecord( 'postType', getCurrentPostType(), getCurrentPostId() );
+
+		if ( undefined !== post && post.wppr_data ) {
+			this.setState( { ...post.wppr_data } );
+		}
+	}
+
 	static getDerivedStateFromProps( nextProps, state ) {
 		if ( ( nextProps.isPublishing || nextProps.isSaving ) && !nextProps.isAutoSaving ) {
 			wp.apiRequest( { path: `/wp-product-review/update-review?id=${nextProps.postId}&postType=${nextProps.postType}`, method: 'POST', data: state } ).then(
@@ -107,12 +121,6 @@ class WP_Product_Review extends Component {
 	}
 
 	componentDidUpdate( prevProps, prevState ) {
-		if ( undefined !== this.props.post ) {
-			if ( prevProps.post.wppr_data !== this.props.post.wppr_data ) {
-				this.setState( { ...this.props.post.wppr_data } );
-			}
-		}
-
 		if ( this.state.cwp_meta_box_check !== prevState.cwp_meta_box_check && this.state.cwp_meta_box_check === 'Yes' ) {
 			this.props.openReviewSidebar();
 		}
@@ -558,7 +566,6 @@ const WPPR = compose( [
 			postId: getCurrentPostId(),
 			postType: getCurrentPostType(),
 			posts: select( 'core' ).getEntityRecords( 'postType', 'post', latestPostsQuery ),
-			post: select( 'core' ).getEntityRecord( 'postType', getCurrentPostType(), getCurrentPostId() ),
 			isSaving: forceIsSaving || isSavingPost(),
 			isAutoSaving: isAutosavingPost(),
 			isPublishing: isPublishingPost(),
