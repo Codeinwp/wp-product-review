@@ -1,4 +1,9 @@
 
+ ### v3.5.2 - 2019-02-28 
+ **Changes:** 
+ * Fix issues with Gutenberg
+* Tested upto 5.1
+ 
  ### v3.5.1 - 2019-02-13 
  **Changes:** 
  * Fix issue with option not showing to add a review in the post editor screen
