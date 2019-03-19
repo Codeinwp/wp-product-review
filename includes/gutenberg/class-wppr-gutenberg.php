@@ -128,6 +128,12 @@ class WPPR_Gutenberg {
 				$pros       = isset( $data['wppr_pros'] ) ? $data['wppr_pros'] : array();
 				$cons       = isset( $data['wppr_cons'] ) ? $data['wppr_cons'] : array();
 
+				foreach ( $affiliates as $key => $option ) {
+					if ( $option == '' && $key == 0 ) {
+						unset( $affiliates[ $key ] );
+					}
+				}
+
 				foreach ( $options as $key => $option ) {
 					if ( $option['name'] == '' && $option['value'] == 0 ) {
 						unset( $options[ $key ] );
