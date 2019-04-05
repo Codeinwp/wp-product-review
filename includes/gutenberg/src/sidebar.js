@@ -103,6 +103,9 @@ class WP_Product_Review extends Component {
 		const post = await select( 'core' ).getEntityRecord( 'postType', getCurrentPostType(), getCurrentPostId() );
 
 		if ( undefined !== post && post.wppr_data ) {
+			if ( post.wppr_data.wppr_links && post.wppr_data.wppr_links.length < 1 ) {
+				post.wppr_data.wppr_links[''] = '';
+			}
 			this.setState( { ...post.wppr_data } );
 		}
 	}
@@ -360,20 +363,23 @@ class WP_Product_Review extends Component {
 								onChange={ this.onChangeImageLink }
 							/>
 							<div className="wppr-review-links-list">
-							{ Object.keys( this.state.wppr_links ).map( ( key ) => [
-								<TextControl
-									label={ __( 'Affiliate Button Text' ) }
-									type="text"
-									value={ key }
-									onChange={ ( e ) => this.onChangeReviewAffiliateTitle( e, key ) }
-								/>,
-								<TextControl
-									label={ __( 'Affiliate Button Link' ) }
-									type="url"
-									value={ this.state.wppr_links[key] }
-									onChange={ ( e ) => this.onChangeReviewAffiliateLink( e, key ) }
-								/>
-							] ) }
+							{ Object.keys( this.state.wppr_links ).map( ( key ) => (
+								<Fragment>
+									<TextControl
+										label={ __( 'Affiliate Button Text' ) }
+										type="text"
+										value={ key != 1 ? key : '' }
+										onChange={ ( e ) => this.onChangeReviewAffiliateTitle( e, key ) }
+									/>
+
+									<TextControl
+										label={ __( 'Affiliate Button Link' ) }
+										type="url"
+										value={ this.state.wppr_links[key] }
+										onChange={ ( e ) => this.onChangeReviewAffiliateLink( e, key ) }
+									/>
+								</Fragment>
+							) ) }
 							{ ( Object.keys( this.state.wppr_links ).length < 2 ) && (
 								<Button
 									isLarge
