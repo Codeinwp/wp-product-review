@@ -129,7 +129,7 @@ class WPPR_Gutenberg {
 				$cons       = isset( $data['wppr_cons'] ) ? $data['wppr_cons'] : array();
 
 				foreach ( $affiliates as $key => $option ) {
-					if ( $option == '' && $key == 0 ) {
+					if ( $option == '' ) {
 						unset( $affiliates[ $key ] );
 					}
 				}
@@ -152,6 +152,8 @@ class WPPR_Gutenberg {
 			} else {
 				$review->deactivate();
 			}
+
+			return new \WP_REST_Response( array( 'message' => __( 'Review updated.', 'wp-product-review' ) ), 200 );
 		}
 	}
 
