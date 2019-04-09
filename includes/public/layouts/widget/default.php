@@ -14,6 +14,7 @@
 <?php
 foreach ( $results as $review ) :
 	$review_object         = new WPPR_Review_Model( $review['ID'] );
+	// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
 	$product_title_display = ( $instance['post_type'] == true ) ? $review_object->get_name() : get_the_title( $review['ID'] );
 	$product_image         = $review_object->get_small_thumbnail();
 
@@ -25,6 +26,7 @@ foreach ( $results as $review ) :
 
 	<?php
 	$wppr_image = false;
+	// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
 	if ( $instance['show_image'] == true && ! empty( $product_image ) ) {
 		?>
 		<div class="cwp_rev_image wppr-col">

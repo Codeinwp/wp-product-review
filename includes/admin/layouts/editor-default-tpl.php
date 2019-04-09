@@ -62,7 +62,7 @@ $check = $review->is_active() ? 'yes' : 'no';
 						$schema_types = $schema->get_types();
 						echo $html_helper->select(
 							array(
-								'name'		=> 'wppr-editor-review-type',
+								'name'      => 'wppr-editor-review-type',
 								'id'        => 'wppr-editor-review-type',
 								'value'     => empty( $review->get_type() ) ? 'Product' : $review->get_type(),
 								'options'   => array_combine(

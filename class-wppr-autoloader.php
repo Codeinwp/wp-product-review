@@ -123,7 +123,7 @@ class WPPR_Autoloader {
 	protected static function check_namespaces( $class_name ) {
 		$found = false;
 		foreach ( static::$namespaces as $namespace ) {
-			if ( substr( $class_name, 0, strlen( $namespace ) ) == $namespace ) {
+			if ( substr( $class_name, 0, strlen( $namespace ) ) === $namespace ) {
 				$found = true;
 			}
 		}

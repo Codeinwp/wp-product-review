@@ -71,11 +71,11 @@ class WPPR_Top_Products_Widget extends WPPR_Widget_Abstract {
 
 		$reviews = new WPPR_Query_Model();
 		$post    = array();
-		if ( isset( $instance['cwp_tp_category'] ) && trim( $instance['cwp_tp_category'] ) != '' ) {
+		if ( isset( $instance['cwp_tp_category'] ) && trim( $instance['cwp_tp_category'] ) !== '' ) {
 			$post['category_name'] = $instance['cwp_tp_category'];
 		}
 
-		if ( isset( $instance['cwp_timespan'] ) && trim( $instance['cwp_timespan'] ) != '' ) {
+		if ( isset( $instance['cwp_timespan'] ) && trim( $instance['cwp_timespan'] ) !== '' ) {
 			$min_max = explode( ',', $instance['cwp_timespan'] );
 			$min     = intval( reset( $min_max ) );
 			$max     = intval( end( $min_max ) );

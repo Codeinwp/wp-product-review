@@ -105,7 +105,7 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 				if ( $this->review->is_active() ) {
 					$links = $this->review->get_links();
 					if ( ! empty( $links ) ) {
-						if ( $key == 'wppr-editor-button-link' ) {
+						if ( $key === 'wppr-editor-button-link' ) {
 							$values = array_values( $links );
 						} else {
 							$values = array_keys( $links );
@@ -117,7 +117,7 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 					if ( ! empty( $this->previous ) ) {
 						$links = $this->previous->get_links();
 						if ( ! empty( $links ) ) {
-							if ( $key == 'wppr-editor-button-link' ) {
+							if ( $key === 'wppr-editor-button-link' ) {
 								$values = array_values( $links );
 							} else {
 								$values = array_keys( $links );

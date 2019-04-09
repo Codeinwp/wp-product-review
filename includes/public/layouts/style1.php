@@ -28,7 +28,7 @@
 	$review_image      = $review_object->get_small_thumbnail();
 	$review_image_link = reset( $links );
 
-	if ( $review_object->get_click() == 'image' ) {
+	if ( $review_object->get_click() === 'image' ) {
 		$lightbox          = 'data-lightbox="' . esc_url( $review_object->get_small_thumbnail() ) . '"';
 		$review_image_link = $review_object->get_image();
 	}

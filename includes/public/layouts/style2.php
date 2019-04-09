@@ -28,7 +28,7 @@
 	if ( count( $links ) > 1 ) {
 		$multiple_affiliates_class = 'affiliate-button2 affiliate-button';
 	}
-	if ( $review_object->get_click() == 'image' ) {
+	if ( $review_object->get_click() === 'image' ) {
 		$lightbox          = 'data-lightbox="' . esc_url( $review_object->get_small_thumbnail() ) . '"';
 		$review_image_link = $review_object->get_image();
 	}

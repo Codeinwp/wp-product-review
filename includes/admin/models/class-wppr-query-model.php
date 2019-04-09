@@ -137,7 +137,7 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 			$final_rating   = "IF(`comment_rating` = 0, `rating`, (`comment_rating` * 10 * ( $comment_influence / 100 ) + `rating` * ( ( 100 - $comment_influence ) / 100 ) ) )";
 		}
 
-		$final_order        = isset( $order['rating'] ) && in_array( $order['rating'], array( 'ASC', 'DESC' ) ) ? " ORDER BY `final_rating` {$order['rating']}" : '';
+		$final_order        = isset( $order['rating'] ) && in_array( $order['rating'], array( 'ASC', 'DESC' ), true ) ? " ORDER BY `final_rating` {$order['rating']}" : '';
 
 		$query   = " 
 		SELECT ID, post_date, post_title, `check`, `name`, `price`, `rating`, `comment_rating`, FORMAT($final_rating, 2) as 'final_rating' FROM
@@ -218,14 +218,14 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	 */
 	private function get_order_by( $order ) {
 		$order_by = '';
-		if ( isset( $order['rating'] ) && in_array( $order['rating'], array( 'ASC', 'DESC' ) ) ) {
+		if ( isset( $order['rating'] ) && in_array( $order['rating'], array( 'ASC', 'DESC' ), true ) ) {
 			$order_by .= "`rating` {$order['rating']}, ";
 		}
 
-		if ( isset( $order['price'] ) && in_array( $order['price'], array( 'ASC', 'DESC' ) ) ) {
+		if ( isset( $order['price'] ) && in_array( $order['price'], array( 'ASC', 'DESC' ), true ) ) {
 			$order_by .= "`price` {$order['price']}, ";
 		}
-		if ( isset( $order['date'] ) && in_array( $order['date'], array( 'ASC', 'DESC' ) ) ) {
+		if ( isset( $order['date'] ) && in_array( $order['date'], array( 'ASC', 'DESC' ), true ) ) {
 			$order_by .= "`post_date` {$order['date']}, ";
 		}
 
@@ -248,16 +248,16 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	private function get_query_conditions( $post, $filter ) {
 		$conditions          = array( 'where' => '', 'having' => '' );
 		$conditions['where'] = $this->get_sub_query_conditions( $post );
-		if ( isset( $filter['name'] ) && $filter['name'] != false ) {
+		if ( isset( $filter['name'] ) && $filter['name'] !== false ) {
 			$conditions['having'] .= $this->db->prepare( ' AND `name` LIKE %s ', '%' . $filter['name'] . '%' );
 		}
 
 		// TODO comparision arguments for price filter.
-		if ( isset( $filter['price'] ) && $filter['price'] != false && is_numeric( $filter['price'] ) ) {
+		if ( isset( $filter['price'] ) && $filter['price'] !== false && is_numeric( $filter['price'] ) ) {
 			$conditions['having'] .= $this->db->prepare( ' AND `price` > FORMAT( %d, 2 ) ', $filter['price'] );
 		}
 		// TODO comparision arguments for rating filter.
-		if ( isset( $filter['rating'] ) && $filter['rating'] != false && is_numeric( $filter['rating'] ) ) {
+		if ( isset( $filter['rating'] ) && $filter['rating'] !== false && is_numeric( $filter['rating'] ) ) {
 			$conditions['having'] .= $this->db->prepare( ' AND `rating`  > %f ', $filter['rating'] );
 		}
 
@@ -278,11 +278,11 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	 */
 	private function get_sub_query_conditions( $post ) {
 		$sub_query_conditions = '';
-		if ( isset( $post['category_id'] ) && $post['category_id'] != false && is_numeric( $post['category_id'] ) && $post['category_id'] > 0 ) {
+		if ( isset( $post['category_id'] ) && $post['category_id'] !== false && is_numeric( $post['category_id'] ) && $post['category_id'] > 0 ) {
 			$sub_query_conditions .= $this->db->prepare( " AND wt.term_id = '%d' ", $post['category_id'] );
 		}
 
-		if ( isset( $post['category_name'] ) && $post['category_name'] != false ) {
+		if ( isset( $post['category_name'] ) && $post['category_name'] !== false ) {
 			$sub_query_conditions .= $this->db->prepare( ' AND wt.slug = %s ', $post['category_name'] );
 		}
 		// TODO Check against available post_types.

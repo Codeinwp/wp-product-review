@@ -198,10 +198,10 @@ class WPPR_Admin {
 		if ( ! isset( $nonce['name'] ) ) {
 			die( 'invalid nonce field' );
 		}
-		if ( $nonce['name'] != 'wppr_nonce_settings' ) {
+		if ( $nonce['name'] !== 'wppr_nonce_settings' ) {
 			die( 'invalid nonce name' );
 		}
-		if ( wp_verify_nonce( $nonce['value'], 'wppr_save_global_settings' ) != 1 ) {
+		if ( wp_verify_nonce( $nonce['value'], 'wppr_save_global_settings' ) !== 1 ) {
 			die( 'invalid nonce value' );
 		}
 
@@ -277,7 +277,7 @@ class WPPR_Admin {
 		$post_types     = apply_filters( 'wppr_post_types_custom_columns', array() );
 		if ( $post_types ) {
 			foreach ( $post_types as $post_type ) {
-				$type   = in_array( $post_type, array( 'post', 'page' ) ) ? "{$post_type}s" : "{$post_type}_posts";
+				$type   = in_array( $post_type, array( 'post', 'page' ), true ) ? "{$post_type}s" : "{$post_type}_posts";
 				add_filter( "manage_{$type}_columns", array( $this, 'manage_posts_columns' ), 10, 1 );
 				add_action( "manage_{$type}_custom_column", array( $this, 'manage_posts_custom_column' ), 10, 2 );
 			}
@@ -293,7 +293,7 @@ class WPPR_Admin {
 	 */
 	public function restrict_manage_posts( $post_type, $which ) {
 		$post_types     = apply_filters( 'wppr_post_types_custom_filter', array( 'post', 'page' ) );
-		if ( ! $post_types || ! in_array( $post_type, $post_types ) ) {
+		if ( ! $post_types || ! in_array( $post_type, $post_types, true ) ) {
 			return;
 		}
 
@@ -319,7 +319,7 @@ class WPPR_Admin {
 		}
 
 		$post_types     = apply_filters( 'wppr_post_types_custom_filter', array( 'post', 'page' ) );
-		if ( ! in_array( $query->query['post_type'], $post_types ) ) {
+		if ( ! in_array( $query->query['post_type'], $post_types, true ) ) {
 			return $query;
 		}
 
@@ -368,7 +368,7 @@ class WPPR_Admin {
 		if ( ! isset( $current_screen->id ) ) {
 			return;
 		}
-		if ( $current_screen->id != 'wppr_review' ) {
+		if ( $current_screen->id !== 'wppr_review' ) {
 			return;
 		}
 

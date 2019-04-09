@@ -432,7 +432,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		$options_nr = $this->wppr_get_option( 'cwppos_option_nr' );
 		for ( $i = 1; $i <= $options_nr; $i ++ ) {
 			$tmp_name = get_post_meta( $this->ID, 'option_' . $i . '_content', true );
-			if ( $tmp_name != '' ) {
+			if ( $tmp_name !== '' ) {
 				$tmp_score     = get_post_meta( $this->ID, 'option_' . $i . '_grade', true );
 				$options[ $i ] = array(
 					'name'  => $tmp_name,
@@ -609,7 +609,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 				$options = array_merge( $options, $comment['options'] );
 			}
 
-			if ( count( $options ) != 0 ) {
+			if ( count( $options ) !== 0 ) {
 				return ( array_sum( wp_list_pluck( $options, 'value' ) ) / count( $options ) );
 			} else {
 				return 0;
@@ -863,7 +863,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 */
 	public function set_click( $click ) {
 		if ( $click === 'image' || $click === 'link' ) {
-			if ( $this->click != $click ) {
+			if ( $this->click !== $click ) {
 				$this->click = $click;
 
 				return update_post_meta( $this->ID, 'cwp_image_link', $this->click );
@@ -1214,7 +1214,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			'datePublished' => get_the_time( 'Y-m-d', $this->get_ID() ),
 		);
 
-		if ( $this->wppr_get_option( 'cwppos_show_userreview' ) != 'yes' ) {
+		if ( $this->wppr_get_option( 'cwppos_show_userreview' ) !== 'yes' ) {
 			$ld['review'] = $review_default;
 
 			return $ld;
