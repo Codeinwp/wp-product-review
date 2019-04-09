@@ -30,7 +30,7 @@ h4 {
 	margin-left: 11px;
 }
 
-.wppr-review-section input[type="text"] {
+.wppr-review-section input[type="text"]:not(.regular-text) {
 	width: 200px;
 }
 
@@ -135,17 +135,15 @@ label.wppr-upsell-label {
 	display: block;
 }
 
-.wppr-review-type-fields.hide {
-	display: none;
+.wppr-review-type {
+	margin-bottom: 2% !important;
 }
 
-.wppr-review-type-fields-toggle {
-	cursor: pointer;
+.wppr-review-type-field p.desc {
+	color: #928b8b;
 }
 
-.wppr-review-type-fields-toggle a,
-.wppr-review-type-fields-toggle a:visited
-.wppr-review-type-fields-toggle a:hover {
-	text-decoration: none;
-	outline: none;
+li.wppr-review-type-field label {
+	width: 30%;
 }
+

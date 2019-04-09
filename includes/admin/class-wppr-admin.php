@@ -76,13 +76,19 @@ class WPPR_Admin {
 		 * class.
 		 */
 
-		if ( $hook == 'toplevel_page_wppr' ) {
-			wp_enqueue_style( 'wp-color-picker' );
-			wp_enqueue_style( $this->plugin_name . '-dashboard-css', WPPR_URL . '/assets/css/dashboard_styles.css', array(), $this->version );
-			wp_enqueue_style( $this->plugin_name . '-admin-css', WPPR_URL . '/assets/css/admin.css', array(), $this->version );
-		}
-		if ( $hook == 'product-review_page_wppr_pro_upsell' || $hook == 'toplevel_page_wppr' ) {
-			wp_enqueue_style( $this->plugin_name . '-upsell-css', WPPR_URL . '/assets/css/upsell.css', array(), $this->version );
+		switch ( $hook ) {
+			case 'toplevel_page_wppr':
+				wp_enqueue_style( 'wp-color-picker' );
+				wp_enqueue_style( $this->plugin_name . '-dashboard-css', WPPR_URL . '/assets/css/dashboard_styles.css', array(), $this->version );
+				wp_enqueue_style( $this->plugin_name . '-admin-css', WPPR_URL . '/assets/css/admin.css', array(), $this->version );
+				// fall-through
+			case 'product-review_page_wppr_pro_upsell':
+				wp_enqueue_style( $this->plugin_name . '-upsell-css', WPPR_URL . '/assets/css/upsell.css', array(), $this->version );
+				break;
+			case 'post.php':
+				$wp_scripts = wp_scripts();
+				wp_enqueue_style( $this->plugin_name . '-jquery-ui', sprintf( '//ajax.googleapis.com/ajax/libs/jqueryui/%s/themes/smoothness/jquery-ui.css', $wp_scripts->registered['jquery-ui-core']->ver ), array(), $this->version );
+				break;
 		}
 	}
 
@@ -108,16 +114,13 @@ class WPPR_Admin {
 		 * class.
 		 */
 
-		if ( $hook == 'toplevel_page_wppr' ) {
-			wp_enqueue_script(
-				$this->plugin_name . '-admin-js',
-				WPPR_URL . '/assets/js/admin.js',
-				array(
-					'jquery',
-					'wp-color-picker',
-				),
-				$this->version
-			);
+		switch ( $hook ) {
+			case 'toplevel_page_wppr':
+				wp_enqueue_script( $this->plugin_name . '-admin-js', WPPR_URL . '/assets/js/admin.js', array( 'jquery', 'wp-color-picker' ), $this->version );
+				break;
+			case 'post.php':
+				wp_enqueue_script( $this->plugin_name . '-post', WPPR_URL . '/assets/js/post.js', array( 'jquery-ui-accordion' ), $this->version );
+				break;
 		}
 
 		$this->load_review_cpt();
