@@ -60,11 +60,15 @@ $check = $review->is_active() ? 'yes' : 'no';
 						<label for="wppr-editor-review-type"><?php _e( 'Review Type', 'wp-product-review' ); ?></label>
 						<?php
 						$schema_types = $schema->get_types();
+						$default = $review->get_type();
+						if ( empty( $default ) ) {
+							$default = 'Product';
+						}
 						echo $html_helper->select(
 							array(
 								'name'      => 'wppr-editor-review-type',
 								'id'        => 'wppr-editor-review-type',
-								'value'     => empty( $review->get_type() ) ? 'Product' : $review->get_type(),
+								'value'     => $default,
 								'options'   => array_combine(
 									array_keys( $schema_types ),
 									array_keys( $schema_types )
