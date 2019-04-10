@@ -186,7 +186,7 @@ if ( ! function_exists( 'wppr_layout_get_image' ) ) {
 		$links              = array_filter( $links );
 		$image_link         = reset( $links );
 		$lightbox           = '';
-		if ( $review_object->get_click() == 'image' ) {
+		if ( $review_object->get_click() === 'image' ) {
 			$lightbox       = 'data-lightbox="' . esc_url( $src ) . '"';
 			$image_link     = $review_object->get_image();
 		}

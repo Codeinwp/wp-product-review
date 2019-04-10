@@ -213,7 +213,7 @@ class WPPR_Autoloader {
 	 * @return bool
 	 */
 	public static function filter_excluded_files( \SplFileInfo $file, $key, \RecursiveDirectoryIterator $iterator ) {
-		if ( ! in_array( $file->getFilename(), static::$excluded_files ) ) {
+		if ( ! in_array( $file->getFilename(), static::$excluded_files, true ) ) {
 			return true;
 		}
 

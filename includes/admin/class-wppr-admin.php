@@ -197,10 +197,10 @@ class WPPR_Admin {
 		if ( ! isset( $nonce['name'] ) ) {
 			die( 'invalid nonce field' );
 		}
-		if ( $nonce['name'] != 'wppr_nonce_settings' ) {
+		if ( $nonce['name'] !== 'wppr_nonce_settings' ) {
 			die( 'invalid nonce name' );
 		}
-		if ( wp_verify_nonce( $nonce['value'], 'wppr_save_global_settings' ) != 1 ) {
+		if ( wp_verify_nonce( $nonce['value'], 'wppr_save_global_settings' ) !== 1 ) {
 			die( 'invalid nonce value' );
 		}
 
