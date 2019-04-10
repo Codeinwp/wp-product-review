@@ -1,9 +1,9 @@
 .idea
 node_modules
+package-lock.json
 logs
 artifact
 vendor
 bin
 composer.lock
-package-lock.json
 dist

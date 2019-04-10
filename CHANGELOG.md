@@ -1,4 +1,30 @@
 
+ ### v3.5.2 - 2019-02-28 
+ **Changes:** 
+ * Fix issues with Gutenberg
+* Tested upto 5.1
+ 
+ ### v3.5.1 - 2019-02-13 
+ **Changes:** 
+ * Fix issue with option not showing to add a review in the post editor screen
+ 
+ ### v3.5.0 - 2019-02-11 
+ **Changes:** 
+ * Fix issue with Gutenberg
+* Outgoing Links should have “noopener”
+* Fix RTL support for review comments slider
+* Fix default template showing empty image tag
+* Add ability to recalculate comment ratings
+* Add widget for Top rated products by tag or custom taxonomy
+* Fix user rating in comment for small screens
+ 
+ ### v3.4.10 - 2018-12-06 
+ **Changes:** 
+ * Add filter to change schema information
+* Limit decimal points when user influence is on
+* Fix bug with widget
+* Tested with WP 5.0
+ 
  ### v3.4.9 - 2018-10-24 
  **Changes:** 
  * Add support for review post type in preloader, shortcode and category archive page

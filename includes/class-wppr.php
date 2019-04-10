@@ -67,7 +67,7 @@ class WPPR {
 	 */
 	public function __construct() {
 		$this->plugin_name = 'wppr';
-		$this->version     = '3.4.10';
+		$this->version     = '3.5.2';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -133,6 +133,9 @@ class WPPR {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'wp_ajax_update_options', $plugin_admin, 'update_options' );
+		$this->loader->add_action( 'wp_ajax_get_taxonomies', $plugin_admin, 'get_taxonomies' );
+		$this->loader->add_action( 'wp_ajax_get_categories', $plugin_admin, 'get_categories' );
+		$this->loader->add_action( 'wp_ajax_reset_comment_ratings', $plugin_admin, 'reset_comment_ratings' );
 		$this->loader->add_action( 'load-edit.php', $plugin_admin, 'get_additional_fields' );
 		$this->loader->add_action( 'wppr_settings_section_upsell', $plugin_admin, 'settings_section_upsell', 10, 1 );
 		$this->loader->add_action( 'after_setup_theme', $plugin_admin, 'add_image_size' );
@@ -146,8 +149,12 @@ class WPPR {
 		$plugin_widget_latest = new WPPR_Latest_Products_Widget();
 		$this->loader->add_action( 'widgets_init', $plugin_widget_latest, 'register' );
 
-		$plugin_widget_top = new WPPR_Top_Products_Widget();
+		$plugin_widget_old_top = new WPPR_Top_Products_Widget();
+		$this->loader->add_action( 'widgets_init', $plugin_widget_old_top, 'register' );
+
+		$plugin_widget_top = new WPPR_Top_Reviews_Widget();
 		$this->loader->add_action( 'widgets_init', $plugin_widget_top, 'register' );
+
 	}
 
 	/**
@@ -289,6 +296,31 @@ class WPPR {
 				'public'                => true,
 				'show_in_menu'          => true,
 				'rewrite'               => array( 'slug' => 'wpprcategory', 'with_front' => true ),
+			)
+		);
+
+		register_taxonomy(
+			'wppr_tag',
+			'wppr_review',
+			array(
+				'hierarchical'          => false,
+				'labels'                => array(
+					'name'                => __( 'Review Tag', 'wp-product-review' ),
+					'singular_name'       => __( 'Review Tag', 'wp-product-review' ),
+					'search_items'        => __( 'Search Review Tags', 'wp-product-review' ),
+					'all_items'           => __( 'All Review Tags', 'wp-product-review' ),
+					'parent_item'         => __( 'Parent Review Tag', 'wp-product-review' ),
+					'parent_item_colon'   => __( 'Parent Review Tag', 'wp-product-review' ) . ':',
+					'edit_item'           => __( 'Edit Review Tag', 'wp-product-review' ),
+					'update_item'         => __( 'Update Review Tag', 'wp-product-review' ),
+					'add_new_item'        => __( 'Add New Review Tag', 'wp-product-review' ),
+					'new_item_name'       => __( 'New Review Tag', 'wp-product-review' ),
+					'menu_name'           => __( 'Review Tags', 'wp-product-review' ),
+				),
+				'show_admin_column'     => true,
+				'public'                => true,
+				'show_in_menu'          => true,
+				'rewrite'               => array( 'slug' => 'wpprtag', 'with_front' => true ),
 			)
 		);
 

@@ -40,4 +40,21 @@ jQuery("document").ready(function () {
 			$btn.removeClass('disabled');
 		});
 	});
+
+    jQuery('.wppr_reset_comment_ratings').on('click', function(e) {
+        e.preventDefault();
+		var $btn = jQuery(this);
+		$btn.parent().append('<span class="spinner is-active"></span>');
+		$btn.addClass('disabled');
+		var form_data = jQuery('#wppr-settings').serializeArray()
+		var data = {
+			'action': 'reset_comment_ratings',
+			'cwppos_options': form_data
+		};
+		// since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
+		jQuery.post(ajaxurl, data, function (response) {
+			$btn.parent().find('.spinner').remove();
+			$btn.removeClass('disabled');
+		});
+    });
 });

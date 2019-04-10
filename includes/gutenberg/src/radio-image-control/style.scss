@@ -1,0 +1,89 @@
+.components-radio-image-control__container {
+	display: block;
+}
+
+.components-radio-image-control__option {
+	display: inline-block;
+	padding: 5px;
+}
+
+.components-radio-image-control {
+
+	label {
+		display: inline-block;
+		position: relative;
+
+		img {
+			border: 1px solid transparent;
+			max-width: 250px !important;
+		}
+	}
+
+	input {
+		display: none;
+	}
+
+	input + label {
+		.image-clickable {
+			bottom: 0;
+			height: 100%;
+			left: 0;
+			position: absolute;
+			right: 0;
+			top: 0;
+			width: 100%;
+		}
+	}
+
+	input:checked + label {
+		img {
+			border: 1px solid #3498DB;
+			-webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.25);
+			box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.25);
+		}
+	}
+}
+
+.wppr-review-import-review-button {
+	text-align: center;
+	margin: 20px 0;
+}
+
+.wppr-review-import-modal {
+	width: 100%;
+	height: auto;
+
+	.components-modal__content {
+		max-height: 100vh;
+		overflow-y: scroll;
+
+		.cwp_pitem_info {
+			display: inline-block;
+			width: 100%;
+			margin-top: 5px;
+	
+			ul {
+				float: left;
+				width: 30.66%;
+				border: 1px solid #f1f1f1;
+	
+				h4 {
+					margin: 0;
+					padding: 3px 0;
+					border-radius: 3px 3px 0 0;
+					background: #f1f1f1;
+					text-align: center;
+				}
+	
+				li {
+					padding: 2px 5px;
+					margin: 0;
+					border-top: 1px solid #f1f1f1;
+					font-size: 10px;
+					-webkit-transition: all 0.2s ease-in-out;
+					transition: all 0.2s ease-in-out;
+				}
+			}
+		}
+	}
+}

@@ -3,7 +3,7 @@ Contributors: codeinwp,marius2012,marius_codeinwp,hardeepasrani,themeisle,Madali
 Tags:  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin,  google rating, product review, rating, review, star rating, user rating, wp rating, wp review,  google, hreview,rich snippets,seo,snippet
 Author URI: http://themeisle.com
 Requires at least: 3.5
-Tested up to: 5.0
+Tested up to: 5.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -67,6 +67,36 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+= 3.5.2 - 2019-02-28  = 
+
+* Fix issues with Gutenberg
+* Tested upto 5.1
+
+
+= 3.5.1 - 2019-02-13  = 
+
+* Fix issue with option not showing to add a review in the post editor screen
+
+
+= 3.5.0 - 2019-02-11  = 
+
+* Fix issue with Gutenberg
+* Outgoing Links should have “noopener”
+* Fix RTL support for review comments slider
+* Fix default template showing empty image tag
+* Add ability to recalculate comment ratings
+* Add widget for Top rated products by tag or custom taxonomy
+* Fix user rating in comment for small screens
+
+
+= 3.4.10 - 2018-12-06  = 
+
+* Add filter to change schema information
+* Limit decimal points when user influence is on
+* Fix bug with widget
+* Tested with WP 5.0
+
+
 = 3.4.9 - 2018-10-24  = 
 
 * Add support for review post type in preloader, shortcode and category archive page
@@ -515,6 +545,8 @@ Alternatively you can also follow the following steps to install the WP Product 
 
 
 
+
+
 = How to activate user reviews =
 
 By default user reviews are disabled since not all the themes are compatible with this option due to different designs for the comment box. You can easily activate them from General Settings
@@ -683,6 +715,15 @@ https://themeisle.com/contact
 
  = How to dynamically change the price of the review for particular posts = 
  [https://docs.themeisle.com/article/906-how-to-dynamically-change-the-price-of-the-review-for-particular-posts](https://docs.themeisle.com/article/906-how-to-dynamically-change-the-price-of-the-review-for-particular-posts) 
+
+ = Amazon Integration Documentation = 
+ [https://docs.themeisle.com/article/448-amazon-integration-documentation](https://docs.themeisle.com/article/448-amazon-integration-documentation) 
+
+ = In WPPR, how do I,. = 
+ [https://docs.themeisle.com/article/969-in-wppr-how-do-i](https://docs.themeisle.com/article/969-in-wppr-how-do-i) 
+
+ = How to display product title and image both in review comparison table = 
+ [https://docs.themeisle.com/article/981-how-to-display-product-title-and-image-both-in-review-comparison-table](https://docs.themeisle.com/article/981-how-to-display-product-title-and-image-both-in-review-comparison-table) 
 
  == Upgrade Notice ==
 
