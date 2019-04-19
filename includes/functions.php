@@ -400,6 +400,45 @@ if ( ! function_exists( 'wppr_layout_get_affiliate_buttons' ) ) {
 	}
 }
 
+if ( ! function_exists( 'wppr_schema_add_director_to_movie' ) ) {
+	add_filter( 'wppr_schema_data_types_allowed_for_Movie', 'wppr_schema_add_director_to_movie', 10, 1 );
+
+	/**
+	 * Movie has to have the Director field.
+	 */
+	function wppr_schema_add_director_to_movie( $types ) {
+		$types[] = 'schema:Person';
+		return $types;
+	}
+}
+
+if ( ! function_exists( 'wppr_schema_remove_fields_from_movie' ) ) {
+	add_filter( 'wppr_schema_fields_for_Movie', 'wppr_schema_remove_fields_from_movie', 10, 2 );
+
+	/**
+	 * The property materialExtent is not recognised by Google for an object of type Movie.
+	 */
+	function wppr_schema_remove_fields_from_movie( $fields, $subtype ) {
+		unset( $fields['materialExtent'] );
+		return $fields;
+	}
+}
+
+if ( ! function_exists( 'wppr_schema_data_types_allowed_brand' ) ) {
+	add_filter( 'wppr_schema_data_types_allowed_for_Product', 'wppr_schema_data_types_allowed_brand', 10, 1 );
+	add_filter( 'wppr_schema_data_types_allowed_for_IndividualProduct', 'wppr_schema_data_types_allowed_brand', 10, 1 );
+	add_filter( 'wppr_schema_data_types_allowed_for_ProductModel', 'wppr_schema_data_types_allowed_brand', 10, 1 );
+	add_filter( 'wppr_schema_data_types_allowed_for_SomeProducts', 'wppr_schema_data_types_allowed_brand', 10, 1 );
+	add_filter( 'wppr_schema_data_types_allowed_for_Vehicle', 'wppr_schema_data_types_allowed_brand', 10, 1 );
+
+	/**
+	 * IndividualProduct, Product, ProductModel, SomeProducts, Vehicle need the Brand field.
+	 */
+	function wppr_schema_data_types_allowed_brand( $types ) {
+		$types[] = 'schema:Brand';
+		return $types;
+	}
+}
 
 
 if ( function_exists( 'register_block_type' ) ) {

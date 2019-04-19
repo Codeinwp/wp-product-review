@@ -64,7 +64,9 @@ class WPPR_Schema_Model extends WPPR_Model_Abstract {
 	 * @param array $things The tree of things to fetch.
 	 */
 	private function setup_types( array $things ) {
-		$this->data_types_allowed   = apply_filters( 'wppr_schema_data_types_allowed', array( 'schema:Text', 'schema:URL', 'schema:Date', 'schema:Number', 'schema:Boolean', 'schema:DateTime', 'schema:Time', 'schema:Integer', 'schema:Float', 'schema:False', 'schema:True', 'schema:QuantitativeValue', 'schema:Distance' ) );
+		// good for testing.
+		// set_time_limit( 0 );
+		$this->data_types_allowed   = apply_filters( 'wppr_schema_data_types_allowed', array( 'schema:Text', 'schema:URL', 'schema:Date', 'schema:Number', 'schema:Boolean', 'schema:DateTime', 'schema:Time', 'schema:Integer', 'schema:Float', 'schema:False', 'schema:True', 'schema:QuantitativeValue', 'schema:Distance' ), $things );
 		$types      = get_transient( 'wppr_schema_types_' . md5( json_encode( $things ) ) );
 		if ( $types ) {
 			$this->types    = $types;
@@ -82,6 +84,8 @@ class WPPR_Schema_Model extends WPPR_Model_Abstract {
 
 		foreach ( $categories as $type => $parent ) {
 			$subtypes   = array();
+
+			$this->data_types_allowed_for_type = apply_filters( 'wppr_schema_data_types_allowed_for_' . $type, $this->data_types_allowed );
 
 			// get the schema types under this type
 			$subtypes   = $this->parse( array( $type ), '@id', array( 'rdfs:subClassOf > @id' => "schema:{$type}" ) );
@@ -111,7 +115,7 @@ class WPPR_Schema_Model extends WPPR_Model_Abstract {
 
 				ksort( $fields );
 
-				$types[ $subtype ]  = $fields;
+				$types[ $subtype ]  = apply_filters( 'wppr_schema_fields_for_' . $type, $fields, $subtype );
 			}
 		}
 
@@ -187,7 +191,7 @@ class WPPR_Schema_Model extends WPPR_Model_Abstract {
 			if ( count( $data_types ) > 1 ) {
 				$data_types     = array_values( wp_list_pluck( $data_types, '@id' ) );
 			}
-			$common = array_intersect( $this->data_types_allowed, $data_types );
+			$common = array_intersect( $this->data_types_allowed_for_type, $data_types );
 			if ( empty( $common ) ) {
 				$extracted = null;
 			}
