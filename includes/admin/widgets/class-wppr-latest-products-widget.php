@@ -56,7 +56,7 @@ class WPPR_Latest_Products_Widget extends WPPR_Widget_Abstract {
 
 		$reviews = new WPPR_Query_Model();
 		$post    = array();
-		if ( isset( $instance['cwp_tp_category'] ) && trim( $instance['cwp_tp_category'] ) != '' ) {
+		if ( isset( $instance['cwp_tp_category'] ) && trim( $instance['cwp_tp_category'] ) !== '' ) {
 			$post['category_name'] = $instance['cwp_tp_category'];
 		}
 		if ( isset( $instance['cwp_tp_post_types'] ) && ! empty( $instance['cwp_tp_post_types'] ) ) {

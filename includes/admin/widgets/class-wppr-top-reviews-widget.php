@@ -71,7 +71,7 @@ class WPPR_Top_Reviews_Widget extends WPPR_Widget_Abstract {
 
 		$reviews = new WPPR_Query_Model();
 		$post    = array();
-		if ( isset( $instance['cwp_tp_category'] ) && trim( $instance['cwp_tp_category'] ) != '' ) {
+		if ( isset( $instance['cwp_tp_category'] ) && trim( $instance['cwp_tp_category'] ) !== '' ) {
 			$array = explode( ':', $instance['cwp_tp_category'] );
 			$post['category_name'] = $array[1];
 			$post['taxonomy_name'] = $array[0];

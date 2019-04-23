@@ -29,7 +29,7 @@ class WPPR_Gutenberg {
 	 * Returns an instance of this class.
 	 */
 	public static function get_instance() {
-		if ( null == self::$instance ) {
+		if ( null === self::$instance ) {
 			self::$instance = new WPPR_Gutenberg();
 		}
 		return self::$instance;
@@ -129,7 +129,8 @@ class WPPR_Gutenberg {
 				$cons       = isset( $data['wppr_cons'] ) ? $data['wppr_cons'] : array();
 
 				foreach ( $options as $key => $option ) {
-					if ( $option['name'] == '' && $option['value'] == 0 ) {
+					// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
+					if ( $option['name'] === '' && $option['value'] == 0 ) {
 						unset( $options[ $key ] );
 					}
 				}

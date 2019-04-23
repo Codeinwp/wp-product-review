@@ -21,8 +21,8 @@
     "source": "https://github.com/Codeinwp/wp-product-review"
   },
   "require": {
-    "codeinwp/themeisle-sdk": "master",
-    "xrstf/composer-php52": "^1.0.20"
+    "xrstf/composer-php52": "^1.0.20",
+    "codeinwp/themeisle-sdk": "^3.0"
   },
   "autoload": {
     "files": [
