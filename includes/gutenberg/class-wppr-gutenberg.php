@@ -129,7 +129,7 @@ class WPPR_Gutenberg {
 				$cons       = isset( $data['wppr_cons'] ) ? $data['wppr_cons'] : array();
 
 				foreach ( $affiliates as $key => $option ) {
-					if ( $option == '' ) {
+					if ( $option === '' ) {
 						unset( $affiliates[ $key ] );
 					}
 				}
