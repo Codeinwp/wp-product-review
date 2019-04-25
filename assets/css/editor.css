@@ -30,7 +30,7 @@ h4 {
 	margin-left: 11px;
 }
 
-.wppr-review-section input[type="text"] {
+.wppr-review-section input[type="text"]:not(.regular-text) {
 	width: 200px;
 }
 
@@ -129,3 +129,21 @@ label.wppr-upsell-label {
 	margin-top: -42px;
 	margin-right: 10px;
 }
+
+
+.wppr-review-type-fields {
+	display: block;
+}
+
+.wppr-review-type {
+	margin-bottom: 2% !important;
+}
+
+.wppr-review-type-field p.desc {
+	color: #928b8b;
+}
+
+li.wppr-review-type-field label {
+	width: 30%;
+}
+

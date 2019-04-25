@@ -146,6 +146,22 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	private $template = 'default';
 
 	/**
+	 * The schema type.
+	 *
+	 * @access  private
+	 * @var string $type The schema type.
+	 */
+	private $type   = 'Product';
+
+	/**
+	 * The schema type custom fields.
+	 *
+	 * @access  private
+	 * @var array $custom_fields The schema type custom fields.
+	 */
+	private $custom_fields;
+
+	/**
 	 * WPPR_Review constructor.
 	 *
 	 * @since   3.0.0
@@ -177,6 +193,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 				$this->setup_pros_cons();
 				$this->setup_options();
 				$this->count_rating();
+				$this->setup_review_schema();
 				if ( ! is_admin() ) {
 					$this->alter_options();
 				}
@@ -415,7 +432,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		$options_nr = $this->wppr_get_option( 'cwppos_option_nr' );
 		for ( $i = 1; $i <= $options_nr; $i ++ ) {
 			$tmp_name = get_post_meta( $this->ID, 'option_' . $i . '_content', true );
-			if ( $tmp_name != '' ) {
+			if ( $tmp_name !== '' ) {
 				$tmp_score     = get_post_meta( $this->ID, 'option_' . $i . '_grade', true );
 				$options[ $i ] = array(
 					'name'  => $tmp_name,
@@ -592,7 +609,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 				$options = array_merge( $options, $comment['options'] );
 			}
 
-			if ( count( $options ) != 0 ) {
+			if ( count( $options ) !== 0 ) {
 				return ( array_sum( wp_list_pluck( $options, 'value' ) ) / count( $options ) );
 			} else {
 				return 0;
@@ -846,7 +863,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 */
 	public function set_click( $click ) {
 		if ( $click === 'image' || $click === 'link' ) {
-			if ( $this->click != $click ) {
+			if ( $this->click !== $click ) {
 				$this->click = $click;
 
 				return update_post_meta( $this->ID, 'cwp_image_link', $this->click );
@@ -1164,11 +1181,12 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	public function get_json_ld() {
 		$ld           = array(
 			'@context'    => 'http://schema.org/',
-			'@type'       => 'Product',
+			'@type'       => $this->get_type(),
 			'name'        => $this->get_name(),
 			'image'       => $this->get_small_thumbnail(),
 			'description' => $this->get_excerpt(),
 		);
+
 		$ld['offers'] = array(
 			'@type'         => 'Offer',
 			'price'         => number_format( $this->get_price(), 2, '.', '' ),
@@ -1196,7 +1214,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			'datePublished' => get_the_time( 'Y-m-d', $this->get_ID() ),
 		);
 
-		if ( $this->wppr_get_option( 'cwppos_show_userreview' ) != 'yes' ) {
+		if ( $this->wppr_get_option( 'cwppos_show_userreview' ) !== 'yes' ) {
 			$ld['review'] = $review_default;
 
 			return $ld;
@@ -1230,7 +1248,7 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			'reviewCount' => count( $ld['review'] ),
 		);
 
-		return apply_filters( 'wppr_schema', $ld, $this );
+		return $this->populate_json_for_schema( $ld );
 	}
 
 	/**
@@ -1315,4 +1333,90 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			return 'wppr-weak';
 		}
 	}
+
+	/**
+	 * Setup the review schema and its related fields.
+	 *
+	 * @access  private
+	 */
+	private function setup_review_schema() {
+		$name       = get_post_meta( $this->ID, 'wppr_review_type', true );
+		$this->type = $name;
+		$fields       = get_post_meta( $this->ID, 'wppr_review_custom_fields', true );
+		$this->custom_fields = $fields;
+	}
+
+	/**
+	 * Setter method for saving the review type.
+	 *
+	 * @access  public
+	 *
+	 * @param   string $type The new review type.
+	 *
+	 * @return bool
+	 */
+	public function set_type( $type ) {
+		$this->type = $type;
+
+		return update_post_meta( $this->ID, 'wppr_review_type', $type );
+
+	}
+
+	/**
+	 * Get the review schema type.
+	 */
+	public function get_type() {
+		return $this->type;
+	}
+
+	/**
+	 * Setter method for saving the review type custom fields.
+	 *
+	 * @access  public
+	 *
+	 * @param   array $fields The new review type custom fields.
+	 *
+	 * @return bool
+	 */
+	public function set_custom_fields( $fields ) {
+		$this->custom_fields = $fields;
+
+		return update_post_meta( $this->ID, 'wppr_review_custom_fields', $fields );
+
+	}
+
+	/**
+	 * Get the review type custom fields.
+	 */
+	public function get_custom_fields() {
+		return $this->custom_fields;
+	}
+
+	/**
+	 * Get a particular custom field value to display in the template.
+	 */
+	public function get_custom_field( $key ) {
+		$fields = $this->custom_fields;
+		if ( $fields && isset( $fields[ $key ] ) ) {
+			return $fields[ $key ];
+		}
+		return '';
+	}
+
+	/**
+	 * Populate the JSON LD schema for the schema type.
+	 */
+	private function populate_json_for_schema( $ld ) {
+		$fields = $this->get_custom_fields();
+		if ( $fields ) {
+			foreach ( $fields as $key => $value ) {
+				// we do not want to overwrite anything that is already set and we don't want to set empty values.
+				if ( ! isset( $ld[ $key ] ) && ! empty( $value ) ) {
+					$ld[ $key ] = $value;
+				}
+			}
+		}
+		return apply_filters( 'wppr_schema', $ld, $this );
+	}
+
 }
