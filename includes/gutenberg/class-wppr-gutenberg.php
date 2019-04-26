@@ -128,6 +128,12 @@ class WPPR_Gutenberg {
 				$pros       = isset( $data['wppr_pros'] ) ? $data['wppr_pros'] : array();
 				$cons       = isset( $data['wppr_cons'] ) ? $data['wppr_cons'] : array();
 
+				foreach ( $affiliates as $key => $option ) {
+					if ( $option === '' ) {
+						unset( $affiliates[ $key ] );
+					}
+				}
+
 				foreach ( $options as $key => $option ) {
 					// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
 					if ( $option['name'] === '' && $option['value'] == 0 ) {
@@ -147,6 +153,8 @@ class WPPR_Gutenberg {
 			} else {
 				$review->deactivate();
 			}
+
+			return new \WP_REST_Response( array( 'message' => __( 'Review updated.', 'wp-product-review' ) ), 200 );
 		}
 	}
 
