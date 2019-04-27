@@ -93,7 +93,8 @@
                     type    : params.selected
                 },
                 success : function(data){
-                    if(data.data.categories){
+                    categories.empty();
+                    if(data.data && data.data.categories){
                         var $all = '';
                         $.each(data.data.categories, function(tax, arr){
                             var $group = '<optgroup label="' + tax + '">';
@@ -103,9 +104,9 @@
                             $group += '</optgroup>';
                             $all += $group;
                         });
-                        categories.empty().append($all);
-                        categories.trigger("chosen:updated");
+                        categories.append($all);
                     }
+                    categories.trigger("chosen:updated");
                     $('.wppr-cat-spinner').css('visibility', 'hidden').hide();
                 }
             });
