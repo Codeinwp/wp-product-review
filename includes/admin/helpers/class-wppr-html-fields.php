@@ -267,9 +267,10 @@ class WPPR_Html_Fields {
 		$output = '<div class="' . $args['class'] . '">';
 		$index = 0;
 		foreach ( $icons as $icon ) {
-			$selected = trim( $value ) === '' && $index++ == 0 ? 'selected' : ( trim( $value ) === $icon ? 'selected' : '' );
-			$output .= '<i id="' . substr( $icon, 3 ). '" class="dashicons ' . $selected . '"></i>';
+			$selected = trim( $value ) === '' && $index++ == 0 ? 'selected' : ( trim( $value ) === substr( $icon, 1 ) ? 'selected' : '' );
+			$output .= '<i id="' . substr( $icon, 3 ). '" class="dashicons ' . $selected . '" data-icon-value="' . substr( $icon, 1 ) . '"></i>';
 		}
+		$output .= '<input type="hidden" id="' . esc_attr( $args['name'] . '-hidden' ) . '" name="' . esc_attr( $args['name'] ) . '" value="' . esc_attr( $value ) . '">';
 		$output .= '</div>';
 
 		if ( ! class_exists( 'WPPR_PRO' ) ) {
@@ -317,28 +318,4 @@ class WPPR_Html_Fields {
 		return apply_filters( 'wppr_field', $output, $args );
 	}
 
-
-	/**
-	 * Render a hidden field.
-	 *
-	 * @since   3.6.0
-	 * @access  public
-	 * @param   array $args The settings of the input.
-	 * @return mixed
-	 */
-	public function hidden( $args ) {
-		$defaults = $this->define_defaults(
-			array(
-			)
-		);
-		$args     = wp_parse_args( $args, $defaults );
-		if ( is_array( $args['value'] ) ) {
-			$value = $args['value'][0];
-		} else {
-			$value = $args['value'];
-		}
-
-		$output = '<input type="hidden" name="' . esc_attr( $args['name'] ) . '" value="' . esc_attr( $value ) . '">';
-		return apply_filters( 'wppr_field', $output, $args );
-	}
 }
