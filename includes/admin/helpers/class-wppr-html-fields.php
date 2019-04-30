@@ -201,6 +201,7 @@ class WPPR_Html_Fields {
 	/**
 	 * Render a Icon font picker.
 	 *
+	 * @deprecated 3.6.0 This will be replaced by the function `icon`.
 	 * @since   3.0.0
 	 * @access  public
 	 * @param   array $args The settings of the input.
@@ -233,6 +234,43 @@ class WPPR_Html_Fields {
                 ' . $active_icon . '
             </span>
         ';
+
+		if ( ! class_exists( 'WPPR_PRO' ) ) {
+			$output = '<span style="color:red;">' . __( 'You need the PRO <a style="color:red;" href="http://bit.ly/2bhylar" target="_blank" >add-on</a> in order to change the review icons.', 'wp-product-review' ) . '</span>';
+		}
+
+		return apply_filters( 'wppr_field', $output, $args );
+	}
+
+	/**
+	 * Render a Icon picker.
+	 *
+	 * @since   3.6.0
+	 * @access  public
+	 * @param   array $args The settings of the input.
+	 * @return mixed
+	 */
+	public function icon( $args ) {
+		$defaults = $this->define_defaults(
+			array(
+				'class' => 'cwp_bar_icon_field',
+			)
+		);
+		$args     = wp_parse_args( $args, $defaults );
+		if ( is_array( $args['value'] ) ) {
+			$value = $args['value'][0];
+		} else {
+			$value = $args['value'];
+		}
+
+		$icons	= $args['options'];
+		$output = '<div class="' . $args['class'] . '">';
+		$index = 0;
+		foreach ( $icons as $icon ) {
+			$selected = trim( $value ) === '' && $index++ == 0 ? 'selected' : ( trim( $value ) === $icon ? 'selected' : '' );
+			$output .= '<i id="' . substr( $icon, 3 ). '" class="dashicons ' . $selected . '"></i>';
+		}
+		$output .= '</div>';
 
 		if ( ! class_exists( 'WPPR_PRO' ) ) {
 			$output = '<span style="color:red;">' . __( 'You need the PRO <a style="color:red;" href="http://bit.ly/2bhylar" target="_blank" >add-on</a> in order to change the review icons.', 'wp-product-review' ) . '</span>';
@@ -276,6 +314,31 @@ class WPPR_Html_Fields {
 		$args     = wp_parse_args( $args, $defaults );
 		$class    = $this->validate_class( $args['class'] );
 		$output     = '<' . $args['type'] . ' type="' . esc_attr( $args['subtype'] ) . '" class="' . $class . '" name="' . esc_attr( $args['name'] ) . '" value="' . esc_attr( $args['placeholder'] ) . '">' . $args['placeholder'] . '</' . $args['type'] . '>';
+		return apply_filters( 'wppr_field', $output, $args );
+	}
+
+
+	/**
+	 * Render a hidden field.
+	 *
+	 * @since   3.6.0
+	 * @access  public
+	 * @param   array $args The settings of the input.
+	 * @return mixed
+	 */
+	public function hidden( $args ) {
+		$defaults = $this->define_defaults(
+			array(
+			)
+		);
+		$args     = wp_parse_args( $args, $defaults );
+		if ( is_array( $args['value'] ) ) {
+			$value = $args['value'][0];
+		} else {
+			$value = $args['value'];
+		}
+
+		$output = '<input type="hidden" name="' . esc_attr( $args['name'] ) . '" value="' . esc_attr( $value ) . '">';
 		return apply_filters( 'wppr_field', $output, $args );
 	}
 }

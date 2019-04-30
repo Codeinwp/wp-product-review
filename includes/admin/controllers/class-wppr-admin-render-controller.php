@@ -120,20 +120,9 @@ class WPPR_Admin_Render_Controller {
 			case 'input_text':
 				$output .= $this->html_helper->text( $field );
 				break;
-			case 'select':
-				$output .= $this->html_helper->select( $field );
-				break;
-			case 'color':
-				$output .= $this->html_helper->color( $field );
-				break;
-			case 'text':
-				$output .= $this->html_helper->text( $field );
-				break;
-			case 'icon_font':
-				$output .= $this->html_helper->icon_font( $field );
-				break;
-			case 'button':
-				$output .= $this->html_helper->button( $field );
+			default:
+				$method = $field['type'];
+				$output .= $this->html_helper->$method( $field );
 				break;
 		}
 
