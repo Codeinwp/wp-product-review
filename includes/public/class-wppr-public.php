@@ -121,14 +121,6 @@ class Wppr_Public {
 		}
 		$icon = $review->wppr_get_option( 'cwppos_change_bar_icon' );
 
-		if ( 'default' !== $review->get_template() || ( ! empty( $icon ) && $review->wppr_get_option( 'cwppos_fontawesome' ) == 'no' ) ) {
-			wp_enqueue_style( $this->plugin_name . 'font-awesome', WPPR_URL . '/assets/css/font-awesome.min.css', array(), $this->version );
-		}
-
-		if ( $review->wppr_get_option( 'cwppos_show_icon' ) == 'yes' ) {
-			wp_enqueue_style( 'dashicons' );
-		}
-
 		wp_enqueue_style( $this->plugin_name . '-' . $review->get_template() . '-stylesheet', WPPR_URL . '/assets/css/' . $review->get_template() . '.css', array(), $this->version );
 		wp_enqueue_style(
 			$this->plugin_name . '-percentage-circle',
@@ -139,7 +131,7 @@ class Wppr_Public {
 		wp_enqueue_style(
 			$this->plugin_name . '-common',
 			WPPR_URL . '/assets/css/common.css',
-			array(),
+			array( 'dashicons' ),
 			$this->version
 		);
 		$style = $this->generate_styles();
