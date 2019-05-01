@@ -119,7 +119,6 @@ class Wppr_Public {
 			wp_enqueue_style( $this->plugin_name . 'jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
 			wp_enqueue_style( $this->plugin_name . 'comments', WPPR_URL . '/assets/css/comments.css', array(), $this->version );
 		}
-		$icon = $review->wppr_get_option( 'cwppos_change_bar_icon' );
 
 		wp_enqueue_style( $this->plugin_name . '-' . $review->get_template() . '-stylesheet', WPPR_URL . '/assets/css/' . $review->get_template() . '.css', array(), $this->version );
 		wp_enqueue_style(
@@ -134,6 +133,15 @@ class Wppr_Public {
 			array( 'dashicons' ),
 			$this->version
 		);
+
+		$icon = $review->wppr_get_option( 'cwppos_change_bar_icon' );
+
+		// new free and old pro after removing fontawesome
+		if ( WPPR_PRO_VERSION && version_compare( WPPR_PRO_VERSION, '2.4', '<' ) && 'style1' !== $review->get_template() && ! empty( $icon ) ) {
+			wp_enqueue_style( $this->plugin_name . 'fa', WPPR_URL . '/assets/css/font-awesome.min.css', array(), $this->version );
+			wp_enqueue_style( $this->plugin_name . '-fa-compat', WPPR_URL . '/assets/css/fontawesome-compat.css', array(), $this->version );
+		}
+
 		$style = $this->generate_styles();
 
 		$style = apply_filters( 'wppr_global_style', $style );
