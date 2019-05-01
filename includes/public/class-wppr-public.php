@@ -136,10 +136,10 @@ class Wppr_Public {
 
 		$icon = $review->wppr_get_option( 'cwppos_change_bar_icon' );
 
-		// new free and old pro after removing fontawesome
+		// new free and old pro after removing fontawesome with an font awesome icon selected.
 		if ( WPPR_PRO_VERSION && version_compare( WPPR_PRO_VERSION, '2.4', '<' ) && 'style1' !== $review->get_template() && ! empty( $icon ) ) {
-			//wp_enqueue_style( $this->plugin_name . 'fa', WPPR_URL . '/assets/css/font-awesome.min.css', array(), $this->version );
-			//wp_enqueue_style( $this->plugin_name . '-fa-compat', WPPR_URL . '/assets/css/fontawesome-compat.css', array(), $this->version );
+			wp_enqueue_style( $this->plugin_name . 'fa', WPPR_URL . '/assets/css/font-awesome.min.css', array(), $this->version );
+			wp_enqueue_style( $this->plugin_name . '-fa-compat', WPPR_URL . '/assets/css/fontawesome-compat.css', array(), $this->version );
 		}
 
 		$style = $this->generate_styles();
