@@ -318,4 +318,22 @@ class WPPR_Html_Fields {
 		return apply_filters( 'wppr_field', $output, $args );
 	}
 
+	/**
+	 * Render a hidden element.
+	 *
+	 * @since   2.4.0
+	 * @access  public
+	 * @param   array $args The settings of the input.
+	 * @return mixed
+	 */
+	public function hidden( $args ) {
+		$defaults = $this->define_defaults(
+			array(
+			)
+		);
+		$args     = wp_parse_args( $args, $defaults );
+		$output     = '<input type="hidden" name="' . esc_attr( $args['name'] ) . '" value="' . esc_attr( $args['value'] ) . '">';
+		return apply_filters( 'wppr_field', $output, $args );
+	}
+
 }

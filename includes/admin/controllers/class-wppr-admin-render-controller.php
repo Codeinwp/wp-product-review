@@ -111,11 +111,14 @@ class WPPR_Admin_Render_Controller {
 	 * @return mixed
 	 */
 	public function add_element( $field ) {
-		$output = '
-            <div class="controls">
-				<div class="explain"><h4>' . $field['title'] . '</h4></div>
-				<div class="controls-content">
-        ';
+		$output = '';
+		if ( 'hidden' !== $field['type'] ) {
+			$output = '
+				<div class="controls">
+					<div class="explain"><h4>' . $field['title'] . '</h4></div>
+					<div class="controls-content">
+			';
+		}
 		switch ( $field['type'] ) {
 			case 'input_text':
 				$output .= $this->html_helper->text( $field );
@@ -125,8 +128,9 @@ class WPPR_Admin_Render_Controller {
 				$output .= $this->html_helper->$method( $field );
 				break;
 		}
-
-		$output .= '<p class="field_description">' . $field['description'] . '</p></div></div><hr/>';
+		if ( 'hidden' !== $field['type'] ) {
+			$output .= '<p class="field_description">' . $field['description'] . '</p></div></div><hr/>';
+		}
 		echo $output;
 
 		if ( isset( $errors ) ) {
