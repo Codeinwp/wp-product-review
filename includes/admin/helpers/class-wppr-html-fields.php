@@ -267,12 +267,12 @@ class WPPR_Html_Fields {
 			$value = $args['value'];
 		}
 
-		$icons	= $args['options'];
+		$icons  = $args['options'];
 		$output = '<div class="' . $args['class'] . '">';
 		$index = 0;
 		foreach ( $icons as $icon ) {
-			$selected = trim( $value ) === '' && $index++ == 0 ? 'selected' : ( trim( $value ) === substr( $icon, 1 ) ? 'selected' : '' );
-			$output .= '<i id="' . substr( $icon, 3 ). '" class="dashicons ' . $selected . '" data-icon-value="' . substr( $icon, 1 ) . '"></i>';
+			$selected = empty( $value ) && $index++ === 0 ? 'selected' : ( trim( $value ) === substr( $icon, 1 ) ? 'selected' : '' );
+			$output .= '<i id="' . substr( $icon, 3 ) . '" class="dashicons ' . $selected . '" data-icon-value="' . substr( $icon, 1 ) . '"></i>';
 		}
 		$output .= '<input type="hidden" id="' . esc_attr( $args['name'] . '-hidden' ) . '" name="' . esc_attr( $args['name'] ) . '" value="' . esc_attr( $value ) . '">';
 		$output .= '</div>';
