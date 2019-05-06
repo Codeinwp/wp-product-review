@@ -75,20 +75,29 @@
     });
 
     function populate_schema($type){
-        $json = JSON.parse($('#wppr-review-type-fields-template').attr('data-json'));
-        $values = JSON.parse($('#wppr-review-type-fields-template').attr('data-custom-fields'));
+        $json = $values = null;
+        $data = $('#wppr-review-type-fields-template').attr('data-json');
+        if(typeof $data !== 'undefined'){
+            $json = JSON.parse($data);
+        }
+        $data = $('#wppr-review-type-fields-template').attr('data-custom-fields');
+        if(typeof $data !== 'undefined'){
+           $values = JSON.parse($data);
+        }
         $saved_type = $('#wppr-review-type-fields-template').attr('data-type');
         $template = $('#wppr-review-type-fields-template').html();
         $html = '';
-        $.each($json[$type], function(name, data){
-            $value = '';
-            if($type === $saved_type){
-                $value = $values[name];
-            }
-            $desc = data.desc.replace(/<a /g, '<a target="blank" ');
-            $html += $template.replace(/#name#/g, name).replace(/#desc#/, $desc).replace(/#value#/g, $value);
-        });
-        $('.wppr-review-type-fields').empty().append($html);
+        if($json !== null){
+            $.each($json[$type], function(name, data){
+                $value = '';
+                if($type === $saved_type && $values !== null){
+                    $value = $values[name];
+                }
+                $desc = data.desc.replace(/<a /g, '<a target="blank" ');
+                $html += $template.replace(/#name#/g, name).replace(/#desc#/, $desc).replace(/#value#/g, $value);
+            });
+            $('.wppr-review-type-fields').empty().append($html);
+        }
     }
 
 })(jQuery);
