@@ -66,10 +66,28 @@ class WPPR_Global_Settings {
 					'reset'        => __( 'Reset Statistics', 'wp-product-review' ),
 				)
 			);
+
+			$placement  = array(
+				'yes'    => __( 'After content', 'wp-product-review' ),
+				'no'     => __( 'Before content', 'wp-product-review' ),
+			);
+
+			if ( defined( 'WPPR_PRO_VERSION' ) ) {
+				$placement['manual']    = __( 'Manually placed', 'wp-product-review' );
+			}
+
 			self::$instance->fields   = apply_filters(
 				'wppr_settings_fields',
 				array(
 					'general'    => array(
+						'cwppos_show_reviewbox'  => array(
+							'id'          => 'review_position',
+							'name'        => __( 'Position of the review box', 'wp-product-review' ),
+							'description' => '',
+							'type'        => 'select',
+							'options'     => $placement,
+							'default'     => 'yes',
+						),
 						'cwppos_show_userreview' => array(
 							'id'          => 'show_review',
 							'name'        => __( 'Show review comment', 'wp-product-review' ),
