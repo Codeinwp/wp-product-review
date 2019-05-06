@@ -70,18 +70,6 @@ class WPPR_Global_Settings {
 				'wppr_settings_fields',
 				array(
 					'general'    => array(
-						'cwppos_show_reviewbox'  => array(
-							'id'          => 'review_position',
-							'name'        => __( 'Position of the review box', 'wp-product-review' ),
-							'description' => '',
-							'type'        => 'select',
-							'options'     => array(
-								'yes'    => __( 'After content', 'wp-product-review' ),
-								'no'     => __( 'Before content', 'wp-product-review' ),
-								'manual' => __( 'Manually placed', 'wp-product-review' ),
-							),
-							'default'     => 'yes',
-						),
 						'cwppos_show_userreview' => array(
 							'id'          => 'show_review',
 							'name'        => __( 'Show review comment', 'wp-product-review' ),
