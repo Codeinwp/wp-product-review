@@ -1216,9 +1216,9 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 
 		if ( $this->wppr_get_option( 'cwppos_show_userreview' ) !== 'yes' ) {
 			$ld['review'] = $review_default;
-
-			return $ld;
+			return $this->populate_json_for_schema( $ld );
 		}
+
 		$ld['review'][] = $review_default;
 
 		$comments = $this->get_comments_options();
