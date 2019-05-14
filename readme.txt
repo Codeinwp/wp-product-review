@@ -67,6 +67,17 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+= 3.5.2 - 2019-02-28  = 
+
+* Fix issues with Gutenberg
+* Tested upto 5.1
+
+
+= 3.5.1 - 2019-02-13  = 
+
+* Fix issue with option not showing to add a review in the post editor screen
+
+
 = 3.5.0 - 2019-02-11  = 
 
 * Fix issue with Gutenberg

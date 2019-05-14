@@ -67,7 +67,7 @@ class WPPR {
 	 */
 	public function __construct() {
 		$this->plugin_name = 'wppr';
-		$this->version     = '3.5.2';
+		$this->version     = '3.6.0';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -200,8 +200,8 @@ class WPPR {
 		$this->loader->add_action( 'comment_form_logged_in_after', $plugin_public, 'add_comment_fields' );
 		$this->loader->add_action( 'comment_form_after_fields', $plugin_public, 'add_comment_fields' );
 		$this->loader->add_filter( 'comment_text', $plugin_public, 'show_comment_ratings' );
-		$currentTheme = wp_get_theme();
-		if ( $currentTheme->get( 'Name' ) !== 'Bookrev' && $currentTheme->get( 'Name' ) !== 'Book Rev Lite' ) {
+		$current_theme = wp_get_theme();
+		if ( $current_theme->get( 'Name' ) !== 'Bookrev' && $current_theme->get( 'Name' ) !== 'Book Rev Lite' ) {
 
 			$this->loader->add_filter( 'the_content', $plugin_public, 'display_on_front' );
 		}

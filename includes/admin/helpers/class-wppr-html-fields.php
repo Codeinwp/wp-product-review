@@ -99,10 +99,14 @@ class WPPR_Html_Fields {
 		if ( is_null( $args['id'] ) ) {
 			$args['id'] = $args['name'];
 		}
-		if ( $args['value'] == null ) {
+		if ( $args['value'] === null ) {
 			$args['value'] = $args['default'];
 		}
 		$output = '<input type="text" ' . $disabled . ' name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( $args['id'] ) . '" class="' . $class . '"   value="' . esc_attr( $args['value'] ) . '" placeholder="' . esc_attr( $args['placeholder'] ) . '"  />';
+
+		if ( isset( $args['desc'] ) ) {
+			$output .= '<p class="desc">' . $args['desc'] . '</p>';
+		}
 
 		return apply_filters( 'wppr_field', $output, $args );
 	}
@@ -153,7 +157,7 @@ class WPPR_Html_Fields {
 		);
 		$args     = wp_parse_args( $args, $defaults );
 		$class    = $this->validate_class( $args['class'] );
-		if ( $args['value'] == null ) {
+		if ( $args['value'] === null ) {
 			$args['value'] = $args['default'];
 		}
 		$disabled = '';
@@ -164,9 +168,9 @@ class WPPR_Html_Fields {
 		foreach ( $args['options'] as $ov => $op ) {
 			$options[ esc_attr( $ov ) ] = esc_html( $op );
 		}
-		$output = '<select class="' . $class . '" name="' . esc_attr( $args['name'] ) . '"' . $disabled . ' > ';
+		$output = '<select class="' . $class . '" id="' . esc_attr( $args['name'] ) . '" name="' . esc_attr( $args['name'] ) . '"' . $disabled . ' > ';
 		foreach ( $options as $k => $v ) {
-			$output .= "<option value='" . $k . "' " . ( ( isset( $args['value'] ) && $args['value'] == $k ) ? 'selected' : '' ) . '>' . $v . '</option>';
+			$output .= "<option value='" . $k . "' " . ( ( isset( $args['value'] ) && $args['value'] === $k ) ? 'selected' : '' ) . '>' . $v . '</option>';
 		}
 		$output .= '</select>';
 
@@ -189,7 +193,7 @@ class WPPR_Html_Fields {
 		);
 		$args     = wp_parse_args( $args, $defaults );
 		$class    = $this->validate_class( $args['class'] );
-		if ( $args['value'] == null ) {
+		if ( $args['value'] === null ) {
 			$args['value'] = $args['default'];
 		}
 		$output = '<input type="hidden" class="' . $class . '" id="' . esc_attr( $args['id'] ) . '_color" name="' . esc_attr( $args['name'] ) . '" value="' . esc_attr( $args['value'] ) . '"/></br>
@@ -201,6 +205,7 @@ class WPPR_Html_Fields {
 	/**
 	 * Render a Icon font picker.
 	 *
+	 * @deprecated 3.6.0 This will be replaced by the function `icon`.
 	 * @since   3.0.0
 	 * @access  public
 	 * @param   array $args The settings of the input.
@@ -218,7 +223,7 @@ class WPPR_Html_Fields {
 		} else {
 			$value = $args['value'];
 		}
-		if ( trim( $value ) != '' ) {
+		if ( trim( $value ) !== '' ) {
 			$active_icon = '
             <i class="fa fa-fw">&' . $value . '</i>
             <a href="#" class="useDefault">' . __( '. Use Default Styling', 'wp-product-review' ) . ' </a>
@@ -233,6 +238,44 @@ class WPPR_Html_Fields {
                 ' . $active_icon . '
             </span>
         ';
+
+		if ( ! class_exists( 'WPPR_PRO' ) ) {
+			$output = '<span style="color:red;">' . __( 'You need the PRO <a style="color:red;" href="http://bit.ly/2bhylar" target="_blank" >add-on</a> in order to change the review icons.', 'wp-product-review' ) . '</span>';
+		}
+
+		return apply_filters( 'wppr_field', $output, $args );
+	}
+
+	/**
+	 * Render a Icon picker.
+	 *
+	 * @since   3.6.0
+	 * @access  public
+	 * @param   array $args The settings of the input.
+	 * @return mixed
+	 */
+	public function icon( $args ) {
+		$defaults = $this->define_defaults(
+			array(
+				'class' => 'cwp_bar_icon_field',
+			)
+		);
+		$args     = wp_parse_args( $args, $defaults );
+		if ( is_array( $args['value'] ) ) {
+			$value = $args['value'][0];
+		} else {
+			$value = $args['value'];
+		}
+
+		$icons  = $args['options'];
+		$output = '<div class="' . $args['class'] . '">';
+		$index = 0;
+		foreach ( $icons as $icon ) {
+			$selected = empty( $value ) && $index++ === 0 ? 'selected' : ( trim( $value ) === substr( $icon, 1 ) ? 'selected' : '' );
+			$output .= '<i id="' . substr( $icon, 3 ) . '" class="dashicons ' . $selected . '" data-icon-value="' . substr( $icon, 1 ) . '"></i>';
+		}
+		$output .= '<input type="hidden" id="' . esc_attr( $args['name'] . '-hidden' ) . '" name="' . esc_attr( $args['name'] ) . '" value="' . esc_attr( $value ) . '">';
+		$output .= '</div>';
 
 		if ( ! class_exists( 'WPPR_PRO' ) ) {
 			$output = '<span style="color:red;">' . __( 'You need the PRO <a style="color:red;" href="http://bit.ly/2bhylar" target="_blank" >add-on</a> in order to change the review icons.', 'wp-product-review' ) . '</span>';
@@ -278,4 +321,23 @@ class WPPR_Html_Fields {
 		$output     = '<' . $args['type'] . ' type="' . esc_attr( $args['subtype'] ) . '" class="' . $class . '" name="' . esc_attr( $args['name'] ) . '" value="' . esc_attr( $args['placeholder'] ) . '">' . $args['placeholder'] . '</' . $args['type'] . '>';
 		return apply_filters( 'wppr_field', $output, $args );
 	}
+
+	/**
+	 * Render a hidden element.
+	 *
+	 * @since   2.4.0
+	 * @access  public
+	 * @param   array $args The settings of the input.
+	 * @return mixed
+	 */
+	public function hidden( $args ) {
+		$defaults = $this->define_defaults(
+			array(
+			)
+		);
+		$args     = wp_parse_args( $args, $defaults );
+		$output     = '<input type="hidden" name="' . esc_attr( $args['name'] ) . '" value="' . esc_attr( $args['value'] ) . '">';
+		return apply_filters( 'wppr_field', $output, $args );
+	}
+
 }

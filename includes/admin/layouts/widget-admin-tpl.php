@@ -29,7 +29,7 @@
 <?php
 foreach( get_post_types( '', 'objects' ) as $post_type ) {
 	?>
-	<option value="<?php echo $post_type->name;?>" <?php echo in_array($post_type->name, $instance['cwp_tp_post_types']) ? 'selected' : '';?>><?php echo $post_type->label;?></option>
+	<option value="<?php echo $post_type->name;?>" <?php echo in_array( $post_type->name, $instance['cwp_tp_post_types'], true) ? 'selected' : '';?>><?php echo $post_type->label;?></option>
 	<?php
 	}
 ?>
