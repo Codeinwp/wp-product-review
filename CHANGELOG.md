@@ -1,4 +1,11 @@
 
+ ### v3.6.0 - 2019-05-14 
+ **Changes:** 
+ * Add support for more schema types
+* Use Dashicons instead of FontAwesome
+* Fix issue with buy button in listing table
+* Tested up to WP 5.2
+ 
  ### v3.5.2 - 2019-02-28 
  **Changes:** 
  * Fix issues with Gutenberg

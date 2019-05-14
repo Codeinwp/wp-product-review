@@ -67,6 +67,14 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 ## Changelog ##
+### 3.6.0 - 2019-05-14  ###
+
+* Add support for more schema types
+* Use Dashicons instead of FontAwesome
+* Fix issue with buy button in listing table
+* Tested up to WP 5.2
+
+
 ### 3.5.2 - 2019-02-28  ###
 
 * Fix issues with Gutenberg
