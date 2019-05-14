@@ -23,7 +23,7 @@ Template 1
 	display: table-cell;
 	float: left;
 	position: relative;
-	font-family: FontAwesome;
+	font-family: dashicons;
 	font-size: 38px;
 	-webkit-font-smoothing: antialiased;
 	line-height: 1;
@@ -239,7 +239,7 @@ Template 1
 	display: inline-block;
 	height: auto;
 	background: transparent !important;
-	font-family: FontAwesome;
+	font-family: dashicons;
 	font-size: 22px;
 	-webkit-font-smoothing: antialiased;
 	text-align: center;

@@ -111,33 +111,26 @@ class WPPR_Admin_Render_Controller {
 	 * @return mixed
 	 */
 	public function add_element( $field ) {
-		$output = '
-            <div class="controls">
-				<div class="explain"><h4>' . $field['title'] . '</h4></div>
-				<div class="controls-content">
-        ';
+		$output = '';
+		if ( 'hidden' !== $field['type'] ) {
+			$output = '
+				<div class="controls">
+					<div class="explain"><h4>' . $field['title'] . '</h4></div>
+					<div class="controls-content">
+			';
+		}
 		switch ( $field['type'] ) {
 			case 'input_text':
 				$output .= $this->html_helper->text( $field );
 				break;
-			case 'select':
-				$output .= $this->html_helper->select( $field );
-				break;
-			case 'color':
-				$output .= $this->html_helper->color( $field );
-				break;
-			case 'text':
-				$output .= $this->html_helper->text( $field );
-				break;
-			case 'icon_font':
-				$output .= $this->html_helper->icon_font( $field );
-				break;
-			case 'button':
-				$output .= $this->html_helper->button( $field );
+			default:
+				$method = $field['type'];
+				$output .= $this->html_helper->$method( $field );
 				break;
 		}
-
-		$output .= '<p class="field_description">' . $field['description'] . '</p></div></div><hr/>';
+		if ( 'hidden' !== $field['type'] ) {
+			$output .= '<p class="field_description">' . $field['description'] . '</p></div></div><hr/>';
+		}
 		echo $output;
 
 		if ( isset( $errors ) ) {

@@ -43,21 +43,21 @@ if ( ! function_exists( 'wppr_display_rating_stars' ) ) {
 				case 'full':
 					for ( $i = 0; $i < $value; $i++ ) {
 						?>
-			<i class="fa fa-star"></i>
+			<i class="dashicons dashicons-star-filled wppr-dashicons"></i>
 						<?php
 					}
 					break;
 				case 'half':
 					if ( $value ) {
 						?>
-			<i class="fa fa-star-half-o"></i>
+			<i class="dashicons dashicons-star-half wppr-dashicons"></i>
 						<?php
 					}
 					break;
 				case 'empty':
 					for ( $i = 0; $i < $value; $i++ ) {
 						?>
-			<i class="fa fa-star-o"></i>
+			<i class="dashicons dashicons-star-empty wppr-dashicons"></i>
 						<?php
 					}
 					break;

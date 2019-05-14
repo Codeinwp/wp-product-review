@@ -34,3 +34,10 @@
 	text-decoration: none;
 	text-transform: uppercase;
 }
+
+
+.wppr-template .wppr-dashicons {
+	height: 47px;
+	width: 47px;
+	font-size: 47px;
+}

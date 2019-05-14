@@ -155,17 +155,6 @@ class WPPR_Global_Settings {
 							),
 							'default'     => 'no',
 						),
-						'cwppos_fontawesome'     => array(
-							'type'        => 'select',
-							'name'        => __( 'Disable Font Awesome', 'wp-product-review' ),
-							'description' => __( 'Disable Font Awesome for websites that already are including it (increase loading speed)', 'wp-product-review' ),
-							'id'          => 'use_fontawesome',
-							'options'     => array(
-								'yes' => __( 'Yes', 'wp-product-review' ),
-								'no'  => __( 'No', 'wp-product-review' ),
-							),
-							'default'     => 'no',
-						),
 						'wppr_rich_snippet'      => array(
 							'type'        => 'select',
 							'name'        => __( 'Enable Rich Snippets', 'wp-product-review' ),
