@@ -96,7 +96,7 @@ class WPPR_Autoloader {
 		require_once 'class-wppr-recursive-filter.php';
 
 		if ( is_null( static::$file_iterator ) ) {
-			$Iterator              = new RecursiveIteratorIterator(
+			$iterator              = new RecursiveIteratorIterator(
 				new Wppr_Recursive_Filter(
 					$directory,
 					array(
@@ -105,8 +105,8 @@ class WPPR_Autoloader {
 					)
 				)
 			);
-			$Regex                 = new RegexIterator( $Iterator, '/^.+\.php$/i', RecursiveRegexIterator::MATCH );
-			static::$file_iterator = iterator_to_array( $Regex, false );
+			$regex                 = new RegexIterator( $iterator, '/^.+\.php$/i', RecursiveRegexIterator::MATCH );
+			static::$file_iterator = iterator_to_array( $regex, false );
 		}
 
 		$filename = 'class-' . str_replace( '_', '-', strtolower( $class_name ) ) . static::$file_ext;
@@ -133,7 +133,7 @@ class WPPR_Autoloader {
 	protected static function check_namespaces( $class_name ) {
 		$found = false;
 		foreach ( static::$namespaces as $namespace ) {
-			if ( substr( $class_name, 0, strlen( $namespace ) ) == $namespace ) {
+			if ( substr( $class_name, 0, strlen( $namespace ) ) === $namespace ) {
 				$found = true;
 			}
 		}
@@ -213,7 +213,7 @@ class WPPR_Autoloader {
 	 * @return bool
 	 */
 	public static function filter_excluded_files( \SplFileInfo $file, $key, \RecursiveDirectoryIterator $iterator ) {
-		if ( ! in_array( $file->getFilename(), static::$excluded_files ) ) {
+		if ( ! in_array( $file->getFilename(), static::$excluded_files, true ) ) {
 			return true;
 		}
 

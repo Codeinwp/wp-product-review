@@ -157,7 +157,7 @@ abstract class WPPR_Widget_Abstract extends WP_Widget {
 			$instance['cwp_tp_layout'] = 'default.php';
 		}
 
-		if ( $instance['cwp_tp_layout'] == 'default.php' ) {
+		if ( $instance['cwp_tp_layout'] === 'default.php' ) {
 			$instance['cwp_tp_rating_type'] = 'round';
 		} else {
 			$instance['cwp_tp_rating_type'] = 'star';

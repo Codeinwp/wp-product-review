@@ -99,12 +99,12 @@ class Wppr_Public {
 			return;
 		}
 
-		if ( $review->wppr_get_option( 'cwppos_lighbox' ) == 'no' ) {
+		if ( $review->wppr_get_option( 'cwppos_lighbox' ) === 'no' ) {
 			wp_enqueue_script( $this->plugin_name . '-lightbox-js', WPPR_URL . '/assets/js/lightbox.min.js', array( 'jquery' ), $this->version, true );
 			wp_enqueue_style( $this->plugin_name . '-lightbox-css', WPPR_URL . '/assets/css/lightbox.css', array(), $this->version );
 		}
 
-		if ( $review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
+		if ( $review->wppr_get_option( 'cwppos_show_userreview' ) === 'yes' ) {
 			wp_enqueue_script( 'jquery-ui-slider' );
 			wp_enqueue_script( 'jquery-touch-punch' );
 			wp_enqueue_script(
@@ -119,15 +119,6 @@ class Wppr_Public {
 			wp_enqueue_style( $this->plugin_name . 'jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
 			wp_enqueue_style( $this->plugin_name . 'comments', WPPR_URL . '/assets/css/comments.css', array(), $this->version );
 		}
-		$icon = $review->wppr_get_option( 'cwppos_change_bar_icon' );
-
-		if ( 'default' !== $review->get_template() || ( ! empty( $icon ) && $review->wppr_get_option( 'cwppos_fontawesome' ) == 'no' ) ) {
-			wp_enqueue_style( $this->plugin_name . 'font-awesome', WPPR_URL . '/assets/css/font-awesome.min.css', array(), $this->version );
-		}
-
-		if ( $review->wppr_get_option( 'cwppos_show_icon' ) == 'yes' ) {
-			wp_enqueue_style( 'dashicons' );
-		}
 
 		wp_enqueue_style( $this->plugin_name . '-' . $review->get_template() . '-stylesheet', WPPR_URL . '/assets/css/' . $review->get_template() . '.css', array(), $this->version );
 		wp_enqueue_style(
@@ -139,9 +130,18 @@ class Wppr_Public {
 		wp_enqueue_style(
 			$this->plugin_name . '-common',
 			WPPR_URL . '/assets/css/common.css',
-			array(),
+			array( 'dashicons' ),
 			$this->version
 		);
+
+		$icon = $review->wppr_get_option( 'cwppos_change_bar_icon' );
+
+		// new free and old pro after removing fontawesome with an font awesome icon selected.
+		if ( defined( 'WPPR_PRO_VERSION' ) && version_compare( WPPR_PRO_VERSION, '2.4', '<' ) && 'style1' !== $review->get_template() && ! empty( $icon ) ) {
+			wp_enqueue_style( $this->plugin_name . 'fa', WPPR_URL . '/assets/css/font-awesome.min.css', array(), $this->version );
+			wp_enqueue_style( $this->plugin_name . '-fa-compat', WPPR_URL . '/assets/css/fontawesome-compat.css', array(), $this->version );
+		}
+
 		$style = $this->generate_styles();
 
 		$style = apply_filters( 'wppr_global_style', $style );
@@ -183,7 +183,7 @@ class Wppr_Public {
 
 		$review             = new WPPR_Review_Model();
 		$conditional_styles = '';
-		if ( $review->wppr_get_option( 'cwppos_show_icon' ) == 'yes' ) {
+		if ( $review->wppr_get_option( 'cwppos_show_icon' ) === 'yes' ) {
 			$adverb         = is_rtl() ? 'after' : 'before';
 			$direction      = is_rtl() ? 'left' : 'right';
 			$conditional_styles .= '
@@ -195,7 +195,7 @@ class Wppr_Public {
                 ';
 		}
 
-		if ( $review->wppr_get_option( 'cwppos_show_userreview' ) == 'yes' ) {
+		if ( $review->wppr_get_option( 'cwppos_show_userreview' ) === 'yes' ) {
 			$conditional_styles .= '
                 .commentlist .comment-body p {
                     clear: left;
@@ -479,9 +479,9 @@ class Wppr_Public {
 			);
 
 			$review_position_before_content = $this->review->wppr_get_option( 'cwppos_show_reviewbox' );
-			if ( $review_position_before_content == 'yes' ) {
+			if ( $review_position_before_content === 'yes' ) {
 				$content = $content . $output;
-			} elseif ( $review_position_before_content == 'no' ) {
+			} elseif ( $review_position_before_content === 'no' ) {
 				$content = $output . $content;
 			}
 		}
@@ -499,7 +499,7 @@ class Wppr_Public {
 		if ( ! $this->review->is_active() ) {
 			return '';
 		}
-		if ( $this->review->wppr_get_option( 'cwppos_show_userreview' ) != 'yes' ) {
+		if ( $this->review->wppr_get_option( 'cwppos_show_userreview' ) !== 'yes' ) {
 			return '';
 		}
 		$options      = $this->review->get_options();
@@ -535,7 +535,7 @@ class Wppr_Public {
 		if ( ! $review->is_active() ) {
 			return;
 		}
-		if ( $review->wppr_get_option( 'cwppos_show_userreview' ) != 'yes' ) {
+		if ( $review->wppr_get_option( 'cwppos_show_userreview' ) !== 'yes' ) {
 			return;
 		}
 
@@ -578,7 +578,7 @@ class Wppr_Public {
 		if ( ! $this->review->is_active() ) {
 			return $text;
 		}
-		if ( $this->review->wppr_get_option( 'cwppos_show_userreview' ) != 'yes' ) {
+		if ( $this->review->wppr_get_option( 'cwppos_show_userreview' ) !== 'yes' ) {
 			return $text;
 		}
 
@@ -591,13 +591,13 @@ class Wppr_Public {
 		$return = '';
 		$return .= '<div class="user-comments-grades">';
 		foreach ( $options as $k => $option ) {
-			$intGrade = intval( $option['value'] * 10 );
+			$int_grade = intval( $option['value'] * 10 );
 			$return   .= '<div class="comment-meta-option">
                             <p class="comment-meta-option-name">' . $option['name'] . '</p>
                             <p class="comment-meta-option-grade">' . $option['value'] . '</p>
                             <div class="cwpr_clearfix"></div>
-                            <div class="comment-meta-grade-bar ' . $this->review->get_rating_class( $intGrade ) . '">
-                                <div class="comment-meta-grade" style="width: ' . $intGrade . '%"></div>
+                            <div class="comment-meta-grade-bar ' . $this->review->get_rating_class( $int_grade ) . '">
+                                <div class="comment-meta-grade" style="width: ' . $int_grade . '%"></div>
                             </div><!-- end .comment-meta-grade-bar -->
                         </div><!-- end .comment-meta-option -->
 					';

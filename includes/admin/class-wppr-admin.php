@@ -76,13 +76,19 @@ class WPPR_Admin {
 		 * class.
 		 */
 
-		if ( $hook == 'toplevel_page_wppr' ) {
-			wp_enqueue_style( 'wp-color-picker' );
-			wp_enqueue_style( $this->plugin_name . '-dashboard-css', WPPR_URL . '/assets/css/dashboard_styles.css', array(), $this->version );
-			wp_enqueue_style( $this->plugin_name . '-admin-css', WPPR_URL . '/assets/css/admin.css', array(), $this->version );
-		}
-		if ( $hook == 'product-review_page_wppr_pro_upsell' || $hook == 'toplevel_page_wppr' ) {
-			wp_enqueue_style( $this->plugin_name . '-upsell-css', WPPR_URL . '/assets/css/upsell.css', array(), $this->version );
+		switch ( $hook ) {
+			case 'toplevel_page_wppr':
+				wp_enqueue_style( 'wp-color-picker' );
+				wp_enqueue_style( $this->plugin_name . '-dashboard-css', WPPR_URL . '/assets/css/dashboard_styles.css', array(), $this->version );
+				wp_enqueue_style( $this->plugin_name . '-admin-css', WPPR_URL . '/assets/css/admin.css', array(), $this->version );
+				// fall-through
+			case 'product-review_page_wppr_pro_upsell':
+				wp_enqueue_style( $this->plugin_name . '-upsell-css', WPPR_URL . '/assets/css/upsell.css', array(), $this->version );
+				break;
+			case 'post.php':
+				$wp_scripts = wp_scripts();
+				wp_enqueue_style( $this->plugin_name . '-jquery-ui', sprintf( '//ajax.googleapis.com/ajax/libs/jqueryui/%s/themes/smoothness/jquery-ui.css', $wp_scripts->registered['jquery-ui-core']->ver ), array(), $this->version );
+				break;
 		}
 	}
 
@@ -108,16 +114,13 @@ class WPPR_Admin {
 		 * class.
 		 */
 
-		if ( $hook == 'toplevel_page_wppr' ) {
-			wp_enqueue_script(
-				$this->plugin_name . '-admin-js',
-				WPPR_URL . '/assets/js/admin.js',
-				array(
-					'jquery',
-					'wp-color-picker',
-				),
-				$this->version
-			);
+		switch ( $hook ) {
+			case 'toplevel_page_wppr':
+				wp_enqueue_script( $this->plugin_name . '-admin-js', WPPR_URL . '/assets/js/admin.js', array( 'jquery', 'wp-color-picker' ), $this->version );
+				break;
+			case 'post.php':
+				wp_enqueue_script( $this->plugin_name . '-post', WPPR_URL . '/assets/js/post.js', array( 'jquery-ui-accordion' ), $this->version );
+				break;
 		}
 
 		$this->load_review_cpt();
@@ -194,10 +197,10 @@ class WPPR_Admin {
 		if ( ! isset( $nonce['name'] ) ) {
 			die( 'invalid nonce field' );
 		}
-		if ( $nonce['name'] != 'wppr_nonce_settings' ) {
+		if ( $nonce['name'] !== 'wppr_nonce_settings' ) {
 			die( 'invalid nonce name' );
 		}
-		if ( wp_verify_nonce( $nonce['value'], 'wppr_save_global_settings' ) != 1 ) {
+		if ( wp_verify_nonce( $nonce['value'], 'wppr_save_global_settings' ) !== 1 ) {
 			die( 'invalid nonce value' );
 		}
 
@@ -232,10 +235,10 @@ class WPPR_Admin {
 		if ( ! isset( $nonce['name'] ) ) {
 			die( 'invalid nonce field' );
 		}
-		if ( $nonce['name'] != 'wppr_nonce_settings' ) {
+		if ( $nonce['name'] !== 'wppr_nonce_settings' ) {
 			die( 'invalid nonce name' );
 		}
-		if ( wp_verify_nonce( $nonce['value'], 'wppr_save_global_settings' ) != 1 ) {
+		if ( wp_verify_nonce( $nonce['value'], 'wppr_save_global_settings' ) !== 1 ) {
 			die( 'invalid nonce value' );
 		}
 
@@ -368,7 +371,7 @@ class WPPR_Admin {
 		$post_types     = apply_filters( 'wppr_post_types_custom_columns', array() );
 		if ( $post_types ) {
 			foreach ( $post_types as $post_type ) {
-				$type   = in_array( $post_type, array( 'post', 'page' ) ) ? "{$post_type}s" : "{$post_type}_posts";
+				$type   = in_array( $post_type, array( 'post', 'page' ), true ) ? "{$post_type}s" : "{$post_type}_posts";
 				add_filter( "manage_{$type}_columns", array( $this, 'manage_posts_columns' ), 10, 1 );
 				add_action( "manage_{$type}_custom_column", array( $this, 'manage_posts_custom_column' ), 10, 2 );
 			}
@@ -384,7 +387,7 @@ class WPPR_Admin {
 	 */
 	public function restrict_manage_posts( $post_type, $which ) {
 		$post_types     = apply_filters( 'wppr_post_types_custom_filter', array( 'post', 'page' ) );
-		if ( ! $post_types || ! in_array( $post_type, $post_types ) ) {
+		if ( ! $post_types || ! in_array( $post_type, $post_types, true ) ) {
 			return;
 		}
 
@@ -410,7 +413,7 @@ class WPPR_Admin {
 		}
 
 		$post_types     = apply_filters( 'wppr_post_types_custom_filter', array( 'post', 'page' ) );
-		if ( ! in_array( $query->query['post_type'], $post_types ) ) {
+		if ( ! in_array( $query->query['post_type'], $post_types, true ) ) {
 			return $query;
 		}
 
@@ -459,7 +462,7 @@ class WPPR_Admin {
 		if ( ! isset( $current_screen->id ) ) {
 			return;
 		}
-		if ( $current_screen->id != 'wppr_review' ) {
+		if ( $current_screen->id !== 'wppr_review' ) {
 			return;
 		}
 
@@ -536,7 +539,7 @@ class WPPR_Admin {
 	 */
 	public function settings_section_upsell( $section ) {
 		if ( 'general' === $section ) {
-			echo '<label class="wppr-upsell-label"> You can display the review using the <b>[P_REVIEW]</b> shortcode. You can read more about it <a href="https://docs.themeisle.com/article/449-wp-product-review-shortcode-documentation" target="_blank">here</a></label>.';
+			echo '<label class="wppr-upsell-label"> You can display the review using the <b>[P_REVIEW]</b> shortcode. You can read more about it <a href="https://docs.themeisle.com/article/449-wp-product-review-shortcode-documentation" target="_blank">here</a></label>';
 		}
 	}
 

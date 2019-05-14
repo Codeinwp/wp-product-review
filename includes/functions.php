@@ -43,21 +43,21 @@ if ( ! function_exists( 'wppr_display_rating_stars' ) ) {
 				case 'full':
 					for ( $i = 0; $i < $value; $i++ ) {
 						?>
-			<i class="fa fa-star"></i>
+			<i class="dashicons dashicons-star-filled wppr-dashicons"></i>
 						<?php
 					}
 					break;
 				case 'half':
 					if ( $value ) {
 						?>
-			<i class="fa fa-star-half-o"></i>
+			<i class="dashicons dashicons-star-half wppr-dashicons"></i>
 						<?php
 					}
 					break;
 				case 'empty':
 					for ( $i = 0; $i < $value; $i++ ) {
 						?>
-			<i class="fa fa-star-o"></i>
+			<i class="dashicons dashicons-star-empty wppr-dashicons"></i>
 						<?php
 					}
 					break;
@@ -101,8 +101,34 @@ if ( ! function_exists( 'wppr_display_rating_custom_icon' ) ) {
 	}
 }
 
-if ( ! function_exists( 'wppr_layout_get_rating' ) ) {
+if ( ! function_exists( 'wppr_default_get_image' ) ) {
 
+	/**
+	 * Display the imaage for the default template.
+	 */
+	function wppr_default_get_image( $review_object ) {
+		$links                     = $review_object->get_links();
+		$links                     = array_filter( $links );
+		$image_link                = reset( $links );
+		$lightbox                   = '';
+		if ( $review_object->get_click() === 'image' ) {
+			$lightbox   = 'data-lightbox="' . esc_url( $review_object->get_small_thumbnail() ) . '"';
+			$image_link = $review_object->get_image();
+		}
+		?>
+		<div class="rev-wu-image">
+			<a class="wppr-default-img" href="<?php echo esc_url( $image_link ); ?>" <?php echo $lightbox; ?> rel="nofollow" target="_blank">
+				<img
+					src="<?php echo esc_attr( $review_object->get_small_thumbnail() ); ?>"
+					alt="<?php echo esc_attr( $review_object->get_name() ); ?>"
+					class="photo photo-wrapup wppr-product-image"/>
+			</a>
+		</div><!-- end .rev-wu-image -->
+		<?php
+	}
+}
+
+if ( ! function_exists( 'wppr_default_get_rating' ) ) {
 	/**
 	 * Display the rating of the given type.
 	 */
@@ -160,7 +186,7 @@ if ( ! function_exists( 'wppr_layout_get_image' ) ) {
 		$links              = array_filter( $links );
 		$image_link         = reset( $links );
 		$lightbox           = '';
-		if ( $review_object->get_click() == 'image' ) {
+		if ( $review_object->get_click() === 'image' ) {
 			$lightbox       = 'data-lightbox="' . esc_url( $src ) . '"';
 			$image_link     = $review_object->get_image();
 		}
@@ -374,6 +400,45 @@ if ( ! function_exists( 'wppr_layout_get_affiliate_buttons' ) ) {
 	}
 }
 
+if ( ! function_exists( 'wppr_schema_add_director_to_movie' ) ) {
+	add_filter( 'wppr_schema_data_types_allowed_for_Movie', 'wppr_schema_add_director_to_movie', 10, 1 );
+
+	/**
+	 * Movie has to have the Director field.
+	 */
+	function wppr_schema_add_director_to_movie( $types ) {
+		$types[] = 'schema:Person';
+		return $types;
+	}
+}
+
+if ( ! function_exists( 'wppr_schema_remove_fields_from_movie' ) ) {
+	add_filter( 'wppr_schema_fields_for_Movie', 'wppr_schema_remove_fields_from_movie', 10, 2 );
+
+	/**
+	 * The property materialExtent is not recognised by Google for an object of type Movie.
+	 */
+	function wppr_schema_remove_fields_from_movie( $fields, $subtype ) {
+		unset( $fields['materialExtent'] );
+		return $fields;
+	}
+}
+
+if ( ! function_exists( 'wppr_schema_data_types_allowed_brand' ) ) {
+	add_filter( 'wppr_schema_data_types_allowed_for_Product', 'wppr_schema_data_types_allowed_brand', 10, 1 );
+	add_filter( 'wppr_schema_data_types_allowed_for_IndividualProduct', 'wppr_schema_data_types_allowed_brand', 10, 1 );
+	add_filter( 'wppr_schema_data_types_allowed_for_ProductModel', 'wppr_schema_data_types_allowed_brand', 10, 1 );
+	add_filter( 'wppr_schema_data_types_allowed_for_SomeProducts', 'wppr_schema_data_types_allowed_brand', 10, 1 );
+	add_filter( 'wppr_schema_data_types_allowed_for_Vehicle', 'wppr_schema_data_types_allowed_brand', 10, 1 );
+
+	/**
+	 * IndividualProduct, Product, ProductModel, SomeProducts, Vehicle need the Brand field.
+	 */
+	function wppr_schema_data_types_allowed_brand( $types ) {
+		$types[] = 'schema:Brand';
+		return $types;
+	}
+}
 
 
 if ( function_exists( 'register_block_type' ) ) {

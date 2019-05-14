@@ -66,6 +66,16 @@ class WPPR_Global_Settings {
 					'reset'        => __( 'Reset Statistics', 'wp-product-review' ),
 				)
 			);
+
+			$placement  = array(
+				'yes'    => __( 'After content', 'wp-product-review' ),
+				'no'     => __( 'Before content', 'wp-product-review' ),
+			);
+
+			if ( defined( 'WPPR_PRO_VERSION' ) ) {
+				$placement['manual']    = __( 'Manually placed', 'wp-product-review' );
+			}
+
 			self::$instance->fields   = apply_filters(
 				'wppr_settings_fields',
 				array(
@@ -75,11 +85,7 @@ class WPPR_Global_Settings {
 							'name'        => __( 'Position of the review box', 'wp-product-review' ),
 							'description' => '',
 							'type'        => 'select',
-							'options'     => array(
-								'yes'    => __( 'After content', 'wp-product-review' ),
-								'no'     => __( 'Before content', 'wp-product-review' ),
-								'manual' => __( 'Manually placed', 'wp-product-review' ),
-							),
+							'options'     => $placement,
 							'default'     => 'yes',
 						),
 						'cwppos_show_userreview' => array(
@@ -143,17 +149,6 @@ class WPPR_Global_Settings {
 							'name'        => __( 'Disable Lighbox images', 'wp-product-review' ),
 							'description' => __( 'Disable lightbox effect on product images (increase loading speed)', 'wp-product-review' ),
 							'id'          => 'use_lightbox',
-							'options'     => array(
-								'yes' => __( 'Yes', 'wp-product-review' ),
-								'no'  => __( 'No', 'wp-product-review' ),
-							),
-							'default'     => 'no',
-						),
-						'cwppos_fontawesome'     => array(
-							'type'        => 'select',
-							'name'        => __( 'Disable Font Awesome', 'wp-product-review' ),
-							'description' => __( 'Disable Font Awesome for websites that already are including it (increase loading speed)', 'wp-product-review' ),
-							'id'          => 'use_fontawesome',
 							'options'     => array(
 								'yes' => __( 'Yes', 'wp-product-review' ),
 								'no'  => __( 'No', 'wp-product-review' ),
