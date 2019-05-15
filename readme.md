@@ -3,7 +3,7 @@
 **Tags:**  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin,  google rating, product review, rating, review, star rating, user rating, wp rating, wp review,  google, hreview,rich snippets,seo,snippet  
 **Author URI:** http://themeisle.com  
 **Requires at least:** 3.5  
-**Tested up to:** 5.1  
+**Tested up to:** 5.2  
 **Stable tag:** trunk  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -67,6 +67,14 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 ## Changelog ##
+### 3.6.0 - 2019-05-14  ###
+
+* Add support for more schema types
+* Use Dashicons instead of FontAwesome
+* Fix issue with buy button in listing table
+* Tested up to WP 5.2
+
+
 ### 3.5.2 - 2019-02-28  ###
 
 * Fix issues with Gutenberg
