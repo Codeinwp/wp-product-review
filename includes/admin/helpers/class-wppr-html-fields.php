@@ -170,7 +170,8 @@ class WPPR_Html_Fields {
 		}
 		$output = '<select class="' . $class . '" id="' . esc_attr( $args['name'] ) . '" name="' . esc_attr( $args['name'] ) . '"' . $disabled . ' > ';
 		foreach ( $options as $k => $v ) {
-			$output .= "<option value='" . $k . "' " . ( ( isset( $args['value'] ) && $args['value'] === $k ) ? 'selected' : '' ) . '>' . $v . '</option>';
+			// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
+			$output .= "<option value='" . $k . "' " . ( ( isset( $args['value'] ) && $args['value'] == $k ) ? 'selected' : '' ) . '>' . $v . '</option>';
 		}
 		$output .= '</select>';
 
