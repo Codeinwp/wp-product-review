@@ -67,6 +67,12 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 * fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
+= 3.6.1 - 2019-05-22  = 
+
+* Fix error in structured data
+* Fix issue with selecting number of options/pros/cons
+
+
 = 3.6.0 - 2019-05-14  = 
 
 * Add support for more schema types
