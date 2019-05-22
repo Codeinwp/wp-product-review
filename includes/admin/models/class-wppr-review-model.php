@@ -1366,7 +1366,8 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 	 * Get the review schema type.
 	 */
 	public function get_type() {
-		return $this->type;
+		// to support reviews created by an old version that are then displayed by the new version.
+		return empty( $this->type ) ? 'Product' : $this->type;
 	}
 
 	/**
