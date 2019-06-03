@@ -105,6 +105,12 @@ class Wppr_Public {
 		}
 
 		if ( $review->wppr_get_option( 'cwppos_show_userreview' ) === 'yes' ) {
+			$scale		= $review->wppr_get_option( "wppr_use_5_rating_scale" );
+			if ( empty( $scale ) ) {
+				$scale	= 10;
+			}
+			$scale		= 10 * ( 10 / $scale );
+
 			wp_enqueue_script( 'jquery-ui-slider' );
 			wp_enqueue_script( 'jquery-touch-punch' );
 			wp_enqueue_script(
@@ -116,6 +122,8 @@ class Wppr_Public {
 				$this->version,
 				true
 			);
+			wp_localize_script( $this->plugin_name . '-frontpage-js', 'wppr_config', array( 'scale' => $scale ) );
+
 			wp_enqueue_style( $this->plugin_name . 'jqueryui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
 			wp_enqueue_style( $this->plugin_name . 'comments', WPPR_URL . '/assets/css/comments.css', array(), $this->version );
 		}
@@ -514,6 +522,13 @@ class Wppr_Public {
             <div class="cwpr_clearfix"></div>
 		</div>';
 		}
+
+		$scale		= $this->review->wppr_get_option( "wppr_use_5_rating_scale" );
+		if ( empty( $scale ) ) {
+			$scale	= 10;
+		}
+
+		echo '<input type="hidden" name="wppr-scale" value="' . $scale . '">';
 		echo '<div id="wppr-slider-comment">' . implode( '', $sliders ) . '<div class="cwpr_clearfix"></div></div>';
 
 	}
@@ -551,13 +566,16 @@ class Wppr_Public {
 		if ( ! $valid_review ) {
 			return;
 		}
+
+		$scale		= wp_filter_nohtml_kses( $_POST['wppr-scale'] );
+		// for scale of 10 multiply by 1 and for scale of 5 multiply by 2. Store the comment rating as out-of-10 always.
+		$multiplier	= ( 10 / $scale );
+
 		foreach ( $option_names as $k => $value ) {
 			if ( isset( $_POST[ 'wppr-slider-option-' . $k ] ) ) {
-
 				$option_value = wp_filter_nohtml_kses( $_POST[ 'wppr-slider-option-' . $k ] );
-				$option_value = empty( $value ) ? 0 : $option_value;
+				$option_value = $multiplier * ( empty( $value ) ? 0 : $option_value );
 				update_comment_meta( $comment_id, 'meta_option_' . $k, $option_value );
-
 			}
 		}
 		$review->update_comments_rating();
@@ -588,13 +606,23 @@ class Wppr_Public {
 		if ( empty( $options ) ) {
 			return $text;
 		}
+
+		// in what scale to display the ratings?
+		$display	= $this->review->wppr_get_option( "wppr_use_5_rating_scale" );
+		if ( empty( $display ) ) {
+			$display	= 10;
+		}
+
 		$return = '';
 		$return .= '<div class="user-comments-grades">';
 		foreach ( $options as $k => $option ) {
-			$int_grade = intval( $option['value'] * 10 );
+			$value	= $option['value'];
+			$int_grade = intval( $value * 10 );
+			// decrease the value to the display-scale from scale 10.
+			$value	= round( floatval( $value / ( 10 / $display ) ), 2 );
 			$return   .= '<div class="comment-meta-option">
                             <p class="comment-meta-option-name">' . $option['name'] . '</p>
-                            <p class="comment-meta-option-grade">' . $option['value'] . '</p>
+                            <p class="comment-meta-option-grade">' . $value . '</p>
                             <div class="cwpr_clearfix"></div>
                             <div class="comment-meta-grade-bar ' . $this->review->get_rating_class( $int_grade ) . '">
                                 <div class="comment-meta-grade" style="width: ' . $int_grade . '%"></div>

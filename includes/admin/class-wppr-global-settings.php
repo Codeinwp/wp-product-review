@@ -100,6 +100,17 @@ class WPPR_Global_Settings {
 							'disabled'    => ! self::enable_user_comments(),
 							'default'     => 'no',
 						),
+						'wppr_use_5_rating_scale' => array(
+							'id'          => 'use_5_rating_scale',
+							'name'        => __( 'Use rating scale of 5', 'wp-product-review' ),
+							'description' => __( 'Instead of the default, which is on a rating scale of 10', 'wp-product-review' ),
+							'type'        => 'select',
+							'default'		  => '10',
+							'options'     => array(
+								'5' => __( 'Yes', 'wp-product-review' ),
+								'10'  => __( 'No', 'wp-product-review' ),
+							),
+						),
 						'cwppos_infl_userreview' => array(
 							'id'          => 'comment_influence',
 							'name'        => __( 'Visitor Review Influence', 'wp-product-review' ),

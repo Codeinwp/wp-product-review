@@ -31,7 +31,6 @@ if ( ! function_exists( 'wppr_display_rating_stars' ) ) {
 	 */
 	function wppr_display_rating_stars( $template, $review_object, $include_author = true ) {
 		$review_rating = $review_object->get_rating();
-		$rating_10      = round( $review_rating, 0 ) / 10;
 		$rating_5       = round( $review_rating / 20, PHP_ROUND_HALF_UP );
 		?>
 		<div class="wppr-review-stars <?php echo is_rtl() ? 'rtl' : ''; ?>" style="direction: <?php echo is_rtl() ? 'rtl' : ''; ?>">
@@ -133,8 +132,16 @@ if ( ! function_exists( 'wppr_default_get_rating' ) ) {
 	 * Display the rating of the given type.
 	 */
 	function wppr_layout_get_rating( $review_object, $type, $template, $div_class = '', $include_author = false ) {
-		$rating     = round( $review_object->get_rating() );
-		$rating_10  = round( $review_object->get_rating(), 0 ) / 10;
+		$review_rating = $review_object->get_rating();
+		$rating     = round( $review_rating );
+
+		$scale		= $review_object->wppr_get_option( "wppr_use_5_rating_scale" );
+		if ( empty( $scale ) ) {
+			$scale	= 10;
+		}
+		// for scale of 10 divide by 10 and for scale of 5 divide by 20.
+		$scale		= 10 * ( 10 / $scale );
+		$rating_10  = round( $review_rating, 0 ) / $scale;
 
 		switch ( $type ) {
 			case 'donut':
@@ -273,6 +280,15 @@ if ( ! function_exists( 'wppr_layout_get_options_ratings' ) ) {
 	 * Display the option ratings.
 	 */
 	function wppr_layout_get_options_ratings( $review_object, $type ) {
+		$scale		= $review_object->wppr_get_option( "wppr_use_5_rating_scale" );
+		if ( empty( $scale ) ) {
+			$scale	= 10;
+		}
+		$display	= round( $scale );
+
+		// for scale of 10 divide by 10 and for scale of 5 divide by 20.
+		$scale		= 10 * ( 10 / $scale );
+
 		switch ( $type ) {
 			case 'dashes':
 	?>
@@ -286,14 +302,14 @@ if ( ! function_exists( 'wppr_layout_get_options_ratings' ) ) {
 				<span>
 					<h3><?php echo esc_html( apply_filters( 'wppr_option_name_html', $option['name'] ) ); ?></h3>
 				</span>
-				<span><?php echo esc_html( number_format( ( $option['value'] / 10 ), 1 ) ); ?>/10</span>
+				<span><?php echo esc_html( number_format( ( $option['value'] / $scale ), 1 ) ); ?>/<?php echo $display; ?></span>
 			</div>
 			<ul class="cwpr_clearfix <?php echo $class_ul; ?>">
 				<?php
-					$rating     = round( $option['value'] / 10 );
-					$start_from = is_rtl() ? ( 11 - $rating ) : 1;
-					$stop_at    = is_rtl() ? 10 : $rating;
-				for ( $i = 1; $i <= 10; $i ++ ) {
+					$rating     = round( $option['value'] / $scale );
+					$start_from = is_rtl() ? ( $display + 1 - $rating ) : 1;
+					$stop_at    = is_rtl() ? $display : $rating;
+				for ( $i = 1; $i <= $display; $i ++ ) {
 					?>
 					<li <?php echo $i >= $start_from && $i <= $stop_at ? ' class="colored"' : ''; ?>></li>
 					<?php
@@ -317,7 +333,7 @@ if ( ! function_exists( 'wppr_layout_get_options_ratings' ) ) {
 <div class="wppr-review-grade-option">
 <div class="wppr-review-grade-option-header">
 	<span><?php echo esc_html( apply_filters( 'wppr_option_name_html', $option['name'] ) ); ?></span>
-	<span><?php echo esc_html( number_format( ( $review_option_rating / 10 ), 1 ) ); ?></span>
+	<span><?php echo esc_html( number_format( ( $review_option_rating / $scale ), 1 ) ); ?></span>
 </div>
 <div class="wppr-review-grade-option-rating wppr-default <?php echo $review_object->get_rating_class( $review_option_rating ); ?> <?php echo is_rtl() ? 'rtl' : ''; ?>">
 	<span class="<?php echo $review_object->get_rating_class( $review_option_rating ); ?>" style="
@@ -350,10 +366,10 @@ if ( ! function_exists( 'wppr_layout_get_options_ratings' ) ) {
 </div>
 <ul class="wppr-review-option-rating <?php echo apply_filters( 'wppr_option_custom_icon', '' ); ?>">
 	<?php
-		$rating     = round( $option['value'] / 10 );
-		$start_from = is_rtl() ? ( 11 - $rating ) : 1;
-		$stop_at    = is_rtl() ? 10 : $rating;
-	for ( $i = 1; $i <= 10; $i ++ ) {
+		$rating     = round( $option['value'] / $scale );
+		$start_from = is_rtl() ? ( $display + 1 - $rating ) : 1;
+		$stop_at    = is_rtl() ? $display : $rating;
+	for ( $i = 1; $i <= $display; $i ++ ) {
 ?>
 <li class="<?php echo $i >= $start_from && $i <= $stop_at ? $review_object->get_rating_class( $option['value'] ) : ' wppr-default'; ?>"></li>
 			<?php
