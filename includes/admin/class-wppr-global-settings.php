@@ -105,7 +105,7 @@ class WPPR_Global_Settings {
 							'name'        => __( 'Use rating scale of 5', 'wp-product-review' ),
 							'description' => __( 'Instead of the default, which is on a rating scale of 10', 'wp-product-review' ),
 							'type'        => 'select',
-							'default'		  => '10',
+							'default'         => '10',
 							'options'     => array(
 								'5' => __( 'Yes', 'wp-product-review' ),
 								'10'  => __( 'No', 'wp-product-review' ),
@@ -116,7 +116,7 @@ class WPPR_Global_Settings {
 							'name'        => __( 'Comment rating style', 'wp-product-review' ),
 							'description' => __( 'What type of rating style would you like to use?', 'wp-product-review' ),
 							'type'        => 'select',
-							'default'		  => 'slider',
+							'default'         => 'slider',
 							'options'     => array(
 								'slider' => __( 'Slider Rating', 'wp-product-review' ),
 								'star'  => __( 'Star Rating', 'wp-product-review' ),

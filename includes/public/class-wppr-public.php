@@ -105,11 +105,11 @@ class Wppr_Public {
 		}
 
 		if ( $review->wppr_get_option( 'cwppos_show_userreview' ) === 'yes' ) {
-			$scale		= $review->wppr_get_option( "wppr_use_5_rating_scale" );
+			$scale      = $review->wppr_get_option( 'wppr_use_5_rating_scale' );
 			if ( empty( $scale ) ) {
-				$scale	= 10;
+				$scale  = 10;
 			}
-			$scale		= 10 * ( 10 / $scale );
+			$scale      = 10 * ( 10 / $scale );
 
 			wp_enqueue_script( 'jquery-ui-slider' );
 			wp_enqueue_script( 'jquery-touch-punch' );
@@ -556,18 +556,18 @@ class Wppr_Public {
 			return;
 		}
 
-		$scale		= $review->wppr_get_option( 'wppr_use_5_rating_scale' );
+		$scale      = $review->wppr_get_option( 'wppr_use_5_rating_scale' );
 		if ( empty( $scale ) ) {
-			$scale	= 10;
+			$scale  = 10;
 		}
 
 		// for scale of 10 multiply by 1 and for scale of 5 multiply by 2. Store the comment rating as out-of-10 always.
-		$multiplier	= ( 10 / $scale );
+		$multiplier = ( 10 / $scale );
 
 		switch ( $review->wppr_get_option( 'wppr_comment_rating' ) ) {
 			case 'star':
 				// 5 stars means 1, 1.5, 2, 2.5 ... this means always multiply by 2. Store the comment rating as out-of-10 always.
-				$multiplier	= 2;
+				$multiplier = 2;
 				break;
 		}
 
@@ -612,18 +612,18 @@ class Wppr_Public {
 		}
 
 		// in what scale to display the ratings?
-		$display	= $this->review->wppr_get_option( "wppr_use_5_rating_scale" );
+		$display    = $this->review->wppr_get_option( 'wppr_use_5_rating_scale' );
 		if ( empty( $display ) ) {
-			$display	= 10;
+			$display    = 10;
 		}
 
 		$return = '';
 		$return .= '<div class="user-comments-grades">';
 		foreach ( $options as $k => $option ) {
-			$value	= $option['value'];
+			$value  = $option['value'];
 			$int_grade = intval( $value * 10 );
 			// decrease the value to the display-scale from scale 10.
-			$value	= round( floatval( $value / ( 10 / $display ) ), 2 );
+			$value  = round( floatval( $value / ( 10 / $display ) ), 2 );
 			$return   .= '<div class="comment-meta-option">
                             <p class="comment-meta-option-name">' . $option['name'] . '</p>
                             <p class="comment-meta-option-grade">' . $value . '</p>
