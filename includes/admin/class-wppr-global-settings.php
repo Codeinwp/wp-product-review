@@ -111,6 +111,18 @@ class WPPR_Global_Settings {
 								'10'  => __( 'No', 'wp-product-review' ),
 							),
 						),
+						'wppr_comment_rating' => array(
+							'id'          => 'comment_rating',
+							'name'        => __( 'Comment rating style', 'wp-product-review' ),
+							'description' => __( 'What type of rating style would you like to use?', 'wp-product-review' ),
+							'type'        => 'select',
+							'default'		  => 'slider',
+							'options'     => array(
+								'slider' => __( 'Slider Rating', 'wp-product-review' ),
+								'star'  => __( 'Star Rating', 'wp-product-review' ),
+							),
+							'disabled'    => ! self::enable_user_comments(),
+						),
 						'cwppos_infl_userreview' => array(
 							'id'          => 'comment_influence',
 							'name'        => __( 'Visitor Review Influence', 'wp-product-review' ),

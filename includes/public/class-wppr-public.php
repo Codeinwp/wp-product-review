@@ -510,26 +510,15 @@ class Wppr_Public {
 		if ( $this->review->wppr_get_option( 'cwppos_show_userreview' ) !== 'yes' ) {
 			return '';
 		}
-		$options      = $this->review->get_options();
-		$option_names = wp_list_pluck( $options, 'name' );
-		$sliders      = array();
-		foreach ( $option_names as $k => $value ) {
-			$sliders[] =
-				'<div class="wppr-comment-form-meta ' . ( is_rtl() ? 'rtl' : '' ) . '">
-            <label for="wppr-slider-option-' . $k . '">' . $value . '</label>
-            <input type="text" id="wppr-slider-option-' . $k . '" class="meta_option_input" value="" name="wppr-slider-option-' . $k . '" readonly="readonly">
-            <div class="wppr-comment-meta-slider"></div>
-            <div class="cwpr_clearfix"></div>
-		</div>';
-		}
 
-		$scale		= $this->review->wppr_get_option( "wppr_use_5_rating_scale" );
-		if ( empty( $scale ) ) {
-			$scale	= 10;
+		switch ( $this->review->wppr_get_option( 'wppr_comment_rating' ) ) {
+			case 'star':
+				include_once WPPR_PATH . '/includes/public/layouts/comment-rating-star-tpl.php';
+				break;
+			default:
+				include_once WPPR_PATH . '/includes/public/layouts/comment-rating-slider-tpl.php';
+				break;
 		}
-
-		echo '<input type="hidden" name="wppr-scale" value="' . $scale . '">';
-		echo '<div id="wppr-slider-comment">' . implode( '', $sliders ) . '<div class="cwpr_clearfix"></div></div>';
 
 	}
 
@@ -567,9 +556,20 @@ class Wppr_Public {
 			return;
 		}
 
-		$scale		= wp_filter_nohtml_kses( $_POST['wppr-scale'] );
+		$scale		= $review->wppr_get_option( 'wppr_use_5_rating_scale' );
+		if ( empty( $scale ) ) {
+			$scale	= 10;
+		}
+
 		// for scale of 10 multiply by 1 and for scale of 5 multiply by 2. Store the comment rating as out-of-10 always.
 		$multiplier	= ( 10 / $scale );
+
+		switch ( $review->wppr_get_option( 'wppr_comment_rating' ) ) {
+			case 'star':
+				// 5 stars means 1, 1.5, 2, 2.5 ... this means always multiply by 2. Store the comment rating as out-of-10 always.
+				$multiplier	= 2;
+				break;
+		}
 
 		foreach ( $option_names as $k => $value ) {
 			if ( isset( $_POST[ 'wppr-slider-option-' . $k ] ) ) {
@@ -601,6 +601,10 @@ class Wppr_Public {
 		}
 
 		global $comment;
+
+		if ( ! $comment ) {
+			return $text;
+		}
 
 		$options = $this->review->get_comment_options( $comment->comment_ID );
 		if ( empty( $options ) ) {
