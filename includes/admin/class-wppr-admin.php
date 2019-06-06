@@ -82,8 +82,8 @@ class WPPR_Admin {
 				wp_enqueue_style( $this->plugin_name . '-dashboard-css', WPPR_URL . '/assets/css/dashboard_styles.css', array(), $this->version );
 				wp_enqueue_style( $this->plugin_name . '-admin-css', WPPR_URL . '/assets/css/admin.css', array(), $this->version );
 				// fall-through
-			case 'product-review_page_wppr_pro_upsell':
-				wp_enqueue_style( $this->plugin_name . '-upsell-css', WPPR_URL . '/assets/css/upsell.css', array(), $this->version );
+			case 'product-review_page_wppr-support':
+				wp_enqueue_style( $this->plugin_name . '-upsell-css', WPPR_URL . '/assets/css/support.css', array(), $this->version );
 				break;
 			case 'post.php':
 				$wp_scripts = wp_scripts();
@@ -145,20 +145,18 @@ class WPPR_Admin {
 			'dashicons-star-half',
 			'99.87414'
 		);
-		if ( ! defined( 'WPPR_PRO_VERSION' ) ) {
-			add_submenu_page(
-				'wppr',
-				__( 'More Features', 'wp-product-review' ),
-				__( 'More Features ', 'wp-product-review' ) . '<span class="dashicons
-		dashicons-star-filled" style="vertical-align:-5px; padding-left:2px; color:#FFCA54;"></span>',
-				'manage_options',
-				'wppr_pro_upsell',
-				array(
-					$this,
-					'page_upsell',
-				)
-			);
-		}
+
+		add_submenu_page(
+			'wppr',
+			__( 'Support', 'wp-product-review' ),
+			__( 'Support', 'wp-product-review' ) . '<span class="dashicons dashicons-editor-help more-features-icon" style="width: 17px; height: 17px; margin-left: 4px; color: #ffca54; font-size: 17px; vertical-align: -3px;"></span>',
+			'manage_options',
+			'wppr-support',
+			array(
+				$this,
+				'render_support',
+			)
+		);
 	}
 
 	/**
@@ -174,14 +172,14 @@ class WPPR_Admin {
 	}
 
 	/**
-	 * Method to render up-sell page.
+	 * Method to render support page.
 	 *
 	 * @since   3.0.0
 	 * @access  public
 	 */
-	public function page_upsell() {
+	public function render_support() {
 		$render = new WPPR_Admin_Render_Controller( $this->plugin_name, $this->version );
-		$render->retrive_template( 'upsell' );
+		$render->retrive_template( 'support' );
 	}
 
 	/**
@@ -549,5 +547,22 @@ class WPPR_Admin {
 	public function add_image_size() {
 		add_image_size( 'wppr-widget', 50, 50 );
 	}
+
+	/**
+	 * On activation of the plugin
+	 *
+	 * @access  public
+	 */
+	public function on_activation( $plugin ) {
+		if ( defined( 'TI_UNIT_TESTING' ) ) {
+			return;
+		}
+
+		if ( $plugin === WPPR_BASENAME ) {
+			wp_redirect( admin_url( 'admin.php?page=wppr-support&tab=help#shortcode' ) );
+			exit();
+		}
+	}
+
 
 }
