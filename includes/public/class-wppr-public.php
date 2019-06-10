@@ -167,7 +167,13 @@ class Wppr_Public {
 		 * Remove any custom icon.
 		 */
 		add_filter( 'wppr_option_custom_icon', '__return_empty_string', 99 );
-		add_action( 'amp_post_template_head', array( $this, 'wppr_amp_add_fa' ), 999 );
+
+		$icon = $model->wppr_get_option( 'cwppos_change_bar_icon' );
+
+		// new free and old pro after removing fontawesome with an font awesome icon selected.
+		if ( defined( 'WPPR_PRO_VERSION' ) && version_compare( WPPR_PRO_VERSION, '2.4', '<' ) && 'style1' !== $this->review->get_template() && ! empty( $icon ) ) {
+			add_action( 'amp_post_template_head', array( $this, 'wppr_amp_add_fa' ), 999 );
+		}
 
 		$model = new WPPR_Query_Model();
 		if ( 'yes' === $model->wppr_get_option( 'wppr_amp' ) ) {
