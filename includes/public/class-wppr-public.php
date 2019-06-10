@@ -165,17 +165,9 @@ class Wppr_Public {
 
 		$model = new WPPR_Query_Model();
 
-		/**
-		 * Remove any custom icon.
-		 */
-		add_filter( 'wppr_option_custom_icon', '__return_empty_string', 99 );
-
 		$icon = $model->wppr_get_option( 'cwppos_change_bar_icon' );
 
-		// new free and old pro after removing fontawesome with an font awesome icon selected.
-		if ( defined( 'WPPR_PRO_VERSION' ) && version_compare( WPPR_PRO_VERSION, '2.4', '<' ) && 'style1' !== $this->review->get_template() && ! empty( $icon ) ) {
-			add_action( 'amp_post_template_head', array( $this, 'wppr_amp_add_fa' ), 999 );
-		}
+		add_action( 'amp_post_template_head', array( $this, 'wppr_amp_add_styles' ), 999 );
 
 		if ( 'yes' === $model->wppr_get_option( 'wppr_amp' ) ) {
 			add_filter( 'wppr_review_option_rating_css', array( $this, 'amp_width_support' ), 99, 2 );
@@ -630,11 +622,11 @@ class Wppr_Public {
 	 * AMP styles for WPPR review amp page.
 	 */
 	public function amp_styles() {
-
 		if ( empty( $this->review ) ) {
 			return;
 		}
 		$template_style = $this->review->get_template();
+
 		$amp_cache_key  = '_wppr_amp_css_' . str_replace( '.', '_', $this->version ) . '_' . $template_style;
 		$output         = get_transient( $amp_cache_key );
 		if ( empty( $output ) ) {
@@ -653,8 +645,9 @@ class Wppr_Public {
 			if ( $wp_filesystem->is_readable( WPPR_PATH . '/assets/css/' . $template_style . '.css' ) ) {
 				$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/' . $template_style . '.css' );
 			}
-			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/rating-amp.css' );
 			$output .= $this->generate_styles();
+			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/rating-amp.css' );
+			$output = apply_filters( 'wppr_global_style', $output );
 			$output = $this->minify_amp_css( $output );
 
 			set_transient( $amp_cache_key, $output, HOUR_IN_SECONDS );
@@ -708,10 +701,20 @@ class Wppr_Public {
 	}
 
 	/**
-	 * Adding Font Awesome at the header for AMP.
+	 * Adding FontAwesome/Dashicons at the header for AMP.
 	 */
-	public function wppr_amp_add_fa() {
-		echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">';
+	public function wppr_amp_add_styles() {
+		$model = new WPPR_Query_Model();
+
+		$icon = $model->wppr_get_option( 'cwppos_change_bar_icon' );
+
+		// new free and old pro after removing fontawesome with an font awesome icon selected.
+		if ( ! empty( $icon ) ) {
+			if ( defined( 'WPPR_PRO_VERSION' ) && version_compare( WPPR_PRO_VERSION, '2.4', '<' ) && 'style1' !== $this->review->get_template() ) {
+				echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">';
+			}
+			echo '<link rel="stylesheet" href="' . site_url( '/wp-includes/css/dashicons.min.css' ) . '"">';
+		}
 	}
 
 	/**
