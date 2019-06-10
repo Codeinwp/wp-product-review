@@ -163,6 +163,8 @@ class Wppr_Public {
 			return;
 		}
 
+		$model = new WPPR_Query_Model();
+
 		/**
 		 * Remove any custom icon.
 		 */
@@ -175,7 +177,6 @@ class Wppr_Public {
 			add_action( 'amp_post_template_head', array( $this, 'wppr_amp_add_fa' ), 999 );
 		}
 
-		$model = new WPPR_Query_Model();
 		if ( 'yes' === $model->wppr_get_option( 'wppr_amp' ) ) {
 			add_filter( 'wppr_review_option_rating_css', array( $this, 'amp_width_support' ), 99, 2 );
 			add_action( 'amp_post_template_css', array( $this, 'amp_styles' ), 999 );
