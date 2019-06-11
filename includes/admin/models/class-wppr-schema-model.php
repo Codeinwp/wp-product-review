@@ -67,6 +67,7 @@ class WPPR_Schema_Model extends WPPR_Model_Abstract {
 		// good for testing.
 		// set_time_limit( 0 );
 		$this->data_types_allowed   = apply_filters( 'wppr_schema_data_types_allowed', array( 'schema:Text', 'schema:URL', 'schema:Date', 'schema:Number', 'schema:Boolean', 'schema:DateTime', 'schema:Time', 'schema:Integer', 'schema:Float', 'schema:False', 'schema:True', 'schema:QuantitativeValue', 'schema:Distance' ), $things );
+		$things		= apply_filters( 'wppr_schema_things', $things );
 		$types      = get_transient( 'wppr_schema_types_' . md5( json_encode( $things ) ) );
 		if ( $types ) {
 			$this->types    = $types;
@@ -74,7 +75,6 @@ class WPPR_Schema_Model extends WPPR_Model_Abstract {
 		}
 
 		$types  = array();
-		$things = apply_filters( 'wppr_schema_things', $things );
 		$categories = array();
 		foreach ( $things as $parent => $type ) {
 			foreach ( $type as $t ) {
