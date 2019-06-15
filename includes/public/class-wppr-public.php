@@ -502,6 +502,11 @@ class Wppr_Public {
 		if ( $this->review->wppr_get_option( 'cwppos_show_userreview' ) !== 'yes' ) {
 			return '';
 		}
+
+		if ( apply_filters( 'wppr_disable_comments', false, $this->review ) ) {
+			return '';
+		}
+
 		$options      = $this->review->get_options();
 		$option_names = wp_list_pluck( $options, 'name' );
 		$sliders      = array();
