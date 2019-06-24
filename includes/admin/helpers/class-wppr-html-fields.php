@@ -341,4 +341,40 @@ class WPPR_Html_Fields {
 		return apply_filters( 'wppr_field', $output, $args );
 	}
 
+	/**
+	 * Render a textarea string.
+	 *
+	 * @since   ?
+	 * @access  public
+	 * @param   array $args The settings of the input.
+	 * @return string
+	 */
+	public function textarea( $args ) {
+		$defaults = $this->define_defaults(
+			array(
+				'class' => 'wppr-text-area',
+			)
+		);
+		$args     = wp_parse_args( $args, $defaults );
+		$class    = $this->validate_class( $args['class'] );
+		$disabled = '';
+		if ( $args['disabled'] ) {
+			$disabled = ' disabled="disabled"';
+		}
+		if ( is_null( $args['id'] ) ) {
+			$args['id'] = $args['name'];
+		}
+		if ( $args['value'] === null ) {
+			$args['value'] = $args['default'];
+		}
+		$rows   = isset( $args['rows'] ) ? $args['rows'] : 3;
+		$cols   = isset( $args['cols'] ) ? $args['cols'] : 50;
+		$output = '<textarea ' . $disabled . ' name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( $args['id'] ) . '" class="' . $class . '" placeholder="' . esc_attr( $args['placeholder'] ) . '" rows=' . $rows . ' cols=' . $cols . '  />' . esc_textarea( $args['value'] ) . '</textarea>';
+
+		if ( isset( $args['desc'] ) ) {
+			$output .= '<p class="desc">' . $args['desc'] . '</p>';
+		}
+
+		return apply_filters( 'wppr_field', $output, $args );
+	}
 }
