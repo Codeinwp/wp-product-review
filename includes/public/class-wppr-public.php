@@ -448,6 +448,7 @@ class Wppr_Public {
 		';
 
 		$scale      = $review->wppr_get_option( 'wppr_use_5_rating_scale' );
+		// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
 		if ( 5 == $scale ) {
 			// change the styles to accommodate fewer icons (out of 5) in the same space.
 			$style  .= '
