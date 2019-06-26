@@ -13,6 +13,7 @@
         $(".wppr-comment-meta-slider").each(function () {
             var min = 0;
             var max = 100;
+            var step = wppr_config.scale / 2;
             if($(this).parent(".wppr-comment-form-meta").hasClass('rtl')){
                 min = -100;
                 max = 0;
@@ -22,6 +23,7 @@
                 min: min,
                 max: max,
                 value: 0,
+                step: step,
                 slide: function (event, ui) {
                     $(comm_meta_input).val(Math.abs(ui.value) / wppr_config.scale);
                 }
