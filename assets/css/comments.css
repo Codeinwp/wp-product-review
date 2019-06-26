@@ -188,9 +188,15 @@
 
 #wppr-comment-rating-stars .wppr-comment-rating-star > input:checked ~ label, /* show gold star when clicked */
 #wppr-comment-rating-stars .wppr-comment-rating-star:not(:checked) > label:hover, /* hover current star */
-#wppr-comment-rating-stars .wppr-comment-rating-star:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+#wppr-comment-rating-stars .wppr-comment-rating-star:not(:checked) > label:hover ~ label {
+	color: #FFD700;
+	cursor: pointer;
+} /* hover previous stars in list */
 
 #wppr-comment-rating-stars .wppr-comment-rating-star > input:checked + label:hover, /* hover current star when changing rating */
 #wppr-comment-rating-stars .wppr-comment-rating-star > input:checked ~ label:hover,
 #wppr-comment-rating-stars .wppr-comment-rating-star > label:hover ~ input:checked ~ label, /* lighten current selection */
-#wppr-comment-rating-stars .wppr-comment-rating-star > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+#wppr-comment-rating-stars .wppr-comment-rating-star > input:checked ~ label:hover ~ label {
+	color: #FFED85;
+	cursor: pointer;
+}
