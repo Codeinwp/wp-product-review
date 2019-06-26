@@ -171,13 +171,12 @@ class Wppr_Public {
 			return;
 		}
 
-		/**
-		 * Remove any custom icon.
-		 */
-		add_filter( 'wppr_option_custom_icon', '__return_empty_string', 99 );
-		add_action( 'amp_post_template_head', array( $this, 'wppr_amp_add_fa' ), 999 );
-
 		$model = new WPPR_Query_Model();
+
+		$icon = $model->wppr_get_option( 'cwppos_change_bar_icon' );
+
+		add_action( 'amp_post_template_head', array( $this, 'wppr_amp_add_styles' ), 999 );
+
 		if ( 'yes' === $model->wppr_get_option( 'wppr_amp' ) ) {
 			add_filter( 'wppr_review_option_rating_css', array( $this, 'amp_width_support' ), 99, 2 );
 			add_action( 'amp_post_template_css', array( $this, 'amp_styles' ), 999 );
@@ -511,6 +510,10 @@ class Wppr_Public {
 			return '';
 		}
 
+		if ( apply_filters( 'wppr_disable_comments', false, $this->review ) ) {
+			return '';
+		}
+
 		switch ( $this->review->wppr_get_option( 'wppr_comment_rating' ) ) {
 			case 'star':
 				include_once WPPR_PATH . '/includes/public/layouts/comment-rating-star-tpl.php';
@@ -655,11 +658,11 @@ class Wppr_Public {
 	 * AMP styles for WPPR review amp page.
 	 */
 	public function amp_styles() {
-
 		if ( empty( $this->review ) ) {
 			return;
 		}
 		$template_style = $this->review->get_template();
+
 		$amp_cache_key  = '_wppr_amp_css_' . str_replace( '.', '_', $this->version ) . '_' . $template_style;
 		$output         = get_transient( $amp_cache_key );
 		if ( empty( $output ) ) {
@@ -678,8 +681,9 @@ class Wppr_Public {
 			if ( $wp_filesystem->is_readable( WPPR_PATH . '/assets/css/' . $template_style . '.css' ) ) {
 				$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/' . $template_style . '.css' );
 			}
-			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/rating-amp.css' );
 			$output .= $this->generate_styles();
+			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/rating-amp.css' );
+			$output = apply_filters( 'wppr_global_style', $output );
 			$output = $this->minify_amp_css( $output );
 
 			set_transient( $amp_cache_key, $output, HOUR_IN_SECONDS );
@@ -733,10 +737,20 @@ class Wppr_Public {
 	}
 
 	/**
-	 * Adding Font Awesome at the header for AMP.
+	 * Adding FontAwesome/Dashicons at the header for AMP.
 	 */
-	public function wppr_amp_add_fa() {
-		echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">';
+	public function wppr_amp_add_styles() {
+		$model = new WPPR_Query_Model();
+
+		$icon = $model->wppr_get_option( 'cwppos_change_bar_icon' );
+
+		// new free and old pro after removing fontawesome with an font awesome icon selected.
+		if ( ! empty( $icon ) ) {
+			if ( defined( 'WPPR_PRO_VERSION' ) && version_compare( WPPR_PRO_VERSION, '2.4', '<' ) && 'style1' !== $this->review->get_template() ) {
+				echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">';
+			}
+			echo '<link rel="stylesheet" href="' . site_url( '/wp-includes/css/dashicons.min.css' ) . '"">';
+		}
 	}
 
 	/**
