@@ -208,6 +208,7 @@ class WPPR {
 
 		$this->loader->add_filter( 'wppr_rating_circle_bar_styles', $plugin_public, 'rating_circle_bar_styles', 10, 2 );
 		$this->loader->add_filter( 'wppr_rating_circle_fill_styles', $plugin_public, 'rating_circle_fill_styles', 10, 2 );
+		$this->loader->add_action( 'wppr_load_template_css', $plugin_public, 'load_template_css', 10, 1 );
 	}
 
 	/**
