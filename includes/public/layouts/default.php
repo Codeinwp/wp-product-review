@@ -31,7 +31,7 @@ $cons = $review_object->get_cons();
 							<?php wppr_layout_get_image( $review_object, 'wppr-default-img', 'photo photo-wrapup wppr-product-image' ); ?>
 						</div>
 
-						<?php wppr_layout_get_rating( $review_object, 'donut', 'default', 'review-wu-grade' ); ?>
+						<?php wppr_layout_get_rating( $review_object, 'donut', 'default', array( 'review-wu-grade' ) ); ?>
 					</div><!-- end .review-wu-left-top -->
 
 					<?php wppr_layout_get_options_ratings( $review_object, 'dashes' ); ?>

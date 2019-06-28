@@ -52,7 +52,7 @@ foreach ( $results as $review ) :
 	$review_class = $review_object->get_rating_class();
 	if ( ! empty( $review_score ) ) {
 		?>
-		<?php wppr_layout_get_rating( $review_object, 'donut', 'style1-widget', 'review-grade-widget wppr-col' ); ?>
+		<?php wppr_layout_get_rating( $review_object, 'donut', 'style1-widget', array( 'review-grade-widget wppr-col' ) ); ?>
 
 	<?php } ?>
 	</li>

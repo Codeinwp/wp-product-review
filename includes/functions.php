@@ -131,7 +131,7 @@ if ( ! function_exists( 'wppr_default_get_rating' ) ) {
 	/**
 	 * Display the rating of the given type.
 	 */
-	function wppr_layout_get_rating( $review_object, $type, $template, $div_class = '', $include_author = false ) {
+	function wppr_layout_get_rating( $review_object, $type, $template, $div_classes = '', $include_author = false ) {
 		$review_rating = $review_object->get_rating();
 		$rating     = round( $review_rating );
 
@@ -143,11 +143,21 @@ if ( ! function_exists( 'wppr_default_get_rating' ) ) {
 		$scale      = 10 * ( 10 / $scale );
 		$rating_10  = round( $review_rating, 0 ) / $scale;
 
+		$div_class1 = $div_class2 = '';
+		if ( is_array( $div_classes ) ) {
+			$div_class1 = array_shift( $div_classes );
+			if ( is_array( $div_classes ) ) {
+				$div_class2 = array_shift( $div_classes );
+			}
+		} else {
+			$div_class1 = $div_classes;
+		}
+
 		switch ( $type ) {
 			case 'donut':
 		?>
-		<div class="<?php echo $div_class; ?>">
-			<div class="review-wu-grade-content">
+		<div class="<?php echo $div_class1; ?>">
+			<div class="review-wu-grade-content <?php echo $div_class2; ?>">
 				<div class="wppr-c100 wppr-p<?php echo esc_attr( $rating ) . ' ' . esc_attr( $review_object->get_rating_class() ); ?>">
 					<span><?php echo esc_html( $rating_10 ); ?></span>
 					<div class="wppr-slice">
