@@ -131,6 +131,9 @@ class Wppr_Public {
 		$this->load_template_css( $review );
 	}
 
+	/**
+	 * Loads the CSS corresponding to the template.
+	 */
 	function load_template_css( $review = null ) {
 		if ( empty( $review ) ) {
 			$review = $this->review;
