@@ -67,7 +67,7 @@ class WPPR {
 	 */
 	public function __construct() {
 		$this->plugin_name = 'wppr';
-		$this->version     = '3.6.1';
+		$this->version     = '3.7.0';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -140,6 +140,7 @@ class WPPR {
 		$this->loader->add_action( 'wppr_settings_section_upsell', $plugin_admin, 'settings_section_upsell', 10, 1 );
 		$this->loader->add_action( 'after_setup_theme', $plugin_admin, 'add_image_size' );
 		$this->loader->add_action( 'wp_ajax_get_categories', $plugin_admin, 'get_categories' );
+		$this->loader->add_action( 'activated_plugin', $plugin_admin, 'on_activation', 10, 1 );
 
 		$plugin_editor = new WPPR_Editor( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'add_meta_boxes', $plugin_editor, 'set_editor' );
@@ -208,6 +209,7 @@ class WPPR {
 
 		$this->loader->add_filter( 'wppr_rating_circle_bar_styles', $plugin_public, 'rating_circle_bar_styles', 10, 2 );
 		$this->loader->add_filter( 'wppr_rating_circle_fill_styles', $plugin_public, 'rating_circle_fill_styles', 10, 2 );
+		$this->loader->add_action( 'wppr_load_template_css', $plugin_public, 'load_template_css', 10, 1 );
 	}
 
 	/**
