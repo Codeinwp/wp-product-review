@@ -21,7 +21,7 @@
 
 		<h2 class="wppr-review-name"><?php echo esc_html( $review_object->get_name() ); ?></h2>
 
-	<?php wppr_layout_get_rating( $review_object, 'stars', 'style1', false ); ?>
+	<?php wppr_layout_get_rating( $review_object, 'stars', 'style1', '', false ); ?>
 
 		<div class="wppr-review-grade">
 			<div class="wppr-review-grade-number">

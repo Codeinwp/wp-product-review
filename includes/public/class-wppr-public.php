@@ -128,6 +128,17 @@ class Wppr_Public {
 			wp_enqueue_style( $this->plugin_name . 'comments', WPPR_URL . '/assets/css/comments.css', array(), $this->version );
 		}
 
+		$this->load_template_css( $review );
+	}
+
+	/**
+	 * Loads the CSS corresponding to the template.
+	 */
+	function load_template_css( $review = null ) {
+		if ( empty( $review ) ) {
+			$review = $this->review;
+		}
+
 		wp_enqueue_style( $this->plugin_name . '-' . $review->get_template() . '-stylesheet', WPPR_URL . '/assets/css/' . $review->get_template() . '.css', array(), $this->version );
 		wp_enqueue_style(
 			$this->plugin_name . '-percentage-circle',
