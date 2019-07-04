@@ -768,6 +768,7 @@ https://themeisle.com/contact
 4. Screenshot 4 Review comment with star rating
 5. Screenshot 5 Settings configuration screen
 6. Screenshot 6 Rich Snippets displayed in Google
+7. Screenshot 7 How ratings appear as comments
 
 for more you can check out
 
