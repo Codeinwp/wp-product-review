@@ -10,11 +10,6 @@
  */
 
 ?>
-<div id="wppr-admin">
-
-	<?php
-	include WPPR_PATH . '/includes/admin/layouts/header-part.php';
-	?>
 
 	<div class="pro-feature">
 		<div class="pro-feature-inner">
@@ -78,5 +73,3 @@
 		<div class="clear"></div>
 		</div>
 	</div>
-	<div class="clear"></div>
-</div>

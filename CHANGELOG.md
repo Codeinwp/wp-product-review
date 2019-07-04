@@ -1,4 +1,9 @@
 
+ ### v3.6.1 - 2019-05-22 
+ **Changes:** 
+ * Fix error in structured data
+* Fix issue with selecting number of options/pros/cons
+ 
  ### v3.6.0 - 2019-05-14 
  **Changes:** 
  * Add support for more schema types

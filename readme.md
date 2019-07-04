@@ -39,7 +39,7 @@ Easily turn your basic posts into in-depth reviews with ratings, pros and cons, 
 
 If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-wordpress-hosting/" rel="nofollow">fastest WordPress hosting</a> or which <a href="http://www.codeinwp.com/blog/15-best-wordpress-review-themes/" rel="nofollow">review themes</a> are playing nice with WP Product review, checkout our blog.
 
- = See how WP Product Review can integrate with your website  =
+ = See how WP Product Review PRO can integrate with your website  =
 
 * [Default review](https://demo.themeisle.com/wp-product-review/sample-review/)
 * [Custom icons ratings](https://demo.themeisle.com/wp-product-review/custom-icons/)
@@ -61,12 +61,13 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 - Add specific user review options to wordpress comments
 - Add rich snippet ( schema ) to your posts
 
-### Translations ###
-
-* sk_SK translation by Patrik Žec (PATWIST) of http://patwist.com
-* fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
-
 ## Changelog ##
+### 3.6.1 - 2019-05-22  ###
+
+* Fix error in structured data
+* Fix issue with selecting number of options/pros/cons
+
+
 ### 3.6.0 - 2019-05-14  ###
 
 * Add support for more schema types
@@ -555,6 +556,7 @@ Alternatively you can also follow the following steps to install the WP Product 
 
 
 
+
 ### How to activate user reviews ###
 
 By default user reviews are disabled since not all the themes are compatible with this option due to different designs for the comment box. You can easily activate them from General Settings
@@ -733,6 +735,21 @@ https://themeisle.com/contact
  = How to display product title and image both in review comparison table = 
  [https://docs.themeisle.com/article/981-how-to-display-product-title-and-image-both-in-review-comparison-table](https://docs.themeisle.com/article/981-how-to-display-product-title-and-image-both-in-review-comparison-table) 
 
+ = How To Use WP Product Review Shortcodes = 
+ [https://docs.themeisle.com/article/449-how-to-use-wp-product-review-shortcodes](https://docs.themeisle.com/article/449-how-to-use-wp-product-review-shortcodes) 
+
+ = How to install the PRO version of WP Product Review = 
+ [https://docs.themeisle.com/article/785-how-to-install-the-pro-version-of-wp-product-review](https://docs.themeisle.com/article/785-how-to-install-the-pro-version-of-wp-product-review) 
+
+ = How the before/after/manual review box placement option works = 
+ [https://docs.themeisle.com/article/865-how-the-beforeaftermanual-review-box-placement-option-works](https://docs.themeisle.com/article/865-how-the-beforeaftermanual-review-box-placement-option-works) 
+
+ = How to display both the product title and image in the review comparison table = 
+ [https://docs.themeisle.com/article/981-how-to-display-both-the-product-title-and-image-in-the-review-comparison-table](https://docs.themeisle.com/article/981-how-to-display-both-the-product-title-and-image-in-the-review-comparison-table) 
+
+ = How to change the widget image size in WP Product Review = 
+ [https://docs.themeisle.com/article/1056-how-to-change-the-widget-image-size-in-wp-product-review](https://docs.themeisle.com/article/1056-how-to-change-the-widget-image-size-in-wp-product-review) 
+
  == Upgrade Notice ==
 
 ### 3.0 ###
@@ -741,9 +758,12 @@ https://themeisle.com/contact
 ## Screenshots ##
 
 1. Screenshot 1 Wrap-up review widget that is added at the end of the posts
-2. Screenshot 2 User Review Options added to wp comments
-3. Screenshot 3 Fully configurable theme options
-4. Screenshot 4 Rich Snippets displayed in Google
+2. Screenshot 2 Review comment on a scale of 5 with slider rating
+3. Screenshot 3 Review comment on a scale of 10 with slider rating
+4. Screenshot 4 Review comment with star rating
+5. Screenshot 5 Settings configuration screen
+6. Screenshot 6 Rich Snippets displayed in Google
+7. Screenshot 7 How ratings appear as comments
 
 for more you can check out
 

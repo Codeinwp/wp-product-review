@@ -100,6 +100,29 @@ class WPPR_Global_Settings {
 							'disabled'    => ! self::enable_user_comments(),
 							'default'     => 'no',
 						),
+						'wppr_use_5_rating_scale' => array(
+							'id'          => 'use_5_rating_scale',
+							'name'        => __( 'Rating scale', 'wp-product-review' ),
+							'description' => __( 'On what scale should reviews be rated?', 'wp-product-review' ),
+							'type'        => 'select',
+							'default'         => '10',
+							'options'     => array(
+								'5' => __( 'On 5', 'wp-product-review' ),
+								'10'  => __( 'On 10', 'wp-product-review' ),
+							),
+						),
+						'wppr_comment_rating' => array(
+							'id'          => 'comment_rating',
+							'name'        => __( 'Comment rating style', 'wp-product-review' ),
+							'description' => __( 'What type of rating style would you like to use?', 'wp-product-review' ),
+							'type'        => 'select',
+							'default'         => 'slider',
+							'options'     => array(
+								'slider' => __( 'Slider', 'wp-product-review' ),
+								'star'  => __( 'Star', 'wp-product-review' ),
+							),
+							'disabled'    => ! self::enable_user_comments(),
+						),
 						'cwppos_infl_userreview' => array(
 							'id'          => 'comment_influence',
 							'name'        => __( 'Visitor Review Influence', 'wp-product-review' ),

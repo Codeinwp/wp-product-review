@@ -148,3 +148,55 @@
 		margin: 0 0 20px 0;
 	}
 }
+
+
+#wppr-comment-rating-stars .wppr-comment-rating-star {
+	width: 20%;
+}
+#wppr-comment-rating-stars .wppr-comment-rating-star > input { display: none; } 
+#wppr-comment-rating-stars .wppr-comment-rating-star > label:before { 
+	margin: 5px;
+	font-size: 1.25em;
+	font-family: dashicons;
+	display: inline-block;
+	content: "\f155";
+}
+
+#wppr-comment-rating-stars .wppr-comment-rating-star > .half:before { 
+	content: "\f459";
+	position: absolute;
+}
+
+#wppr-comment-rating-stars .wppr-comment-rating-star.rtl > .half:before { 
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
+	-ms-transform: rotateY(180deg);
+	transform: rotateY(180deg);
+}
+
+#wppr-comment-rating-stars .wppr-comment-rating-star > label { 
+	color: #ddd; 
+	float: right; 
+}
+
+#wppr-comment-rating-stars .wppr-comment-rating-star.rtl > label { 
+	float: left;
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+#wppr-comment-rating-stars .wppr-comment-rating-star > input:checked ~ label, /* show gold star when clicked */
+#wppr-comment-rating-stars .wppr-comment-rating-star:not(:checked) > label:hover, /* hover current star */
+#wppr-comment-rating-stars .wppr-comment-rating-star:not(:checked) > label:hover ~ label {
+	color: #FFD700;
+	cursor: pointer;
+} /* hover previous stars in list */
+
+#wppr-comment-rating-stars .wppr-comment-rating-star > input:checked + label:hover, /* hover current star when changing rating */
+#wppr-comment-rating-stars .wppr-comment-rating-star > input:checked ~ label:hover,
+#wppr-comment-rating-stars .wppr-comment-rating-star > label:hover ~ input:checked ~ label, /* lighten current selection */
+#wppr-comment-rating-stars .wppr-comment-rating-star > input:checked ~ label:hover ~ label {
+	color: #FFED85;
+	cursor: pointer;
+}
