@@ -102,13 +102,13 @@ class WPPR_Global_Settings {
 						),
 						'wppr_use_5_rating_scale' => array(
 							'id'          => 'use_5_rating_scale',
-							'name'        => __( 'Use rating scale of 5', 'wp-product-review' ),
-							'description' => __( 'Instead of the default, which is on a rating scale of 10', 'wp-product-review' ),
+							'name'        => __( 'Rating scale', 'wp-product-review' ),
+							'description' => __( 'On what scale should reviews be rated?', 'wp-product-review' ),
 							'type'        => 'select',
 							'default'         => '10',
 							'options'     => array(
-								'5' => __( 'Yes', 'wp-product-review' ),
-								'10'  => __( 'No', 'wp-product-review' ),
+								'5' => __( 'On 5', 'wp-product-review' ),
+								'10'  => __( 'On 10', 'wp-product-review' ),
 							),
 						),
 						'wppr_comment_rating' => array(
@@ -118,8 +118,8 @@ class WPPR_Global_Settings {
 							'type'        => 'select',
 							'default'         => 'slider',
 							'options'     => array(
-								'slider' => __( 'Slider Rating', 'wp-product-review' ),
-								'star'  => __( 'Star Rating', 'wp-product-review' ),
+								'slider' => __( 'Slider', 'wp-product-review' ),
+								'star'  => __( 'Star', 'wp-product-review' ),
 							),
 							'disabled'    => ! self::enable_user_comments(),
 						),
