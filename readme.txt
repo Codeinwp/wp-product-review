@@ -39,7 +39,7 @@ Easily turn your basic posts into in-depth reviews with ratings, pros and cons, 
 
 If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-wordpress-hosting/" rel="nofollow">fastest WordPress hosting</a> or which <a href="http://www.codeinwp.com/blog/15-best-wordpress-review-themes/" rel="nofollow">review themes</a> are playing nice with WP Product review, checkout our blog.
 
- = See how WP Product Review can integrate with your website  =
+ = See how WP Product Review PRO can integrate with your website  =
 
 * [Default review](https://demo.themeisle.com/wp-product-review/sample-review/)
 * [Custom icons ratings](https://demo.themeisle.com/wp-product-review/custom-icons/)
@@ -60,11 +60,6 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 - Add an awesome wrap-up widget at the end of your articles
 - Add specific user review options to wordpress comments
 - Add rich snippet ( schema ) to your posts
-
-= Translations =
-
-* sk_SK translation by Patrik Žec (PATWIST) of http://patwist.com
-* fr_FR translation by Jacques Soule of http://wordpress-pour-vous.com/
 
 == Changelog ==
 = 3.6.1 - 2019-05-22  = 
