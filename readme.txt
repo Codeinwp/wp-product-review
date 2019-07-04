@@ -763,9 +763,11 @@ https://themeisle.com/contact
 == Screenshots ==
 
 1. Screenshot 1 Wrap-up review widget that is added at the end of the posts
-2. Screenshot 2 User Review Options added to wp comments
-3. Screenshot 3 Fully configurable theme options
-4. Screenshot 4 Rich Snippets displayed in Google
+2. Screenshot 2 Review comment on a scale of 5 with slider rating
+3. Screenshot 3 Review comment on a scale of 10 with slider rating
+4. Screenshot 4 Review comment with star rating
+5. Screenshot 5 Settings configuration screen
+6. Screenshot 6 Rich Snippets displayed in Google
 
 for more you can check out
 
