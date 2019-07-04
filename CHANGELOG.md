@@ -1,4 +1,11 @@
 
+ ### v3.7.0 - 2019-07-04 
+ **Changes:** 
+ * Add rating scale out of 5
+* Add star rating
+* Fix UI for AMP requests
+* Added filter to disable comments per review
+ 
  ### v3.6.1 - 2019-05-22 
  **Changes:** 
  * Fix error in structured data

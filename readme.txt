@@ -62,6 +62,14 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 - Add rich snippet ( schema ) to your posts
 
 == Changelog ==
+= 3.7.0 - 2019-07-04  = 
+
+* Add rating scale out of 5
+* Add star rating
+* Fix UI for AMP requests
+* Added filter to disable comments per review
+
+
 = 3.6.1 - 2019-05-22  = 
 
 * Fix error in structured data
@@ -557,6 +565,7 @@ Alternatively you can also follow the following steps to install the WP Product 
 
 
 
+
 = How to activate user reviews =
 
 By default user reviews are disabled since not all the themes are compatible with this option due to different designs for the comment box. You can easily activate them from General Settings
@@ -749,6 +758,24 @@ https://themeisle.com/contact
 
  = How to change the widget image size in WP Product Review = 
  [https://docs.themeisle.com/article/1056-how-to-change-the-widget-image-size-in-wp-product-review](https://docs.themeisle.com/article/1056-how-to-change-the-widget-image-size-in-wp-product-review) 
+
+ = How to make Comment Review option work in any theme = 
+ [https://docs.themeisle.com/article/54-why-comment-review-option-is-not-working-with-my-theme](https://docs.themeisle.com/article/54-why-comment-review-option-is-not-working-with-my-theme) 
+
+ = Enable user reviews in WP Product Review = 
+ [https://docs.themeisle.com/article/759-enable-user-reviews-in-wp-product-revie](https://docs.themeisle.com/article/759-enable-user-reviews-in-wp-product-revie) 
+
+ = How to remove Pros/Cons list in WP Product Review = 
+ [https://docs.themeisle.com/article/762-how-to-remove-pros-cons-list-in-wp-product-review](https://docs.themeisle.com/article/762-how-to-remove-pros-cons-list-in-wp-product-review) 
+
+ = How the before/after/manual review box placement option works = 
+ [https://docs.themeisle.com/article/865-how-the-before-after-manual-review-box-placement-works](https://docs.themeisle.com/article/865-how-the-before-after-manual-review-box-placement-works) 
+
+ = How to display both the product title and image in the review comparison table = 
+ [https://docs.themeisle.com/article/981-how-to-display-product-title-and-image-both-in-review-table](https://docs.themeisle.com/article/981-how-to-display-product-title-and-image-both-in-review-table) 
+
+ = Add specific "Service" types for schema.org in WP Product Review = 
+ [https://docs.themeisle.com/article/1071-add-specific-service-types-for-schema-org](https://docs.themeisle.com/article/1071-add-specific-service-types-for-schema-org) 
 
  == Upgrade Notice ==
 
