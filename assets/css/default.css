@@ -385,7 +385,8 @@
 	list-style: none;
 }
 
-.review-wu-right ul li {
+.review-wu-right ul li, 
+.review-wu-right ol li {
 	list-style: none !important;
 }
 
