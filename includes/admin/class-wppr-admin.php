@@ -563,6 +563,11 @@ class WPPR_Admin {
 		return $columns;
 	}
 
+	/**
+	 * Defines the logic to use for sortable columns.
+	 *
+	 * @access  public
+	 */
 	public function sort_cpt_custom_column_order( $query ) {
 		if ( ! is_admin() ) {
 			return;
