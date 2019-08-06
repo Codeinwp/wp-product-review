@@ -21,9 +21,6 @@
 	height: 100%;
 	border: 15px solid #333;
 	border-radius: 50%;
-	-webkit-transform: rotate(0deg);
-	-ms-transform: rotate(0deg);
-	transform: rotate(0deg);
 }
 
 .wppr-pie-fill,

@@ -155,14 +155,34 @@ if ( ! function_exists( 'wppr_default_get_rating' ) ) {
 
 		switch ( $type ) {
 			case 'donut':
+				$class_bar = $class_fill = '';
+				$style_bar = apply_filters( 'wppr_rating_circle_bar_styles', '', $rating );
+				$style_fill = apply_filters( 'wppr_rating_circle_fill_styles', '', $rating );
+				if ( function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() ) {
+					$class_bar = md5( $style_bar ) . '-donut';
+					$class_fill = md5( $style_fill ) . '-donut';
+					$style_bar = $style_fill = '';
+					add_filter(
+						'wppr_global_style', function( $css, $review ) {
+						$review_rating = $review->get_rating();
+						$rating     = round( $review_rating );
+						$style_bar = apply_filters( 'wppr_rating_circle_bar_styles', '', $rating );
+						$style_fill = apply_filters( 'wppr_rating_circle_fill_styles', '', $rating );
+						$class_bar = md5( $style_bar ) . '-donut';
+						$class_fill = md5( $style_fill ) . '-donut';
+						$css = $css . ".$class_bar { $style_bar } .$class_fill { $style_fill }";
+						return $css;
+						}, 10, 2
+					);
+				}
 		?>
 		<div class="<?php echo $div_class1; ?>">
 			<div class="review-wu-grade-content <?php echo $div_class2; ?>">
 				<div class="wppr-c100 wppr-p<?php echo esc_attr( $rating ) . ' ' . esc_attr( $review_object->get_rating_class() ); ?>">
 					<span><?php echo esc_html( $rating_10 ); ?></span>
 					<div class="wppr-slice">
-						<div class="wppr-bar" style="<?php echo apply_filters( 'wppr_rating_circle_bar_styles', '', $rating ); ?>"></div>
-						<div class="wppr-fill" style="<?php echo apply_filters( 'wppr_rating_circle_fill_styles', '', $rating ); ?>"></div>
+						<div class="wppr-bar <?php echo $class_bar; ?>" style="<?php echo $style_bar; ?>"></div>
+						<div class="wppr-fill <?php echo $class_fill; ?>" style="<?php echo $style_fill; ?>"></div>
 					</div>
 					<div class="wppr-slice-center"></div>
 				</div>

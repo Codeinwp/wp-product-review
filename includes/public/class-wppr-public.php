@@ -704,12 +704,12 @@ class Wppr_Public {
 			}
 			$output .= $this->generate_styles();
 			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/rating-amp.css' );
-			$output = apply_filters( 'wppr_global_style', $output );
+			$output = apply_filters( 'wppr_global_style', $output, $this->review );
 			$output = $this->minify_amp_css( $output );
 
 			set_transient( $amp_cache_key, $output, HOUR_IN_SECONDS );
 		}
-		echo apply_filters( 'wppr_add_amp_css', $output );
+		echo apply_filters( 'wppr_add_amp_css', $output, $this->review );
 	}
 
 	/**
@@ -770,8 +770,8 @@ class Wppr_Public {
 			if ( defined( 'WPPR_PRO_VERSION' ) && version_compare( WPPR_PRO_VERSION, '2.4', '<' ) && 'style1' !== $this->review->get_template() ) {
 				echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">';
 			}
-			echo '<link rel="stylesheet" href="' . site_url( '/wp-includes/css/dashicons.min.css' ) . '"">';
 		}
+		echo '<link rel="stylesheet" href="' . site_url( '/wp-includes/css/dashicons.min.css' ) . '"">';
 	}
 
 	/**
