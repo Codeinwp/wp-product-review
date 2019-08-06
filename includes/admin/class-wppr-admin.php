@@ -382,6 +382,7 @@ class WPPR_Admin {
 				$type   = in_array( $post_type, array( 'post', 'page' ), true ) ? "{$post_type}s" : "{$post_type}_posts";
 				add_filter( "manage_{$type}_columns", array( $this, 'manage_posts_columns' ), 10, 1 );
 				add_action( "manage_{$type}_custom_column", array( $this, 'manage_posts_custom_column' ), 10, 2 );
+				add_action( "manage_edit-{$post_type}_sortable_columns", array( $this, 'sort_posts_custom_column' ), 10, 1 );
 			}
 		}
 
@@ -443,10 +444,19 @@ class WPPR_Admin {
 	 * @access  public
 	 */
 	public function manage_posts_columns( $columns ) {
-		$columns['wppr_review']    = __( 'Review', 'wp-product-review' );
+		$columns['wppr_review']    = __( 'Review Rating', 'wp-product-review' );
 		return $columns;
 	}
 
+	/**
+	 * Defines the sortable columns.
+	 *
+	 * @access  public
+	 */
+	public function sort_posts_custom_column( $columns ) {
+		$columns['wppr_review'] = 'wppr_review';
+		return $columns;
+	}
 	/**
 	 * Manage the additional column.s
 	 *
@@ -505,6 +515,8 @@ class WPPR_Admin {
 
 		add_filter( 'manage_wppr_review_posts_columns', array( $this, 'manage_cpt_columns' ), 10, 1 );
 		add_action( 'manage_wppr_review_posts_custom_column', array( $this, 'manage_cpt_custom_column' ), 10, 2 );
+		add_filter( 'manage_edit-wppr_review_sortable_columns', array( $this, 'sort_cpt_custom_column' ), 10, 1 );
+		add_action( 'pre_get_posts', array( $this, 'sort_cpt_custom_column_order') );
 	}
 
 	/**
@@ -535,10 +547,48 @@ class WPPR_Admin {
 				break;
 			case 'wppr_rating':
 				$model = new WPPR_Review_Model( $id );
-				echo $model->get_rating();
+				// save the rating as a temporary post meta which can be used in pre_get_posts
+				add_filter(
+					'wppr_rating', function( $rating, $id ) {
+					update_post_meta( $id, '_wppr_rating_num_temp', $rating );
+					return $rating;
+					}, 10, 2
+				);
+				echo wppr_layout_get_rating( $model, 'stars', '' );
 				break;
 		}
 	}
+
+	/**
+	 * Defines the sortable columns.
+	 *
+	 * @access  public
+	 */
+	public function sort_cpt_custom_column( $columns ) {
+		$columns['wppr_rating'] = 'wppr_rating_num';
+		return $columns;
+	}
+
+	/**
+	 * Defines the logic to use for sortable columns.
+	 *
+	 * @access  public
+	 */
+	public function sort_cpt_custom_column_order( $query ) {
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		$orderby = $query->get( 'orderby' );
+
+		switch ( $orderby ) {
+			case 'wppr_rating_num':
+				$query->set( 'meta_key', '_wppr_rating_num_temp' );
+				$query->set( 'orderby', 'meta_value_num' );
+				break;
+		}
+	}
+
 
 	/**
 	 * Add an upsell bar when the tab starts.
