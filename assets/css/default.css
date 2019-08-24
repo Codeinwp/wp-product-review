@@ -385,7 +385,8 @@
 	list-style: none;
 }
 
-.review-wu-right ul li {
+.review-wu-right ul li, 
+.review-wu-right ol li {
 	list-style: none !important;
 }
 
@@ -494,25 +495,4 @@
 .review-wu-grade .cwp-review-chart {
 	float: none;
 	position: relative;
-}
-
-.clearfix:after {
-	display: block;
-	visibility: hidden;
-	clear: both;
-	height: 0;
-	font-size: 0;
-	content: " ";
-}
-
-.clearfix {
-	display: inline-block;
-}
-
-* html .clearfix {
-	height: 1%;
-}
-
-.clearfix {
-	display: block;
 }

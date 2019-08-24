@@ -62,6 +62,14 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 - Add rich snippet ( schema ) to your posts
 
 ## Changelog ##
+### 3.7.0 - 2019-07-04  ###
+
+* Add rating scale out of 5
+* Add star rating
+* Fix UI for AMP requests
+* Added filter to disable comments per review
+
+
 ### 3.6.1 - 2019-05-22  ###
 
 * Fix error in structured data
