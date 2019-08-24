@@ -23,13 +23,21 @@
 
 .wppr-template ul li, .wppr-template ol li {
 	position: initial !important;
+	background: none !important;
+}
+
+.wppr-template-1 ul li, 
+.wppr-template-1 ol li,
+.wppr-template-2 ul li, 
+.wppr-template-2 ol li {
+	position: initial !important;
 	list-style-type: disc;
 	background: none !important;
 }
 
-#review-statistics .review-wu-bars ul.wppr-weak li.colored,
-#review-statistics .review-wu-bars ul.wppr-not-bad li.colored,
-#review-statistics .review-wu-bars ul.wppr-good li.colored,
-#review-statistics .review-wu-bars ul.wppr-very-good li.colored {
+#review-statistics .review-wu-bars ul.wppr-weak.wppr-custom-icon li.colored,
+#review-statistics .review-wu-bars ul.wppr-not-bad.wppr-custom-icon li.colored,
+#review-statistics .review-wu-bars ul.wppr-good.wppr-custom-icon li.colored,
+#review-statistics .review-wu-bars ul.wppr-very-good.wppr-custom-icon li.colored {
 	background: none !important;
 }

@@ -24,11 +24,7 @@
 			<div class="wppr-review-rating <?php echo is_rtl() ? 'rtl' : ''; ?>">
 				<?php wppr_layout_get_rating( $review_object, 'number', 'style2' ); ?>
 				<?php wppr_layout_get_image( $review_object, 'wppr-review-product-image wppr-default-img', 'wppr-product-image' ); ?>
-
-				<div class="clearfix"></div>
-
 				<?php wppr_layout_get_user_rating( $review_object ); ?>
-
 			</div>
 
 			<?php wppr_layout_get_pros( $review_object, 'wppr-review-pros', 'h3', 'wppr-review-pros-name' ); ?>
@@ -38,7 +34,6 @@
 
 		<?php wppr_layout_get_options_ratings( $review_object, 'stars' ); ?>
 
-		<div class="clearfix"></div>
 	</div><!-- end .wppr-review-container -->
 
 	<?php wppr_layout_get_affiliate_buttons( $review_object ); ?>
