@@ -62,6 +62,13 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 - Add rich snippet ( schema ) to your posts
 
 == Changelog ==
+= 3.7.1 - 2019-08-24  = 
+
+* Improve UI for AMP requests
+* Fix CSS conflict with some themes
+* Make rating column sortable in listing screen
+
+
 = 3.7.0 - 2019-07-04  = 
 
 * Add rating scale out of 5
