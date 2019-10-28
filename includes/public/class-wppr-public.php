@@ -186,8 +186,6 @@ class Wppr_Public {
 
 		$icon = $model->wppr_get_option( 'cwppos_change_bar_icon' );
 
-		add_action( 'amp_post_template_head', array( $this, 'wppr_amp_add_styles' ), 999 );
-
 		if ( 'yes' === $model->wppr_get_option( 'wppr_amp' ) ) {
 			add_filter( 'wppr_review_option_rating_css', array( $this, 'amp_width_support' ), 99, 2 );
 			add_action( 'amp_post_template_css', array( $this, 'amp_styles' ), 999 );
@@ -696,11 +694,19 @@ class Wppr_Public {
 			 * @global \WP_Filesystem_Direct $wp_filesystem
 			 */
 			global $wp_filesystem;
+
+			$exclude = apply_filters( 'wppr_amp_exclude_stylesheets', array() );
 			$output = '';
 			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/common.css' );
-			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/circle.css' );
+
+			if ( ! in_array( 'circle', $exclude, true ) ) {
+				$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/circle.css' );
+			}
 			if ( $wp_filesystem->is_readable( WPPR_PATH . '/assets/css/' . $template_style . '.css' ) ) {
 				$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/' . $template_style . '.css' );
+			}
+			if ( ! in_array( 'dashicons', $exclude, true ) ) {
+				$output .= $wp_filesystem->get_contents( ABSPATH . '/wp-includes/css/dashicons.min.css' );
 			}
 			$output .= $this->generate_styles();
 			$output .= $wp_filesystem->get_contents( WPPR_PATH . '/assets/css/rating-amp.css' );
@@ -755,23 +761,6 @@ class Wppr_Public {
 		}
 
 		return $css;
-	}
-
-	/**
-	 * Adding FontAwesome/Dashicons at the header for AMP.
-	 */
-	public function wppr_amp_add_styles() {
-		$model = new WPPR_Query_Model();
-
-		$icon = $model->wppr_get_option( 'cwppos_change_bar_icon' );
-
-		// new free and old pro after removing fontawesome with an font awesome icon selected.
-		if ( ! empty( $icon ) ) {
-			if ( defined( 'WPPR_PRO_VERSION' ) && version_compare( WPPR_PRO_VERSION, '2.4', '<' ) && 'style1' !== $this->review->get_template() ) {
-				echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">';
-			}
-		}
-		echo '<link rel="stylesheet" href="' . site_url( '/wp-includes/css/dashicons.min.css' ) . '"">';
 	}
 
 	/**
