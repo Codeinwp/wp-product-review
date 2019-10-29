@@ -19,7 +19,6 @@
  * Author:            ThemeIsle
  * Author URI:        https://themeisle.com/
  * Requires at least: 3.5
- * Tested up to:      5.3
  * Stable tag:        trunk
  * WordPress Available:  yes
  * Pro Slug:          wp-product-review-pro
