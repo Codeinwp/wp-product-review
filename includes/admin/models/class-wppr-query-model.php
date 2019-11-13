@@ -222,7 +222,13 @@ class WPPR_Query_Model extends WPPR_Model_Abstract {
 	private function get_order_by( $order ) {
 		$order_by = '';
 		if ( isset( $order['rating'] ) && in_array( $order['rating'], array( 'ASC', 'DESC' ), true ) ) {
-			$order_by .= "`rating` {$order['rating']}, ";
+			$column = 'rating';
+			// if user influence is on, we should sort by comment_rating.
+			$comment_influence = intval( $this->wppr_get_option( 'cwppos_infl_userreview' ) );
+			if ( $comment_influence > 0 ) {
+				$column = 'comment_rating';
+			}
+			$order_by .= "`$column` {$order['rating']}, ";
 		}
 
 		if ( isset( $order['price'] ) && in_array( $order['price'], array( 'ASC', 'DESC' ), true ) ) {

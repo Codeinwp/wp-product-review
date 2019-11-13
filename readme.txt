@@ -3,7 +3,7 @@ Contributors: codeinwp,marius2012,marius_codeinwp,hardeepasrani,themeisle,Madali
 Tags:  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin,  google rating, product review, rating, review, star rating, user rating, wp rating, wp review,  google, hreview,rich snippets,seo,snippet
 Author URI: http://themeisle.com
 Requires at least: 3.5
-Tested up to: 5.2
+Tested up to: 5.3
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -43,7 +43,7 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 
 * [Default review](https://demo.themeisle.com/wp-product-review/sample-review/)
 * [Custom icons ratings](https://demo.themeisle.com/wp-product-review/custom-icons/)
-* [Comparision table](https://demo.themeisle.com/wp-product-review/comparison-table/)
+* [Comparison table](https://demo.themeisle.com/wp-product-review/comparison-table/)
 * [Shortcode reviews](https://demo.themeisle.com/wp-product-review/shortcode-review/)
 * [Listing table](https://demo.themeisle.com/wp-product-review/listing-table/)
 * [Reviews by visitors](https://demo.themeisle.com/wp-product-review/review-with-comments/)
@@ -62,6 +62,13 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 - Add rich snippet ( schema ) to your posts
 
 == Changelog ==
+= 3.7.1 - 2019-08-24  = 
+
+* Improve UI for AMP requests
+* Fix CSS conflict with some themes
+* Make rating column sortable in listing screen
+
+
 = 3.7.0 - 2019-07-04  = 
 
 * Add rating scale out of 5
@@ -714,7 +721,7 @@ https://themeisle.com/contact
  = How users can leave review comments without rating = 
  [https://docs.themeisle.com/article/862-how-users-can-leave-review-comments-without-rating](https://docs.themeisle.com/article/862-how-users-can-leave-review-comments-without-rating) 
 
- = How to force description into comparision table = 
+ = How to force description into comparison table = 
  [https://docs.themeisle.com/article/859-how-to-force-description-into-comparision-table](https://docs.themeisle.com/article/859-how-to-force-description-into-comparision-table) 
 
  = How the before/after/manual review box placement works = 
