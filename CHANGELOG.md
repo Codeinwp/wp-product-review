@@ -1,4 +1,10 @@
 
+ ### v3.7.2 - 2019-11-13 
+ **Changes:** 
+ * Tested up to WordPress 5.3
+* Added filter `wppr_amp_exclude_stylesheets` to exclude stylesheets in AMP
+* Fix issue with showing limited rows when user influence is on
+ 
  ### v3.7.1 - 2019-08-24 
  **Changes:** 
  * Improve UI for AMP requests
