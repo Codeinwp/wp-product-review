@@ -269,7 +269,7 @@ if ( ! function_exists( 'wppr_layout_get_proscons' ) ) {
 	?>
 		<div class="<?php echo $class_div; ?> <?php echo $type; ?>s">
 			<<?php echo $heading_type; ?> class="<?php echo $class_heading; ?>">
-				<?php echo esc_html( apply_filters( "wppr_review_{$type}s_text", $review_object->wppr_get_option( "cwppos_{$type}s_text" ) ) ); ?>
+				<?php echo esc_html_e( apply_filters( "wppr_review_{$type}s_text", $review_object->wppr_get_option( "cwppos_{$type}s_text" ) ), 'wp-product-review' ); ?>
 			</<?php echo $heading_type; ?>>
 			<ul>
 				<?php
