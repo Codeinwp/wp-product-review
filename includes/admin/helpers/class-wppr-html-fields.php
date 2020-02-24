@@ -240,10 +240,6 @@ class WPPR_Html_Fields {
             </span>
         ';
 
-		if ( ! class_exists( 'WPPR_PRO' ) ) {
-			$output = '<span style="color:red;">' . __( 'You need the PRO <a style="color:red;" href="http://bit.ly/2bhylar" target="_blank" >add-on</a> in order to change the review icons.', 'wp-product-review' ) . '</span>';
-		}
-
 		return apply_filters( 'wppr_field', $output, $args );
 	}
 
@@ -277,10 +273,6 @@ class WPPR_Html_Fields {
 		}
 		$output .= '<input type="hidden" id="' . esc_attr( $args['name'] . '-hidden' ) . '" name="' . esc_attr( $args['name'] ) . '" value="' . esc_attr( $value ) . '">';
 		$output .= '</div>';
-
-		if ( ! class_exists( 'WPPR_PRO' ) ) {
-			$output = '<span style="color:red;">' . __( 'You need the PRO <a style="color:red;" href="http://bit.ly/2bhylar" target="_blank" >add-on</a> in order to change the review icons.', 'wp-product-review' ) . '</span>';
-		}
 
 		return apply_filters( 'wppr_field', $output, $args );
 	}

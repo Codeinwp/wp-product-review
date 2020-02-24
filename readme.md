@@ -62,6 +62,13 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 - Add rich snippet ( schema ) to your posts
 
 ## Changelog ##
+### 3.7.2 - 2019-11-13  ###
+
+* Tested up to WordPress 5.3
+* Added filter `wppr_amp_exclude_stylesheets` to exclude stylesheets in AMP
+* Fix issue with showing limited rows when user influence is on
+
+
 ### 3.7.1 - 2019-08-24  ###
 
 * Improve UI for AMP requests
