@@ -82,6 +82,9 @@ $check = $review->is_active() ? 'yes' : 'no';
 
 				<?php
 				$templates = apply_filters( 'wppr_review_templates', array( 'default', 'style1', 'style2' ) );
+				if ( ! defined( 'WPPR_PRO_SLUG' ) ) {
+					$templates = null;
+				}
 				if ( $templates ) {
 					?>
 					<li>
@@ -96,9 +99,6 @@ $check = $review->is_active() ? 'yes' : 'no';
 									'class'   => 'wppr-review-template',
 									'value'   => $template,
 									'current' => $review->get_template(),
-									'options' => array(
-										'disabled' => ! defined( 'WPPR_PRO_SLUG' ) && 'default' !== $template,
-									),
 								)
 							);
 							?>
@@ -121,12 +121,6 @@ $check = $review->is_active() ? 'yes' : 'no';
 						}
 						?>
 					</li>
-					<?php
-				}
-				if ( ! defined( 'WPPR_PRO_SLUG' ) ) {
-					?>
-					<label class="wppr-upsell-label"><?php echo sprintf( esc_html__( 'You will need the %1$spremium%2$s version to use the extra review templates. You can checkout this %3$sdemo%4$s to see how they are looking.', 'wp-product-review' ), '<a href="' . WPPR_UPSELL_LINK . '">', '</a>', '<a href="https://demo.themeisle.com/wp-product-review/multiple-review-templates/">', '</a>' ); ?></label>
-					<br/>
 					<?php
 				}
 				?>
@@ -314,8 +308,6 @@ $check = $review->is_active() ? 'yes' : 'no';
 				?>
 				<a href="#" class="preload_info"><?php _e( 'Preload Info', 'wp-product-review' ); ?></a>
 				<?php
-			} else {
-				echo '<label class="wppr-upsell-label">' . __( ' In order to be able to automatically load your options from another posts, you need the ', 'wp-product-review' ) . '<a href="' . WPPR_UPSELL_LINK . '" target="_blank" >' . __( 'PRO add-on', 'wp-product-review' ) . '</a></label>';
 			}
 			?>
 		</div>
@@ -422,13 +414,6 @@ $check = $review->is_active() ? 'yes' : 'no';
 	</div>
 
 	<br class="clear">
-
-	<?php if ( ! shortcode_exists( 'P_REVIEW' ) ) : ?>
-		<label class="wppr-upsell-label"> You can use the shortcode <b>[P_REVIEW]</b> to show a review you already made
-			or
-			<b>[wpr_landing]</b> to display a comparision table of them. The shortcodes are available on the <a
-					target="_blank" href="<?php echo WPPR_UPSELL_LINK; ?>">Pro Bundle</a><br/><br/></label>
-	<?php endif; ?>
 
 	<?php do_action( 'wppr_editor_after', $model->post ); ?>
 </div>
