@@ -62,6 +62,11 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 - Add rich snippet ( schema ) to your posts
 
 ## Changelog ##
+### 3.7.3 - 2020-02-24  ###
+
+* Removed PRO mentions
+
+
 ### 3.7.2 - 2019-11-13  ###
 
 * Tested up to WordPress 5.3
