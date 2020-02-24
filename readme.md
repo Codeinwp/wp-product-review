@@ -24,32 +24,8 @@ Easily turn your basic posts into in-depth reviews with ratings, pros and cons, 
 
 1. For updates follow https://twitter.com/themeisle.
 
-> **Time-saving features available in the Pro version:**
->
-> * Shortcodes
-> * Custom Rating Icons
-> * Product Review Listings
-> * Comparison Table
-> * Amazon Integration
-> * Priority email support from the developer of the plugin
-> * Support and updates for 12 months
->
-> **[Learn more about WP Product Review](http://themeisle.com/plugins/wp-product-review/)**
-
 
 If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-wordpress-hosting/" rel="nofollow">fastest WordPress hosting</a> or which <a href="http://www.codeinwp.com/blog/15-best-wordpress-review-themes/" rel="nofollow">review themes</a> are playing nice with WP Product review, checkout our blog.
-
- = See how WP Product Review PRO can integrate with your website  =
-
-* [Default review](https://demo.themeisle.com/wp-product-review/sample-review/)
-* [Custom icons ratings](https://demo.themeisle.com/wp-product-review/custom-icons/)
-* [Comparison table](https://demo.themeisle.com/wp-product-review/comparison-table/)
-* [Shortcode reviews](https://demo.themeisle.com/wp-product-review/shortcode-review/)
-* [Listing table](https://demo.themeisle.com/wp-product-review/listing-table/)
-* [Reviews by visitors](https://demo.themeisle.com/wp-product-review/review-with-comments/)
-
-
-
 
 
 **WP Product Review provides following features**
@@ -760,9 +736,6 @@ https://themeisle.com/contact
 
  = How To Use WP Product Review Shortcodes = 
  [https://docs.themeisle.com/article/449-how-to-use-wp-product-review-shortcodes](https://docs.themeisle.com/article/449-how-to-use-wp-product-review-shortcodes) 
-
- = How to install the PRO version of WP Product Review = 
- [https://docs.themeisle.com/article/785-how-to-install-the-pro-version-of-wp-product-review](https://docs.themeisle.com/article/785-how-to-install-the-pro-version-of-wp-product-review) 
 
  = How the before/after/manual review box placement option works = 
  [https://docs.themeisle.com/article/865-how-the-beforeaftermanual-review-box-placement-option-works](https://docs.themeisle.com/article/865-how-the-beforeaftermanual-review-box-placement-option-works) 
