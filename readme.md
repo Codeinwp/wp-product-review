@@ -3,7 +3,7 @@
 **Tags:**  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin,  google rating, product review, rating, review, star rating, user rating, wp rating, wp review,  google, hreview,rich snippets,seo,snippet  
 **Author URI:** http://themeisle.com  
 **Requires at least:** 3.5  
-**Tested up to:** 5.3  
+**Tested up to:** 5.4  
 **Stable tag:** trunk  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -38,6 +38,11 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 - Add rich snippet ( schema ) to your posts
 
 ## Changelog ##
+### 3.7.3 - 2020-02-24  ###
+
+* Removed PRO mentions
+
+
 ### 3.7.2 - 2019-11-13  ###
 
 * Tested up to WordPress 5.3
