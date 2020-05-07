@@ -613,19 +613,17 @@ class WPPR_Admin {
 	 *
 	 * @access  public
 	 */
-	public function on_activation( $plugin ) {
-		if ( isset( $_REQUEST['action2'] ) && 'activate-selected' === $_REQUEST['action2'] && isset( $_REQUEST['checked'] ) && is_array( $_REQUEST['checked'] ) && count( $_REQUEST['checked'] ) > 1 ) {
-			// bulk activation, bail!
-			return;
-		}
-
+	public function on_activation() {
 		if ( defined( 'TI_UNIT_TESTING' ) ) {
 			return;
 		}
 
-		if ( $plugin === WPPR_BASENAME ) {
-			wp_redirect( admin_url( 'admin.php?page=wppr-support&tab=help#shortcode' ) );
-			exit();
+		if ( get_option( 'wppr-activated' ) ) {
+			delete_option( 'wppr-activated' );
+			if ( ! headers_sent() ) {
+				wp_redirect( admin_url( 'admin.php?page=wppr-support&tab=help#shortcode' ) );
+				exit();
+			}
 		}
 	}
 
