@@ -29,7 +29,7 @@ class WPPR_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
-
+		add_option( 'wppr-activated', true );
 	}
 
 }

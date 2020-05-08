@@ -20,6 +20,7 @@
 		}
 ?>
 		</div>
+		<div class="wppr-clear"></div>
 	</div>
 <?php
 	}
