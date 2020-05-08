@@ -1,4 +1,8 @@
 
+ ### v3.7.4 - 2020-03-31 
+ **Changes:** 
+ * Tested up to WordPress 5.4
+ 
  ### v3.7.3 - 2020-02-24 
  **Changes:** 
  * Removed PRO mentions

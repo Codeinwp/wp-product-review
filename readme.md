@@ -24,7 +24,6 @@ Easily turn your basic posts into in-depth reviews with ratings, pros and cons, 
 
 1. For updates follow https://twitter.com/themeisle.
 
-
 If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-wordpress-hosting/" rel="nofollow">fastest WordPress hosting</a> or which <a href="http://www.codeinwp.com/blog/15-best-wordpress-review-themes/" rel="nofollow">review themes</a> are playing nice with WP Product review, checkout our blog.
 
 
@@ -38,6 +37,11 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 - Add rich snippet ( schema ) to your posts
 
 ## Changelog ##
+### 3.7.4 - 2020-03-31  ###
+
+* Tested up to WordPress 5.4
+
+
 ### 3.7.3 - 2020-02-24  ###
 
 * Removed PRO mentions
@@ -631,9 +635,6 @@ https://themeisle.com/contact
  = What actions and filters are available in WP Product Review = 
  [http://docs.themeisle.com/article/770-what-actions-and-filters-are-available-in-wp-product-review](http://docs.themeisle.com/article/770-what-actions-and-filters-are-available-in-wp-product-review) 
 
- = Install and use the pro version of WP Product Review = 
- [http://docs.themeisle.com/article/785-install-and-use-the-pro-version-of-wp-product-review](http://docs.themeisle.com/article/785-install-and-use-the-pro-version-of-wp-product-review) 
-
  = WP Product Review Documentation = 
  [https://docs.themeisle.com/article/173-wp-product-review-documentation](https://docs.themeisle.com/article/173-wp-product-review-documentation) 
 
@@ -663,9 +664,6 @@ https://themeisle.com/contact
 
  = Enable user reviews in WP Product Review = 
  [https://docs.themeisle.com/article/759-enable-user-reviews-in-wp-product-review](https://docs.themeisle.com/article/759-enable-user-reviews-in-wp-product-review) 
-
- = Install and use the pro version of WP Product Review = 
- [https://docs.themeisle.com/article/785-install-and-use-the-pro-version-of-wp-product-review](https://docs.themeisle.com/article/785-install-and-use-the-pro-version-of-wp-product-review) 
 
  = Rich Snippets not showing in search results = 
  [https://docs.themeisle.com/article/756-rich-snippets-not-showing-in-search-results](https://docs.themeisle.com/article/756-rich-snippets-not-showing-in-search-results) 
