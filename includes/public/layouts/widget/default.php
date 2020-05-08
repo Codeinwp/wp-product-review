@@ -30,8 +30,9 @@ foreach ( $results as $review ) :
 	if ( $instance['show_image'] == true && ! empty( $product_image ) ) {
 		?>
 		<div class="cwp_rev_image wppr-col">
-			<img src="<?php echo $product_image; ?>"
-			 alt="<?php echo $review_object->get_name(); ?>">
+			<a href="<?php echo get_the_permalink( $review['ID'] ); ?>" class="wppr-col" title="<?php echo $review_object->get_name(); ?>" rel="noopener">
+				<img src="<?php echo $product_image; ?>" alt="<?php echo $review_object->get_name(); ?>">
+			</a>
 		</div>
 		<?php
 		$wppr_image = true;
@@ -39,7 +40,7 @@ foreach ( $results as $review ) :
 	?>
 
 	<div class="wppr-post-title wppr-col<?php echo ( $wppr_image ) ? '' : ' wppr-no-image'; ?>">
-		<a href="<?php echo get_the_permalink( $review['ID'] ); ?>" class="wppr-col" title="<?php echo $review_object->get_name(); ?>">
+		<a href="<?php echo get_the_permalink( $review['ID'] ); ?>" class="wppr-col" title="<?php echo $review_object->get_name(); ?>" rel="noopener">
 			<?php echo $product_title_display; ?>
 		</a>
 	</div>
