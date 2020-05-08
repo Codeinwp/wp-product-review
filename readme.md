@@ -37,6 +37,14 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 - Add rich snippet ( schema ) to your posts
 
 ## Changelog ##
+### 3.7.5 - 2020-05-08  ###
+
+* [Fix] Comments area layout in the TwentyTwenty theme
+* [Fix] Pros and Cons texts not translatable with Polylang
+* [Fix] Image missing link in the Top Products Widget  
+* [Fix] Bulk activation of plugin aborts activation of subsequent plugins
+
+
 ### 3.7.4 - 2020-03-31  ###
 
 * Tested up to WordPress 5.4
@@ -565,6 +573,7 @@ Alternatively you can also follow the following steps to install the WP Product 
 
 
 
+
 ### How to activate user reviews ###
 
 By default user reviews are disabled since not all the themes are compatible with this option due to different designs for the comment box. You can easily activate them from General Settings
@@ -766,6 +775,9 @@ https://themeisle.com/contact
 
  = Add specific "Service" types for schema.org in WP Product Review = 
  [https://docs.themeisle.com/article/1071-add-specific-service-types-for-schema-org](https://docs.themeisle.com/article/1071-add-specific-service-types-for-schema-org) 
+
+ = How to install the PRO version of WP Product Review = 
+ [https://docs.themeisle.com/article/785-install-and-use-the-pro-version-of-wp-product-review](https://docs.themeisle.com/article/785-install-and-use-the-pro-version-of-wp-product-review) 
 
  == Upgrade Notice ==
 
