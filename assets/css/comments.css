@@ -140,18 +140,14 @@
 	box-shadow: none;
 }
 
-/*Responsiveness in comments area*/
-@media (max-width: 767px) {
-	.user-comments-grades {
-		float: none;
-		width: 100%;
-		margin: 0 0 20px 0;
-	}
+
+.wppr-clear {
+	clear: both;
+	float: none;
 }
 
-
 #wppr-comment-rating-stars .wppr-comment-rating-star {
-	width: 20%;
+	max-width: 26%;
 }
 #wppr-comment-rating-stars .wppr-comment-rating-star > input { display: none; } 
 #wppr-comment-rating-stars .wppr-comment-rating-star > label:before { 
@@ -199,4 +195,16 @@
 #wppr-comment-rating-stars .wppr-comment-rating-star > input:checked ~ label:hover ~ label {
 	color: #FFED85;
 	cursor: pointer;
+}
+
+/*Responsiveness in comments area*/
+@media (max-width: 767px) {
+	.user-comments-grades {
+		float: none;
+		width: 100%;
+		margin: 0 0 20px 0;
+	}
+	#wppr-comment-rating-stars .wppr-comment-rating-star {
+		max-width: 45%;
+	}
 }
