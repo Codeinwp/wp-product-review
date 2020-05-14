@@ -1,4 +1,8 @@
 
+ ### v3.7.6 - 2020-05-14 
+ **Changes:** 
+ * - [Fix] Security vulnerability
+ 
  ### v3.7.5 - 2020-05-08 
  **Changes:** 
  * [Fix] Comments area layout in the TwentyTwenty theme
