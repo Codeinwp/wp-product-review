@@ -37,6 +37,14 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 - Add rich snippet ( schema ) to your posts
 
 == Changelog ==
+= 3.7.5 - 2020-05-08  = 
+
+* [Fix] Comments area layout in the TwentyTwenty theme
+* [Fix] Pros and Cons texts not translatable with Polylang
+* [Fix] Image missing link in the Top Products Widget  
+* [Fix] Bulk activation of plugin aborts activation of subsequent plugins
+
+
 = 3.7.4 - 2020-03-31  = 
 
 * Tested up to WordPress 5.4
