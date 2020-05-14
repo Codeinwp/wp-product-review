@@ -96,6 +96,9 @@ class WPPR_Gutenberg {
 			array(
 				'methods'  => 'POST',
 				'callback' => array( $this, 'update_review_callback' ),
+				'permission_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
 				'args'     => array(
 					'id' => array(
 						'sanitize_callback' => 'absint',

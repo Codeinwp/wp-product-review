@@ -228,7 +228,7 @@ if ( ! function_exists( 'wppr_layout_get_image' ) ) {
 			$image_link     = $review_object->get_image();
 		}
 		?>
-		<a title="<?php echo $review_object->get_name(); ?>" class="<?php echo $class_a; ?>" href="<?php echo esc_url( $image_link ); ?>" <?php echo $lightbox; ?> rel="nofollow" target="_blank">
+		<a title="<?php echo esc_attr( $review_object->get_name() ); ?>" class="<?php echo $class_a; ?>" href="<?php echo esc_url( $image_link ); ?>" <?php echo $lightbox; ?> rel="nofollow" target="_blank">
 			<img
 				src="<?php echo esc_attr( $src ); ?>"
 				alt="<?php echo esc_attr( $review_object->get_image_alt() ); ?>"
