@@ -1,5 +1,5 @@
 === WP Product Review Lite ===
-Contributors: codeinwp,marius2012,marius_codeinwp,hardeepasrani,themeisle,Madalin_ThemeIsle,contactashish13
+Contributors: codeinwp,marius2012,marius_codeinwp,hardeepasrani,themeisle,Madalin_ThemeIsle,rozroz
 Tags:  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin,  google rating, product review, rating, review, star rating, user rating, wp rating, wp review,  google, hreview,rich snippets,seo,snippet
 Author URI: http://themeisle.com
 Requires at least: 3.5
@@ -11,8 +11,6 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Easily turn your basic posts into in-depth reviews with ratings, pros and cons, affiliate links, rich snippets and user reviews.
 == Description ==
-
-### User Review Enabled
 
 1. This review plugin helps you to interact with your users with improved comments, you can expose your reviews in a easier to read way and will help you generate money by adding a buy now button in your post. Rich snippets are also supported.
 
@@ -35,6 +33,8 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 - Add an awesome wrap-up widget at the end of your articles
 - Add specific user review options to wordpress comments
 - Add rich snippet ( schema ) to your posts
+
+**Please note that WP Product Review PRO has been retired and is no longer available**
 
 == Changelog ==
 = 3.7.6 - 2020-05-14  = 
