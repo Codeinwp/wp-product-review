@@ -37,6 +37,11 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 **Please note that WP Product Review PRO has been retired and is no longer available**
 
 == Changelog ==
+= 3.7.7 - 2020-05-21  = 
+
+* [Fix] Security vulnerability
+
+
 = 3.7.6 - 2020-05-14  = 
 
 * - [Fix] Security vulnerability
