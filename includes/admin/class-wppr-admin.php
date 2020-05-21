@@ -88,8 +88,7 @@ class WPPR_Admin {
 			case 'post.php':
 				// fall through.
 			case 'post-new.php':
-				$wp_scripts = wp_scripts();
-				wp_enqueue_style( $this->plugin_name . '-jquery-ui', sprintf( '//ajax.googleapis.com/ajax/libs/jqueryui/%s/themes/smoothness/jquery-ui.css', $wp_scripts->registered['jquery-ui-core']->ver ), array(), $this->version );
+				wp_enqueue_style( $this->plugin_name . '-jquery-ui', WPPR_URL . '/assets/css/jquery-ui.css', array(), $this->version );
 				break;
 		}
 	}
