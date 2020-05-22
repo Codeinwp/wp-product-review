@@ -102,7 +102,7 @@ $check = $review->is_active() ? 'yes' : 'no';
 								)
 							);
 							?>
-							<label for="<?php echo $template_id; ?>">
+							<label for="<?php echo esc_attr( $template_id ); ?>">
 							<?php
 								$image  = null;
 							if ( file_exists( WPPR_PATH . "/assets/img/templates/$template.png" ) ) {
@@ -112,7 +112,7 @@ $check = $review->is_active() ? 'yes' : 'no';
 							}
 							if ( $image ) {
 								?>
-							<img src='<?php echo $image; ?>' class="wppr-review-template"/>
+							<img src='<?php echo esc_url( $image ); ?>' class="wppr-review-template"/>
 								<?php
 							}
 							?>
@@ -419,8 +419,8 @@ $check = $review->is_active() ? 'yes' : 'no';
 </div>
 
 <script id="wppr-review-type-fields-template" type="text/template" 
-	data-json='<?php echo str_replace( "'", '\"', json_encode( $schema_types ) ); ?>'
-	data-type='<?php echo $review->get_type(); ?>'
+	data-json='<?php echo esc_attr( str_replace( "'", '\"', json_encode( $schema_types ) ) ); ?>'
+	data-type='<?php echo esc_attr( $review->get_type() ); ?>'
 	data-custom-fields='<?php echo json_encode( $review->get_custom_fields() ); ?>'
 >
 	<li class="wppr-review-type-field">

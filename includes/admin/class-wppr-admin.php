@@ -465,7 +465,7 @@ class WPPR_Admin {
 		switch ( $column ) {
 			case 'wppr_review':
 				$model = new WPPR_Review_Model( $id );
-				echo $model->get_rating();
+				echo esc_html( $model->get_rating() );
 				break;
 		}
 	}
@@ -542,7 +542,7 @@ class WPPR_Admin {
 		switch ( $column ) {
 			case 'wppr_price':
 				$model = new WPPR_Review_Model( $id );
-				echo $model->get_price();
+				echo esc_html( $model->get_price() );
 				break;
 			case 'wppr_rating':
 				$model = new WPPR_Review_Model( $id );

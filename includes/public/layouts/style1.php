@@ -17,7 +17,7 @@
 	$review_cons   = $review_object->get_cons();
 	?>
 
-	<div id="wppr-review-<?php echo $review_id; ?>" class="wppr-review-container">
+	<div id="wppr-review-<?php echo esc_attr( $review_id ); ?>" class="wppr-review-container">
 
 		<h2 class="wppr-review-name"><?php echo esc_html( $review_object->get_name() ); ?></h2>
 

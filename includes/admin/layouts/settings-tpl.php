@@ -22,9 +22,9 @@ $fields          = $global_settings->get_fields();
 	<div id="wppr_top_tabs" class="clearfix">
 		<ul id="tabs_menu" role="menu">
 			<?php foreach ( $sections as $section_key => $section_name ) : ?>
-				<li class="wppr-nav-tab" id="wppr-nav-tab-<?php echo $section_key; ?>"
-					data-tab="wppr-tab-<?php echo $section_key; ?>">
-					<a href="#wppr-tab-<?php echo $section_key; ?>" title="<?php esc_attr( $section_name ); ?>">
+				<li class="wppr-nav-tab" id="wppr-nav-tab-<?php echo esc_attr( $section_key ); ?>"
+					data-tab="wppr-tab-<?php echo esc_attr( $section_key ); ?>">
+					<a href="#wppr-tab-<?php echo esc_attr( $section_key ); ?>" title="<?php esc_attr( $section_name ); ?>">
 						<?php echo esc_html( $section_name ); ?>
 					</a>
 				</li>
@@ -35,7 +35,7 @@ $fields          = $global_settings->get_fields();
 	<form id="wppr-settings" method="post" action="#" enctype="multipart/form-data">
 
 		<?php foreach ( $sections as $section_key => $section_name ) : ?>
-			<div id="wppr-tab-<?php echo $section_key; ?>" class="wppr-tab-content">
+			<div id="wppr-tab-<?php echo esc_attr( $section_key ); ?>" class="wppr-tab-content">
 				<?php
 				if ( shortcode_exists( 'P_REVIEW' ) ) {
 					do_action( 'wppr_settings_section_upsell', $section_key );

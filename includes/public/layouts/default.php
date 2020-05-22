@@ -16,7 +16,7 @@ $pros = $review_object->get_pros();
 $cons = $review_object->get_cons();
 
 ?>
-<div id="wppr-review-<?php echo $review_object->get_ID(); ?>"
+<div id="wppr-review-<?php echo esc_attr( $review_object->get_ID() ); ?>"
 	 class="wppr-template wppr-template-default <?php echo is_rtl() ? 'rtl' : ''; ?> wppr-review-container <?php echo( empty( $pros ) ? 'wppr-review-no-pros' : '' ); ?> <?php echo( empty( $cons ) ? 'wppr-review-no-cons' : '' ); ?>">
 	<section id="review-statistics" class="article-section">
 		<div class="review-wrap-up  cwpr_clearfix">
