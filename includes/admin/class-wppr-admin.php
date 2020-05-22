@@ -244,13 +244,13 @@ class WPPR_Admin {
 		}
 
 		foreach ( $data as $option ) {
-			$model->wppr_set_option( $option['name'], $option['value'] );
+			$model->wppr_set_option( sanitize_text_field( $option['name'] ), sanitize_text_field( $option['value'] ) );
 		}
 
 		// delete the transients for AMP.
 		$templates = apply_filters( 'wppr_review_templates', array( 'default', 'style1', 'style2' ) );
 		foreach ( $templates as $template ) {
-			delete_transient( '_wppr_amp_css_' . str_replace( '.', '_', $this->version ) . '_' . $template );
+			delete_transient( '_wppr_amp_css_' . str_replace( '.', '_', $this->version ) . '_' . sanitize_text_field( $template ) );
 		}
 		die();
 	}
@@ -265,7 +265,7 @@ class WPPR_Admin {
 		check_ajax_referer( WPPR_SLUG, 'nonce' );
 
 		if ( isset( $_POST['type'] ) ) {
-			echo wp_send_json_success( array( 'categories' => self::get_taxonomy_and_terms_for_post_type( $_POST['type'] ) ) );
+			echo wp_send_json_success( array( 'categories' => self::get_taxonomy_and_terms_for_post_type( sanitize_text_field( $_POST['type'] ) ) ) );
 		}
 		wp_die();
 	}
@@ -280,7 +280,7 @@ class WPPR_Admin {
 		check_ajax_referer( WPPR_SLUG, 'nonce' );
 
 		if ( isset( $_POST['type'] ) ) {
-			echo wp_send_json_success( array( 'categories' => self::get_category_for_post_type( $_POST['type'] ) ) );
+			echo wp_send_json_success( array( 'categories' => self::get_category_for_post_type( sanitize_text_field( $_POST['type'] ) ) ) );
 		}
 		wp_die();
 	}
