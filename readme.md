@@ -1,5 +1,5 @@
 # WP Product Review Lite #
-**Contributors:** [codeinwp](https://profiles.wordpress.org/codeinwp), [marius2012](https://profiles.wordpress.org/marius2012), [marius_codeinwp](https://profiles.wordpress.org/marius_codeinwp), [hardeepasrani](https://profiles.wordpress.org/hardeepasrani), [themeisle](https://profiles.wordpress.org/themeisle), [Madalin_ThemeIsle](https://profiles.wordpress.org/Madalin_ThemeIsle), [contactashish13](https://profiles.wordpress.org/contactashish13)  
+**Contributors:** [codeinwp](https://profiles.wordpress.org/codeinwp), [marius2012](https://profiles.wordpress.org/marius2012), [marius_codeinwp](https://profiles.wordpress.org/marius_codeinwp), [hardeepasrani](https://profiles.wordpress.org/hardeepasrani), [themeisle](https://profiles.wordpress.org/themeisle), [Madalin_ThemeIsle](https://profiles.wordpress.org/Madalin_ThemeIsle), [rozroz](https://profiles.wordpress.org/rozroz)  
 **Tags:**  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin,  google rating, product review, rating, review, star rating, user rating, wp rating, wp review,  google, hreview,rich snippets,seo,snippet  
 **Author URI:** http://themeisle.com  
 **Requires at least:** 3.5  
@@ -11,8 +11,6 @@
 
 Easily turn your basic posts into in-depth reviews with ratings, pros and cons, affiliate links, rich snippets and user reviews.
 ## Description ##
-
-### User Review Enabled
 
 1. This review plugin helps you to interact with your users with improved comments, you can expose your reviews in a easier to read way and will help you generate money by adding a buy now button in your post. Rich snippets are also supported.
 
@@ -36,7 +34,14 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 - Add specific user review options to wordpress comments
 - Add rich snippet ( schema ) to your posts
 
+**Please note that WP Product Review PRO has been retired and is no longer available**
+
 ## Changelog ##
+### 3.7.7 - 2020-05-21  ###
+
+* [Fix] Security vulnerability
+
+
 ### 3.7.6 - 2020-05-14  ###
 
 * - [Fix] Security vulnerability

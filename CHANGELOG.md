@@ -1,4 +1,8 @@
 
+ ### v3.7.7 - 2020-05-21 
+ **Changes:** 
+ * [Fix] Security vulnerability
+ 
  ### v3.7.6 - 2020-05-14 
  **Changes:** 
  * - [Fix] Security vulnerability
