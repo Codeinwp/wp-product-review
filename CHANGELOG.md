@@ -1,4 +1,8 @@
 
+ ### v3.7.8 - 2020-05-22 
+ **Changes:** 
+ * [Fix] Sanitize values
+ 
  ### v3.7.7 - 2020-05-21 
  **Changes:** 
  * [Fix] Security vulnerability
