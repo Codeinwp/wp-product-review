@@ -484,7 +484,7 @@ class Wppr_Public {
 			return $content;
 		}
 
-		if ( $this->review->is_active() && is_singular() ) {
+		if ( $this->review->is_active() && is_singular() && in_the_loop() ) {
 			$output        = '';
 			$review_object = $this->review;
 			$template      = new WPPR_Template();
