@@ -626,5 +626,17 @@ class WPPR_Admin {
 		}
 	}
 
+	/**
+	 * Method called from AJAX request to get the specified schema's fields.
+	 *
+	 * @since   ?
+	 * @access  public
+	 */
+	public function get_schema_fields() {
+		check_ajax_referer( WPPR_SLUG, 'nonce' );
+
+		$type  = $_GET['type'];
+		wp_send_json_success( array( 'fields' => WPPR_Schema_Model::get_fields_for_type( $type ), 'url' => WPPR_Schema_Model::get_schema_url( $type ) ) );
+	}
 
 }

@@ -147,3 +147,11 @@ li.wppr-review-type-field label {
 	width: 30%;
 }
 
+
+.wppr-review-section span.wppr-review-type-link {
+	float: right;
+    padding: 0;
+    margin: 8px;
+	font-weight: normal;
+	text-transform: lowercase;
+}

@@ -23,3 +23,14 @@ export const renameKey = ( obj, oldName, newName ) => {
 	}
 	return obj;
 };
+
+export const inArray = ( key, array ) => {
+    let exists = false;
+    Object.values( array ).map( function( field, index ) {
+        if(field === key){
+            exists = true;
+            return true;
+        }
+    });
+    return exists;
+}

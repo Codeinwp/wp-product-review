@@ -22,7 +22,8 @@
   },
   "require": {
     "xrstf/composer-php52": "^1.0.20",
-    "codeinwp/themeisle-sdk": "^3.0"
+    "codeinwp/themeisle-sdk": "^3.0",
+    "spatie/schema-org": "^2.8"
   },
   "autoload": {
     "files": [
