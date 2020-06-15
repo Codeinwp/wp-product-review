@@ -79,6 +79,7 @@ class WPPR_Gutenberg {
 				'isPro' => $isPro,
 				'path'  => WPPR_URL,
 				'length' => $length,
+				'schema_types' => $this->get_schema_types(),
 			)
 		);
 
@@ -87,11 +88,23 @@ class WPPR_Gutenberg {
 	}
 
 	/**
+	 * Get the schema types in a consumable format.
+	 */
+	private function get_schema_types() {
+		$types = WPPR_Schema_Model::get_types();
+		$array = array();
+		foreach ( $types as $type ) {
+			$array[] = array( 'label' => $type, 'value' => $type );
+		}
+		return $array;
+	}
+
+	/**
 	 * Hook server side rendering into render callback
 	 */
 	public function update_posts_endpoints() {
 		register_rest_route(
-			'wp-product-review',
+			'wppr/v1',
 			'/update-review',
 			array(
 				'methods'  => 'POST',
@@ -106,6 +119,32 @@ class WPPR_Gutenberg {
 				),
 			)
 		);
+
+		register_rest_route(
+			'wppr/v1',
+			'/schema-fields',
+			array(
+				'methods'  => 'GET',
+				'callback' => array( $this, 'get_schema_details' ),
+				'args'     => array(
+					'type' => array(
+						'sanitize_callback' => 'sanitize_text_field',
+					),
+				),
+			)
+		);
+
+	}
+
+	/**
+	 * Rest Callbackk Method to get schema details (fields and url).
+	 */
+	public function get_schema_details( $data ) {
+		if ( empty( $data['type'] ) ) {
+			return;
+		}
+
+		return array( 'fields' => WPPR_Schema_Model::get_fields_for_type( $data['type'] ), 'url' => WPPR_Schema_Model::get_schema_url( $data['type'] ) );
 	}
 
 	/**
@@ -130,6 +169,22 @@ class WPPR_Gutenberg {
 				$options    = isset( $data['wppr_options'] ) ? $data['wppr_options'] : array();
 				$pros       = isset( $data['wppr_pros'] ) ? $data['wppr_pros'] : array();
 				$cons       = isset( $data['wppr_cons'] ) ? $data['wppr_cons'] : array();
+				$schema_type    = isset( $data['wppr_review_type'] ) ? sanitize_text_field( $data['wppr_review_type'] ) : 'Product';
+				$schema_field_values  = isset( $data['wppr_review_custom_fields'] ) ? $data['wppr_review_custom_fields'] : array();
+				$schema_fields  = isset( $data['schema_fields'] ) ? $data['schema_fields'] : array();
+
+				$custom_fields  = array();
+				if ( $schema_field_values ) {
+					foreach ( $schema_field_values as $field => $value ) {
+						// if the field is not part of the current schema, unset it
+						// this can happen when the schema of a review is being changed.
+						if ( ! in_array( $field, $schema_fields, true ) ) {
+							unset( $custom_fields[ $field ] );
+						} elseif ( ! empty( $value ) ) {
+							$custom_fields[ $field ] = sanitize_text_field( $value );
+						}
+					}
+				}
 
 				foreach ( $affiliates as $key => $option ) {
 					if ( $option === '' ) {
@@ -153,6 +208,8 @@ class WPPR_Gutenberg {
 				$review->set_options( $options );
 				$review->set_pros( $pros );
 				$review->set_cons( $cons );
+				$review->set_type( $schema_type );
+				$review->set_custom_fields( $custom_fields );
 			} else {
 				$review->deactivate();
 			}
@@ -203,6 +260,8 @@ class WPPR_Gutenberg {
 			'wppr_cons',
 			'wppr_rating',
 			'wppr_options',
+			'wppr_review_type',
+			'wppr_review_custom_fields',
 		);
 		foreach ( $options as $option ) {
 			if ( get_post_meta( $post_id, $option ) ) {

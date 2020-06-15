@@ -160,3 +160,25 @@
 	background: #cae9ff;
 	text-align: center;
 }
+
+/** loader **/
+.locker,
+.locker-loader {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.locker {
+	z-index: 1000;
+	opacity: 0.8;
+	background-color: white;
+
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter: alpha(opacity=80);
+}
+
+.locker-loader {
+	z-index: 1001;
+	background: url(/wp-includes/images/wpspin-2x.gif) no-repeat center center;
+}

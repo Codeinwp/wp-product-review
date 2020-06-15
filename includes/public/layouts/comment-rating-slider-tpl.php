@@ -18,7 +18,7 @@
 	$scale  = 10;
 		}
 
-		echo '<input type="hidden" name="wppr-scale" value="' . esc_attr( $scale ). '">';
+		echo '<input type="hidden" name="wppr-scale" value="' . esc_attr( $scale ) . '">';
 		echo '<div id="wppr-slider-comment">' . implode( '', $sliders ) . '<div class="cwpr_clearfix"></div></div>';
 
 

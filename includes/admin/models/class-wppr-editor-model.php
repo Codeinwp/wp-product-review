@@ -280,11 +280,12 @@ class WPPR_Editor_Model extends WPPR_Model_Abstract {
 			),
 			'js'  => array(
 				'editor' => array(
-					'path'     => WPPR_URL . '/assets/js/admin-review.js',
+					'path'     => WPPR_URL . '/assets/js/admin-editor.js',
 					'required' => array( 'jquery' ),
 					'vars'     => array(
 						'image_title'  => __( 'Add a product image to the review', 'wp-product-review' ),
 						'image_button' => __( 'Attach the image', 'wp-product-review' ),
+						'nonce'     => wp_create_nonce( WPPR_SLUG ),
 					),
 				),
 			),

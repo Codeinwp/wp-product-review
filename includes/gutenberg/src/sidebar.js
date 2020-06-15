@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import './style.scss';
-import { reverseObject, renameKey } from './utils';
+import { reverseObject, renameKey, inArray } from './utils';
 import RadioImageControl from './radio-image-control/';
 
 /**
@@ -45,6 +45,7 @@ const {
 	PanelBody,
 	SelectControl,
 	TextControl,
+	ExternalLink,
 } = wp.components;
 
 class WP_Product_Review extends Component {
@@ -62,6 +63,8 @@ class WP_Product_Review extends Component {
 		this.onChangeReviewPrice = this.onChangeReviewPrice.bind( this );
 		this.onChangeOptionText = this.onChangeOptionText.bind( this );
 		this.onChangeOptionNumber = this.onChangeOptionNumber.bind( this );
+		this.onChangeSchemaType = this.onChangeSchemaType.bind( this );
+		this.onChangeSchemaField = this.onChangeSchemaField.bind( this );
 		this.addOption = this.addOption.bind( this );
 		this.onChangeProText = this.onChangeProText.bind( this );
 		this.addPro = this.addPro.bind( this );
@@ -90,7 +93,11 @@ class WP_Product_Review extends Component {
 			},
 			wppr_cons: {
 				0: '',
-			}
+			},
+            wppr_review_type: 'Product',
+            wppr_review_custom_fields: {},
+            schema_fields: {},
+            schema_url: ''
 		};
 	}
 
@@ -107,12 +114,15 @@ class WP_Product_Review extends Component {
 				post.wppr_data.wppr_links[''] = '';
 			}
 			this.setState( { ...post.wppr_data } );
-		}
+	        
+            const data = await wp.apiRequest( { path: `/wppr/v1/schema-fields?type=${this.state.wppr_review_type}` } );
+            this.setState( { schema_fields: data.fields, schema_url: data.url } );
+        }
 	}
 
 	static getDerivedStateFromProps( nextProps, state ) {
 		if ( ( nextProps.isPublishing || nextProps.isSaving ) && !nextProps.isAutoSaving ) {
-			wp.apiRequest( { path: `/wp-product-review/update-review?id=${nextProps.postId}&postType=${nextProps.postType}`, method: 'POST', data: state } ).then(
+			wp.apiRequest( { path: `/wppr/v1/update-review?id=${nextProps.postId}&postType=${nextProps.postType}`, method: 'POST', data: state } ).then(
 				( data ) => {
 					return data;
 				},
@@ -205,6 +215,31 @@ class WP_Product_Review extends Component {
 		if ( e === '' ) e = 0;
 		wppr_options[key]['value'] = e;
 		this.setState( { wppr_options } );
+		this.props.editPostStatus( { edited: true } );
+	}
+
+    onChangeSchemaType( e, key ) {
+		if ( e === '' ) return;
+
+        // remove existing fields first.
+		this.setState( { schema_fields: {}, schema_url: '' } );
+
+        wp.apiRequest( { path: `/wppr/v1/schema-fields?type=${e}` } ).then(
+            ( data ) => {
+                this.setState( { schema_fields: data.fields, schema_url: data.url, wppr_review_type: e } );
+		        this.props.editPostStatus( { edited: true } );
+            },
+            ( err ) => {
+                return err;
+            }
+        );
+    }
+
+	onChangeSchemaField( e, field ) {
+		const fields = { ...this.state.wppr_review_custom_fields };
+		const schema_fields = { ...this.state.schema_fields };
+        fields[field] = e;
+		this.setState( { wppr_review_custom_fields: fields } );
 		this.props.editPostStatus( { edited: true } );
 	}
 
@@ -492,6 +527,40 @@ class WP_Product_Review extends Component {
 								) }
 							</div>
 						</PanelBody>
+
+						<PanelBody
+							title={ __( 'Schema Details' ) }
+							className="wp-product-review-schema"
+							initialOpen={ false }
+						>
+							<div className="wppr-review-schema">
+                                <SelectControl
+                                    label={ __( 'Review Type' ) }
+                                    value={ this.state.wppr_review_type }
+                                    options={ wpprguten.schema_types }
+                                    onChange={ this.onChangeSchemaType }
+                                />
+							</div>
+							<div className="wppr-review-schema-fields">
+                                { !!this.state.schema_url && (
+                                    <ExternalLink href={ this.state.schema_url } title={ __( 'View Schema Description ' ) }>{ __( 'View Schema Description ' ) }</ExternalLink>
+                                ) }
+								{ Object.values( this.state.schema_fields ).map( ( field, key ) => (
+									<div className="wppr-review-schema-field">
+										<label for={`wppr-schema-field-${key}`}>{ field }</label>
+										<TextControl
+											type="text"
+											id={`wppr-schema-field-${key}`}
+											name={`wppr-schema-field-${field}`}
+											className="wppr-text"
+											value={ this.state.wppr_review_custom_fields[field] ? this.state.wppr_review_custom_fields[field] : ''}
+											onChange={ ( e ) => this.onChangeSchemaField( e, field ) }
+										/>
+									</div>
+								) ) }
+							</div>
+						</PanelBody>
+
 						{ ( wpprguten.isPro ) && (
 							<div className="wppr-review-import-review-button">
 								<Button
