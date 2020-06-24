@@ -38,12 +38,24 @@ class WPPR_Schema_Model extends WPPR_Model_Abstract {
 	}
 
 	/**
+	 * Checks if the PHP version is supported by this package.
+	 */
+	private static function is_version_supported() {
+		return version_compare( phpversion(), '7.0', '>=' );
+	}
+
+	/**
 	 * Gets all the schema types that support review-type data.
 	 *
 	 * To disable the (year-long) cache, use `wppr_schema_disable_cache`.
 	 */
 	public static function get_types() {
 		$types = null;
+
+		if ( ! self::is_version_supported() ) {
+			return $types;
+		}
+
 		if ( ! ( WPPR_CACHE_DISABLED || apply_filters( 'wppr_schema_disable_cache', false ) ) ) {
 			$types = get_transient( 'wppr_schema_types' );
 		}
@@ -69,12 +81,17 @@ class WPPR_Schema_Model extends WPPR_Model_Abstract {
 	 * Gets all the fields for the specified schema type.
 	 */
 	public static function get_fields_for_type( $type ) {
+		$fields = array();
+
+		if ( ! self::is_version_supported() ) {
+			return $fields;
+		}
+
 		include WPPR_PATH . '/vendor/autoload.php';
 		$class = '\Spatie\SchemaOrg\\' . ucwords( $type );
 		$class = new $class();
 		$methods = self::get_uninherited_class_methods( $class );
 
-		$fields = array();
 		foreach ( $methods as $method ) {
 			if ( is_callable( array( $class, $method ) ) ) {
 				$fields[] = $method;

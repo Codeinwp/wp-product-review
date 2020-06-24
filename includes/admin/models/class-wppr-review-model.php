@@ -1197,13 +1197,23 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 			),
 		);
 
+		$scale      = $this->wppr_get_option( 'wppr_use_5_rating_scale' );
+		if ( empty( $scale ) ) {
+			$scale  = 10;
+		}
+		// for determining the overall ratings.
+		$divide_by_1    = 10 * ( 10 / $scale );
+
+		// for determinig the comment ratings.
+		$divide_by_2    = 10 / $scale;
+
 		$review_default = array(
 			'@type'         => 'Review',
 			'reviewRating'  => array(
 				'@type'       => 'Rating',
-				'bestRating'  => '10',
+				'bestRating'  => $scale,
 				'worstRating' => '0',
-				'ratingValue' => number_format( ( $this->get_rating() / 10 ), 2 ),
+				'ratingValue' => number_format( ( $this->get_rating() / $divide_by_1 ), 2 ),
 			),
 			'name'          => $this->get_name(),
 			'reviewBody'    => $this->get_content(),
@@ -1227,9 +1237,9 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 				'@type'         => 'Review',
 				'reviewRating'  => array(
 					'@type'       => 'Rating',
-					'bestRating'  => '10',
+					'bestRating'  => $scale,
 					'worstRating' => '0',
-					'ratingValue' => number_format( ( $this->rating_by_options( $comment['options'] ) ), 2 ),
+					'ratingValue' => number_format( ( $this->rating_by_options( $comment['options'] ) / $divide_by_2 ), 2 ),
 				),
 				'name'          => $comment['title'],
 				'reviewBody'    => $comment['content'],
@@ -1242,9 +1252,9 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 		}
 		$ld['aggregateRating'] = array(
 			'@type'       => 'AggregateRating',
-			'bestRating'  => '10',
+			'bestRating'  => $scale,
 			'worstRating' => '0',
-			'ratingValue' => number_format( ( $this->get_rating() / 10 ), 2 ),
+			'ratingValue' => number_format( ( $this->get_rating() / $divide_by_1 ), 2 ),
 			'reviewCount' => count( $ld['review'] ),
 		);
 

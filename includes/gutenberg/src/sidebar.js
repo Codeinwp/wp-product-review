@@ -528,6 +528,7 @@ class WP_Product_Review extends Component {
 							</div>
 						</PanelBody>
 
+                    { ( wpprguten.schema_types && wpprguten.schema_types.length > 0 ) && (
 						<PanelBody
 							title={ __( 'Schema Details' ) }
 							className="wp-product-review-schema"
@@ -560,6 +561,7 @@ class WP_Product_Review extends Component {
 								) ) }
 							</div>
 						</PanelBody>
+                        ) }
 
 						{ ( wpprguten.isPro ) && (
 							<div className="wppr-review-import-review-button">
