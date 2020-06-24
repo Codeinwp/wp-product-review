@@ -1,4 +1,10 @@
 
+ ### v3.7.10 - 2020-06-24 
+ **Changes:** 
+ * [Fix] Load schema.org just for PHP 7.0 and above
+* [Fix] Take into account the rating scale option for schema.org
+* [Fix] Dequeue jquery-ui-slider when not used
+ 
  ### v3.7.9 - 2020-06-15 
  **Changes:** 
  * [Fix] Schema.org in both the new and classic editor
