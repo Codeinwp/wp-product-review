@@ -1,4 +1,9 @@
 
+ ### v3.7.9 - 2020-06-15 
+ **Changes:** 
+ * [Fix] Schema.org in both the new and classic editor
+* [Fix] Do not display reviews in content outside the loop
+ 
  ### v3.7.8 - 2020-05-22 
  **Changes:** 
  * [Fix] Sanitize values

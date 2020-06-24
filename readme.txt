@@ -37,6 +37,12 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 **Please note that WP Product Review PRO has been retired and is no longer available**
 
 == Changelog ==
+= 3.7.9 - 2020-06-15  = 
+
+* [Fix] Schema.org in both the new and classic editor
+* [Fix] Do not display reviews in content outside the loop
+
+
 = 3.7.8 - 2020-05-22  = 
 
 * [Fix] Sanitize values

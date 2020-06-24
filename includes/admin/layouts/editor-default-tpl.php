@@ -53,11 +53,14 @@ $check = $review->is_active() ? 'yes' : 'no';
 		<?php do_action( 'wppr_editor_details_before', $model->post ); ?>
 		<div class="wppr-review-details-fields wppr-review-fieldset">
 			<ul>
+				<?php
+					$schema_types = WPPR_Schema_Model::get_types();
+					if ( $schema_types ) {
+				?>
 				<div class="wppr-review-type">
 					<h5>
 						<label for="wppr-editor-review-type"><?php _e( 'Review Type', 'wp-product-review' ); ?></label>
 						<?php
-						$schema_types = WPPR_Schema_Model::get_types();
 						$schema_type = $review->get_type();
 						echo $html_helper->select(
 							array(
@@ -72,6 +75,7 @@ $check = $review->is_active() ? 'yes' : 'no';
 					</h5>
 					<div class="wppr-review-type-fields"></div>
 				</div>
+				<?php } ?>
 
 				<?php
 				$templates = apply_filters( 'wppr_review_templates', array( 'default', 'style1', 'style2' ) );
@@ -411,14 +415,16 @@ $check = $review->is_active() ? 'yes' : 'no';
 	<?php do_action( 'wppr_editor_after', $model->post ); ?>
 </div>
 
-<script id="wppr-review-type-fields-template" type="text/template" 
-	data-json='<?php echo esc_attr( str_replace( "'", '\"', json_encode( WPPR_Schema_Model::get_fields_for_type( $schema_type ) ) ) ); ?>'
-	data-type='<?php echo esc_attr( $schema_type ); ?>'
-	data-custom-fields='<?php echo json_encode( $review->get_custom_fields() ); ?>'
->
-	<li class="wppr-review-type-field">
-		<label for="wppr-editor-review-type-field">#name#</label>
-		<input type="text" name="#name#" value="#value#" class="regular-text">
-		<input type="hidden" name="wppr-editor-review-type-field[]" value="#name#">
-	</li>
-</script>
+<?php if ( $schema_types ) { ?>
+	<script id="wppr-review-type-fields-template" type="text/template" 
+		data-json='<?php echo esc_attr( str_replace( "'", '\"', json_encode( WPPR_Schema_Model::get_fields_for_type( $schema_type ) ) ) ); ?>'
+		data-type='<?php echo esc_attr( $schema_type ); ?>'
+		data-custom-fields='<?php echo json_encode( $review->get_custom_fields() ); ?>'
+	>
+		<li class="wppr-review-type-field">
+			<label for="wppr-editor-review-type-field">#name#</label>
+			<input type="text" name="#name#" value="#value#" class="regular-text">
+			<input type="hidden" name="wppr-editor-review-type-field[]" value="#name#">
+		</li>
+	</script>
+<?php } ?>
