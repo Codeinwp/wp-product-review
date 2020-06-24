@@ -93,8 +93,10 @@ class WPPR_Gutenberg {
 	private function get_schema_types() {
 		$types = WPPR_Schema_Model::get_types();
 		$array = array();
-		foreach ( $types as $type ) {
-			$array[] = array( 'label' => $type, 'value' => $type );
+		if ( $types ) {
+			foreach ( $types as $type ) {
+				$array[] = array( 'label' => $type, 'value' => $type );
+			}
 		}
 		return $array;
 	}
