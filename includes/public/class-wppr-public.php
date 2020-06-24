@@ -111,14 +111,15 @@ class Wppr_Public {
 			}
 			$scale      = 10 * ( 10 / $scale );
 
-			wp_enqueue_script( 'jquery-ui-slider' );
-			wp_enqueue_script( 'jquery-touch-punch' );
+			$dependencies = array( 'jquery-touch-punch' );
+			if ( 'slider' === $review->wppr_get_option( 'wppr_comment_rating' ) ) {
+				$dependencies[] = 'jquery-ui-slider';
+			}
+
 			wp_enqueue_script(
 				$this->plugin_name . '-frontpage-js',
 				WPPR_URL . '/assets/js/main.js',
-				array(
-					'jquery-ui-slider',
-				),
+				$dependencies,
 				$this->version,
 				true
 			);
