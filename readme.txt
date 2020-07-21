@@ -22,7 +22,7 @@ Easily turn your basic posts into in-depth reviews with ratings, pros and cons, 
 
 1. For updates follow https://twitter.com/themeisle.
 
-If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-wordpress-hosting/" rel="nofollow">fastest WordPress hosting</a> or which <a href="http://www.codeinwp.com/blog/15-best-wordpress-review-themes/" rel="nofollow">review themes</a> are playing nice with WP Product review, checkout our blog.
+If you wanna learn more about the <a href="https://www.codeinwp.com/blog/fastest-wordpress-hosting/" rel="nofollow">fastest WordPress hosting</a> or which <a href="https://www.codeinwp.com/blog/best-wordpress-review-themes/" rel="nofollow">review themes</a> are playing nice with WP Product review, checkout our blog.
 
 
 **WP Product Review provides following features**
