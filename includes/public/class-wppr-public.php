@@ -190,7 +190,7 @@ class Wppr_Public {
 			return;
 		}
 
-		if ( ! is_amp_page() ) {
+		if ( ! $this->is_amp_page() ) {
 			return;
 		}
 
