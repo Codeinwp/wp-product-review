@@ -22,7 +22,7 @@ Easily turn your basic posts into in-depth reviews with ratings, pros and cons, 
 
 1. For updates follow https://twitter.com/themeisle.
 
-If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-wordpress-hosting/" rel="nofollow">fastest WordPress hosting</a> or which <a href="http://www.codeinwp.com/blog/15-best-wordpress-review-themes/" rel="nofollow">review themes</a> are playing nice with WP Product review, checkout our blog.
+If you wanna learn more about the <a href="https://www.codeinwp.com/blog/fastest-wordpress-hosting/" rel="nofollow">fastest WordPress hosting</a> or which <a href="https://www.codeinwp.com/blog/best-wordpress-review-themes/" rel="nofollow">review themes</a> are playing nice with WP Product review, checkout our blog.
 
 
 **WP Product Review provides following features**
@@ -37,7 +37,15 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 **Please note that WP Product Review PRO has been retired and is no longer available**
 
 == Changelog ==
-= 3.7.9 - 2020-06-15  =
+
+= 3.7.10 - 2020-06-24  = 
+
+* [Fix] Load schema.org just for PHP 7.0 and above
+* [Fix] Take into account the rating scale option for schema.org
+* [Fix] Dequeue jquery-ui-slider when not used
+
+
+= 3.7.9 - 2020-06-15  = 
 
 * [Fix] Schema.org in both the new and classic editor
 * [Fix] Do not display reviews in content outside the loop
