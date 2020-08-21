@@ -170,16 +170,27 @@ class Wppr_Public {
 	}
 
 	/**
+	 * Is this an AMP page?
+	 */
+	private function is_amp_page() {
+		if ( ! function_exists( 'ampforwp_is_amp_endpoint' ) || ! function_exists( 'is_amp_endpoint' ) ) {
+			return false;
+		}
+		if ( ! ampforwp_is_amp_endpoint() || ! is_amp_endpoint() ) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * Load AMP logic.
 	 */
 	public function amp_support() {
 		if ( ! $this->review->is_active() ) {
 			return;
 		}
-		if ( ! function_exists( 'ampforwp_is_amp_endpoint' ) || ! function_exists( 'is_amp_endpoint' ) ) {
-			return;
-		}
-		if ( ! ampforwp_is_amp_endpoint() || ! is_amp_endpoint() ) {
+
+		if ( ! $this->is_amp_page() ) {
 			return;
 		}
 
@@ -485,7 +496,7 @@ class Wppr_Public {
 			return $content;
 		}
 
-		if ( $this->review->is_active() && is_singular() && in_the_loop() ) {
+		if ( $this->review->is_active() && is_singular() && ( $this->is_amp_page() || in_the_loop() ) ) {
 			$output        = '';
 			$review_object = $this->review;
 			$template      = new WPPR_Template();

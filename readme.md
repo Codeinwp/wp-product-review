@@ -3,7 +3,7 @@
 **Tags:**  review, rating, posts, widget, review blogger, review blogging, affiliate, product reviews,plugin,  google rating, product review, rating, review, star rating, user rating, wp rating, wp review,  google, hreview,rich snippets,seo,snippet  
 **Author URI:** http://themeisle.com  
 **Requires at least:** 3.5  
-**Tested up to:** 5.4  
+**Tested up to:** 5.5  
 **Stable tag:** trunk  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -37,6 +37,7 @@ If you wanna learn more about the <a href="http://www.codeinwp.com/blog/fastest-
 **Please note that WP Product Review PRO has been retired and is no longer available**
 
 ## Changelog ##
+
 ### 3.7.10 - 2020-06-24  ###
 
 * [Fix] Load schema.org just for PHP 7.0 and above

@@ -133,6 +133,9 @@ class WPPR_Gutenberg {
 						'sanitize_callback' => 'sanitize_text_field',
 					),
 				),
+				'permission_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
 			)
 		);
 
