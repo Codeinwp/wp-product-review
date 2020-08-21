@@ -1,4 +1,9 @@
 
+ ### v3.7.11 - 2020-08-21 
+ **Changes:** 
+ * [Fix] Compatibility with WP 5.5
+* [Fix] Compatibility with AMP for WP plugin
+ 
  ### v3.7.10 - 2020-06-24 
  **Changes:** 
  * [Fix] Load schema.org just for PHP 7.0 and above

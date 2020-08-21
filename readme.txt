@@ -37,6 +37,12 @@ If you wanna learn more about the <a href="https://www.codeinwp.com/blog/fastest
 **Please note that WP Product Review PRO has been retired and is no longer available**
 
 == Changelog ==
+= 3.7.11 - 2020-08-21  = 
+
+* [Fix] Compatibility with WP 5.5
+* [Fix] Compatibility with AMP for WP plugin
+
+
 
 = 3.7.10 - 2020-06-24  = 
 
