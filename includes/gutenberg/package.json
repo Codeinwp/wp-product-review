@@ -31,5 +31,8 @@
 		"webpack": "^3.10.0"
 	},
 	"version": "1.0.0",
-	"license": "MIT"
+	"license": "MIT",
+	"dependencies": {
+		"currency-symbol-map": "^5.0.1"
+	}
 }

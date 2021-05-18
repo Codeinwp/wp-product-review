@@ -1,9 +1,15 @@
 /**
+ * External dependencies
+ */
+import currencyToSymbolMap from 'currency-symbol-map/map';
+ 
+/**
  * Internal dependencies
  */
 import './style.scss';
-import { reverseObject, renameKey, inArray } from './utils';
+import { reverseObject, renameKey } from './utils';
 import RadioImageControl from './radio-image-control/';
+import  './migration.js';
 
 /**
  * WordPress dependencies
@@ -14,10 +20,16 @@ const  { isUndefined, pickBy } = lodash;
 
 const { registerPlugin } = wp.plugins;
 
-const { MediaUpload } = wp.editor;
+const {
+	createBlock,
+	getBlockType
+} = wp.blocks;
+
+const { MediaUpload } = wp.blockEditor;
 
 const {
 	select,
+	dispatch,
 	withSelect,
 	withDispatch,
 } = wp.data;
@@ -71,6 +83,11 @@ class WP_Product_Review extends Component {
 		this.onChangeConText = this.onChangeConText.bind( this );
 		this.addCon = this.addCon.bind( this );
 		this.importReview = this.importReview.bind( this );
+		this.migrateToReviewBlock = this.migrateToReviewBlock.bind( this );
+		this.disableMigrationNotice = this.disableMigrationNotice.bind( this );
+
+		window.wpprToggleReviewStatus = this.toggleReviewStatus;
+		window.wpprDisableMigrationNotice = this.disableMigrationNotice;
 
 		this.state = {
 			cwp_meta_box_check: 'No',
@@ -141,7 +158,12 @@ class WP_Product_Review extends Component {
 
 	toggleReviewStatus() {
 		this.setState( { cwp_meta_box_check: this.state.cwp_meta_box_check === 'Yes' ? 'No' : 'Yes' } );
-		this.props.editPostStatus( { edited: true } );
+		this.props.editPostStatus( {
+			edited: true,
+			meta: {
+				'cwp_meta_box_check': this.state.cwp_meta_box_check === 'Yes' ? 'No' : 'Yes'
+			}
+		} );
 	}
 
 	onChangeTemplate( value ) {
@@ -291,6 +313,100 @@ class WP_Product_Review extends Component {
 		this.props.setState( { isOpen: false } );
 	};
 
+	migrateToReviewBlock() {
+		const attrs = {};
+
+		if ( this.state.cwp_rev_product_name ) {
+			attrs.title = this.state.cwp_rev_product_name;
+		}
+
+		if ( this.state.cwp_rev_product_image ) {
+			attrs.image = {
+				id: 0,
+				alt: '',
+				url: this.state.cwp_rev_product_image
+			};
+		}
+
+		if ( this.state.wppr_links && 0 < Object.keys( this.state.wppr_links).length ) {
+			attrs.links = Object.keys( this.state.wppr_links).map( link => ({
+				label: link,
+				href: this.state.wppr_links[ link ]
+			}) );
+		}
+
+		if ( this.state.cwp_rev_price ) {
+			const reg = /[0-9.,]/g;
+			let currency = this.state.cwp_rev_price.replace( reg, '' );
+
+			if ( '' !== currency ) {
+				attrs.price = Number( this.state.cwp_rev_price.replace( currency, '' ) );
+
+				if ( '$' === currency ) {
+					currency = 'USD';
+				} else if ( '£' === currency ) {
+					currency = 'GBP';
+				} else if ( '€' === currency ) {
+					currency = 'EUR';
+				} else {
+					currency = Object.keys( currencyToSymbolMap ).find( key => currency === currencyToSymbolMap[ key ]);
+				}
+
+				attrs.currency = currency;
+			} else {
+				attrs.price = Number( this.state.cwp_rev_price );
+			}
+		}
+
+		if ( this.state.wppr_options && 0 < this.state.wppr_options.length ) {
+			attrs.features = this.state.wppr_options.map( i => ({
+				title: i.name || '',
+				rating: Math.round( Number( i.value ) / 10 )
+			}) );
+		}
+
+		if ( this.state.wppr_pros && 0 < this.state.wppr_pros.length ) {
+			attrs.pros = this.state.wppr_pros;
+		}
+
+		if ( this.state.wppr_cons && 0 < this.state.wppr_cons.length ) {
+			attrs.cons = this.state.wppr_cons;
+		}
+
+		dispatch( 'core/block-editor' ).insertBlock(
+			createBlock( 'themeisle-blocks/review', { ...attrs } )
+		);
+
+		dispatch( 'core/notices' ).createNotice(
+			'info',
+			__( 'Migrated to Review Block' ),
+			{
+				isDismissible: true,
+				type: 'snackbar'
+			}
+		);
+
+		this.toggleReviewStatus();
+	};
+
+	disableMigrationNotice() {
+		const model = new wp.api.models.Settings({
+			// eslint-disable-next-line camelcase
+			'cwppos_options_migration': true
+		});
+
+		const save = model.save();
+
+		save.success( () => {
+			window.wpprguten.showMigrationNotice = false;
+			this.props.setState({ showMigration: false });
+		});
+
+		save.error( ( response, status ) => {
+			console.warning( response.responseJSON.message );
+		});
+	}
+
 	render() {
 		return (
 			<Fragment>
@@ -312,6 +428,33 @@ class WP_Product_Review extends Component {
 						name="wp-product-review"
 						title={ __( 'WP Product Review' ) }
 					>
+						{ ( getBlockType( 'themeisle-blocks/review' ) && this.props.showMigration ) && (
+							<PanelBody
+								title={ __( 'Migrate to Otter\'s Review Block' ) }
+							>
+								<p>{ __( 'WP Product Review is not being maintained anymore. You can migrate your data to Otter\'s Review Block and keep most of the functionality and continue receiving updates.' ) }</p>
+
+								<Button
+									isPrimary
+									onClick={ this.migrateToReviewBlock }
+								>
+									{ __( 'Migrate to Block' ) }
+								</Button>
+
+								<Button
+									isTertiary
+									onClick={ this.disableMigrationNotice }
+								>
+									{ __( 'Dismiss notice' ) }
+								</Button>
+
+								<br/><br/>
+
+								<ExternalLink href="https://docs.themeisle.com/article/1360-migrating-from-wp-product-review-to-otters-review-block">
+									{ __( 'Learn more' ) }
+								</ExternalLink>
+							</PanelBody>
+						) }
 						<PanelBody
 							title={ __( 'Product Details' ) }
 							className="wp-product-review-product-details"
@@ -651,6 +794,7 @@ const WPPR = compose( [
 
 	withState( {
 		isOpen: false,
+		showMigration: Boolean( wpprguten.showMigrationNotice ),
 	} ),
 
 	withDispatch( ( dispatch ) => ( {

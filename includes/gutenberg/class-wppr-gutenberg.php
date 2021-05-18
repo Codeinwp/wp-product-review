@@ -41,10 +41,82 @@ class WPPR_Gutenberg {
 	private function __construct() {
 		$plugin        = new WPPR();
 		$this->version = $plugin->get_version();
+
+		$meta_values = array(
+			'cwp_meta_box_check'    => array(
+				'type' => 'string',
+				'rest' => true,
+			),
+			'cwp_rev_product_name'  => array(
+				'type' => 'string',
+				'rest' => true,
+			),
+			'cwp_rev_product_image' => array(
+				'type' => 'string',
+				'rest' => true,
+			),
+			'wppr_links'            => array(
+				'type' => 'object',
+				'rest' => array(
+					'schema' => array(
+						'additionalProperties' => true,
+					),
+				),
+			),
+			'cwp_rev_price'         => array(
+				'type' => 'string',
+				'rest' => true,
+			),
+			'wppr_options'          => array(
+				'type' => 'array',
+				'rest' => array(
+					'schema' => array(
+						'items' =>  array(
+							'type' => 'object',
+							'additionalProperties' => true,
+						),
+					),
+				),
+			),
+			'wppr_pros'             => array(
+				'type' => 'array',
+				'rest' => array(
+					'schema' => array(
+						'items' => array(
+							'type' => 'string',
+						),
+					),
+				),
+			),
+			'wppr_cons'             => array(
+				'type' => 'array',
+				'rest' => array(
+					'schema' => array(
+						'items' => array(
+							'type' => 'string',
+						),
+					),
+				),
+			),
+		);
+
+		foreach( $meta_values as $meta => $values ) {
+			register_post_meta(
+				'',
+				$meta,
+				array(
+					'type'         => $values['type'],
+					'single'       => true,
+					'show_in_rest' => $values['rest'],
+				)
+			);
+		}
+
 		// Add a filter to load functions when all plugins have been loaded
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_gutenberg_scripts' ) );
 		add_action( 'wp_loaded', array( $this, 'register_endpoints' ) );
 		add_action( 'rest_api_init', array( $this, 'update_posts_endpoints' ) );
+		add_action( 'init', array( $this, 'register_settings' ) );
 		add_filter( 'rest_post_query', array( $this, 'post_meta_request_params' ), 99, 2 );
 		add_filter( 'rest_page_query', array( $this, 'post_meta_request_params' ), 99, 2 );
 		add_filter( 'rest_wppr_review_query', array( $this, 'post_meta_request_params' ), 99, 2 );
@@ -80,11 +152,27 @@ class WPPR_Gutenberg {
 				'path'  => WPPR_URL,
 				'length' => $length,
 				'schema_types' => $this->get_schema_types(),
+				'showMigrationNotice' => true === boolval( get_option( 'cwppos_options_migration', false ) ) ? false : true
 			)
 		);
 
 		// Enqueue editor block styles
 		wp_enqueue_style( 'wppr-gutenberg-block-css', WPPR_URL . '/includes/gutenberg/build/sidebar.css', '', $version );
+	}
+
+	/**
+	 * Register Settings
+	 */
+	public function register_settings() {
+		register_setting(
+			'cwppos_options',
+			'cwppos_options_migration',
+			array(
+				'type'         => 'boolean',
+				'show_in_rest' => true,
+				'default'      => false,
+			)
+		);
 	}
 
 	/**
