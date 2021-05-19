@@ -152,7 +152,8 @@ class WPPR_Gutenberg {
 				'path'  => WPPR_URL,
 				'length' => $length,
 				'schema_types' => $this->get_schema_types(),
-				'showMigrationNotice' => true === boolval( get_option( 'cwppos_options_migration', false ) ) ? false : true
+				'showMigrationNotice' => true === boolval( get_option( 'cwppos_options_migration', false ) ) ? false : true,
+				'installOtter' => admin_url( 'plugin-install.php?tab=plugin-information&plugin=otter-blocks' ),
 			)
 		);
 

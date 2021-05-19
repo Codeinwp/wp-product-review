@@ -428,18 +428,40 @@ class WP_Product_Review extends Component {
 						name="wp-product-review"
 						title={ __( 'WP Product Review' ) }
 					>
-						{ ( getBlockType( 'themeisle-blocks/review' ) && this.props.showMigration ) && (
+						{ this.props.showMigration && (
 							<PanelBody
 								title={ __( 'Migrate to Otter\'s Review Block' ) }
 							>
 								<p>{ __( 'WP Product Review is not being maintained anymore. You can migrate your data to Otter\'s Review Block and keep most of the functionality and continue receiving updates.' ) }</p>
 
-								<Button
-									isPrimary
-									onClick={ this.migrateToReviewBlock }
-								>
-									{ __( 'Migrate to Block' ) }
-								</Button>
+								{ getBlockType( 'themeisle-blocks/review' ) && (
+									<Button
+										isPrimary
+										onClick={ this.migrateToReviewBlock }
+									>
+										{ __( 'Migrate to Block' ) }
+									</Button>
+								) }
+
+								{ ( ! getBlockType( 'themeisle-blocks/review' ) && getBlockType( 'themeisle-blocks/advanced-columns' ) ) && (
+									<Button
+										isPrimary
+										href={ window.wpprguten.installOtter }
+										target="_blank"
+									>
+										{ __( 'Update' ) }
+									</Button>
+								) }
+
+								{ ! getBlockType( 'themeisle-blocks/advanced-columns' ) && (
+									<Button
+										isPrimary
+										href={ window.wpprguten.installOtter }
+										target="_blank"
+									>
+										{ __( 'Install & Activate' ) }
+									</Button>
+								) }
 
 								<Button
 									isTertiary
@@ -455,6 +477,7 @@ class WP_Product_Review extends Component {
 								</ExternalLink>
 							</PanelBody>
 						) }
+
 						<PanelBody
 							title={ __( 'Product Details' ) }
 							className="wp-product-review-product-details"
