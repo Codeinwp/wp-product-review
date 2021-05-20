@@ -36,6 +36,17 @@ $fields          = $global_settings->get_fields();
 
 		<?php foreach ( $sections as $section_key => $section_name ) : ?>
 			<div id="wppr-tab-<?php echo esc_attr( $section_key ); ?>" class="wppr-tab-content">
+				<div class="controls migration-notice">
+					<?php _e( 'WP Product Review is not being maintained anymore. You can migrate your data to Otter\'s Review Block and keep most of the functionality and continue receiving updates.', 'wp-product-review' ); ?>
+					<br/>
+					<a href="https://docs.themeisle.com/article/1360-migrating-from-wp-product-review-to-otters-review-block"><?php _e( 'Learn more', 'wp-product-review' ); ?></a>
+
+					<?php if ( ! defined( 'THEMEISLE_BLOCKS_VERSION' ) ) : ?>
+						- <a href="<?php echo admin_url( 'plugin-install.php?tab=plugin-information&plugin=otter-blocks' ) ?>" target="_blank"><?php _e( 'Install', 'wp-product-review' ); ?></a>
+					<?php endif; ?>
+				</div>
+				<hr>
+
 				<?php
 				if ( shortcode_exists( 'P_REVIEW' ) ) {
 					do_action( 'wppr_settings_section_upsell', $section_key );
