@@ -71,7 +71,7 @@ class WPPR_Gutenberg {
 				'type' => 'array',
 				'rest' => array(
 					'schema' => array(
-						'items' =>  array(
+						'items' => array(
 							'type' => 'object',
 							'additionalProperties' => true,
 						),
@@ -100,7 +100,7 @@ class WPPR_Gutenberg {
 			),
 		);
 
-		foreach( $meta_values as $meta => $values ) {
+		foreach ( $meta_values as $meta => $values ) {
 			register_post_meta(
 				'',
 				$meta,
