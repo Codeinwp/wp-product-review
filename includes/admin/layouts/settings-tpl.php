@@ -42,7 +42,7 @@ $fields          = $global_settings->get_fields();
 					<a href="https://docs.themeisle.com/article/1360-migrating-from-wp-product-review-to-otters-review-block"><?php _e( 'Learn more', 'wp-product-review' ); ?></a>
 
 					<?php if ( ! defined( 'THEMEISLE_BLOCKS_VERSION' ) ) : ?>
-						- <a href="<?php echo admin_url( 'plugin-install.php?tab=plugin-information&plugin=otter-blocks' ) ?>" target="_blank"><?php _e( 'Install', 'wp-product-review' ); ?></a>
+						- <a href="<?php echo admin_url( 'plugin-install.php?tab=plugin-information&plugin=otter-blocks' ); ?>" target="_blank"><?php _e( 'Install', 'wp-product-review' ); ?></a>
 					<?php endif; ?>
 				</div>
 				<hr>
