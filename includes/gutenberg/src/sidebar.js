@@ -358,10 +358,10 @@ class WP_Product_Review extends Component {
 			}
 		}
 
-		if ( this.state.wppr_options && 0 < this.state.wppr_options.length ) {
-			attrs.features = this.state.wppr_options.map( i => ({
-				title: i.name || '',
-				rating: Math.round( Number( i.value ) / 10 )
+		if ( this.state.wppr_options && 0 < Object.keys( this.state.wppr_options ).length ) {
+			attrs.features = Object.keys( this.state.wppr_options ).map( i => ({
+				title: this.state.wppr_options[ i ].name || '',
+				rating: Math.round( Number( this.state.wppr_options[ i ].value ) / 10 )
 			}) );
 		}
 
