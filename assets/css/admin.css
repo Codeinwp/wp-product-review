@@ -105,6 +105,13 @@
 	display: table;
 }
 
+#wppr-settings .controls.migration-notice {
+	border-left: 4px solid #f16848;
+	padding: 20px 10px;
+	font-weight: 500;
+	font-size: 14px;
+}
+
 #wppr-settings .explain,
 #wppr-settings .controls-content {
 	display: table-cell;
